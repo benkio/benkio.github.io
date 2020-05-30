@@ -13,5 +13,5 @@
 * Enrico Benini
 
 ** Links
-#+ATTR_HTML: title: github repositories
-[[https://github.com/benkio?tab=repositories]]
+#+ATTR_HTML: :title Github Repositories :alt Github Repositories
+[[https://github.com/benkio?tab=repositories][file:images/github.png]]
