@@ -1,3 +1,29 @@
-.figure p {
+body {
+    background-image: url("../images/background.png");
+    background-repeat: repeat;
+}
+
+.title {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 25px;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+    color: #000000;
+    font-weight: 700;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: capitalize;
+}
+
+#content {
+    text-align: center;
+}
+#text-ExtLink * {
     display:inline-block;
+    margin: .3em;
+}
+#text-ExtLink figure {
+    width: 100px;
+    height: 100px;
 }

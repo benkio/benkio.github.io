@@ -1,19 +1,30 @@
 #+OPTIONS: html-link-use-abs-url:nil html-postamble:auto toc:nil num:nil
-#+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:t
+#+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:nil
 #+OPTIONS: html5-fancy:nil tex:t
 #+HTML_DOCTYPE: html5
 #+HTML_CONTAINER: div
 #+TITLE: Enrico Benini's Personal Page
 #+DESCRIPTION: Enrico Benini's Personal Page
 #+KEYWORDS: enrico benini personal page
-#+HTML_LINK_HOME: https://benkio.github.io/
 #+HTML_HEAD: <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 #+HTML_HEAD: <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 #+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="css/main.css">
 #+INFOJS_OPT:
 #+CREATOR: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 26.3 (<a href="https://orgmode.org">Org</a> mode 9.1.9)
 
+* 
+:PROPERTIES:
+:CUSTOM_ID: ExtLink
+:END:
 #+ATTR_HTML: :title Github Repositories :alt Github Repositories
 [[https://github.com/benkio?tab=repositories][file:images/github.png]]
 #+ATTR_HTML: :title Instagram Profile :alt Instagram Profile
 [[https://www.instagram.com/benkio48/][file:images/instagram.png]]
+#+ATTR_HTML: :title Youtube Profile :alt Youtube Profile
+[[https://www.youtube.com/channel/UCoS2WR1WgwolOItRr3f_GyQ][file:images/youtube.png]]
+#+ATTR_HTML: :title Twitter Profile :alt Twitter Profile
+[[https://twitter.com/benkio89][file:images/twitter.png]]
+#+ATTR_HTML: :title Linkedin Profile :alt Linkedin Profile
+[[https://www.linkedin.com/in/enrico-benini-442558a5/][file:images/linkedin.png]]
+
+
