@@ -12,4 +12,6 @@
 #+CREATOR: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 26.3 (<a href="https://orgmode.org">Org</a> mode 9.1.9)
 * Enrico Benini
 
-generated with org mode
+** Links
+#+ATTR_HTML: title: github repositories
+[[https://github.com/benkio?tab=repositories]]
