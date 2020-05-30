@@ -9,12 +9,11 @@
 #+HTML_LINK_HOME: https://benkio.github.io/
 #+HTML_HEAD: <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 #+HTML_HEAD: <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-#+HTML_HEAD_EXTRA:
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="css/main.css">
 #+INFOJS_OPT:
 #+CREATOR: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 26.3 (<a href="https://orgmode.org">Org</a> mode 9.1.9)
 
 #+ATTR_HTML: :title Github Repositories :alt Github Repositories
 [[https://github.com/benkio?tab=repositories][file:images/github.png]]
-
 #+ATTR_HTML: :title Instagram Profile :alt Instagram Profile
 [[https://www.instagram.com/benkio48/][file:images/instagram.png]]
