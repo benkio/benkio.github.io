@@ -17,15 +17,18 @@ html, body {
 }
 #text-MainContent {
     color: rgba(255,255,255,.6);
-    line-height: normal; 
+    line-height: normal;
 }
-
-.outline-2 #sec- {
-    display: none;
-}
+#subtitle { font-size: 2em; }
+.outline-2 #sec- {display: none;}
 .outline-3 {
     line-height: 5em;
 }
+#outline-container-text-email {
+    line-height: 1em;
+}
+#text-email { display:none; }
+
 #outline-container-header { font-size: 0px; }
 #outline-container-header #header{ display: none; }
 #outline-container-footer { font-size: 0px; }

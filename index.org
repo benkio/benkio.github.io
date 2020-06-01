@@ -23,7 +23,7 @@
 
 #+name: textFading
 #+begin_src javascript :exports none
-let text = ['Software Engineer', 'FP Enthusiast', 'Guitar Player','Freak 🤪'];
+let text = ['Software Engineer 💾', 'FP Enthusiast 🤓', 'Guitar Player 🎸','Freak 🤪'];
 var textIndex = 1;
 $(document).ready(function(){
   setInterval(function(){
@@ -53,7 +53,7 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  Donec hendrerit tempo
   :HTML_CONTAINER_CLASS: text-center container
   :END:
 
-  #+html: <div id="subtitle">Software Engineer</div>
+  #+html: <div id="subtitle">Software Engineer 💾</div>
 ** 
   :PROPERTIES:
   :HTML_CONTAINER_CLASS: col-xs-1
@@ -86,6 +86,26 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  Donec hendrerit tempo
 ** 
   :PROPERTIES:
   :HTML_CONTAINER_CLASS: col-xs-1
+  :END:
+** 
+  :PROPERTIES:
+  :HTML_CONTAINER_CLASS: col-xs-4
+  :END:
+
+** 
+  :PROPERTIES:
+  :HTML_CONTAINER_CLASS: col-xs-2
+  :END:
+#+html: <a title="telegram" href="https://t.me/benkio"><i class="fab fa-3x fa-telegram" aria-hidden="true"></i></a>
+** 
+  :PROPERTIES:
+  :HTML_CONTAINER_CLASS: col-xs-2
+  :CUSTOM_ID: text-email
+  :END:
+#+html: <a title="email" href="mailto: benkio89@gmail.com"><i class="fas fa-3x fa-envelope" aria-hidden="true"></i>benkio89@gmail.com</a>
+** 
+  :PROPERTIES:
+  :HTML_CONTAINER_CLASS: col-xs-4
   :END:
 
 * Footer
