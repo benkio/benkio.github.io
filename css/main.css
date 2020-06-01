@@ -1,35 +1,7 @@
 html, body {
     font: 400 15px Lato, sans-serif;
-    color: #818181;
+    color: rgba(255,255,255,.6);
     Background: #202020;
     height: 100%;
 }
-#content {
-    line-height: 15em;
-    height: 15em;
-    /* border: 3px solid green; */
-    text-align: center;
-}
-#MainContent {
-    font-family: Montserrat, sans-serif;
-    font-size: 3em;
-    color: #FFF;
-}
-#text-MainContent {
-    color: rgba(255,255,255,.6);
-    line-height: normal;
-}
-#subtitle { font-size: 2em; }
-.outline-2 #sec- {display: none;}
-.outline-3 {
-    line-height: 5em;
-}
-#outline-container-text-email {
-    line-height: 1em;
-}
-#text-email { display:none; }
-
-#outline-container-header { font-size: 0px; }
-#outline-container-header #header{ display: none; }
-#outline-container-footer { font-size: 0px; }
-#outline-container-footer #footer{ display: none; }
+.title { display: none; }
