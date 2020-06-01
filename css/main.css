@@ -1,6 +1,7 @@
 html, body {
     font: 400 15px Lato, sans-serif;
     color: #818181;
+    Background: #202020;
     height: 100%;
 }
 #content {
@@ -12,6 +13,11 @@ html, body {
 #MainContent {
     font-family: Montserrat, sans-serif;
     font-size: 3em;
+    color: #FFF;
+}
+#text-MainContent {
+    color: rgba(255,255,255,.6);
+    line-height: normal; 
 }
 
 .outline-2 #sec- {

@@ -9,7 +9,35 @@
 #+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 #+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
 #+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 #+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="css/main.css">
+
+#+name: inline-js
+#+begin_src elisp :exports none :results html :var blk=""
+(concat
+ "<script type=\"text/javascript\">\n"
+ (cadr (org-babel-lob--src-info blk))
+ "\n"
+ "</script>")
+#+end_src
+
+#+name: textFading
+#+begin_src javascript :exports none
+let text = ['Software Engineer', 'FP Enthusiast', 'Guitar Player','Freak 🤪'];
+var textIndex = 1;
+$(document).ready(function(){
+  setInterval(function(){
+    let opacity = Number($("#subtitle").css("opacity"));
+    if (opacity == 0) {
+      textIndex = textIndex > 3? 0: textIndex;
+      $("#subtitle").text(text[textIndex])
+      textIndex += 1;;
+    }
+    $("#subtitle").fadeTo(500, (opacity + 1)%2);
+  }, 2000);
+});
+#+end_src
+
 
 * Header
   :PROPERTIES:
@@ -24,6 +52,8 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  Donec hendrerit tempo
   :CUSTOM_ID: MainContent
   :HTML_CONTAINER_CLASS: text-center container
   :END:
+
+  #+html: <div id="subtitle">Software Engineer</div>
 ** 
   :PROPERTIES:
   :HTML_CONTAINER_CLASS: col-xs-1
@@ -64,4 +94,4 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  Donec hendrerit tempo
   :END:
   Aliquam erat volutpat.  Nunc eleifend leo vitae magna.  In id erat non orci commodo lobortis.  Proin neque massa, cursus ut, gravida ut, lobortis eget, lacus.  Sed diam.  Praesent fermentum tempor tellus.  Nullam tempus.  Mauris ac felis vel velit tristique imperdiet.  Donec at pede.  Etiam vel neque nec dui dignissim bibendum.  Vivamus id enim.  Phasellus neque orci, porta a, aliquet quis, semper a, massa.  Phasellus purus.  Pellentesque tristique imperdiet tortor.  Nam euismod tellus id erat.
 
-
+#+call: inline-js("textFading")
