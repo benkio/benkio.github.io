@@ -1,30 +1,67 @@
 #+OPTIONS: html-link-use-abs-url:nil html-postamble:auto toc:nil num:nil
 #+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:nil
 #+OPTIONS: html5-fancy:nil tex:t
-#+HTML_DOCTYPE: html5
-#+HTML_CONTAINER: div
-#+TITLE: Enrico Benini's Personal Page
+# #+TITLE: Enrico Benini's Personal Page
 #+DESCRIPTION: Enrico Benini's Personal Page
 #+KEYWORDS: enrico benini personal page
-#+HTML_HEAD: <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-#+HTML_HEAD: <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA: <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA: <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
 #+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="css/main.css">
-#+INFOJS_OPT:
-#+CREATOR: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 26.3 (<a href="https://orgmode.org">Org</a> mode 9.1.9)
 
-* 
-:PROPERTIES:
-:CUSTOM_ID: ExtLink
-:END:
-#+ATTR_HTML: :title Github Repositories :alt Github Repositories
-[[https://github.com/benkio?tab=repositories][file:images/github.png]]
-#+ATTR_HTML: :title Instagram Profile :alt Instagram Profile
-[[https://www.instagram.com/benkio48/][file:images/instagram.png]]
-#+ATTR_HTML: :title Youtube Profile :alt Youtube Profile
-[[https://www.youtube.com/channel/UCoS2WR1WgwolOItRr3f_GyQ][file:images/youtube.png]]
-#+ATTR_HTML: :title Twitter Profile :alt Twitter Profile
-[[https://twitter.com/benkio89][file:images/twitter.png]]
-#+ATTR_HTML: :title Linkedin Profile :alt Linkedin Profile
-[[https://www.linkedin.com/in/enrico-benini-442558a5/][file:images/linkedin.png]]
+* Header
+  :PROPERTIES:
+  :CUSTOM_ID: header
+  :END:
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  Donec hendrerit tempor tellus.  Donec pretium posuere tellus.  Proin quam nisl, tincidunt et, mattis eget, convallis nec, purus.  Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.  Nulla posuere.  Donec vitae dolor.  Nullam tristique diam non turpis.  Cras placerat accumsan nulla.  Nullam rutrum.  Nam vestibulum accumsan nisl.
+
+
+
+* Hello, I'm Enrico
+  :PROPERTIES:
+  :CUSTOM_ID: MainContent
+  :HTML_CONTAINER_CLASS: text-center container
+  :END:
+** 
+  :PROPERTIES:
+  :HTML_CONTAINER_CLASS: col-sm-1
+  :END:
+** 
+  :PROPERTIES:
+  :HTML_CONTAINER_CLASS: col-sm-2
+  :END:
+#+html: <a title="Github Repositories" href="https://github.com/benkio?tab=repositories"><i class="fab fa-3x fa-github" aria-hidden="true"></i></a>
+** 
+  :PROPERTIES:
+  :HTML_CONTAINER_CLASS: col-sm-2
+  :END:
+#+html: <a title="Instagram Profile" href="https://www.instagram.com/benkio48/"><i class="fab fa-3x fa-instagram" aria-hidden="true"></i></a>
+** 
+  :PROPERTIES:
+  :HTML_CONTAINER_CLASS: col-sm-2
+  :END:
+#+html: <a title="Youtube Profile" href="https://www.youtube.com/channel/UCoS2WR1WgwolOItRr3f_GyQ"><i class="fab fa-3x fa-youtube" aria-hidden="true"></i></a>
+** 
+  :PROPERTIES:
+  :HTML_CONTAINER_CLASS: col-sm-2
+  :END:
+#+html: <a title="Twitter Profile" href="https://twitter.com/benkio89"><i class="fab fa-3x fa-twitter" aria-hidden="true"></i></a>
+** 
+  :PROPERTIES:
+  :HTML_CONTAINER_CLASS: col-sm-2
+  :END:
+#+html: <a title="Linkedin Profile" href="https://www.linkedin.com/in/enrico-benini-442558a5/"><i class="fab fa-3x fa-linkedin" aria-hidden="true"></i></a>
+** 
+  :PROPERTIES:
+  :HTML_CONTAINER_CLASS: col-sm-1
+  :END:
+
+* Footer
+  :PROPERTIES:
+  :CUSTOM_ID: footer
+  :END:
+  Aliquam erat volutpat.  Nunc eleifend leo vitae magna.  In id erat non orci commodo lobortis.  Proin neque massa, cursus ut, gravida ut, lobortis eget, lacus.  Sed diam.  Praesent fermentum tempor tellus.  Nullam tempus.  Mauris ac felis vel velit tristique imperdiet.  Donec at pede.  Etiam vel neque nec dui dignissim bibendum.  Vivamus id enim.  Phasellus neque orci, porta a, aliquet quis, semper a, massa.  Phasellus purus.  Pellentesque tristique imperdiet tortor.  Nam euismod tellus id erat.
 
 
