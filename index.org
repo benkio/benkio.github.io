@@ -26,36 +26,36 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  Donec hendrerit tempo
   :END:
 ** 
   :PROPERTIES:
-  :HTML_CONTAINER_CLASS: col-sm-1
+  :HTML_CONTAINER_CLASS: col-xs-1
   :END:
 ** 
   :PROPERTIES:
-  :HTML_CONTAINER_CLASS: col-sm-2
+  :HTML_CONTAINER_CLASS: col-xs-2
   :END:
 #+html: <a title="Github Repositories" href="https://github.com/benkio?tab=repositories"><i class="fab fa-3x fa-github" aria-hidden="true"></i></a>
 ** 
   :PROPERTIES:
-  :HTML_CONTAINER_CLASS: col-sm-2
+  :HTML_CONTAINER_CLASS: col-xs-2
   :END:
 #+html: <a title="Instagram Profile" href="https://www.instagram.com/benkio48/"><i class="fab fa-3x fa-instagram" aria-hidden="true"></i></a>
 ** 
   :PROPERTIES:
-  :HTML_CONTAINER_CLASS: col-sm-2
+  :HTML_CONTAINER_CLASS: col-xs-2
   :END:
 #+html: <a title="Youtube Profile" href="https://www.youtube.com/channel/UCoS2WR1WgwolOItRr3f_GyQ"><i class="fab fa-3x fa-youtube" aria-hidden="true"></i></a>
 ** 
   :PROPERTIES:
-  :HTML_CONTAINER_CLASS: col-sm-2
+  :HTML_CONTAINER_CLASS: col-xs-2
   :END:
 #+html: <a title="Twitter Profile" href="https://twitter.com/benkio89"><i class="fab fa-3x fa-twitter" aria-hidden="true"></i></a>
 ** 
   :PROPERTIES:
-  :HTML_CONTAINER_CLASS: col-sm-2
+  :HTML_CONTAINER_CLASS: col-xs-2
   :END:
 #+html: <a title="Linkedin Profile" href="https://www.linkedin.com/in/enrico-benini-442558a5/"><i class="fab fa-3x fa-linkedin" aria-hidden="true"></i></a>
 ** 
   :PROPERTIES:
-  :HTML_CONTAINER_CLASS: col-sm-1
+  :HTML_CONTAINER_CLASS: col-xs-1
   :END:
 
 * Footer
