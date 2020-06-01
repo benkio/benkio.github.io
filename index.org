@@ -89,7 +89,7 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  Donec hendrerit tempo
   :END:
 ** 
   :PROPERTIES:
-  :HTML_CONTAINER_CLASS: col-xs-4
+  :HTML_CONTAINER_CLASS: col-xs-3
   :END:
 
 ** 
@@ -97,6 +97,12 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  Donec hendrerit tempo
   :HTML_CONTAINER_CLASS: col-xs-2
   :END:
 #+html: <a title="telegram" href="https://t.me/benkio"><i class="fab fa-3x fa-telegram" aria-hidden="true"></i></a>
+
+** 
+  :PROPERTIES:
+  :HTML_CONTAINER_CLASS: col-xs-2
+  :END:
+
 ** 
   :PROPERTIES:
   :HTML_CONTAINER_CLASS: col-xs-2
@@ -105,7 +111,7 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  Donec hendrerit tempo
 #+html: <a title="email" href="mailto: benkio89@gmail.com"><i class="fas fa-3x fa-envelope" aria-hidden="true"></i>benkio89@gmail.com</a>
 ** 
   :PROPERTIES:
-  :HTML_CONTAINER_CLASS: col-xs-4
+  :HTML_CONTAINER_CLASS: col-xs-3
   :END:
 
 * Footer
