@@ -23,7 +23,7 @@
 #+name: populateArticles
 #+begin_src elisp :exports none :results html :var page=1
 (progn
-  (setq almostJSVar (seq-reduce (lambda (acc file)(concat acc "\"" file "\""  ",")) (seq-take (seq-drop (directory-files "./articles/" t "\.html$") (* 5 (- page 1))) 5) "var htmlArticles = [")
+  (setq almostJSVar (seq-reduce (lambda (acc file)(concat acc "\"./articles/" file "\""  ",")) (seq-take (seq-drop (directory-files "./articles/" nil "\.html$") (* 5 (- page 1))) 5) "var htmlArticles = [")
         almostJSVarLeng (length almostJSVar)
         JSVar (concat (substring almostJSVar 0 (- almostJSVarLeng 1)) "];")
         )
