@@ -51,3 +51,6 @@
 # files defined into the variable `htmlArticles`, when loaded, into
 # the callback remove the unwanted data. See `load` function from
 # JQuery.
+
+# Add pagination and put the values of the page into the
+# populateArticles function, starting with one
