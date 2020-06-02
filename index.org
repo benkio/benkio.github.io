@@ -13,14 +13,7 @@
 #+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="css/main.css">
 #+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="css/index.css">
 
-#+name: inline-js
-#+begin_src elisp :exports none :results html :var blk=""
-(concat
- "<script type=\"text/javascript\">\n"
- (cadr (org-babel-lob--src-info blk))
- "\n"
- "</script>")
-#+end_src
+#+INCLUDE: "./templates.org"
 
 #+name: textFading
 #+begin_src javascript :exports none
@@ -113,7 +106,7 @@ Etiam laoreet quam sed arcu.  Lorem ipsum dolor sit amet, consectetuer adipiscin
   :HTML_CONTAINER_CLASS: col-xs-2
   :CUSTOM_ID: text-email
   :END:
-#+html: <a title="email" href="mailto: benkio89@gmail.com"><i class="fas fa-3x fa-envelope" aria-hidden="true"></i>benkio89@gmail.com</a>
+#+html: <a title="email" href="mailto: benkio89@gmail.com"><i class="fas fa-3x fa-envelope" aria-hidden="true"></i><div class="hidden-xs">benkio89@gmail.com</div></a>
 ** 
   :PROPERTIES:
   :HTML_CONTAINER_CLASS: col-xs-3

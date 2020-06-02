@@ -3,4 +3,4 @@ body { padding-top: 70px; }
 #navbarContainer { display: none; }
 #navbarHeader { display: none; }
 #navbarLinks { display: none; }
-/* #navbarTitle { padding: 15px 15px; } */
+#Articles { display: none; }
