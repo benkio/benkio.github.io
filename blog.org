@@ -1,6 +1,7 @@
 #+OPTIONS: html-postamble:auto toc:nil num:nil
 #+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:nil
 #+TITLE: BLOG
+
 #+DESCRIPTION: Blog
 #+KEYWORDS: Blog
 #+HTML_HEAD_EXTRA: <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
@@ -13,31 +14,31 @@
 #+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="css/blog.css">
 
 * Blog
-  :PROPERTIES:
-  :HTML_CONTAINER_CLASS: text-center navbar navbar-inverse navbar-fixed-top
-  :CUSTOM_ID: navbar
-  :END:
+:PROPERTIES:
+:HTML_CONTAINER_CLASS: text-center navbar navbar-inverse navbar-fixed-top
+:CUSTOM_ID: navbar
+:END:
 
 #+BEGIN_EXPORT html
-<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapsableNavbar">
-  <span class="icon-bar"></span>
-  <span class="icon-bar"></span>
-  <span class="icon-bar"></span>
-</button>
-<h1 id="navbarTitle" class="navbar-text">Blog</h1>
-<div class="collapse navbar-collapse" id="collapsableNavbar">
-  <ul class="nav navbar-nav">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapsableNavbar">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    </button>
+    <h1 id="navbarTitle" class="navbar-text">Blog</h1>
+    <div class="collapse navbar-collapse" id="collapsableNavbar">
+    <ul class="nav navbar-nav">
     <li><a title="Home" href="./index.html"><i class="fas fa-home fa-3x" aria-hidden="true"></i></a></li>
     <li><a title="Article List" href="#" class="navbar-text h3">Article List</a></li>
-  </ul>
-</div>
+    </ul>
+    </div>
 #+END_EXPORT
 
 
 * Articles
-  :PROPERTIES: 
-  :CUSTOM_ID: Articles
-  :END:
+:PROPERTIES:
+:CUSTOM_ID: Articles
+:END:
 #+html: <div id='Article1' data-include="article1"></div>
 #+html: <div id='Article2' data-include="article2"></div>
 #+html: <div id='Article3' data-include="article3"></div>
@@ -45,8 +46,28 @@
 #+html: <div id='Article5' data-include="article5"></div>
 
 #+CALL: templates.org:compileOrgArticles()
-#+CALL: templates.org:populateArticles(1)
+#+CALL: templates.org:articlesRelativePathsPaginated(1)
 
+#+name: populateArticles
+#+begin_src javascript :exports none
+var articleDivs = $("[data-include]").map(function() { return this.id; });
+
+var articlesZip = [];
+
+for (var i = 0; i < articleDivs.length; i++) {
+    articlesZip.push([articleDivs[i], htmlArticles[i]]);
+}
+
+articlesZip.forEach(function(tuple) {
+    const [element, articleContent] = tuple;
+    const articleContentFiltered = $($.parseHTML(articleContent)).find("#Article, #outline-container-ArticleAbstract")
+    console.log("tuple " + tuple);
+    console.log("articleContent " + articleContent);
+    console.log("articleContentFiltered " + $('<div>').append(articleContentFiltered).html());
+    document.getElementById(element).innerHTML = $('<div>').append(articleContentFiltered).html();
+});
+#+end_src
+#+call: templates.org:inline-js("populateArticles")
 # function js that foearch article div above loops and load the
 # files defined into the variable `htmlArticles`, when loaded, into
 # the callback remove the unwanted data. See `load` function from

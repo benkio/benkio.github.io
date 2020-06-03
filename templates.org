@@ -20,10 +20,24 @@
 
 #+end_src
 
-#+name: populateArticles
+#+name: articlesRelativePathsPaginated
 #+begin_src elisp :exports none :results html :var page=1
 (progn
-  (setq almostJSVar (seq-reduce (lambda (acc file)(concat acc "\"./articles/" file "\""  ",")) (seq-take (seq-drop (directory-files "./articles/" nil "\.html$") (* 5 (- page 1))) 5) "var htmlArticles = [")
+  (setq fileContents (mapcar (lambda (filePath) (with-temp-buffer
+                                                  (insert-file-contents (concat "./articles/" filePath))
+                                                  (goto-char (point-min))
+                                                  (replace-string "/" "\\/")
+                                                  (goto-char (point-min))
+                                                  (replace-string "\n" "")
+                                                  (goto-char (point-min))
+                                                  (replace-string "'" "\\'")
+                                                  (goto-char (point-min))
+                                                  (replace-string "\"" "\\\"")
+                                                  (buffer-string)
+                                                  )
+                               )
+                             (directory-files "./articles/" nil "\.html$"))
+        almostJSVar (seq-reduce (lambda (acc fileContent)(concat acc "\"" fileContent "\"" ",")) (seq-take (seq-drop fileContents (* 5 (- page 1))) 5) "var htmlArticles = [")
         almostJSVarLeng (length almostJSVar)
         JSVar (concat (substring almostJSVar 0 (- almostJSVarLeng 1)) "];")
         )
