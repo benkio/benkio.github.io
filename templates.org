@@ -23,27 +23,37 @@
 #+name: articlesRelativePathsPaginated
 #+begin_src elisp :exports none :results html :var page=1
 (progn
-  (setq fileContents (mapcar (lambda (filePath) (with-temp-buffer
-                                                  (insert-file-contents (concat "./articles/" filePath))
-                                                  (goto-char (point-min))
-                                                  (replace-string "/" "\\/")
-                                                  (goto-char (point-min))
-                                                  (replace-string "\n" "")
-                                                  (goto-char (point-min))
-                                                  (replace-string "'" "\\'")
-                                                  (goto-char (point-min))
-                                                  (replace-string "\"" "\\\"")
-                                                  (buffer-string)
-                                                  )
-                               )
-                             (directory-files "./articles/" nil "\.html$"))
-        almostJSVar (seq-reduce (lambda (acc fileContent)(concat acc "\"" fileContent "\"" ",")) (seq-take (seq-drop fileContents (* 5 (- page 1))) 5) "var htmlArticles = [")
-        almostJSVarLeng (length almostJSVar)
-        JSVar (concat (substring almostJSVar 0 (- almostJSVarLeng 1)) "];")
-        )
+  (defun ListToJsArray (elist varName)
+    (setq almostJSVar (seq-reduce (lambda (acc content)(concat acc "\"" content "\"" ",")) elist (concat "var " varName " = ["))
+           almostJSVarLeng (length almostJSVar)
+          )
+    (concat (substring almostJSVar 0 (- almostJSVarLeng 1)) "];")
+    )
+  (setq
+   filePaths (mapcar (lambda (fileName) (concat "./articles/" fileName))
+                     (directory-files "./articles/" nil "\.html$"))
+   fileContents (mapcar (lambda (filePath) (with-temp-buffer
+                                             (insert-file-contents filePath)
+                                             (goto-char (point-min))
+                                             (replace-string "/" "\\/")
+                                             (goto-char (point-min))
+                                             (replace-string "\n" "")
+                                             (goto-char (point-min))
+                                             (replace-string "'" "\\'")
+                                             (goto-char (point-min))
+                                             (replace-string "\"" "\\\"")
+                                             (buffer-string)
+                                             )
+                          )
+                        filePaths)
+   htmlArticlesContent (seq-take (seq-drop fileContents (* 5 (- page 1))) 5)
+   filePathsPaginated (seq-take (seq-drop filePaths (* 5 (- page 1))) 5)
+   )
   (concat
    "<script type=\"text/javascript\">\n"
-   JSVar
+   (ListToJsArray htmlArticlesContent "htmlArticles")
+   "\n"
+   (ListToJsArray filePathsPaginated "htmlArticlesPaths")
    "\n"
    "</script>")
   )

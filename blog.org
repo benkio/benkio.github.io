@@ -39,11 +39,11 @@
 :PROPERTIES:
 :CUSTOM_ID: Articles
 :END:
-#+html: <div id='Article1' data-include="article1"></div>
-#+html: <div id='Article2' data-include="article2"></div>
-#+html: <div id='Article3' data-include="article3"></div>
-#+html: <div id='Article4' data-include="article4"></div>
-#+html: <div id='Article5' data-include="article5"></div>
+#+html: <div id='wrap1' data-include="article1"></div>
+#+html: <div id='wrap2' data-include="article2"></div>
+#+html: <div id='wrap3' data-include="article3"></div>
+#+html: <div id='wrap4' data-include="article4"></div>
+#+html: <div id='wrap5' data-include="article5"></div>
 
 #+CALL: templates.org:compileOrgArticles()
 #+CALL: templates.org:articlesRelativePathsPaginated(1)
@@ -53,19 +53,32 @@
 var articleDivs = $("[data-include]").map(function() { return this.id; });
 
 var articlesZip = [];
+var articlesElementsZip = [];
 
-for (var i = 0; i < articleDivs.length; i++) {
-    articlesZip.push([articleDivs[i], htmlArticles[i]]);
+for (var i = 0; i < htmlArticles.length; i++) {
+    articlesZip.push([htmlArticles[i], htmlArticlesPaths[i]]);
 }
 
-articlesZip.forEach(function(tuple) {
-    const [element, articleContent] = tuple;
-    const articleContentFiltered = $($.parseHTML(articleContent)).find("#Article, #outline-container-ArticleAbstract")
-    console.log("tuple " + tuple);
-    console.log("articleContent " + articleContent);
-    console.log("articleContentFiltered " + $('<div>').append(articleContentFiltered).html());
-    document.getElementById(element).innerHTML = $('<div>').append(articleContentFiltered).html();
+var htmlArticlesTitle = articlesZip.map(function(tuple) {
+  const [articleContent, articlePath] = tuple;
+  return $($.parseHTML(articleContent)).find("#Article").wrap(function (){
+    return "<a href='" + articlePath + "'></a>"
+  }).parent();
 });
+
+var htmlArticlesAbstract = htmlArticles.map(function(articleContent) {
+  return $($.parseHTML(articleContent)).find("#outline-container-ArticleAbstract");
+});
+
+for (var i = 0; i < htmlArticles.length; i++) {
+    articlesElementsZip.push([articleDivs[i], htmlArticlesTitle[i], htmlArticlesAbstract[i]]);
+}
+
+articlesElementsZip.forEach(function(tuple) {
+    const [element, title, abstract] = tuple;
+    $("#" + element).html($('<div>').append(title).append(abstract));
+});
+
 #+end_src
 #+call: templates.org:inline-js("populateArticles")
 # function js that foearch article div above loops and load the
