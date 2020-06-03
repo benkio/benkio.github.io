@@ -20,8 +20,8 @@
 
 #+end_src
 
-#+name: articlesRelativePathsPaginated
-#+begin_src elisp :exports none :results html :var page=1
+#+name: articlesRelativePaths
+#+begin_src elisp :exports none :results html
 (progn
   (defun ListToJsArray (elist varName)
     (setq almostJSVar (seq-reduce (lambda (acc content)(concat acc "\"" content "\"" ",")) elist (concat "var " varName " = ["))
@@ -46,14 +46,12 @@
                                              )
                           )
                         filePaths)
-   htmlArticlesContent (seq-take (seq-drop fileContents (* 5 (- page 1))) 5)
-   filePathsPaginated (seq-take (seq-drop filePaths (* 5 (- page 1))) 5)
    )
   (concat
    "<script type=\"text/javascript\">\n"
-   (ListToJsArray htmlArticlesContent "htmlArticles")
+   (ListToJsArray fileContents "htmlArticles")
    "\n"
-   (ListToJsArray filePathsPaginated "htmlArticlesPaths")
+   (ListToJsArray filePaths "htmlArticlesPaths")
    "\n"
    "</script>")
   )

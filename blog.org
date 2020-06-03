@@ -45,18 +45,40 @@
 #+html: <div id='wrap4' data-include="article4"></div>
 #+html: <div id='wrap5' data-include="article5"></div>
 
+#+html: <ul id="pagination" class="pagination pagination-lg"></ul>
+
 #+CALL: templates.org:compileOrgArticles()
-#+CALL: templates.org:articlesRelativePathsPaginated(1)
+#+CALL: templates.org:articlesRelativePaths()
+
+#+NAME: pagination
+#+BEGIN_SRC javascript :exports none
+const page = ((new URLSearchParams(window.location.search).get('page') || 1) - 1) * 5;
+const perPage = 5;
+for (var i = 0; i < (htmlArticles.length/perPage); i++) {
+    var active = "";
+    if ((page/perPage) == i) {
+        active = "class='active'";
+    }
+    $("#pagination").append(
+        '<li ' + active + '><a href="' + window.location.href.split('?')[0] + '?page=' + (i+1) + '">' + (i+1) + '</a></li>'
+    );
+}
+#+END_SRC
+#+call: templates.org:inline-js("pagination")
 
 #+name: populateArticles
 #+begin_src javascript :exports none
+// Pagination 0 based 
+const htmlArticlesPaginated = htmlArticles.slice(page, page + perPage);
+const htmlArticlesPathsPaginated = htmlArticlesPaths.slice(page, page + perPage);
+
 var articleDivs = $("[data-include]").map(function() { return this.id; });
 
 var articlesZip = [];
 var articlesElementsZip = [];
 
-for (var i = 0; i < htmlArticles.length; i++) {
-    articlesZip.push([htmlArticles[i], htmlArticlesPaths[i]]);
+for (var i = 0; i < htmlArticlesPaginated.length; i++) {
+    articlesZip.push([htmlArticlesPaginated[i], htmlArticlesPathsPaginated[i]]);
 }
 
 var htmlArticlesTitle = articlesZip.map(function(tuple) {
@@ -66,11 +88,11 @@ var htmlArticlesTitle = articlesZip.map(function(tuple) {
   }).parent();
 });
 
-var htmlArticlesAbstract = htmlArticles.map(function(articleContent) {
+var htmlArticlesAbstract = htmlArticlesPaginated.map(function(articleContent) {
   return $($.parseHTML(articleContent)).find("#outline-container-ArticleAbstract");
 });
 
-for (var i = 0; i < htmlArticles.length; i++) {
+for (var i = 0; i < htmlArticlesPaginated.length; i++) {
     articlesElementsZip.push([articleDivs[i], htmlArticlesTitle[i], htmlArticlesAbstract[i]]);
 }
 
@@ -81,10 +103,3 @@ articlesElementsZip.forEach(function(tuple) {
 
 #+end_src
 #+call: templates.org:inline-js("populateArticles")
-# function js that foearch article div above loops and load the
-# files defined into the variable `htmlArticles`, when loaded, into
-# the callback remove the unwanted data. See `load` function from
-# JQuery.
-
-# Add pagination and put the values of the page into the
-# populateArticles function, starting with one
