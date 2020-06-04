@@ -17,13 +17,13 @@
 
 #+name: textFading
 #+begin_src javascript :exports none
-let text = ['Software Engineer 💾', 'FP Enthusiast 🤓', 'Guitar Player 🎸','Freak 🤪'];
+let text = ['Software Engineer 💾', 'FP Enthusiast 🤓', 'Guitar Player 🎸', 'Cat Lover 😻', 'Freak 🤪'];
 var textIndex = 1;
 $(document).ready(function(){
   setInterval(function(){
     let opacity = Number($("#subtitle").css("opacity"));
     if (opacity == 0) {
-      textIndex = textIndex > 3? 0: textIndex;
+      textIndex = textIndex > 4? 0: textIndex;
       $("#subtitle").text(text[textIndex])
       textIndex += 1;;
     }
