@@ -1,6 +1,6 @@
 #+OPTIONS: html-postamble:auto toc:nil num:nil
 #+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:nil
-#+TITLE: BLOG
+#+TITLE: Blog
 
 #+DESCRIPTION: Blog
 #+KEYWORDS: Blog
@@ -29,7 +29,7 @@
     <div class="collapse navbar-collapse" id="collapsableNavbar">
     <ul class="nav navbar-nav">
     <li><a title="Home" href="./index.html"><i class="fas fa-home fa-3x" aria-hidden="true"></i></a></li>
-    <li><a title="Article List" href="#" class="navbar-text h3">Article List</a></li>
+    <li><a title="Article List" href="./articleList.html" class="navbar-text h3">Article List</a></li>
     </ul>
     </div>
 #+END_EXPORT

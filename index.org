@@ -44,7 +44,6 @@ Etiam laoreet quam sed arcu.  Lorem ipsum dolor sit amet, consectetuer adipiscin
 
 #+html: <img class="img-circle"  src="https://www.gravatar.com/avatar/aa7f68a32b011ac94698a7a1cb16ffc8?s=200">
 
-
 * Hello, I'm Enrico
   :PROPERTIES:
   :CUSTOM_ID: MainContent

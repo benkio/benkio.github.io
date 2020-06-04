@@ -1,0 +1,83 @@
+#+OPTIONS: html-postamble:auto toc:nil num:nil
+#+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:nil
+#+TITLE: Article List
+
+#+DESCRIPTIONxo: Article List
+#+KEYWORDS: Article List
+#+HTML_HEAD_EXTRA: <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA: <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="css/main.css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="css/articleList.css">
+
+* Article List
+:PROPERTIES:
+:HTML_CONTAINER_CLASS: text-center navbar navbar-inverse navbar-fixed-top
+:CUSTOM_ID: navbar
+:END:
+
+#+BEGIN_EXPORT html
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapsableNavbar">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    </button>
+    <h1 id="navbarTitle" class="navbar-text">Article List</h1>
+    <div class="collapse navbar-collapse" id="collapsableNavbar">
+    <ul class="nav navbar-nav">
+    <li><a title="Home" href="./index.html"><i class="fas fa-home fa-3x" aria-hidden="true"></i></a></li>
+    <li><a title="Blog Main Page" href="./blog.html" class="navbar-text h3">Blog</a></li>
+    </ul>
+    </div>
+#+END_EXPORT
+
+
+* Articles
+:PROPERTIES:
+:CUSTOM_ID: Articles
+:END:
+
+
+#+BEGIN_EXPORT HTML
+
+<ul id="ArticleList" class="list-group">
+  <!-- <a href="#" class="list-group-item list-group-item-action">Article 1</a> -->
+</ul>
+
+#+END_EXPORT
+
+
+#+CALL: templates.org:compileOrgArticles()
+#+CALL: templates.org:articlesRelativePaths()
+
+#+name: populateArticles
+#+begin_src javascript :exports none
+ // Pagination 0 based
+ var articlesZip = [];
+
+ for (var i = 0; i < htmlArticles.length; i++) {
+     articlesZip.push([htmlArticles[i], htmlArticlesPaths[i]]);
+ }
+
+ const htmlArticlesTitle = articlesZip.map(function(tuple) {
+   const [articleContent, articlePath] = tuple;
+   const articleTitle = $($.parseHTML(articleContent)).find("#Article").text();
+   return $('<a href="' + articlePath + '" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">' + articleTitle + '</a>').hover(function(){
+  $(this).css("background-color", "#99ccff");
+  }, function(){
+  $(this).css("background-color", "#202020");
+  });
+ });
+
+ 
+
+
+htmlArticlesTitle.forEach(function(listElement) {
+     $("#ArticleList").append(listElement);
+ });
+
+#+end_src
+#+call: templates.org:inline-js("populateArticles")
