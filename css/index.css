@@ -25,3 +25,10 @@
 #footer     { display: none; }
 #outline-container-footer { font-size: 0px; }
 #outline-container-header { font-size: 0px; }
+
+@media (max-width:767px) {
+    #text-header p{
+        line-height: 10em;
+        height: 10em;
+    }
+}
