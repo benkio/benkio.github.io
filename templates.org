@@ -34,6 +34,12 @@
                      (directory-files "./articles/" nil "\.html$"))
    fileContents (mapcar (lambda (filePath) (with-temp-buffer
                                              (insert-file-contents filePath)
+                                             (search-forward "outline-container-Article")
+                                             (beginning-of-line)
+                                             (kill-region (point-min) (point))
+                                             (search-forward "outline-container-ShareButtons")
+                                             (beginning-of-line)
+                                             (kill-region (point) (point-max))
                                              (goto-char (point-min))
                                              (replace-string "/" "\\/")
                                              (goto-char (point-min))

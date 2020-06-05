@@ -1,8 +1,9 @@
-#+OPTIONS: html-postamble:auto toc:nil num:nil
+#+OPTIONS: toc:nil num:nil
 #+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:nil
 #+TITLE: BLOG
 #+DESCRIPTION: Blog
 #+KEYWORDS: Blog
+#+CREATOR: Enrico Benini
 #+HTML_HEAD_EXTRA: <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon">
 #+HTML_HEAD_EXTRA: <link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
 #+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
@@ -35,7 +36,7 @@
 #+END_EXPORT
 
 
-* Article 1
+* Article 1 
   :PROPERTIES: 
   :CUSTOM_ID: Article
   :END:
@@ -56,7 +57,7 @@ test
   :CUSTOM_ID: ArticleConclusions
   :END:
 test3
-* DONE Share Buttons
+* Share Buttons
   :PROPERTIES: 
   :CUSTOM_ID: ShareButtons
   :END:
