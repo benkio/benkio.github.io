@@ -14,17 +14,6 @@
 #+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/blog.css">
 #+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/article.css">
 
-#+INCLUDE: "../templates.org"
-
-#+name: removeUnWantedTOC
-#+begin_src javascript :exports none
-$(function() {
-  $('#text-table-of-contents > ul li').first().css("display", "none");
-  $('#text-table-of-contents > ul li').last().css("display", "none");
-});
-
-#+end_src
-
 * Blog
   :PROPERTIES:
   :HTML_CONTAINER_CLASS: text-center navbar navbar-inverse navbar-fixed-top
@@ -93,4 +82,11 @@ test3
 <!-- AddToAny END -->
 #+END_EXPORT
 
-#+call: inline-js("removeUnWantedTOC")
+#+begin_export html
+<script type="text/javascript">
+$(function() {
+  $('#text-table-of-contents > ul li').first().css("display", "none");
+  $('#text-table-of-contents > ul li').last().css("display", "none");
+});
+</script>
+#+end_export
