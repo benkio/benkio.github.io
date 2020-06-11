@@ -1,5 +1,5 @@
-#+OPTIONS: toc:nil num:nil
-#+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:nil toc: t
+#+OPTIONS: num:nil toc:t
+#+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:nil
 #+TITLE: BLOG
 #+DESCRIPTION: Blog
 #+KEYWORDS: Blog
@@ -34,7 +34,6 @@
   </ul>
 </div>
 #+END_EXPORT
-
 
 * Static Personal Website with Org Mode
   :PROPERTIES:
