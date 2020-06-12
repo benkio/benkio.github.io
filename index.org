@@ -12,6 +12,7 @@
 #+HTML_HEAD_EXTRA:  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 #+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="css/main.css">
 #+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="css/index.css">
+#+HTML_HEAD_EXTRA:  <script data-ad-client="ca-pub-6596341732684246" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
 #+INCLUDE: "./templates.org"
 
