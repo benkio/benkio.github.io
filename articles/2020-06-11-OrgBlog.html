@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>BLOG</title>
-<!-- 2020-06-12 Fri 19:23 -->
+<!-- 2020-06-12 Fri 19:27 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -185,7 +185,7 @@ List</a> page.
 </p>
 
 <p>
-On Both occasions there are two Js arrays, called
+Both occasions, there are two Js arrays, called
 <code>htmlArticles</code> and <code>htmlArticlesPaths</code>. The former contains a
 subset of the HTML structure (Title and Abstract) of the
 Articles, and the latter contains the relative path of them.
@@ -266,7 +266,7 @@ articlesElementsZip.forEach(<span style="color: #b4fa70;">function</span>(<span 
 Obviously, all of this came at a cost, in particular:
 </p>
 <ul class="org-ul">
-<li>In case of an article addition/deletion/renaming we need to
+<li>In case of an article addition/deletion/renaming, we need to
 recompile both pages. This could be a nasty problem if we would
 need to add multiple dynamic behaviors to several pages. A possible
 workaround could be to trigger the whole site compilation from a
@@ -288,16 +288,16 @@ dynamic nature only to a subset of the articles.
 <div class="outline-text-5" id="text-">
 <p>
 Pagination is no different from the previous section, in fact, It
-takes advantage of the same data. 
+takes advantage of the same data.
 </p>
 
 <p>
-If you take a look closely to the previous <a href="#populateArticlesSnippet">snippet</a> you will see
+If you take a look closely at the previous <a href="#populateArticlesSnippet">snippet</a> you will see
 two additional variables, called <code>page</code> and <code>perPage</code>, used to
 slice the starting data arrays to the specific selected
 page. Both of those variables are defined in another snippet, in
 particular, the <code>page</code> is selected from the URL query string,
-meanwhile the <code>perPage</code> is fixed to 5.
+meanwhile, the <code>perPage</code> is fixed to 5.
 </p>
 
 <p>
@@ -333,12 +333,12 @@ Here you can see the complete js code snippet for the pagination:
 <div class="outline-text-3" id="text-ArticleConclusions">
 <p>
 In conclusion, <b><b>DON'T DO WHAT I HAVE DONE</b></b>. I'm sure there are
-several solutions that are more convenient then the one I implemented
-in here, like Wordpress, Blogspot, Blogger&#x2026;
+several solutions that are more convenient than the one I implemented
+here, like Wordpress, Blogspot, Blogger&#x2026;
 </p>
 
 <p>
-Anyway, even if I have to re-implement several well known framework, I
+Anyway, even if I have to re-implement several well-known framework, I
 also gain these benefits:
 </p>
 <ul class="org-ul">

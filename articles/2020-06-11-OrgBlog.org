@@ -119,7 +119,7 @@
      the targeted page. Two examples are The [[https://benkio.github.io/blog.html][Blog]] page and the [[https://benkio.github.io/articleList.html][Article
      List]] page.
 
-     On Both occasions there are two Js arrays, called
+     Both occasions, there are two Js arrays, called
      ~htmlArticles~ and ~htmlArticlesPaths~. The former contains a
      subset of the HTML structure (Title and Abstract) of the
      Articles, and the latter contains the relative path of them.
@@ -144,7 +144,7 @@ populate the empty article tags:
 #+include: "../blog.org" :lines "68-105" src javascript -n
 
 Obviously, all of this came at a cost, in particular:
- + In case of an article addition/deletion/renaming we need to
+ + In case of an article addition/deletion/renaming, we need to
    recompile both pages. This could be a nasty problem if we would
    need to add multiple dynamic behaviors to several pages. A possible
    workaround could be to trigger the whole site compilation from a
@@ -160,14 +160,14 @@ Obviously, all of this came at a cost, in particular:
      # JQuery integration using the calculated values
 
      Pagination is no different from the previous section, in fact, It
-     takes advantage of the same data. 
+     takes advantage of the same data.
 
-     If you take a look closely to the previous [[populateArticlesSnippet][snippet]] you will see
+     If you take a look closely at the previous [[populateArticlesSnippet][snippet]] you will see
      two additional variables, called ~page~ and ~perPage~, used to
      slice the starting data arrays to the specific selected
      page. Both of those variables are defined in another snippet, in
      particular, the ~page~ is selected from the URL query string,
-     meanwhile the ~perPage~ is fixed to 5.
+     meanwhile, the ~perPage~ is fixed to 5.
 
      Here you can see the complete js code snippet for the pagination:
 
@@ -179,10 +179,10 @@ Obviously, all of this came at a cost, in particular:
   :END:
 
 In conclusion, **DON'T DO WHAT I HAVE DONE**. I'm sure there are
-several solutions that are more convenient then the one I implemented
-in here, like Wordpress, Blogspot, Blogger...
+several solutions that are more convenient than the one I implemented
+here, like Wordpress, Blogspot, Blogger...
 
-Anyway, even if I have to re-implement several well known framework, I
+Anyway, even if I have to re-implement several well-known framework, I
 also gain these benefits:
 + I have the chance to learn org better
 + I am free from a specific framework
