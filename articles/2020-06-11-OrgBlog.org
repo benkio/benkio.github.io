@@ -182,7 +182,7 @@ In conclusion, **DON'T DO WHAT I HAVE DONE**. I'm sure there are
 several solutions that are more convenient than the one I implemented
 here, like Wordpress, Blogspot, Blogger...
 
-Anyway, even if I have to re-implement several well-known framework, I
+Anyway, even if I have to re-implement several well-known frameworks, I
 also gain these benefits:
 + I have the chance to learn org better
 + I am free from a specific framework
