@@ -135,17 +135,13 @@
      [[https://github.com/benkio/benkio.github.io/blob/master/templates.org][templates.org]](omitted for brevity) and then integrated into the
      page in this way:
 
-#+BEGIN_EXPORT html
-<script src="http://gist-it.appspot.com/github/benkio/benkio.github.io/blob/master/blog.org?slice=49:51"></script>
-#+END_EXPORT
+#+include: "../blog.org" :lines "49-52" src org -n
 
 After that, we need to add some custom js to treat those variables and
 populate the empty article tags:
 
 <<populateArticlesSnippet>>
-#+BEGIN_EXPORT html
-<script src="http://gist-it.appspot.com/github/benkio/benkio.github.io/blob/master/blog.org?slice=68:105"></script>
-#+END_EXPORT
+#+include: "../blog.org" :lines "68-105" src javascript -n
 
 Obviously, all of this came at a cost, in particular:
  + In case of an article addition/deletion/renaming we need to
@@ -175,9 +171,7 @@ Obviously, all of this came at a cost, in particular:
 
      Here you can see the complete js code snippet for the pagination:
 
-#+BEGIN_EXPORT html
-<script src="http://gist-it.appspot.com/github/benkio/benkio.github.io/blob/master/blog.org?slice=52:67"></script>
-#+END_EXPORT
+#+include: "../blog.org" :lines "52-68" src org -n
 
 ** Conclusions
   :PROPERTIES:

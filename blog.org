@@ -68,7 +68,7 @@ for (var i = 0; i < (htmlArticles.length/perPage); i++) {
 
 #+name: populateArticles
 #+begin_src javascript :exports none
-// Pagination 0 based 
+// Pagination 0 based
 const htmlArticlesPaginated = htmlArticles.slice(page, page + perPage);
 const htmlArticlesPathsPaginated = htmlArticlesPaths.slice(page, page + perPage);
 
