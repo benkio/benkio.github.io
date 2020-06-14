@@ -10,7 +10,6 @@
 #+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
 #+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
 #+HTML_HEAD_EXTRA:  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-#+HTML_HEAD_EXTRA:  <script data-ad-client="ca-pub-6596341732684246" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 #+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/main.css">
 #+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/blog.css">
 #+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/article.css">
@@ -213,6 +212,7 @@ also gain these benefits:
 $(function() {
   $('#text-table-of-contents > ul li').first().css("display", "none");
   $('#text-table-of-contents > ul li').last().css("display", "none");
+  $('#table-of-contents').addClass("visible-lg")
 });
 </script>
 #+end_export
