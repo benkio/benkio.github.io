@@ -43,7 +43,7 @@
   :CUSTOM_ID: ArticleAbstract
   :END:
 
-  A personal compact and simple review of the Positive Grid Spark
+  A personal compact and simple review of the [[https://www.positivegrid.com/spark][Positive Grid Spark]]
   Amp. This will be more a review from my personal point of view,
   without inspecting feature by feature, but pointing out
   strengths, weaknesses and especially personal considerations.
@@ -63,9 +63,9 @@
 
   So you might think: /"Well this guy is also a nerd, so he should be
   the best one when it comes to gear reviews!"/. Nothing could be more
-  wrong than that 😅 When it comes to guitar I'm the most pragmatic
+  wrong than that 😅 When it comes to the guitar I'm the most pragmatic
   person, focused on doing exercises and practice, spending no time on
-  staying up to date with latest news. Then it makes me the most
+  staying up to date with the latest news. Then it makes me the most
   unqualifiable person for the job.
 
   Anyway, I'll give you my honest opinion on this amp, and hopefully,
@@ -88,13 +88,52 @@
   different location you know what I mean. However, you know, you
   can't stay without playing for longer 😛
 
-  Then, I bought a cheap 7-string guitar (because I never had one, so
-  why not), a ~100$ external audio interface, a small Blackstar mini
-  amp (I got it from the Metalhammer subscription 😎) and a pair of
-  headphones. Using the guitar plugins on the PC, I was able to: play,
-  record, jam along, and going back to business.
+  Then, I bought a cheap [[https://www.jacksonguitars.com/gear/shape/dinky/js-series-dinky-js22-7/2910132568][7-string guitar]] (because I never had one, so
+  why not), a ~100$ [[https://m-audio.com/m-tracks/2x2][external audio interface]], a small [[https://www.blackstaramps.com/uk/products/fly-3][Blackstar mini
+  amp]] (I got it from 6 months Metalhammer subscription 😎) and a pair
+  of [[https://en-uk.sennheiser.com/monitoring-headphone-studio-headphone-professional-audio-hd-380-pro][headphones]]. Using the guitar plugins on the PC, I was able to:
+  play, record, jam along, and going back to business. In fact, I used
+  this setup to record several songs you could find on my youtube
+  channel. All's well that ends well, but there's always room for
+  improvement, especially in this case.
 
-*** Home Recording
+  I started to see [[https://www.positivegrid.com/spark][Positive Grid Spark]] commercials, reviews at the end
+  of the last year when they started to sell it in preview. So looking
+  at the specs I noticed it did exactly what all my current setup did
+  and more. In particular, what attracted me was:
+  + The ability to record
+  + I can use it as an external speaker for my PC
+  + Its 40W, it's always good to have some power 😛
+  + All the amp simulations, available also online. Since I'm a lazy
+    person, if I can get a good tone without spending time tweaking
+    this setting or the other, the better.
+  + *The Price* Last, but not least! Just ~300$ 😲
+
+  It also comes with other features, but not very appealing to me
+  honestly. You can find the details on the [[https://www.positivegrid.com/spark][amp page]].
+
+  For all those reasons I decided to do me a Christmas gift and I
+  ordered. Unfortunately, It took a long time to arrive, 6 months, due
+  to the unexpected amount of orders and a little pandemic in
+  between. The first impact I had was great, it does exactly what it
+  claimed. I had some troubles setting it up, with the Bluetooth
+  pairing between the app and the PC, for instance, I discovered it can't
+  be controlled by the phone app (changing the settings) and receive
+  the audio from the PC at the same time, but apart from these little
+  details, I don't have any complaints about the sound.
+
+  In the next section, I will record some licks and riffs so you can
+  hear the factory presets. I will not apply any post-production
+  effect or changes so you can hear the raw sound out of the unit
+  itself.
+
+  I leave you with a lesson I learned about practice amps: /In order to
+  be good, it should not have the battery supply option!/
+
+*** Demos
+    :PROPERTIES:
+    :CUSTOM_ID: ArticleContentDemos
+    :END:
 
 *** Other Youtube Reviews links
     :PROPERTIES:
