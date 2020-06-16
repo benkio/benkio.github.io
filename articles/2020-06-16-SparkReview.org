@@ -57,11 +57,49 @@
   :CUSTOM_ID: ArticleContent
   :END:
 
-*** First Impact
+  The standard guitarist usually is also a gear fanatic and he's
+  always in search of something new to try and experiment with, it
+  can be a new amp, software, guitars, pedals...
 
-*** Home Recording 
+  So you might think: /"Well this guy is also a nerd, so he should be
+  the best one when it comes to gear reviews!"/. Nothing could be more
+  wrong than that 😅 When it comes to guitar I'm the most pragmatic
+  person, focused on doing exercises and practice, spending no time on
+  staying up to date with latest news. Then it makes me the most
+  unqualifiable person for the job.
+
+  Anyway, I'll give you my honest opinion on this amp, and hopefully,
+  you could find it useful. My main suggestion still, is to check out
+  the youtube reviews I linked in the [[#ArticleContentYoutubeLinks][Other Youtube Reviews links
+  Section]]. I can tell you I decided to preorder this amp in late
+  2019 by looking at those first.
+
+*** Situation, Motivation & First Impact
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleContentSituationMotivationFirstImpact
+  :END:
+
+  Before starting, I want to explain my current situation, so you will
+  understand also the follow-up motivations. At the moment, I'm
+  working abroad, and that means: away from my hometown, on rent, with
+  a fraction of what I usually have (both in terms of space available
+  and gear). Plus, I wish to keep my belongings compact because I
+  might need to move again and again. If you ever had to move to a
+  different location you know what I mean. However, you know, you
+  can't stay without playing for longer 😛
+
+  Then, I bought a cheap 7-string guitar (because I never had one, so
+  why not), a ~100$ external audio interface, a small Blackstar mini
+  amp (I got it from the Metalhammer subscription 😎) and a pair of
+  headphones. Using the guitar plugins on the PC, I was able to play,
+  jam along, and going back to business.
+
+*** Home Recording
 
 *** Other Youtube Reviews links
+    :PROPERTIES:
+    :CUSTOM_ID: ArticleContentYoutubeLinks
+    :END:
 
     + [[https://youtu.be/-BRU7Hd_3dI][Review by Tom Quayle]]
     + [[https://youtu.be/FubvySS-Xo8][Review by Sophie Burrell]]
