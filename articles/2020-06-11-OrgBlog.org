@@ -1,8 +1,8 @@
 #+OPTIONS: num:nil toc:t H:4
 #+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:nil
-#+TITLE: BLOG
-#+DESCRIPTION: Blog
-#+KEYWORDS: Blog
+#+TITLE: Static Personal Website with Org Mode
+#+DESCRIPTION: Static Personal Website with Org Mode
+#+KEYWORDS: Org Mode blog
 #+CREATOR: Enrico Benini
 #+HTML_HEAD_EXTRA: <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon">
 #+HTML_HEAD_EXTRA: <link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
