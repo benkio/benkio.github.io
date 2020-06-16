@@ -91,8 +91,8 @@
   Then, I bought a cheap 7-string guitar (because I never had one, so
   why not), a ~100$ external audio interface, a small Blackstar mini
   amp (I got it from the Metalhammer subscription 😎) and a pair of
-  headphones. Using the guitar plugins on the PC, I was able to play,
-  jam along, and going back to business.
+  headphones. Using the guitar plugins on the PC, I was able to: play,
+  record, jam along, and going back to business.
 
 *** Home Recording
 
