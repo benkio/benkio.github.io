@@ -135,6 +135,69 @@
     :CUSTOM_ID: ArticleContentDemos
     :END:
 
+**** Technical Difficulties
+    :PROPERTIES:
+    :CUSTOM_ID: ArticleContentDemosTechnicalDifficulties
+    :END:
+
+     Yesterday, I tried recording something specifically for this
+     review, but I encountered some technical difficulties. In
+     particular, the problem was with the connectivity between the amp
+     and the PC.
+
+     Positive Grid provides a specific [[https://help.positivegrid.com/hc/en-us/articles/360039598451-Spark-Windows-ASIO-Driver-][ASIO driver]] for the Spark amp,
+     but even if I had that installed, it seems that the USB
+     connection was not reliable. It often disconnects and was
+     impossible to take a recording or jam along. Meanwhile, the
+     Bluetooth connection works without any problem.
+
+     In the end, I realized that they keep updating the driver. In
+     fact, going to [[https://help.positivegrid.com/hc/en-us/articles/360039598451-Spark-Windows-ASIO-Driver-][the driver page]] right now I see /Updated:
+     Yesterday/. Therefore, I just installed the new driver, restarted
+     the PC and it seemed to work fine.
+
+     In the following sections, I will expose the criteria behind the
+     demos I will record. So you can hear the Spark sound.
+
+     *Edit:* I just received right now an email telling the spark
+     users to update the amp firmware to improve connectivity.
+
+**** The Demo Plan
+    :PROPERTIES:
+    :CUSTOM_ID: ArticleContentDemosTheDemoPlan
+    :END:
+
+     The main problem with doing Spark's demos is that it can
+     reproduce an infinite variety of sounds you can craft by the app
+     or download from the cloud. Then, I will just restrict the number
+     of sounds to the factory ones (those you can select by the fist
+     knob on the amp itself).
+
+     Moving on, another decision to take is, what to play as a proper
+     sample? My idea is to select 3 different licks:
+     + One for testing clean tones (3)
+     + One for testing crunch/blues tones (2)
+     + One for testing high gain tones (2)
+
+     Then, I also want to play the same lick with different magnet
+     setup:
+     + Bridge magnet
+     + Neck magnet
+     + Bridge and Neck magnets
+
+     This strategy will bring at least 21 samples, but I might play a
+     little more then that 𝨾. I hope those will
+     give you quite a clear idea of the amp.
+
+     About the sound manipulation, I will not add any mixing/mastering
+     to the files: I'll just click record, and export the results. So
+     you will have the exact raw sound files.
+
+**** Recordings
+    :PROPERTIES:
+    :CUSTOM_ID: ArticleContentDemosRecordings
+    :END:
+
 *** Other Youtube Reviews links
     :PROPERTIES:
     :CUSTOM_ID: ArticleContentYoutubeLinks
@@ -198,8 +261,8 @@ $(function() {
 $(function() {
 		$('.pop').on('click', function() {
 			$('.imagepreview').attr('src', $(this).find('img').attr('src'));
-			$('#imagemodal').modal('show');   
-		});		
+			$('#imagemodal').modal('show');
+		});
 });
 </script>
 
