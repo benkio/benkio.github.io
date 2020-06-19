@@ -165,8 +165,17 @@
      *Edit:* <2020-06-19 Fri> What still happens is that, when you
      record using USB, the connection is quite unstable. When a
      disconnection happens, the recording stops and you need to
-     unplug-plug the cable again and exit the DAW. Otherwise the
-     recording will present problems (clipping and various noises).
+     unplug-plug the cable again and exit the DAW and you *MAY* solve
+     the issue. Otherwise the recording will present problems
+     (clipping and various noises).  I add a sample of one of the
+     interferences
+
+     #+begin_export html
+     <audio controls>
+       <source src="2020-06-16-SparkReview/RecordingInterference.wav" type="audio/wav">
+       Your browser does not support the audio element.
+     </audio>
+     #+end_export
 
 **** The Demo Plan
     :PROPERTIES:
@@ -206,7 +215,10 @@
 
 **** Acustic
 
-    #+begin_export html
+     This tone is probably reserved for the acustic guitar since spark
+     promote himself as an amp for that as well.
+
+#+begin_export html
     <table class="table table-dark">
   <thead>
     <tr>
@@ -259,10 +271,113 @@
         </audio>
       </td>
     </tr>
+        <tr>
+      <th scope="row">Mutter</th>
+      <td>
+        <audio controls>
+          <source src="2020-06-16-SparkReview/MutterAcusticBridge.wav" type="audio/wav">
+      Your browser does not support the audio element.
+        </audio>
+      </td>
+      <td>
+        <audio controls>
+          <source src="2020-06-16-SparkReview/MutterAcusticBridgeNNeck.wav" type="audio/wav">
+      Your browser does not support the audio element.
+        </audio>
+      </td>
+      <td>
+        <audio controls>
+          <source src="2020-06-16-SparkReview/MutterAcusticNeck.wav" type="audio/wav">
+      Your browser does not support the audio element.
+        </audio>
+      </td>
+    </tr>
   </tbody>
 </table>
     #+end_export
 
+**** Bass
+
+     This tone is probably reserved for the Bass guitar since spark
+     promote himself as an amp for that as well.
+
+    #+begin_export html
+    <table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Lick</th>
+      <th scope="col">Bridge Pickup</th>
+      <th scope="col">Middle Position Pickup</th>
+      <th scope="col">Neck Pickup</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">C Major Scale</th>
+      <td>
+        <audio controls>
+          <source src="2020-06-16-SparkReview/CMajorBassBridge.wav" type="audio/wav">
+      Your browser does not support the audio element.
+        </audio>
+      </td>
+      <td>
+        <audio controls>
+          <source src="2020-06-16-SparkReview/CMajorBassBridgeNNeck.wav" type="audio/wav">
+      Your browser does not support the audio element.
+        </audio>
+      </td>
+      <td>
+        <audio controls>
+          <source src="2020-06-16-SparkReview/CMajorBassNeck.wav" type="audio/wav">
+      Your browser does not support the audio element.
+        </audio>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Cemetery Gates</th>
+      <td>
+        <audio controls>
+          <source src="2020-06-16-SparkReview/CemeteryGatesBassBridge.wav" type="audio/wav">
+      Your browser does not support the audio element.
+        </audio>
+      </td>
+      <td>
+        <audio controls>
+          <source src="2020-06-16-SparkReview/CemeteryGatesBassBridgeNNeck.wav" type="audio/wav">
+      Your browser does not support the audio element.
+        </audio>
+      </td>
+      <td>
+        <audio controls>
+          <source src="2020-06-16-SparkReview/CemeteryGatesBassNeck.wav" type="audio/wav">
+      Your browser does not support the audio element.
+        </audio>
+      </td>
+    </tr>
+        <tr>
+      <th scope="row">Mutter</th>
+      <td>
+        <audio controls>
+          <source src="2020-06-16-SparkReview/MutterBassBridge.wav" type="audio/wav">
+      Your browser does not support the audio element.
+        </audio>
+      </td>
+      <td>
+        <audio controls>
+          <source src="2020-06-16-SparkReview/MutterBassBridgeNNeck.wav" type="audio/wav">
+      Your browser does not support the audio element.
+        </audio>
+      </td>
+      <td>
+        <audio controls>
+          <source src="2020-06-16-SparkReview/MutterBassNeck.wav" type="audio/wav">
+      Your browser does not support the audio element.
+        </audio>
+      </td>
+    </tr>
+  </tbody>
+</table>
+    #+end_export
 
 *** Other Youtube Reviews links
     :PROPERTIES:
