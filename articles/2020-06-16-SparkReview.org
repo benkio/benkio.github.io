@@ -74,6 +74,15 @@
   Section]]. I can tell you I decided to preorder this amp in late
   2019 by looking at those first.
 
+#+begin_export html
+<figure>
+<iframe width="640" height="480" src="https://www.youtube.com/embed/mT1lF6Efi1E?rel=0" allowfullscreen></iframe>
+<figcaption>
+Positive Grid Spark Unboxing
+</figcaption>
+</figure>
+#+end_export
+
 *** Situation, Motivation & First Impact
   :PROPERTIES:
   :CUSTOM_ID: ArticleContentSituationMotivationFirstImpact
