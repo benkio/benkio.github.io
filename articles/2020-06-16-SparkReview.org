@@ -222,171 +222,571 @@ Positive Grid Spark Unboxing
     :CUSTOM_ID: ArticleContentDemosRecordings
     :END:
 
-**** Acustic
+***** Acustic
 
-     This tone is probably reserved for the acustic guitar since spark
-     promote himself as an amp for that as well.
+      This tone is probably reserved for the acustic guitar since spark
+      promote himself as an amp for that as well.
 
-#+begin_export html
-    <table class="table table-dark">
-  <thead>
-    <tr>
-      <th scope="col">Lick</th>
-      <th scope="col">Bridge Pickup</th>
-      <th scope="col">Middle Position Pickup</th>
-      <th scope="col">Neck Pickup</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">C Major Scale</th>
-      <td>
-        <audio controls>
-          <source src="2020-06-16-SparkReview/CMajorAcusticBridge.wav" type="audio/wav">
-      Your browser does not support the audio element.
-        </audio>
-      </td>
-      <td>
-        <audio controls>
-          <source src="2020-06-16-SparkReview/CMajorAcusticBridgeNNeck.wav" type="audio/wav">
-      Your browser does not support the audio element.
-        </audio>
-      </td>
-      <td>
-        <audio controls>
-          <source src="2020-06-16-SparkReview/CMajorAcusticNeck.wav" type="audio/wav">
-      Your browser does not support the audio element.
-        </audio>
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">Cemetery Gates</th>
-      <td>
-        <audio controls>
-          <source src="2020-06-16-SparkReview/CemeteryGatesAcusticBridge.wav" type="audio/wav">
-      Your browser does not support the audio element.
-        </audio>
-      </td>
-      <td>
-        <audio controls>
-          <source src="2020-06-16-SparkReview/CemeteryGatesAcusticBridgeNNeck.wav" type="audio/wav">
-      Your browser does not support the audio element.
-        </audio>
-      </td>
-      <td>
-        <audio controls>
-          <source src="2020-06-16-SparkReview/CemeteryGatesAcusticNeck.wav" type="audio/wav">
-      Your browser does not support the audio element.
-        </audio>
-      </td>
-    </tr>
-        <tr>
-      <th scope="row">Mutter</th>
-      <td>
-        <audio controls>
-          <source src="2020-06-16-SparkReview/MutterAcusticBridge.wav" type="audio/wav">
-      Your browser does not support the audio element.
-        </audio>
-      </td>
-      <td>
-        <audio controls>
-          <source src="2020-06-16-SparkReview/MutterAcusticBridgeNNeck.wav" type="audio/wav">
-      Your browser does not support the audio element.
-        </audio>
-      </td>
-      <td>
-        <audio controls>
-          <source src="2020-06-16-SparkReview/MutterAcusticNeck.wav" type="audio/wav">
-      Your browser does not support the audio element.
-        </audio>
-      </td>
-    </tr>
-  </tbody>
-</table>
-    #+end_export
+      #+begin_export html
+          <table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col">Lick</th>
+            <th scope="col">Bridge Pickup</th>
+            <th scope="col">Middle Position Pickup</th>
+            <th scope="col">Neck Pickup</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">C Major Scale</th>
+            <td>
+              <audio controls>
+                <source src="2020-06-16-SparkReview/CMajorAcusticBridge.wav" type="audio/wav">
+            Your browser does not support the audio element.
+              </audio>
+            </td>
+            <td>
+              <audio controls>
+                <source src="2020-06-16-SparkReview/CMajorAcusticBridgeNNeck.wav" type="audio/wav">
+            Your browser does not support the audio element.
+              </audio>
+            </td>
+            <td>
+              <audio controls>
+                <source src="2020-06-16-SparkReview/CMajorAcusticNeck.wav" type="audio/wav">
+            Your browser does not support the audio element.
+              </audio>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Cemetery Gates</th>
+            <td>
+              <audio controls>
+                <source src="2020-06-16-SparkReview/CemeteryGatesAcusticBridge.wav" type="audio/wav">
+            Your browser does not support the audio element.
+              </audio>
+            </td>
+            <td>
+              <audio controls>
+                <source src="2020-06-16-SparkReview/CemeteryGatesAcusticBridgeNNeck.wav" type="audio/wav">
+            Your browser does not support the audio element.
+              </audio>
+            </td>
+            <td>
+              <audio controls>
+                <source src="2020-06-16-SparkReview/CemeteryGatesAcusticNeck.wav" type="audio/wav">
+            Your browser does not support the audio element.
+              </audio>
+            </td>
+          </tr>
+              <tr>
+            <th scope="row">Mutter</th>
+            <td>
+              <audio controls>
+                <source src="2020-06-16-SparkReview/MutterAcusticBridge.wav" type="audio/wav">
+            Your browser does not support the audio element.
+              </audio>
+            </td>
+            <td>
+              <audio controls>
+                <source src="2020-06-16-SparkReview/MutterAcusticBridgeNNeck.wav" type="audio/wav">
+            Your browser does not support the audio element.
+              </audio>
+            </td>
+            <td>
+              <audio controls>
+                <source src="2020-06-16-SparkReview/MutterAcusticNeck.wav" type="audio/wav">
+            Your browser does not support the audio element.
+              </audio>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+          #+end_export
 
-**** Bass
+***** Bass
 
      This tone is probably reserved for the Bass guitar since spark
      promote himself as an amp for that as well.
 
-    #+begin_export html
-    <table class="table table-dark">
-  <thead>
-    <tr>
-      <th scope="col">Lick</th>
-      <th scope="col">Bridge Pickup</th>
-      <th scope="col">Middle Position Pickup</th>
-      <th scope="col">Neck Pickup</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">C Major Scale</th>
-      <td>
-        <audio controls>
-          <source src="2020-06-16-SparkReview/CMajorBassBridge.wav" type="audio/wav">
-      Your browser does not support the audio element.
-        </audio>
-      </td>
-      <td>
-        <audio controls>
-          <source src="2020-06-16-SparkReview/CMajorBassBridgeNNeck.wav" type="audio/wav">
-      Your browser does not support the audio element.
-        </audio>
-      </td>
-      <td>
-        <audio controls>
-          <source src="2020-06-16-SparkReview/CMajorBassNeck.wav" type="audio/wav">
-      Your browser does not support the audio element.
-        </audio>
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">Cemetery Gates</th>
-      <td>
-        <audio controls>
-          <source src="2020-06-16-SparkReview/CemeteryGatesBassBridge.wav" type="audio/wav">
-      Your browser does not support the audio element.
-        </audio>
-      </td>
-      <td>
-        <audio controls>
-          <source src="2020-06-16-SparkReview/CemeteryGatesBassBridgeNNeck.wav" type="audio/wav">
-      Your browser does not support the audio element.
-        </audio>
-      </td>
-      <td>
-        <audio controls>
-          <source src="2020-06-16-SparkReview/CemeteryGatesBassNeck.wav" type="audio/wav">
-      Your browser does not support the audio element.
-        </audio>
-      </td>
-    </tr>
-        <tr>
-      <th scope="row">Mutter</th>
-      <td>
-        <audio controls>
-          <source src="2020-06-16-SparkReview/MutterBassBridge.wav" type="audio/wav">
-      Your browser does not support the audio element.
-        </audio>
-      </td>
-      <td>
-        <audio controls>
-          <source src="2020-06-16-SparkReview/MutterBassBridgeNNeck.wav" type="audio/wav">
-      Your browser does not support the audio element.
-        </audio>
-      </td>
-      <td>
-        <audio controls>
-          <source src="2020-06-16-SparkReview/MutterBassNeck.wav" type="audio/wav">
-      Your browser does not support the audio element.
-        </audio>
-      </td>
-    </tr>
-  </tbody>
-</table>
-    #+end_export
+     #+begin_export html
+     <table class="table table-dark">
+   <thead>
+     <tr>
+       <th scope="col">Lick</th>
+       <th scope="col">Bridge Pickup</th>
+       <th scope="col">Middle Position Pickup</th>
+       <th scope="col">Neck Pickup</th>
+     </tr>
+   </thead>
+   <tbody>
+     <tr>
+       <th scope="row">C Major Scale</th>
+       <td>
+         <audio controls>
+           <source src="2020-06-16-SparkReview/CMajorBassBridge.wav" type="audio/wav">
+       Your browser does not support the audio element.
+         </audio>
+       </td>
+       <td>
+         <audio controls>
+           <source src="2020-06-16-SparkReview/CMajorBassBridgeNNeck.wav" type="audio/wav">
+       Your browser does not support the audio element.
+         </audio>
+       </td>
+       <td>
+         <audio controls>
+           <source src="2020-06-16-SparkReview/CMajorBassNeck.wav" type="audio/wav">
+       Your browser does not support the audio element.
+         </audio>
+       </td>
+     </tr>
+     <tr>
+       <th scope="row">Cemetery Gates</th>
+       <td>
+         <audio controls>
+           <source src="2020-06-16-SparkReview/CemeteryGatesBassBridge.wav" type="audio/wav">
+       Your browser does not support the audio element.
+         </audio>
+       </td>
+       <td>
+         <audio controls>
+           <source src="2020-06-16-SparkReview/CemeteryGatesBassBridgeNNeck.wav" type="audio/wav">
+       Your browser does not support the audio element.
+         </audio>
+       </td>
+       <td>
+         <audio controls>
+           <source src="2020-06-16-SparkReview/CemeteryGatesBassNeck.wav" type="audio/wav">
+       Your browser does not support the audio element.
+         </audio>
+       </td>
+     </tr>
+         <tr>
+       <th scope="row">Mutter</th>
+       <td>
+         <audio controls>
+           <source src="2020-06-16-SparkReview/MutterBassBridge.wav" type="audio/wav">
+       Your browser does not support the audio element.
+         </audio>
+       </td>
+       <td>
+         <audio controls>
+           <source src="2020-06-16-SparkReview/MutterBassBridgeNNeck.wav" type="audio/wav">
+       Your browser does not support the audio element.
+         </audio>
+       </td>
+       <td>
+         <audio controls>
+           <source src="2020-06-16-SparkReview/MutterBassNeck.wav" type="audio/wav">
+       Your browser does not support the audio element.
+         </audio>
+       </td>
+     </tr>
+   </tbody>
+ </table>
+     #+end_export
+
+***** Clean
+
+     #+begin_export html
+     <table class="table table-dark">
+   <thead>
+     <tr>
+       <th scope="col">Lick</th>
+       <th scope="col">Bridge Pickup</th>
+       <th scope="col">Middle Position Pickup</th>
+       <th scope="col">Neck Pickup</th>
+     </tr>
+   </thead>
+   <tbody>
+     <tr>
+       <th scope="row">C Major Scale</th>
+       <td>
+         <audio controls>
+           <source src="2020-06-16-SparkReview/CMajorCleanBridge.wav" type="audio/wav">
+       Your browser does not support the audio element.
+         </audio>
+       </td>
+       <td>
+         <audio controls>
+           <source src="2020-06-16-SparkReview/CMajorCleanBridgeNNeck.wav" type="audio/wav">
+       Your browser does not support the audio element.
+         </audio>
+       </td>
+       <td>
+         <audio controls>
+           <source src="2020-06-16-SparkReview/CMajorCleanNeck.wav" type="audio/wav">
+       Your browser does not support the audio element.
+         </audio>
+       </td>
+     </tr>
+     <tr>
+       <th scope="row">Cemetery Gates</th>
+       <td>
+         <audio controls>
+           <source src="2020-06-16-SparkReview/CemeteryGatesCleanBridge.wav" type="audio/wav">
+       Your browser does not support the audio element.
+         </audio>
+       </td>
+       <td>
+         <audio controls>
+           <source src="2020-06-16-SparkReview/CemeteryGatesCleanBridgeNNeck.wav" type="audio/wav">
+       Your browser does not support the audio element.
+         </audio>
+       </td>
+       <td>
+         <audio controls>
+           <source src="2020-06-16-SparkReview/CemeteryGatesCleanNeck.wav" type="audio/wav">
+       Your browser does not support the audio element.
+         </audio>
+       </td>
+     </tr>
+         <tr>
+       <th scope="row">Mutter</th>
+       <td>
+         <audio controls>
+           <source src="2020-06-16-SparkReview/MutterCleanBridge.wav" type="audio/wav">
+       Your browser does not support the audio element.
+         </audio>
+       </td>
+       <td>
+         <audio controls>
+           <source src="2020-06-16-SparkReview/MutterCleanBridgeNNeck.wav" type="audio/wav">
+       Your browser does not support the audio element.
+         </audio>
+       </td>
+       <td>
+         <audio controls>
+           <source src="2020-06-16-SparkReview/MutterCleanNeck.wav" type="audio/wav">
+       Your browser does not support the audio element.
+         </audio>
+       </td>
+     </tr>
+   </tbody>
+ </table>
+     #+end_export
+
+***** Glassy
+
+     #+begin_export html
+     <table class="table table-dark">
+   <thead>
+     <tr>
+       <th scope="col">Lick</th>
+       <th scope="col">Bridge Pickup</th>
+       <th scope="col">Middle Position Pickup</th>
+       <th scope="col">Neck Pickup</th>
+     </tr>
+   </thead>
+   <tbody>
+     <tr>
+       <th scope="row">C Major Scale</th>
+       <td>
+         <audio controls>
+           <source src="2020-06-16-SparkReview/CMajorGlassyBridge.wav" type="audio/wav">
+       Your browser does not support the audio element.
+         </audio>
+       </td>
+       <td>
+         <audio controls>
+           <source src="2020-06-16-SparkReview/CMajorGlassyBridgeNNeck.wav" type="audio/wav">
+       Your browser does not support the audio element.
+         </audio>
+       </td>
+       <td>
+         <audio controls>
+           <source src="2020-06-16-SparkReview/CMajorGlassyNeck.wav" type="audio/wav">
+       Your browser does not support the audio element.
+         </audio>
+       </td>
+     </tr>
+     <tr>
+       <th scope="row">Cemetery Gates</th>
+       <td>
+         <audio controls>
+           <source src="2020-06-16-SparkReview/CemeteryGatesGlassyBridge.wav" type="audio/wav">
+       Your browser does not support the audio element.
+         </audio>
+       </td>
+       <td>
+         <audio controls>
+           <source src="2020-06-16-SparkReview/CemeteryGatesGlassyBridgeNNeck.wav" type="audio/wav">
+       Your browser does not support the audio element.
+         </audio>
+       </td>
+       <td>
+         <audio controls>
+           <source src="2020-06-16-SparkReview/CemeteryGatesGlassyNeck.wav" type="audio/wav">
+       Your browser does not support the audio element.
+         </audio>
+       </td>
+     </tr>
+         <tr>
+       <th scope="row">Mutter</th>
+       <td>
+         <audio controls>
+           <source src="2020-06-16-SparkReview/MutterGlassyBridge.wav" type="audio/wav">
+       Your browser does not support the audio element.
+         </audio>
+       </td>
+       <td>
+         <audio controls>
+           <source src="2020-06-16-SparkReview/MutterGlassyBridgeNNeck.wav" type="audio/wav">
+       Your browser does not support the audio element.
+         </audio>
+       </td>
+       <td>
+         <audio controls>
+           <source src="2020-06-16-SparkReview/MutterGlassyNeck.wav" type="audio/wav">
+       Your browser does not support the audio element.
+         </audio>
+       </td>
+     </tr>
+   </tbody>
+ </table>
+     #+end_export
+
+***** Crunch
+
+      #+begin_export html
+      <table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">Lick</th>
+        <th scope="col">Bridge Pickup</th>
+        <th scope="col">Middle Position Pickup</th>
+        <th scope="col">Neck Pickup</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">C Major Scale</th>
+        <td>
+          <audio controls>
+            <source src="2020-06-16-SparkReview/CMajorCrunchBridge.wav" type="audio/wav">
+        Your browser does not support the audio element.
+          </audio>
+        </td>
+        <td>
+          <audio controls>
+            <source src="2020-06-16-SparkReview/CMajorCrunchBridgeNNeck.wav" type="audio/wav">
+        Your browser does not support the audio element.
+          </audio>
+        </td>
+        <td>
+          <audio controls>
+            <source src="2020-06-16-SparkReview/CMajorCrunchNeck.wav" type="audio/wav">
+        Your browser does not support the audio element.
+          </audio>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Cemetery Gates</th>
+        <td>
+          <audio controls>
+            <source src="2020-06-16-SparkReview/CemeteryGatesCrunchBridge.wav" type="audio/wav">
+        Your browser does not support the audio element.
+          </audio>
+        </td>
+        <td>
+          <audio controls>
+            <source src="2020-06-16-SparkReview/CemeteryGatesCrunchBridgeNNeck.wav" type="audio/wav">
+        Your browser does not support the audio element.
+          </audio>
+        </td>
+        <td>
+          <audio controls>
+            <source src="2020-06-16-SparkReview/CemeteryGatesCrunchNeck.wav" type="audio/wav">
+        Your browser does not support the audio element.
+          </audio>
+        </td>
+      </tr>
+          <tr>
+        <th scope="row">Mutter</th>
+        <td>
+          <audio controls>
+            <source src="2020-06-16-SparkReview/MutterCrunchBridge.wav" type="audio/wav">
+        Your browser does not support the audio element.
+          </audio>
+        </td>
+        <td>
+          <audio controls>
+            <source src="2020-06-16-SparkReview/MutterCrunchBridgeNNeck.wav" type="audio/wav">
+        Your browser does not support the audio element.
+          </audio>
+        </td>
+        <td>
+          <audio controls>
+            <source src="2020-06-16-SparkReview/MutterCrunchNeck.wav" type="audio/wav">
+        Your browser does not support the audio element.
+          </audio>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+      #+end_export
+
+***** HiGain
+
+      #+begin_export html
+      <table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">Lick</th>
+        <th scope="col">Bridge Pickup</th>
+        <th scope="col">Middle Position Pickup</th>
+        <th scope="col">Neck Pickup</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">C Major Scale</th>
+        <td>
+          <audio controls>
+            <source src="2020-06-16-SparkReview/CMajorHiGainBridge.wav" type="audio/wav">
+        Your browser does not support the audio element.
+          </audio>
+        </td>
+        <td>
+          <audio controls>
+            <source src="2020-06-16-SparkReview/CMajorHiGainBridgeNNeck.wav" type="audio/wav">
+        Your browser does not support the audio element.
+          </audio>
+        </td>
+        <td>
+          <audio controls>
+            <source src="2020-06-16-SparkReview/CMajorHiGainNeck.wav" type="audio/wav">
+        Your browser does not support the audio element.
+          </audio>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Cemetery Gates</th>
+        <td>
+          <audio controls>
+            <source src="2020-06-16-SparkReview/CemeteryGatesHiGainBridge.wav" type="audio/wav">
+        Your browser does not support the audio element.
+          </audio>
+        </td>
+        <td>
+          <audio controls>
+            <source src="2020-06-16-SparkReview/CemeteryGatesHiGainBridgeNNeck.wav" type="audio/wav">
+        Your browser does not support the audio element.
+          </audio>
+        </td>
+        <td>
+          <audio controls>
+            <source src="2020-06-16-SparkReview/CemeteryGatesHiGainNeck.wav" type="audio/wav">
+        Your browser does not support the audio element.
+          </audio>
+        </td>
+      </tr>
+          <tr>
+        <th scope="row">Mutter</th>
+        <td>
+          <audio controls>
+            <source src="2020-06-16-SparkReview/MutterHiGainBridge.wav" type="audio/wav">
+        Your browser does not support the audio element.
+          </audio>
+        </td>
+        <td>
+          <audio controls>
+            <source src="2020-06-16-SparkReview/MutterHiGainBridgeNNeck.wav" type="audio/wav">
+        Your browser does not support the audio element.
+          </audio>
+        </td>
+        <td>
+          <audio controls>
+            <source src="2020-06-16-SparkReview/MutterHiGainNeck.wav" type="audio/wav">
+        Your browser does not support the audio element.
+          </audio>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+      #+end_export
+
+***** Metal
+
+      #+begin_export html
+      <table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">Lick</th>
+        <th scope="col">Bridge Pickup</th>
+        <th scope="col">Middle Position Pickup</th>
+        <th scope="col">Neck Pickup</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">C Major Scale</th>
+        <td>
+          <audio controls>
+            <source src="2020-06-16-SparkReview/CMajorMetalBridge.wav" type="audio/wav">
+        Your browser does not support the audio element.
+          </audio>
+        </td>
+        <td>
+          <audio controls>
+            <source src="2020-06-16-SparkReview/CMajorMetalBridgeNNeck.wav" type="audio/wav">
+        Your browser does not support the audio element.
+          </audio>
+        </td>
+        <td>
+          <audio controls>
+            <source src="2020-06-16-SparkReview/CMajorMetalNeck.wav" type="audio/wav">
+        Your browser does not support the audio element.
+          </audio>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Cemetery Gates</th>
+        <td>
+          <audio controls>
+            <source src="2020-06-16-SparkReview/CemeteryGatesMetalBridge.wav" type="audio/wav">
+        Your browser does not support the audio element.
+          </audio>
+        </td>
+        <td>
+          <audio controls>
+            <source src="2020-06-16-SparkReview/CemeteryGatesMetalBridgeNNeck.wav" type="audio/wav">
+        Your browser does not support the audio element.
+          </audio>
+        </td>
+        <td>
+          <audio controls>
+            <source src="2020-06-16-SparkReview/CemeteryGatesMetalNeck.wav" type="audio/wav">
+        Your browser does not support the audio element.
+          </audio>
+        </td>
+      </tr>
+          <tr>
+        <th scope="row">Mutter</th>
+        <td>
+          <audio controls>
+            <source src="2020-06-16-SparkReview/MutterMetalBridge.wav" type="audio/wav">
+        Your browser does not support the audio element.
+          </audio>
+        </td>
+        <td>
+          <audio controls>
+            <source src="2020-06-16-SparkReview/MutterMetalBridgeNNeck.wav" type="audio/wav">
+        Your browser does not support the audio element.
+          </audio>
+        </td>
+        <td>
+          <audio controls>
+            <source src="2020-06-16-SparkReview/MutterMetalNeck.wav" type="audio/wav">
+        Your browser does not support the audio element.
+          </audio>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+      #+end_export
 
 *** Other Youtube Reviews links
     :PROPERTIES:
