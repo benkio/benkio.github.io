@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Static Personal Website with Org Mode</title>
-<!-- 2020-06-21 Sun 19:09 -->
+<!-- 2020-06-22 Mon 00:15 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -72,6 +72,8 @@ $(function() {
   <ul class="nav navbar-nav">
     <li><a title="Home" href="../index.html"><i class="fas fa-home fa-3x" aria-hidden="true"></i></a></li>
     <li><a title="Article List" href="../articleList.html" class="navbar-text h3">Article List</a></li>
+<li><a title="Book List" href="../bookList.html" class="navbar-text h3">Book List</a></li>
+<li><a title="Album List" href="../albumList.html" class="navbar-text h3">Album List</a></li>
   </ul>
 </div>
 </div>
@@ -233,8 +235,6 @@ page in this way:
 <div class="org-src-container">
 
 <pre class="src src-org"><span style="color: #ff7f24;">#+html: &lt;ul id="pagination" class="pagination pagination-lg"&gt;&lt;/ul&gt;</span>
-
-<span style="color: #ff7f24;">#+CALL: templates.org:compileOrgArticles()</span>
 </pre>
 </div>
 
@@ -248,7 +248,8 @@ populate the empty article tags:
 </p>
 <div class="org-src-container">
 
-<pre class="src src-javascript">#+call: templates.org:inline-js(<span style="color: #ffa07a;">"pagination"</span>)
+<pre class="src src-javascript">#+END_SRC
+#+call: templates.org:inline-js(<span style="color: #ffa07a;">"pagination"</span>)
 
 #+name: populateArticles
 #+begin_src javascript :exports none
@@ -331,22 +332,22 @@ Here you can see the complete js code snippet for the pagination:
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #ff7f24;">#+CALL: templates.org:articlesRelativePaths()</span>
+<pre class="src src-org"><span style="color: #ff7f24;">#+CALL: templates.org:compileOrgArticles()</span>
+<span style="color: #ff7f24;">#+CALL: templates.org:articlesRelativePaths()</span>
 
 <span style="color: #ff7f24;">#+NAME: pagination</span>
-<span style="color: #ff7f24;">#+BEGIN_SRC javascript :exports none</span>
-<span style="color: #00ffff;">const</span><span style="color: #b3b3b3;"> </span><span style="color: #eedd82;">page</span><span style="color: #b3b3b3;"> = ((</span><span style="color: #00ffff;">new</span><span style="color: #b3b3b3;"> </span><span style="color: #98fb98;">URLSearchParams</span><span style="color: #b3b3b3;">(window.location.search).get(</span><span style="color: #ffa07a;">'page'</span><span style="color: #b3b3b3;">) || 1) - 1) * 5;</span>
-<span style="color: #00ffff;">const</span><span style="color: #b3b3b3;"> </span><span style="color: #eedd82;">perPage</span><span style="color: #b3b3b3;"> = 5;</span>
-<span style="color: #00ffff;">for</span><span style="color: #b3b3b3;"> (</span><span style="color: #00ffff;">var</span><span style="color: #b3b3b3;"> </span><span style="color: #eedd82;">i</span><span style="color: #b3b3b3;"> = 0; i &lt; (htmlArticles.length/perPage); i++) {</span>
-<span style="color: #b3b3b3;">    </span><span style="color: #00ffff;">var</span><span style="color: #b3b3b3;"> </span><span style="color: #eedd82;">active</span><span style="color: #b3b3b3;"> = </span><span style="color: #ffa07a;">""</span><span style="color: #b3b3b3;">;</span>
-<span style="color: #b3b3b3;">    </span><span style="color: #00ffff;">if</span><span style="color: #b3b3b3;"> ((page/perPage) == i) {</span>
-<span style="color: #b3b3b3;">        active = </span><span style="color: #ffa07a;">"class='active'"</span><span style="color: #b3b3b3;">;</span>
-<span style="color: #b3b3b3;">    }</span>
-<span style="color: #b3b3b3;">    $(</span><span style="color: #ffa07a;">"#pagination"</span><span style="color: #b3b3b3;">).append(</span>
-<span style="color: #b3b3b3;">        </span><span style="color: #ffa07a;">'&lt;li '</span><span style="color: #b3b3b3;"> + active + </span><span style="color: #ffa07a;">'&gt;&lt;a href="'</span><span style="color: #b3b3b3;"> + window.location.href.split(</span><span style="color: #ffa07a;">'?'</span><span style="color: #b3b3b3;">)[0] + </span><span style="color: #ffa07a;">'?page='</span><span style="color: #b3b3b3;"> + (i+1) + </span><span style="color: #ffa07a;">'"&gt;'</span><span style="color: #b3b3b3;"> + (i+1) + </span><span style="color: #ffa07a;">'&lt;/a&gt;&lt;/li&gt;'</span>
-<span style="color: #b3b3b3;">    );</span>
-<span style="color: #b3b3b3;">}</span>
-<span style="color: #ff7f24;">#+END_SRC</span>
+#+BEGIN_SRC javascript :exports none
+const page = ((new URLSearchParams(window.location.search).get('page') || 1) - 1) * 5;
+const perPage = 5;
+for (var i = 0; i &lt; (htmlArticles.length/perPage); i++) {
+    var active = "";
+    if ((page/perPage) <span style="color: #b3b3b3;">== i) {</span>
+<span style="color: #b3b3b3;">        active = "class=</span>'active'";
+    }
+    $("#pagination").append(
+        '&lt;li ' + active + '&gt;&lt;a href="' + window.location.href.split('?')[0] + '?page=' + (i+1) + '"&gt;' + (i+1) + '&lt;/a&gt;&lt;/li&gt;'
+    );
+}
 </pre>
 </div>
 </div>

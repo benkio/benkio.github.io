@@ -33,6 +33,7 @@
       <li><a title="Home" href="./index.html"><i class="fas fa-home fa-3x" aria-hidden="true"></i></a></li>
       <li><a title="Blog Main Page" href="./blog.html" class="navbar-text h3">Blog</a></li>
       <li><a title="Article List" href="./articleList.html" class="navbar-text h3">Article List</a></li>
+<li><a title="Album List" href="./albumList.html" class="navbar-text h3">Album List</a></li>
       </ul>
       </div>
   #+END_EXPORT
@@ -48,15 +49,15 @@
   #+BEGIN_EXPORT HTML
 
   <ul id="bookList" class="list-group">
-    <a href="https://en.wikipedia.org/wiki/Homo_Deus:_A_Brief_History_of_Tomorrow" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Homo Deus: A Brief History of Tomorrow</a>
-  <a href="https://en.wikipedia.org/wiki/The_Lord_of_the_Rings" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">The Lord of the Rings</a>
-  <a href="https://en.wikipedia.org/wiki/The_Hobbit" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">The Hobbit</a>
-  <a href="https://en.wikipedia.org/wiki/Shannara" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Shannara</a>
-  <a href="https://en.wikipedia.org/wiki/The_Pillars_of_the_Earth" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">The Pillars of the Earth</a>
-  <a href="https://en.wikipedia.org/wiki/World_Without_End_(Follett_novel)" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">World Without End</a>
-  <a href="https://en.wikipedia.org/wiki/A_Column_of_Fire" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">A Column of Fire</a>
-  <a href="!https://en.wikipedia.org/wiki/Star_Wars:_Episode_I_%E2%80%93_The_Phantom_Menace_(novel)" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Star Wars: Episode I - The Phantom Menace (novel)</a>
-  <a href="https://en.wikipedia.org/wiki/The_Problem_of_Cell_13" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">The Problem of Cell 13</a>
+    <a target="_blank" href="https://en.wikipedia.org/wiki/Homo_Deus:_A_Brief_History_of_Tomorrow" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Homo Deus: A Brief History of Tomorrow</a>
+  <a target="_blank" href="https://en.wikipedia.org/wiki/The_Lord_of_the_Rings" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">The Lord of the Rings</a>
+  <a target="_blank" href="https://en.wikipedia.org/wiki/The_Hobbit" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">The Hobbit</a>
+  <a target="_blank" href="https://en.wikipedia.org/wiki/Shannara" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Shannara</a>
+  <a target="_blank" href="https://en.wikipedia.org/wiki/The_Pillars_of_the_Earth" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">The Pillars of the Earth</a>
+  <a target="_blank" href="https://en.wikipedia.org/wiki/World_Without_End_(Follett_novel)" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">World Without End</a>
+  <a target="_blank" href="https://en.wikipedia.org/wiki/A_Column_of_Fire" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">A Column of Fire</a>
+  <a target="_blank" href="!https://en.wikipedia.org/wiki/Star_Wars:_Episode_I_%E2%80%93_The_Phantom_Menace_(novel)" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Star Wars: Episode I - The Phantom Menace (novel)</a>
+  <a target="_blank" href="https://en.wikipedia.org/wiki/The_Problem_of_Cell_13" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">The Problem of Cell 13</a>
   </ul>
 #+END_EXPORT
 
