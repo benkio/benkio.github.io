@@ -1,0 +1,117 @@
+#+OPTIONS: num:nil toc:t H:4
+#+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:nil
+#+TITLE: Book List
+
+#+DESCRIPTIONxo: Book List
+#+KEYWORDS: Book List
+#+HTML_HEAD_EXTRA: <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA: <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="css/main.css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="css/Blog.css">
+
+#+HTML_HEAD_EXTRA: <style>body { padding-top: 100px; } </style>
+
+* Book List
+  :PROPERTIES:
+  :HTML_CONTAINER_CLASS: text-center navbar navbar-inverse navbar-fixed-top
+  :CUSTOM_ID: navbar
+  :END:
+
+  #+BEGIN_EXPORT html
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapsableNavbar">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      </button>
+      <h1 id="navbarTitle" class="navbar-text">Book List</h1>
+      <div class="collapse navbar-collapse" id="collapsableNavbar">
+      <ul class="nav navbar-nav">
+      <li><a title="Home" href="./index.html"><i class="fas fa-home fa-3x" aria-hidden="true"></i></a></li>
+      <li><a title="Blog Main Page" href="./blog.html" class="navbar-text h3">Blog</a></li>
+      <li><a title="Article List" href="./articleList.html" class="navbar-text h3">Article List</a></li>
+      </ul>
+      </div>
+  #+END_EXPORT
+
+
+* Books
+  :PROPERTIES:
+  :CUSTOM_ID: Books
+  :END:
+
+  In this page I list the books I read with a little description on what
+  are them about. Hopefully you might get inspired and want to check
+  some of them out 😉
+
+* Homo Deus
+  :PROPERTIES:
+  :CUSTOM_ID: BookHomoDeus
+  :END:
+
+  [[https://en.wikipedia.org/wiki/Homo_Deus:_A_Brief_History_of_Tomorrow][Homo Deus - Wikipedia's Page
+]]
+
+  Super interesting essay from Harari about what could be the future
+  into the XI century. This book makes you think about a
+  lot of topics: intelligence, mind, psychology,
+  technology...  It contains a lot of references and
+  bibliography, so you can check out the sources and,
+  because of it, I added a couple of books to my /TODO
+  read list/. Even if sometimes it seems to overflow into
+  science-fiction realm, it's Super recommended!
+
+* The Lord of the Rings
+  :PROPERTIES:
+  :CUSTOM_ID: BookTLOTR
+  :END:
+
+  [[https://en.wikipedia.org/wiki/The_Lord_of_the_Rings][The Lord of the Rings - Wikipedia's page]]
+
+  [[https://en.wikipedia.org/wiki/The_Hobbit][The Hobbit - Wikipedia's page]]
+
+  I read this one on my teenage years and I ain't gonna lie, it was
+  hard to carry on sometimes. In several parts it's quite slow and
+  descriptive, but it's definitely worth reading. Milestone of fantasy
+  literature.
+
+* Shannara
+  :PROPERTIES:
+  :CUSTOM_ID: BookShannara
+  :END:
+
+
+  [[https://en.wikipedia.org/wiki/Shannara][Shannara - Wikipedia's Page]]
+
+  I almost read every book on this series. Even if sometimes it could
+  be very similar to other fantasy operas, like [[*The Lord of the Rings][The Lord of the Rings]],
+  if you like magic, dragons, elves, dwarfs... you aren't going to be
+  disappointed.
+
+* Kingsbridge Series
+  :PROPERTIES:
+  :CUSTOM_ID: BookKingsbridge
+  :END:
+
+  [[https://en.wikipedia.org/wiki/The_Pillars_of_the_Earth][The Pillars of Earth - Wikipedia's Page]]
+
+  [[https://en.wikipedia.org/wiki/World_Without_End_(Follett_novel)][World Without End - Wikipedia's Page]]
+
+  [[https://en.wikipedia.org/wiki/A_Column_of_Fire][A Column of Fire - Wikipedia's Page]]
+
+  An amazing historical trilogy revolve around the Kingsbridge's
+  cathedral. I liked this trilogy so much, especially the last two
+  books. 
+
+#+begin_export html
+<script type="text/javascript">
+$(function() {
+  $('#text-table-of-contents > ul li').first().css("display", "none");
+  $('#text-table-of-contents > ul li:nth-child(2)').first().css("display", "none");
+  $('#table-of-contents').addClass("visible-lg")
+});
+</script>
+#+end_export
