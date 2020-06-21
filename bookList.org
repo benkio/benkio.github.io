@@ -117,6 +117,15 @@ $(function() {
 });
 </script>
 #+end_export
+* Star Wars: The Phantom Menace
+  :PROPERTIES:
+  :CUSTOM_ID: BookSWPhantomMenace
+  :END:
+
+  [[https://en.wikipedia.org/wiki/Star_Wars:_Episode_I_%E2%80%93_The_Phantom_Menace_(novel)][Star Wars: Episode I - The Phantom Menace - Wikipedia's Page]]
+
+  The adaptation of the episode I star wars film into novel.
+
 * The Problem of Cell 13
   :PROPERTIES:
   :CUSTOM_ID: BookCell13
