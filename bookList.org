@@ -43,6 +43,8 @@
   :CUSTOM_ID: Books
   :END:
 
+  **Created:** <2020-06-21 Sun>
+
   In this page I list the books I read with a little description on what
   are them about. Hopefully you might get inspired and want to check
   some of them out 😉
