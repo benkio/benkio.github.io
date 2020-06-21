@@ -106,7 +106,7 @@
 
   An amazing historical trilogy revolve around the Kingsbridge's
   cathedral. I liked this trilogy so much, especially the last two
-  books. 
+  books.
 
 #+begin_export html
 <script type="text/javascript">
@@ -117,3 +117,11 @@ $(function() {
 });
 </script>
 #+end_export
+* The Problem of Cell 13
+  :PROPERTIES:
+  :CUSTOM_ID: BookCell13
+  :END:
+
+  [[https://en.wikipedia.org/wiki/The_Problem_of_Cell_13][The Problem of Cell 13 - Wikipedia's Page]]
+
+  A collection of short stories about problem solving and mysterys.
