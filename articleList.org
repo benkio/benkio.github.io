@@ -2,7 +2,7 @@
 #+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:nil
 #+TITLE: Article List
 
-#+DESCRIPTIONxo: Article List
+#+DESCRIPTION: Article List
 #+KEYWORDS: Article List
 #+HTML_HEAD_EXTRA: <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 #+HTML_HEAD_EXTRA: <link rel="icon" href="images/favicon.ico" type="image/x-icon">

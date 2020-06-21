@@ -2,7 +2,7 @@
 #+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:nil
 #+TITLE: Book List
 
-#+DESCRIPTIONxo: Book List
+#+DESCRIPTION: Book List
 #+KEYWORDS: Book List
 #+HTML_HEAD_EXTRA: <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 #+HTML_HEAD_EXTRA: <link rel="icon" href="images/favicon.ico" type="image/x-icon">
@@ -11,9 +11,9 @@
 #+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
 #+HTML_HEAD_EXTRA:  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 #+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="css/main.css">
-#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="css/Blog.css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="css/blog.css">
 
-#+HTML_HEAD_EXTRA: <style>body { padding-top: 100px; } .title { display: none; }</style>
+#+HTML_HEAD_EXTRA: <style>body { padding-top: 100px; }</style>
 
 * Book List
   :PROPERTIES:
