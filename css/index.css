@@ -20,7 +20,7 @@
     line-height: 1em;
 }
 #text-email { display: none; }
-#Blog       { display: none; }
+#enter      { display: none; }
 #header     { display: none; }
 #footer     { display: none; }
 #outline-container-footer { font-size: 0px; }

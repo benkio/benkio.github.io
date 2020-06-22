@@ -111,9 +111,9 @@ Etiam laoreet quam sed arcu.  Lorem ipsum dolor sit amet, consectetuer adipiscin
   :HTML_CONTAINER_CLASS: col-sm-3 hidden-xs
   :END:
 
-* Blog
+* Enter
   :PROPERTIES:
-  :CUSTOM_ID: Blog
+  :CUSTOM_ID: enter
   :HTML_CONTAINER_CLASS: text-center container
   :END:
 ** 
@@ -127,7 +127,7 @@ Etiam laoreet quam sed arcu.  Lorem ipsum dolor sit amet, consectetuer adipiscin
   :END:
 
 #+ATTR_HTML: :class btn btn-success
-[[file:blog.html][Go To Blog]]
+[[file:blog.html][Enter]]
 
 ** 
   :PROPERTIES:
