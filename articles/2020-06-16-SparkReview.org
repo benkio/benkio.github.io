@@ -466,6 +466,12 @@ Positive Grid Spark Unboxing
      </tr>
    </tbody>
  </table>
+
+ <p>Dynamic Response - Bridge & Neck Pickups</p>
+ <audio controls>
+   <source src="2020-06-16-SparkReview/DynamicResponseCleanBridgeNNeck.wav" type="audio/wav">
+Your browser does not support the audio element.
+ </audio>
      #+end_export
 
 ***** Glassy
