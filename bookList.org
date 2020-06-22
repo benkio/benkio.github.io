@@ -58,6 +58,10 @@
   <a target="_blank" href="https://en.wikipedia.org/wiki/A_Column_of_Fire" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">A Column of Fire</a>
   <a target="_blank" href="https://en.wikipedia.org/wiki/Star_Wars:_Episode_I_%E2%80%93_The_Phantom_Menace_(novel)" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Star Wars: Episode I - The Phantom Menace (novel)</a>
   <a target="_blank" href="https://en.wikipedia.org/wiki/The_Problem_of_Cell_13" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">The Problem of Cell 13</a>
+  <a target="_blank" href="https://en.wikipedia.org/wiki/Harry_Potter" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Harry Potter</a>
+  <a target="_blank" href="https://www.amazon.it/gp/product/8861270239/ref=ppx_yo_dt_b_asin_title_o01_s00?ie=UTF8&psc=1" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Black Jesus. The anthology</a>
+  <a target="_blank" href="https://en.wikipedia.org/wiki/The_Hunger_Games" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">The Hunger Games</a>
+  <a target="_blank" href="https://www.amazon.it/gp/product/1521369038/ref=ppx_yo_dt_b_asin_title_o01_s00?ie=UTF8&psc=1" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Informattica: informatica da matti per matti che fan informatica</a>
   </ul>
 #+END_EXPORT
 
