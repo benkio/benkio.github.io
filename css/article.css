@@ -2,3 +2,11 @@
 h1, h2, h3, h4, h5 {
     color: white;
 }
+audio {
+    width: 200px;
+}
+@media only screen and (max-width: 600px) { 
+    audio {
+        width: 100px;
+    }
+}
