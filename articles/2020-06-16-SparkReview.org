@@ -487,14 +487,14 @@ Your browser does not support the audio element.
 
      #+begin_export html
      <figure>
-     <iframe width="640" height="480" src="https://youtu.be/UVepVNuitvw" allowfullscreen></iframe>
+     <iframe width="640" height="480" src="https://www.youtube.com/embed/UVepVNuitvw" allowfullscreen></iframe>
      <figcaption>
      Lick Friday 247
      </figcaption>
      </figure>
 
      <figure>
-     <iframe width="640" height="480" src="https://youtu.be/cuhAXtjgTos" allowfullscreen></iframe>
+     <iframe width="640" height="480" src="https://www.youtube.com/embed/cuhAXtjgTos" allowfullscreen></iframe>
      <figcaption>
      Lick Friday 250
      </figcaption>
