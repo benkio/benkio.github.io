@@ -486,7 +486,8 @@ Your browser does not support the audio element.
       from Danny Page:
 
      #+begin_export html
-     <figure>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/UVepVNuitvw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<!--     <figure>
      <iframe width="640" height="480" src="https://www.youtube.com/embed/UVepVNuitvw" allowfullscreen></iframe>
      <figcaption>
      Lick Friday 247
@@ -499,6 +500,8 @@ Your browser does not support the audio element.
      Lick Friday 250
      </figcaption>
      </figure>
+-->
+<iframe width="560" height="315" src="https://www.youtube.com/embed/cuhAXtjgTos" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
      #+end_export
 
 
