@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Gilded Rose Kata</title>
+<!-- 2020-06-30 Tue 20:04 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="Org-mode">
+
+<link  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<style>body { margin-bottom: 0px; }</style><script>
+$(function() {
+    'use strict';
+
+    $('.bs-docs-sidebar li').first().addClass('active');
+
+    $(document.body).scrollspy({target: '.bs-docs-sidebar'});
+
+    $('.bs-docs-sidebar').affix();
+});
+</script><link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon">
+<link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/blog.css">
+<link rel="stylesheet" href="../css/article.css">
+</head>
+<body>
+<div id="content" class="container">
+<div class="row"><div class="col-md-3 col-md-push-9"><nav id="table-of-contents">
+<div id="text-table-of-contents" class="bs-docs-sidebar">
+<ul class="nav">
+<li><a href="#navbar">Blog</a></li>
+<li><a href="#Article">Gilded Rose Kata</a>
+<ul class="nav">
+<li><a href="#ArticleAbstract">Abstract</a></li>
+<li><a href="#ArticleContent">Content</a>
+<ul class="nav">
+<li><a href="#CodebaseStateContent">Codebase State</a></li>
+<li><a href="#SolutionApproachContent">Solution Approach</a>
+<ul class="nav">
+<li><a href="#SolutionApproachTestsContent">Tests</a></li>
+</ul>
+</li>
+<li><a href="#ScalaContent">Scala Kata</a></li>
+<li><a href="#HaskellContent">Haskell Kata</a></li>
+</ul>
+</li>
+<li><a href="#ArticleConclusions">Conclusions</a>
+<ul class="nav">
+<li><a href="#MainChallengesConclusion">Main Challenges</a></li>
+<li><a href="#LaguagesComparisonConclusions">Languages Comparison</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#ShareButtons">Share Buttons</a></li>
+</ul>
+</div>
+</nav>
+</div><div class="col-md-9 col-md-pull-3"><h1 class="title">Gilded Rose Kata</h1>
+
+<div id="outline-container-navbar" class="outline-2 text-center navbar navbar-inverse navbar-fixed-top">
+<h2 id="navbar"><a id="sec-" name="sec-"></a>Blog</h2>
+<div class="outline-text-2" id="text-navbar">
+<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapsableNavbar">
+  <span class="icon-bar"Article 6</span>
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+</button>
+<a title="Home" href="../blog.html"><h1 id="navbarTitle" class="navbar-text">Blog</h1></a>
+<div class="collapse navbar-collapse" id="collapsableNavbar">
+  <ul class="nav navbar-nav">
+    <li><a title="Home" href="../index.html"><i class="fas fa-home fa-3x" aria-hidden="true"></i></a></li>
+    <li><a title="Article List" href="../articleList.html" class="navbar-text h3">Article List</a></li>
+<li><a title="Book List" href="../bookList.html" class="navbar-text h3">Book List</a></li>
+<li><a title="Album List" href="../albumList.html" class="navbar-text h3">Album List</a></li>
+  </ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-Article" class="outline-2">
+<h2 id="Article"><a id="sec-" name="sec-"></a>Gilded Rose Kata</h2>
+<div class="outline-text-2" id="text-Article">
+<p>
+<b>Created: <span class="timestamp-wrapper"><span class="timestamp">&lt;2020-06-30 Tue&gt;</span></span></b>
+</p>
+</div>
+<div id="outline-container-ArticleAbstract" class="outline-3">
+<h3 id="ArticleAbstract"><a id="sec-" name="sec-"></a>Abstract</h3>
+<div class="outline-text-3" id="text-ArticleAbstract">
+<p>
+Not some time ago I watched the mighty <a href="https://twitter.com/NicolasRinaudo">Nicolas Rinaudo</a> dealing with
+the <a href="https://github.com/emilybache/GildedRose-Refactoring-Kata">Gilded Rose Kata</a> on the <a href="https://www.twitch.tv/scalalove">scalalove's twitch channel</a> and that
+inspired me into trying it out using my favorite languages: Scala &amp;
+Haskell.
+</p>
+
+<p>
+I'll structure the article in this way:
+</p>
+<ol class="org-ol">
+<li>I want to get familiar with the actual code-base, analyze it and
+explain what are the (main) flaws I can see. This section will be
+language-independent, since the same algorithm will be
+implemented in the same way, no matter the language, by kata's
+definition. It's a refactoring kata after all.
+</li>
+<li>Following the previous point, I will write down the approach I'll
+use. This should be language-independent as well
+</li>
+<li>Then, It's time to point out the difficulties I found into doing
+it with Scala and Haskell, the pros and cons. I could try also to
+do a comparison between the two.
+</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-ArticleContent" class="outline-3">
+<h3 id="ArticleContent"><a id="sec-" name="sec-"></a>Content</h3>
+<div class="outline-text-3" id="text-ArticleContent">
+</div>
+
+<div id="outline-container-CodebaseStateContent" class="outline-4">
+<h4 id="CodebaseStateContent"><a id="sec-" name="sec-"></a>Codebase State</h4>
+<div class="outline-text-4" id="text-CodebaseStateContent">
+<p>
+In order to write this section I just need to access the <a href="https://github.com/emilybache/GildedRose-Refactoring-Kata">Github kata
+repo</a> and do the most boring thing I usually do, after meetings: a
+code review.
+</p>
+
+<p>
+<b>Disclaimer:</b> this code is intentionally bad. If you will ever
+encounter a code-base like this one in your life, listen to me&#x2026;
+</p>
+
+<iframe src="https://giphy.com/embed/A6PcmRqkyMOBy" width="480" height="224" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+
+<p>
+let's start&#x2026;
+</p>
+
+<p>
+First thing first, I see there are no tests for the
+application. That need to be fixed ASAP. We will talk about that in
+the <a href="#SolutionApproachTestsContent">specific section</a>.
+</p>
+
+<p>
+Then I see an attempt of a <i><a href="https://en.wikipedia.org/wiki/Domain_model">Domain Model</a></i>. That's actually a good
+practice: design your types first and be as picky as possible in
+order to <a href="https://fsharpforfunandprofit.com/posts/designing-with-types-making-illegal-states-unrepresentable/">make the illegal states unrepresentable</a>. The problems here
+are
+</p>
+<ul class="org-ul">
+<li>The <code>var</code> keyword, that means mutability. As an FP enthusiast, I
+know mutable state can be hard to manage and lead to unintended
+behaviors. I just notice how it's a problem of the Scala solution
+only! Mutation is possible in Haskell too, but luckily we got
+spared.
+</li>
+<li>Just Items!! There are two possible cases: the problem is
+extremely simple or we are missing some types in here.
+</li>
+<li>No validations. I expect to see some data validation to ensure the
+values we are going to compute remains valid throughout the program
+execution.
+</li>
+</ul>
+
+<p>
+Finally it comes the main algorithm and It has several problems as expected:
+</p>
+<ol class="org-ol">
+<li>There's only one giant function. Ok, that in the end the CPU will
+execute 1 operation at a time(mono-core, single-thread), but code
+needs to be human-readable. <i>Any fool can write code that a computer can understand. Good programmers write code that humans can understand.</i> (Martin Fowler)
+Plus it violates the <a href="https://en.wikipedia.org/wiki/Single-responsibility_principle">Single Responsibility Principle</a>.
+</li>
+<li>Mutation again! Apart from the items fields, that was expected,
+also into the index variable <code>i</code>. Luckily, it is just used to
+select the current element to evaluate, it could be way worse,
+like a different algorithm for odd and even elements, checks on
+the index and so on.
+</li>
+<li>There should be Types and a compiler somewhere, but I don't see
+any usage of those in here. The code is nearly indistinguishable
+from Javascript.
+</li>
+<li>Nested Ifs statements.
+</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-SolutionApproachContent" class="outline-4">
+<h4 id="SolutionApproachContent"><a id="sec-" name="sec-"></a>Solution Approach</h4>
+<div class="outline-text-4" id="text-SolutionApproachContent">
+</div>
+
+<div id="outline-container-SolutionApproachTestsContent" class="outline-5">
+<h5 id="SolutionApproachTestsContent"><a id="sec-" name="sec-"></a>Tests</h5>
+<div class="outline-text-5" id="text-SolutionApproachTestsContent">
+</div>
+</div>
+</div>
+
+<div id="outline-container-ScalaContent" class="outline-4">
+<h4 id="ScalaContent"><a id="sec-" name="sec-"></a>Scala Kata</h4>
+<div class="outline-text-4" id="text-ScalaContent">
+</div>
+</div>
+
+<div id="outline-container-HaskellContent" class="outline-4">
+<h4 id="HaskellContent"><a id="sec-" name="sec-"></a>Haskell Kata</h4>
+<div class="outline-text-4" id="text-HaskellContent">
+</div>
+</div>
+</div>
+
+<div id="outline-container-ArticleConclusions" class="outline-3">
+<h3 id="ArticleConclusions"><a id="sec-" name="sec-"></a>Conclusions</h3>
+<div class="outline-text-3" id="text-ArticleConclusions">
+</div>
+
+<div id="outline-container-MainChallengesConclusion" class="outline-4">
+<h4 id="MainChallengesConclusion"><a id="sec-" name="sec-"></a>Main Challenges</h4>
+<div class="outline-text-4" id="text-MainChallengesConclusion">
+</div>
+</div>
+
+
+<div id="outline-container-LaguagesComparisonConclusions" class="outline-4">
+<h4 id="LaguagesComparisonConclusions"><a id="sec-" name="sec-"></a>Languages Comparison</h4>
+<div class="outline-text-4" id="text-LaguagesComparisonConclusions">
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-ShareButtons" class="outline-2">
+<h2 id="ShareButtons"><a id="sec-" name="sec-"></a>Share Buttons</h2>
+<div class="outline-text-2" id="text-ShareButtons">
+<!-- AddToAny BEGIN -->
+<hr>
+<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+<a class="a2a_button_facebook"></a>
+<a class="a2a_button_twitter"></a>
+<a class="a2a_button_whatsapp"></a>
+<a class="a2a_button_telegram"></a>
+<a class="a2a_button_linkedin"></a>
+<a class="a2a_button_email"></a>
+</div>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+<!-- AddToAny END -->
+
+<script type="text/javascript">
+$(function() {
+  $('#text-table-of-contents > ul li').first().css("display", "none");
+  $('#text-table-of-contents > ul li').last().css("display", "none");
+  $('#table-of-contents').addClass("visible-lg")
+});
+</script>
+</div>
+</div>
+</div></div></div>
+</body>
+</html>
