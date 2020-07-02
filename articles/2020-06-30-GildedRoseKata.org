@@ -163,6 +163,14 @@
      Another downside of this approach is the computational cost:
      generating inputs and having multiple runs will increase the testing time.
 
+     **Edit:** Since we have even the specs of the program the
+     property base testing fits super nicely: convert phrases like
+
+     /“Sulfuras”, being a legendary item, never has to be sold or
+     decreases in Quality/
+
+     becomes quite a natural process.
+
 **** Split the Monster
      :PROPERTIES:
      :CUSTOM_ID: SolutionApproachSplitMonsterContent
@@ -237,6 +245,9 @@ r2
      mutation and from the model itself and return a new copy of the
      input with the requested changes.
 
+     **Edit:** Reading the specification I'm not allow to touch the
+       Item class unfortunately. Then, this step will remain
+       theoretic, for Scala at least.
 **** Refinement
 
      Finally, with this new working codebase, we should be able to see

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Gilded Rose Kata</title>
-<!-- 2020-07-02 Thu 01:37 -->
+<!-- 2020-07-02 Thu 19:55 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -257,6 +257,20 @@ times with several inputs. It's straight away a big plus.
 Another downside of this approach is the computational cost:
 generating inputs and having multiple runs will increase the testing time.
 </p>
+
+<p>
+<b><b>Edit:</b></b> Since we have even the specs of the program the
+property base testing fits super nicely: convert phrases like
+</p>
+
+<p>
+<i>“Sulfuras”, being a legendary item, never has to be sold or
+decreases in Quality</i>
+</p>
+
+<p>
+becomes quite a natural process.
+</p>
 </div>
 </div>
 
@@ -349,9 +363,14 @@ because we are in this situation we can easily remove that
 mutation and from the model itself and return a new copy of the
 input with the requested changes.
 </p>
-</div>
-</div>
 
+<p>
+<b><b>Edit:</b></b> Reading the specification I'm not allow to touch the
+  Item class unfortunately. Then, this step will remain
+  theoretic, for Scala at least.
+</p>
+</div>
+</div>
 <div id="outline-container-sec-" class="outline-5">
 <h5 id="sec-">Refinement</h5>
 <div class="outline-text-5" id="text-">
