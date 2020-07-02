@@ -266,6 +266,10 @@ r2
     :CUSTOM_ID: ScalaContent
     :END:
 
+    <2020-07-02 Thu>: Started the scala exercise from testing and
+    [[https://www.scalacheck.org/][scalacheck]]. Get stucked on some test corner case, but with some
+    ~println~ I figured it out. [[https://github.com/benkio/GeneralExercises/commit/8e066e5cc678518f6f10147f7280969dce245be2][commit]]
+
 *** Haskell Kata
     :PROPERTIES:
     :CUSTOM_ID: HaskellContent
