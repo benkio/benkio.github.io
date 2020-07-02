@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Gilded Rose Kata</title>
-<!-- 2020-07-02 Thu 01:22 -->
+<!-- 2020-07-02 Thu 01:37 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -134,7 +134,7 @@ do a comparison between the two.
 <h4 id="CodebaseStateContent"><a id="sec-" name="sec-"></a>Codebase State</h4>
 <div class="outline-text-4" id="text-CodebaseStateContent">
 <p>
-In order to write this section I just need to access the <a href="https://github.com/emilybache/GildedRose-Refactoring-Kata">Github kata
+In order to write this section, I just need to access the <a href="https://github.com/emilybache/GildedRose-Refactoring-Kata">Github kata
 repo</a> and do the most boring thing I usually do, after meetings: a
 code review.
 </p>
@@ -152,7 +152,7 @@ let's start&#x2026;
 
 <p>
 First thing first, I see there are no tests for the
-application. That need to be fixed ASAP. We will talk about that in
+application. That needs to be fixed ASAP. We will talk about that in
 the <a href="#SolutionApproachTestsContent">specific section</a>.
 </p>
 
@@ -165,12 +165,12 @@ are
 <ul class="org-ul">
 <li>The <code>var</code> keyword, that means mutability. As an FP enthusiast, I
 know mutable state can be hard to manage and lead to unintended
-behaviors. I just notice how it's a problem of the Scala solution
+behaviors. I just notice how it's a problem with the Scala solution
 only! Mutation is possible in Haskell too, but luckily we got
 spared.
 </li>
 <li>Just Items!! There are two possible cases: the problem is
-extremely simple or we are missing some types in here.
+extremely simple or we are missing some types here.
 </li>
 <li>No validations. I expect to see some data validation to ensure the
 values we are going to compute remains valid throughout the program
@@ -179,7 +179,7 @@ execution.
 </ul>
 
 <p>
-Finally it comes the main algorithm and It has several problems as expected:
+Finally, it comes to the main algorithm and It has several problems as expected:
 </p>
 <ol class="org-ol">
 <li>There's only one giant function. Ok, that in the end the CPU will
@@ -191,7 +191,7 @@ Plus it violates the <a href="https://en.wikipedia.org/wiki/Single-responsibilit
 also into the index variable <code>i</code>. Luckily, it is just used to
 select the current element to evaluate, it could be way worse,
 like a different algorithm for odd and even elements, checks on
-the index and so on.
+the index, and so on.
 </li>
 <li>There should be Types and a compiler somewhere, but I don't see
 any usage of those in here. The code is nearly indistinguishable
@@ -207,8 +207,8 @@ from Javascript.
 <h4 id="SolutionApproachContent"><a id="sec-" name="sec-"></a>Solution Approach</h4>
 <div class="outline-text-4" id="text-SolutionApproachContent">
 <p>
-Following up the previous analysis, we can come up with a plan and
-in here I'll prioritize the tasks we need to do in order to make
+Following up on the previous analysis, we can come up with a plan and
+here I'll prioritize the tasks we need to do in order to make
 this code better and solve the kata.
 </p>
 </div>
@@ -217,14 +217,14 @@ this code better and solve the kata.
 <h5 id="SolutionApproachTestsContent"><a id="sec-" name="sec-"></a>Tests</h5>
 <div class="outline-text-5" id="text-SolutionApproachTestsContent">
 <p>
-The first task needed is a good test suite. With a proper testing we
+The first task needed is a good test suite. With proper testing we
 will be sure that the changes we are going to make are
 correct. After all, the definition of <i><a href="https://en.wikipedia.org/wiki/Code_refactoring">Code Refactoring</a></i> is to <b>NOT</b>
 change the program behavior.
 </p>
 
 <p>
-Now, test suite can be crafted using multiple techniques and it's an
+Now, the test suite can be crafted using multiple techniques and it's a
 huge topic by itself. In this case, testing is not the main focus of
 the kata but still key. Fortunately, it's a simple, little, local
 program. So we should be fine with just <i><a href="https://en.wikipedia.org/wiki/Unit_testing">Unit Testing</a></i> and <i><a href="https://en.wikipedia.org/wiki/System_testing">System Testing</a></i>.
@@ -232,7 +232,7 @@ program. So we should be fine with just <i><a href="https://en.wikipedia.org/wik
 
 <p>
 Usually, testing is done by providing some specific input data to
-the program, fetch the result of the computation and then compare
+the program, fetch the result of the computation, and then compare
 it with what is expected. That's completely fine and it's what the
 majority of the companies do nowadays. The downside of this approach
 is it's static: let say your program has a bug, or crash, for a
@@ -246,8 +246,8 @@ input data is <b>generated</b>. The software engineer defines the rules
 used by the supporting library/framework to generate the inputs and
 then the expected behavior as a property. I won't go deeper into it,
 but the typical example is the associativity of the sum
-operation. Definitely, the most complicated part is identify the
-properties of your program, but in my honest opinion I still see
+operation. Definitely, the most complicated part is to identify the
+properties of your program, but in my honest opinion, I still see
 benefits into just take advantage of the generated inputs. For
 instance, you will write your test once and it will run multiple
 times with several inputs. It's straight away a big plus.
@@ -264,17 +264,17 @@ generating inputs and having multiple runs will increase the testing time.
 <h5 id="SolutionApproachSplitMonsterContent"><a id="sec-" name="sec-"></a>Split the Monster</h5>
 <div class="outline-text-5" id="text-SolutionApproachSplitMonsterContent">
 <p>
-Once we have the testing setup properly, we can start to break
+Once we have the testing set up properly, we can start to break
 stuff using the 🔨.
 </p>
 
 <p>
-The Most annoying thing into the codebase is the giant
+The Most annoying thing in the codebase is the giant
 stand-alone function. I will tackle this by splitting that
-function in two or more sub-functions. Then, repeat the same
-approach for the out coming functions. This recursive process
+function into two or more sub-functions. Then, repeat the same
+approach for the outcoming functions. This recursive process
 will terminate when the functions I end up with have a small
-amount of lines of code and one single mutation in it, simple as
+number of lines of code and one single mutation in it, simple as
 that.
 </p>
 
@@ -302,7 +302,7 @@ if-else-statement:
 } <span style="color: #00ffff;">else</span> <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Stuff</span>
 
 <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">After</span>
-<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">f1</span>(params)<span style="color: #00ffff;">:</span> <span style="color: #98fb98;">StuffType</span> <span style="color: #00ffff;">=</span> <span style="color: #00ffff;">if</span> (condition1) { f3(params) } <span style="color: #00ffff;">else</span> <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Previous state (indentity)</span>
+<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">f1</span>(params)<span style="color: #00ffff;">:</span> <span style="color: #98fb98;">StuffType</span> <span style="color: #00ffff;">=</span> <span style="color: #00ffff;">if</span> (condition1) { f3(params) } <span style="color: #00ffff;">else</span> <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Previous state (identity)</span>
 <span style="color: #00ffff;">def</span> <span style="color: #87cefa;">f2</span>(params)<span style="color: #00ffff;">:</span> <span style="color: #98fb98;">StuffType</span> <span style="color: #00ffff;">=</span> <span style="color: #00ffff;">if</span> (condition2) {<span style="color: #ff7f24;">/* </span><span style="color: #ff7f24;">Stuff */</span> } <span style="color: #00ffff;">else</span> <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Stuff</span>
 <span style="color: #00ffff;">def</span> <span style="color: #87cefa;">f3</span>(params)<span style="color: #00ffff;">:</span> <span style="color: #98fb98;">StuffType</span> <span style="color: #00ffff;">=</span> <span style="color: #00ffff;">if</span> (condition3) {<span style="color: #ff7f24;">/* </span><span style="color: #ff7f24;">Stuff */</span> } <span style="color: #00ffff;">else</span> <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Stuff</span>
 <span style="color: #00ffff;">val</span> <span style="color: #eedd82;">r1</span> <span style="color: #00ffff;">=</span> f1(args)
@@ -313,7 +313,7 @@ r2
 
 <p>
 This might seems controversial and more complicated, but it helps
-into put the computations in context. This way, you don't need to
+in to put the computations in context. This way, you don't need to
 go and look into the content of the functions, you can just skip
 their implementation details and get an overall feeling of the
 data-flow. Plus, you could not realize it yet, but doing so we
@@ -323,14 +323,14 @@ also put types back into play!
 <p>
 You might also notice I added an else to the first if, that's
 because I want the wrapping function to actually return a type
-and, since there wasn't an else, in that case the result will be
+and, since there wasn't an else, in that case, the result will be
 the previous input. When the else branch is chosen the <code>f1</code>
-function will behave as the <a href="https://en.wikipedia.org/wiki/Identity_function">Indentity Function</a>.
+function will behave as the <a href="https://en.wikipedia.org/wiki/Identity_function">Identity Function</a>.
 </p>
 
 <p>
 In the very end, I want also to grab your attention on the way
-this approach penetrates the nested ifs and allow to collapse the
+this approach penetrates the nested ifs and allow us to collapse the
 structure. Of course, we could also merge <code>condition1</code> and
 <code>condition3</code>, and we might actually decide to do that in a later
 stage, but let us suppose we will discover that the same logic of
@@ -343,8 +343,8 @@ stage, but let us suppose we will discover that the same logic of
 <h5 id="SolutionApproachMutationContent"><a id="sec-" name="sec-"></a>Dealing With Mutation once and for All</h5>
 <div class="outline-text-5" id="text-SolutionApproachMutationContent">
 <p>
-Everything is in it's own box that returns a new version of the
-input 💜 However&#x2026; it still mutate and internal field!! But
+Everything is in its own box that returns a new version of the
+input 💜, However&#x2026; it still mutates and internal field!! But
 because we are in this situation we can easily remove that
 mutation and from the model itself and return a new copy of the
 input with the requested changes.
@@ -356,7 +356,7 @@ input with the requested changes.
 <h5 id="sec-">Refinement</h5>
 <div class="outline-text-5" id="text-">
 <p>
-Finally, with this new working codebase we should be able to see
+Finally, with this new working codebase, we should be able to see
 patterns clearly and apply further optimizations. In particular,
 regarding:
 </p>
@@ -365,13 +365,14 @@ regarding:
 </li>
 <li>Adding fields validation
 </li>
-<li>Structuring the code: moving function to the model companion
+<li>Structuring the code: moving the functions to the model companion
 objects, in case of Scala, or to a separate module.
 </li>
 </ul>
 
 <p>
-Now that we have a plan, let's start the fun part&#x2026;
+Now that we have a plan, let's start the fun part&#x2026;let's
+executed it!
 </p>
 </div>
 </div>

@@ -72,7 +72,7 @@
     :CUSTOM_ID: CodebaseStateContent
     :END:
 
-    In order to write this section I just need to access the [[https://github.com/emilybache/GildedRose-Refactoring-Kata][Github kata
+    In order to write this section, I just need to access the [[https://github.com/emilybache/GildedRose-Refactoring-Kata][Github kata
     repo]] and do the most boring thing I usually do, after meetings: a
     code review.
 
@@ -84,7 +84,7 @@
     let's start...
 
     First thing first, I see there are no tests for the
-    application. That need to be fixed ASAP. We will talk about that in
+    application. That needs to be fixed ASAP. We will talk about that in
     the [[#SolutionApproachTestsContent][specific section]].
 
     Then I see an attempt of a /[[https://en.wikipedia.org/wiki/Domain_model][Domain Model]]/. That's actually a good
@@ -93,16 +93,16 @@
     are
     + The ~var~ keyword, that means mutability. As an FP enthusiast, I
       know mutable state can be hard to manage and lead to unintended
-      behaviors. I just notice how it's a problem of the Scala solution
+      behaviors. I just notice how it's a problem with the Scala solution
       only! Mutation is possible in Haskell too, but luckily we got
       spared.
     + Just Items!! There are two possible cases: the problem is
-      extremely simple or we are missing some types in here.
+      extremely simple or we are missing some types here.
     + No validations. I expect to see some data validation to ensure the
       values we are going to compute remains valid throughout the program
       execution.
 
-    Finally it comes the main algorithm and It has several problems as expected:
+    Finally, it comes to the main algorithm and It has several problems as expected:
     1. There's only one giant function. Ok, that in the end the CPU will
        execute 1 operation at a time(mono-core, single-thread), but code
        needs to be human-readable. /Any fool can write code that a computer can understand. Good programmers write code that humans can understand./ (Martin Fowler)
@@ -111,7 +111,7 @@
        also into the index variable ~i~. Luckily, it is just used to
        select the current element to evaluate, it could be way worse,
        like a different algorithm for odd and even elements, checks on
-       the index and so on.
+       the index, and so on.
     3. There should be Types and a compiler somewhere, but I don't see
        any usage of those in here. The code is nearly indistinguishable
        from Javascript.
@@ -122,8 +122,8 @@
     :CUSTOM_ID: SolutionApproachContent
     :END:
 
-    Following up the previous analysis, we can come up with a plan and
-    in here I'll prioritize the tasks we need to do in order to make
+    Following up on the previous analysis, we can come up with a plan and
+    here I'll prioritize the tasks we need to do in order to make
     this code better and solve the kata.
 
 **** Tests
@@ -131,18 +131,18 @@
      :CUSTOM_ID: SolutionApproachTestsContent
      :END:
 
-     The first task needed is a good test suite. With a proper testing we
+     The first task needed is a good test suite. With proper testing we
      will be sure that the changes we are going to make are
      correct. After all, the definition of /[[https://en.wikipedia.org/wiki/Code_refactoring][Code Refactoring]]/ is to *NOT*
      change the program behavior.
 
-     Now, test suite can be crafted using multiple techniques and it's an
+     Now, the test suite can be crafted using multiple techniques and it's a
      huge topic by itself. In this case, testing is not the main focus of
      the kata but still key. Fortunately, it's a simple, little, local
      program. So we should be fine with just /[[https://en.wikipedia.org/wiki/Unit_testing][Unit Testing]]/ and /[[https://en.wikipedia.org/wiki/System_testing][System Testing]]/.
 
      Usually, testing is done by providing some specific input data to
-     the program, fetch the result of the computation and then compare
+     the program, fetch the result of the computation, and then compare
      it with what is expected. That's completely fine and it's what the
      majority of the companies do nowadays. The downside of this approach
      is it's static: let say your program has a bug, or crash, for a
@@ -154,8 +154,8 @@
      used by the supporting library/framework to generate the inputs and
      then the expected behavior as a property. I won't go deeper into it,
      but the typical example is the associativity of the sum
-     operation. Definitely, the most complicated part is identify the
-     properties of your program, but in my honest opinion I still see
+     operation. Definitely, the most complicated part is to identify the
+     properties of your program, but in my honest opinion, I still see
      benefits into just take advantage of the generated inputs. For
      instance, you will write your test once and it will run multiple
      times with several inputs. It's straight away a big plus.
@@ -168,15 +168,15 @@
      :CUSTOM_ID: SolutionApproachSplitMonsterContent
      :END:
 
-     Once we have the testing setup properly, we can start to break
+     Once we have the testing set up properly, we can start to break
      stuff using the 🔨.
 
-     The Most annoying thing into the codebase is the giant
+     The Most annoying thing in the codebase is the giant
      stand-alone function. I will tackle this by splitting that
-     function in two or more sub-functions. Then, repeat the same
-     approach for the out coming functions. This recursive process
+     function into two or more sub-functions. Then, repeat the same
+     approach for the outcoming functions. This recursive process
      will terminate when the functions I end up with have a small
-     amount of lines of code and one single mutation in it, simple as
+     number of lines of code and one single mutation in it, simple as
      that.
 
      A little but key detail in all of this is that each function will
@@ -198,7 +198,7 @@ if (condition2) {
 } else // Stuff
 
 // After
-def f1(params): StuffType = if (condition1) { f3(params) } else // Previous state (indentity)
+def f1(params): StuffType = if (condition1) { f3(params) } else // Previous state (identity)
 def f2(params): StuffType = if (condition2) {/* Stuff */ } else // Stuff
 def f3(params): StuffType = if (condition3) {/* Stuff */ } else // Stuff
 val r1 = f1(args)
@@ -207,7 +207,7 @@ r2
 #+END_SRC
 
      This might seems controversial and more complicated, but it helps
-     into put the computations in context. This way, you don't need to
+     in to put the computations in context. This way, you don't need to
      go and look into the content of the functions, you can just skip
      their implementation details and get an overall feeling of the
      data-flow. Plus, you could not realize it yet, but doing so we
@@ -215,12 +215,12 @@ r2
 
      You might also notice I added an else to the first if, that's
      because I want the wrapping function to actually return a type
-     and, since there wasn't an else, in that case the result will be
+     and, since there wasn't an else, in that case, the result will be
      the previous input. When the else branch is chosen the ~f1~
-     function will behave as the [[https://en.wikipedia.org/wiki/Identity_function][Indentity Function]].
+     function will behave as the [[https://en.wikipedia.org/wiki/Identity_function][Identity Function]].
 
      In the very end, I want also to grab your attention on the way
-     this approach penetrates the nested ifs and allow to collapse the
+     this approach penetrates the nested ifs and allow us to collapse the
      structure. Of course, we could also merge ~condition1~ and
      ~condition3~, and we might actually decide to do that in a later
      stage, but let us suppose we will discover that the same logic of
@@ -231,20 +231,20 @@ r2
      :CUSTOM_ID: SolutionApproachMutationContent
      :END:
 
-     Everything is in it's own box that returns a new version of the
-     input 💜 However... it still mutate and internal field!! But
+     Everything is in its own box that returns a new version of the
+     input 💜, However... it still mutates and internal field!! But
      because we are in this situation we can easily remove that
      mutation and from the model itself and return a new copy of the
      input with the requested changes.
 
 **** Refinement
 
-     Finally, with this new working codebase we should be able to see
+     Finally, with this new working codebase, we should be able to see
      patterns clearly and apply further optimizations. In particular,
      regarding:
      + Merging condition together
      + Adding fields validation
-     + Structuring the code: moving function to the model companion
+     + Structuring the code: moving the functions to the model companion
        objects, in case of Scala, or to a separate module.
 
      Now that we have a plan, let's start the fun part...let's
