@@ -5,6 +5,10 @@ h1, h2, h3, h4, h5 {
 audio {
     width: 200px;
 }
+.src {
+    background-color: #1c1c1c;
+    color: rgba(255,255,255,.6);
+}
 @media only screen and (max-width: 600px) { 
     audio {
         width: 100px;

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Gilded Rose Kata</title>
-<!-- 2020-06-30 Tue 20:04 -->
+<!-- 2020-07-02 Thu 01:22 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -44,6 +44,9 @@ $(function() {
 <li><a href="#SolutionApproachContent">Solution Approach</a>
 <ul class="nav">
 <li><a href="#SolutionApproachTestsContent">Tests</a></li>
+<li><a href="#SolutionApproachSplitMonsterContent">Split the Monster</a></li>
+<li><a href="#SolutionApproachMutationContent">Dealing With Mutation once and for All</a></li>
+<li><a href="#sec-">Refinement</a></li>
 </ul>
 </li>
 <li><a href="#ScalaContent">Scala Kata</a></li>
@@ -203,11 +206,173 @@ from Javascript.
 <div id="outline-container-SolutionApproachContent" class="outline-4">
 <h4 id="SolutionApproachContent"><a id="sec-" name="sec-"></a>Solution Approach</h4>
 <div class="outline-text-4" id="text-SolutionApproachContent">
+<p>
+Following up the previous analysis, we can come up with a plan and
+in here I'll prioritize the tasks we need to do in order to make
+this code better and solve the kata.
+</p>
 </div>
 
 <div id="outline-container-SolutionApproachTestsContent" class="outline-5">
 <h5 id="SolutionApproachTestsContent"><a id="sec-" name="sec-"></a>Tests</h5>
 <div class="outline-text-5" id="text-SolutionApproachTestsContent">
+<p>
+The first task needed is a good test suite. With a proper testing we
+will be sure that the changes we are going to make are
+correct. After all, the definition of <i><a href="https://en.wikipedia.org/wiki/Code_refactoring">Code Refactoring</a></i> is to <b>NOT</b>
+change the program behavior.
+</p>
+
+<p>
+Now, test suite can be crafted using multiple techniques and it's an
+huge topic by itself. In this case, testing is not the main focus of
+the kata but still key. Fortunately, it's a simple, little, local
+program. So we should be fine with just <i><a href="https://en.wikipedia.org/wiki/Unit_testing">Unit Testing</a></i> and <i><a href="https://en.wikipedia.org/wiki/System_testing">System Testing</a></i>.
+</p>
+
+<p>
+Usually, testing is done by providing some specific input data to
+the program, fetch the result of the computation and then compare
+it with what is expected. That's completely fine and it's what the
+majority of the companies do nowadays. The downside of this approach
+is it's static: let say your program has a bug, or crash, for a
+corner case you didn't thought about, testing by example will not
+help you there.
+</p>
+
+<p>
+A different approach I like more is <a href="https://en.wikipedia.org/wiki/Property_testing">Property Testing</a>, where the
+input data is <b>generated</b>. The software engineer defines the rules
+used by the supporting library/framework to generate the inputs and
+then the expected behavior as a property. I won't go deeper into it,
+but the typical example is the associativity of the sum
+operation. Definitely, the most complicated part is identify the
+properties of your program, but in my honest opinion I still see
+benefits into just take advantage of the generated inputs. For
+instance, you will write your test once and it will run multiple
+times with several inputs. It's straight away a big plus.
+</p>
+
+<p>
+Another downside of this approach is the computational cost:
+generating inputs and having multiple runs will increase the testing time.
+</p>
+</div>
+</div>
+
+<div id="outline-container-SolutionApproachSplitMonsterContent" class="outline-5">
+<h5 id="SolutionApproachSplitMonsterContent"><a id="sec-" name="sec-"></a>Split the Monster</h5>
+<div class="outline-text-5" id="text-SolutionApproachSplitMonsterContent">
+<p>
+Once we have the testing setup properly, we can start to break
+stuff using the 🔨.
+</p>
+
+<p>
+The Most annoying thing into the codebase is the giant
+stand-alone function. I will tackle this by splitting that
+function in two or more sub-functions. Then, repeat the same
+approach for the out coming functions. This recursive process
+will terminate when the functions I end up with have a small
+amount of lines of code and one single mutation in it, simple as
+that.
+</p>
+
+<p>
+A little but key detail in all of this is that each function will
+return a value and the parent function will be a composition of
+its child.
+</p>
+
+<p>
+This works well when you have 2 consecutive if-statements or an
+if-else-statement:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-scala"><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Before</span>
+<span style="color: #00ffff;">if</span> (condition1) {
+  <span style="color: #00ffff;">if</span> (condition3) {
+   <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Stuff</span>
+  } <span style="color: #00ffff;">else</span> <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Stuff</span>
+}
+<span style="color: #00ffff;">if</span> (condition2) {
+<span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Stuff</span>
+} <span style="color: #00ffff;">else</span> <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Stuff</span>
+
+<span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">After</span>
+<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">f1</span>(params)<span style="color: #00ffff;">:</span> <span style="color: #98fb98;">StuffType</span> <span style="color: #00ffff;">=</span> <span style="color: #00ffff;">if</span> (condition1) { f3(params) } <span style="color: #00ffff;">else</span> <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Previous state (indentity)</span>
+<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">f2</span>(params)<span style="color: #00ffff;">:</span> <span style="color: #98fb98;">StuffType</span> <span style="color: #00ffff;">=</span> <span style="color: #00ffff;">if</span> (condition2) {<span style="color: #ff7f24;">/* </span><span style="color: #ff7f24;">Stuff */</span> } <span style="color: #00ffff;">else</span> <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Stuff</span>
+<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">f3</span>(params)<span style="color: #00ffff;">:</span> <span style="color: #98fb98;">StuffType</span> <span style="color: #00ffff;">=</span> <span style="color: #00ffff;">if</span> (condition3) {<span style="color: #ff7f24;">/* </span><span style="color: #ff7f24;">Stuff */</span> } <span style="color: #00ffff;">else</span> <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Stuff</span>
+<span style="color: #00ffff;">val</span> <span style="color: #eedd82;">r1</span> <span style="color: #00ffff;">=</span> f1(args)
+<span style="color: #00ffff;">val</span> <span style="color: #eedd82;">r2</span> <span style="color: #00ffff;">=</span> f2(args) <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">This might probably require r1 as input</span>
+r2
+</pre>
+</div>
+
+<p>
+This might seems controversial and more complicated, but it helps
+into put the computations in context. This way, you don't need to
+go and look into the content of the functions, you can just skip
+their implementation details and get an overall feeling of the
+data-flow. Plus, you could not realize it yet, but doing so we
+also put types back into play!
+</p>
+
+<p>
+You might also notice I added an else to the first if, that's
+because I want the wrapping function to actually return a type
+and, since there wasn't an else, in that case the result will be
+the previous input. When the else branch is chosen the <code>f1</code>
+function will behave as the <a href="https://en.wikipedia.org/wiki/Identity_function">Indentity Function</a>.
+</p>
+
+<p>
+In the very end, I want also to grab your attention on the way
+this approach penetrates the nested ifs and allow to collapse the
+structure. Of course, we could also merge <code>condition1</code> and
+<code>condition3</code>, and we might actually decide to do that in a later
+stage, but let us suppose we will discover that the same logic of
+<code>f3</code> is reused. This way we can just call <code>f3</code> since it's independent.
+</p>
+</div>
+</div>
+
+<div id="outline-container-SolutionApproachMutationContent" class="outline-5">
+<h5 id="SolutionApproachMutationContent"><a id="sec-" name="sec-"></a>Dealing With Mutation once and for All</h5>
+<div class="outline-text-5" id="text-SolutionApproachMutationContent">
+<p>
+Everything is in it's own box that returns a new version of the
+input 💜 However&#x2026; it still mutate and internal field!! But
+because we are in this situation we can easily remove that
+mutation and from the model itself and return a new copy of the
+input with the requested changes.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-" class="outline-5">
+<h5 id="sec-">Refinement</h5>
+<div class="outline-text-5" id="text-">
+<p>
+Finally, with this new working codebase we should be able to see
+patterns clearly and apply further optimizations. In particular,
+regarding:
+</p>
+<ul class="org-ul">
+<li>Merging condition together
+</li>
+<li>Adding fields validation
+</li>
+<li>Structuring the code: moving function to the model companion
+objects, in case of Scala, or to a separate module.
+</li>
+</ul>
+
+<p>
+Now that we have a plan, let's start the fun part&#x2026;
+</p>
 </div>
 </div>
 </div>

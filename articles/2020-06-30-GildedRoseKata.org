@@ -18,22 +18,22 @@
   :HTML_CONTAINER_CLASS: text-center navbar navbar-inverse navbar-fixed-top
   :CUSTOM_ID: navbar
   :END:
-#+BEGIN_EXPORT html
-<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapsableNavbar">
-  <span class="icon-bar"Article 6</span>
-  <span class="icon-bar"></span>
-  <span class="icon-bar"></span>
-</button>
-<a title="Home" href="../blog.html"><h1 id="navbarTitle" class="navbar-text">Blog</h1></a>
-<div class="collapse navbar-collapse" id="collapsableNavbar">
-  <ul class="nav navbar-nav">
-    <li><a title="Home" href="../index.html"><i class="fas fa-home fa-3x" aria-hidden="true"></i></a></li>
-    <li><a title="Article List" href="../articleList.html" class="navbar-text h3">Article List</a></li>
-<li><a title="Book List" href="../bookList.html" class="navbar-text h3">Book List</a></li>
-<li><a title="Album List" href="../albumList.html" class="navbar-text h3">Album List</a></li>
-  </ul>
-</div>
-#+END_EXPORT
+  #+BEGIN_EXPORT html
+  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapsableNavbar">
+    <span class="icon-bar"Article 6</span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+  <a title="Home" href="../blog.html"><h1 id="navbarTitle" class="navbar-text">Blog</h1></a>
+  <div class="collapse navbar-collapse" id="collapsableNavbar">
+    <ul class="nav navbar-nav">
+      <li><a title="Home" href="../index.html"><i class="fas fa-home fa-3x" aria-hidden="true"></i></a></li>
+      <li><a title="Article List" href="../articleList.html" class="navbar-text h3">Article List</a></li>
+  <li><a title="Book List" href="../bookList.html" class="navbar-text h3">Book List</a></li>
+  <li><a title="Album List" href="../albumList.html" class="navbar-text h3">Album List</a></li>
+    </ul>
+  </div>
+  #+END_EXPORT
 
 * Gilded Rose Kata
   :PROPERTIES:
@@ -41,91 +41,214 @@
   :END:
   *Created: <2020-06-30 Tue>*
 ** Abstract
-  :PROPERTIES:
-  :CUSTOM_ID: ArticleAbstract
-  :END:
+   :PROPERTIES:
+   :CUSTOM_ID: ArticleAbstract
+   :END:
 
-  Not some time ago I watched the mighty [[https://twitter.com/NicolasRinaudo][Nicolas Rinaudo]] dealing with
-  the [[https://github.com/emilybache/GildedRose-Refactoring-Kata][Gilded Rose Kata]] on the [[https://www.twitch.tv/scalalove][scalalove's twitch channel]] and that
-  inspired me into trying it out using my favorite languages: Scala &
-  Haskell.
+   Not some time ago I watched the mighty [[https://twitter.com/NicolasRinaudo][Nicolas Rinaudo]] dealing with
+   the [[https://github.com/emilybache/GildedRose-Refactoring-Kata][Gilded Rose Kata]] on the [[https://www.twitch.tv/scalalove][scalalove's twitch channel]] and that
+   inspired me into trying it out using my favorite languages: Scala &
+   Haskell.
 
-  I'll structure the article in this way:
-  1. I want to get familiar with the actual code-base, analyze it and
-     explain what are the (main) flaws I can see. This section will be
-     language-independent, since the same algorithm will be
-     implemented in the same way, no matter the language, by kata's
-     definition. It's a refactoring kata after all.
-  2. Following the previous point, I will write down the approach I'll
-     use. This should be language-independent as well
-  3. Then, It's time to point out the difficulties I found into doing
-     it with Scala and Haskell, the pros and cons. I could try also to
-     do a comparison between the two.
+   I'll structure the article in this way:
+   1. I want to get familiar with the actual code-base, analyze it and
+      explain what are the (main) flaws I can see. This section will be
+      language-independent, since the same algorithm will be
+      implemented in the same way, no matter the language, by kata's
+      definition. It's a refactoring kata after all.
+   2. Following the previous point, I will write down the approach I'll
+      use. This should be language-independent as well
+   3. Then, It's time to point out the difficulties I found into doing
+      it with Scala and Haskell, the pros and cons. I could try also to
+      do a comparison between the two.
 
 ** Content
-  :PROPERTIES:
-  :CUSTOM_ID: ArticleContent
-  :END:
+   :PROPERTIES:
+   :CUSTOM_ID: ArticleContent
+   :END:
 
 *** Codebase State
-  :PROPERTIES:
-  :CUSTOM_ID: CodebaseStateContent
-  :END:
+    :PROPERTIES:
+    :CUSTOM_ID: CodebaseStateContent
+    :END:
 
-  In order to write this section I just need to access the [[https://github.com/emilybache/GildedRose-Refactoring-Kata][Github kata
-  repo]] and do the most boring thing I usually do, after meetings: a
-  code review.
+    In order to write this section I just need to access the [[https://github.com/emilybache/GildedRose-Refactoring-Kata][Github kata
+    repo]] and do the most boring thing I usually do, after meetings: a
+    code review.
 
-  *Disclaimer:* this code is intentionally bad. If you will ever
-  encounter a code-base like this one in your life, listen to me...
+    *Disclaimer:* this code is intentionally bad. If you will ever
+    encounter a code-base like this one in your life, listen to me...
 
-  #+html: <iframe src="https://giphy.com/embed/A6PcmRqkyMOBy" width="480" height="224" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+    #+html: <iframe src="https://giphy.com/embed/A6PcmRqkyMOBy" width="480" height="224" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 
-  let's start...
+    let's start...
 
-  First thing first, I see there are no tests for the
-  application. That need to be fixed ASAP. We will talk about that in
-  the [[#SolutionApproachTestsContent][specific section]].
+    First thing first, I see there are no tests for the
+    application. That need to be fixed ASAP. We will talk about that in
+    the [[#SolutionApproachTestsContent][specific section]].
 
-  Then I see an attempt of a /[[https://en.wikipedia.org/wiki/Domain_model][Domain Model]]/. That's actually a good
-  practice: design your types first and be as picky as possible in
-  order to [[https://fsharpforfunandprofit.com/posts/designing-with-types-making-illegal-states-unrepresentable/][make the illegal states unrepresentable]]. The problems here
-  are
-  + The ~var~ keyword, that means mutability. As an FP enthusiast, I
-    know mutable state can be hard to manage and lead to unintended
-    behaviors. I just notice how it's a problem of the Scala solution
-    only! Mutation is possible in Haskell too, but luckily we got
-    spared.
-  + Just Items!! There are two possible cases: the problem is
-    extremely simple or we are missing some types in here.
-  + No validations. I expect to see some data validation to ensure the
-    values we are going to compute remains valid throughout the program
-    execution.
+    Then I see an attempt of a /[[https://en.wikipedia.org/wiki/Domain_model][Domain Model]]/. That's actually a good
+    practice: design your types first and be as picky as possible in
+    order to [[https://fsharpforfunandprofit.com/posts/designing-with-types-making-illegal-states-unrepresentable/][make the illegal states unrepresentable]]. The problems here
+    are
+    + The ~var~ keyword, that means mutability. As an FP enthusiast, I
+      know mutable state can be hard to manage and lead to unintended
+      behaviors. I just notice how it's a problem of the Scala solution
+      only! Mutation is possible in Haskell too, but luckily we got
+      spared.
+    + Just Items!! There are two possible cases: the problem is
+      extremely simple or we are missing some types in here.
+    + No validations. I expect to see some data validation to ensure the
+      values we are going to compute remains valid throughout the program
+      execution.
 
-  Finally it comes the main algorithm and It has several problems as expected:
-  1. There's only one giant function. Ok, that in the end the CPU will
-     execute 1 operation at a time(mono-core, single-thread), but code
-     needs to be human-readable. /Any fool can write code that a computer can understand. Good programmers write code that humans can understand./ (Martin Fowler)
-     Plus it violates the [[https://en.wikipedia.org/wiki/Single-responsibility_principle][Single Responsibility Principle]].
-  2. Mutation again! Apart from the items fields, that was expected,
-     also into the index variable ~i~. Luckily, it is just used to
-     select the current element to evaluate, it could be way worse,
-     like a different algorithm for odd and even elements, checks on
-     the index and so on.
-  3. There should be Types and a compiler somewhere, but I don't see
-     any usage of those in here. The code is nearly indistinguishable
-     from Javascript.
-  4. Nested Ifs statements.
+    Finally it comes the main algorithm and It has several problems as expected:
+    1. There's only one giant function. Ok, that in the end the CPU will
+       execute 1 operation at a time(mono-core, single-thread), but code
+       needs to be human-readable. /Any fool can write code that a computer can understand. Good programmers write code that humans can understand./ (Martin Fowler)
+       Plus it violates the [[https://en.wikipedia.org/wiki/Single-responsibility_principle][Single Responsibility Principle]].
+    2. Mutation again! Apart from the items fields, that was expected,
+       also into the index variable ~i~. Luckily, it is just used to
+       select the current element to evaluate, it could be way worse,
+       like a different algorithm for odd and even elements, checks on
+       the index and so on.
+    3. There should be Types and a compiler somewhere, but I don't see
+       any usage of those in here. The code is nearly indistinguishable
+       from Javascript.
+    4. Nested Ifs statements.
 
 *** Solution Approach
-  :PROPERTIES:
-  :CUSTOM_ID: SolutionApproachContent
-  :END:
+    :PROPERTIES:
+    :CUSTOM_ID: SolutionApproachContent
+    :END:
+
+    Following up the previous analysis, we can come up with a plan and
+    in here I'll prioritize the tasks we need to do in order to make
+    this code better and solve the kata.
 
 **** Tests
-  :PROPERTIES:
-  :CUSTOM_ID: SolutionApproachTestsContent
-  :END:
+     :PROPERTIES:
+     :CUSTOM_ID: SolutionApproachTestsContent
+     :END:
+
+     The first task needed is a good test suite. With a proper testing we
+     will be sure that the changes we are going to make are
+     correct. After all, the definition of /[[https://en.wikipedia.org/wiki/Code_refactoring][Code Refactoring]]/ is to *NOT*
+     change the program behavior.
+
+     Now, test suite can be crafted using multiple techniques and it's an
+     huge topic by itself. In this case, testing is not the main focus of
+     the kata but still key. Fortunately, it's a simple, little, local
+     program. So we should be fine with just /[[https://en.wikipedia.org/wiki/Unit_testing][Unit Testing]]/ and /[[https://en.wikipedia.org/wiki/System_testing][System Testing]]/.
+
+     Usually, testing is done by providing some specific input data to
+     the program, fetch the result of the computation and then compare
+     it with what is expected. That's completely fine and it's what the
+     majority of the companies do nowadays. The downside of this approach
+     is it's static: let say your program has a bug, or crash, for a
+     corner case you didn't thought about, testing by example will not
+     help you there.
+
+     A different approach I like more is [[https://en.wikipedia.org/wiki/Property_testing][Property Testing]], where the
+     input data is *generated*. The software engineer defines the rules
+     used by the supporting library/framework to generate the inputs and
+     then the expected behavior as a property. I won't go deeper into it,
+     but the typical example is the associativity of the sum
+     operation. Definitely, the most complicated part is identify the
+     properties of your program, but in my honest opinion I still see
+     benefits into just take advantage of the generated inputs. For
+     instance, you will write your test once and it will run multiple
+     times with several inputs. It's straight away a big plus.
+
+     Another downside of this approach is the computational cost:
+     generating inputs and having multiple runs will increase the testing time.
+
+**** Split the Monster
+     :PROPERTIES:
+     :CUSTOM_ID: SolutionApproachSplitMonsterContent
+     :END:
+
+     Once we have the testing setup properly, we can start to break
+     stuff using the 🔨.
+
+     The Most annoying thing into the codebase is the giant
+     stand-alone function. I will tackle this by splitting that
+     function in two or more sub-functions. Then, repeat the same
+     approach for the out coming functions. This recursive process
+     will terminate when the functions I end up with have a small
+     amount of lines of code and one single mutation in it, simple as
+     that.
+
+     A little but key detail in all of this is that each function will
+     return a value and the parent function will be a composition of
+     its child.
+
+     This works well when you have 2 consecutive if-statements or an
+     if-else-statement:
+
+#+BEGIN_SRC scala
+// Before
+if (condition1) {
+  if (condition3) {
+   // Stuff
+  } else // Stuff
+}
+if (condition2) {
+// Stuff
+} else // Stuff
+
+// After
+def f1(params): StuffType = if (condition1) { f3(params) } else // Previous state (indentity)
+def f2(params): StuffType = if (condition2) {/* Stuff */ } else // Stuff
+def f3(params): StuffType = if (condition3) {/* Stuff */ } else // Stuff
+val r1 = f1(args)
+val r2 = f2(args) // This might probably require r1 as input
+r2
+#+END_SRC
+
+     This might seems controversial and more complicated, but it helps
+     into put the computations in context. This way, you don't need to
+     go and look into the content of the functions, you can just skip
+     their implementation details and get an overall feeling of the
+     data-flow. Plus, you could not realize it yet, but doing so we
+     also put types back into play!
+
+     You might also notice I added an else to the first if, that's
+     because I want the wrapping function to actually return a type
+     and, since there wasn't an else, in that case the result will be
+     the previous input. When the else branch is chosen the ~f1~
+     function will behave as the [[https://en.wikipedia.org/wiki/Identity_function][Indentity Function]].
+
+     In the very end, I want also to grab your attention on the way
+     this approach penetrates the nested ifs and allow to collapse the
+     structure. Of course, we could also merge ~condition1~ and
+     ~condition3~, and we might actually decide to do that in a later
+     stage, but let us suppose we will discover that the same logic of
+     ~f3~ is reused. This way we can just call ~f3~ since it's independent.
+
+**** Dealing With Mutation once and for All
+     :PROPERTIES:
+     :CUSTOM_ID: SolutionApproachMutationContent
+     :END:
+
+     Everything is in it's own box that returns a new version of the
+     input 💜 However... it still mutate and internal field!! But
+     because we are in this situation we can easily remove that
+     mutation and from the model itself and return a new copy of the
+     input with the requested changes.
+
+**** Refinement
+
+     Finally, with this new working codebase we should be able to see
+     patterns clearly and apply further optimizations. In particular,
+     regarding:
+     + Merging condition together
+     + Adding fields validation
+     + Structuring the code: moving function to the model companion
+       objects, in case of Scala, or to a separate module.
+
+     Now that we have a plan, let's start the fun part...let's
+     executed it!
 
 *** Scala Kata
     :PROPERTIES:
@@ -133,55 +256,55 @@
     :END:
 
 *** Haskell Kata
-  :PROPERTIES:
-  :CUSTOM_ID: HaskellContent
-  :END:
+    :PROPERTIES:
+    :CUSTOM_ID: HaskellContent
+    :END:
 
 ** Conclusions
-  :PROPERTIES:
-  :CUSTOM_ID: ArticleConclusions
-  :END:
+   :PROPERTIES:
+   :CUSTOM_ID: ArticleConclusions
+   :END:
 
 *** Main Challenges
-  :PROPERTIES:
-  :CUSTOM_ID: MainChallengesConclusion
-  :END:
+    :PROPERTIES:
+    :CUSTOM_ID: MainChallengesConclusion
+    :END:
 
 
 *** Languages Comparison
-  :PROPERTIES:
-  :CUSTOM_ID: LaguagesComparisonConclusions
-  :END:
+    :PROPERTIES:
+    :CUSTOM_ID: LaguagesComparisonConclusions
+    :END:
 
-  # Haskell codebase started a little better, no mutantion into the
-  # domain model
+    # Haskell codebase started a little better, no mutantion into the
+    # domain model
 
 * Share Buttons
   :PROPERTIES:
   :CUSTOM_ID: ShareButtons
   :END:
-#+BEGIN_EXPORT html
-<!-- AddToAny BEGIN -->
-<hr>
-<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
-<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
-<a class="a2a_button_facebook"></a>
-<a class="a2a_button_twitter"></a>
-<a class="a2a_button_whatsapp"></a>
-<a class="a2a_button_telegram"></a>
-<a class="a2a_button_linkedin"></a>
-<a class="a2a_button_email"></a>
-</div>
-<script async src="https://static.addtoany.com/menu/page.js"></script>
-<!-- AddToAny END -->
-#+END_EXPORT
+  #+BEGIN_EXPORT html
+  <!-- AddToAny BEGIN -->
+  <hr>
+  <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+  <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+  <a class="a2a_button_facebook"></a>
+  <a class="a2a_button_twitter"></a>
+  <a class="a2a_button_whatsapp"></a>
+  <a class="a2a_button_telegram"></a>
+  <a class="a2a_button_linkedin"></a>
+  <a class="a2a_button_email"></a>
+  </div>
+  <script async src="https://static.addtoany.com/menu/page.js"></script>
+  <!-- AddToAny END -->
+  #+END_EXPORT
 
-#+begin_export html
-<script type="text/javascript">
-$(function() {
-  $('#text-table-of-contents > ul li').first().css("display", "none");
-  $('#text-table-of-contents > ul li').last().css("display", "none");
-  $('#table-of-contents').addClass("visible-lg")
-});
-</script>
-#+end_export
+  #+begin_export html
+  <script type="text/javascript">
+  $(function() {
+    $('#text-table-of-contents > ul li').first().css("display", "none");
+    $('#text-table-of-contents > ul li').last().css("display", "none");
+    $('#table-of-contents').addClass("visible-lg")
+  });
+  </script>
+  #+end_export
