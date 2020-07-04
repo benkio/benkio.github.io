@@ -272,7 +272,8 @@ r2
      patterns clearly and apply further optimizations. In particular,
      regarding:
      * Merging condition together
-     * Adding fields validation
+     * Adding fields validation or other helpful functions,
+       identifying patters in code
      * Structuring the code: moving the functions to the model companion
        objects, in case of Scala, or to a separate module.
 
@@ -282,6 +283,11 @@ r2
 
      Now that we have a plan, let's start the fun part...let's
      executed it!
+
+     **Edit:** Sometimes you need to do some refinements listed in
+     here even in earlier stages because doing it earlier helps you
+     very much then postpone the change. Anyway, my suggestion is to
+     refine as less as possible in the beginning, only when it's necessary.
 
 *** Scala Kata
     :PROPERTIES:
