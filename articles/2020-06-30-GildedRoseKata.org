@@ -293,11 +293,11 @@ r2
     ~println~ I figured it out. [[https://github.com/benkio/GeneralExercises/commit/8e066e5cc678518f6f10147f7280969dce245be2][commit]]
 
     <2020-07-03 Fri>: Finished the scala tests. Fixed some errors in
-    the making. Now we can move to the actual code.
+    the making. Now we can move to the actual code. [[https://github.com/benkio/GeneralExercises/commit/19c8b9e][commit]]
 
     <2020-07-04 Sat>: splitted the monster. now I have several
     functions, returning Items containing only one if statement as
-    body. No more if indentation anywhere
+    body. No more if indentation anywhere. [[https://github.com/benkio/GeneralExercises/commit/d40580b][commit]]
 
 *** Haskell Kata
     :PROPERTIES:
