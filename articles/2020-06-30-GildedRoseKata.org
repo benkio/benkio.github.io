@@ -273,13 +273,17 @@ r2
      regarding:
      * Merging condition together
      * Adding fields validation or other helpful functions,
-       identifying patters in code
+     * Adding new types.
      * Structuring the code: moving the functions to the model companion
        objects, in case of Scala, or to a separate module.
 
-     Once the code is finally in a good shape, we can easily add the
-     new feature. It should be quite simple, since the new item to
-     eval require a logic that is already shared with another item.
+     Once the code is finally in a good shape, we can:
+     1. See some pattern emerge clearly and properly design the rest
+        of the code to expose them: moving the logic to proper new
+        types that communicate the intention of the code.
+     2. easily add the new feature. It should be quite simple, since
+        the new item to eval require a logic that is already shared
+        with another item.
 
      Now that we have a plan, let's start the fun part...let's
      executed it!
@@ -303,15 +307,14 @@ r2
 
     <2020-07-04 Sat>: splitted the monster. now I have several
     functions, returning Items containing only one if statement as
-    body. No more if indentation anywhere. [[https://github.com/benkio/GeneralExercises/commit/d40580b][commit]]
-
-    <2020-07-04 Sat>: 
+    body. No more if indentation anywhere. Plus:
     + Introduced new types wrapper and aliases for the fields
-    + Defer mutation as much as possible. Only 2 places now.
-    + Extracted main operation on types to companion objects
-    [[https://github.com/benkio/GeneralExercises/commit/9614fcb][commit]]
-    [[https://github.com/benkio/GeneralExercises/commit/a33d05c][commit]]
-    [[https://github.com/benkio/GeneralExercises/commit/ee8359c][commit]]
+    + Defer/remove mutation as much as possible. Only at the end of
+      the foreach.
+    + Extracted main operation on types to companion objects.
+    + Merged the functions into one calling only basic operations
+    [[https://github.com/benkio/GeneralExercises/commit/9fdc7be][commit]]
+
 
 *** Haskell Kata
     :PROPERTIES:
