@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Gilded Rose Kata</title>
-<!-- 2020-07-03 Fri 19:56 -->
+<!-- 2020-07-04 Sat 13:01 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -350,6 +350,29 @@ structure. Of course, we could also merge <code>condition1</code> and
 <code>condition3</code>, and we might actually decide to do that in a later
 stage, but let us suppose we will discover that the same logic of
 <code>f3</code> is reused. This way we can just call <code>f3</code> since it's independent.
+</p>
+
+<p>
+<b>Edit:</b> a very important aspect when comes to refactoring is KNOW
+WHEN TO COMMIT. In my opinion the right time is when all of the
+following conditions holds:
+</p>
+<ol class="org-ol">
+<li>Your tests are green
+</li>
+<li>You are not in the middle of a change (you know what to do
+next)
+</li>
+<li>You are on stand-by, thinking about the next move (related to
+point 2)
+</li>
+</ol>
+
+<p>
+Doing like that will ensure that you commit quite often and you
+can roll back to a <i>safe-state</i> without loosing too much
+time. Otherwise, you might don't want to roll back because your
+last commit was 2h ago.
 </p>
 </div>
 </div>

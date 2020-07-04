@@ -234,6 +234,20 @@ r2
      stage, but let us suppose we will discover that the same logic of
      ~f3~ is reused. This way we can just call ~f3~ since it's independent.
 
+     *Edit:* a very important aspect when comes to refactoring is KNOW
+     WHEN TO COMMIT. In my opinion the right time is when all of the
+     following conditions holds:
+     1. Your tests are green
+     2. You are not in the middle of a change (you know what to do
+        next)
+     3. You are on stand-by, thinking about the next move (related to
+        point 2)
+
+     Doing like that will ensure that you commit quite often and you
+     can roll back to a /safe-state/ without loosing too much
+     time. Otherwise, you might don't want to roll back because your
+     last commit was 2h ago.
+
 **** Dealing With Mutation once and for All
      :PROPERTIES:
      :CUSTOM_ID: SolutionApproachMutationContent
@@ -257,9 +271,9 @@ r2
      Finally, with this new working codebase, we should be able to see
      patterns clearly and apply further optimizations. In particular,
      regarding:
-     + Merging condition together
-     + Adding fields validation
-     + Structuring the code: moving the functions to the model companion
+     * Merging condition together
+     * Adding fields validation
+     * Structuring the code: moving the functions to the model companion
        objects, in case of Scala, or to a separate module.
 
      Once the code is finally in a good shape, we can easily add the
