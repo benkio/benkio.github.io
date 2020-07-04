@@ -305,6 +305,14 @@ r2
     functions, returning Items containing only one if statement as
     body. No more if indentation anywhere. [[https://github.com/benkio/GeneralExercises/commit/d40580b][commit]]
 
+    <2020-07-04 Sat>: 
+    + Introduced new types wrapper and aliases for the fields
+    + Defer mutation as much as possible. Only 2 places now.
+    + Extracted main operation on types to companion objects
+    [[https://github.com/benkio/GeneralExercises/commit/9614fcb][commit]]
+    [[https://github.com/benkio/GeneralExercises/commit/a33d05c][commit]]
+    [[https://github.com/benkio/GeneralExercises/commit/ee8359c][commit]]
+
 *** Haskell Kata
     :PROPERTIES:
     :CUSTOM_ID: HaskellContent
