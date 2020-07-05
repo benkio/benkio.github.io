@@ -339,6 +339,9 @@ r2
     :CUSTOM_ID: MainChallengesConclusion
     :END:
 
+    # Stay calm and hold yourself from over refactoring, do small
+    # steps. Self discipline
+    # The constraint on the Item domain model was annoying.
 
 *** Languages Comparison
     :PROPERTIES:
