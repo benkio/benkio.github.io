@@ -282,7 +282,7 @@ r2
         of the code to expose them: moving the logic to proper new
         types that communicate the intention of the code.
      2. easily add the new feature. It should be quite simple, since
-        the new item to eval require a logic that is already shared
+        the new item to evaluate, require a logic that is already shared
         with another item.
 
      Now that we have a plan, let's start the fun part...let's
@@ -315,6 +315,14 @@ r2
     + Merged the functions into one calling only basic operations
     [[https://github.com/benkio/GeneralExercises/commit/9fdc7be][commit]]
 
+    <2020-07-05 Sun>: Since the specs just tell us to not touch the
+    ~Item~ class, I can change the return type of the ~updateQuality~
+    to be the new value. In this way we avoid mutation of the item
+    array. After that we can see the pattern composed by: a pre-quality calculation, an increase in sellIn value, a final
+    adjustment. Then, we can create subtypes of the item class and put
+    the specific logic into each class. This way we can get rid of the
+    big remaining functions. Afterwards, we can add the new class for
+    the new item easily. Work done!
 
 *** Haskell Kata
     :PROPERTIES:
