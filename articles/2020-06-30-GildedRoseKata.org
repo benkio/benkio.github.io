@@ -51,7 +51,7 @@
    Haskell.
 
    I'll structure the article in this way:
-   1. I want to get familiar with the actual code-base, analyze it and
+   1. I want to get familiar with the actual code-base, analyze it, and
       explain what are the (main) flaws I can see. This section will be
       language-independent, since the same algorithm will be
       implemented in the same way, no matter the language, by kata's
@@ -122,7 +122,7 @@
     :CUSTOM_ID: SolutionApproachContent
     :END:
 
-    Following up on the previous analysis, we can come up with a plan and
+    Following up on the previous analysis, we can come up with a plan, and
     here I'll prioritize the tasks we need to do in order to make
     this code better and solve the kata.
 
@@ -131,7 +131,7 @@
      :CUSTOM_ID: SolutionApproachTestsContent
      :END:
 
-     The first task needed is a good test suite. With proper testing we
+     The first task needed is a good test suite. With proper testing, we
      will be sure that the changes we are going to make are
      correct. After all, the definition of /[[https://en.wikipedia.org/wiki/Code_refactoring][Code Refactoring]]/ is to *NOT*
      change the program behavior.
@@ -146,7 +146,7 @@
      it with what is expected. That's completely fine and it's what the
      majority of the companies do nowadays. The downside of this approach
      is it's static: let say your program has a bug, or crash, for a
-     corner case you didn't thought about, testing by example will not
+     corner case you didn't think about, testing by example will not
      help you there.
 
      A different approach I like more is [[https://en.wikipedia.org/wiki/Property_testing][Property Testing]], where the
@@ -215,7 +215,7 @@ r2
 #+END_SRC
 
      This might seems controversial and more complicated, but it helps
-     in to put the computations in context. This way, you don't need to
+     to put the computations in context. This way, you don't need to
      go and look into the content of the functions, you can just skip
      their implementation details and get an overall feeling of the
      data-flow. Plus, you could not realize it yet, but doing so we
@@ -228,15 +228,15 @@ r2
      function will behave as the [[https://en.wikipedia.org/wiki/Identity_function][Identity Function]].
 
      In the very end, I want also to grab your attention on the way
-     this approach penetrates the nested ifs and allow us to collapse the
+     this approach penetrates the nested ifs and allows us to collapse the
      structure. Of course, we could also merge ~condition1~ and
      ~condition3~, and we might actually decide to do that in a later
      stage, but let us suppose we will discover that the same logic of
      ~f3~ is reused. This way we can just call ~f3~ since it's independent.
 
      *Edit:* a very important aspect when comes to refactoring is KNOW
-     WHEN TO COMMIT. In my opinion the right time is when all of the
-     following conditions holds:
+     WHEN TO COMMIT. In my opinion, the right time is when all of the
+     following conditions hold:
      1. Your tests are green
      2. You are not in the middle of a change (you know what to do
         next)
@@ -259,8 +259,8 @@ r2
      mutation and from the model itself and return a new copy of the
      input with the requested changes.
 
-     **Edit:** Reading the specification I'm not allow to touch the
-       Item class unfortunately. Then, this step will remain
+     **Edit:** Reading the specification I'm not allowed to touch the
+       Item class, unfortunately. Then, this step will remain
        theoretic, for Scala at least.
 **** Refinement & New feature
      :PROPERTIES:
@@ -277,11 +277,11 @@ r2
      * Structuring the code: moving the functions to the model companion
        objects, in case of Scala, or to a separate module.
 
-     Once the code is finally in a good shape, we can:
+     Once the code is finally in good shape, we can:
      1. See some pattern emerge clearly and properly design the rest
         of the code to expose them: moving the logic to proper new
         types that communicate the intention of the code.
-     2. easily add the new feature. It should be quite simple, since
+     2. easily add the new feature. It should be quite simple since
         the new item to evaluate, require a logic that is already shared
         with another item.
 
@@ -291,7 +291,7 @@ r2
      **Edit:** Sometimes you need to do some refinements listed in
      here even in earlier stages because doing it earlier helps you
      very much then postpone the change. Anyway, my suggestion is to
-     refine as less as possible in the beginning, only when it's necessary.
+     refine as little as possible in the beginning, only when it's necessary.
 
 *** Scala Kata
     :PROPERTIES:
@@ -299,15 +299,15 @@ r2
     :END:
 
     <2020-07-02 Thu>: Started the scala exercise from testing and
-    [[https://www.scalacheck.org/][scalacheck]]. Get stucked on some test corner case, but with some
+    [[https://www.scalacheck.org/][scalacheck]]. Get stuck on some test corner case, but with some
     ~println~ I figured it out. [[https://github.com/benkio/GeneralExercises/commit/8e066e5cc678518f6f10147f7280969dce245be2][commit]]
 
     <2020-07-03 Fri>: Finished the scala tests. Fixed some errors in
     the making. Now we can move to the actual code. [[https://github.com/benkio/GeneralExercises/commit/19c8b9e][commit]]
 
-    <2020-07-04 Sat>: splitted the monster. now I have several
+    <2020-07-04 Sat>: split the monster. now I have several
     functions, returning Items containing only one if statement as
-    body. No more if indentation anywhere. Plus:
+    a body. No more if indentation anywhere. Plus:
     + Introduced new types wrapper and aliases for the fields
     + Defer/remove mutation as much as possible. Only at the end of
       the foreach.
@@ -317,12 +317,20 @@ r2
 
     <2020-07-05 Sun>: Since the specs just tell us to not touch the
     ~Item~ class, I can change the return type of the ~updateQuality~
-    to be the new value. In this way we avoid mutation of the item
-    array. After that we can see the pattern composed by: a pre-quality calculation, an increase in sellIn value, a final
+    to be the new value. In this way, we avoid mutation of the item
+    array. After that, we can see the pattern composed by a
+    pre-quality calculation, an increase in sellIn value, a final
     adjustment. Then, we can create subtypes of the item class and put
     the specific logic into each class. This way we can get rid of the
-    big remaining functions. Afterwards, we can add the new class for
-    the new item easily. Work done!
+    big remaining functions. Afterward, we can add the new class for
+    the new item easily. Work is done! [[https://github.com/benkio/GeneralExercises/commit/03ac121][commit]]
+
+    #+html: <hr/>
+
+    I just tried to reproduce the counterintuitive behavior I faced
+    when subtyping, but when I went to [[https://scastie.scala-lang.org/][scastie]], the code behaved as
+    expected. This makes it even most weird 🤔 if you are a programmer,
+    you know these kinds of things happens from time to time.
 
 *** Haskell Kata
     :PROPERTIES:
@@ -339,9 +347,37 @@ r2
     :CUSTOM_ID: MainChallengesConclusion
     :END:
 
-    # Stay calm and hold yourself from over refactoring, do small
-    # steps. Self discipline
-    # The constraint on the Item domain model was annoying.
+    The first challenge that comes into my mind is test
+    crafting. During this kata you really understand the importance of
+    having a very well done test code. Most of the time we think test
+    code is B-class code, but this kata shows it's not. It needs to be
+    very fine-tuned and precise in order to catch bugs ahead of
+    time. Plus, it's code you need to maintain and write daily, to
+    write your feature. That makes it on the same level as the
+    production code.
+
+    I agree it's not great fun to write such code and that's why I
+    suggest using the compiler as much as possible to reduce the
+    design space and the amount of tests you need to write to cover
+    your application.
+
+    A second relevant challenge is about being
+    disciplined. Refactoring consists of very small changes, this is
+    not always possible, sometimes you need to break quite some amount
+    of code at once, but that must be an exception to the regular
+    refactoring process. What can happen is that we might see multiple
+    applicable improvements at the same time. Therefore, we are
+    tempted to apply them all at once, instead, we should hold back and
+    do one single, small, consistent change, commit it and then move on to
+    the next. This requires a great self-discipline.
+
+    Finally, the last challenge is definitely /dependencies/. When you
+    have constraints from different libraries or legacy code that
+    you are not allowed to change, it makes things very difficult and
+    require you to put workarounds in place. That defiles the goal of
+    refactoring itself. This shows the importance of keeping projects
+    small and self-contained as much as possible, with the minimal set
+    of dependencies as possible.
 
 *** Languages Comparison
     :PROPERTIES:
