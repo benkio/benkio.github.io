@@ -337,6 +337,8 @@ r2
     :CUSTOM_ID: HaskellContent
     :END:
 
+    <2020-07-08 Wed>: Started the tests: Sulfuras + AgedBrie. [[https://github.com/benkio/GeneralExercises/commit/ea0b859][commit]]
+
 ** Conclusions
    :PROPERTIES:
    :CUSTOM_ID: ArticleConclusions
