@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Gilded Rose Kata</title>
-<!-- 2020-07-14 Tue 09:51 -->
+<!-- 2020-07-14 Tue 10:00 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -599,6 +599,18 @@ functions and enhance the reusability as much as possible. This
 should always be the case, for whatever language you are using,
 but in reality we all know that programmer laziness and copy-paste
 wins most of the time.
+</p>
+
+<p>
+Moving on the next difference, we can see from the initial
+codebase status that Haskell comes with immutability straight
+away. Even if it doesn't seems very important, this is a big
+improvement, especially when things scale up in size. Then, you
+could achieve mutation in haskell as well using specific
+constructions like <a href="https://www.oreilly.com/library/view/parallel-and-concurrent/9781449335939/ch07.html">MVar</a> or <a href="https://wiki.haskell.org/Software_transactional_memory">STM</a> (used mainly for concurrency
+purposes), but even then, mutation is enclosed into a specific
+space where particular constraints on the access and modify
+operations hold.
 </p>
 </div>
 </div>

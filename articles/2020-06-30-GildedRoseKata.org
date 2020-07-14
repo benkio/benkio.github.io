@@ -387,9 +387,6 @@ r2
     :CUSTOM_ID: LaguagesComparisonConclusions
     :END:
 
-    # Haskell codebase started a little better, no mutantion into the
-    # domain model
-    
     Before diving into the differences I found between the two
     technologies I need to do a little disclamer in order to give to
     my follow-up words a little bit of context:What I will say is a
@@ -419,6 +416,16 @@ r2
     should always be the case, for whatever language you are using,
     but in reality we all know that programmer laziness and copy-paste
     wins most of the time.
+
+    Moving on the next difference, we can see from the initial
+    codebase status that Haskell comes with immutability straight
+    away. Even if it doesn't seems very important, this is a big
+    improvement, especially when things scale up in size. Then, you
+    could achieve mutation in haskell as well using specific
+    constructions like [[https://www.oreilly.com/library/view/parallel-and-concurrent/9781449335939/ch07.html][MVar]] or [[https://wiki.haskell.org/Software_transactional_memory][STM]] (used mainly for concurrency
+    purposes), but even then, mutation is enclosed into a specific
+    space where particular constraints on the access and modify
+    operations hold.
 
 * Share Buttons
   :PROPERTIES:
