@@ -389,6 +389,36 @@ r2
 
     # Haskell codebase started a little better, no mutantion into the
     # domain model
+    
+    Before diving into the differences I found between the two
+    technologies I need to do a little disclamer in order to give to
+    my follow-up words a little bit of context:What I will say is a
+    personal opinion after all, it's not based on facts, but on
+    personal experience. Therefore, it depends on: my emotions
+    throughout the exercise, how fluent I am on both languages and how
+    much I know about the problem (the order in which I solved the
+    kata might influenced me). Probably this disclamer should be
+    placed at the very start 😺.
+
+    One of the first differences I felt when dealing with tests In
+    Haskell was that I was pushed way more into abstracting things and
+    I might figure out why. In Scala, if a test fails, what I usually
+    do to debug it is putting a breakpoint or a ~println~ and see what
+    is the input of the test, the result an so on. Once I know what is
+    going on it's usually an easy fix: the generator wasn't right, the
+    success condition wasn't correct etc.
+
+    This approach doesn't hold in Haskell because you can't put a
+    simple ~println~ into the test, so you need to work differently
+    and as a result you end up with better code. The only way to inspect
+    your test is to use the REPL and when you get into it you want to
+    be able to execute exactly the bit of code you are interested in,
+    the minimal amount of code where the bug might hide. To achieve
+    this goal you need to extract the logic of your tests into small
+    functions and enhance the reusability as much as possible. This
+    should always be the case, for whatever language you are using,
+    but in reality we all know that programmer laziness and copy-paste
+    wins most of the time.
 
 * Share Buttons
   :PROPERTIES:
