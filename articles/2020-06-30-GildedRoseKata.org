@@ -339,7 +339,7 @@ r2
 
     <2020-07-08 Wed>: Started the tests: Sulfuras + AgedBrie. [[https://github.com/benkio/GeneralExercises/commit/ea0b859][commit]]
     <2020-07-13 Mon>: Added the BackstagePasses test + test refactoring [[https://github.com/benkio/GeneralExercises/commit/8a9a98b][commit]]
-
+    <2020-07-14 Tue>: Haskell test completed. [[https://github.com/benkio/GeneralExercises/commit/f19fa11][commit]]
 ** Conclusions
    :PROPERTIES:
    :CUSTOM_ID: ArticleConclusions
