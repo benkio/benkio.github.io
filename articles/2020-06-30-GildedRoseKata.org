@@ -417,7 +417,7 @@ r2
     but in reality we all know that programmer laziness and copy-paste
     wins most of the time.
 
-    Moving on the next difference, we can see from the initial
+    Moving on, the next difference, we can see from the initial
     codebase status that Haskell comes with immutability straight
     away. Even if it doesn't seems very important, this is a big
     improvement, especially when things scale up in size. Then, you
@@ -426,6 +426,13 @@ r2
     purposes), but even then, mutation is enclosed into a specific
     space where particular constraints on the access and modify
     operations hold.
+
+    Moreover, I found the starting impact of the refactoring less
+    scary than the the Scala one. I guess the reason is because I
+    already know the context, but I was able to give a meaningful name
+    to the extracted functions straight away because of the usage of
+    the ~where~ and ~let-in~ costructs.
+
 
 * Share Buttons
   :PROPERTIES:
