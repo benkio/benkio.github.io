@@ -342,10 +342,14 @@ r2
     <2020-07-13 Mon>: Added the BackstagePasses test + test
     refactoring [[https://github.com/benkio/GeneralExercises/commit/8a9a98b][commit]]
 
-    <2020-07-14 Tue>: Haskell test completed. [[https://github.com/benkio/GeneralExercises/commit/f19fa11][commit]]
+    <2020-07-14 Tue>: Test completed. [[https://github.com/benkio/GeneralExercises/commit/f19fa11][commit]]
 
-    <2020-07-15 Wed>: Haskell started to split the monster. Added
+    <2020-07-15 Wed>: Started to split the monster. Added
     Hlint, you can't immagine how many /redundant bracket/ I removed. [[https://github.com/benkio/GeneralExercises/commit/acce770][commit]]
+
+    <2020-07-16 Thu>: Add a ~newtype~ for the quality field, add the
+    special item type, setup the ~HasQuality~ typeclass, merged if
+    functions together into a guard function. [[https://github.com/benkio/GeneralExercises/commit/89db36e][commit]] 
 ** Conclusions
    :PROPERTIES:
    :CUSTOM_ID: ArticleConclusions
