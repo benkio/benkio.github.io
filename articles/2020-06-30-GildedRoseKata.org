@@ -46,7 +46,7 @@
    :END:
 
    Not so long ago. I watched the mighty [[https://twitter.com/NicolasRinaudo][Nicolas Rinaudo]] dealing with
-   the [[https://github.com/emilybache/GildedRose-Refactoring-Kata][Gilded Rose Kata]] on the [[https://www.twitch.tv/scalalove][Scalalove's twitch channel]]. and that
+   the [[https://github.com/emilybache/GildedRose-Refactoring-Kata][Gilded Rose Kata]] on the [[https://www.twitch.tv/scalalove][Scalalove's twitch channel]], and that
    inspired me into trying it out using my favorite languages: Scala &
    Haskell.
 
