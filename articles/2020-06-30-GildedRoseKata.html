@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Gilded Rose Kata</title>
-<!-- 2020-07-16 Thu 19:30 -->
+<!-- 2020-07-17 Fri 14:47 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -58,6 +58,7 @@ $(function() {
 <ul class="nav">
 <li><a href="#MainChallengesConclusion">Main Challenges</a></li>
 <li><a href="#LaguagesComparisonConclusions">Languages Comparison</a></li>
+<li><a href="#LaguagesComparisonConclusions">Final words</a></li>
 </ul>
 </li>
 </ul>
@@ -214,7 +215,7 @@ from Javascript.
 <div class="outline-text-4" id="text-SolutionApproachContent">
 <p>
 After the code review we know the issues of the code and we can
-come up with a plan. Here, I'll prioritize the tasks we need to do
+come up with a plan. Here, I'll prioritise the tasks we need to do
 in order to make this code better and solve the Kata.
 </p>
 </div>
@@ -238,30 +239,37 @@ program. So we should be fine with just <i><a href="https://en.wikipedia.org/wik
 
 <p>
 Usually, testing is done by providing some specific input data to
-the program, fetch the result of the computation, and then compare
-it with what is expected. That's completely fine and it's what the
-majority of the companies do nowadays. The downside of this approach
-is it's static: let say your program has a bug, or crash, for a
-corner case you didn't think about, testing by example will not
-help you there.
+the program, fetch the result of the computation, and then
+compare it with what is expected. That's completely fine and it's
+what the majority of the companies do nowadays. The downside of
+this approach is: it's static. Let say your program has a bug and
+will crash under specific conditions, for a corner case you
+didn't think about, testing by example will not help you there if
+you didn't catch that specific case beforehand.
 </p>
 
 <p>
 A different approach I like more is <a href="https://en.wikipedia.org/wiki/Property_testing">Property Testing</a>, where the
-input data is <b>generated</b>. The software engineer defines the rules
-used by the supporting library/framework to generate the inputs and
-then the expected behavior as a property. I won't go deeper into it,
-but the typical example is the associativity of the sum
-operation. Definitely, the most complicated part is to identify the
+input data is <b>generated</b>. The software engineer defines the
+input generation rules, used by the supporting library/framework,
+and then the expected behavior as a property. I won't go deeper
+into it, but the typical example is the <i>associativity law</i> of
+the sum. Definitely, the most complicated part is to identify the
 properties of your program, but in my honest opinion, I still see
-benefits in just take advantage of the generated inputs. For
-instance, you will write your test once and it will run multiple
-times with several inputs. It's straight away a big plus.
+benefits in just take advantage of the generated inputs and
+having a "normal" test built on top. Having to write your test
+once and run them multiple times with several inputs, it's
+straight away a big plus.
 </p>
 
 <p>
 Another downside of this approach is the computational cost:
-generating inputs and having multiple runs will increase the testing time.
+generating inputs and having multiple runs will increase the
+testing time. In fact, if you mess up the way you generate your
+input, you couldn't even be able to run your test at all,
+obtaining the "infinite loop effect" at the time of
+execution. For example, I learnt by experience that, operators
+like <code>suchAs</code> must be used very carefully.
 </p>
 
 <p>
@@ -300,7 +308,7 @@ that.
 
 <p>
 A little but key detail in all of this is that each function will
-return a value and the parent function will be a composition of
+return a value, and the parent function will be a composition of
 its child.
 </p>
 
@@ -336,14 +344,14 @@ This might seems controversial and more complicated, but it helps
 to put the computations in context. This way, you don't need to
 go and look into the content of the functions, you can just skip
 their implementation details and get an overall feeling of the
-data-flow. Plus, you could not realize it yet, but doing so we
+data-flow. Plus, you could not realize it yet, but doing so, we
 also put types back into play!
 </p>
 
 <p>
 You might also notice I added an else to the first if, that's
 because I want the wrapping function to actually return a type
-and, since there wasn't an else, in that case, the result will be
+and, since there wasn't an else in that case, the result will be
 the previous input. When the else branch is chosen the <code>f1</code>
 function will behave as the <a href="https://en.wikipedia.org/wiki/Identity_function">Identity Function</a>.
 </p>
@@ -354,7 +362,8 @@ this approach penetrates the nested ifs and allows us to collapse the
 structure. Of course, we could also merge <code>condition1</code> and
 <code>condition3</code>, and we might actually decide to do that in a later
 stage, but let us suppose we will discover that the same logic of
-<code>f3</code> is reused. This way we can just call <code>f3</code> since it's independent.
+<code>f3</code> is reused. This way we can just call <code>f3</code> since it's
+independent from the rest.
 </p>
 
 <p>
@@ -377,7 +386,17 @@ point 2)
 Doing like that will ensure that you commit quite often and you
 can roll back to a <i>safe-state</i> without loosing too much
 time. Otherwise, you might don't want to roll back because your
-last commit was 2h ago.
+last commit was 2h ago, but you can't keep up because you are
+stuck for some reason.
+</p>
+
+<p>
+<b>Edit:</b> Since this specific problem is mainly just nested if, at
+some point, we actually want to merge them together and collapse
+some of the independent functions into one. You might think that
+we will roll back to the start, but we can instead take
+advantage of specific language constructs, like pattern matching,
+to keep the structure flat.
 </p>
 </div>
 </div>
@@ -386,30 +405,34 @@ last commit was 2h ago.
 <h5 id="SolutionApproachMutationContent"><a id="sec-" name="sec-"></a>Dealing With Mutation once and for All</h5>
 <div class="outline-text-5" id="text-SolutionApproachMutationContent">
 <p>
-Everything is in its own box that returns a new version of the
-input 💜, However&#x2026; it still mutates and internal field!! But
-because we are in this situation we can easily remove that
-mutation and from the model itself and return a new copy of the
-input with the requested changes.
+Everything is in its own box, each one returning a value 💜,
+However&#x2026; it still mutates and internal field!! 😞
 </p>
 
 <p>
-<b><b>Edit:</b></b> Reading the specification I'm not allowed to touch the
-  Item class, unfortunately. Then, this step will remain
-  theoretic, for Scala at least.
+Anyway, due to the previous steps, we can easily remove that
+mutation from the algorithm and the model itself, returning a new
+copy of the input with the requested changes.
+</p>
+
+<p>
+<b><b>Edit:</b></b> Reading the specification I found I'm not allowed to
+  touch the <code>Item</code> class, unfortunately. Then, this step will
+  remain theoretic. What we can do is to add other types around
+  the main one, those will helps us to structure our code and
+  give to each bit of logic its own context.
 </p>
 </div>
 </div>
+
 <div id="outline-container-SolutionApproachRefinementNewFeatureContent" class="outline-5">
 <h5 id="SolutionApproachRefinementNewFeatureContent"><a id="sec-" name="sec-"></a>Refinement &amp; New feature</h5>
 <div class="outline-text-5" id="text-SolutionApproachRefinementNewFeatureContent">
 <p>
-Finally, with this new working codebase, we should be able to see
-patterns clearly and apply further optimizations. In particular,
-regarding:
+Finally, with this new working codebase, we should be able to:
 </p>
 <ul class="org-ul">
-<li>Merging condition together
+<li>Merging condition together.
 </li>
 <li>Adding fields validation or other helpful functions,
 </li>
@@ -442,7 +465,7 @@ executed it!
 <p>
 <b><b>Edit:</b></b> Sometimes you need to do some refinements listed
 here even in earlier stages because, doing it earlier, helps you
-very much then postpone the change. Anyway, my suggestion is to
+very much rather then postpone the change. Anyway, my suggestion is to
 refine as little as possible in the beginning, only when it's necessary.
 </p>
 </div>
@@ -472,7 +495,7 @@ a body. No more if indentation anywhere. Plus:
 <li>Introduced new types wrapper and aliases for the fields
 </li>
 <li>Defer/remove mutation as much as possible. Only at the end of
-the foreach.
+the <code>foreach</code>.
 </li>
 <li>Extracted main operation on types to companion objects.
 </li>
@@ -571,13 +594,13 @@ crafting. During this kata you really understand the importance of
 having a very well done test code. Most of the time we think test
 code is B-class code, but this kata shows it's not. It needs to be
 very fine-tuned and precise in order to catch bugs ahead of
-time. Plus, it's code you need to maintain and write daily, to
-write your feature. That makes it on the same level as the
-production code.
+time. Plus, test-code is code you need to maintain and write
+daily, to write your feature. That makes it on the same level of
+importance as the production code.
 </p>
 
 <p>
-I agree it's not great fun to write such code and that's why I
+I agree it's not great fun to write such code, that's why I
 suggest using the compiler as much as possible to reduce the
 design space and the amount of tests you need to write to cover
 your application.
@@ -585,14 +608,14 @@ your application.
 
 <p>
 A second relevant challenge is about being
-disciplined. Refactoring consists of very small changes, this is
-not always possible, sometimes you need to break quite some amount
+disciplined. Refactoring consists of very small changes, but this is
+not always possible. Sometimes, you need to break quite some amount
 of code at once, but that must be an exception to the regular
 refactoring process. What can happen is that we might see multiple
 applicable improvements at the same time. Therefore, we are
-tempted to apply them all at once, instead, we should hold back and
-do one single, small, consistent change, commit it, and then move on to
-the next. This requires great self-discipline.
+tempted to apply them all at once, instead, we should hold back
+and do one single, small, consistent change, commit it, and then
+move on to the next. This requires great self-discipline.
 </p>
 
 <p>
@@ -612,8 +635,8 @@ of dependencies as possible.
 <div class="outline-text-4" id="text-LaguagesComparisonConclusions">
 <p>
 Before diving into the differences I found between the two
-technologies I need to do a little disclaimer in order to give to
-my follow-up words a little bit of context: What I will say is a
+technologies, I need to do a little disclaimer in order to give to
+my follow-up words a little bit of context. What I will write is a
 personal opinion, after all, it's not based on facts, but on
 personal experience. Therefore, it depends on: my emotions
 throughout the exercise, how fluent I am on both languages, and how
@@ -623,27 +646,34 @@ placed at the very start of this article 😺.
 </p>
 
 <p>
-One of the first differences I felt when dealing with tests In
-Haskell was that I was pushed way more into abstracting things and
-I might figure out why. In Scala, if a test fails, what I usually
-do to debug it is putting a breakpoint or a <code>println</code> and see what
-is the input of the test, the result an so on. Once I know what is
-going on it's usually an easy fix: the generator wasn't right, the
-success condition wasn't correct etc.
+One of the first differences I felt, when dealing with tests in
+Haskell, was that I was pushed way more into abstracting things
+compared to Scala and I might figure out why.
+</p>
+
+<p>
+In Scala, if a test fails, what I usually do to debug it is:
+putting a break point or a <code>println</code> and see what is the input to
+the test, the result an so on. Once I know what is going on, it's
+usually an easy fix: the generator wasn't right, the success
+condition wasn't correct etc.
 </p>
 
 <p>
 This approach doesn't hold in Haskell because you can't put a
 simple <code>println</code> into the test, so you need to work differently
-and, as a result, you end up with better code. The only way to inspect
-your test is to use the REPL and when you get into it you want to
-be able to execute exactly the bit of code you are interested in,
-the minimal amount of code where the bug might hide. To achieve
-this goal you need to extract the logic of your tests into small
-functions and enhance the reusability as much as possible. This
-should always be the case, for whatever language you are using,
-but, in reality, we all know that programmer laziness and copy-paste
-wins most of the time.
+and, as a result, you end up with better code. The only way to
+inspect your test is to use the REPL and, when you get into it,
+you want to be able to execute exactly the bit of code you are
+interested in, the minimal amount of code where the bug might
+hide. To achieve this goal you need to extract the logic of your
+tests into small functions and enhance the re-usability as much as
+possible. This should always be the case, for whatever language
+you are using, but I strongly believe that, if something is not
+forced by the technology and the responsibility of "doing the
+right thing" is on the shoulder of the developer, laziness and
+negligence will eventually sometimes kick in and drive it to a
+sub-optimal result.
 </p>
 
 <p>
@@ -653,17 +683,16 @@ away. Even if it doesn't seem very important, this is a big
 improvement, especially when things scale up in size. Then, you
 could achieve mutation in Haskell as well using specific
 constructions like <a href="https://www.oreilly.com/library/view/parallel-and-concurrent/9781449335939/ch07.html">MVar</a> or <a href="https://wiki.haskell.org/Software_transactional_memory">STM</a> (used mainly for concurrency
-purposes), but even then, mutation is enclosed into a specific
-space where particular constraints on the access and modify
-operations hold.
+purposes), but even then, mutation is enclosed and accessible
+under a specific contract where particular constraints hold.
 </p>
 
 <p>
 Moreover, I found the starting impact of the refactoring less
-scary than the the Scala one. I guess the reason is because I
+scary than the Scala one. I guess the reason is because I
 already know the context, but I was able to give a meaningful name
 to the extracted functions straight away because of the usage of
-the <code>where</code> and <code>let-in</code> costructs.
+the <code>where</code> and <code>let-in</code> constructs.
 </p>
 
 <div class="org-src-container">
@@ -684,20 +713,43 @@ would have struggled less.
 </p>
 
 <p>
-A downside of plain Haskell in comparison of Scala is the amount
+A downside of plain Haskell, in comparison to Scala, is the amount
 of machinery you have to create in order to do simple things, such
-as just access fields. Don't get me wrong here, I'm sure that some
-specific compiler extension or using <a href="http://wiki.haskell.org/Template_Haskell">Template Haskell</a>, a
-cleaver/experienced haskeller can easily overcome this limitation,
-autogenerating instances for example. Anyway, I'm not a great
-Haskell developer and I just wanted to compare the two languages
-out of the box, with minimal overhead possible. A possible
-justification I can think of is that Haskell prefers to keep a
-minimal core and then to integrate the language using external
-modules/extensions/libraries. As a result, it's often told that
-Commercial Haskell is far different from the plain language, due
-to the high amount of pieces involved that completely turn
-upside-down the syntax.
+as just access fields. Don't get me wrong here, I'm sure that
+through some specific compiler extension, or using <a href="http://wiki.haskell.org/Template_Haskell">Template
+Haskell</a>, a cleaver/experienced haskeller can easily overcome this
+limitation, auto-generating instances for example. Anyway, I'm not
+a great Haskell developer and I just wanted to compare the two
+languages out of the box, with minimal overhead possible. A
+possible justification I can think of is that Haskell prefers to
+keep a minimal core, and then it allow you to integrate the
+language using external modules/extensions/libraries. As a result,
+it's often told that Commercial Haskell is far different from the
+plain language, due to the high amount of pieces involved that
+completely turn upside-down the syntax.
+</p>
+</div>
+</div>
+
+<div id="outline-container-LaguagesComparisonConclusions" class="outline-4">
+<h4 id="LaguagesComparisonConclusions"><a id="sec-" name="sec-"></a>Final words</h4>
+<div class="outline-text-4" id="text-LaguagesComparisonConclusions">
+<p>
+To be completely honest I must say that most of the concepts I
+showed here are quite old and you can find them into details from
+several famous books, such as <a href="https://martinfowler.com/books/refactoring.html">Refactoring by Martin Fowler</a>.
+</p>
+
+<p>
+Anyway you can see here is the application of some of those
+principles, plus how picking a FP based technology can speed up
+the process by a lot.
+</p>
+
+<p>
+I really hope you enjoyed reading this article and expired you into
+trying this kata, especially if you aren't confident with
+Refactoring practices.
 </p>
 </div>
 </div>
