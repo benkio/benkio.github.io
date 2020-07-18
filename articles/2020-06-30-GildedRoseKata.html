@@ -2,11 +2,10 @@
 <html lang="en">
 <head>
 <title>Gilded Rose Kata</title>
-<!-- 2020-07-17 Fri 15:00 -->
+<!-- 2020-07-18 Sat 15:34 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
-<meta name="author" content="benkio">
 
 <link  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -163,7 +162,11 @@ fixed ASAP. We will talk about that in the <a href="#SolutionApproachTestsConten
 <p>
 Then, I see an attempt of a <i><a href="https://en.wikipedia.org/wiki/Domain_model">Domain Model</a></i>. That's actually a good
 practice: design your types first and be as picky as possible in
-order to <a href="https://fsharpforfunandprofit.com/posts/designing-with-types-making-illegal-states-unrepresentable/">make the illegal states unrepresentable</a>. The problems here
+order to <a href="https://fsharpforfunandprofit.com/posts/designing-with-types-making-illegal-states-unrepresentable/">make the illegal states unrepresentable</a>. 
+</p>
+
+<p>
+Moving on to The problems I found doing the code review:
 are several
 </p>
 <ul class="org-ul">
@@ -195,7 +198,7 @@ human-readable. <i>Any fool can write code that a computer can understand. Good 
 Responsibility Principle</a>.
 </li>
 <li>Mutation again! Apart from the items fields, that was expected,
-there's also into the index variable <code>i</code>. Luckily, it is just
+there's mutation regarding the index variable <code>i</code>. Luckily, it is just
 used to select the current element to evaluate, it could have
 been way worse, like a different algorithm for odd and even
 elements, checks on the index, and so on. 😖
@@ -204,7 +207,7 @@ elements, checks on the index, and so on. 😖
 any usage of those in here. The code is nearly indistinguishable
 from Javascript.
 </li>
-<li>Nested Ifs statements.
+<li>Nested Ifs statements. No need to tell you why it is bad.
 </li>
 </ol>
 </div>
@@ -224,28 +227,39 @@ in order to make this code better and solve the Kata.
 <h5 id="SolutionApproachTestsContent"><a id="sec-" name="sec-"></a>Tests</h5>
 <div class="outline-text-5" id="text-SolutionApproachTestsContent">
 <p>
-The first task needed is a good test suite. With proper testing, we
-will be sure that the changes we are going to make are
-correct. After all, the definition of <i><a href="https://en.wikipedia.org/wiki/Code_refactoring">Code Refactoring</a></i> is to <b>NOT</b>
-change the program behavior.
+The first thing needed is a good test suite. With proper testing,
+we will be sure that the changes we are going to make are
+correct, Meaning that the behavior of the program is
+preserved. After all, the definition of <i><a href="https://en.wikipedia.org/wiki/Code_refactoring">Code Refactoring</a></i> is to
+<b>NOT</b> change the program behavior.
 </p>
 
 <p>
 Now, the test suite can be crafted using multiple techniques and it's a
 huge topic by itself. In this case, testing is not the main focus of
-the kata but still key. Fortunately, it's a simple, little, local
+the kata but is still a key point. Fortunately, it's a simple, little, local
 program. So we should be fine with just <i><a href="https://en.wikipedia.org/wiki/Unit_testing">Unit Testing</a></i> and <i><a href="https://en.wikipedia.org/wiki/System_testing">System Testing</a></i>.
 </p>
 
 <p>
-Usually, testing is done by providing some specific input data to
-the program, fetch the result of the computation, and then
-compare it with what is expected. That's completely fine and it's
-what the majority of the companies do nowadays. The downside of
-this approach is: it's static. Let say your program has a bug and
-will crash under specific conditions, for a corner case you
-didn't think about, testing by example will not help you there if
-you didn't catch that specific case beforehand.
+Usually, testing is done by:
+</p>
+<ul class="org-ul">
+<li>Providing some specific input data to the program.
+</li>
+<li>Fetch the result of the computation.
+</li>
+<li>Compare it with what is expected.
+</li>
+</ul>
+
+<p>
+That's completely fine and it's what the majority of the
+companies do nowadays. The downside of this approach is: it's
+static. Let say your program has a bug and will crash under
+specific conditions, for a corner case you didn't think about,
+testing by example will not help you there if you didn't catch
+that specific case beforehand.
 </p>
 
 <p>

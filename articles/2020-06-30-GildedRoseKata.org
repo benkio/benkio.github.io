@@ -88,7 +88,9 @@
 
     Then, I see an attempt of a /[[https://en.wikipedia.org/wiki/Domain_model][Domain Model]]/. That's actually a good
     practice: design your types first and be as picky as possible in
-    order to [[https://fsharpforfunandprofit.com/posts/designing-with-types-making-illegal-states-unrepresentable/][make the illegal states unrepresentable]]. The problems here
+    order to [[https://fsharpforfunandprofit.com/posts/designing-with-types-making-illegal-states-unrepresentable/][make the illegal states unrepresentable]]. 
+
+    Moving on to The problems I found doing the code review:
     are several
     + The ~var~ keyword, that means mutability. As a software engineer, I
       know that mutable state can be hard to manage and lead to unintended
@@ -110,14 +112,14 @@
        human-readable. /Any fool can write code that a computer can understand. Good programmers write code that humans can understand./ (Martin Fowler) Plus, it violates the [[https://en.wikipedia.org/wiki/Single-responsibility_principle][Single
        Responsibility Principle]].
     2. Mutation again! Apart from the items fields, that was expected,
-       there's also into the index variable ~i~. Luckily, it is just
+       there's mutation regarding the index variable ~i~. Luckily, it is just
        used to select the current element to evaluate, it could have
        been way worse, like a different algorithm for odd and even
        elements, checks on the index, and so on. 😖
     3. There should be Types and a compiler somewhere, but I don't see
        any usage of those in here. The code is nearly indistinguishable
        from Javascript.
-    4. Nested Ifs statements.
+    4. Nested Ifs statements. No need to tell you why it is bad.
 
 *** Solution Approach
     :PROPERTIES:
@@ -133,24 +135,28 @@
      :CUSTOM_ID: SolutionApproachTestsContent
      :END:
 
-     The first task needed is a good test suite. With proper testing, we
-     will be sure that the changes we are going to make are
-     correct. After all, the definition of /[[https://en.wikipedia.org/wiki/Code_refactoring][Code Refactoring]]/ is to *NOT*
-     change the program behavior.
+     The first thing needed is a good test suite. With proper testing,
+     we will be sure that the changes we are going to make are
+     correct, Meaning that the behavior of the program is
+     preserved. After all, the definition of /[[https://en.wikipedia.org/wiki/Code_refactoring][Code Refactoring]]/ is to
+     *NOT* change the program behavior.
 
      Now, the test suite can be crafted using multiple techniques and it's a
      huge topic by itself. In this case, testing is not the main focus of
-     the kata but still key. Fortunately, it's a simple, little, local
+     the kata but is still a key point. Fortunately, it's a simple, little, local
      program. So we should be fine with just /[[https://en.wikipedia.org/wiki/Unit_testing][Unit Testing]]/ and /[[https://en.wikipedia.org/wiki/System_testing][System Testing]]/.
 
-     Usually, testing is done by providing some specific input data to
-     the program, fetch the result of the computation, and then
-     compare it with what is expected. That's completely fine and it's
-     what the majority of the companies do nowadays. The downside of
-     this approach is: it's static. Let say your program has a bug and
-     will crash under specific conditions, for a corner case you
-     didn't think about, testing by example will not help you there if
-     you didn't catch that specific case beforehand.
+     Usually, testing is done by:
+     + Providing some specific input data to the program.
+     + Fetch the result of the computation.
+     + Compare it with what is expected.
+
+     That's completely fine and it's what the majority of the
+     companies do nowadays. The downside of this approach is: it's
+     static. Let say your program has a bug and will crash under
+     specific conditions, for a corner case you didn't think about,
+     testing by example will not help you there if you didn't catch
+     that specific case beforehand.
 
      A different approach I like more is [[https://en.wikipedia.org/wiki/Property_testing][Property Testing]], where the
      input data is *generated*. The software engineer defines the
