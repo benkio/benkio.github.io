@@ -514,37 +514,42 @@ Perhaps:
 
     #+html: <hr/>
 
-    Finally, a downside of plain Haskell, in comparison to Scala, is the amount
-    of machinery you have to create in order to do simple things, such
-    as just access fields. Don't get me wrong here, I'm sure that
-    through some specific compiler extension, or using [[http://wiki.haskell.org/Template_Haskell][Template
-    Haskell]], a cleaver/experienced haskeller can easily overcome this
-    limitation, auto-generating instances for example. Anyway, I'm not
-    a great Haskell developer and I just wanted to compare the two
-    languages out of the box, with minimal overhead possible. A
-    possible justification I can think of is that Haskell prefers to
-    keep a minimal core, and then it allow you to integrate the
-    language using external modules/extensions/libraries. As a result,
-    it's often told that Commercial Haskell is far different from the
-    plain language, due to the high amount of pieces involved that
-    completely turn upside-down the syntax.
+    Finally, a downside of plain Haskell, in comparison to Scala, is
+    the amount of machinery you have to create in order to do simple
+    things, such as just access fields. Don't get me wrong here, I'm
+    sure that through some specific compiler extension, or using
+    [[http://wiki.haskell.org/Template_Haskell][Template Haskell]], a cleaver/experienced haskeller can easily
+    overcome this limitation, auto-generating instances for
+    example. Anyway, I'm not a great Haskell developer and I just
+    wanted to compare the two languages out of the box, with minimal
+    overhead possible. A possible justification I can think of is that
+    Haskell prefers to keep a minimal core, and then it allow you to
+    integrate the language using external
+    modules/extensions/libraries. As a result, it's often told that
+    Commercial Haskell is far different from the plain language, due
+    to the high amount of pieces involved that completely turn
+    upside-down the syntax. As a reference to it I link a proper book
+    discussing [[http://dev.stephendiehl.com/hask/][What I Wish I Knew When Learning Haskell]]. I hope to
+    find the time to read this one day.
 
 *** Final words
     :PROPERTIES:
     :CUSTOM_ID: LaguagesComparisonConclusions
     :END:
 
-    To be completely honest I must say that most of the concepts I
+    To be completely honest, I must say that most of the concepts I
     showed here are quite old and you can find them into details from
     several famous books, such as [[https://martinfowler.com/books/refactoring.html][Refactoring by Martin Fowler]].
 
-    Anyway you can see here is the application of some of those
-    principles, plus how picking a FP based technology can speed up
-    the process by a lot.
+    Anyway, you can see here the application of some of those
+    principles, plus what does in means to refactor in a FP oriented language.
 
-    I really hope you enjoyed reading this article and expired you into
-    trying this kata, especially if you aren't confident with
-    Refactoring practices.
+    I really hope you enjoyed reading this article and that it
+    inspired you into trying this kata, especially if you aren't
+    confident with Refactoring practices. Feel free to contact me if
+    you have any feedback.
+
+    May the force be with you
 
 * Share Buttons
   :PROPERTIES:
