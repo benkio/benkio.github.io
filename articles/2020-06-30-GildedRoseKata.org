@@ -172,7 +172,7 @@
      about /Property/ testing anymore, but I can't think of a proper
      term, if you know it, please tell me.
 
-     Another downside of this approach is the computational cost:
+     The biggest downside of this approach is the computational cost:
      generating inputs and having multiple runs will increase the
      testing time. In fact, if you mess up the way you generate your
      input, you couldn't even be able to run your test at all,
@@ -186,9 +186,9 @@
      /“Sulfuras”, being a legendary item, never has to be sold or
      decreases in Quality/
 
-     becomes quite a natural process.
+     to a property becomes quite a natural process.
 
-**** Split the Monster
+**** COMMENT Split the Monster
      :PROPERTIES:
      :CUSTOM_ID: SolutionApproachSplitMonsterContent
      :END:
@@ -196,13 +196,12 @@
      Once we have the testing set up properly, we can start to break
      stuff using the 🔨.
 
-     The Most annoying thing in the codebase is the giant
-     stand-alone function. I will tackle this by splitting that
-     function into two or more sub-functions. Then, repeat the same
-     approach for the outcoming functions. This recursive process
-     will terminate when the functions I end up with have a small
-     number of lines of code and one single mutation in it, simple as
-     that.
+     The Most annoying thing in the codebase is the giant stand-alone
+     function. I will tackle this by splitting that function into
+     sub-functions. Then, repeat the same approach for the outcoming
+     functions. This recursive process will terminate when the
+     functions I end up with have a small number of lines of code,
+     one single mutation in it or just one if statement. Simple as that.
 
      A little but key detail in all of this is that each function will
      return a value, and the parent function will be a composition of
@@ -214,20 +213,20 @@
 #+BEGIN_SRC scala
 // Before
 if (condition1) {
-  if (condition3) {
+  if (condition2) {
    // Stuff
   } else // Stuff
 }
-if (condition2) {
+if (condition3) {
 // Stuff
 } else // Stuff
 
 // After
-def f1(params): StuffType = if (condition1) { f3(params) } else // Previous state (identity)
+def f1(params): StuffType = if (condition1) { f2(params) } else // Previous state (identity)
 def f2(params): StuffType = if (condition2) {/* Stuff */ } else // Stuff
 def f3(params): StuffType = if (condition3) {/* Stuff */ } else // Stuff
 val r1 = f1(args)
-val r2 = f2(args) // This might probably require r1 as input
+val r2 = f3(args) // This might probably require r1 as input
 r2
 #+END_SRC
 
@@ -235,25 +234,29 @@ r2
      to put the computations in context. This way, you don't need to
      go and look into the content of the functions, you can just skip
      their implementation details and get an overall feeling of the
-     data-flow. Plus, you could not realize it yet, but doing so, we
-     also put types back into play!
+     data-flow. Just imagine if the ~Stuff~ size is hundred of lines,
+     but you are interested only in ~f3~. After this refactoring, you can
+     just search for ~f3~, go to his definition, and forget about the
+     rest. Plus, by doing so, we can move the functions away, to a
+     different file for instance.
 
-     You might also notice I added an else to the first if, that's
-     because I want the wrapping function to actually return a type
-     and, since there wasn't an else in that case, the result will be
-     the previous input. When the else branch is chosen the ~f1~
-     function will behave as the [[https://en.wikipedia.org/wiki/Identity_function][Identity Function]].
+     You might also notice I added an else to the first if that wasn't
+     there. That's because I want the wrapping function to actually
+     return a type and, since there wasn't an else in that case, the
+     result will be the previous input. When the else branch is chosen
+     the ~f1~ function will behave as the [[https://en.wikipedia.org/wiki/Identity_function][Identity Function]]. With this
+     trick, we are finally able to put types back into play!
 
      In the very end, I want also to grab your attention on the way
      this approach penetrates the nested ifs and allows us to collapse the
      structure. Of course, we could also merge ~condition1~ and
-     ~condition3~, and we might actually decide to do that in a later
+     ~condition2~, and we might actually decide to do that in a later
      stage, but let us suppose we will discover that the same logic of
-     ~f3~ is reused. This way we can just call ~f3~ since it's
+     ~f2~ is reused. This way, we can just call ~f2~ since it's
      independent from the rest.
 
-     *Edit:* a very important aspect when comes to refactoring is KNOW
-     WHEN TO COMMIT. In my opinion, the right time is when all of the
+     *Edit:* a very important aspect when comes to refactoring is *KNOW WHEN TO COMMIT*. 
+     In my opinion, the right time is when all of the
      following conditions hold:
      1. Your tests are green
      2. You are not in the middle of a change (you know what to do
@@ -261,10 +264,10 @@ r2
      3. You are on stand-by, thinking about the next move (related to
         point 2)
 
-     Doing like that will ensure that you commit quite often and you
+     Doing like that, will ensure that you commit quite often and you
      can roll back to a /safe-state/ without loosing too much
      time. Otherwise, you might don't want to roll back because your
-     last commit was 2h ago, but you can't keep up because you are
+     last commit was 2h ago, but you can't carry on because you are
      stuck for some reason.
 
      *Edit:* Since this specific problem is mainly just nested if, at
@@ -287,10 +290,15 @@ r2
      copy of the input with the requested changes.
 
      **Edit:** Reading the specification I found I'm not allowed to
-       touch the ~Item~ class, unfortunately. Then, this step will
-       remain theoretic. What we can do is to add other types around
-       the main one, those will helps us to structure our code and
-       give to each bit of logic its own context.
+       touch the ~Item~ class, unfortunately. Then, what we can do is
+       to add other types around the main one, those will helps us to
+       structure our code and give to each bit of logic its own
+       context. A good Idea could be to add an internal representation
+       of the ~Item~, not visible from outside. Doing so will add the
+       conversion overhead from ~Item~ to the internal type, but we
+       are the owner of it, so it can change and be
+       immutable. Basically, we are going to decouple ourselves from
+       the foreign ~Item~ type.
 
 **** Refinement & New feature
      :PROPERTIES:
@@ -299,7 +307,7 @@ r2
 
 
      Finally, with this new working codebase, we should be able to:
-     * Merging condition together.
+     * Merging conditions together.
      * Adding fields validation or other helpful functions,
      * Adding new types.
      * Structuring the code: moving the functions to the model companion
@@ -316,10 +324,10 @@ r2
      Now that we have a plan, let's start the fun part...let's
      executed it!
 
-     **Edit:** Sometimes you need to do some refinements listed
-     here even in earlier stages because, doing it earlier, helps you
-     very much rather then postpone the change. Anyway, my suggestion is to
-     refine as little as possible in the beginning, only when it's necessary.
+     **Edit:** Sometimes, you need to do some refinements listed here
+     in earlier stages. That's because, it helps you a lot rather
+     then postpone the change. Anyway, my suggestion is to refine as
+     little as possible in the beginning, only when it's really necessary.
 
 *** Scala Kata
     :PROPERTIES:
@@ -333,9 +341,9 @@ r2
     <2020-07-03 Fri>: Finished Scala's tests. Fixed some errors in
     the making. Now we can move to the actual code. [[https://github.com/benkio/GeneralExercises/commit/19c8b9e][commit]]
 
-    <2020-07-04 Sat>: split the monster. now I have several
+    <2020-07-04 Sat>: Split the monster. Now, I have several
     functions, returning Items containing only one if statement as
-    a body. No more if indentation anywhere. Plus:
+    a body. No more two level if indentation anywhere. Plus:
     + Introduced new types wrapper and aliases for the fields
     + Defer/remove mutation as much as possible. Only at the end of
       the ~foreach~.
@@ -343,8 +351,7 @@ r2
     + Merged the functions into one calling only basic operations
     [[https://github.com/benkio/GeneralExercises/commit/9fdc7be][commit]]
 
-    <2020-07-05 Sun>: Since the specs just tell us to not touch the
-    ~Item~ class, I can change the return type of the ~updateQuality~
+    <2020-07-05 Sun>: Changed the return type of the ~updateQuality~
     to be the new value. In this way, we avoid mutation of the item
     array. After that, we can see the pattern composed by a
     pre-quality calculation, an increase in sellIn value, a final
@@ -352,13 +359,6 @@ r2
     the specific logic into each class. This way we can get rid of the
     big remaining functions. Afterward, we can add the new class for
     the new item easily. Work is done! [[https://github.com/benkio/GeneralExercises/commit/03ac121][commit]]
-
-    #+html: <hr/>
-
-    I just tried to reproduce the counterintuitive behavior I faced
-    when subtyping, but when I went to [[https://scastie.scala-lang.org/][Scastie]], the code behaved as
-    expected. This makes it even most weird 🤔 if you are a programmer,
-    you know these kinds of things happens from time to time.
 
 *** Haskell Kata
     :PROPERTIES:
@@ -370,7 +370,7 @@ r2
     <2020-07-13 Mon>: Added the BackstagePasses test + test
     refactoring [[https://github.com/benkio/GeneralExercises/commit/8a9a98b][commit]]
 
-    <2020-07-14 Tue>: Test completed. [[https://github.com/benkio/GeneralExercises/commit/f19fa11][commit]]
+    <2020-07-14 Tue>: Tests completed. [[https://github.com/benkio/GeneralExercises/commit/f19fa11][commit]]
 
     <2020-07-15 Wed>: Started to split the monster. Added
     Hlint, you can't imagine how many /redundant brackets/ I removed. [[https://github.com/benkio/GeneralExercises/commit/acce770][commit]]
@@ -404,31 +404,34 @@ r2
     code is B-class code, but this kata shows it's not. It needs to be
     very fine-tuned and precise in order to catch bugs ahead of
     time. Plus, test-code is code you need to maintain and write
-    daily, to write your feature. That makes it on the same level of
+    daily, to add your features. That makes it at the same level of
     importance as the production code.
 
-    I agree it's not great fun to write such code, that's why I
-    suggest using the compiler as much as possible to reduce the
+    I agree, it's not great fun to write such code, that's why I
+    suggest to use the compiler as much as possible to reduce the
     design space and the amount of tests you need to write to cover
-    your application.
+    your application. If a behavior is impossible, you don't need to
+    add a test for it.
 
     A second relevant challenge is about being
-    disciplined. Refactoring consists of very small changes, but this is
-    not always possible. Sometimes, you need to break quite some amount
-    of code at once, but that must be an exception to the regular
-    refactoring process. What can happen is that we might see multiple
-    applicable improvements at the same time. Therefore, we are
-    tempted to apply them all at once, instead, we should hold back
-    and do one single, small, consistent change, commit it, and then
-    move on to the next. This requires great self-discipline.
+    disciplined. Refactoring should be a sequence of very small
+    changes, but this is not always possible. Sometimes, you need to
+    break quite some amount of code at once, but that must be an
+    exception to the regular refactoring process. Said from a guy who usually opens refactoring PRs of hundreds of files. 🙊 😬
 
-    Finally, the last challenge is definitely /dependencies/. When you
-    have constraints from different libraries or legacy code that
+    What can happen is that we might see multiple applicable
+    improvements at the same time. Therefore, we are tempted to apply
+    them all at once, instead, we should hold back and do one single,
+    small, consistent change, commit it, and then move on to the
+    next. This requires great self-discipline.
+
+    Finally, the last challenge, is definitely /dependencies/. When
+    you have constraints from different libraries or legacy code that
     you are not allowed to change, it makes things very difficult and
     requires you to put workarounds in place. That defiles the goal of
     refactoring itself. This shows the importance of keeping projects
-    small and self-contained as much as possible, with the minimal set
-    of dependencies as possible.
+    small, self-contained and decoupled from each other as much as
+    possible, with the minimal set of dependencies as possible.
 
 *** Languages Comparison
     :PROPERTIES:

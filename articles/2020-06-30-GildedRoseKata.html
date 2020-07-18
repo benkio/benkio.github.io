@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Gilded Rose Kata</title>
-<!-- 2020-07-18 Sat 15:39 -->
+<!-- 2020-07-18 Sat 16:22 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -44,7 +44,6 @@ $(function() {
 <li><a href="#SolutionApproachContent">Solution Approach</a>
 <ul class="nav">
 <li><a href="#SolutionApproachTestsContent">Tests</a></li>
-<li><a href="#SolutionApproachSplitMonsterContent">Split the Monster</a></li>
 <li><a href="#SolutionApproachMutationContent">Dealing With Mutation once and for All</a></li>
 <li><a href="#SolutionApproachRefinementNewFeatureContent">Refinement &amp; New feature</a></li>
 </ul>
@@ -279,7 +278,7 @@ term, if you know it, please tell me.
 </p>
 
 <p>
-Another downside of this approach is the computational cost:
+The biggest downside of this approach is the computational cost:
 generating inputs and having multiple runs will increase the
 testing time. In fact, if you mess up the way you generate your
 input, you couldn't even be able to run your test at all,
@@ -299,120 +298,7 @@ decreases in Quality</i>
 </p>
 
 <p>
-becomes quite a natural process.
-</p>
-</div>
-</div>
-
-<div id="outline-container-SolutionApproachSplitMonsterContent" class="outline-5">
-<h5 id="SolutionApproachSplitMonsterContent"><a id="sec-" name="sec-"></a>Split the Monster</h5>
-<div class="outline-text-5" id="text-SolutionApproachSplitMonsterContent">
-<p>
-Once we have the testing set up properly, we can start to break
-stuff using the 🔨.
-</p>
-
-<p>
-The Most annoying thing in the codebase is the giant
-stand-alone function. I will tackle this by splitting that
-function into two or more sub-functions. Then, repeat the same
-approach for the outcoming functions. This recursive process
-will terminate when the functions I end up with have a small
-number of lines of code and one single mutation in it, simple as
-that.
-</p>
-
-<p>
-A little but key detail in all of this is that each function will
-return a value, and the parent function will be a composition of
-its child.
-</p>
-
-<p>
-This works well when you have 2 consecutive if-statements or an
-if-else-statement:
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-scala"><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Before</span>
-<span style="color: #00ffff;">if</span> (condition1) {
-  <span style="color: #00ffff;">if</span> (condition3) {
-   <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Stuff</span>
-  } <span style="color: #00ffff;">else</span> <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Stuff</span>
-}
-<span style="color: #00ffff;">if</span> (condition2) {
-<span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Stuff</span>
-} <span style="color: #00ffff;">else</span> <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Stuff</span>
-
-<span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">After</span>
-<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">f1</span>(params)<span style="color: #00ffff;">:</span> <span style="color: #98fb98;">StuffType</span> <span style="color: #00ffff;">=</span> <span style="color: #00ffff;">if</span> (condition1) { f3(params) } <span style="color: #00ffff;">else</span> <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Previous state (identity)</span>
-<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">f2</span>(params)<span style="color: #00ffff;">:</span> <span style="color: #98fb98;">StuffType</span> <span style="color: #00ffff;">=</span> <span style="color: #00ffff;">if</span> (condition2) {<span style="color: #ff7f24;">/* </span><span style="color: #ff7f24;">Stuff */</span> } <span style="color: #00ffff;">else</span> <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Stuff</span>
-<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">f3</span>(params)<span style="color: #00ffff;">:</span> <span style="color: #98fb98;">StuffType</span> <span style="color: #00ffff;">=</span> <span style="color: #00ffff;">if</span> (condition3) {<span style="color: #ff7f24;">/* </span><span style="color: #ff7f24;">Stuff */</span> } <span style="color: #00ffff;">else</span> <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Stuff</span>
-<span style="color: #00ffff;">val</span> <span style="color: #eedd82;">r1</span> <span style="color: #00ffff;">=</span> f1(args)
-<span style="color: #00ffff;">val</span> <span style="color: #eedd82;">r2</span> <span style="color: #00ffff;">=</span> f2(args) <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">This might probably require r1 as input</span>
-r2
-</pre>
-</div>
-
-<p>
-This might seems controversial and more complicated, but it helps
-to put the computations in context. This way, you don't need to
-go and look into the content of the functions, you can just skip
-their implementation details and get an overall feeling of the
-data-flow. Plus, you could not realize it yet, but doing so, we
-also put types back into play!
-</p>
-
-<p>
-You might also notice I added an else to the first if, that's
-because I want the wrapping function to actually return a type
-and, since there wasn't an else in that case, the result will be
-the previous input. When the else branch is chosen the <code>f1</code>
-function will behave as the <a href="https://en.wikipedia.org/wiki/Identity_function">Identity Function</a>.
-</p>
-
-<p>
-In the very end, I want also to grab your attention on the way
-this approach penetrates the nested ifs and allows us to collapse the
-structure. Of course, we could also merge <code>condition1</code> and
-<code>condition3</code>, and we might actually decide to do that in a later
-stage, but let us suppose we will discover that the same logic of
-<code>f3</code> is reused. This way we can just call <code>f3</code> since it's
-independent from the rest.
-</p>
-
-<p>
-<b>Edit:</b> a very important aspect when comes to refactoring is KNOW
-WHEN TO COMMIT. In my opinion, the right time is when all of the
-following conditions hold:
-</p>
-<ol class="org-ol">
-<li>Your tests are green
-</li>
-<li>You are not in the middle of a change (you know what to do
-next)
-</li>
-<li>You are on stand-by, thinking about the next move (related to
-point 2)
-</li>
-</ol>
-
-<p>
-Doing like that will ensure that you commit quite often and you
-can roll back to a <i>safe-state</i> without loosing too much
-time. Otherwise, you might don't want to roll back because your
-last commit was 2h ago, but you can't keep up because you are
-stuck for some reason.
-</p>
-
-<p>
-<b>Edit:</b> Since this specific problem is mainly just nested if, at
-some point, we actually want to merge them together and collapse
-some of the independent functions into one. You might think that
-we will roll back to the start, but we can instead take
-advantage of specific language constructs, like pattern matching,
-to keep the structure flat.
+to a property becomes quite a natural process.
 </p>
 </div>
 </div>
@@ -433,10 +319,15 @@ copy of the input with the requested changes.
 
 <p>
 <b><b>Edit:</b></b> Reading the specification I found I'm not allowed to
-  touch the <code>Item</code> class, unfortunately. Then, this step will
-  remain theoretic. What we can do is to add other types around
-  the main one, those will helps us to structure our code and
-  give to each bit of logic its own context.
+  touch the <code>Item</code> class, unfortunately. Then, what we can do is
+  to add other types around the main one, those will helps us to
+  structure our code and give to each bit of logic its own
+  context. A good Idea could be to add an internal representation
+  of the <code>Item</code>, not visible from outside. Doing so will add the
+  conversion overhead from <code>Item</code> to the internal type, but we
+  are the owner of it, so it can change and be
+  immutable. Basically, we are going to decouple ourselves from
+  the foreign <code>Item</code> type.
 </p>
 </div>
 </div>
@@ -448,7 +339,7 @@ copy of the input with the requested changes.
 Finally, with this new working codebase, we should be able to:
 </p>
 <ul class="org-ul">
-<li>Merging condition together.
+<li>Merging conditions together.
 </li>
 <li>Adding fields validation or other helpful functions,
 </li>
@@ -479,10 +370,10 @@ executed it!
 </p>
 
 <p>
-<b><b>Edit:</b></b> Sometimes you need to do some refinements listed
-here even in earlier stages because, doing it earlier, helps you
-very much rather then postpone the change. Anyway, my suggestion is to
-refine as little as possible in the beginning, only when it's necessary.
+<b><b>Edit:</b></b> Sometimes, you need to do some refinements listed here
+in earlier stages. That's because, it helps you a lot rather
+then postpone the change. Anyway, my suggestion is to refine as
+little as possible in the beginning, only when it's really necessary.
 </p>
 </div>
 </div>
@@ -503,9 +394,9 @@ the making. Now we can move to the actual code. <a href="https://github.com/benk
 </p>
 
 <p>
-<span class="timestamp-wrapper"><span class="timestamp">&lt;2020-07-04 Sat&gt;</span></span>: split the monster. now I have several
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2020-07-04 Sat&gt;</span></span>: Split the monster. Now, I have several
 functions, returning Items containing only one if statement as
-a body. No more if indentation anywhere. Plus:
+a body. No more two level if indentation anywhere. Plus:
 </p>
 <ul class="org-ul">
 <li>Introduced new types wrapper and aliases for the fields
@@ -523,8 +414,7 @@ the <code>foreach</code>.
 </p>
 
 <p>
-<span class="timestamp-wrapper"><span class="timestamp">&lt;2020-07-05 Sun&gt;</span></span>: Since the specs just tell us to not touch the
-<code>Item</code> class, I can change the return type of the <code>updateQuality</code>
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2020-07-05 Sun&gt;</span></span>: Changed the return type of the <code>updateQuality</code>
 to be the new value. In this way, we avoid mutation of the item
 array. After that, we can see the pattern composed by a
 pre-quality calculation, an increase in sellIn value, a final
@@ -532,15 +422,6 @@ adjustment. Then, we can create subtypes of the item class and put
 the specific logic into each class. This way we can get rid of the
 big remaining functions. Afterward, we can add the new class for
 the new item easily. Work is done! <a href="https://github.com/benkio/GeneralExercises/commit/03ac121">commit</a>
-</p>
-
-<hr/>
-
-<p>
-I just tried to reproduce the counterintuitive behavior I faced
-when subtyping, but when I went to <a href="https://scastie.scala-lang.org/">Scastie</a>, the code behaved as
-expected. This makes it even most weird 🤔 if you are a programmer,
-you know these kinds of things happens from time to time.
 </p>
 </div>
 </div>
@@ -558,7 +439,7 @@ refactoring <a href="https://github.com/benkio/GeneralExercises/commit/8a9a98b">
 </p>
 
 <p>
-<span class="timestamp-wrapper"><span class="timestamp">&lt;2020-07-14 Tue&gt;</span></span>: Test completed. <a href="https://github.com/benkio/GeneralExercises/commit/f19fa11">commit</a>
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2020-07-14 Tue&gt;</span></span>: Tests completed. <a href="https://github.com/benkio/GeneralExercises/commit/f19fa11">commit</a>
 </p>
 
 <p>
@@ -611,37 +492,42 @@ having a very well done test code. Most of the time we think test
 code is B-class code, but this kata shows it's not. It needs to be
 very fine-tuned and precise in order to catch bugs ahead of
 time. Plus, test-code is code you need to maintain and write
-daily, to write your feature. That makes it on the same level of
+daily, to add your features. That makes it at the same level of
 importance as the production code.
 </p>
 
 <p>
-I agree it's not great fun to write such code, that's why I
-suggest using the compiler as much as possible to reduce the
+I agree, it's not great fun to write such code, that's why I
+suggest to use the compiler as much as possible to reduce the
 design space and the amount of tests you need to write to cover
-your application.
+your application. If a behavior is impossible, you don't need to
+add a test for it.
 </p>
 
 <p>
 A second relevant challenge is about being
-disciplined. Refactoring consists of very small changes, but this is
-not always possible. Sometimes, you need to break quite some amount
-of code at once, but that must be an exception to the regular
-refactoring process. What can happen is that we might see multiple
-applicable improvements at the same time. Therefore, we are
-tempted to apply them all at once, instead, we should hold back
-and do one single, small, consistent change, commit it, and then
-move on to the next. This requires great self-discipline.
+disciplined. Refactoring should be a sequence of very small
+changes, but this is not always possible. Sometimes, you need to
+break quite some amount of code at once, but that must be an
+exception to the regular refactoring process. Said from a guy who usually opens refactoring PRs of hundreds of files. 🙊 😬
 </p>
 
 <p>
-Finally, the last challenge is definitely <i>dependencies</i>. When you
-have constraints from different libraries or legacy code that
+What can happen is that we might see multiple applicable
+improvements at the same time. Therefore, we are tempted to apply
+them all at once, instead, we should hold back and do one single,
+small, consistent change, commit it, and then move on to the
+next. This requires great self-discipline.
+</p>
+
+<p>
+Finally, the last challenge, is definitely <i>dependencies</i>. When
+you have constraints from different libraries or legacy code that
 you are not allowed to change, it makes things very difficult and
 requires you to put workarounds in place. That defiles the goal of
 refactoring itself. This shows the importance of keeping projects
-small and self-contained as much as possible, with the minimal set
-of dependencies as possible.
+small, self-contained and decoupled from each other as much as
+possible, with the minimal set of dependencies as possible.
 </p>
 </div>
 </div>
