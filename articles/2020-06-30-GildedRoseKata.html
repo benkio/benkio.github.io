@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Gilded Rose Kata</title>
-<!-- 2020-07-18 Sat 16:22 -->
+<!-- 2020-07-18 Sat 16:36 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -537,14 +537,15 @@ possible, with the minimal set of dependencies as possible.
 <div class="outline-text-4" id="text-LaguagesComparisonConclusions">
 <p>
 Before diving into the differences I found between the two
-technologies, I need to do a little disclaimer in order to give to
-my follow-up words a little bit of context. What I will write is a
-personal opinion, after all, it's not based on facts, but on
-personal experience. Therefore, it depends on: my emotions
-throughout the exercise, how fluent I am on both languages, and how
-much I know about the problem (the order in which I solved the
-kata might have influenced me). Probably this disclaimer should have been
-placed at the very start of this article 😺.
+technologies, I feel the need to do a little disclaimer. What I
+will write is a personal opinion, after all, it's not based on
+facts, but on personal experience. Therefore, it depends on: my
+emotions throughout the exercise, how fluent I am on both
+languages, and how much I know about the problem (the order in
+which I solved the Kata might have influenced me). Therefore,
+what's following may not apply to you and you disagree, that's
+completely fine.  Probably this disclaimer should have been placed
+at the very start of this article 😺.
 </p>
 
 <p>
@@ -558,35 +559,45 @@ In Scala, if a test fails, what I usually do to debug it is:
 putting a break point or a <code>println</code> and see what is the input to
 the test, the result an so on. Once I know what is going on, it's
 usually an easy fix: the generator wasn't right, the success
-condition wasn't correct etc.
+condition wasn't correct etc&#x2026; and that's it.
 </p>
 
 <p>
 This approach doesn't hold in Haskell because you can't put a
-simple <code>println</code> into the test, so you need to work differently
-and, as a result, you end up with better code. The only way to
-inspect your test is to use the REPL and, when you get into it,
-you want to be able to execute exactly the bit of code you are
-interested in, the minimal amount of code where the bug might
-hide. To achieve this goal you need to extract the logic of your
-tests into small functions and enhance the re-usability as much as
-possible. This should always be the case, for whatever language
-you are using, but I strongly believe that, if something is not
-forced by the technology and the responsibility of "doing the
-right thing" is on the shoulder of the developer, laziness and
-negligence will eventually sometimes kick in and drive it to a
-sub-optimal result.
+simple <code>println</code> into the tests. You know, <a href="https://www.youtube.com/watch?v=fCoQb-zqYDI">IO Monad</a> and
+stuff. So, you need to work differently and, as a result, you end
+up with better code. Let's see why.
+</p>
+
+<p>
+The only way to inspect your test I know in Haskell is to use the
+REPL. When you get into it, you want to be able to execute exactly
+the bit of code you are interested in, the minimal amount of code
+where the bug might hide. To achieve this goal, you need to
+extract the logic of your tests into small functions and enhance
+the re-usability as much as possible instead of just care about
+fixing the single test.
+</p>
+
+<p>
+This should always be the case, for whatever language you are
+using, but I strongly believe that, if something is not forced by
+the technology and the responsibility of "doing the right thing"
+is on the shoulder of the developer, laziness and negligence will
+eventually kick in and drive it to a sub-optimal result.
 </p>
 
 <p>
 Moving on, the next difference, we can see from the initial
 codebase status that Haskell comes with immutability straight
-away. Even if it doesn't seem very important, this is a big
-improvement, especially when things scale up in size. Then, you
-could achieve mutation in Haskell as well using specific
-constructions like <a href="https://www.oreilly.com/library/view/parallel-and-concurrent/9781449335939/ch07.html">MVar</a> or <a href="https://wiki.haskell.org/Software_transactional_memory">STM</a> (used mainly for concurrency
-purposes), but even then, mutation is enclosed and accessible
-under a specific contract where particular constraints hold.
+away. Even if it doesn't seem very important, this is a big plus,
+especially when things scale up in size. Then, you could achieve
+mutation in Haskell as well using specific constructions like <a href="https://www.oreilly.com/library/view/parallel-and-concurrent/9781449335939/ch07.html">MVar</a>
+or <a href="https://wiki.haskell.org/Software_transactional_memory">STM</a> (used mainly for concurrency purposes), but even then,
+mutation is enclosed and accessible under a specific contract
+where particular constraints hold. Having immutability as a
+default saves you time, since we can skip a step in our
+refactoring plan.
 </p>
 
 <p>
@@ -595,6 +606,12 @@ scary than the Scala one. I guess the reason is because I
 already know the context, but I was able to give a meaningful name
 to the extracted functions straight away because of the usage of
 the <code>where</code> and <code>let-in</code> constructs.
+</p>
+
+<hr/>
+
+<p>
+let me open a small parenthesis in here
 </p>
 
 <div class="org-src-container">
@@ -614,8 +631,10 @@ tools, like <a href="https://github.com/scalacenter/scalafix">Scalafix</a>, but 
 would have struggled less.
 </p>
 
+<hr/>
+
 <p>
-A downside of plain Haskell, in comparison to Scala, is the amount
+Finally, a downside of plain Haskell, in comparison to Scala, is the amount
 of machinery you have to create in order to do simple things, such
 as just access fields. Don't get me wrong here, I'm sure that
 through some specific compiler extension, or using <a href="http://wiki.haskell.org/Template_Haskell">Template
