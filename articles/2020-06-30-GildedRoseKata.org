@@ -154,8 +154,8 @@
      That's completely fine and it's what the majority of the
      companies do nowadays. The downside of this approach is: it's
      static. Let say your program has a bug and will crash under
-     specific conditions, for a corner case you didn't think about,
-     testing by example will not help you there if you didn't catch
+     specific conditions, for a corner case you didn't think about.
+     Testing by example will not help you there, if you didn't catch
      that specific case beforehand.
 
      A different approach I like more is [[https://en.wikipedia.org/wiki/Property_testing][Property Testing]], where the
@@ -168,7 +168,9 @@
      benefits in just take advantage of the generated inputs and
      having a "normal" test built on top. Having to write your test
      once and run them multiple times with several inputs, it's
-     straight away a big plus.
+     straight away a big plus. Used this way, we probably can't talk
+     about /Property/ testing anymore, but I can't think of a proper
+     term, if you know it, please tell me.
 
      Another downside of this approach is the computational cost:
      generating inputs and having multiple runs will increase the
