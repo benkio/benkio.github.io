@@ -79,7 +79,7 @@
     *Disclaimer:* this code is intentionally bad. If you will ever
     encounter a code-base like this one in your life, listen to me...
 
-    #+html: <iframe src="https://giphy.com/embed/A6PcmRqkyMOBy" width="480" height="224" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+    #+html: <iframe src="https://giphy.com/embed/A6PcmRqkyMOBy" width="460" height="224" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 
     let's start...
 
