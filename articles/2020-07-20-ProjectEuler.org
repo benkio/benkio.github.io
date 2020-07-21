@@ -92,6 +92,16 @@
   #+html: <script src="http://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler.hs?slice=15:30"></script>
 
 
+*** Largest Palindrome Product
+    :PROPERTIES:
+    :CUSTOM_ID: ArticleContentEx4
+    :END:
+
+  Problem: [[https://projecteuler.net/problem=4][Largest Palindrome Product]]
+
+  Solution:
+  #+html: <script src="http://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler.hs?slice=31:37"></script>
+
 
 ** Conclusions
   :PROPERTIES:
