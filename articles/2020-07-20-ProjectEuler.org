@@ -91,7 +91,6 @@
   Solution:
   #+html: <script src="http://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler.hs?slice=15:30"></script>
 
-
 *** Largest Palindrome Product
     :PROPERTIES:
     :CUSTOM_ID: ArticleContentEx4
@@ -101,6 +100,37 @@
 
   Solution:
   #+html: <script src="http://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler.hs?slice=31:37"></script>
+
+*** Smallest Multiple
+    :PROPERTIES:
+    :CUSTOM_ID: ArticleContentEx5
+    :END:
+
+  Problem: [[https://projecteuler.net/problem=5][Smallest Multiple]]
+
+  Solution:
+  #+html: <script src="http://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler.hs?slice=38:41"></script>
+
+*** Sum Square Difference
+    :PROPERTIES:
+    :CUSTOM_ID: ArticleContentEx6
+    :END:
+
+  Problem: [[https://projecteuler.net/problem=6][Sum Square Difference]]
+
+  Solution:
+  #+html: <script src="http://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler.hs?slice=42:48"></script>
+
+*** 10001st prime
+    :PROPERTIES:
+    :CUSTOM_ID: ArticleContentEx7
+    :END:
+
+  Problem: [[https://projecteuler.net/problem=7][10001st prime]]
+
+  Solution:
+  #+html: <script src="http://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler.hs?slice=49:61"></script>
+
 
 
 ** Conclusions
