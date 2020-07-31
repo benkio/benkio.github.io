@@ -48,7 +48,7 @@
   [[https://projecteuler.net/][Project Euler]] is a collection of math based problems you can try to
   solve using a programming language, for fun.
 
-  #+html: <img src="https://mliumztazidk.i.optimole.com/5yrf4Xo-0ZmlwmlF/w:auto/h:auto/q:auto/https://epjapanesey.com/wp-content/uploads/2019/04/Saitamas-Quote-Im-A-Guy-Whos-A-Hero-For-Fun.png" style="width:50%; max-height: 300px"></img>
+  #+html: <img src="https://mliumztazidk.i.optimole.com/5yrf4Xo-0ZmlwmlF/w:auto/h:auto/q:auto/https://epjapanesey.com/wp-content/uploads/2019/04/Saitamas-Quote-Im-A-Guy-Whos-A-Hero-For-Fun.png" style="width:50%; max-height: 300px; margin-bottom: 1em;"></img>
 
   Therefore I decided to start doing some of them, using haskell as a
   language. That's quite similar to other site like [[https://www.hackerrank.com/][HackerRank]]. You
@@ -131,7 +131,15 @@
   Solution:
   #+html: <script src="http://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler.hs?slice=49:61"></script>
 
+*** Largest product in a series
+    :PROPERTIES:
+    :CUSTOM_ID: ArticleContentEx8
+    :END:
 
+  Problem: [[https://projecteuler.net/problem=8][Largest product in a series]]
+
+  Solution:
+  #+html: <script src="http://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler.hs?slice=62:75"></script>
 
 ** Conclusions
   :PROPERTIES:
