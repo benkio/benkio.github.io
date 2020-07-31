@@ -130,7 +130,6 @@
 
   Solution:
   #+html: <script src="http://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler.hs?slice=49:61"></script>
-
 *** Largest product in a series
     :PROPERTIES:
     :CUSTOM_ID: ArticleContentEx8
@@ -140,6 +139,16 @@
 
   Solution:
   #+html: <script src="http://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler.hs?slice=62:75"></script>
+  
+*** Special Pythagorean triplet
+    :PROPERTIES:
+    :CUSTOM_ID: ArticleContentEx9
+    :END:
+
+  Problem: [[https://projecteuler.net/problem=9][Special Pythagorean triplet]]
+
+  Solution:
+  #+html: <script src="http://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler.hs?slice=76:96"></script>
 
 ** Conclusions
   :PROPERTIES:
