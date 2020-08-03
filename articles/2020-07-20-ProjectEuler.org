@@ -1,0 +1,202 @@
+#+OPTIONS: num:nil toc:t H:4
+#+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:nil
+#+TITLE: Project Euler 1-10
+#+DESCRIPTION: Project Euler 1-10
+#+KEYWORDS: Project Euler 1-10
+#+CREATOR: Enrico Benini
+#+HTML_HEAD_EXTRA: <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA: <link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/main.css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/blog.css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/article.css">
+
+* Blog
+  :PROPERTIES:
+  :HTML_CONTAINER_CLASS: text-center navbar navbar-inverse navbar-fixed-top
+  :CUSTOM_ID: navbar
+  :END:
+  #+BEGIN_EXPORT html
+  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapsableNavbar">
+    <span class="icon-bar"Article 6</span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+  <a title="Home" href="../blog.html"><h1 id="navbarTitle" class="navbar-text">Blog</h1></a>
+  <div class="collapse navbar-collapse" id="collapsableNavbar">
+    <ul class="nav navbar-nav">
+      <li><a title="Home" href="../index.html"><i class="fas fa-home fa-3x" aria-hidden="true"></i></a></li>
+      <li><a title="Article List" href="../articleList.html" class="navbar-text h3">Article List</a></li>
+  <li><a title="Book List" href="../bookList.html" class="navbar-text h3">Book List</a></li>
+  <li><a title="Album List" href="../albumList.html" class="navbar-text h3">Album List</a></li>
+    </ul>
+  </div>
+  #+END_EXPORT
+
+* Project Euler 1-10
+  :PROPERTIES:
+  :CUSTOM_ID: Article
+  :END:
+  *Created: <2020-07-20 Mon>*
+** Abstract
+   :PROPERTIES:
+   :CUSTOM_ID: ArticleAbstract
+   :END:
+
+   [[https://projecteuler.net/][Project Euler]] is a collection of math based problems you can try to
+   solve using a programming language, for fun.
+
+   #+html: <img src="https://mliumztazidk.i.optimole.com/5yrf4Xo-0ZmlwmlF/w:auto/h:auto/q:auto/https://epjapanesey.com/wp-content/uploads/2019/04/Saitamas-Quote-Im-A-Guy-Whos-A-Hero-For-Fun.png" style="width:50%; max-height: 300px; margin-bottom: 1em;"></img>
+
+   Therefore I decided to start doing some of them, using haskell as a
+   language. That's quite similar to other site like [[https://www.hackerrank.com/][HackerRank]]. You
+   might want to look at them if you are searching a way to train
+   yourself on a specific language, plus learn some math in the
+   process.
+
+** Content
+   :PROPERTIES:
+   :CUSTOM_ID: ArticleContent
+   :END:
+
+*** Multiple of 3 and 5
+    :PROPERTIES:
+    :CUSTOM_ID: ArticleContentEx1
+    :END:
+
+    Problem:  [[https://projecteuler.net/problem=1][Multiples of 3 and 5]]
+
+    Solution:
+    #+html: <script src="http://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler.hs?slice=6:10"></script>
+
+*** Even Fibonacci Numbers
+    :PROPERTIES:
+    :CUSTOM_ID: ArticleContentEx2
+    :END:
+
+    Problem: [[https://projecteuler.net/problem=2][Even Fibonacci Numbers]]
+
+    Solution:
+    #+html: <script src="http://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler.hs?slice=10:16"></script>
+
+*** Large Prime Factor
+    :PROPERTIES:
+    :CUSTOM_ID: ArticleContentEx3
+    :END:
+
+    Problem: [[https://projecteuler.net/problem=3][Largest Prime Factor]]
+
+    Solution:
+    #+html: <script src="http://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler.hs?slice=16:31"></script>
+
+*** Largest Palindrome Product
+    :PROPERTIES:
+    :CUSTOM_ID: ArticleContentEx4
+    :END:
+
+    Problem: [[https://projecteuler.net/problem=4][Largest Palindrome Product]]
+
+    Solution:
+    #+html: <script src="http://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler.hs?slice=32:38"></script>
+
+*** Smallest Multiple
+    :PROPERTIES:
+    :CUSTOM_ID: ArticleContentEx5
+    :END:
+
+    Problem: [[https://projecteuler.net/problem=5][Smallest Multiple]]
+
+    Solution:
+    #+html: <script src="http://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler.hs?slice=39:42"></script>
+
+*** Sum Square Difference
+    :PROPERTIES:
+    :CUSTOM_ID: ArticleContentEx6
+    :END:
+
+    Problem: [[https://projecteuler.net/problem=6][Sum Square Difference]]
+
+    Solution:
+    #+html: <script src="http://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler.hs?slice=43:49"></script>
+
+*** 10001st prime
+    :PROPERTIES:
+    :CUSTOM_ID: ArticleContentEx7
+    :END:
+
+    Problem: [[https://projecteuler.net/problem=7][10001st prime]]
+
+    Solution:
+    #+html: <script src="http://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler.hs?slice=50:62"></script>
+*** Largest product in a series
+    :PROPERTIES:
+    :CUSTOM_ID: ArticleContentEx8
+    :END:
+
+    Problem: [[https://projecteuler.net/problem=8][Largest product in a series]]
+
+    Solution:
+    #+html: <script src="http://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler.hs?slice=63:76"></script>
+
+*** Special Pythagorean triplet
+    :PROPERTIES:
+    :CUSTOM_ID: ArticleContentEx9
+    :END:
+
+    Problem: [[https://projecteuler.net/problem=9][Special Pythagorean triplet]]
+
+    Solution:
+    #+html: <script src="http://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler.hs?slice=77:97"></script>
+
+*** Summation of Primes
+    :PROPERTIES:
+    :CUSTOM_ID: ArticleContentEx10
+    :END:
+
+    This one never terminates. I searched for a solution on the web,
+    but they provide the simplistic solution. Plus, ~GHCI~ doesn't see
+    multiple cores.
+
+    Problem: [[https://projecteuler.net/problem=10][Summation of primes]]
+
+    Solution:
+    #+html: <script src="http://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler.hs?slice=98:102"></script>
+
+** Conclusions
+   :PROPERTIES:
+   :CUSTOM_ID: ArticleConclusions
+   :END:
+
+   learning never ends 😃
+
+* Share Buttons
+  :PROPERTIES:
+  :CUSTOM_ID: ShareButtons
+  :END:
+  #+BEGIN_EXPORT html
+  <!-- AddToAny BEGIN -->
+  <hr>
+  <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+  <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+  <a class="a2a_button_facebook"></a>
+  <a class="a2a_button_twitter"></a>
+  <a class="a2a_button_whatsapp"></a>
+  <a class="a2a_button_telegram"></a>
+  <a class="a2a_button_linkedin"></a>
+  <a class="a2a_button_email"></a>
+  </div>
+  <script async src="https://static.addtoany.com/menu/page.js"></script>
+  <!-- AddToAny END -->
+  #+END_EXPORT
+
+  #+begin_export html
+  <script type="text/javascript">
+  $(function() {
+    $('#text-table-of-contents > ul li').first().css("display", "none");
+    $('#text-table-of-contents > ul li').last().css("display", "none");
+    $('#table-of-contents').addClass("visible-lg")
+  });
+  </script>
+  #+end_export
