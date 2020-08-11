@@ -34,7 +34,7 @@
     </ul>
   </div>
   #+END_EXPORT
-
+  
 * Project Euler 1-10
   :PROPERTIES:
   :CUSTOM_ID: Article
@@ -50,7 +50,7 @@
 
    #+html: <img src="https://mliumztazidk.i.optimole.com/5yrf4Xo-0ZmlwmlF/w:auto/h:auto/q:auto/https://epjapanesey.com/wp-content/uploads/2019/04/Saitamas-Quote-Im-A-Guy-Whos-A-Hero-For-Fun.png" style="width:50%; max-height: 300px; margin-bottom: 1em;"></img>
 
-   Therefore I decided to start doing some of them, using haskell as a
+   Therefore, I decided to start doing some of them, using Haskell as a
    language. That's quite similar to other site like [[https://www.hackerrank.com/][HackerRank]]. You
    might want to look at them if you are searching a way to train
    yourself on a specific language, plus learn some math in the
