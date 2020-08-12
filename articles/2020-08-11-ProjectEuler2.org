@@ -63,7 +63,17 @@
     Problem:  [[https://projecteuler.net/problem=11][Largest Product in a Grid]]
 
     Solution:
-    #+html: <script src="https://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler2.hs?slice=5:71"></script>
+    #+html: <script src="https://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler2.hs?slice=10:77"></script>
+
+*** Highly Divisible Triangular Number
+    :PROPERTIES:
+    :CUSTOM_ID: ArticleContentEx12
+    :END:
+
+    Problem:  [[https://projecteuler.net/problem=12][Highly Divisible Triangular Number]]
+
+    Solution:
+    #+html: <script src="https://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler2.hs?slice=77:93"></script>
 
 ** Conclusions
    :PROPERTIES:
