@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Project Euler 11-20</title>
-<!-- 2020-08-12 Wed 11:54 -->
+<!-- 2020-08-12 Wed 17:05 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -125,10 +125,25 @@ Problem:  <a href="https://projecteuler.net/problem=12">Highly Divisible Triangu
 Solution:
 </p>
 <script src="https://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler2.hs?slice=77:93"></script>
-</div>
-</div>
+
+<p>
+Note that <code>find</code> function from <code>Data.List</code> is more inefficient
+then using the handmade, recursive function I used. Just try
+Something like
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-haskell">fromJust <span style="color: #87cefa;">$</span> find ((<span style="color: #eedd82;">==</span>500) <span style="color: #eedd82;">.</span> length <span style="color: #eedd82;">.</span> findDivisors) triangleNumbers
+</pre>
 </div>
 
+<p>
+and you will see it hangs, never returning
+</p>
+</div>
+</div>
+</div>
 <div id="outline-container-ArticleConclusions" class="outline-3">
 <h3 id="ArticleConclusions"><a id="sec-" name="sec-"></a>Conclusions</h3>
 <div class="outline-text-3" id="text-ArticleConclusions">

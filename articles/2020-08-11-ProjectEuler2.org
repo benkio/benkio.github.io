@@ -75,6 +75,15 @@
     Solution:
     #+html: <script src="https://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler2.hs?slice=77:93"></script>
 
+    Note that ~find~ function from ~Data.List~ is more inefficient
+    then using the handmade, recursive function I used. Just try
+    Something like
+
+#+BEGIN_SRC haskell :exports code
+fromJust $ find ((==500) . length . findDivisors) triangleNumbers
+#+END_SRC
+
+    and you will see it hangs, never returning
 ** Conclusions
    :PROPERTIES:
    :CUSTOM_ID: ArticleConclusions
