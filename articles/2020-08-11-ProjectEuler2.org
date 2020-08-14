@@ -94,6 +94,18 @@ fromJust $ find ((==500) . length . findDivisors) triangleNumbers
     Solution:
     #+html: <script src="https://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler2.hs?slice=94:201"></script>
 
+*** Largest Collatz Sequesnce
+    :PROPERTIES:
+    :CUSTOM_ID: ArticleContentEx14
+    :END:
+
+    Problem:  [[https://projecteuler.net/problem=14][Largest Collatz Sequnece]]
+
+    Solution:
+    #+html: <script src="https://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler2.hs?slice=94:201"></script>
+
+    Note: this hangs and never returns, any suggestion on how to improve this solution is welcome.
+
 ** Conclusions
    :PROPERTIES:
    :CUSTOM_ID: ArticleConclusions
