@@ -63,7 +63,7 @@
     Problem:  [[https://projecteuler.net/problem=11][Largest Product in a Grid]]
 
     Solution:
-    #+html: <script src="https://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler2.hs?slice=10:77"></script>
+    #+html: <script src="https://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler2.hs?slice=10:81"></script>
 
 *** Highly Divisible Triangular Number
     :PROPERTIES:
@@ -73,7 +73,7 @@
     Problem:  [[https://projecteuler.net/problem=12][Highly Divisible Triangular Number]]
 
     Solution:
-    #+html: <script src="https://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler2.hs?slice=77:93"></script>
+    #+html: <script src="https://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler2.hs?slice=81:98"></script>
 
     Note that ~find~ function from ~Data.List~ is more inefficient
     then using the handmade, recursive function I used. Just try
@@ -92,7 +92,7 @@ fromJust $ find ((==500) . length . findDivisors) triangleNumbers
     Problem:  [[https://projecteuler.net/problem=13][Large Sum]]
 
     Solution:
-    #+html: <script src="https://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler2.hs?slice=94:201"></script>
+    #+html: <script src="https://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler2.hs?slice=98:206"></script>
 
 *** Largest Collatz Sequesnce
     :PROPERTIES:
@@ -100,11 +100,70 @@ fromJust $ find ((==500) . length . findDivisors) triangleNumbers
     :END:
 
     Problem:  [[https://projecteuler.net/problem=14][Largest Collatz Sequnece]]
+    
+    Solution:
+    #+html: <script src="https://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler2.hs?slice=206:226"></script>
+    
+*** Lattice Path
+    :PROPERTIES:
+    :CUSTOM_ID: ArticleContentEx15
+    :END:
+
+    Problem:  [[https://projecteuler.net/problem=15][Lattice Path]]
 
     Solution:
-    #+html: <script src="https://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler2.hs?slice=94:201"></script>
+    #+html: <script src="https://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler2.hs?slice=226:236"></script>
 
-    Note: this hangs and never returns, any suggestion on how to improve this solution is welcome.
+*** Power Digit Sum
+    :PROPERTIES:
+    :CUSTOM_ID: ArticleContentEx16
+    :END:
+
+    Problem:  [[https://projecteuler.net/problem=16][Power Digit Sum]]
+
+    Solution:
+    #+html: <script src="https://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler2.hs?slice=236:241"></script>
+
+*** Number Letter Count
+    :PROPERTIES:
+    :CUSTOM_ID: ArticleContentEx17
+    :END:
+
+    Problem:  [[https://projecteuler.net/problem=17][Number Letter Count]]
+
+    Solution:
+    #+html: <script src="https://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler2.hs?slice=241:322"></script>
+
+*** Maximum Path Sum I
+    :PROPERTIES:
+    :CUSTOM_ID: ArticleContentEx18
+    :END:
+
+    Problem:  [[https://projecteuler.net/problem=18][Maximum Path Sum I]]
+
+    Solution:
+    #+html: <script src="https://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler2.hs?slice=322:352"></script>
+
+*** Counting Sundays
+    :PROPERTIES:
+    :CUSTOM_ID: ArticleContentEx19
+    :END:
+
+    Problem:  [[https://projecteuler.net/problem=19][Counting Sundays]]
+
+    Solution:
+    #+html: <script src="https://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler2.hs?slice=352:388"></script>
+
+*** Factorial Digit Sum
+    :PROPERTIES:
+    :CUSTOM_ID: ArticleContentEx20
+    :END:
+
+    Problem:  [[https://projecteuler.net/problem=20][Factorial Digit Sum]]
+
+    Solution:
+    #+html: <script src="https://gist-it.appspot.com/https://github.com/benkio/GeneralExercises/blob/master/ProjectEuler/projectEuler2.hs?slice=388:392"></script>
+
 
 ** Conclusions
    :PROPERTIES:
