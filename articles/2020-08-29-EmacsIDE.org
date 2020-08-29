@@ -1,0 +1,227 @@
+#+OPTIONS: num:nil toc:t H:4
+#+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:nil
+#+TITLE: Emacs IDE
+#+DESCRIPTION: Emacs IDE
+#+KEYWORDS: Emacs IDE
+#+CREATOR: Enrico Benini
+#+HTML_HEAD_EXTRA: <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA: <link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/main.css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/blog.css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/article.css">
+
+* Blog
+  :PROPERTIES:
+  :HTML_CONTAINER_CLASS: text-center navbar navbar-inverse navbar-fixed-top
+  :CUSTOM_ID: navbar
+  :END:
+#+BEGIN_EXPORT html
+<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapsableNavbar">
+  <span class="icon-bar"Article 6</span>
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+</button>
+<a title="Home" href="../blog.html"><h1 id="navbarEmacs IDE" class="navbar-text">Blog</h1></a>
+<div class="collapse navbar-collapse" id="collapsableNavbar">
+  <ul class="nav navbar-nav">
+    <li><a title="Home" href="../index.html"><i class="fas fa-home fa-3x" aria-hidden="true"></i></a></li>
+    <li><a title="Article List" href="../articleList.html" class="navbar-text h3">Article List</a></li>
+<li><a title="Book List" href="../bookList.html" class="navbar-text h3">Book List</a></li>
+<li><a title="Album List" href="../albumList.html" class="navbar-text h3">Album List</a></li>
+  </ul>
+</div>
+#+END_EXPORT
+
+* Emacs IDE
+  :PROPERTIES:
+  :CUSTOM_ID: Article
+  :END:
+  *Created: <2020-08-29 Sat>*
+** Abstract
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleAbstract
+  :END:
+
+  Plain emacs is pretty basic, but we all know that, with little
+  effort, you can extend it to the max.
+
+  This article is about my experience into turning emacs, from a simple
+  editor, to something like an IDE. It's still a work in progress as
+  always, but it may be inspiring for you into doing the same or pick
+  up some ideas from my configuration, extend and make them yours.
+
+  Enjoy 😺
+
+** Content
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleContent
+  :END:
+
+  I am one of those nerds who uses Emacs for pretty much
+  everything. I'm not living in it, but I'm not to far from it. One of
+  the things I most love of it is the possibility to configure it as
+  much as you like: creating you own features to extend it.
+
+  I work as a software engineer and, when you deal with code, you
+  often need a set of features from your editor (IDE) that speed up
+  your productivity by a lot. Nowadays, these features are shipped
+  throughout cross-editor extensions, like [[https://scalameta.org/metals/][Metals]] in case of Scala,
+  using the [[https://en.wikipedia.org/wiki/Language_Server_Protocol][Language Server Protocol (LSP)]]. Of course, emacs support
+  it as well.
+
+  *However*, installing metals in emacs ended up being a real pain in
+  the ass:
+
+  + [[https://www.reddit.com/r/emacs/comments/idsyxi/having_a_hard_time_setting_up_doom_scala_metals/][Having a hard time setting up Doom + Scala (Metals) + Gradle +
+    monorepo]]
+  + [[https://twitter.com/NicolasRinaudo/status/1204143009807425536][Metals in VSCode vs Metals in Emacs]]
+
+
+  I don't know about the status of it right now. Check on twitter if
+  you like.
+
+  At that point, I just told to myself: /Benkio, you know how to code, you can learn and use Elisp, you can virtually implement those features for yourself!/
+  And here we are.
+
+** Features
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleContentFeatures
+  :END:
+
+  The features I selected for my work-flow are the following:
+
+  + ~shell-clean-old-output~ :: During development I usually start
+       continuous compilation, so I have a background shell printing
+       out the compiler output at every change of code (file
+       saving). It can be the compiler, the linter or a checker, in
+       case of dynamic languages. You name it. In this way, when you
+       are ready to deal with errors, you just switch to the shell and
+       you see them. However, what could happen is that, the shell
+       buffer carry the old output results, with errors that
+       aren't there anymore. Therefore, I need a command to cleanup
+       the shell and leave just the last output, the meaningful one.
+  + ~goto-next-warn-error~ :: Once you have the current errors you
+       wish to jump to them. Fortunately, pretty much every tool
+       provides: file path, line & column number in which the error
+       occurred. So, with this command, I put the cursor at the
+       beginning of the shell output and it moves the cursor to the
+       next location of the error/warnings he encounter parsing the
+       output.
+  + ~remove-unused-import~ :: Dependency management is a very useful
+       feature of any IDE. When happens to have an import that's not
+       used you really wish to get rid of it. This command is built on
+       the previous one and it goes and remove it for you. I must say
+       it's not always super precise (depends on how you instruct it)
+       and it might leave empty lines, but nothing a code formatter,
+       like [[https://scalameta.org/scalafmt/][scalafmt]] or [[https://github.com/mihaimaruseac/hindent][hindent]], can't deal with.
+  + ~import-type-at-point~ :: The other way around can happen. When
+       you have something in your code that's not in scope, so you
+       need the right import. This command goes in search of an
+       existing import for such object and, if none is found, it goes
+       for its definition and build it by itself. Then, the import is
+       added to your current file automatically.
+  + ~extract-code-line-or-region~ :: A key feature for every
+       refactoring maniac, the ability to extract pieces of code to a
+       new value or method. it just put the result to the first empty
+       line it finds backwards, so you can then move it wherever you
+       want, and substitute the code you selected with the name of
+       that method/value.
+
+  IDEs have definitely a longer list of features, but I added the most
+  important for me. A possible improvement would be to have a command
+  for unimplemented methods/values, in case you are creating something
+  that should satisfy a specific contract, like a trait/interface/typeclass.
+
+** Abstract the Pattern
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleContentAbstactPattern
+  :END:
+
+  The previous section is my /Letter of Intent/ about what I need and
+  I want to do, but we know that the number of languages out there are
+  countless. Do I need to implement the same exact features countless
+  times (or at least for every language I'm interested in) over and
+  over again??
+
+  Answer: *Yes and No* 😄
+
+  Every language/tool out there has different syntax, so we need to add
+  some specific logic to each one of them. Luckily, there are
+  operations that are common for every technology, such as copying the
+  resulting import to the starting file or copying the extract code to
+  the nearest available position. How can we factor out these
+  operations and share them between the specific implementations?
+
+  Answer: *Higher-order Functions*
+
+  We can have common patterns for the features that get, as arguments,
+  the language-specific functions and apply them accordingly.
+
+*** Example
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleContentAbstactPatternExample
+  :END:
+
+
+
+** Language Specific
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleContentLanguageSpecific
+  :END:
+
+
+** Conclusions
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleConclusions
+  :END:
+
+  Usually, you write the conclusions at the end of the article, but in
+  this case I already know what to write in here.
+
+  There's a high chance that [[https://scalameta.org/metals/][Metals]], or something similar, now works
+  flawless and it's easy to install. So my recommendation is to use
+  it, the less configuration you have in place the better.
+
+  By the way, this was a very cool exercise to do and it's easy to
+  remove, because them are just a bunch of (almost) stand alone
+  functions. Plus, right now them aren't perfect, but knowing that you
+  could change them and make them work better is reassuring.
+
+  In summary, if you want to really make a difference and improve the
+  state of software, don't code for your own configuration, but go and
+  contribute to those projects to make them better.
+
+  PS: basically, every conclusion I make at the end of my articles is
+  something like. Don't do what you just read!.
+* Share Buttons
+  :PROPERTIES:
+  :CUSTOM_ID: ShareButtons
+  :END:
+#+BEGIN_EXPORT html
+<!-- AddToAny BEGIN -->
+<hr>
+<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+<a class="a2a_button_facebook"></a>
+<a class="a2a_button_twitter"></a>
+<a class="a2a_button_whatsapp"></a>
+<a class="a2a_button_telegram"></a>
+<a class="a2a_button_linkedin"></a>
+<a class="a2a_button_email"></a>
+</div>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+<!-- AddToAny END -->
+#+END_EXPORT
+
+#+begin_export html
+<script type="text/javascript">
+$(function() {
+  $('#text-table-of-contents > ul li').first().css("display", "none");
+  $('#text-table-of-contents > ul li').last().css("display", "none");
+  $('#table-of-contents').addClass("visible-lg")
+});
+</script>
+#+end_export
