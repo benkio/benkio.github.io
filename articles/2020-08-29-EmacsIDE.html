@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="en">
 <head>
-<title>Emacs IDE</title>
-<!-- 2020-08-29 Sat 16:11 -->
+<title>Emacs IDE - Build your own Metals</title>
+<!-- 2020-08-31 Mon 11:09 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -35,7 +35,7 @@ $(function() {
 <div id="text-table-of-contents" class="bs-docs-sidebar">
 <ul class="nav">
 <li><a href="#navbar">Blog</a></li>
-<li><a href="#Article">Emacs IDE</a>
+<li><a href="#Article">You Don't Need Metals When You Can Build Your Own (Heavy) Metal</a>
 <ul class="nav">
 <li><a href="#ArticleAbstract">Abstract</a></li>
 <li><a href="#ArticleContent">Content</a></li>
@@ -45,15 +45,23 @@ $(function() {
 <li><a href="#ArticleContentAbstactPatternExample">Example</a></li>
 </ul>
 </li>
-<li><a href="#ArticleContentLanguageSpecific">Language Specific</a></li>
-<li><a href="#ArticleConclusions">Conclusions</a></li>
+<li><a href="#ArticleContentLanguageSpecific">Language Specific</a>
+<ul class="nav">
+<li><a href="#ArticleContentLanguageSpecificExample">Example</a></li>
+</ul>
+</li>
+<li><a href="#ArticleConclusions">Conclusions</a>
+<ul class="nav">
+<li><a href="#sec-">References</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#ShareButtons">Share Buttons</a></li>
 </ul>
 </div>
 </nav>
-</div><div class="col-md-9 col-md-pull-3"><h1 class="title">Emacs IDE</h1>
+</div><div class="col-md-9 col-md-pull-3"><h1 class="title">Emacs IDE - Build your own Metals</h1>
 
 <div id="outline-container-navbar" class="outline-2 text-center navbar navbar-inverse navbar-fixed-top">
 <h2 id="navbar"><a id="sec-" name="sec-"></a>Blog</h2>
@@ -63,7 +71,7 @@ $(function() {
   <span class="icon-bar"></span>
   <span class="icon-bar"></span>
 </button>
-<a title="Home" href="../blog.html"><h1 id="navbarEmacs IDE" class="navbar-text">Blog</h1></a>
+<a title="Home" href="../blog.html"><h1 id="navbartitle" class="navbar-text">Blog</h1></a>
 <div class="collapse navbar-collapse" id="collapsableNavbar">
   <ul class="nav navbar-nav">
     <li><a title="Home" href="../index.html"><i class="fas fa-home fa-3x" aria-hidden="true"></i></a></li>
@@ -76,7 +84,7 @@ $(function() {
 </div>
 
 <div id="outline-container-Article" class="outline-2">
-<h2 id="Article"><a id="sec-" name="sec-"></a>Emacs IDE</h2>
+<h2 id="Article"><a id="sec-" name="sec-"></a>You Don't Need Metals When You Can Build Your Own (Heavy) Metal</h2>
 <div class="outline-text-2" id="text-Article">
 <p>
 <b>Created: <span class="timestamp-wrapper"><span class="timestamp">&lt;2020-08-29 Sat&gt;</span></span></b>
@@ -86,15 +94,15 @@ $(function() {
 <h3 id="ArticleAbstract"><a id="sec-" name="sec-"></a>Abstract</h3>
 <div class="outline-text-3" id="text-ArticleAbstract">
 <p>
-Plain emacs is pretty basic, but we all know that, with little
-effort, you can extend it to the max.
+Plain emacs is pretty basic, but we all know you can extend it, with
+little effort, to the max.
 </p>
 
 <p>
-This article is about my experience into turning emacs, from a simple
+This article is about my experience of turning emacs, from a simple
 editor, to something like an IDE. It's still a work in progress as
-always, but it may be inspiring for you into doing the same or pick
-up some ideas from my configuration, extend and make them yours.
+always, but it may inspire you into doing the same or pick up some
+ideas from my configuration, extend and make them yours.
 </p>
 
 <p>
@@ -108,18 +116,18 @@ Enjoy 😺
 <div class="outline-text-3" id="text-ArticleContent">
 <p>
 I am one of those nerds who uses Emacs for pretty much
-everything. I'm not living in it, but I'm not to far from it. One of
-the things I most love of it is the possibility to configure it as
-much as you like: creating you own features to extend it.
+everything. I'm not living in it, but I'm not too far from it. One
+of the things I love about it is the possibility to configure it
+as much as you like: creating you own features to extend it.
 </p>
 
 <p>
 I work as a software engineer and, when you deal with code, you
 often need a set of features from your editor (IDE) that speed up
 your productivity by a lot. Nowadays, these features are shipped
-throughout cross-editor extensions, like <a href="https://scalameta.org/metals/">Metals</a> in case of Scala,
-using the <a href="https://en.wikipedia.org/wiki/Language_Server_Protocol">Language Server Protocol (LSP)</a>. Of course, emacs support
-it as well.
+throughout classic IDEs, like IntelliJ or Eclipse, or cross-editor
+extensions, like <a href="https://scalameta.org/metals/">Metals</a> in case of Scala, using the <a href="https://en.wikipedia.org/wiki/Language_Server_Protocol">Language Server
+Protocol (LSP)</a>. Of course, emacs support it as well.
 </p>
 
 <p>
@@ -162,17 +170,17 @@ out the compiler output at every change of code (file
 saving). It can be the compiler, the linter or a checker, in
 case of dynamic languages. You name it. In this way, when you
 are ready to deal with errors, you just switch to the shell and
-you see them. However, what could happen is that, the shell
-buffer carry the old output results, with errors that
+you see them. However, when you switch to the shell after a
+while, buffer carry the old output results, with errors that
 aren't there anymore. Therefore, I need a command to cleanup
 the shell and leave just the last output, the meaningful one.
 </dd>
 <dt> <code>goto-next-warn-error</code> </dt><dd>Once you have the current errors you
 wish to jump to them. Fortunately, pretty much every tool
-provides: file path, line &amp; column number in which the error
-occurred. So, with this command, I put the cursor at the
+provides, as error/warning output: file path, line &amp; column
+number. So, with this command, I put the cursor at the
 beginning of the shell output and it moves the cursor to the
-next location of the error/warnings he encounter parsing the
+next location of the error/warnings it encounter, parsing the
 output.
 </dd>
 <dt> <code>remove-unused-import</code> </dt><dd>Dependency management is a very useful
@@ -195,15 +203,20 @@ refactoring maniac, the ability to extract pieces of code to a
 new value or method. it just put the result to the first empty
 line it finds backwards, so you can then move it wherever you
 want, and substitute the code you selected with the name of
-that method/value.
+that method/value. It might not be super precise as well, but
+it's a start.
 </dd>
 </dl>
 
 <p>
 IDEs have definitely a longer list of features, but I added the most
-important for me. A possible improvement would be to have a command
+important for me. A possible improvement would be to add a command
 for unimplemented methods/values, in case you are creating something
 that should satisfy a specific contract, like a trait/interface/typeclass.
+</p>
+
+<p>
+At the time of writing, I've implemented them for: Haskell, Scala and Typescript.
 </p>
 </div>
 </div>
@@ -213,7 +226,7 @@ that should satisfy a specific contract, like a trait/interface/typeclass.
 <div class="outline-text-3" id="text-ArticleContentAbstactPattern">
 <p>
 The previous section is my <i>Letter of Intent</i> about what I need and
-I want to do, but we know that the number of languages out there are
+I want to do, but the number of languages out there are
 countless. Do I need to implement the same exact features countless
 times (or at least for every language I'm interested in) over and
 over again??
@@ -226,7 +239,7 @@ Answer: <b>Yes and No</b> 😄
 <p>
 Every language/tool out there has different syntax, so we need to add
 some specific logic to each one of them. Luckily, there are
-operations that are common for every technology, such as copying the
+operations that are common whatever the technology, such as copying the
 resulting import to the starting file or copying the extract code to
 the nearest available position. How can we factor out these
 operations and share them between the specific implementations?
@@ -237,7 +250,7 @@ Answer: <b>Higher-order Functions</b>
 </p>
 
 <p>
-We can have common patterns for the features that get, as arguments,
+We can have common patterns/templates for the features that get, as arguments,
 the language-specific functions and apply them accordingly.
 </p>
 </div>
@@ -245,37 +258,179 @@ the language-specific functions and apply them accordingly.
 <div id="outline-container-ArticleContentAbstactPatternExample" class="outline-4">
 <h4 id="ArticleContentAbstactPatternExample"><a id="sec-" name="sec-"></a>Example</h4>
 <div class="outline-text-4" id="text-ArticleContentAbstactPatternExample">
-</div>
-</div>
+<p>
+I will show you how the higher-order function behind
+the feature <code>extract-code-line-or-region</code> is built.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #00ffff;">defun</span> <span style="color: #87cefa;">extract-code-line-or-region-template</span> (value function postDefinitionSyntaxValue postDefinitionSyntaxFunc EndSyntaxValue EndSyntaxFunc name parameters from to)
+  <span style="color: #ffa07a;">"Template for extracting code to value or function:</span>
+<span style="color: #ffa07a;">   Based on the input it this extract the selected code to the closest empty line above.</span>
+<span style="color: #ffa07a;">   - Value: syntax for values in target laguage</span>
+<span style="color: #ffa07a;">   - function: syntax for function in target laguage</span>
+<span style="color: #ffa07a;">   - postDefinitionSyntax: what you put between the name + parameters and the body of the function/value. eg (= in scala)</span>
+<span style="color: #ffa07a;">   - EndSyntax: what to put at the end of the definition of value/function body. Eg in js it's ';' for value but '}' for functionsxs</span>
+<span style="color: #ffa07a;">   - name: name of the extracted value/function</span>
+<span style="color: #ffa07a;">   - from: start of the region</span>
+<span style="color: #ffa07a;">   - to: end of the region</span>
+<span style="color: #ffa07a;">  "</span>
+  <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">extract code, cut if region or cut from point to end of the line</span>
+  (<span style="color: #00ffff;">setq</span> code (buffer-substring from to))
+  (delete-region from to)
+
+  <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Generate code</span>
+  (<span style="color: #00ffff;">setq</span> resultDefinition (<span style="color: #00ffff;">if</span> (string-blank-p parameters)
+                             (concat value name postDefinitionSyntaxValue code EndSyntaxValue)
+                           (concat function name parameters postDefinitionSyntaxFunc code EndSyntaxFunc)))
+  (<span style="color: #00ffff;">setq</span> resultReference (<span style="color: #00ffff;">if</span> (string-blank-p parameters)
+                            name
+                          (concat name parameters)))
+  <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Put the resultReference at point</span>
+  (insert resultReference)
+  <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Move to the closest ^$ line and insert the resultDefinition</span>
+  (re-search-backward <span style="color: #ffa07a;">"^$"</span>)
+  (insert resultDefinition)
+  )
+</pre>
 </div>
 
+<p>
+The first thing you notice is how this function takes a lot of
+parameters. That's due to his nature of higher order function, since
+it needs to apply the language specific functions in input and
+change its behavior based on the values it gets.
+</p>
 
+<p>
+These are the operations performed:
+</p>
+<ul class="org-ul">
+<li>Grabs the code to extract and delete the region selected.
+</li>
+<li>Compose the input values to create the extracted code and the
+related reference. It choose if it will be a value of a method
+based on the presence of parameters.
+</li>
+<li>Insert the reference where there was the code.
+</li>
+<li>Search back for the first empty line.
+</li>
+<li>Insert the computed value, method.
+</li>
+</ul>
+
+
+<p>
+Notice how there's no reference about a specific language syntax
+into this function.
+</p>
+</div>
+</div>
+</div>
 
 <div id="outline-container-ArticleContentLanguageSpecific" class="outline-3">
 <h3 id="ArticleContentLanguageSpecific"><a id="sec-" name="sec-"></a>Language Specific</h3>
 <div class="outline-text-3" id="text-ArticleContentLanguageSpecific">
-</div>
+<p>
+Now that we have templates to use, we can focus on crafting the
+language specific functions to pass into the templates. Most of the
+time, them rely on Regexp to instruct: what to search for or what is
+the right syntax of an import for instance. Of course, some are more
+complex then other and can be quite tricky to set them
+properly. Plus, sometimes you need to override a specific template function
+because the target language is quite <i>special</i>.
+</p>
 </div>
 
+<div id="outline-container-ArticleContentLanguageSpecificExample" class="outline-4">
+<h4 id="ArticleContentLanguageSpecificExample"><a id="sec-" name="sec-"></a>Example</h4>
+<div class="outline-text-4" id="text-ArticleContentLanguageSpecificExample">
+<p>
+Still using the <code>extract-code-line-or-region-template</code> but the
+Haskell version
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #00ffff;">defun</span> <span style="color: #87cefa;">hs-extract-code-line-or-region</span> (name <span style="color: #98fb98;">&amp;optional</span> parameters from to)
+  <span style="color: #ffa07a;">"Extract the code to val or def:</span>
+<span style="color: #ffa07a;">   Require:</span>
+<span style="color: #ffa07a;">     - Name of the val/def</span>
+<span style="color: #ffa07a;">     - Optional list of parameters (if empty it will be a val)</span>
+
+<span style="color: #ffa07a;">   if no code region is selected then it extracts the rest of the line from current position</span>
+<span style="color: #ffa07a;">   Return type not specified.</span>
+<span style="color: #ffa07a;">  "</span>
+  (<span style="color: #00ffff;">interactive</span> (list
+                (read-string <span style="color: #ffa07a;">"value/function name: "</span> )
+                (<span style="color: #00ffff;">progn</span>
+                  (<span style="color: #00ffff;">setq</span>
+                   param (read-string <span style="color: #ffa07a;">"param name (RET to finish): "</span>)
+                   params nil
+                   )
+                  (<span style="color: #00ffff;">while</span> (not (equal <span style="color: #ffa07a;">""</span> (s-trim param)))
+                    (<span style="color: #00ffff;">push</span> (s-trim param) params)
+                    (<span style="color: #00ffff;">setq</span> param (read-string <span style="color: #ffa07a;">"param name (RET to finish): "</span>))
+                    )
+                  (concat <span style="color: #ffa07a;">" "</span> (mapconcat 'identity (reverse params) <span style="color: #ffa07a;">" "</span>))
+                  )
+                (<span style="color: #00ffff;">if</span> (use-region-p) (region-beginning) (point))
+                (<span style="color: #00ffff;">if</span> (use-region-p) (region-end) (line-end-position))
+                ))
+  (funcall 'extract-code-line-or-region-template <span style="color: #ffa07a;">""</span> <span style="color: #ffa07a;">""</span> <span style="color: #ffa07a;">" = "</span> <span style="color: #ffa07a;">" = "</span> <span style="color: #ffa07a;">""</span> <span style="color: #ffa07a;">""</span> name parameters from to)
+  )
+</pre>
+</div>
+
+<p>
+Here, the most part of the function is about fetching the input. In
+particular:
+</p>
+<ul class="org-ul">
+<li>The name of the outcome value/method.
+</li>
+<li>The list of parameters. See how it loops until the user inserts the
+empty string.
+</li>
+<li>The region, if present, Otherwise a new region is taken, starting
+from the current position to the end of the line.
+</li>
+</ul>
+
+
+<p>
+After all the inputs are set, the function just calls the relative
+template function, passing some constants, where the language-syntax
+specific is required, and the variables, where the values are driven
+by the input.  Here you can see how most of the constants are empty
+strings since Haskell has a very concise syntax compared to other
+languages like Scala or Typescript.
+</p>
+</div>
+</div>
+</div>
 
 <div id="outline-container-ArticleConclusions" class="outline-3">
 <h3 id="ArticleConclusions"><a id="sec-" name="sec-"></a>Conclusions</h3>
 <div class="outline-text-3" id="text-ArticleConclusions">
 <p>
 Usually, you write the conclusions at the end of the article, but in
-this case I already know what to write in here.
+this case, I already know what to write in here, so I have written
+these sections pretty much at the beginning of the article.
 </p>
 
 <p>
 There's a high chance that <a href="https://scalameta.org/metals/">Metals</a>, or something similar, now works
-flawless and it's easy to install. So my recommendation is to use
-it, the less configuration you have in place the better.
+flawlessly and it's easy to install. So, my recommendation is to use
+it, the less configuration you have in place, the better.
 </p>
 
 <p>
 By the way, this was a very cool exercise to do and it's easy to
-remove, because them are just a bunch of (almost) stand alone
-functions. Plus, right now them aren't perfect, but knowing that you
+remove because they are just a bunch of (almost) stand-alone
+functions. Plus, right now they aren't perfect, but knowing that you
 could change them and make them work better is reassuring.
 </p>
 
@@ -287,11 +442,30 @@ contribute to those projects to make them better.
 
 <p>
 PS: basically, every conclusion I make at the end of my articles is
-something like. Don't do what you just read!.
+something like. Don't do what you just read!. 😄
 </p>
 </div>
+
+<div id="outline-container-sec-" class="outline-4">
+<h4 id="sec-">References</h4>
+<div class="outline-text-4" id="text-">
+<ul class="org-ul">
+<li><a href="https://bitbucket.org/benkio89/.emacs.d/src/master/">Emacs configuration</a>
+</li>
+<li><a href="https://bitbucket.org/benkio89/.emacs.d/src/master/orgConfig/functions/languageTemplateFunctions.org">Template Functions</a>
+</li>
+<li><a href="https://bitbucket.org/benkio89/.emacs.d/src/master/orgConfig/functions/scala.org">Scala Functions</a>
+</li>
+<li><a href="https://bitbucket.org/benkio89/.emacs.d/src/master/orgConfig/functions/haskell.org">Haskell Functions</a>
+</li>
+<li><a href="https://bitbucket.org/benkio89/.emacs.d/src/master/orgConfig/functions/typescript.org">Typescript Functions</a>
+</li>
+</ul>
 </div>
 </div>
+</div>
+</div>
+
 <div id="outline-container-ShareButtons" class="outline-2">
 <h2 id="ShareButtons"><a id="sec-" name="sec-"></a>Share Buttons</h2>
 <div class="outline-text-2" id="text-ShareButtons">

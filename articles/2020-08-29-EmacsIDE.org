@@ -1,8 +1,8 @@
 #+OPTIONS: num:nil toc:t H:4
 #+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:nil
-#+TITLE: Emacs IDE
-#+DESCRIPTION: Emacs IDE
-#+KEYWORDS: Emacs IDE
+#+TITLE: Emacs IDE - Build your own Metals
+#+DESCRIPTION: Emacs IDE - Build your own Metals
+#+KEYWORDS: Emacs IDE - Build your own Metals
 #+CREATOR: Enrico Benini
 #+HTML_HEAD_EXTRA: <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon">
 #+HTML_HEAD_EXTRA: <link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
@@ -24,7 +24,7 @@
   <span class="icon-bar"></span>
   <span class="icon-bar"></span>
 </button>
-<a title="Home" href="../blog.html"><h1 id="navbarEmacs IDE" class="navbar-text">Blog</h1></a>
+<a title="Home" href="../blog.html"><h1 id="navbartitle" class="navbar-text">Blog</h1></a>
 <div class="collapse navbar-collapse" id="collapsableNavbar">
   <ul class="nav navbar-nav">
     <li><a title="Home" href="../index.html"><i class="fas fa-home fa-3x" aria-hidden="true"></i></a></li>
@@ -35,7 +35,7 @@
 </div>
 #+END_EXPORT
 
-* Emacs IDE
+* You Don't Need Metals When You Can Build Your Own (Heavy) Metal
   :PROPERTIES:
   :CUSTOM_ID: Article
   :END:
@@ -45,13 +45,13 @@
   :CUSTOM_ID: ArticleAbstract
   :END:
 
-  Plain emacs is pretty basic, but we all know that, with little
-  effort, you can extend it to the max.
+  Plain emacs is pretty basic, but we all know you can extend it, with
+  little effort, to the max.
 
-  This article is about my experience into turning emacs, from a simple
+  This article is about my experience of turning emacs, from a simple
   editor, to something like an IDE. It's still a work in progress as
-  always, but it may be inspiring for you into doing the same or pick
-  up some ideas from my configuration, extend and make them yours.
+  always, but it may inspire you into doing the same or pick up some
+  ideas from my configuration, extend and make them yours.
 
   Enjoy 😺
 
@@ -61,16 +61,16 @@
   :END:
 
   I am one of those nerds who uses Emacs for pretty much
-  everything. I'm not living in it, but I'm not to far from it. One of
-  the things I most love of it is the possibility to configure it as
-  much as you like: creating you own features to extend it.
+  everything. I'm not living in it, but I'm not too far from it. One
+  of the things I love about it is the possibility to configure it
+  as much as you like: creating you own features to extend it.
 
   I work as a software engineer and, when you deal with code, you
   often need a set of features from your editor (IDE) that speed up
   your productivity by a lot. Nowadays, these features are shipped
-  throughout cross-editor extensions, like [[https://scalameta.org/metals/][Metals]] in case of Scala,
-  using the [[https://en.wikipedia.org/wiki/Language_Server_Protocol][Language Server Protocol (LSP)]]. Of course, emacs support
-  it as well.
+  throughout classic IDEs, like IntelliJ or Eclipse, or cross-editor
+  extensions, like [[https://scalameta.org/metals/][Metals]] in case of Scala, using the [[https://en.wikipedia.org/wiki/Language_Server_Protocol][Language Server
+  Protocol (LSP)]]. Of course, emacs support it as well.
 
   *However*, installing metals in emacs ended up being a real pain in
   the ass:
@@ -99,16 +99,16 @@
        saving). It can be the compiler, the linter or a checker, in
        case of dynamic languages. You name it. In this way, when you
        are ready to deal with errors, you just switch to the shell and
-       you see them. However, what could happen is that, the shell
-       buffer carry the old output results, with errors that
+       you see them. However, when you switch to the shell after a
+       while, buffer carry the old output results, with errors that
        aren't there anymore. Therefore, I need a command to cleanup
        the shell and leave just the last output, the meaningful one.
   + ~goto-next-warn-error~ :: Once you have the current errors you
        wish to jump to them. Fortunately, pretty much every tool
-       provides: file path, line & column number in which the error
-       occurred. So, with this command, I put the cursor at the
+       provides, as error/warning output: file path, line & column
+       number. So, with this command, I put the cursor at the
        beginning of the shell output and it moves the cursor to the
-       next location of the error/warnings he encounter parsing the
+       next location of the error/warnings it encounter, parsing the
        output.
   + ~remove-unused-import~ :: Dependency management is a very useful
        feature of any IDE. When happens to have an import that's not
@@ -128,12 +128,15 @@
        new value or method. it just put the result to the first empty
        line it finds backwards, so you can then move it wherever you
        want, and substitute the code you selected with the name of
-       that method/value.
+       that method/value. It might not be super precise as well, but
+       it's a start.
 
   IDEs have definitely a longer list of features, but I added the most
-  important for me. A possible improvement would be to have a command
+  important for me. A possible improvement would be to add a command
   for unimplemented methods/values, in case you are creating something
   that should satisfy a specific contract, like a trait/interface/typeclass.
+
+  At the time of writing, I've implemented them for: Haskell, Scala and Typescript.
 
 ** Abstract the Pattern
   :PROPERTIES:
@@ -141,7 +144,7 @@
   :END:
 
   The previous section is my /Letter of Intent/ about what I need and
-  I want to do, but we know that the number of languages out there are
+  I want to do, but the number of languages out there are
   countless. Do I need to implement the same exact features countless
   times (or at least for every language I'm interested in) over and
   over again??
@@ -150,14 +153,14 @@
 
   Every language/tool out there has different syntax, so we need to add
   some specific logic to each one of them. Luckily, there are
-  operations that are common for every technology, such as copying the
+  operations that are common whatever the technology, such as copying the
   resulting import to the starting file or copying the extract code to
   the nearest available position. How can we factor out these
   operations and share them between the specific implementations?
 
   Answer: *Higher-order Functions*
 
-  We can have common patterns for the features that get, as arguments,
+  We can have common patterns/templates for the features that get, as arguments,
   the language-specific functions and apply them accordingly.
 
 *** Example
@@ -165,13 +168,124 @@
   :CUSTOM_ID: ArticleContentAbstactPatternExample
   :END:
 
+  I will show you how the higher-order function behind
+  the feature ~extract-code-line-or-region~ is built.
 
+  #+BEGIN_SRC emacs-lisp
+  (defun extract-code-line-or-region-template (value function postDefinitionSyntaxValue postDefinitionSyntaxFunc EndSyntaxValue EndSyntaxFunc name parameters from to)
+    "Template for extracting code to value or function:
+     Based on the input it this extract the selected code to the closest empty line above.
+     - Value: syntax for values in target laguage
+     - function: syntax for function in target laguage
+     - postDefinitionSyntax: what you put between the name + parameters and the body of the function/value. eg (= in scala)
+     - EndSyntax: what to put at the end of the definition of value/function body. Eg in js it's ';' for value but '}' for functionsxs
+     - name: name of the extracted value/function
+     - from: start of the region
+     - to: end of the region
+    "
+    ;; extract code, cut if region or cut from point to end of the line
+    (setq code (buffer-substring from to))
+    (delete-region from to)
+
+    ;; Generate code
+    (setq resultDefinition (if (string-blank-p parameters)
+                               (concat value name postDefinitionSyntaxValue code EndSyntaxValue)
+                             (concat function name parameters postDefinitionSyntaxFunc code EndSyntaxFunc)))
+    (setq resultReference (if (string-blank-p parameters)
+                              name
+                            (concat name parameters)))
+    ;; Put the resultReference at point
+    (insert resultReference)
+    ;; Move to the closest ^$ line and insert the resultDefinition
+    (re-search-backward "^$")
+    (insert resultDefinition)
+    )
+  #+END_SRC
+
+  The first thing you notice is how this function takes a lot of
+  parameters. That's due to his nature of higher order function, since
+  it needs to apply the language specific functions in input and
+  change its behavior based on the values it gets.
+
+  These are the operations performed:
+  - Grabs the code to extract and delete the region selected.
+  - Compose the input values to create the extracted code and the
+    related reference. It choose if it will be a value of a method
+    based on the presence of parameters.
+  - Insert the reference where there was the code.
+  - Search back for the first empty line.
+  - Insert the computed value, method.
+
+
+    Notice how there's no reference about a specific language syntax
+    into this function.
 
 ** Language Specific
   :PROPERTIES:
   :CUSTOM_ID: ArticleContentLanguageSpecific
   :END:
 
+  Now that we have templates to use, we can focus on crafting the
+  language specific functions to pass into the templates. Most of the
+  time, them rely on Regexp to instruct: what to search for or what is
+  the right syntax of an import for instance. Of course, some are more
+  complex then other and can be quite tricky to set them
+  properly. Plus, sometimes you need to override a specific template function
+  because the target language is quite /special/.
+
+*** Example
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleContentLanguageSpecificExample
+  :END:
+
+  Still using the ~extract-code-line-or-region-template~ but the
+  Haskell version
+
+  #+BEGIN_SRC emacs-lisp
+  (defun hs-extract-code-line-or-region (name &optional parameters from to)
+    "Extract the code to val or def:
+     Require:
+       - Name of the val/def
+       - Optional list of parameters (if empty it will be a val)
+
+     if no code region is selected then it extracts the rest of the line from current position
+     Return type not specified.
+    "
+    (interactive (list
+                  (read-string "value/function name: " )
+                  (progn
+                    (setq
+                     param (read-string "param name (RET to finish): ")
+                     params nil
+                     )
+                    (while (not (equal "" (s-trim param)))
+                      (push (s-trim param) params)
+                      (setq param (read-string "param name (RET to finish): "))
+                      )
+                    (concat " " (mapconcat 'identity (reverse params) " "))
+                    )
+                  (if (use-region-p) (region-beginning) (point))
+                  (if (use-region-p) (region-end) (line-end-position))
+                  ))
+    (funcall 'extract-code-line-or-region-template "" "" " = " " = " "" "" name parameters from to)
+    )
+  #+END_SRC
+
+  Here, the most part of the function is about fetching the input. In
+  particular:
+  - The name of the outcome value/method.
+  - The list of parameters. See how it loops until the user inserts the
+    empty string.
+  - The region, if present, Otherwise a new region is taken, starting
+    from the current position to the end of the line.
+
+
+  After all the inputs are set, the function just calls the relative
+  template function, passing some constants, where the language-syntax
+  specific is required, and the variables, where the values are driven
+  by the input.  Here you can see how most of the constants are empty
+  strings since Haskell has a very concise syntax compared to other
+  languages like Scala or Typescript.
 
 ** Conclusions
   :PROPERTIES:
@@ -179,15 +293,16 @@
   :END:
 
   Usually, you write the conclusions at the end of the article, but in
-  this case I already know what to write in here.
+  this case, I already know what to write in here, so I have written
+  these sections pretty much at the beginning of the article.
 
   There's a high chance that [[https://scalameta.org/metals/][Metals]], or something similar, now works
-  flawless and it's easy to install. So my recommendation is to use
-  it, the less configuration you have in place the better.
+  flawlessly and it's easy to install. So, my recommendation is to use
+  it, the less configuration you have in place, the better.
 
   By the way, this was a very cool exercise to do and it's easy to
-  remove, because them are just a bunch of (almost) stand alone
-  functions. Plus, right now them aren't perfect, but knowing that you
+  remove because they are just a bunch of (almost) stand-alone
+  functions. Plus, right now they aren't perfect, but knowing that you
   could change them and make them work better is reassuring.
 
   In summary, if you want to really make a difference and improve the
@@ -195,7 +310,16 @@
   contribute to those projects to make them better.
 
   PS: basically, every conclusion I make at the end of my articles is
-  something like. Don't do what you just read!.
+  something like. Don't do what you just read!. 😄
+
+*** References
+
+    - [[https://bitbucket.org/benkio89/.emacs.d/src/master/][Emacs configuration]]
+    - [[https://bitbucket.org/benkio89/.emacs.d/src/master/orgConfig/functions/languageTemplateFunctions.org][Template Functions]]
+    - [[https://bitbucket.org/benkio89/.emacs.d/src/master/orgConfig/functions/scala.org][Scala Functions]]
+    - [[https://bitbucket.org/benkio89/.emacs.d/src/master/orgConfig/functions/haskell.org][Haskell Functions]]
+    - [[https://bitbucket.org/benkio89/.emacs.d/src/master/orgConfig/functions/typescript.org][Typescript Functions]]
+
 * Share Buttons
   :PROPERTIES:
   :CUSTOM_ID: ShareButtons
