@@ -1,0 +1,123 @@
+#+OPTIONS: num:nil toc:t H:4
+#+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:nil
+#+TITLE: Rondò Veneziano - Nettuno - Tab + Score + Midi
+#+DESCRIPTION: Rondò Veneziano - Nettuno - Tab + Score + Midi
+#+KEYWORDS: Rondò Veneziano - Nettuno - Tab + Score + Midi
+#+CREATOR: Enrico Benini
+#+HTML_HEAD_EXTRA: <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA: <link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/main.css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/blog.css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/article.css">
+
+* Blog
+  :PROPERTIES:
+  :HTML_CONTAINER_CLASS: text-center navbar navbar-inverse navbar-fixed-top
+  :CUSTOM_ID: navbar
+  :END:
+#+BEGIN_EXPORT html
+<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapsableNavbar">
+  <span class="icon-bar"Article 6</span>
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+</button>
+<a title="Home" href="../blog.html"><h1 id="navbarTitle" class="navbar-text">Blog</h1></a>
+<div class="collapse navbar-collapse" id="collapsableNavbar">
+  <ul class="nav navbar-nav">
+    <li><a title="Home" href="../index.html"><i class="fas fa-home fa-3x" aria-hidden="true"></i></a></li>
+    <li><a title="Article List" href="../articleList.html" class="navbar-text h3">Article List</a></li>
+<li><a title="Book List" href="../bookList.html" class="navbar-text h3">Book List</a></li>
+<li><a title="Album List" href="../albumList.html" class="navbar-text h3">Album List</a></li>
+  </ul>
+</div>
+#+END_EXPORT
+
+* Rondò Veneziano - Nettuno - Tab + Score + Midi
+  :PROPERTIES:
+  :CUSTOM_ID: Article
+  :END:
+  *Created: <2020-08-31 Mon>*
+** Abstract
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleAbstract
+  :END:
+
+  I'm studying this song and I was searching in the web for some score
+  about it. I couldn't find any. Therefore, since I need to learn it
+  by ear, I decided to write an article on that, transcribing the
+  music. So a score would be available and I could experiment with [[https://lilypond.org/][Lilypond]].
+
+** Content
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleContent
+  :END:
+  
+
+*** Song
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleContentSong
+  :END:
+  
+#+begin_export html
+<figure>
+<iframe width="640" height="480" src="https://www.youtube.com/embed/iWkUn3_0W2E?rel=0" allowfullscreen></iframe>
+<figcaption>
+Rondò Veneziano - Nettuno
+</figcaption>
+</figure>
+#+end_export
+
+*** Lilypond Source
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleContentLilypondSource
+  :END:
+
+  Here you can find the [[https://lilypond.org/doc/v2.20/Documentation/learning/index.html][Lilypond guide]]
+
+*** Score PDF
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleContentScore
+  :END:
+
+*** Midi
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleContentMidi
+  :END:
+
+** Conclusions
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleConclusions
+  :END:
+
+* Share Buttons
+  :PROPERTIES:
+  :CUSTOM_ID: ShareButtons
+  :END:
+#+BEGIN_EXPORT html
+<!-- AddToAny BEGIN -->
+<hr>
+<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+<a class="a2a_button_facebook"></a>
+<a class="a2a_button_twitter"></a>
+<a class="a2a_button_whatsapp"></a>
+<a class="a2a_button_telegram"></a>
+<a class="a2a_button_linkedin"></a>
+<a class="a2a_button_email"></a>
+</div>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+<!-- AddToAny END -->
+#+END_EXPORT
+
+#+begin_export html
+<script type="text/javascript">
+$(function() {
+  $('#text-table-of-contents > ul li').first().css("display", "none");
+  $('#text-table-of-contents > ul li').last().css("display", "none");
+  $('#table-of-contents').addClass("visible-lg")
+});
+</script>
+#+end_export
