@@ -12,7 +12,6 @@ introAScore = \relative c' {
        e16 d e c g c e g e4 r4
        e'16 d e c g c e g e4 r4
      }
-
 introATab = \relative c' {
   e16\2 d\3 e\2 c\3 g\4 c\3 e\2 g\2 e4\2 r4
   e'16\1 d\2 e\1 c\2 g\3 c\2 e\1 g\1 e4\1 r4
@@ -91,12 +90,22 @@ verseAlternativeATab = \relative c' {
 verseAlternativeBScore = \relative c'' {
   g f g dis bes dis g bes f dis f d bes d f bes
 }
-
 verseAlternativeBTab = \relative c''{
   g\2 f\2 g\2 dis\3 bes\4 dis\3 g\2 bes\1 f\2 dis\3 f\2 d\3 bes\4 d\3 f\2 bes\1
 }
 
-staff =   \new StaffGroup <<
+verseBScore = \relative c'' {
+  c bes c a f c f c a f a c a c f a
+  c bes c a e c e c a e a c a c e a
+  c bes c a fis d fis d a fis a d a d fis a
+}
+verseBTab = \relative c'' {
+  c\1 bes\1 c\1 a\1 f\2 c\3 f\2 c\3 a\4 f\5 a\4 c\3 a\4 c\3 f\2 a\1
+  c\1 bes\1 c\1 a\1 e\2 c\3 e\2 c\3 a\4 e\5 a\4 c\3 a\4 c\3 e\2 a\1
+  c\1 bes\1 c\1 a\1 fis\2 d\3 fis\2 d\3 a\4 fis\5 a\4 d\3 a\4 d\3 fis\2 a\1
+}
+
+staff = \new StaffGroup <<
   \new Staff {
     \introAScore
     \repeat volta 2 \verseScore
@@ -104,6 +113,7 @@ staff =   \new StaffGroup <<
       {\verseAlternativeAScore |}
       {\verseAlternativeBScore |}
     }
+    \verseBScore
   }
   \new TabStaff {
     \introATab
@@ -112,6 +122,7 @@ staff =   \new StaffGroup <<
       {\verseAlternativeATab |}
       {\verseAlternativeBTab |}
     }
+    \verseBTab
   }
 >> 
 
