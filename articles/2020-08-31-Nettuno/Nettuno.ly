@@ -54,6 +54,14 @@ verseVariationAScore = \relative c' {
   f e f d a d f a e d e c a c e a
   b a b gis e b e b gis e gis b gis b e gis
   b a b g d b d g a g a fis d a d fis
+  {
+    e' d e cis a e a e cis a cis e cis e a cis
+    e d e c g e g e c g c e c e g c
+  }
+  d c d b g d g d bes f bes d bes d f bes
+  c bes c a f c f c a e a c a c e a
+  b a b gis e b e gis b a b gis e b e gis
+  b a b g d b d b g d g b g b d g
 }
 verseVariationATab = \relative c' {
   f16\2 e\2 f\2 d\3 a\4 d\3 f\2 a\1 e\2 d\3 e\2 c\3 a\4 c\3 e\2 a\1
@@ -61,6 +69,14 @@ verseVariationATab = \relative c' {
   \set TabStaff.restrainOpenStrings = ##t
   b\1 a\1 b\1 gis\1 e\2 b\3 e\2 b\3 gis\4 e\5 gis\4 b\3 gis\4 b\3 e\2 gis\1
   b\1 a\1 b\1 g\1 d\2 b\3 d\2 g\1 a\1 g\1 a\1 fis\1 d\2 a\3 d\2 fis\1
+
+  e'\1 d\1 e\1 cis\1 a\2 e\3 a\2 e\3 cis\4 a\5 cis\4 e\3 cis\4 e\3 a\2 cis\1
+  e\1 d\1 e\1 c\1   g\2 e\3 g\2 e\3 c\4   g\5 c\4   e\3 c\4   e\3 g\2 c\1
+
+  d\1 c\1  d\1 b\1 g\2 d\3 g\2 d\3 bes\4 f\5 bes\4 d\3 bes\4 d\3 f\2 bes\1
+  c\1 bes\1 c\1 a\1 f\2 c\3 f\2 c\3 a\4 e\5 a\4 c\3 a\4 c\3 e\2 a\1
+  b\1 a\1 b\1 gis\1 e\2 b\3 e\2 gis\1 b\1 a\1 b\1 gis\1 e\2 b\3 e\2 gis\1
+  b\1 a\1 b\1 g\1 d\2 b\3 d\2 b\3 g\4 d\5 g\4 b\3 g\4 b\3 d\2 g\1
 }
 
 \score {
