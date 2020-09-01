@@ -5,13 +5,24 @@
   composer = "Rondò Veneziano"
 }
 
-verseScore = \relative c' {
+introAScore = \relative c' {
        \time 4/4
        \tempo 4 = 125
        \key c \major
        e16 d e c g c e g e4 r4
        e'16 d e c g c e g e4 r4
-       e,16 d e c g c e g e d e c g c e g
+     }
+
+introATab = \relative c' {
+  e16\2 d\3 e\2 c\3 g\4 c\3 e\2 g\2 e4\2 r4
+  e'16\1 d\2 e\1 c\2 g\3 c\2 e\1 g\1 e4\1 r4
+}
+
+verseScore = \relative c' {
+       \time 4/4
+       \tempo 4 = 125
+       \key c \major
+       e16 d e c g c e g e d e c g c e g
        d c d b g b d g d c d b g b d g
        f e f d a d f a f e f d a d f a
        e d e c a c e a e d e c a c e a
@@ -27,9 +38,7 @@ verseScore = \relative c' {
        d c d b g b d g d c d b g b d g
      }
 verseTab = \relative c' {
-       e16\2 d\3 e\2 c\3 g\4 c\3 e\2 g\2 e4\2 r4
-       e'16\1 d\2 e\1 c\2 g\3 c\2 e\1 g\1 e4\1 r4
-       e,16\2 d\3 e\2 c\3 g\4 c\3 e\2 g\2 e\2 d\3 e\2 c\3 g\4 c\3 e\2 g\2
+       e16\2 d\3 e\2 c\3 g\4 c\3 e\2 g\2 e\2 d\3 e\2 c\3 g\4 c\3 e\2 g\2
        d\3 c\4 d\3 b\4 g\5 b\4 d\3 g\2 d\3 c\4 d\3 b\4 g\5 b\4 d\3 g\2
        f\3 e\3 f\3 d\4 a\5 d\4 f\3 a\2 f\3 e\3 f\3 d\4 a\5 d\4 f\3 a\2
        e\3 d\3 e\3 c\4 a\4 c\4 e\3 a\2 e\3 d\3 e\3 c\4 a\4 c\4 e\3 a\2
@@ -50,7 +59,7 @@ verseTab = \relative c' {
        d\2 c\3 d\2 b\3 g\4 b\3 d\2 g\1 d\2 c\3 d\2 b\3 g\4 b\3 d\2 g\1
      }
 
-verseVariationAScore = \relative c' {
+verseAlternativeAScore = \relative c' {
   f e f d a d f a e d e c a c e a
   b a b gis e b e b gis e gis b gis b e gis
   b a b g d b d g a g a fis d a d fis
@@ -63,7 +72,7 @@ verseVariationAScore = \relative c' {
   b a b gis e b e gis b a b gis e b e gis
   b a b g d b d b g d g b g b d g
 }
-verseVariationATab = \relative c' {
+verseAlternativeATab = \relative c' {
   f16\2 e\2 f\2 d\3 a\4 d\3 f\2 a\1 e\2 d\3 e\2 c\3 a\4 c\3 e\2 a\1
   \set TabStaff.minimumFret = #3
   \set TabStaff.restrainOpenStrings = ##t
@@ -79,17 +88,38 @@ verseVariationATab = \relative c' {
   b\1 a\1 b\1 g\1 d\2 b\3 d\2 b\3 g\4 d\5 g\4 b\3 g\4 b\3 d\2 g\1
 }
 
+verseAlternativeBScore = \relative c'' {
+  g f g dis bes dis g bes f dis f d bes d f bes
+}
+
+verseAlternativeBTab = \relative c''{
+  g\2 f\2 g\2 dis\3 bes\4 dis\3 g\2 bes\1 f\2 dis\3 f\2 d\3 bes\4 d\3 f\2 bes\1
+}
+
+staff =   \new StaffGroup <<
+  \new Staff {
+    \introAScore
+    \repeat volta 2 \verseScore
+    \alternative{
+      {\verseAlternativeAScore |}
+      {\verseAlternativeBScore |}
+    }
+  }
+  \new TabStaff {
+    \introATab
+    \repeat volta 2 \verseTab
+    \alternative {
+      {\verseAlternativeATab |}
+      {\verseAlternativeBTab |}
+    }
+  }
+>> 
+
 \score {
-  \new StaffGroup <<
-    \new Staff {
-      \verseScore
-      \verseVariationAScore
-    }
-    \new TabStaff {
-      \verseTab
-      \verseVariationATab
-    }
-  >>
+  \staff
   \layout {}
+}
+\score {
+  \unfoldRepeats \staff
   \midi {}
 }
