@@ -17,6 +17,16 @@ introATab = \relative c' {
   e'16\1 d\2 e\1 c\2 g\3 c\2 e\1 g\1 e4\1 r4
 }
 
+introBScore = \relative c' {
+       e16 d e c g c e g e4 r4
+       e'16 d e cis a cis e a e4 r4
+     }
+introBTab = \relative c' {
+  e16\2 d\3 e\2 c\3 g\4 c\3 e\2 g\2 e4\2 r4
+  e'16\1 d\2 e\1 cis\2 a\3 cis\2 e\1 a\1 e4\1 r4
+}
+
+
 verseScore = \relative c' {
        \time 4/4
        \tempo 4 = 125
@@ -107,6 +117,12 @@ verseBScore = \relative c'' {
     e d e cis a e a e cis a cis e cis e a cis
     e d e c g e g e c g c e c e g c
   }
+  d c d b g d g b d c d bes f d f bes
+  c bes c a f c f a c bes c a e c e a
+  {
+    b a b gis e b e b gis e gis b gis b e gis
+    b a b g d b d b  g d g b g b d g
+  }
 }
 verseBTab = \relative c'' {
   c\1 bes\1 c\1 a\1 f\2 c\3 f\2 c\3 a\4 f\5 a\4 c\3 a\4 c\3 f\2 a\1
@@ -121,7 +137,11 @@ verseBTab = \relative c'' {
   e\1 d\1 e\1 cis\1 a\2 e\3 a\2 e\3 cis\4 a\5 cis\4 e\3 cis\4 e\3 a\2 cis\1
   e\1 d\1 e\1 c\1   g\2 e\3 g\2 e\3 c\4   g\5 c\4   e\3 c\4   e\3 g\2 c\1
   
-  
+  d\1 c\1 d\1 b\1 g\2 d\3 g\2 b\1 d\1 c\1 d\1 bes\1 f\2 d\3 f\2 bes\1
+  c\1 bes\1 c\1 a\1 f\2 c\3 f\2 a\1 c\1 bes\1 c\1 a\1 e\2 c\3 e\2 a\1
+
+  b\1 a\1 b\1 gis\1 e\2 b\3 e\2 b\3 gis\4 e\5 gis\4 b\3 gis\4 b\3 e\2 gis\1
+  b\1 a\1 b\1 g  \1 d\2 b\3 d\2 b\3 g  \4 d\5 g  \4 b\3 g  \4 b\3 d\2 g  \1
 }
 
 staff = \new StaffGroup <<
@@ -133,6 +153,7 @@ staff = \new StaffGroup <<
       {\verseAlternativeBScore |}
     }
     \verseBScore
+    \introBScore
   }
   \new TabStaff {
     \introATab
@@ -142,6 +163,7 @@ staff = \new StaffGroup <<
       {\verseAlternativeBTab |}
     }
     \verseBTab
+    \introBTab
   }
 >> 
 
