@@ -98,11 +98,30 @@ verseBScore = \relative c'' {
   c bes c a f c f c a f a c a c f a
   c bes c a e c e c a e a c a c e a
   c bes c a fis d fis d a fis a d a d fis a
+  b a b g d b d b g e g b g b d g
+  a g a fis c a c a fis dis fis a fis a c fis
+  g fis g e b e g b g fis g e b e g b
+  fis e fis d b d fis b fis e fis d b d fis b
+  b a b g d g b d a g a fis d fis a d
+  {
+    e d e cis a e a e cis a cis e cis e a cis
+    e d e c g e g e c g c e c e g c
+  }
 }
 verseBTab = \relative c'' {
   c\1 bes\1 c\1 a\1 f\2 c\3 f\2 c\3 a\4 f\5 a\4 c\3 a\4 c\3 f\2 a\1
   c\1 bes\1 c\1 a\1 e\2 c\3 e\2 c\3 a\4 e\5 a\4 c\3 a\4 c\3 e\2 a\1
   c\1 bes\1 c\1 a\1 fis\2 d\3 fis\2 d\3 a\4 fis\5 a\4 d\3 a\4 d\3 fis\2 a\1
+  b\1 a\1 b\1 g\1 d\2 b\3 d\2 b\3 g\4 e\4 g\4 b\3 g\4 b\3 d\2 g\1
+  a\1 g\1 a\1 fis\1 c\3 a\3 c\3 a\3 fis\4 dis\4 fis\4 a\3 fis\4 a\3 c\3 fis\1
+  g\1 fis\2 g\1 e\2 b\3 e\2 g\1 b\1 g\1 fis\2 g\1 e\2 b\3 e\2 g\1 b\1
+  fis\2 e\3 fis\2 d\3 b\4 d\3 fis\2 b\1 fis\2 e\3 fis\2 d\3 b\4 d\3 fis\2 b\1
+  b\1 a\2 b\1 g\2 d\3 g\2 b\1 d\1 a\2 g\3 a\2 fis\3 d\4 fis\3 a\2 d\1
+
+  e\1 d\1 e\1 cis\1 a\2 e\3 a\2 e\3 cis\4 a\5 cis\4 e\3 cis\4 e\3 a\2 cis\1
+  e\1 d\1 e\1 c\1   g\2 e\3 g\2 e\3 c\4   g\5 c\4   e\3 c\4   e\3 g\2 c\1
+  
+  
 }
 
 staff = \new StaffGroup <<
