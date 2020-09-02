@@ -54,7 +54,6 @@
   :PROPERTIES:
   :CUSTOM_ID: ArticleContent
   :END:
-  
 
 *** Song
   :PROPERTIES:
@@ -77,15 +76,34 @@ Rondò Veneziano - Nettuno
 
   Here you can find the [[https://lilypond.org/doc/v2.20/Documentation/learning/index.html][Lilypond guide]]
 
+  [[file:2020-08-31-Nettuno/Nettuno.ly][Transcription]]
+
 *** Score PDF
   :PROPERTIES:
   :CUSTOM_ID: ArticleContentScore
   :END:
 
+
+#+begin_export html
+  <figure>
+  <iframe width="640" height="480" src="./2020-08-31-Nettuno/Nettuno.pdf" allowfullscreen></iframe>
+  <figcaption>
+  Rondò Veneziano - Nettuno - PDF
+  </figcaption>
+  </figure>
+#+end_export
+
 *** Midi
   :PROPERTIES:
   :CUSTOM_ID: ArticleContentMidi
   :END:
+  
+#+begin_export html
+  <audio controls>
+    <source src="./2020-08-31-Nettuno/Nettuno.mp3" type="audio/mp3">
+  Your browser does not support the audio element.
+  </audio>
+#+end_export
 
 ** Conclusions
   :PROPERTIES:
