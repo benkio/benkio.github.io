@@ -52,70 +52,110 @@
   :CUSTOM_ID: ArticleContent
   :END:
 
-Intro/Strofa
-Dmin - C - Bb - C - Dmin
-Dmin - C - Bb - C - Dmin
-Dmin - C - Dmin C - Bb - C - Dmin - Bb
+#+begin_export html
+<figure>
+<iframe width="640" height="480" src="https://www.youtube.com/embed/1Crm94eMuPE?rel=0" allowfullscreen></iframe>
+<figcaption>
+Ken il Guerriero 1986 Sigla Completa
+</figcaption>
+</figure>
+<br/>
+#+end_export
 
-Strofa
-D#min - C# - B - C# - D#min
-D#min - C# - B - C# - D#min
-D#min - C# - D#min C# - B - C#
 
-Bridge
+#+BEGIN_SRC
+Dmin  C   Bb
+Mai,  mai scorderai
+C                  Dmin
+L'attimo, la terra che tremò
+Dmin C Bb
+L'aria si incendiò
+C     Dmin
+E poi silenzio
+Dmin                 C          Dmin C Bb
+E gli avvoltoi sulle case sopra la città
+C         Dmin    G#min
+Senza pietà
+
+D#min  C#  B
+Chi    mai fermerà
+C#                   D#min
+La follia, che per le strade va
+    C#  B
+Chi mai spezzerà
+C#        D#min
+Le nostre catene
+                    C#         D#min C#   B
+Chi da quest'incubo nero ci risve    glie rà
+C#           D#min
+Chi mai potrà
+
 D#min - C# - B - C#
 
-Rit
-D# - Bb - G# - Bb - D# - Bb - G#
-F  - C  - Bb - C  - F  - C  - Bb
-
-Bb - G# - Bb
-
-ricomincia da Strofa
-
-chiudi con 2 strofe
-
-
-Mai, mai scorderai
-L'attimo, la terra che tremò
-L'aria si incendiò
-E poi silenzio
-E gli avvoltoi sulle case sopra la città
-Senza pietà
-Chi mai fermerà
-La follia, che per le strade va
-Chi mai spezzerà
-Le nostre catene
-Chi da quest'incubo nero ci risveglierà
-Chi mai potrà
-Ken, sei tu
+D#         Bb
+ken, sei tu
+    G#           Bb
 Fantastico guerriero
+D#            Bb           G#
 Sceso come un fulmine dal cielo
+F        C
 Ken, sei tu
+    Bb           C
 Il nostro condottiero
+F            C              Bb
 E nessuno al mondo adesso è solo
-Ken, sei libero
-L'unico, l'ultimo angelo
-Ken, sei l'energia
-L'azzurra magia (Magia, magia, magia)
-Stella dell'orsa maggiore
-Stella su di noi
-Guerriero va!
-Ken, sei tu
-Col pugno tuo più forte
-Tu che hai messo KO la morte
-Ken, sei tu
-L'acciaio nelle mani
-Tu la mia speranza nel domani
-Mai, mai scorderai
-L'attimo
-La terra che tremò
-Vai, vai tu vivrai
-Giorni felici
-Stella dell'orsa maggiore
-Stella su di noi
-Guerriero vai
 
+Bb G# Bb
+
+D#min C#  B
+Ken,  sei libero
+C#                D#min
+L'unico, l'ultimo angelo
+D#min  C#   B
+Ken,   sei l'energia
+C#        D#min
+L'azzurra magia (Magia, magia, magia)
+                     C#
+Stella dell'orsa maggiore
+       D#min C# B
+Stella su    di noi
+C#        D#min
+Guerriero va!
+
+D#min - C# - B - C#
+
+D#       Bb
+Ken, sei tu
+    G#            Bb
+Col pugno tuo più forte
+D#               Bb    G#
+Tu che hai messo KO la morte
+F         C
+Ken, sei tu
+    Bb           C
+L'acciaio nelle mani
+F            C           Bb
+Tu la mia speranza nel domani
+
+Bb G# Bb
+
+D#min  C#  B
+Mai,   mai scorderai
+C#
+L'attimo
+         D#min
+La terra che tremò
+     C#  B
+Vai, vai tu vivrai
+C#     D#min
+Giorni felici
+                     C#
+Stella dell'orsa maggiore
+       D#min C# B
+Stella su    di noi
+C#        D#min
+Guerriero vai
+#+END_SRC
 
 * Share Buttons
   :PROPERTIES:
