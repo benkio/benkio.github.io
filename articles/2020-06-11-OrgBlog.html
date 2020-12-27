@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Static Personal Website with Org Mode</title>
-<!-- 2020-10-25 Sun 01:12 -->
+<!-- 2020-12-27 Sun 03:16 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -235,7 +235,7 @@ page in this way:
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #ff7f24;">#+html: &lt;ul id="pagination" class="pagination pagination-lg"&gt;&lt;/ul&gt;</span>
+<pre class="src src-org"><span style="color: #ff7f24;">#+html:</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">&lt;ul</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">id="pagination"</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">class="pagination</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">pagination-lg"&gt;&lt;/ul&gt;</span>
 </pre>
 </div>
 
@@ -250,41 +250,41 @@ populate the empty article tags:
 <div class="org-src-container">
 
 <pre class="src src-javascript">#+END_SRC
-#+call: templates.org:inline-js(<span style="color: #ffa07a;">"pagination"</span>)
+#+call:<span style="color: #262626; background-color: #0d0d0d;"> </span>templates.org:inline-js(<span style="color: #ffa07a;">"pagination"</span>)
 
-#+name: populateArticles
-#+begin_src javascript :exports none
-<span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Pagination 0 based</span>
-<span style="color: #00ffff;">const</span> <span style="color: #eedd82;">htmlArticlesPaginated</span> = htmlArticles.slice(page, page + perPage);
-<span style="color: #00ffff;">const</span> <span style="color: #eedd82;">htmlArticlesPathsPaginated</span> = htmlArticlesPaths.slice(page, page + perPage);
+#+name:<span style="color: #262626; background-color: #0d0d0d;"> </span>populateArticles
+#+begin_src<span style="color: #262626; background-color: #0d0d0d;"> </span>javascript<span style="color: #262626; background-color: #0d0d0d;"> </span>:exports<span style="color: #262626; background-color: #0d0d0d;"> </span>none
+<span style="color: #ff7f24;">//</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">Pagination</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">0</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">based</span>
+<span style="color: #00ffff;">const</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #eedd82;">htmlArticlesPaginated</span><span style="color: #262626; background-color: #0d0d0d;"> </span>=<span style="color: #262626; background-color: #0d0d0d;"> </span>htmlArticles.slice(page,<span style="color: #262626; background-color: #0d0d0d;"> </span>page<span style="color: #262626; background-color: #0d0d0d;"> </span>+<span style="color: #262626; background-color: #0d0d0d;"> </span>perPage);
+<span style="color: #00ffff;">const</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #eedd82;">htmlArticlesPathsPaginated</span><span style="color: #262626; background-color: #0d0d0d;"> </span>=<span style="color: #262626; background-color: #0d0d0d;"> </span>htmlArticlesPaths.slice(page,<span style="color: #262626; background-color: #0d0d0d;"> </span>page<span style="color: #262626; background-color: #0d0d0d;"> </span>+<span style="color: #262626; background-color: #0d0d0d;"> </span>perPage);
 
-<span style="color: #00ffff;">var</span> <span style="color: #eedd82;">articleDivs</span> = $(<span style="color: #ffa07a;">"[data-include]"</span>).map(<span style="color: #00ffff;">function</span>() { <span style="color: #00ffff;">return</span> <span style="color: #7fffd4;">this</span>.id; });
+<span style="color: #00ffff;">var</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #eedd82;">articleDivs</span><span style="color: #262626; background-color: #0d0d0d;"> </span>=<span style="color: #262626; background-color: #0d0d0d;"> </span>$(<span style="color: #ffa07a;">"[data-include]"</span>).map(<span style="color: #00ffff;">function</span>()<span style="color: #262626; background-color: #0d0d0d;"> </span>{<span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #00ffff;">return</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #7fffd4;">this</span>.id;<span style="color: #262626; background-color: #0d0d0d;"> </span>});
 
-<span style="color: #00ffff;">var</span> <span style="color: #eedd82;">articlesZip</span> = [];
-<span style="color: #00ffff;">var</span> <span style="color: #eedd82;">articlesElementsZip</span> = [];
+<span style="color: #00ffff;">var</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #eedd82;">articlesZip</span><span style="color: #262626; background-color: #0d0d0d;"> </span>=<span style="color: #262626; background-color: #0d0d0d;"> </span>[];
+<span style="color: #00ffff;">var</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #eedd82;">articlesElementsZip</span><span style="color: #262626; background-color: #0d0d0d;"> </span>=<span style="color: #262626; background-color: #0d0d0d;"> </span>[];
 
-<span style="color: #00ffff;">for</span> (<span style="color: #00ffff;">var</span> <span style="color: #eedd82;">i</span> = 0; i &lt; htmlArticlesPaginated.length; i++) {
-    articlesZip.push([htmlArticlesPaginated[i], htmlArticlesPathsPaginated[i]]);
+<span style="color: #00ffff;">for</span><span style="color: #262626; background-color: #0d0d0d;"> </span>(<span style="color: #00ffff;">var</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #eedd82;">i</span><span style="color: #262626; background-color: #0d0d0d;"> </span>=<span style="color: #262626; background-color: #0d0d0d;"> </span>0;<span style="color: #262626; background-color: #0d0d0d;"> </span>i<span style="color: #262626; background-color: #0d0d0d;"> </span>&lt;<span style="color: #262626; background-color: #0d0d0d;"> </span>htmlArticlesPaginated.length;<span style="color: #262626; background-color: #0d0d0d;"> </span>i++)<span style="color: #262626; background-color: #0d0d0d;"> </span>{
+<span style="color: #262626; background-color: #0d0d0d;">    </span>articlesZip.push([htmlArticlesPaginated[i],<span style="color: #262626; background-color: #0d0d0d;"> </span>htmlArticlesPathsPaginated[i]]);
 }
 
-<span style="color: #00ffff;">var</span> <span style="color: #eedd82;">htmlArticlesTitle</span> = articlesZip.map(<span style="color: #00ffff;">function</span>(<span style="color: #eedd82;">tuple</span>) {
-  <span style="color: #00ffff;">const</span> [<span style="color: #eedd82;">articleContent</span>, <span style="color: #eedd82;">articlePath</span>] = tuple;
-  <span style="color: #00ffff;">return</span> $($.parseHTML(articleContent)).find(<span style="color: #ffa07a;">"#Article"</span>).wrap(<span style="color: #00ffff;">function</span> (){
-    <span style="color: #00ffff;">return</span> <span style="color: #ffa07a;">"&lt;a href='"</span> + articlePath + <span style="color: #ffa07a;">"'&gt;&lt;/a&gt;"</span>
-  }).parent();
+<span style="color: #00ffff;">var</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #eedd82;">htmlArticlesTitle</span><span style="color: #262626; background-color: #0d0d0d;"> </span>=<span style="color: #262626; background-color: #0d0d0d;"> </span>articlesZip.map(<span style="color: #00ffff;">function</span>(<span style="color: #eedd82;">tuple</span>)<span style="color: #262626; background-color: #0d0d0d;"> </span>{
+<span style="color: #262626; background-color: #0d0d0d;">  </span><span style="color: #00ffff;">const</span><span style="color: #262626; background-color: #0d0d0d;"> </span>[<span style="color: #eedd82;">articleContent</span>,<span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #eedd82;">articlePath</span>]<span style="color: #262626; background-color: #0d0d0d;"> </span>=<span style="color: #262626; background-color: #0d0d0d;"> </span>tuple;
+<span style="color: #262626; background-color: #0d0d0d;">  </span><span style="color: #00ffff;">return</span><span style="color: #262626; background-color: #0d0d0d;"> </span>$($.parseHTML(articleContent)).find(<span style="color: #ffa07a;">"#Article"</span>).wrap(<span style="color: #00ffff;">function</span><span style="color: #262626; background-color: #0d0d0d;"> </span>(){
+<span style="color: #262626; background-color: #0d0d0d;">    </span><span style="color: #00ffff;">return</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ffa07a;">"&lt;a</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ffa07a;">href='"</span><span style="color: #262626; background-color: #0d0d0d;"> </span>+<span style="color: #262626; background-color: #0d0d0d;"> </span>articlePath<span style="color: #262626; background-color: #0d0d0d;"> </span>+<span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ffa07a;">"'&gt;&lt;/a&gt;"</span>
+<span style="color: #262626; background-color: #0d0d0d;">  </span>}).parent();
 });
 
-<span style="color: #00ffff;">var</span> <span style="color: #eedd82;">htmlArticlesAbstract</span> = htmlArticlesPaginated.map(<span style="color: #00ffff;">function</span>(<span style="color: #eedd82;">articleContent</span>) {
-  <span style="color: #00ffff;">return</span> $($.parseHTML(articleContent)).find(<span style="color: #ffa07a;">"#outline-container-ArticleAbstract"</span>);
+<span style="color: #00ffff;">var</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #eedd82;">htmlArticlesAbstract</span><span style="color: #262626; background-color: #0d0d0d;"> </span>=<span style="color: #262626; background-color: #0d0d0d;"> </span>htmlArticlesPaginated.map(<span style="color: #00ffff;">function</span>(<span style="color: #eedd82;">articleContent</span>)<span style="color: #262626; background-color: #0d0d0d;"> </span>{
+<span style="color: #262626; background-color: #0d0d0d;">  </span><span style="color: #00ffff;">return</span><span style="color: #262626; background-color: #0d0d0d;"> </span>$($.parseHTML(articleContent)).find(<span style="color: #ffa07a;">"#outline-container-ArticleAbstract"</span>);
 });
 
-<span style="color: #00ffff;">for</span> (<span style="color: #00ffff;">var</span> <span style="color: #eedd82;">i</span> = 0; i &lt; htmlArticlesPaginated.length; i++) {
-    articlesElementsZip.push([articleDivs[i], htmlArticlesTitle[i], htmlArticlesAbstract[i]]);
+<span style="color: #00ffff;">for</span><span style="color: #262626; background-color: #0d0d0d;"> </span>(<span style="color: #00ffff;">var</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #eedd82;">i</span><span style="color: #262626; background-color: #0d0d0d;"> </span>=<span style="color: #262626; background-color: #0d0d0d;"> </span>0;<span style="color: #262626; background-color: #0d0d0d;"> </span>i<span style="color: #262626; background-color: #0d0d0d;"> </span>&lt;<span style="color: #262626; background-color: #0d0d0d;"> </span>htmlArticlesPaginated.length;<span style="color: #262626; background-color: #0d0d0d;"> </span>i++)<span style="color: #262626; background-color: #0d0d0d;"> </span>{
+<span style="color: #262626; background-color: #0d0d0d;">    </span>articlesElementsZip.push([articleDivs[i],<span style="color: #262626; background-color: #0d0d0d;"> </span>htmlArticlesTitle[i],<span style="color: #262626; background-color: #0d0d0d;"> </span>htmlArticlesAbstract[i]]);
 }
 
-articlesElementsZip.forEach(<span style="color: #00ffff;">function</span>(<span style="color: #eedd82;">tuple</span>) {
-    <span style="color: #00ffff;">const</span> [<span style="color: #eedd82;">element</span>, <span style="color: #eedd82;">title</span>, <span style="color: #00ffff;">abstract</span>] = tuple;
-    $(<span style="color: #ffa07a;">"#"</span> + element).html($(<span style="color: #ffa07a;">'&lt;div&gt;'</span>).append(title).append(<span style="color: #00ffff;">abstract</span>));
+articlesElementsZip.forEach(<span style="color: #00ffff;">function</span>(<span style="color: #eedd82;">tuple</span>)<span style="color: #262626; background-color: #0d0d0d;"> </span>{
+<span style="color: #262626; background-color: #0d0d0d;">    </span><span style="color: #00ffff;">const</span><span style="color: #262626; background-color: #0d0d0d;"> </span>[<span style="color: #eedd82;">element</span>,<span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #eedd82;">title</span>,<span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #00ffff;">abstract</span>]<span style="color: #262626; background-color: #0d0d0d;"> </span>=<span style="color: #262626; background-color: #0d0d0d;"> </span>tuple;
+<span style="color: #262626; background-color: #0d0d0d;">    </span>$(<span style="color: #ffa07a;">"#"</span><span style="color: #262626; background-color: #0d0d0d;"> </span>+<span style="color: #262626; background-color: #0d0d0d;"> </span>element).html($(<span style="color: #ffa07a;">'&lt;div&gt;'</span>).append(title).append(<span style="color: #00ffff;">abstract</span>));
 });
 </pre>
 </div>
@@ -333,21 +333,21 @@ Here you can see the complete js code snippet for the pagination:
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #ff7f24;">#+CALL: templates.org:compileOrgArticles()</span>
-<span style="color: #ff7f24;">#+CALL: templates.org:articlesRelativePaths()</span>
+<pre class="src src-org"><span style="color: #ff7f24;">#+CALL:</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">templates.org:compileOrgArticles()</span>
+<span style="color: #ff7f24;">#+CALL:</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">templates.org:articlesRelativePaths()</span>
 
-<span style="color: #ff7f24;">#+NAME: pagination</span>
-#+BEGIN_SRC javascript :exports none
-const page = ((new URLSearchParams(window.location.search).get('page') || 1) - 1) * 5;
-const perPage = 5;
-for (var i = 0; i &lt; (htmlArticles.length/perPage); i++) {
-    var active = "";
-    if ((page/perPage) <span style="color: #b3b3b3;">== i) {</span>
-<span style="color: #b3b3b3;">        active = "class=</span>'active'";
-    }
-    $("#pagination").append(
-        '&lt;li ' + active + '&gt;&lt;a href="' + window.location.href.split('?')[0] + '?page=' + (i+1) + '"&gt;' + (i+1) + '&lt;/a&gt;&lt;/li&gt;'
-    );
+<span style="color: #ff7f24;">#+NAME:</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">pagination</span>
+#+BEGIN_SRC<span style="color: #262626; background-color: #0d0d0d;"> </span>javascript<span style="color: #262626; background-color: #0d0d0d;"> </span>:exports<span style="color: #262626; background-color: #0d0d0d;"> </span>none
+const<span style="color: #262626; background-color: #0d0d0d;"> </span>page<span style="color: #262626; background-color: #0d0d0d;"> </span>=<span style="color: #262626; background-color: #0d0d0d;"> </span>((new<span style="color: #262626; background-color: #0d0d0d;"> </span>URLSearchParams(window.location.search).get('page')<span style="color: #262626; background-color: #0d0d0d;"> </span>||<span style="color: #262626; background-color: #0d0d0d;"> </span>1)<span style="color: #262626; background-color: #0d0d0d;"> </span>-<span style="color: #262626; background-color: #0d0d0d;"> </span>1)<span style="color: #262626; background-color: #0d0d0d;"> </span>*<span style="color: #262626; background-color: #0d0d0d;"> </span>5;
+const<span style="color: #262626; background-color: #0d0d0d;"> </span>perPage<span style="color: #262626; background-color: #0d0d0d;"> </span>=<span style="color: #262626; background-color: #0d0d0d;"> </span>5;
+for<span style="color: #262626; background-color: #0d0d0d;"> </span>(var<span style="color: #262626; background-color: #0d0d0d;"> </span>i<span style="color: #262626; background-color: #0d0d0d;"> </span>=<span style="color: #262626; background-color: #0d0d0d;"> </span>0;<span style="color: #262626; background-color: #0d0d0d;"> </span>i<span style="color: #262626; background-color: #0d0d0d;"> </span>&lt;<span style="color: #262626; background-color: #0d0d0d;"> </span>(htmlArticles.length/perPage);<span style="color: #262626; background-color: #0d0d0d;"> </span>i++)<span style="color: #262626; background-color: #0d0d0d;"> </span>{
+<span style="color: #262626; background-color: #0d0d0d;">    </span>var<span style="color: #262626; background-color: #0d0d0d;"> </span>active<span style="color: #262626; background-color: #0d0d0d;"> </span>=<span style="color: #262626; background-color: #0d0d0d;"> </span>"";
+<span style="color: #262626; background-color: #0d0d0d;">    </span>if<span style="color: #262626; background-color: #0d0d0d;"> </span>((page/perPage)<span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #b3b3b3;">==</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #b3b3b3;">i)</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #b3b3b3;">{</span>
+<span style="color: #262626; background-color: #0d0d0d;">        </span><span style="color: #b3b3b3;">active</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #b3b3b3;">=</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #b3b3b3;">"class=</span>'active'";
+<span style="color: #262626; background-color: #0d0d0d;">    </span>}
+<span style="color: #262626; background-color: #0d0d0d;">    </span>$("#pagination").append(
+<span style="color: #262626; background-color: #0d0d0d;">        </span>'&lt;li<span style="color: #262626; background-color: #0d0d0d;"> </span>'<span style="color: #262626; background-color: #0d0d0d;"> </span>+<span style="color: #262626; background-color: #0d0d0d;"> </span>active<span style="color: #262626; background-color: #0d0d0d;"> </span>+<span style="color: #262626; background-color: #0d0d0d;"> </span>'&gt;&lt;a<span style="color: #262626; background-color: #0d0d0d;"> </span>href="'<span style="color: #262626; background-color: #0d0d0d;"> </span>+<span style="color: #262626; background-color: #0d0d0d;"> </span>window.location.href.split('?')[0]<span style="color: #262626; background-color: #0d0d0d;"> </span>+<span style="color: #262626; background-color: #0d0d0d;"> </span>'?page='<span style="color: #262626; background-color: #0d0d0d;"> </span>+<span style="color: #262626; background-color: #0d0d0d;"> </span>(i+1)<span style="color: #262626; background-color: #0d0d0d;"> </span>+<span style="color: #262626; background-color: #0d0d0d;"> </span>'"&gt;'<span style="color: #262626; background-color: #0d0d0d;"> </span>+<span style="color: #262626; background-color: #0d0d0d;"> </span>(i+1)<span style="color: #262626; background-color: #0d0d0d;"> </span>+<span style="color: #262626; background-color: #0d0d0d;"> </span>'&lt;/a&gt;&lt;/li&gt;'
+<span style="color: #262626; background-color: #0d0d0d;">    </span>);
 }
 </pre>
 </div>
