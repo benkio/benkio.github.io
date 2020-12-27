@@ -73,6 +73,7 @@
   <video controls autoplay loop>
     <source src="./2020-12-27-AdventOfCode2020/AdventOfCodeCalendar.mp4" type="video/mp4">
   </video>
+  <p>The Advent of Code Calendar Animation</p>
 </div>
 
 #+END_EXPORT
