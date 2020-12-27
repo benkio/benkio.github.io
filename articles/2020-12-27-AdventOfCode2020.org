@@ -70,7 +70,7 @@
 <br/>
 
 <div class="embed-responsive embed-responsive-16by9">
-  <video autoplay loop>
+  <video autoplay="true" loop>
     <source src="./2020-12-27-AdventOfCode2020/AdventOfCodeCalendar.mp4" type="video/mp4">
   </video>
 </div>
