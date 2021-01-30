@@ -1,0 +1,171 @@
+#+OPTIONS: num:nil toc:t H:4
+#+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:nil
+#+TITLE: Time to Move to Nix
+#+DESCRIPTION: Time to Move to Nix
+#+KEYWORDS: Time to Move to Nix
+#+CREATOR: Enrico Benini
+#+HTML_HEAD_EXTRA: <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA: <link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/main.css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/blog.css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/article.css">
+
+* Blog
+  :PROPERTIES:
+  :HTML_CONTAINER_CLASS: text-center navbar navbar-inverse navbar-fixed-top
+  :CUSTOM_ID: navbar
+  :END:
+#+BEGIN_EXPORT html
+<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapsableNavbar">
+  <span class="icon-bar"Article 6</span>
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+</button>
+<a title="Home" href="../blog.html"><h1 id="navbarTitle" class="navbar-text">Blog</h1></a>
+<div class="collapse navbar-collapse" id="collapsableNavbar">
+  <ul class="nav navbar-nav">
+    <li><a title="Home" href="../index.html"><i class="fas fa-home fa-3x" aria-hidden="true"></i></a></li>
+    <li><a title="Article List" href="../articleList.html" class="navbar-text h3">Article List</a></li>
+<li><a title="Book List" href="../bookList.html" class="navbar-text h3">Book List</a></li>
+<li><a title="Album List" href="../albumList.html" class="navbar-text h3">Album List</a></li>
+  </ul>
+</div>
+#+END_EXPORT
+
+* Time to Move to Nix
+  :PROPERTIES:
+  :CUSTOM_ID: Article
+  :END:
+  *Created: <2021-01-29 Fri>*
+** Abstract
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleAbstract
+  :END:
+
+  Since some time I hear about the [[https://nixos.wiki/wiki/Main_Page][Nix package manager]]: how it is
+  awesome, how it solves you all the config problems of this world,
+  how it will make you hardware agnostic. You can read all the
+  benefits of it all over the web. Then, as a software developer, with
+  his own config scripts and so on, I dedided that's time to give it a
+  go.
+
+  In this article, I will describe the process, from being a complete
+  noob: knowing nothing about it apart form the last paragraph, to set
+  up a complete configuration that works for me.
+
+  Disclamer: you might have different needs from mine, but still I
+  think this could help someone else. So, let's get ready to rumble!!!
+
+** Content
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleContent
+  :END:
+
+*** The Plan
+
+    As a real professional, I must start with a tweet 😉
+    #+caption: The Plan Tweet
+    [[file:./2021-01-29-NixMigration/The_Plan_Tweet.png]]
+
+    I skip the ~Virtual Box~ & ~Ubuntu Minimal~ installation. I choose
+    Ubuntu minimal as a base since I want to really start from scratch
+    and try to setup also the window manager.
+
+    Another question I want to answer straight away is: Why don't I
+    just start using NixOs instead? Honestly, I don't have a strong
+    reason, I can say I want to start as minimal as possible and from a
+    thing I know. Plus, it should be quicker to set up a minimal
+    virtual machine rather then one with Nix OS.
+
+*** First Impact
+
+    The only word I can think of is: *overwhelming*, but not in a good
+    way. It has so much stuff that you, newcomer, will feel confused
+    and disoriented. You might thing «Oh, let's read the manual/guide
+    from the official site», well in there there's everything: the nix
+    language, the nixos, the different commands, multiuser setup,
+    profiles and much much more. The only thing I found useful was
+    how to install nix and that's it.
+
+    What I'm searching is how to setup my own configuration, then,
+    when the need arise, I will go and search how to create a Set or a
+    funciton with the Nix language. Instead, a lot of the guides
+    doesn't start from a simple plain config with, let's say, just
+    ~wget~ and ~7zip~.
+
+    So I kept reading and reading, landing finally on Reddit. They
+    suggest to take an exsisting configuration and start by modifying
+    that.
+
+**** NixOs and Home Manager
+
+     In the end, I discovered that, with ~Nix~ only, you can't
+     actually manage the whole system. In particular, I wasn't able to
+     find a guide telling you how to set up a proper script like you
+     would to with bash. Plus, if you want to change some config apart
+     from just installing/uninstalling software, you need
+     ~NixOs~. That could be installed by using the [[https://github.com/jeaye/nixos-in-place][nix-in-place
+     script]], but, what it does is to create an _alternative_ root
+     folder as you will just restart in NixOs and moves everything you
+     have to an ~old-root~ folder. I don't think you want that, unless
+     you just do it from the start (and still I find it not very cool,
+     let's say okish).
+
+     After some more reearch, I found the [[https://github.com/nix-community/home-manager][Home Manager Package]]. This
+     will extend the capabilities of ~Nix~ by far and let you manage
+     your home directory using nix. I still don't know if this has the
+     same power of ~NixOs~, but it seems the thing I want. Especially,
+     considering that I wish to be more OS independent as possible.
+
+     What you have to do is to create a ~home.nix~ into your
+     ~$HOME/.config/nixpkgs/~ and then run ~home-manager switch~.
+     Checkout my [[https://github.com/benkio/nix-config/commit/378a70906e691d4bdf3892844740743716eef40f][Initial Commit]].
+
+** Conclusions
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleConclusions
+  :END:
+
+
+** References
+ - [[https://nixos.org/][NixOs Website]] :: Where you can find all the ufficial instructions
+      about Nix and the related distro.
+ - [[https://github.com/jeaye/nixos-in-place][Nix In Place]] :: You can install ~NixOs~ wherever you want (Linux or
+      Mac) more or less.
+ - [[https://github.com/nix-community/home-manager][Home Manager]] :: ~Nix~ package that allows you to access quite some
+      configuration options of your home directory as well as manage
+      your software.
+ - [[https://github.com/benkio/nix-config.git][My Nix Config]] :: Here is where I try to build my nix
+      configuration.
+* Share Buttons
+  :PROPERTIES:
+  :CUSTOM_ID: ShareButtons
+  :END:
+#+BEGIN_EXPORT html
+<!-- AddToAny BEGIN -->
+<hr>
+<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+<a class="a2a_button_facebook"></a>
+<a class="a2a_button_twitter"></a>
+<a class="a2a_button_whatsapp"></a>
+<a class="a2a_button_telegram"></a>
+<a class="a2a_button_linkedin"></a>
+<a class="a2a_button_email"></a>
+</div>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+<!-- AddToAny END -->
+#+END_EXPORT
+
+#+begin_export html
+<script type="text/javascript">
+$(function() {
+  $('#text-table-of-contents > ul li').first().css("display", "none");
+  $('#text-table-of-contents > ul li').last().css("display", "none");
+  $('#table-of-contents').addClass("visible-lg")
+});
+</script>
+#+end_export
