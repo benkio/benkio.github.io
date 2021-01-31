@@ -122,24 +122,151 @@
 
      What you have to do is to create a ~home.nix~ into your
      ~$HOME/.config/nixpkgs/~ and then run ~home-manager switch~.
-     Checkout my [[https://github.com/benkio/nix-config/commit/378a70906e691d4bdf3892844740743716eef40f][Initial Commit]].
+     Checkout my [[https://github.com/benkio/nix-config/commit/378a70906e691d4bdf3892844740743716eef40f][Initial Commit]]. If you want to check out the initial
+     reference script, you can find it [[https://gist.github.com/benkio/2d4346e5e02b85556b0e][here]].
+
+*** Setup From existing Github Config
+
+    As every emacs user, I already have my emacs configuration
+    gelously crafted and polished. Now, I don't want to restart from
+    scratch and specify all the packages I have and so on, plus I have
+    some custom ~elisp~ functions I wish to preserve. Fortunately,
+    ~Nix~ gives you a way to fetch something from github using
+    ~fetchFromGitHub~ function. ([[https://nixos.org/manual/nixpkgs/stable/#sec-sources][Manual Section]])
+
+    So, the idea here is to:
+    + Download your config from github: provide the owner, repo,
+      reference to the specific commit or tag and hash SHA256 of the
+      resulting directory
+    + Tell nix to copy it into the ~$HOME/.emacs.d/~ directory. I
+      can't move it since nix stores immutable directories in his
+      store. Therefore, you must just make a copy to the desired
+      location. Fortunately the emacs config, without compilation
+      packages is not that big.
+    + Setup the emacs server hook. (Optional, advanced topic)
+
+    And that should be it. I took [[https://github.com/NixOS/nixpkgs/issues/14277][this issue]] as a reference.
+    *EDIT:* After a little bit more research I found this better
+    answer: [[https://discourse.nixos.org/t/home-manager-spacemacs/8033][emacs.d home-manager dot file(directory)]]
+
+    This works, BUT!!! the result will be all symlinks to the nix
+    store. Then, you can't actually change anything from the
+    configuration itself. You should change it somewhere else, commit,
+    recalculate the sha256...a full-pain. Then, you have to put a
+    simple shell snippet to copy the source to the ~$HOME/.emacs.d/~
+    folder and change the permissions in order to be able to change
+    it.
+
+    Huge downside of using `fetchFromGitHub` is that it just download
+    the tarball and extract it's content. Therefore, your emacs ~.git~
+    folder is not downloaded and then, when you move it to the right
+    place with the shell snippet you don't have the git
+    repository. Now, you can decide to use `fetchGit` with the
+    option ~leaveDotGit = true~ to solve the issue, *but* remember
+    that ~nix~ rely on sha256 and bring the ~.git~ folder down will
+    increate the probability of a mismatch!! ([[https://discourse.nixos.org/t/keep-git-folder-in-when-fetching-a-git-repo/8590/2][source]])
+
+    As a result, you will have your beloved ~emacs.d~ config
+    maintained in another repo. The only weirdness I noticed was that
+    the resulting ~git~ repo is set on a new branch called
+    ~fetchgit~. What you have to do is to:
+    + Setup the remote: ~git add remote origin
+      https://github.com/....~
+    + Create & checkout a new branch from ~master~.
+    + Delete the ~fetchgit~.
+
+    Now the question is: does in work consistently? Is it actually
+    reproduceable? Future myself will tell.
+
+    [[https://github.com/benkio/nix-config/commit/6b2a31fafab4f9853f9ef9a87acbebbfa810eab1][emacs configuration commit]]
+
+*** Provided Packages
+
+    I must say the amount of available packages is huge: I found
+    (almost) all I needed straight out of the main channels. I had
+    some trouble installing the ~amule~ package due to a missing
+    library (~crypto++~) and the ~home-manager build~ became quite
+    slow checking the packages, but overall it went smoothly more then
+    expected.
+
+    [[https://github.com/benkio/nix-config/commit/ef67d992efe0f96840e16814fe669ebae8c2498d][add packages and todos to the home.nix]]
+
+*** The Unexpected
+
+    I added more packages, I added the keyboard configuration and so
+    on, then I looked into how to setup I3 and x11. Well, as a result
+    I caused an infinite login loop, inserting ~startx~ into the
+    ~.bash_profile~. Apparently it tried just to turn back to login
+    again!!
+
+    Well, I guess it's time to try to setup a new virtual machine then.
+
+    As you could immagine, setting up X11 and XOrg is not that
+    straight forward as the other packages. The reason behind this is
+    because online you can find a lot of articles using ~NixOs~ that
+    provides a system layer, meanwhile in here I don't have that, I
+    need to setup everything into the ~home-manager~ that seems to
+    have a subset of the configurations you can specify in
+    ~NixOs~. 
+
+    For example, in the following pages all reference to the
+    ~Nix~ configs in the /etc/ folder:
+
+    [[http://wiki.haskell.org/Xmonad/Installing_xmonad#NixOS][XMonad NixOs Installation Page]]
+    [[https://gvolpe.com/blog/xmonad-polybar-nixos/#xmonad][Gabriel Volpe's XMonad Config]]
+
+    *edit:* I start thinking that, installing ~XOrg~ into ~VirtualBox~
+    is not a worderful Idea and it might just not work. I'm thinking
+    about creating a Virtual machine with a GUI in place. I know it's
+    a fallback from the initial plan, but I have to reduce the amount
+    of weirdness if I wish to proceed 😃
+
+    Ok, I tried and tried and tried. Finally I have to give up on
+    setting the WindowManager. Basically, if you are using ~NixOs~ it
+    should be easy: you have your own ~/etc/nixos/configuration.nix~
+    where you set your system configuration and then, on
+    ~$HOME/.config/nixos/home.nix~ you can enable thing on the user
+    side easily. The problem here is that you are bound to
+    ~NixOs~. Ok, you can install it with ~nix-in-place~, but in my
+    mind you should be able to *CONFIGURE* everything you want without
+    having to go into the specific Linux distro.
+
+    I might ask for help in the future into some IRC channel or wherever.
 
 ** Conclusions
   :PROPERTIES:
   :CUSTOM_ID: ArticleConclusions
   :END:
 
+  We all know that this is only the beginning, I will probably keep
+  working on this configuration for long long time, but I think it
+  will save me tons of hours everytime I setup a new machine.
+
+  I know you want me to answer the questions:
+  - Is it hard? Yes, as everytime you need to work with a new
+    technology I guess. You need to learn a new language, a new way of
+    dealing with software and basically google for everything hoping
+    it's not a pain in the nuts...being often disapponted...
+  - Do you reccommend it? Mmm hard to say, I did it since I'm a nerd,
+    but it's really worth it? Isn't better to create your docker
+    image and live with it? Is actually better then a well crafted
+    script? Very hard to say, but I mean: I use emacs, I have a blog
+    in org-mode. It's obvious that there is something wrong here.
+
+  What I really hope is that this article could help you into start up
+  with Nix and boost your startup process by a lot.
 
 ** References
- - [[https://nixos.org/][NixOs Website]] :: Where you can find all the ufficial instructions
+ * [[https://nixos.org/][NixOs Website]] :: Where you can find all the ufficial instructions
       about Nix and the related distro.
- - [[https://github.com/jeaye/nixos-in-place][Nix In Place]] :: You can install ~NixOs~ wherever you want (Linux or
+ * [[https://github.com/jeaye/nixos-in-place][Nix In Place]] :: You can install ~NixOs~ wherever you want (Linux or
       Mac) more or less.
- - [[https://github.com/nix-community/home-manager][Home Manager]] :: ~Nix~ package that allows you to access quite some
+ * [[https://github.com/nix-community/home-manager][Home Manager]] :: ~Nix~ package that allows you to access quite some
       configuration options of your home directory as well as manage
       your software.
- - [[https://github.com/benkio/nix-config.git][My Nix Config]] :: Here is where I try to build my nix
+ * [[https://github.com/benkio/nix-config.git][My Nix Config]] :: Here is where I try to build my nix
       configuration.
+ * [[https://gist.github.com/benkio/2d4346e5e02b85556b0e][Reference Script]] :: Script I used until now to setup a new machine
 * Share Buttons
   :PROPERTIES:
   :CUSTOM_ID: ShareButtons
