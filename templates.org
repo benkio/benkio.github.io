@@ -11,12 +11,21 @@
 #+begin_src elisp :exports none :results output
 (mapc 
   (lambda (f) (progn 
-                (message "file %s" f)
+                (message "compile org file %s" f)
                 (find-file f)
                 (org-twbs-export-to-html)
                 (kill-buffer)
                 ))
   (directory-files "./articles/" t "\.org$"))
+(mapc 
+  (lambda (f) (progn 
+                (message "post compilation processing - file %s" f)
+                (find-file f)
+                (while (re-search-forward "<span style=\"color: #262626; background-color: #0d0d0d;\">\\([ ]*\\)</span>" nil t)
+                  (replace-match "\\1"))
+                (kill-buffer)
+                ))
+  (directory-files "./articles/" t "\.html$"))
 
 #+end_src
 
