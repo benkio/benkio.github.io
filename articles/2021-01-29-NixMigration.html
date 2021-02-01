@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="en">
 <head>
-<title>Time to Move to Nix</title>
-<!-- 2021-02-01 Mon 02:34 -->
+<title>Time to Move to Try Nix - A Weekend Experiment</title>
+<!-- 2021-02-01 Mon 12:53 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -36,7 +36,7 @@ $(function() {
 <div id="text-table-of-contents" class="bs-docs-sidebar">
 <ul class="nav">
 <li><a href="#navbar">Blog</a></li>
-<li><a href="#Article">Time to Move to Nix</a>
+<li><a href="#Article">Time to Move to Try Nix - A Weekend Experiment</a>
 <ul class="nav">
 <li><a href="#ArticleAbstract">Abstract</a></li>
 <li><a href="#ArticleContent">Content</a>
@@ -47,7 +47,7 @@ $(function() {
 <li><a href="#sec-">NixOs and Home Manager</a></li>
 </ul>
 </li>
-<li><a href="#sec-">Setup From existing Github Config</a></li>
+<li><a href="#sec-">Setup From existing Github Configuration</a></li>
 <li><a href="#sec-">Provided Packages</a></li>
 <li><a href="#sec-">The Unexpected</a></li>
 <li><a href="#sec-">Developer Environment</a></li>
@@ -61,7 +61,7 @@ $(function() {
 </ul>
 </div>
 </nav>
-</div><div class="col-md-9 col-md-pull-3"><h1 class="title">Time to Move to Nix</h1>
+</div><div class="col-md-9 col-md-pull-3"><h1 class="title">Time to Move to Try Nix - A Weekend Experiment</h1>
 
 <div id="outline-container-navbar" class="outline-2 text-center navbar navbar-inverse navbar-fixed-top">
 <h2 id="navbar"><a id="sec-" name="sec-"></a>Blog</h2>
@@ -84,7 +84,7 @@ $(function() {
 </div>
 
 <div id="outline-container-Article" class="outline-2">
-<h2 id="Article"><a id="sec-" name="sec-"></a>Time to Move to Nix</h2>
+<h2 id="Article"><a id="sec-" name="sec-"></a>Time to Move to Try Nix - A Weekend Experiment</h2>
 <div class="outline-text-2" id="text-Article">
 <p>
 <b>Created: <span class="timestamp-wrapper"><span class="timestamp">&lt;2021-01-29 Fri&gt;</span></span></b>
@@ -94,18 +94,18 @@ $(function() {
 <h3 id="ArticleAbstract"><a id="sec-" name="sec-"></a>Abstract</h3>
 <div class="outline-text-3" id="text-ArticleAbstract">
 <p>
-Since some time I hear about the <a href="https://nixos.wiki/wiki/Main_Page">Nix package manager</a>: how it is
-awesome, how it solves you all the config problems of this world,
-how it will make you hardware agnostic. You can read all the
-benefits of it all over the web. Then, as a software developer, with
-his own config scripts and so on, I dedided that's time to give it a
-go.
+Since some time now I hear about the <a href="https://nixos.wiki/wiki/Main_Page">Nix package manager</a>: how it is
+awesome, how it solves you all the configuration problems of this
+world, how it will make you hardware agnostic. You can read all the
+benefits of it all over the web. Then, as a software developer and a
+curious nerd with his own configuration scripts and so on, I decided that's
+time to give it a go.
 </p>
 
 <p>
 In this article, I will describe the process, from being a complete
-noob: knowing nothing about it apart form the last paragraph, to set
-up a complete configuration that works for me.
+newbie, knowing nothing about it apart form the last paragraph, to set
+up a configuration in a weekend.
 </p>
 
 <p>
@@ -140,11 +140,11 @@ and try to setup also the window manager.
 </p>
 
 <p>
-Another question I want to answer straight away is: Why don't I
-just start using NixOs instead? Honestly, I don't have a strong
+Another question I want to answer straight away is: <i>Why don't I
+just start using <code>NixOs</code> instead?</i> Honestly, I don't have a strong
 reason, I can say I want to start as minimal as possible and from a
 thing I know. Plus, it should be quicker to set up a minimal
-virtual machine rather then one with Nix OS.
+virtual machine rather then one with <code>NixOs</code>.
 </p>
 </div>
 </div>
@@ -156,24 +156,25 @@ virtual machine rather then one with Nix OS.
 The only word I can think of is: <b>overwhelming</b>, but not in a good
 way. It has so much stuff that you, newcomer, will feel confused
 and disoriented. You might thing «Oh, let's read the manual/guide
-from the official site», well in there there's everything: the nix
-language, the nixos, the different commands, multiuser setup,
+from the official site», well there are tons of stuff: the <code>Nix</code>
+language, the <code>Nixos</code>, the different commands, multi-user setup,
 profiles and much much more. The only thing I found useful was
-how to install nix and that's it.
+how to install <code>Nix</code> and that's it.
 </p>
 
 <p>
-What I'm searching is how to setup my own configuration, then,
+What I'm searching is: how to setup my own configuration, then,
 when the need arise, I will go and search how to create a Set or a
-funciton with the Nix language. Instead, a lot of the guides
-doesn't start from a simple plain config with, let's say, just
+function with the <code>Nix</code> language. Instead, a lot of the guides
+doesn't start from a simple plain configuration with, let's say, just
 <code>wget</code> and <code>7zip</code>.
 </p>
 
 <p>
-So I kept reading and reading, landing finally on Reddit. They
-suggest to take an exsisting configuration and start by modifying
-that.
+So, I kept reading and reading, landing finally on Reddit. They
+suggest to take an existing configuration and start by modifying
+that. I must say the majority of the guides are about <code>NixOs</code>
+instead of just <code>Nix</code> on a non-NixOs distribution, like I'm trying to do.
 </p>
 </div>
 
@@ -182,22 +183,22 @@ that.
 <div class="outline-text-5" id="text-">
 <p>
 In the end, I discovered that, with <code>Nix</code> only, you can't
-actually manage the whole system. In particular, I wasn't able to
-find a guide telling you how to set up a proper script like you
-would to with bash. Plus, if you want to change some config apart
-from just installing/uninstalling software, you need
-<code>NixOs</code>. That could be installed by using the <a href="https://github.com/jeaye/nixos-in-place">nix-in-place
-script</a>, but, what it does is to create an <span class="underline">alternative</span> root
-folder as you will just restart in NixOs and moves everything you
-have to an <code>old-root</code> folder. I don't think you want that, unless
-you just do it from the start (and still I find it not very cool,
-let's say okish).
+actually manage the whole system(or it's not straightforward at
+least). In particular, I wasn't able to find a guide telling you
+how to set up a proper script like you would with bash. Plus,
+if you want to change some configuration apart from just
+installing/uninstalling software, you need <code>NixOs</code>. That could be
+installed by using the <a href="https://github.com/jeaye/nixos-in-place">nix-in-place script</a>, but, what it does is
+to create an <span class="underline">alternative</span> root folder as you will just restart
+in <code>NixOs</code> and moves everything you have to an <code>old-root</code> folder. I
+don't think you want that, unless you just do it from the start
+(and still I find it not very cool, let's say okayish).
 </p>
 
 <p>
-After some more reearch, I found the <a href="https://github.com/nix-community/home-manager">Home Manager Package</a>. This
+After some more research, I found the <a href="https://github.com/nix-community/home-manager">Home Manager Package</a>. This
 will extend the capabilities of <code>Nix</code> by far and let you manage
-your home directory using nix. I still don't know if this has the
+your home directory using <code>Nix</code>. I still don't know if this has the
 same power of <code>NixOs</code>, but it seems the thing I want. Especially,
 considering that I wish to be more OS independent as possible.
 </p>
@@ -213,14 +214,14 @@ reference script, you can find it <a href="https://gist.github.com/benkio/2d4346
 </div>
 
 <div id="outline-container-sec-" class="outline-4">
-<h4 id="sec-">Setup From existing Github Config</h4>
+<h4 id="sec-">Setup From existing Github Configuration</h4>
 <div class="outline-text-4" id="text-">
 <p>
-As every emacs user, I already have my emacs configuration
-gelously crafted and polished. Now, I don't want to restart from
-scratch and specify all the packages I have and so on, plus I have
+As every Emacs user, I already have my Emacs configuration
+jealously crafted and polished. Now, I don't want to restart from
+scratch and specify all the packages I have and so on. Plus, I have
 some custom <code>elisp</code> functions I wish to preserve. Fortunately,
-<code>Nix</code> gives you a way to fetch something from github using
+<code>Nix</code> gives you a way to fetch something from Github using
 <code>fetchFromGitHub</code> function. (<a href="https://nixos.org/manual/nixpkgs/stable/#sec-sources">Manual Section</a>)
 </p>
 
@@ -228,17 +229,17 @@ some custom <code>elisp</code> functions I wish to preserve. Fortunately,
 So, the idea here is to:
 </p>
 <ul class="org-ul">
-<li>Download your config from github: provide the owner, repo,
+<li>Download your configuration from Github: provide the owner, repository,
 reference to the specific commit or tag and hash SHA256 of the
 resulting directory
 </li>
-<li>Tell nix to copy it into the <code>$HOME/.emacs.d/</code> directory. I
-can't move it since nix stores immutable directories in his
+<li>Tell <code>Nix</code> to copy it into the <code>$HOME/.emacs.d/</code> directory. I
+can't move it since <code>Nix</code> stores immutable directories in his
 store. Therefore, you must just make a copy to the desired
-location. Fortunately the emacs config, without compilation
+location. Fortunately the Emacs configuration, without compilation
 packages is not that big.
 </li>
-<li>Setup the emacs server hook. (Optional, advanced topic)
+<li>Setup the Emacs server hook. (Optional, advanced topic)
 </li>
 </ul>
 
@@ -249,30 +250,30 @@ answer: <a href="https://discourse.nixos.org/t/home-manager-spacemacs/8033">emac
 </p>
 
 <p>
-This works, BUT!!! the result will be all symlinks to the nix
+This works, BUT!!! the result will be all symlinks to the <code>Nix</code>
 store. Then, you can't actually change anything from the
-configuration itself. You should change it somewhere else, commit,
-recalculate the sha256&#x2026;a full-pain. Then, you have to put a
-simple shell snippet to copy the source to the <code>$HOME/.emacs.d/</code>
-folder and change the permissions in order to be able to change
-it.
+configuration itself because <code>Nix</code> store immutable data. You
+should change it somewhere else, commit, recalculate the
+sha256&#x2026;a full-pain. Then, you have to put a simple shell snippet
+to copy the source to the <code>$HOME/.emacs.d/</code> folder and change the
+permissions in order to be able to change it.
 </p>
 
 <p>
-Huge downside of using `fetchFromGitHub` is that it just download
-the tarball and extract it's content. Therefore, your emacs <code>.git</code>
+Huge downside of using <code>fetchFromGitHub</code> is that it just download
+the tarball and extract it's content. Therefore, your Emacs <code>.git</code>
 folder is not downloaded and then, when you move it to the right
 place with the shell snippet you don't have the git
-repository. Now, you can decide to use `fetchGit` with the
+repository. Now, you can decide to use <code>fetchGit</code> with the
 option <code>leaveDotGit = true</code> to solve the issue, <b>but</b> remember
-that <code>nix</code> rely on sha256 and bring the <code>.git</code> folder down will
-increate the probability of a mismatch!! (<a href="https://discourse.nixos.org/t/keep-git-folder-in-when-fetching-a-git-repo/8590/2">source</a>)
+that <code>Nix</code> rely on sha256 and bring the <code>.git</code> folder down will
+increase the probability of a mismatch!! (<a href="https://discourse.nixos.org/t/keep-git-folder-in-when-fetching-a-git-repo/8590/2">source</a>)
 </p>
 
 <p>
-As a result, you will have your beloved <code>emacs.d</code> config
-maintained in another repo. The only weirdness I noticed was that
-the resulting <code>git</code> repo is set on a new branch called
+As a result, you will have your beloved <code>emacs.d</code> configuration
+maintained in another repository. The only weirdness I noticed was
+that the resulting <code>git</code> repository is set on a new branch called
 <code>fetchgit</code>. What you have to do is to:
 </p>
 <ul class="org-ul">
@@ -287,7 +288,7 @@ the resulting <code>git</code> repo is set on a new branch called
 
 <p>
 Now the question is: does in work consistently? Is it actually
-reproduceable? Future myself will tell.
+reproducible? Future myself will tell.
 </p>
 
 <p>
@@ -319,7 +320,7 @@ expected.
 <div class="outline-text-4" id="text-">
 <p>
 I added more packages, I added the keyboard configuration and so
-on, then I looked into how to setup I3 and x11. Well, as a result
+on, then I looked into how to setup <code>I3</code> and <code>X11</code>. Well, as a result
 I caused an infinite login loop, inserting <code>startx</code> into the
 <code>.bash_profile</code>. Apparently it tried just to turn back to login
 again!!
@@ -330,43 +331,43 @@ Well, I guess it's time to try to setup a new virtual machine then.
 </p>
 
 <p>
-As you could immagine, setting up X11 and XOrg is not that
+As you could imagine, setting up <code>X11</code> and <code>XOrg</code> is not that
 straight forward as the other packages. The reason behind this is
 because online you can find a lot of articles using <code>NixOs</code> that
 provides a system layer, meanwhile in here I don't have that, I
 need to setup everything into the <code>home-manager</code> that seems to
 have a subset of the configurations you can specify in
-<code>NixOs</code>. 
+<code>NixOs</code>.
 </p>
 
 <p>
 For example, in the following pages all reference to the
-<code>Nix</code> configs in the <i>etc</i> folder:
+<code>Nix</code> configurations in the <i>etc</i> folder:
 </p>
 
 <p>
 <a href="http://wiki.haskell.org/Xmonad/Installing_xmonad#NixOS">XMonad NixOs Installation Page</a>
-<a href="https://gvolpe.com/blog/xmonad-polybar-nixos/#xmonad">Gabriel Volpe's XMonad Config</a>
+<a href="https://gvolpe.com/blog/xmonad-polybar-nixos/#xmonad">Gabriel Volpe's XMonad Configuration</a>
 </p>
 
 <p>
 <b>edit:</b> I start thinking that, installing <code>XOrg</code> into <code>VirtualBox</code>
-is not a worderful Idea and it might just not work. I'm thinking
+is not a wonderful Idea and it might just not work. I'm thinking
 about creating a Virtual machine with a GUI in place. I know it's
 a fallback from the initial plan, but I have to reduce the amount
 of weirdness if I wish to proceed 😃
 </p>
 
 <p>
-Ok, I tried and tried and tried. Finally I have to give up on
-setting the WindowManager. Basically, if you are using <code>NixOs</code> it
+After tons of trials, finally, I have to give up on
+setting the Window Manager. Basically, if you are using <code>NixOs</code> it
 should be easy: you have your own <code>/etc/nixos/configuration.nix</code>
 where you set your system configuration and then, on
 <code>$HOME/.config/nixos/home.nix</code> you can enable thing on the user
 side easily. The problem here is that you are bound to
-<code>NixOs</code>. Ok, you can install it with <code>nix-in-place</code>, but in my
+<code>NixOs</code>. You can install it with <code>nix-in-place</code>, but in my
 mind you should be able to <b>CONFIGURE</b> everything you want without
-having to go into the specific Linux distro.
+having to go into the specific Linux distribution.
 </p>
 
 <p>
@@ -379,10 +380,11 @@ I might ask for help in the future into some IRC channel or wherever.
 <h4 id="sec-">Developer Environment</h4>
 <div class="outline-text-4" id="text-">
 <p>
-Ok, I can live without setting my window manager for now, what
-about <code>scala</code> and <code>haskell</code> then? Well guess what, I cloned a
-bunch of project in both languages and I wasn't able to compile
-them in the virtual machine.
+After the failure of the previous section I decided that I can
+live without setting my window manager for now (<a href="http://read.gov/aesop/005.html">The Fox &amp; The
+Grapes</a>), what about <code>Scala</code> and <code>Haskell</code> then? Well, guess what, I
+cloned a bunch of project in both languages and I wasn't able to
+compile them in the virtual machine.
 </p>
 
 <dl class="org-dl">
@@ -395,10 +397,11 @@ them in the virtual machine.
 
 <p>
 For both this errors I scanned the internet for HOURS without any
-success. after all this pain I'm really considering to just have
-an additional shell script to run post-nix. At least I can get
-what I can't set from nix&#x2026;if I just don't consider the whole
-experiment a failure, especially considering that I could just
+success. After all this pain, I'm really considering to just have
+an additional shell script to run post-Nix. At least I can get
+what I can't set from <code>Nix</code>&#x2026;if I just don't consider the whole
+experiment a failure, but definitely it is not going the way I was
+hoping for. Especially considering that I could just
 install the <code>haskell-plaftorm</code> with a one-liner command.
 </p>
 </div>
@@ -425,17 +428,20 @@ who knows.
 I know you want me to answer the questions:
 </p>
 <ul class="org-ul">
-<li>Is it hard? Yes, as everytime you need to work with a new
+<li>Is it hard? Yes, as every time you need to work with a new
 technology I guess. You need to learn a new language, a new way of
 dealing with software and basically google for everything hoping
-it's not a pain in the nuts&#x2026;being often disapponted&#x2026;
+it's not a pain in the nuts&#x2026;being often disappointed&#x2026;
 </li>
-<li>Do you reccommend it? Mmm hard to say, I did it since I'm a nerd
-and I like to try things out when I hear good things about them,
+<li>Do you recommend it? Mmm hard to say, I did it since I'm a nerd
+and I like to try stuff out when I hear/read good things about them,
 but it's really worth it? Isn't just better to create your docker
 image and live with it? Is actually better then a well crafted
-script? Very hard to say, but I mean: I use emacs, I have a blog
-in org-mode. It's obvious that there is already something wrong here.
+script? Very hard to say, but I mean: I use Emacs, I have a blog
+in org-mode. It's obvious that there is already something wrong
+here. Probably, you should consider how important is for you to
+have a really stable environment (more than bash script) and how
+frequently you have to setup a new machine as well!
 </li>
 </ul>
 </div>
@@ -445,8 +451,8 @@ in org-mode. It's obvious that there is already something wrong here.
 <h3 id="sec-">References</h3>
 <div class="outline-text-3" id="text-">
 <dl class="org-dl">
-<dt> <a href="https://nixos.org/">NixOs Website</a> </dt><dd>Where you can find all the ufficial instructions
-about Nix and the related distro.
+<dt> <a href="https://nixos.org/">NixOs Website</a> </dt><dd>Where you can find all the official instructions
+about <code>Nix</code> and the related distribution.
 </dd>
 <dt> <a href="https://github.com/jeaye/nixos-in-place">Nix In Place</a> </dt><dd>You can install <code>NixOs</code> wherever you want (Linux or
 Mac) more or less.
@@ -455,7 +461,7 @@ Mac) more or less.
 configuration options of your home directory as well as manage
 your software.
 </dd>
-<dt> <a href="https://github.com/benkio/nix-config.git">My Nix Config</a> </dt><dd>Here is where I try to build my nix
+<dt> <a href="https://github.com/benkio/nix-config.git">My Nix Configuration</a> </dt><dd>Here is where I try to build my nix
 configuration.
 </dd>
 <dt> <a href="https://gist.github.com/benkio/2d4346e5e02b85556b0e">Reference Script</a> </dt><dd>Script I used until now to setup a new machine
