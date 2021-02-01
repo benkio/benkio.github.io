@@ -233,28 +233,47 @@
 
     I might ask for help in the future into some IRC channel or wherever.
 
+*** Developer Environment
+
+    Ok, I can live without setting my window manager for now, what
+    about ~scala~ and ~haskell~ then? Well guess what, I cloned a
+    bunch of project in both languages and I wasn't able to compile
+    them in the virtual machine.
+
+    + Sbt :: ~MissingRequirementError: Object java.lang.object in
+             compiler mirror not found~
+    + Stack :: ~libgmp.10.so: cannot open shared open file~
+
+    For both this errors I scanned the internet for HOURS without any
+    success. after all this pain I'm really considering to just have
+    an additional shell script to run post-nix. At least I can get
+    what I can't set from nix...if I just don't consider the whole
+    experiment a failure, especially considering that I could just
+    install the ~haskell-plaftorm~ with a one-liner command.
+
 ** Conclusions
   :PROPERTIES:
   :CUSTOM_ID: ArticleConclusions
   :END:
 
-  We all know that this is only the beginning, I will probably keep
-  working on this configuration for long long time, but I think it
-  will save me tons of hours everytime I setup a new machine.
+  #+caption: Weekend Recap
+  [[file:./2021-01-29-NixMigration/weekendResult.png]]
+
+  Well, this is the final result. Not that great. What I could try to
+  do is to actually use directly ~NixOs~ and get away with it, but
+  who knows.
 
   I know you want me to answer the questions:
   - Is it hard? Yes, as everytime you need to work with a new
     technology I guess. You need to learn a new language, a new way of
     dealing with software and basically google for everything hoping
     it's not a pain in the nuts...being often disapponted...
-  - Do you reccommend it? Mmm hard to say, I did it since I'm a nerd,
-    but it's really worth it? Isn't better to create your docker
+  - Do you reccommend it? Mmm hard to say, I did it since I'm a nerd
+    and I like to try things out when I hear good things about them,
+    but it's really worth it? Isn't just better to create your docker
     image and live with it? Is actually better then a well crafted
     script? Very hard to say, but I mean: I use emacs, I have a blog
-    in org-mode. It's obvious that there is something wrong here.
-
-  What I really hope is that this article could help you into start up
-  with Nix and boost your startup process by a lot.
+    in org-mode. It's obvious that there is already something wrong here.
 
 ** References
  * [[https://nixos.org/][NixOs Website]] :: Where you can find all the ufficial instructions
