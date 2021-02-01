@@ -243,8 +243,11 @@
     cloned a bunch of project in both languages and I wasn't able to
     compile them in the virtual machine.
 
-    + Sbt :: ~MissingRequirementError: Object java.lang.object in
-             compiler mirror not found~
+    + Sbt :: 
+#+begin_src
+MissingRequirementError: Object java.lang.object
+in compiler mirror not found
+#+end_src
     + Stack :: ~libgmp.10.so: cannot open shared open file~
 
     For both this errors I scanned the internet for HOURS without any

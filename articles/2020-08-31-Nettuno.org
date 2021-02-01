@@ -63,7 +63,7 @@
 
 #+begin_export html
 <figure>
-<iframe width="640" height="480" src="https://www.youtube.com/embed/iWkUn3_0W2E?rel=0" allowfullscreen></iframe>
+<div class="video-container"><iframe class="responsive-iframe" src="https://www.youtube.com/embed/iWkUn3_0W2E?rel=0" allowfullscreen></iframe></div>
 <figcaption>
 Rondò Veneziano - Nettuno
 </figcaption>
@@ -87,7 +87,7 @@ Rondò Veneziano - Nettuno
 
 #+begin_export html
   <figure>
-  <iframe width="640" height="480" src="./2020-08-31-Nettuno/Nettuno.pdf" allowfullscreen></iframe>
+<div class="video-container">  <iframe class="responsive-iframe" src="./2020-08-31-Nettuno/Nettuno.pdf" allowfullscreen></iframe></div>
   <figcaption>
   Rondò Veneziano - Nettuno - PDF
   </figcaption>

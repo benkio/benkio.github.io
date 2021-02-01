@@ -55,7 +55,8 @@
 
 #+begin_export html
 <figure>
-<iframe width="640" height="480" src="https://www.youtube.com/embed/1Crm94eMuPE?rel=0" allowfullscreen></iframe>
+<div class="video-container">
+<iframe class="responsive-iframe" src="https://www.youtube.com/embed/1Crm94eMuPE?rel=0" allowfullscreen></iframe></div>
 <figcaption>
 Ken il Guerriero 1986 Sigla Completa
 </figcaption>
