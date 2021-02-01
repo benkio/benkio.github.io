@@ -1,8 +1,8 @@
 #+OPTIONS: num:nil toc:t H:4
 #+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:nil
-#+TITLE: Time to Move to Try Nix - A Weekend Experiment
-#+DESCRIPTION: Time to Move to Try Nix - A Weekend Experiment
-#+KEYWORDS: Time to Move to Try Nix - A Weekend Experiment
+#+TITLE: Time to Try Nix - A Weekend Experiment
+#+DESCRIPTION: Time to Try Nix - A Weekend Experiment
+#+KEYWORDS: Time to Try Nix - A Weekend Experiment
 #+CREATOR: Enrico Benini
 #+HTML_HEAD_EXTRA: <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon">
 #+HTML_HEAD_EXTRA: <link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
@@ -35,7 +35,7 @@
 </div>
 #+END_EXPORT
 
-* Time to Move to Try Nix - A Weekend Experiment
+* Time to Try Nix - A Weekend Experiment
   :PROPERTIES:
   :CUSTOM_ID: Article
   :END:
