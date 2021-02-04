@@ -39,7 +39,7 @@
   :PROPERTIES:
   :CUSTOM_ID: Article
   :END:
-  *Created: <2020-07-20 Mon>*
+  *Created: <2020-08-11 Tue>*
 ** Abstract
    :PROPERTIES:
    :CUSTOM_ID: ArticleAbstract
