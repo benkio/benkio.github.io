@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-<title>Advent Of Code 2020</title>
+<title>NixOs Checkout</title>
 <!-- 2021-02-04 Thu 18:16 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,6 +26,7 @@ $(function() {
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="../css/main.css">
 <link rel="stylesheet" href="../css/blog.css">
 <link rel="stylesheet" href="../css/article.css">
@@ -36,18 +37,23 @@ $(function() {
 <div id="text-table-of-contents" class="bs-docs-sidebar">
 <ul class="nav">
 <li><a href="#navbar">Blog</a></li>
-<li><a href="#Article">Advent Of Code 2020</a>
+<li><a href="#Article">NixOs Checkout</a>
 <ul class="nav">
 <li><a href="#ArticleAbstract">Abstract</a></li>
-<li><a href="#ArticleContent">Content</a></li>
+<li><a href="#ArticleContent">Content</a>
+<ul class="nav">
+<li><a href="#sec-">Intro</a></li>
+</ul>
+</li>
 <li><a href="#ArticleConclusions">Conclusions</a></li>
+<li><a href="#sec-">References</a></li>
 </ul>
 </li>
 <li><a href="#ShareButtons">Share Buttons</a></li>
 </ul>
 </div>
 </nav>
-</div><div class="col-md-9 col-md-pull-3"><h1 class="title">Advent Of Code 2020</h1>
+</div><div class="col-md-9 col-md-pull-3"><h1 class="title">NixOs Checkout</h1>
 
 <div id="outline-container-navbar" class="outline-2 text-center navbar navbar-inverse navbar-fixed-top">
 <h2 id="navbar"><a id="sec-" name="sec-"></a>Blog</h2>
@@ -70,30 +76,21 @@ $(function() {
 </div>
 
 <div id="outline-container-Article" class="outline-2">
-<h2 id="Article"><a id="sec-" name="sec-"></a>Advent Of Code 2020</h2>
+<h2 id="Article"><a id="sec-" name="sec-"></a>NixOs Checkout</h2>
 <div class="outline-text-2" id="text-Article">
 <p>
-<b>Created: <span class="timestamp-wrapper"><span class="timestamp">&lt;2020-12-27 Sun&gt;</span></span></b>
+*Created: *
 </p>
 </div>
 <div id="outline-container-ArticleAbstract" class="outline-3">
 <h3 id="ArticleAbstract"><a id="sec-" name="sec-"></a>Abstract</h3>
 <div class="outline-text-3" id="text-ArticleAbstract">
 <p>
-This year I did the advent of code for the first time and, since I
-wish to learn haskell I used it to solve (most of) the problems.
-</p>
-
-<p>
-It wasn't easy and a couple of times I had to look for solutions,
-since I didn't know that specific math theorem or I just couldn't
-figure out how to proceed.
-</p>
-
-<p>
-I just did some screenshot and screencast as a memory of the
-experience.
-You can find all the code in here: <a href="https://github.com/benkio/GeneralExercises/tree/master/AdventOfCode">Advent Of Code Repository</a>
+After trying out the <code>Nix</code> package manager (full details <a href="https://benkio.github.io/articles/2021-01-29-NixMigration.html">here</a>). It's
+time to try out <code>NixOs</code>, still with the idea to setup a reproduceable
+environment once and for all. We will start out from the result of
+the <code>Nix</code> experiment and evolve that to use <code>NixOs</code>, with a little
+cheat. 😉
 </p>
 </div>
 </div>
@@ -101,42 +98,67 @@ You can find all the code in here: <a href="https://github.com/benkio/GeneralExe
 <div id="outline-container-ArticleContent" class="outline-3">
 <h3 id="ArticleContent"><a id="sec-" name="sec-"></a>Content</h3>
 <div class="outline-text-3" id="text-ArticleContent">
-<figure>
-  <img src="./2020-12-27-AdventOfCode2020/AdventOfCodeCompleted.png" alt="Completed Screen of Advent of Code" align="left" title="Advent Of Code Completed" class="img-fluid" style="width:100%;"/>
-  <figcaption>Advent of Code Final Screen</figcaption>
-</figure>
-
-<br/>
-
-<div class="embed-responsive embed-responsive-16by9">
-  <video controls autoplay loop>
-    <source src="./2020-12-27-AdventOfCode2020/AdventOfCodeCalendar.mp4" type="video/mp4">
-  </video>
-</div>
-<p>The Advent of Code Calendar Animation</p>
-</div>
 </div>
 
+<div id="outline-container-sec-" class="outline-4">
+<h4 id="sec-">Intro</h4>
+<div class="outline-text-4" id="text-">
+<p>
+We learned from the previous experience that, setting up a full
+system out of only <code>Nix</code> package manager, is a tough
+task. However, <code>NixOs</code> exists for that exact purpose: leverage the
+<code>Nix</code> package manager to the max and allow you to have a
+reproduceable system. Plus, you can find a lot of documentation
+and examples out there where you can get inspired from.
+</p>
+
+<p>
+In particular, I came across Gabriel Volpe's <code>NixOs</code> configuration
+and I was quite impressed by what he had done. It seems very easy
+to setup, very complete and it uses <a href="https://xmonad.org/">XMonad</a>, a tiling window
+manager written in <code>Haskell</code>. Plus, he has an <a href="https://gvolpe.com/blog/xmonad-polybar-nixos/">article</a> on that!! So
+it should be easy to extend and that's exactly what I want to do
+now:
+</p>
+<ul class="org-ul">
+<li>Take my previous <code>Nix</code> configuration
+</li>
+<li>Fork Gabriel's Configuration
+</li>
+<li>Merge them together
+</li>
+<li>Try the result on a <code>NixOs</code> virtual machine
+</li>
+</ul>
+
+<p>
+In addition, <code>NixOs</code> comes also as <i>minimal</i> ISO, so you can
+configure it from the ground up instead of having to remove the
+software you might not want.
+</p>
+</div>
+</div>
+</div>
 
 <div id="outline-container-ArticleConclusions" class="outline-3">
 <h3 id="ArticleConclusions"><a id="sec-" name="sec-"></a>Conclusions</h3>
 <div class="outline-text-3" id="text-ArticleConclusions">
-<p>
-It's an experience I recommend to anyone who's approaching
-programming. I would say you will pretty much never encounter such
-problems in real life/work, but it's good for your training. Plus,
-this puzzles are often used in job interviews!! So it might be more
-helpful then you think.
-</p>
-
-<p>
-I will probably going to resume the advent of code of past years as
-well. 😉
-</p>
-</div>
 </div>
 </div>
 
+
+<div id="outline-container-sec-" class="outline-3">
+<h3 id="sec-">References</h3>
+<div class="outline-text-3" id="text-">
+<ul class="org-ul">
+<li><a href="https://gvolpe.com/blog/xmonad-polybar-nixos/">Gabriel Volpe's <code>NixOs</code> Configuration w/ Xmonad</a>
+</li>
+<li><a href="https://xmonad.org/">XMonad Homepage</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
 <div id="outline-container-ShareButtons" class="outline-2">
 <h2 id="ShareButtons"><a id="sec-" name="sec-"></a>Share Buttons</h2>
 <div class="outline-text-2" id="text-ShareButtons">
