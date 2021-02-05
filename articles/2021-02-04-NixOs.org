@@ -1,0 +1,203 @@
+#+OPTIONS: num:nil toc:t H:4
+#+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:nil
+#+TITLE: NixOs Checkout
+#+DESCRIPTION: NixOs Checkout
+#+KEYWORDS: NixOs Checkout
+#+CREATOR: Enrico Benini
+#+HTML_HEAD_EXTRA: <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA: <link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/main.css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/blog.css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/article.css">
+
+* Blog
+  :PROPERTIES:
+  :HTML_CONTAINER_CLASS: text-center navbar navbar-inverse navbar-fixed-top
+  :CUSTOM_ID: navbar
+  :END:
+#+BEGIN_EXPORT html
+<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapsableNavbar">
+  <span class="icon-bar"Article 6</span>
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+</button>
+<a title="Home" href="../blog.html"><h1 id="navbarTitle" class="navbar-text">Blog</h1></a>
+<div class="collapse navbar-collapse" id="collapsableNavbar">
+  <ul class="nav navbar-nav">
+    <li><a title="Home" href="../index.html"><i class="fas fa-home fa-3x" aria-hidden="true"></i></a></li>
+    <li><a title="Article List" href="../articleList.html" class="navbar-text h3">Article List</a></li>
+<li><a title="Book List" href="../bookList.html" class="navbar-text h3">Book List</a></li>
+<li><a title="Album List" href="../albumList.html" class="navbar-text h3">Album List</a></li>
+  </ul>
+</div>
+#+END_EXPORT
+
+* NixOs Checkout
+  :PROPERTIES:
+  :CUSTOM_ID: Article
+  :END:
+  *Created: <2021-02-03 Wed>*
+** Abstract
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleAbstract
+  :END:
+
+  After trying out the ~Nix~ package manager (full details [[https://benkio.github.io/articles/2021-01-29-NixMigration.html][here]]). It's
+  time to try out ~NixOs~, still with the idea to setup a reproduceable
+  environment once and for all. We will start out from the result of
+  the ~Nix~ experiment and evolve that to use ~NixOs~, with a little
+  cheat. 😉
+
+** Content
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleContent
+  :END:
+
+*** Intro
+
+    We learned from the previous experience that, setting up a full
+    system out of only ~Nix~ package manager, is a tough
+    task. However, ~NixOs~ exists for that exact purpose: leverage the
+    ~Nix~ package manager to the max and allow you to have a
+    reproduceable system. Plus, you can find a lot of documentation
+    and examples out there where you can get inspired from.
+
+    In particular, I came across Gabriel Volpe's ~NixOs~ configuration
+    and I was quite impressed by what he had done. It seems very easy
+    to setup, very complete and it uses [[https://xmonad.org/][XMonad]], a tiling window
+    manager written in ~Haskell~. Plus, he has an [[https://gvolpe.com/blog/xmonad-polybar-nixos/][article]] on that!! So,
+    it should be easy to extend and that's exactly what I want. Let's
+    write down the steps to take
+    + Setup a ~NixOs~ VM
+    + Take my previous ~Nix~ configuration
+    + Fork Gabriel's Configuration
+    + Merge them together
+    + Try the result on a ~NixOs~ virtual machine
+
+    In addition, ~NixOs~ comes also as /minimal/ ISO, so you can
+    configure it from the ground up instead of having to remove the
+    software you might not want.
+
+    Ah, I forgot to say that Gabriel is still developing his config!
+    Then, if he will add something I might end up stealing it just
+    by doing a quick merge from his repository. 😎
+
+*** First Step - NixOs VM
+
+    let's install minimal ~NixOs~ on a ~VirtualBox~. You can find the
+    ISO [[https://nixos.org/download.html#nixos-iso][here]]. I just noticed how you can directly download a
+    ~VirtualBox~ VM straight out from the site! Unfortunately it is
+    the /Plasma/ version, meanwhile we want to start from the minimal one.
+
+    At this stage, I'm just going to install the plain system and then
+    work on the configuration on the host machine. When, I will feel
+    confident and satisfied enough about the configuration, I will
+    clone it into the Virtual Machine and test it out.
+
+    I do so because it's extremely easier to work into the host
+    machine instead of doing the changes inside the virtual
+    machine. Basically, I'll use that as a compiler until everything
+    is fine.
+
+    It boots into a shell as expected, but what I liked is the
+    suggestion to type ~nixos-help~ and get back the whole detailed
+    manual about the system. A comprehensive guide with all the links
+    to different sections
+
+    #+caption: NixOs Manual from First Installation
+    [[file:./2021-02-04-NixOs/Nixos-help.png]]
+
+    You have to be patient and read the manual about the different
+    options you have for installation, but at the end it's not that
+    difficult to do, you need to:
+
+    + Partition your drive
+    + Format the drive
+    + Generate and write your configuration file
+    + install the system
+
+    #+begin_src shell
+    # for Legacy boot, see manual for uefi
+    sudo parted /dev/sda -- mklabel msdos
+     # Create primary partition, but 8gb for the swap
+    sudo parted /dev/sda -- mkpart primary 1MiB -8GiB
+    # Create the Swap partition
+    sudo parted /dev/sda -- mkpart primary linux-swap -8GiB 100%
+    # Format primary partition
+    sudo mkfs.ext4 -L nixos /dev/sda1
+    # Format Swap
+    sudo mkswap -L swap /dev/sda2
+    # Mount the primary partition into mnt
+    sudo mount /dev/disk/by-label/nixos /mnt
+    # Enable the swap
+    sudo swapon /dev/sda2
+    # Generate the configuration
+    sudo nixos-generate-config --root /mnt
+    # Edit configurations
+    sudo nano /mnt/etc/nixos/configuration.nix
+    # Install the system
+    sudo nixos-install
+    #+end_src
+
+    I can see how it could be tedious, but if you want there's already
+    someone else online who has crafted scripts to make this pretty
+    much automatic, eg [[https://github.com/aveltras/nixos-install-script/blob/master/install.sh][this installation script]].
+    If you want to see a video regarding installing ~NixOs~, you can
+    find it in [[https://www.youtube.com/watch?v=J7Hdaqs1rjU][here]].
+
+    *Edit:* after ~nixos-install~, the laptop crashed 😄
+
+    Ok, seems that, after login you need to log as a root and then set the password for the new user. Not so great.
+
+*** Working on config
+
+    Well, I worked on the config, but I did a great mistake: I started
+    to change it without regarding if it worked or not. Guess what,
+    the result is that it didn't work and I didn't know why. I assume
+    all the guilty, I should just start from something that works and,
+    *VERY SLOWLY*, start changing it as I wish.
+
+    So what I do now is, let's just apply the conf I forked from and
+    then let's see what we can do to make it mine 😃
+** Conclusions
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleConclusions
+  :END:
+
+
+** References
+   - [[https://gvolpe.com/blog/xmonad-polybar-nixos/][Gabriel Volpe's ~NixOs~ Configuration w/ Xmonad]]
+   - [[https://xmonad.org/][XMonad Homepage]]
+* Share Buttons
+  :PROPERTIES:
+  :CUSTOM_ID: ShareButtons
+  :END:
+#+BEGIN_EXPORT html
+<!-- AddToAny BEGIN -->
+<hr>
+<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+<a class="a2a_button_facebook"></a>
+<a class="a2a_button_twitter"></a>
+<a class="a2a_button_whatsapp"></a>
+<a class="a2a_button_telegram"></a>
+<a class="a2a_button_linkedin"></a>
+<a class="a2a_button_email"></a>
+</div>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+<!-- AddToAny END -->
+#+END_EXPORT
+
+#+begin_export html
+<script type="text/javascript">
+$(function() {
+  $('#text-table-of-contents > ul li').first().css("display", "none");
+  $('#text-table-of-contents > ul li').last().css("display", "none");
+  $('#table-of-contents').addClass("visible-lg")
+});
+</script>
+#+end_export
