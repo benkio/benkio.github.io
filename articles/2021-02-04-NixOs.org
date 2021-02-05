@@ -153,6 +153,8 @@
 
     Ok, seems that, after login you need to log as a root and then set the password for the new user. Not so great.
 
+    *End of the day:* I took the configuration straight out from the box, apart of my username, but I couldn't make it work. Not very promising.
+
 *** Working on config
 
     Well, I worked on the config, but I did a great mistake: I started
