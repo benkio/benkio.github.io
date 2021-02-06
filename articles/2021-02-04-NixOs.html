@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>NixOs Checkout</title>
-<!-- 2021-02-05 Fri 02:10 -->
+<!-- 2021-02-06 Sat 17:13 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -45,6 +45,9 @@ $(function() {
 <li><a href="#sec-">Intro</a></li>
 <li><a href="#sec-">First Step - NixOs VM</a></li>
 <li><a href="#sec-">Working on config</a></li>
+<li><a href="#sec-">Change of Plan</a></li>
+<li><a href="#sec-">Don't Give Up</a></li>
+<li><a href="#sec-">Up to Speed</a></li>
 </ul>
 </li>
 <li><a href="#ArticleConclusions">Conclusions</a></li>
@@ -246,11 +249,37 @@ Ok, seems that, after login you need to log as a root and then set the password 
 </p>
 
 <p>
-<b>End of the day:</b> I took the configuration straight out from the box, apart of my username, but I couldn't make it work. Not very promising.
+<b>End of the day:</b> I took the configuration straight out from the
+box, apart of my username, but I couldn't make it work. I got some
+DBus error that's seems related to gnome somehow, Not very promising.
+</p>
+
+<p>
+Since we will follow the idea of: installing more then necessary
+and then remove/add/replace software with your own, at this point
+we can just download the virtual box pre-cooked VM from the site
+and try with that. Apparently, I'm not able to start from minimal
+ISO 😢
+</p>
+
+<p>
+The good thing about using the ready-to-go is that you can just:
+</p>
+<ul class="org-ul">
+<li>Import it into <code>VirtualBox</code>
+</li>
+<li>Mount the main partition as above
+</li>
+<li>Generate the configuration
+</li>
+<li>Install <code>NixOs</code>
+</li>
+</ul>
+<p>
+So you can skip all the commands about the filesystem.
 </p>
 </div>
 </div>
-
 <div id="outline-container-sec-" class="outline-4">
 <h4 id="sec-">Working on config</h4>
 <div class="outline-text-4" id="text-">
@@ -266,9 +295,176 @@ all the guilty, I should just start from something that works and,
 So what I do now is, let's just apply the conf I forked from and
 then let's see what we can do to make it mine 😃
 </p>
+
+<p>
+Well, seems that, even just not touching anything from Gabriel's
+configuration I got:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-shell">error:<span style="color: #262626; background-color: #0d0d0d;"> </span>GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown:<span style="color: #262626; background-color: #0d0d0d;"> </span>The<span style="color: #262626; background-color: #0d0d0d;"> </span>name<span style="color: #262626; background-color: #0d0d0d;"> </span>ca.desrt.dconf<span style="color: #262626; background-color: #0d0d0d;"> </span>was<span style="color: #262626; background-color: #0d0d0d;"> </span>not<span style="color: #262626; background-color: #0d0d0d;"> </span>provided<span style="color: #262626; background-color: #0d0d0d;"> </span>by<span style="color: #262626; background-color: #0d0d0d;"> </span>any<span style="color: #262626; background-color: #0d0d0d;"> </span>.service<span style="color: #262626; background-color: #0d0d0d;"> </span>files
+</pre>
+</div>
+
+<p>
+I tried applying the solution described in <a href="https://github.com/NixOS/nixpkgs/issues/24333#issuecomment-289235108">here</a> and in other
+places, but it didn't work. Then I tried with <code>nix-env -i dconf</code>
+installing the package manually and it seemed to work. Plus, I had
+to add a couple of lines into the install script since there were
+some configuration conflicts to solve.
+</p>
+
+<p>
+Well, after the restart, <code>XMonad</code> started but I got this new error:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-shell">org.freedesktop.DBus.Error.ServiceUnknown:<span style="color: #262626; background-color: #0d0d0d;"> </span>The<span style="color: #262626; background-color: #0d0d0d;"> </span>name<span style="color: #262626; background-color: #0d0d0d;"> </span>org.blueman.Mechanism<span style="color: #262626; background-color: #0d0d0d;"> </span>was<span style="color: #262626; background-color: #0d0d0d;"> </span>not<span style="color: #262626; background-color: #0d0d0d;"> </span>provided<span style="color: #262626; background-color: #0d0d0d;"> </span>by<span style="color: #262626; background-color: #0d0d0d;"> </span>any<span style="color: #262626; background-color: #0d0d0d;"> </span>.service<span style="color: #262626; background-color: #0d0d0d;"> </span>files
+</pre>
+</div>
+
+<p>
+And then the screen stays grey. Appartently we need to install
+more stuff on to our config, I'm going to revert the <code>NixOs</code> and
+try to do the add from <a href="https://github.com/NixOS/nixpkgs/issues/68591">here</a>.  Good news, the oldest configuration
+seems to have the <code>XMonad</code>, so I'm not able to login to the system
+as before. I'll try to see if I can access a terminal from the
+grub and commit my changes.
+</p>
+
+<p>
+<i>Did I just debunked the Reproducibility and Reversability of
+<code>NixOs</code>??</i> (or I just can't make it work)
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-" class="outline-4">
+<h4 id="sec-">Change of Plan</h4>
+<div class="outline-text-4" id="text-">
+<p>
+Let's take a different approach, I will:
+</p>
+<ul class="org-ul">
+<li>Take the default <code>/etc/nixos/configuration.conf</code> and
+the <code>home.nix</code> file I created from my previous experiment
+</li>
+<li>See if everything works
+</li>
+<li>Keep tweaking the config until a satisfactory result
+</li>
+</ul>
+
+<p>
+After a little effort in editing this and that, this seems to be
+the right way to go. The only problem is that, I did quite some
+changes, I run a switch command and now the virtual machine is
+frozen. Time for a break.
+</p>
+
+<p>
+There are a bad and a good news, the good one is that I restarted
+into an XFCE fine environment, the bad is that it doesn't seems to
+have any software available from the ones I specified into my
+<code>home.nix</code> and now I encountered this error:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-shell">error:<span style="color: #262626; background-color: #0d0d0d;"> </span>attribute<span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ffa07a;">'anything'</span><span style="color: #262626; background-color: #0d0d0d;"> </span>missing,<span style="color: #262626; background-color: #0d0d0d;"> </span>at<span style="color: #262626; background-color: #0d0d0d;"> </span>/mix/var/nix/profiles/pre-user/root/channels/home-manager/modules/programs/matplotlib.nix
+</pre>
+</div>
+
+<p>
+The fun fact is that I can't change it since the filesystem is
+read only!! 😠 At least I was able to push all the changes to the
+repository, so I can retry a fresh install, since that's what we
+are looking for, it needs to work right from the start (if it ever
+does)
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-" class="outline-4">
+<h4 id="sec-">Don't Give Up</h4>
+<div class="outline-text-4" id="text-">
+<p>
+I'm not that kind of person who stops at first issue, so le't keep
+trying and trying again. 
+</p>
+<ul class="org-ul">
+<li>I restarted from a new nixos machine
+</li>
+<li>I applied the changes following the guideline and I kept track
+of each command I did.
+</li>
+<li>I first applied the <code>configuration.nix</code>, install <code>NixOs</code> and
+then applied <code>home.nix</code> and runned the <code>home-manager</code>. It seems
+there's a different way of install <code>home-manager</code> in <code>NixOs</code>
+since you have to be careful about the specific version you are
+going to use
+</li>
+</ul>
+
+<p>
+And now, finally, I'm able to have a simple setup that works in
+the VW!!!! I can now proceed into tweaking the configuration
+details until I'm fully happy with it. At each step I will just
+use the <code>Nix</code> configuration to apply all the changes.
+</p>
+
+<p>
+<a href="https://github.com/benkio/nix-config/commit/8366391">commit</a> ← this is the commit that seems to work now ☺
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-" class="outline-4">
+<h4 id="sec-">Up to Speed</h4>
+<div class="outline-text-4" id="text-">
+<p>
+Now that I'm able to confortably configure the system, I must say
+it's pretty fast doing so:
+</p>
+
+<ul class="org-ul">
+<li>Adding a new software is usually just
+</li>
+</ul>
+<p>
+adding it to the packages lines
+</p>
+<ul class="org-ul">
+<li>Dot files are easy to configure and check
+</li>
+<li>Stuff like environment variables or daemons are built-in the
+configuration of <code>NixOs</code> or <code>home-manager</code>.
+</li>
+</ul>
+
+<p>
+Once you start understanding how things works you move quickly
+then a bash script. Anyway, you can always fallback to a script
+for some tasks.
+</p>
+
+<p>
+For simplicity I used <code>xfce</code> as window manager, but now that
+everything seems fine, I really wish to move to a tiling window manager.
+</p>
+
+<p>
+I just tried with <code>i3</code> and I messed up with the configuration as
+expected. Well, I think it's time to put the <code>NixOs</code> time machine
+mechanism to the test&#x2026;and I was able to go back to a previous
+working configuration of my system, change the config and try a
+different setup, benkio is happy now!!! 😃
+</p>
 </div>
 </div>
 </div>
+
 <div id="outline-container-ArticleConclusions" class="outline-3">
 <h3 id="ArticleConclusions"><a id="sec-" name="sec-"></a>Conclusions</h3>
 <div class="outline-text-3" id="text-ArticleConclusions">
