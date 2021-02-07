@@ -47,7 +47,7 @@
   :END:
 
   After trying out the ~Nix~ package manager (full details [[https://benkio.github.io/articles/2021-01-29-NixMigration.html][here]]). It's
-  time to try out ~NixOs~, still with the idea to setup a reproduceable
+  time to try out ~NixOs~, still with the idea to setup a reproducible
   environment once and for all. We will start out from the result of
   the ~Nix~ experiment and evolve that to use ~NixOs~, with a little
   cheat. 😉
@@ -63,7 +63,7 @@
     system out of only ~Nix~ package manager, is a tough
     task. However, ~NixOs~ exists for that exact purpose: leverage the
     ~Nix~ package manager to the max and allow you to have a
-    reproduceable system. Plus, you can find a lot of documentation
+    reproducible system. Plus, you can find a lot of documentation
     and examples out there where you can get inspired from.
 
     In particular, I came across Gabriel Volpe's ~NixOs~ configuration
@@ -72,7 +72,7 @@
     manager written in ~Haskell~. Plus, he has an [[https://gvolpe.com/blog/xmonad-polybar-nixos/][article]] on that!! So,
     it should be easy to extend and that's exactly what I want. Let's
     write down the steps to take
-    + Setup a ~NixOs~ VM
+    + Setup a ~NixOs~ Virtual Machine
     + Take my previous ~Nix~ configuration
     + Fork Gabriel's Configuration
     + Merge them together
@@ -82,15 +82,15 @@
     configure it from the ground up instead of having to remove the
     software you might not want.
 
-    Ah, I forgot to say that Gabriel is still developing his config!
+    Ah, I forgot to say that Gabriel is still developing his configuration!
     Then, if he will add something I might end up stealing it just
     by doing a quick merge from his repository. 😎
 
-*** First Step - NixOs VM
+*** First Step - NixOs Virtual Machine
 
     let's install minimal ~NixOs~ on a ~VirtualBox~. You can find the
     ISO [[https://nixos.org/download.html#nixos-iso][here]]. I just noticed how you can directly download a
-    ~VirtualBox~ VM straight out from the site! Unfortunately it is
+    ~VirtualBox~ Virtual Machine straight out from the site! Unfortunately it is
     the /Plasma/ version, meanwhile we want to start from the minimal one.
 
     At this stage, I'm just going to install the plain system and then
@@ -151,15 +151,15 @@
 
     *Edit:* after ~nixos-install~, the laptop crashed 😄
 
-    Ok, seems that, after login you need to log as a root and then set the password for the new user. Not so great.
+    OK, seems that, after login you need to log as a root and then set the password for the new user. Not so great.
 
     *End of the day:* I took the configuration straight out from the
     box, apart of my username, but I couldn't make it work. I got some
-    DBus error that's seems related to gnome somehow, Not very promising.
+    ~DBus~ error that's seems related to gnome somehow, Not very promising.
 
     Since we will follow the idea of: installing more then necessary
     and then remove/add/replace software with your own, at this point
-    we can just download the virtual box pre-cooked VM from the site
+    we can just download the virtual box pre-cooked Virtual Machine from the site
     and try with that. Apparently, I'm not able to start from minimal
     ISO 😢
 
@@ -168,16 +168,16 @@
     + Mount the main partition as above
     + Generate the configuration
     + Install ~NixOs~
-    So you can skip all the commands about the filesystem.
-*** Working on config
+    So you can skip all the commands about the file system.
+*** Working on configuration
 
-    Well, I worked on the config, but I did a great mistake: I started
+    Well, I worked on the configuration, but I did a great mistake: I started
     to change it without regarding if it worked or not. Guess what,
     the result is that it didn't work and I didn't know why. I assume
     all the guilty, I should just start from something that works and,
     *VERY SLOWLY*, start changing it as I wish.
 
-    So what I do now is, let's just apply the conf I forked from and
+    So what I do now is, let's just apply the configuration I forked from and
     then let's see what we can do to make it mine 😃
 
     Well, seems that, even just not touching anything from Gabriel's
@@ -198,14 +198,14 @@
     org.freedesktop.DBus.Error.ServiceUnknown: The name org.blueman.Mechanism was not provided by any .service files
     #+end_src
 
-    And then the screen stays grey. Appartently we need to install
-    more stuff on to our config, I'm going to revert the ~NixOs~ and
+    And then the screen stays grey. Apparently we need to install
+    more stuff on to our configuration, I'm going to revert the ~NixOs~ and
     try to do the add from [[https://github.com/NixOS/nixpkgs/issues/68591][here]].  Good news, the oldest configuration
     seems to have the ~XMonad~, so I'm not able to login to the system
     as before. I'll try to see if I can access a terminal from the
     grub and commit my changes.
 
-    /Did I just debunked the Reproducibility and Reversability of
+    /Did I just debunked the Reproducibility and Reversibility of
     ~NixOs~??/ (or I just can't make it work)
 
 *** Change of Plan
@@ -214,7 +214,7 @@
     + Take the default ~/etc/nixos/configuration.conf~ and
       the ~home.nix~ file I created from my previous experiment
     + See if everything works
-    + Keep tweaking the config until a satisfactory result
+    + Keep tweaking the configuration until a satisfactory result
 
     After a little effort in editing this and that, this seems to be
     the right way to go. The only problem is that, I did quite some
@@ -222,7 +222,7 @@
     frozen. Time for a break.
 
     There are a bad and a good news, the good one is that I restarted
-    into an XFCE fine environment, the bad is that it doesn't seems to
+    into an ~XFCE~ environment, the bad is that it doesn't seems to
     have any software available from the ones I specified into my
     ~home.nix~ and now I encountered this error:
 
@@ -230,7 +230,7 @@
     error: attribute 'anything' missing, at /mix/var/nix/profiles/pre-user/root/channels/home-manager/modules/programs/matplotlib.nix
     #+end_src
 
-    The fun fact is that I can't change it since the filesystem is
+    The fun fact is that I can't change it since the file system is
     read only!! 😠 At least I was able to push all the changes to the
     repository, so I can retry a fresh install, since that's what we
     are looking for, it needs to work right from the start (if it ever
@@ -238,19 +238,19 @@
 
 *** Don't Give Up
 
-    I'm not that kind of person who stops at first issue, so le't keep
+    I'm not that kind of person who stops at first issue, so let's keep
     trying and trying again. 
-    + I restarted from a new nixos machine
+    + I restarted from a new ~NixOs~ machine
     + I applied the changes following the guideline and I kept track
       of each command I did.
-    + I first applied the ~configuration.nix~, install ~NixOs~ and
-      then applied ~home.nix~ and runned the ~home-manager~. It seems
+    + I first applied the ~configuration.nix~, installed ~NixOs~,
+      applied ~home.nix~ and finally I ran the ~home-manager~. It seems
       there's a different way of install ~home-manager~ in ~NixOs~
       since you have to be careful about the specific version you are
       going to use
 
     And now, finally, I'm able to have a simple setup that works in
-    the VW!!!! I can now proceed into tweaking the configuration
+    the Virtual Machine!!!! I can now proceed into tweaking the configuration
     details until I'm fully happy with it. At each step I will just
     use the ~Nix~ configuration to apply all the changes.
 
@@ -258,7 +258,7 @@
 
 *** Up to Speed
 
-    Now that I'm able to confortably configure the system, I must say
+    Now that I'm able to comfortably configure the system, I must say
     it's pretty fast doing so:
 
     + Adding a new software is usually just
@@ -277,27 +277,27 @@
     I just tried with ~i3~ and I messed up with the configuration as
     expected. Well, I think it's time to put the ~NixOs~ time machine
     mechanism to the test...and I was able to go back to a previous
-    working configuration of my system, change the config and try a
-    different setup, benkio is happy now!!! 😃
+    working configuration of my system, change the configuration and try a
+    different setup, Benkio is happy now!!! 😃
 
-    At the end of the day I did some progress, but half of my VM
+    At the end of the day I did some progress, but half of my Virtual Machine
     snapshots are broken due to bad configuration.
 
     *edit:* when I say «up to speed» I mean, «most of the time». For
-    example, it took me half a day to setup firefox extensions using
-    ~home-manager~ and ~nur~ due to the fact that I needed to apply
-    packageOverride and it was not so easy to figure it out.
+    example, it took me half a day to setup Firefox extensions using
+    ~home-manager~ and ~nur~ due to the fact that I needed to apply a
+    package Override and it was not so easy to figure it out.
 
 *** Follow Up
 
     I think I reached quite a fine initial configuration by now: I
-    just have all the software I need (emacs and firefox basically 😃)
+    just have all the software I need (Emacs and Firefox basically 😃)
     and I have a basic tiling window manager (i3) with simple
     configuration to manage windows and so on.
 
     What I will do now is:
 
-    + Playing more into the VM: triying to develop in it for a bit and
+    + Playing more into the Virtual Machine: trying to develop in it for a bit and
       do my classic tasks.
     + Work more on the startup installation: setup everything from the
       minimal ~NixOs~ as smoothly as possible. Probably creating one
