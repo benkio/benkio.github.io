@@ -273,22 +273,64 @@
 
     For simplicity I used ~xfce~ as window manager, but now that
     everything seems fine, I really wish to move to a tiling window manager.
-    
+
     I just tried with ~i3~ and I messed up with the configuration as
     expected. Well, I think it's time to put the ~NixOs~ time machine
     mechanism to the test...and I was able to go back to a previous
     working configuration of my system, change the config and try a
     different setup, benkio is happy now!!! 😃
 
+    At the end of the day I did some progress, but half of my VM
+    snapshots are broken due to bad configuration.
+
+    *edit:* when I say «up to speed» I mean, «most of the time». For
+    example, it took me half a day to setup firefox extensions using
+    ~home-manager~ and ~nur~ due to the fact that I needed to apply
+    packageOverride and it was not so easy to figure it out.
+
+*** Follow Up
+
+    I think I reached quite a fine initial configuration by now: I
+    just have all the software I need (emacs and firefox basically 😃)
+    and I have a basic tiling window manager (i3) with simple
+    configuration to manage windows and so on.
+
+    What I will do now is:
+
+    + Playing more into the VM: triying to develop in it for a bit and
+      do my classic tasks.
+    + Work more on the startup installation: setup everything from the
+      minimal ~NixOs~ as smoothly as possible. Probably creating one
+      or more basic shell scripts.
+
+    After a while, when I feel confident I might format my main
+    machine entirely and switch to ~NixOs~. I might add a new section
+    later on in case of relevant updates.
+
 ** Conclusions
   :PROPERTIES:
   :CUSTOM_ID: ArticleConclusions
   :END:
 
+  Finally, I have a working configuration!! 🎉
+
+  As you read it wasn't simple at all, I hope this would turn out to
+  be beneficial in the long run, I can't say right now. What I know is
+  that it took me several hours in order to have something that works
+  and, even if the documentation is actually huge, I think a better
+  job could be done regarding the /Getting Started/ guides and basic
+  ~NixOs~ templates instead of having to go to github inspecting the
+  different user configurations and steal from one or another.
+
+  I hope this article could was useful to you and if you are
+  interested in looking at ~Nix~/~NixOs~ then feel free to checkout my
+  configuration. You will find the link in the [[*References][References Section]].
+
 
 ** References
    - [[https://gvolpe.com/blog/xmonad-polybar-nixos/][Gabriel Volpe's ~NixOs~ Configuration w/ Xmonad]]
    - [[https://xmonad.org/][XMonad Homepage]]
+   - [[https://github.com/benkio/nix-config][My Nix Configuration]]
 * Share Buttons
   :PROPERTIES:
   :CUSTOM_ID: ShareButtons
