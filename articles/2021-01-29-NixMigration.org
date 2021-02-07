@@ -284,6 +284,10 @@ in compiler mirror not found
     here. Probably, you should consider how important is for you to
     have a really stable environment (more than bash script) and how
     frequently you have to setup a new machine as well!
+  - When this could be convenient? I think, using ~Nix~ +
+    ~home-manager~ without ~NixOs~, could be convenient when you don't
+    care/want/can manage the operating system settings, eg. some
+    developers set up their MacOs using ~Nix~ instead of ~Homebrew~.
 
 ** References
  * [[https://nixos.org/][NixOs Website]] :: Where you can find all the official instructions
