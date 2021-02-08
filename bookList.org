@@ -13,7 +13,7 @@
 #+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="css/main.css">
 #+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="css/blog.css">
 
-#+HTML_HEAD_EXTRA: <style>body { padding-top: 150px; }</style>
+#+HTML_HEAD_EXTRA: <style>body { padding-top: 100px; }</style>
 
 * Book List
   :PROPERTIES:

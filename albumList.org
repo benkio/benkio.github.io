@@ -12,8 +12,7 @@
 #+HTML_HEAD_EXTRA:  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 #+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="css/main.css">
 #+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="css/blog.css">
-
-#+HTML_HEAD_EXTRA: <style>body { padding-top: 150px; }</style>
+#+HTML_HEAD_EXTRA: <style>body { padding-top: 100px; }</style>
 
 * Album List
   :PROPERTIES:
@@ -47,65 +46,65 @@
   **Created:** <2020-06-21 Sun>
 
   #+BEGIN_EXPORT HTML
-  x
-    <ul id="bookList" class="list-group">
-    <a target="_blank" href="https://www.youtube.com/results?search_query=...And+Justice+For+All+-+Metallica" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">...And Justice For All - Metallica</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=1984+-+Van+Halen" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">1984 - Van Halen</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Alive+Or+Just+Breathing+-+Killswitch+Engage" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Alive Or Just Breathing - Killswitch Engage</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=An+Ocean+Between+Us+-+As+I+Lay+Dying" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">An Ocean Between Us - As I Lay Dying</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Appetite+For+Destruction+-+Guns+N'+Roses" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Appetite For Destruction - Guns N' Roses</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Ashes+Of+The+Wake+-+Lamb+Of+God" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Ashes Of The Wake - Lamb Of God</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Assimilate+Regenerate+-+Paul+Wardingham" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Assimilate Regenerate - Paul Wardingham</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Back+In+Black+-+AC/DC" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Back In Black - AC/DC</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Blackwater+Park+-+Opeth" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Blackwater Park - Opeth</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Carnival+Diablos+-+Annihilator" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Carnival Diablos - Annihilator</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Couldn't+Stand+The+Weather+-+Stevie+Ray+Vaughan+&+Double+Trouble" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Couldn't Stand The Weather - Stevie Ray Vaughan & Double Trouble</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Cowboys+From+Hell+-+Pantera" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Cowboys From Hell - Pantera</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Cryptic+Writings+[Remaster]+-+Megadeth" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Cryptic Writings [Remaster] - Megadeth</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Diluvium+-+Obscura" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Diluvium - Obscura</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Diver+Down+-+Van+Halen" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Diver Down - Van Halen</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Doomsday+Machine+-+Arch+Enemy" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Doomsday Machine - Arch Enemy</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=The+Embers+of+Eternity+-+Aspherium" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">The Embers of Eternity - Aspherium</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=The+Fall+of+Ideals+-+All+That+Remains" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">The Fall of Ideals - All That Remains</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Enemy+Of+God+-+Kreator" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Enemy Of God - Kreator</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=The+Extremist+-+Joe+Satriani" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">The Extremist - Joe Satriani</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Fair+Warning+-+Van+Halen" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Fair Warning - Van Halen</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Ghostbusters:+Original+Soundtrack+Album+-+V+" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Ghostbusters: Original Soundtrack Album - V
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Holy+Diver+-+Dio" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Holy Diver - Dio</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Images+And+Words+-+Dream+Theater" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Images And Words - Dream Theater</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=The+Jester+Race+(Reissue+2014)+-+In+Flames" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">The Jester Race (Reissue 2014) - In Flames</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Jomsviking+-+Amon+Amarth" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Jomsviking - Amon Amarth</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=King+-+Fleshgod+Apocalypse" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">King - Fleshgod Apocalypse</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=The+Last+Stand+-+Sabaton" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">The Last Stand - Sabaton</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Machine+Head+-+Deep+Purple" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Machine Head - Deep Purple</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Master+Of+Puppets+-+Metallica" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Master Of Puppets - Metallica</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Metal+-+Annihilator" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Metal - Annihilator</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Metal+[Bonus+CD]+-+Best+Of+-+Annihilator" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Metal [Bonus CD] - Best Of - Annihilator</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Multiversum+-+Luca+Mantovanelli" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Multiversum - Luca Mantovanelli</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Mutter+-+Rammstein" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Mutter - Rammstein</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Painkiller+-+Judas+Priest" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Painkiller - Judas Priest</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Pornograffitti+-+Extreme" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Pornograffitti - Extreme</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Reise,+Reise+-+Rammstein" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Reise, Reise - Rammstein</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Ride+The+Lightning+-+Metallica" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Ride The Lightning - Metallica</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Rising+Force+-+Yngwie+J.+Malmsteen's+Rising+Force" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Rising Force - Yngwie J. Malmsteen's Rising Force</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Rust+In+Peace+-+Megadeth" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Rust In Peace - Megadeth</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Sacrament+-+Lamb+Of+God" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Sacrament - Lamb Of God</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=The+Simulation+-+Born+Of+Osiris" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">The Simulation - Born Of Osiris</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Slaughter+Of+The+Soul+[Bonus+Tracks]+-+At+The+Gates" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Slaughter Of The Soul [Bonus Tracks] - At The Gates</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Smash+Hits+-+The+Jimi+Hendrix+Experience" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Smash Hits - The Jimi Hendrix Experience</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=The+Sound+Of+Perseverance+-+Death" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">The Sound Of Perseverance - Death</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Space+Ship+One+[Bonus+Track]+-+Paul+Gilbert" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Space Ship One [Bonus Track] - Paul Gilbert</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Surfing+With+The+Alien+-+Joe+Satriani" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Surfing With The Alien - Joe Satriani</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Suspended+Animation+-+John+Petrucci" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Suspended Animation - John Petrucci</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Texas+Flood+-+Stevie+Ray+Vaughan+&+Double+Trouble" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Texas Flood - Stevie Ray Vaughan & Double Trouble</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Toxicity+-+System+Of+A+Down" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Toxicity - System Of A Down</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Van+Halen+-+Van+Halen" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Van Halen - Van Halen</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Van+Halen+II+-+Van+Halen" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Van Halen II - Van Halen</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Vulgar+Display+Of+Power+-+Pantera" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Vulgar Display Of Power - Pantera</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=War+Eternal+-+Arch+Enemy" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">War Eternal - Arch Enemy</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=Women+And+Children+First+-+Van+Halen" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">Women And Children First - Van Halen</a>
-    <a target="_blank" href="https://www.youtube.com/results?search_query=The+Zenith+Rise+-+I+Built+The+Sky" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">The Zenith Rise - I Built The Sky</a>
-    </ul>
+  <p id="totalAlbumCount"></p>
+  <ul id="bookList" class="list-group">
+  <a target="_blank" href="https://www.youtube.com/results?search_query=...And+Justice+For+All+-+Metallica" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">...And Justice For All - Metallica</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=1984+-+Van+Halen" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">1984 - Van Halen</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Alive+Or+Just+Breathing+-+Killswitch+Engage" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Alive Or Just Breathing - Killswitch Engage</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=An+Ocean+Between+Us+-+As+I+Lay+Dying" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">An Ocean Between Us - As I Lay Dying</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Appetite+For+Destruction+-+Guns+N'+Roses" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Appetite For Destruction - Guns N' Roses</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Ashes+Of+The+Wake+-+Lamb+Of+God" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Ashes Of The Wake - Lamb Of God</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Assimilate+Regenerate+-+Paul+Wardingham" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Assimilate Regenerate - Paul Wardingham</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Back+In+Black+-+AC/DC" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Back In Black - AC/DC</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Blackwater+Park+-+Opeth" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Blackwater Park - Opeth</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Carnival+Diablos+-+Annihilator" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Carnival Diablos - Annihilator</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Couldn't+Stand+The+Weather+-+Stevie+Ray+Vaughan+&+Double+Trouble" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Couldn't Stand The Weather - Stevie Ray Vaughan & Double Trouble</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Cowboys+From+Hell+-+Pantera" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Cowboys From Hell - Pantera</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Cryptic+Writings+[Remaster]+-+Megadeth" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Cryptic Writings [Remaster] - Megadeth</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Diluvium+-+Obscura" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Diluvium - Obscura</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Diver+Down+-+Van+Halen" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Diver Down - Van Halen</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Doomsday+Machine+-+Arch+Enemy" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Doomsday Machine - Arch Enemy</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=The+Embers+of+Eternity+-+Aspherium" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">The Embers of Eternity - Aspherium</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=The+Fall+of+Ideals+-+All+That+Remains" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">The Fall of Ideals - All That Remains</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Enemy+Of+God+-+Kreator" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Enemy Of God - Kreator</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=The+Extremist+-+Joe+Satriani" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">The Extremist - Joe Satriani</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Fair+Warning+-+Van+Halen" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Fair Warning - Van Halen</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Ghostbusters:+Original+Soundtrack+Album+-+V+" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Ghostbusters: Original Soundtrack Album - V
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Holy+Diver+-+Dio" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Holy Diver - Dio</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Images+And+Words+-+Dream+Theater" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Images And Words - Dream Theater</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=The+Jester+Race+(Reissue+2014)+-+In+Flames" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">The Jester Race (Reissue 2014) - In Flames</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Jomsviking+-+Amon+Amarth" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Jomsviking - Amon Amarth</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=King+-+Fleshgod+Apocalypse" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">King - Fleshgod Apocalypse</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=The+Last+Stand+-+Sabaton" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">The Last Stand - Sabaton</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Machine+Head+-+Deep+Purple" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Machine Head - Deep Purple</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Master+Of+Puppets+-+Metallica" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Master Of Puppets - Metallica</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Metal+-+Annihilator" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Metal - Annihilator</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Metal+[Bonus+CD]+-+Best+Of+-+Annihilator" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Metal [Bonus CD] - Best Of - Annihilator</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Multiversum+-+Luca+Mantovanelli" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Multiversum - Luca Mantovanelli</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Mutter+-+Rammstein" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Mutter - Rammstein</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Painkiller+-+Judas+Priest" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Painkiller - Judas Priest</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Pornograffitti+-+Extreme" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Pornograffitti - Extreme</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Reise,+Reise+-+Rammstein" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Reise, Reise - Rammstein</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Ride+The+Lightning+-+Metallica" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Ride The Lightning - Metallica</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Rising+Force+-+Yngwie+J.+Malmsteen's+Rising+Force" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Rising Force - Yngwie J. Malmsteen's Rising Force</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Rust+In+Peace+-+Megadeth" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Rust In Peace - Megadeth</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Sacrament+-+Lamb+Of+God" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Sacrament - Lamb Of God</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=The+Simulation+-+Born+Of+Osiris" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">The Simulation - Born Of Osiris</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Slaughter+Of+The+Soul+[Bonus+Tracks]+-+At+The+Gates" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Slaughter Of The Soul [Bonus Tracks] - At The Gates</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Smash+Hits+-+The+Jimi+Hendrix+Experience" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Smash Hits - The Jimi Hendrix Experience</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=The+Sound+Of+Perseverance+-+Death" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">The Sound Of Perseverance - Death</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Space+Ship+One+[Bonus+Track]+-+Paul+Gilbert" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Space Ship One [Bonus Track] - Paul Gilbert</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Surfing+With+The+Alien+-+Joe+Satriani" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Surfing With The Alien - Joe Satriani</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Suspended+Animation+-+John+Petrucci" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Suspended Animation - John Petrucci</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Texas+Flood+-+Stevie+Ray+Vaughan+&+Double+Trouble" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Texas Flood - Stevie Ray Vaughan & Double Trouble</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Toxicity+-+System+Of+A+Down" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Toxicity - System Of A Down</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Van+Halen+-+Van+Halen" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Van Halen - Van Halen</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Van+Halen+II+-+Van+Halen" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Van Halen II - Van Halen</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Vulgar+Display+Of+Power+-+Pantera" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Vulgar Display Of Power - Pantera</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=War+Eternal+-+Arch+Enemy" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">War Eternal - Arch Enemy</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=Women+And+Children+First+-+Van+Halen" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">Women And Children First - Van Halen</a>
+  <a target="_blank" href="https://www.youtube.com/results?search_query=The+Zenith+Rise+-+I+Built+The+Sky" class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">The Zenith Rise - I Built The Sky</a>
+  </ul>
 #+END_EXPORT
 
 #+begin_export html
@@ -119,6 +118,7 @@ $(function() {
   $(this).css("background-color", "#202020");
   });
   $('#table-of-contents').addClass("visible-lg")
+  $('#totalAlbumCount').text("Total Albums: " + $('.album').length)
 });
 </script>
 #+end_export

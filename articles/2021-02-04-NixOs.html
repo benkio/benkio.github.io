@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>NixOs Checkout</title>
-<!-- 2021-02-07 Sun 19:18 -->
+<!-- 2021-02-08 Mon 18:37 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -43,8 +43,8 @@ $(function() {
 <li><a href="#ArticleContent">Content</a>
 <ul class="nav">
 <li><a href="#sec-">Intro</a></li>
-<li><a href="#sec-">First Step - NixOs VM</a></li>
-<li><a href="#sec-">Working on config</a></li>
+<li><a href="#sec-">First Step - NixOs Virtual Machine</a></li>
+<li><a href="#sec-">Working on configuration</a></li>
 <li><a href="#sec-">Change of Plan</a></li>
 <li><a href="#sec-">Don't Give Up</a></li>
 <li><a href="#sec-">Up to Speed</a></li>
@@ -93,7 +93,7 @@ $(function() {
 <div class="outline-text-3" id="text-ArticleAbstract">
 <p>
 After trying out the <code>Nix</code> package manager (full details <a href="https://benkio.github.io/articles/2021-01-29-NixMigration.html">here</a>). It's
-time to try out <code>NixOs</code>, still with the idea to setup a reproduceable
+time to try out <code>NixOs</code>, still with the idea to setup a reproducible
 environment once and for all. We will start out from the result of
 the <code>Nix</code> experiment and evolve that to use <code>NixOs</code>, with a little
 cheat. 😉
@@ -114,7 +114,7 @@ We learned from the previous experience that, setting up a full
 system out of only <code>Nix</code> package manager, is a tough
 task. However, <code>NixOs</code> exists for that exact purpose: leverage the
 <code>Nix</code> package manager to the max and allow you to have a
-reproduceable system. Plus, you can find a lot of documentation
+reproducible system. Plus, you can find a lot of documentation
 and examples out there where you can get inspired from.
 </p>
 
@@ -127,7 +127,7 @@ it should be easy to extend and that's exactly what I want. Let's
 write down the steps to take
 </p>
 <ul class="org-ul">
-<li>Setup a <code>NixOs</code> VM
+<li>Setup a <code>NixOs</code> Virtual Machine
 </li>
 <li>Take my previous <code>Nix</code> configuration
 </li>
@@ -146,7 +146,7 @@ software you might not want.
 </p>
 
 <p>
-Ah, I forgot to say that Gabriel is still developing his config!
+Ah, I forgot to say that Gabriel is still developing his configuration!
 Then, if he will add something I might end up stealing it just
 by doing a quick merge from his repository. 😎
 </p>
@@ -154,12 +154,12 @@ by doing a quick merge from his repository. 😎
 </div>
 
 <div id="outline-container-sec-" class="outline-4">
-<h4 id="sec-">First Step - NixOs VM</h4>
+<h4 id="sec-">First Step - NixOs Virtual Machine</h4>
 <div class="outline-text-4" id="text-">
 <p>
 let's install minimal <code>NixOs</code> on a <code>VirtualBox</code>. You can find the
 ISO <a href="https://nixos.org/download.html#nixos-iso">here</a>. I just noticed how you can directly download a
-<code>VirtualBox</code> VM straight out from the site! Unfortunately it is
+<code>VirtualBox</code> Virtual Machine straight out from the site! Unfortunately it is
 the <i>Plasma</i> version, meanwhile we want to start from the minimal one.
 </p>
 
@@ -246,19 +246,19 @@ find it in <a href="https://www.youtube.com/watch?v=J7Hdaqs1rjU">here</a>.
 </p>
 
 <p>
-Ok, seems that, after login you need to log as a root and then set the password for the new user. Not so great.
+OK, seems that, after login you need to log as a root and then set the password for the new user. Not so great.
 </p>
 
 <p>
 <b>End of the day:</b> I took the configuration straight out from the
 box, apart of my username, but I couldn't make it work. I got some
-DBus error that's seems related to gnome somehow, Not very promising.
+<code>DBus</code> error that's seems related to gnome somehow, Not very promising.
 </p>
 
 <p>
 Since we will follow the idea of: installing more then necessary
 and then remove/add/replace software with your own, at this point
-we can just download the virtual box pre-cooked VM from the site
+we can just download the virtual box pre-cooked Virtual Machine from the site
 and try with that. Apparently, I'm not able to start from minimal
 ISO 😢
 </p>
@@ -277,15 +277,15 @@ The good thing about using the ready-to-go is that you can just:
 </li>
 </ul>
 <p>
-So you can skip all the commands about the filesystem.
+So you can skip all the commands about the file system.
 </p>
 </div>
 </div>
 <div id="outline-container-sec-" class="outline-4">
-<h4 id="sec-">Working on config</h4>
+<h4 id="sec-">Working on configuration</h4>
 <div class="outline-text-4" id="text-">
 <p>
-Well, I worked on the config, but I did a great mistake: I started
+Well, I worked on the configuration, but I did a great mistake: I started
 to change it without regarding if it worked or not. Guess what,
 the result is that it didn't work and I didn't know why. I assume
 all the guilty, I should just start from something that works and,
@@ -293,7 +293,7 @@ all the guilty, I should just start from something that works and,
 </p>
 
 <p>
-So what I do now is, let's just apply the conf I forked from and
+So what I do now is, let's just apply the configuration I forked from and
 then let's see what we can do to make it mine 😃
 </p>
 
@@ -326,8 +326,8 @@ Well, after the restart, <code>XMonad</code> started but I got this new error:
 </div>
 
 <p>
-And then the screen stays grey. Appartently we need to install
-more stuff on to our config, I'm going to revert the <code>NixOs</code> and
+And then the screen stays grey. Apparently we need to install
+more stuff on to our configuration, I'm going to revert the <code>NixOs</code> and
 try to do the add from <a href="https://github.com/NixOS/nixpkgs/issues/68591">here</a>.  Good news, the oldest configuration
 seems to have the <code>XMonad</code>, so I'm not able to login to the system
 as before. I'll try to see if I can access a terminal from the
@@ -335,7 +335,7 @@ grub and commit my changes.
 </p>
 
 <p>
-<i>Did I just debunked the Reproducibility and Reversability of
+<i>Did I just debunked the Reproducibility and Reversibility of
 <code>NixOs</code>??</i> (or I just can't make it work)
 </p>
 </div>
@@ -353,7 +353,7 @@ the <code>home.nix</code> file I created from my previous experiment
 </li>
 <li>See if everything works
 </li>
-<li>Keep tweaking the config until a satisfactory result
+<li>Keep tweaking the configuration until a satisfactory result
 </li>
 </ul>
 
@@ -366,7 +366,7 @@ frozen. Time for a break.
 
 <p>
 There are a bad and a good news, the good one is that I restarted
-into an XFCE fine environment, the bad is that it doesn't seems to
+into an <code>XFCE</code> environment, the bad is that it doesn't seems to
 have any software available from the ones I specified into my
 <code>home.nix</code> and now I encountered this error:
 </p>
@@ -378,7 +378,7 @@ have any software available from the ones I specified into my
 </div>
 
 <p>
-The fun fact is that I can't change it since the filesystem is
+The fun fact is that I can't change it since the file system is
 read only!! 😠 At least I was able to push all the changes to the
 repository, so I can retry a fresh install, since that's what we
 are looking for, it needs to work right from the start (if it ever
@@ -391,17 +391,17 @@ does)
 <h4 id="sec-">Don't Give Up</h4>
 <div class="outline-text-4" id="text-">
 <p>
-I'm not that kind of person who stops at first issue, so le't keep
+I'm not that kind of person who stops at first issue, so let's keep
 trying and trying again. 
 </p>
 <ul class="org-ul">
-<li>I restarted from a new nixos machine
+<li>I restarted from a new <code>NixOs</code> machine
 </li>
 <li>I applied the changes following the guideline and I kept track
 of each command I did.
 </li>
-<li>I first applied the <code>configuration.nix</code>, install <code>NixOs</code> and
-then applied <code>home.nix</code> and runned the <code>home-manager</code>. It seems
+<li>I first applied the <code>configuration.nix</code>, installed <code>NixOs</code>,
+applied <code>home.nix</code> and finally I ran the <code>home-manager</code>. It seems
 there's a different way of install <code>home-manager</code> in <code>NixOs</code>
 since you have to be careful about the specific version you are
 going to use
@@ -410,7 +410,7 @@ going to use
 
 <p>
 And now, finally, I'm able to have a simple setup that works in
-the VW!!!! I can now proceed into tweaking the configuration
+the Virtual Machine!!!! I can now proceed into tweaking the configuration
 details until I'm fully happy with it. At each step I will just
 use the <code>Nix</code> configuration to apply all the changes.
 </p>
@@ -425,7 +425,7 @@ use the <code>Nix</code> configuration to apply all the changes.
 <h4 id="sec-">Up to Speed</h4>
 <div class="outline-text-4" id="text-">
 <p>
-Now that I'm able to confortably configure the system, I must say
+Now that I'm able to comfortably configure the system, I must say
 it's pretty fast doing so:
 </p>
 
@@ -459,20 +459,20 @@ everything seems fine, I really wish to move to a tiling window manager.
 I just tried with <code>i3</code> and I messed up with the configuration as
 expected. Well, I think it's time to put the <code>NixOs</code> time machine
 mechanism to the test&#x2026;and I was able to go back to a previous
-working configuration of my system, change the config and try a
-different setup, benkio is happy now!!! 😃
+working configuration of my system, change the configuration and try a
+different setup, Benkio is happy now!!! 😃
 </p>
 
 <p>
-At the end of the day I did some progress, but half of my VM
+At the end of the day I did some progress, but half of my Virtual Machine
 snapshots are broken due to bad configuration.
 </p>
 
 <p>
 <b>edit:</b> when I say «up to speed» I mean, «most of the time». For
-example, it took me half a day to setup firefox extensions using
-<code>home-manager</code> and <code>nur</code> due to the fact that I needed to apply
-packageOverride and it was not so easy to figure it out.
+example, it took me half a day to setup Firefox extensions using
+<code>home-manager</code> and <code>nur</code> due to the fact that I needed to apply a
+package Override and it was not so easy to figure it out.
 </p>
 </div>
 </div>
@@ -482,7 +482,7 @@ packageOverride and it was not so easy to figure it out.
 <div class="outline-text-4" id="text-">
 <p>
 I think I reached quite a fine initial configuration by now: I
-just have all the software I need (emacs and firefox basically 😃)
+just have all the software I need (Emacs and Firefox basically 😃)
 and I have a basic tiling window manager (i3) with simple
 configuration to manage windows and so on.
 </p>
@@ -492,7 +492,7 @@ What I will do now is:
 </p>
 
 <ul class="org-ul">
-<li>Playing more into the VM: triying to develop in it for a bit and
+<li>Playing more into the Virtual Machine: trying to develop in it for a bit and
 do my classic tasks.
 </li>
 <li>Work more on the startup installation: setup everything from the

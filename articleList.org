@@ -12,7 +12,7 @@
 #+HTML_HEAD_EXTRA:  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 #+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="css/main.css">
 #+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="css/blog.css">
-#+HTML_HEAD_EXTRA: <style>body { padding-top: 150px; }</style>
+#+HTML_HEAD_EXTRA: <style>body { padding-top: 100px; }</style>
 
 * Article List
 :PROPERTIES:
