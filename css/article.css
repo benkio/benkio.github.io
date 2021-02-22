@@ -36,7 +36,7 @@ video {
     height: 100%;
 }
 /* add a padding to the intenal TOC anchor links so they consider the top bar*/
-:is(h1, h2, h3, h4, h5)::before {
+:is(h2, h3, h4, h5)::before {
   display: block;
   content: " ";
   margin-top: -100px;
