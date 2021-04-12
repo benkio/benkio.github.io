@@ -1,0 +1,61 @@
+#+OPTIONS: html-postamble:auto toc:nil num:nil
+#+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:nil
+#+TITLE: Note Trainer
+
+#+DESCRIPTION: Note Trainer
+#+KEYWORDS: Note Trainer
+#+HTML_HEAD_EXTRA: <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA: <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+#+HTML_HEAD_EXTRA:  <script src="./elm.js"></script>
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/main.css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/blog.css">
+#+HTML_HEAD_EXTRA: <style>body { padding-top: 100px; }</style>
+
+* Note Trainer
+:PROPERTIES:
+:HTML_CONTAINER_CLASS: text-center navbar navbar-inverse navbar-fixed-top
+:CUSTOM_ID: navbar
+:END:
+
+#+BEGIN_EXPORT html
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapsableNavbar">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    </button>
+    <h1 id="navbarTitle" class="navbar-text">Note Trainer</h1>
+    <div class="collapse navbar-collapse" id="collapsableNavbar">
+    <ul class="nav navbar-nav">
+    <li><a title="Home" href="../index.html"><i class="fas fa-home fa-3x" aria-hidden="true"></i></a></li>
+    <li><a title="Blog Main Page" href="../blog.html" class="navbar-text h3">Blog</a></li>
+    <li><a title="Book List" href="../bookList.html" class="navbar-text h3">Book List</a></li>
+<li><a title="Album List" href="../albumList.html" class="navbar-text h3">Album List</a></li>
+    </ul>
+    </div>
+#+END_EXPORT
+
+
+* Note Trainer
+:PROPERTIES:
+:CUSTOM_ID: NoteTrainer
+:END:
+
+
+#+BEGIN_EXPORT HTML
+
+<div id="NoteTrainer">
+</div>
+
+#+END_EXPORT
+
+#+name: embedElm
+#+begin_src javascript :exports none
+  var app = Elm.Main.init({
+    node: document.getElementById('NoteTrainer')
+  });
+#+end_src
+#+call: ../templates.org:inline-js("embedElm")
