@@ -34,6 +34,7 @@
       <li><a title="Blog Main Page" href="./blog.html" class="navbar-text h3">Blog</a></li>
       <li><a title="Article List" href="./articleList.html" class="navbar-text h3">Article List</a></li>
 <li><a title="Album List" href="./albumList.html" class="navbar-text h3">Album List</a></li>
+    <li><a title="Note Trainer" href="./NoteTrainer/NoteTrainer.html" class="navbar-text h3">Note Trainer</a></li>
       </ul>
       </div>
   #+END_EXPORT
