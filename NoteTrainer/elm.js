@@ -5148,7 +5148,7 @@ var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Main$init = function (_v0) {
 	return _Utils_Tuple2(
-		{},
+		{bpm: 100, isPlaying: false},
 		$elm$core$Platform$Cmd$none);
 };
 var $elm$core$Platform$Sub$batch = _Platform_batch;
@@ -5157,21 +5157,223 @@ var $author$project$Main$subscriptions = function (_v0) {
 	return $elm$core$Platform$Sub$none;
 };
 var $author$project$Main$update = F2(
-	function (_v0, _v1) {
-		return _Utils_Tuple2(
-			{},
-			$elm$core$Platform$Cmd$none);
+	function (msg, model) {
+		switch (msg.$) {
+			case 'BpmChanged':
+				var bpm = msg.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{bpm: bpm}),
+					$elm$core$Platform$Cmd$none);
+			case 'Start':
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{isPlaying: true}),
+					$elm$core$Platform$Cmd$none);
+			default:
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{isPlaying: false}),
+					$elm$core$Platform$Cmd$none);
+		}
 	});
 var $elm$html$Html$div = _VirtualDom_node('div');
+var $elm$json$Json$Encode$string = _Json_wrap;
+var $elm$html$Html$Attributes$stringProperty = F2(
+	function (key, string) {
+		return A2(
+			_VirtualDom_property,
+			key,
+			$elm$json$Json$Encode$string(string));
+	});
+var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
+var $elm$html$Html$p = _VirtualDom_node('p');
+var $author$project$Main$Start = {$: 'Start'};
+var $author$project$Main$Stop = {$: 'Stop'};
+var $elm$html$Html$button = _VirtualDom_node('button');
+var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
+var $elm$virtual_dom$VirtualDom$Normal = function (a) {
+	return {$: 'Normal', a: a};
+};
+var $elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
+var $elm$html$Html$Events$on = F2(
+	function (event, decoder) {
+		return A2(
+			$elm$virtual_dom$VirtualDom$on,
+			event,
+			$elm$virtual_dom$VirtualDom$Normal(decoder));
+	});
+var $elm$html$Html$Events$onClick = function (msg) {
+	return A2(
+		$elm$html$Html$Events$on,
+		'click',
+		$elm$json$Json$Decode$succeed(msg));
+};
+var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
+var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
-var $author$project$Main$view = function (_v0) {
+var $author$project$Main$startButton = function (isPlaying) {
+	return isPlaying ? A2(
+		$elm$html$Html$button,
+		_List_fromArray(
+			[
+				A2($elm$html$Html$Attributes$style, 'width', '30%'),
+				A2($elm$html$Html$Attributes$style, 'margin', 'auto'),
+				A2($elm$html$Html$Attributes$style, 'margin-bottom', '1em'),
+				$elm$html$Html$Attributes$class('btn btn-danger'),
+				$elm$html$Html$Events$onClick($author$project$Main$Stop)
+			]),
+		_List_fromArray(
+			[
+				$elm$html$Html$text('Stop')
+			])) : A2(
+		$elm$html$Html$button,
+		_List_fromArray(
+			[
+				A2($elm$html$Html$Attributes$style, 'width', '30%'),
+				A2($elm$html$Html$Attributes$style, 'margin', 'auto'),
+				A2($elm$html$Html$Attributes$style, 'margin-bottom', '1em'),
+				$elm$html$Html$Attributes$class('btn btn-success'),
+				$elm$html$Html$Events$onClick($author$project$Main$Start)
+			]),
+		_List_fromArray(
+			[
+				$elm$html$Html$text('Start')
+			]));
+};
+var $author$project$Main$controls = function (model) {
 	return A2(
 		$elm$html$Html$div,
 		_List_Nil,
 		_List_fromArray(
 			[
-				$elm$html$Html$text('hello world')
+				A2(
+				$elm$html$Html$p,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$id('bpmSliderValue'),
+						A2($elm$html$Html$Attributes$style, 'float', 'left'),
+						A2($elm$html$Html$Attributes$style, 'width', '70%'),
+						A2($elm$html$Html$Attributes$style, 'text-align', 'center'),
+						A2($elm$html$Html$Attributes$style, 'padding-top', '.5em'),
+						A2($elm$html$Html$Attributes$style, 'font-size', 'large')
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text(
+						'BPM: ' + $elm$core$String$fromInt(model.bpm))
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						A2($elm$html$Html$Attributes$style, 'float', 'left'),
+						A2($elm$html$Html$Attributes$style, 'width', '30%')
+					]),
+				_List_fromArray(
+					[
+						$author$project$Main$startButton(model.isPlaying)
+					]))
+			]));
+};
+var $author$project$Main$BpmChanged = function (a) {
+	return {$: 'BpmChanged', a: a};
+};
+var $elm$core$Basics$composeR = F3(
+	function (f, g, x) {
+		return g(
+			f(x));
+	});
+var $elm$html$Html$input = _VirtualDom_node('input');
+var $elm$html$Html$Attributes$max = $elm$html$Html$Attributes$stringProperty('max');
+var $elm$html$Html$Attributes$min = $elm$html$Html$Attributes$stringProperty('min');
+var $elm$html$Html$Events$alwaysStop = function (x) {
+	return _Utils_Tuple2(x, true);
+};
+var $elm$virtual_dom$VirtualDom$MayStopPropagation = function (a) {
+	return {$: 'MayStopPropagation', a: a};
+};
+var $elm$html$Html$Events$stopPropagationOn = F2(
+	function (event, decoder) {
+		return A2(
+			$elm$virtual_dom$VirtualDom$on,
+			event,
+			$elm$virtual_dom$VirtualDom$MayStopPropagation(decoder));
+	});
+var $elm$json$Json$Decode$field = _Json_decodeField;
+var $elm$json$Json$Decode$at = F2(
+	function (fields, decoder) {
+		return A3($elm$core$List$foldr, $elm$json$Json$Decode$field, decoder, fields);
+	});
+var $elm$json$Json$Decode$string = _Json_decodeString;
+var $elm$html$Html$Events$targetValue = A2(
+	$elm$json$Json$Decode$at,
+	_List_fromArray(
+		['target', 'value']),
+	$elm$json$Json$Decode$string);
+var $elm$html$Html$Events$onInput = function (tagger) {
+	return A2(
+		$elm$html$Html$Events$stopPropagationOn,
+		'input',
+		A2(
+			$elm$json$Json$Decode$map,
+			$elm$html$Html$Events$alwaysStop,
+			A2($elm$json$Json$Decode$map, tagger, $elm$html$Html$Events$targetValue)));
+};
+var $elm$html$Html$Attributes$step = function (n) {
+	return A2($elm$html$Html$Attributes$stringProperty, 'step', n);
+};
+var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
+var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
+var $elm$core$Maybe$withDefault = F2(
+	function (_default, maybe) {
+		if (maybe.$ === 'Just') {
+			var value = maybe.a;
+			return value;
+		} else {
+			return _default;
+		}
+	});
+var $author$project$Main$slider = function (bpm) {
+	return A2(
+		$elm$html$Html$input,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$type_('range'),
+				$elm$html$Html$Attributes$min('40'),
+				$elm$html$Html$Attributes$max('250'),
+				$elm$html$Html$Attributes$value(
+				$elm$core$String$fromInt(bpm)),
+				$elm$html$Html$Attributes$id('bpmSlider'),
+				$elm$html$Html$Attributes$step('5'),
+				A2($elm$html$Html$Attributes$style, 'width', '80%'),
+				A2($elm$html$Html$Attributes$style, 'margin', 'auto'),
+				$elm$html$Html$Events$onInput(
+				A2(
+					$elm$core$Basics$composeR,
+					$elm$core$String$toInt,
+					A2(
+						$elm$core$Basics$composeR,
+						$elm$core$Maybe$withDefault(60),
+						$author$project$Main$BpmChanged)))
+			]),
+		_List_Nil);
+};
+var $author$project$Main$view = function (model) {
+	return A2(
+		$elm$html$Html$div,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$id('sliderContainer')
+			]),
+		_List_fromArray(
+			[
+				$author$project$Main$controls(model),
+				$author$project$Main$slider(model.bpm)
 			]));
 };
 var $author$project$Main$main = $elm$browser$Browser$element(
