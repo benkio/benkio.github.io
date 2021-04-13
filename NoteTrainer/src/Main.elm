@@ -1,11 +1,14 @@
 module Main exposing (..)
 
 import Browser exposing (element)
-import Html exposing (Html, button, div, input, p, text)
+import Html exposing (Html, button, div, h1, input, p, text)
 import Html.Attributes as A exposing (class, id, max, min, step, style, type_, value)
 import Html.Events exposing (onClick, onInput)
 import Maybe exposing (withDefault)
-import String exposing (fromInt, toInt)
+import Note exposing (Note, noteGenerator, noteToString)
+import Random exposing (generate)
+import String exposing (fromChar, fromInt, toInt)
+import Time exposing (every)
 
 
 main =
@@ -20,7 +23,13 @@ main =
 type alias Model =
     { bpm : Int
     , isPlaying : Bool
+    , note : String
     }
+
+
+bpmToMillis : Int -> Float
+bpmToMillis bpm =
+    toFloat 60000 / toFloat bpm
 
 
 
@@ -29,7 +38,7 @@ type alias Model =
 
 init : () -> ( Model, Cmd msg )
 init _ =
-    ( { bpm = 100, isPlaying = False }, Cmd.none )
+    ( { bpm = 100, isPlaying = False, note = "A" }, Cmd.none )
 
 
 
@@ -39,6 +48,8 @@ init _ =
 type Msg
     = BpmChanged Int
     | Start
+    | NewNote Note
+    | ChangeNote
     | Stop
 
 
@@ -54,14 +65,25 @@ update msg model =
         Stop ->
             ( { model | isPlaying = False }, Cmd.none )
 
+        ChangeNote ->
+            ( model, generate NewNote noteGenerator )
+
+        NewNote n ->
+            ( { model | note = noteToString n }, Cmd.none )
+
 
 
 -- Subscriptions ----------------------------------------------------------
 
 
-subscriptions : Model -> Sub msg
-subscriptions _ =
-    Sub.none
+subscriptions : Model -> Sub Msg
+subscriptions model =
+    case model.isPlaying of
+        True ->
+            every (bpmToMillis model.bpm) (\_ -> ChangeNote)
+
+        False ->
+            Sub.none
 
 
 
@@ -73,6 +95,7 @@ view model =
     div [ id "sliderContainer" ]
         [ controls model
         , slider model.bpm
+        , note model.note
         ]
 
 
@@ -105,8 +128,8 @@ slider : Int -> Html Msg
 slider bpm =
     input
         [ type_ "range"
-        , A.min "40"
-        , A.max "250"
+        , A.min "20"
+        , A.max "220"
         , value (fromInt bpm)
         , id "bpmSlider"
         , step "5"
@@ -115,3 +138,8 @@ slider bpm =
         , onInput (toInt >> withDefault 60 >> BpmChanged)
         ]
         []
+
+
+note : String -> Html Msg
+note n =
+    p [ style "font-size" "15em", style "text-align" "center" ] [ text n ]
