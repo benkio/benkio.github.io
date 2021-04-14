@@ -119,18 +119,18 @@ noteTrainerControls model =
             , style "font-size" "large"
             ]
             [ text ("BPM: " ++ fromInt model.bpm) ]
-        , div [ style "float" "left", style "width" "20%" ] [ startButton model.isPlaying ]
-        , audio [ id "notePlayer", controls True ] [ source [ id "notePlayerSource" ] [] ]
+        , div [ style "float" "left", style "min-width" "100px", style "width" "30%" ] [ startButton model.isPlaying ]
+        , audio [ id "notePlayer", controls True, style "width" "100px" ] [ source [ id "notePlayerSource" ] [] ]
         ]
 
 
 startButton : Bool -> Html Msg
 startButton isPlaying =
     if isPlaying then
-        button [ style "width" "30%", style "margin" "auto", style "margin-bottom" "1em", class "btn btn-danger", onClick Stop ] [ text "Stop" ]
+        button [ style "width" "30%", style "min-width" "80px", style "margin" "auto", style "margin-bottom" "1em", class "btn btn-danger", onClick Stop ] [ text "Stop" ]
 
     else
-        button [ style "width" "30%", style "margin" "auto", style "margin-bottom" "1em", class "btn btn-success", onClick Start ] [ text "Start" ]
+        button [ style "width" "30%", style "min-width" "80px", style "margin" "auto", style "margin-bottom" "1em", class "btn btn-success", onClick Start ] [ text "Start" ]
 
 
 slider : Int -> Html Msg

@@ -6028,6 +6028,7 @@ var $author$project$Main$startButton = function (isPlaying) {
 		_List_fromArray(
 			[
 				A2($elm$html$Html$Attributes$style, 'width', '30%'),
+				A2($elm$html$Html$Attributes$style, 'min-width', '80px'),
 				A2($elm$html$Html$Attributes$style, 'margin', 'auto'),
 				A2($elm$html$Html$Attributes$style, 'margin-bottom', '1em'),
 				$elm$html$Html$Attributes$class('btn btn-danger'),
@@ -6041,6 +6042,7 @@ var $author$project$Main$startButton = function (isPlaying) {
 		_List_fromArray(
 			[
 				A2($elm$html$Html$Attributes$style, 'width', '30%'),
+				A2($elm$html$Html$Attributes$style, 'min-width', '80px'),
 				A2($elm$html$Html$Attributes$style, 'margin', 'auto'),
 				A2($elm$html$Html$Attributes$style, 'margin-bottom', '1em'),
 				$elm$html$Html$Attributes$class('btn btn-success'),
@@ -6078,7 +6080,8 @@ var $author$project$Main$noteTrainerControls = function (model) {
 				_List_fromArray(
 					[
 						A2($elm$html$Html$Attributes$style, 'float', 'left'),
-						A2($elm$html$Html$Attributes$style, 'width', '20%')
+						A2($elm$html$Html$Attributes$style, 'min-width', '100px'),
+						A2($elm$html$Html$Attributes$style, 'width', '30%')
 					]),
 				_List_fromArray(
 					[
@@ -6089,7 +6092,8 @@ var $author$project$Main$noteTrainerControls = function (model) {
 				_List_fromArray(
 					[
 						$elm$html$Html$Attributes$id('notePlayer'),
-						$elm$html$Html$Attributes$controls(true)
+						$elm$html$Html$Attributes$controls(true),
+						A2($elm$html$Html$Attributes$style, 'width', '100px')
 					]),
 				_List_fromArray(
 					[
