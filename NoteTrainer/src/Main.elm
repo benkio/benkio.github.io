@@ -1,14 +1,20 @@
 module Main exposing (..)
 
 import Browser exposing (element)
-import Html exposing (Html, button, div, h1, input, p, text)
-import Html.Attributes as A exposing (class, id, max, min, step, style, type_, value)
+import Html exposing (Html, audio, button, div, h1, input, p, source, text)
+import Html.Attributes as A exposing (autoplay, class, controls, id, max, min, src, step, style, type_, value)
 import Html.Events exposing (onClick, onInput)
 import Maybe exposing (withDefault)
 import Note exposing (Note, noteGenerator, noteToString)
 import Random exposing (generate)
 import String exposing (fromChar, fromInt, toInt)
 import Time exposing (every)
+
+
+
+-- TODO: audio still not working
+-- https://vincent.jousse.org/blog/interacting-with-dom-element-using-elm-audio-video
+-- Probably you need to add a port and call it on subscription to trigger the audio from js
 
 
 main =
@@ -30,6 +36,11 @@ type alias Model =
 bpmToMillis : Int -> Float
 bpmToMillis bpm =
     toFloat 60000 / toFloat bpm
+
+
+noteToMP3 : String -> String
+noteToMP3 n =
+    "./notes/" ++ n ++ ".mp3"
 
 
 
@@ -93,25 +104,26 @@ subscriptions model =
 view : Model -> Html Msg
 view model =
     div [ id "sliderContainer" ]
-        [ controls model
+        [ noteTrainerControls model
         , slider model.bpm
         , note model.note
         ]
 
 
-controls : Model -> Html Msg
-controls model =
+noteTrainerControls : Model -> Html Msg
+noteTrainerControls model =
     div []
         [ p
             [ id "bpmSliderValue"
             , style "float" "left"
-            , style "width" "70%"
+            , style "width" "45%"
             , style "text-align" "center"
             , style "padding-top" ".5em"
             , style "font-size" "large"
             ]
             [ text ("BPM: " ++ fromInt model.bpm) ]
-        , div [ style "float" "left", style "width" "30%" ] [ startButton model.isPlaying ]
+        , div [ style "float" "left", style "width" "20%" ] [ startButton model.isPlaying ]
+        , audio [ controls True ] [ source [ src (noteToMP3 model.note), autoplay True, type_ "audio/mpeg", style "width" "20%" ] [] ]
         ]
 
 

@@ -5960,6 +5960,44 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 	});
 var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
 var $elm$html$Html$p = _VirtualDom_node('p');
+var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
+var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
+var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
+var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
+var $author$project$Main$note = function (n) {
+	return A2(
+		$elm$html$Html$p,
+		_List_fromArray(
+			[
+				A2($elm$html$Html$Attributes$style, 'font-size', '15em'),
+				A2($elm$html$Html$Attributes$style, 'text-align', 'center')
+			]),
+		_List_fromArray(
+			[
+				$elm$html$Html$text(n)
+			]));
+};
+var $elm$html$Html$audio = _VirtualDom_node('audio');
+var $elm$json$Json$Encode$bool = _Json_wrap;
+var $elm$html$Html$Attributes$boolProperty = F2(
+	function (key, bool) {
+		return A2(
+			_VirtualDom_property,
+			key,
+			$elm$json$Json$Encode$bool(bool));
+	});
+var $elm$html$Html$Attributes$autoplay = $elm$html$Html$Attributes$boolProperty('autoplay');
+var $elm$html$Html$Attributes$controls = $elm$html$Html$Attributes$boolProperty('controls');
+var $author$project$Main$noteToMP3 = function (n) {
+	return './notes/' + (n + '.mp3');
+};
+var $elm$html$Html$source = _VirtualDom_node('source');
+var $elm$html$Html$Attributes$src = function (url) {
+	return A2(
+		$elm$html$Html$Attributes$stringProperty,
+		'src',
+		_VirtualDom_noJavaScriptOrHtmlUri(url));
+};
 var $author$project$Main$Start = {$: 'Start'};
 var $author$project$Main$Stop = {$: 'Stop'};
 var $elm$html$Html$button = _VirtualDom_node('button');
@@ -5981,10 +6019,6 @@ var $elm$html$Html$Events$onClick = function (msg) {
 		'click',
 		$elm$json$Json$Decode$succeed(msg));
 };
-var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
-var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
-var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
-var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$Main$startButton = function (isPlaying) {
 	return isPlaying ? A2(
 		$elm$html$Html$button,
@@ -6014,7 +6048,8 @@ var $author$project$Main$startButton = function (isPlaying) {
 				$elm$html$Html$text('Start')
 			]));
 };
-var $author$project$Main$controls = function (model) {
+var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
+var $author$project$Main$noteTrainerControls = function (model) {
 	return A2(
 		$elm$html$Html$div,
 		_List_Nil,
@@ -6026,7 +6061,7 @@ var $author$project$Main$controls = function (model) {
 					[
 						$elm$html$Html$Attributes$id('bpmSliderValue'),
 						A2($elm$html$Html$Attributes$style, 'float', 'left'),
-						A2($elm$html$Html$Attributes$style, 'width', '70%'),
+						A2($elm$html$Html$Attributes$style, 'width', '45%'),
 						A2($elm$html$Html$Attributes$style, 'text-align', 'center'),
 						A2($elm$html$Html$Attributes$style, 'padding-top', '.5em'),
 						A2($elm$html$Html$Attributes$style, 'font-size', 'large')
@@ -6041,25 +6076,32 @@ var $author$project$Main$controls = function (model) {
 				_List_fromArray(
 					[
 						A2($elm$html$Html$Attributes$style, 'float', 'left'),
-						A2($elm$html$Html$Attributes$style, 'width', '30%')
+						A2($elm$html$Html$Attributes$style, 'width', '20%')
 					]),
 				_List_fromArray(
 					[
 						$author$project$Main$startButton(model.isPlaying)
+					])),
+				A2(
+				$elm$html$Html$audio,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$controls(true)
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$source,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$src(
+								$author$project$Main$noteToMP3(model.note)),
+								$elm$html$Html$Attributes$autoplay(true),
+								$elm$html$Html$Attributes$type_('audio/mpeg'),
+								A2($elm$html$Html$Attributes$style, 'width', '20%')
+							]),
+						_List_Nil)
 					]))
-			]));
-};
-var $author$project$Main$note = function (n) {
-	return A2(
-		$elm$html$Html$p,
-		_List_fromArray(
-			[
-				A2($elm$html$Html$Attributes$style, 'font-size', '15em'),
-				A2($elm$html$Html$Attributes$style, 'text-align', 'center')
-			]),
-		_List_fromArray(
-			[
-				$elm$html$Html$text(n)
 			]));
 };
 var $author$project$Main$BpmChanged = function (a) {
@@ -6109,7 +6151,6 @@ var $elm$html$Html$Events$onInput = function (tagger) {
 var $elm$html$Html$Attributes$step = function (n) {
 	return A2($elm$html$Html$Attributes$stringProperty, 'step', n);
 };
-var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
 var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
 var $elm$core$Maybe$withDefault = F2(
 	function (_default, maybe) {
@@ -6154,7 +6195,7 @@ var $author$project$Main$view = function (model) {
 			]),
 		_List_fromArray(
 			[
-				$author$project$Main$controls(model),
+				$author$project$Main$noteTrainerControls(model),
 				$author$project$Main$slider(model.bpm),
 				$author$project$Main$note(model.note)
 			]));
