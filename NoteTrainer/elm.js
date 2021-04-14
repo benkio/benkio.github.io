@@ -5874,6 +5874,16 @@ var $author$project$Note$noteGenerator = A2(
 			_Utils_Tuple2(5, $author$project$Note$Gs),
 			_Utils_Tuple2(5, $author$project$Note$Ab)
 		]));
+var $elm$core$String$replace = F3(
+	function (before, after, string) {
+		return A2(
+			$elm$core$String$join,
+			after,
+			A2($elm$core$String$split, before, string));
+	});
+var $author$project$Main$noteToMP3 = function (n) {
+	return './notes/' + (A3($elm$core$String$replace, '#', 'sharp', n) + '.mp3');
+};
 var $author$project$Note$noteToString = function (note) {
 	switch (note.$) {
 		case 'A':
@@ -5912,6 +5922,8 @@ var $author$project$Note$noteToString = function (note) {
 			return 'Ab';
 	}
 };
+var $elm$json$Json$Encode$string = _Json_wrap;
+var $author$project$Main$playNote = _Platform_outgoingPort('playNote', $elm$json$Json$Encode$string);
 var $author$project$Main$update = F2(
 	function (msg, model) {
 		switch (msg.$) {
@@ -5946,11 +5958,12 @@ var $author$project$Main$update = F2(
 						{
 							note: $author$project$Note$noteToString(n)
 						}),
-					$elm$core$Platform$Cmd$none);
+					$author$project$Main$playNote(
+						$author$project$Main$noteToMP3(
+							$author$project$Note$noteToString(n))));
 		}
 	});
 var $elm$html$Html$div = _VirtualDom_node('div');
-var $elm$json$Json$Encode$string = _Json_wrap;
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
 		return A2(
@@ -5986,18 +5999,8 @@ var $elm$html$Html$Attributes$boolProperty = F2(
 			key,
 			$elm$json$Json$Encode$bool(bool));
 	});
-var $elm$html$Html$Attributes$autoplay = $elm$html$Html$Attributes$boolProperty('autoplay');
 var $elm$html$Html$Attributes$controls = $elm$html$Html$Attributes$boolProperty('controls');
-var $author$project$Main$noteToMP3 = function (n) {
-	return './notes/' + (n + '.mp3');
-};
 var $elm$html$Html$source = _VirtualDom_node('source');
-var $elm$html$Html$Attributes$src = function (url) {
-	return A2(
-		$elm$html$Html$Attributes$stringProperty,
-		'src',
-		_VirtualDom_noJavaScriptOrHtmlUri(url));
-};
 var $author$project$Main$Start = {$: 'Start'};
 var $author$project$Main$Stop = {$: 'Stop'};
 var $elm$html$Html$button = _VirtualDom_node('button');
@@ -6048,7 +6051,6 @@ var $author$project$Main$startButton = function (isPlaying) {
 				$elm$html$Html$text('Start')
 			]));
 };
-var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
 var $author$project$Main$noteTrainerControls = function (model) {
 	return A2(
 		$elm$html$Html$div,
@@ -6086,6 +6088,7 @@ var $author$project$Main$noteTrainerControls = function (model) {
 				$elm$html$Html$audio,
 				_List_fromArray(
 					[
+						$elm$html$Html$Attributes$id('notePlayer'),
 						$elm$html$Html$Attributes$controls(true)
 					]),
 				_List_fromArray(
@@ -6094,11 +6097,7 @@ var $author$project$Main$noteTrainerControls = function (model) {
 						$elm$html$Html$source,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$src(
-								$author$project$Main$noteToMP3(model.note)),
-								$elm$html$Html$Attributes$autoplay(true),
-								$elm$html$Html$Attributes$type_('audio/mpeg'),
-								A2($elm$html$Html$Attributes$style, 'width', '20%')
+								$elm$html$Html$Attributes$id('notePlayerSource')
 							]),
 						_List_Nil)
 					]))
@@ -6151,6 +6150,7 @@ var $elm$html$Html$Events$onInput = function (tagger) {
 var $elm$html$Html$Attributes$step = function (n) {
 	return A2($elm$html$Html$Attributes$stringProperty, 'step', n);
 };
+var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
 var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
 var $elm$core$Maybe$withDefault = F2(
 	function (_default, maybe) {

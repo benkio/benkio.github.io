@@ -1,4 +1,4 @@
-module Main exposing (..)
+port module Main exposing (..)
 
 import Browser exposing (element)
 import Html exposing (Html, audio, button, div, h1, input, p, source, text)
@@ -7,14 +7,11 @@ import Html.Events exposing (onClick, onInput)
 import Maybe exposing (withDefault)
 import Note exposing (Note, noteGenerator, noteToString)
 import Random exposing (generate)
-import String exposing (fromChar, fromInt, toInt)
+import String exposing (fromChar, fromInt, replace, toInt)
 import Time exposing (every)
 
 
-
--- TODO: audio still not working
--- https://vincent.jousse.org/blog/interacting-with-dom-element-using-elm-audio-video
--- Probably you need to add a port and call it on subscription to trigger the audio from js
+port playNote : String -> Cmd msg
 
 
 main =
@@ -40,7 +37,7 @@ bpmToMillis bpm =
 
 noteToMP3 : String -> String
 noteToMP3 n =
-    "./notes/" ++ n ++ ".mp3"
+    "./notes/" ++ replace "#" "sharp" n ++ ".mp3"
 
 
 
@@ -80,7 +77,7 @@ update msg model =
             ( model, generate NewNote noteGenerator )
 
         NewNote n ->
-            ( { model | note = noteToString n }, Cmd.none )
+            ( { model | note = noteToString n }, playNote (noteToMP3 (noteToString n)) )
 
 
 
@@ -123,7 +120,7 @@ noteTrainerControls model =
             ]
             [ text ("BPM: " ++ fromInt model.bpm) ]
         , div [ style "float" "left", style "width" "20%" ] [ startButton model.isPlaying ]
-        , audio [ controls True ] [ source [ src (noteToMP3 model.note), autoplay True, type_ "audio/mpeg", style "width" "20%" ] [] ]
+        , audio [ id "notePlayer", controls True ] [ source [ id "notePlayerSource" ] [] ]
         ]
 
 
