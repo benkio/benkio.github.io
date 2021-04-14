@@ -100,7 +100,7 @@ subscriptions model =
 
 view : Model -> Html Msg
 view model =
-    div [ id "sliderContainer" ]
+    div [ id "sliderContainer", style "display" "table", style "width" "100%" ]
         [ noteTrainerControls model
         , slider model.bpm
         , note model.note
@@ -109,46 +109,81 @@ view model =
 
 noteTrainerControls : Model -> Html Msg
 noteTrainerControls model =
-    div []
-        [ p
+    div [style "display" "table-row"]
+        [ div [ style "display" "table-cell"
+              , style "text-align" "center"
+              , style "min-width" "100px"
+              , style "width" "20%"] [
+               p
             [ id "bpmSliderValue"
-            , style "float" "left"
-            , style "width" "45%"
-            , style "text-align" "center"
-            , style "padding-top" ".5em"
             , style "font-size" "large"
             ]
-            [ text ("BPM: " ++ fromInt model.bpm) ]
-        , div [ style "float" "left", style "min-width" "100px", style "width" "30%" ] [ startButton model.isPlaying ]
-        , audio [ id "notePlayer", controls True, style "width" "100px" ] [ source [ id "notePlayerSource" ] [] ]
+            [ text ("BPM: " ++ fromInt model.bpm) ]]
+        , div [ style "display" "table-cell"
+              , style "text-align" "center"
+              , style "width" "60%"
+              ] [ startButton model.isPlaying ]
+        , div [style "display" "table-cell"
+              ,style "text-align" "center"
+              , style "width" "20%"
+              ]
+            [audio [ id "notePlayer"
+                , controls True
+                , style "width" "100px"
+                , style "vertical-align" "middle"
+                ] [ source [ id "notePlayerSource" ] [] ]]
         ]
 
 
 startButton : Bool -> Html Msg
 startButton isPlaying =
     if isPlaying then
-        button [ style "width" "30%", style "min-width" "80px", style "margin" "auto", style "margin-bottom" "1em", class "btn btn-danger", onClick Stop ] [ text "Stop" ]
+        button [ 
+                style "min-width" "80px"
+               , style "margin" "auto"
+               , style "margin-bottom" "1em"
+               , style "margin-top" "1em"
+               , class "btn btn-danger"
+               , onClick Stop ] [ text "Stop" ]
 
     else
-        button [ style "width" "30%", style "min-width" "80px", style "margin" "auto", style "margin-bottom" "1em", class "btn btn-success", onClick Start ] [ text "Start" ]
+        button [
+                style "min-width" "80px"
+               , style "margin" "auto"
+               , style "margin-bottom" "1em"
+               , style "margin-top" "1em"
+               , class "btn btn-success"
+               , onClick Start ] [ text "Start" ]
 
 
 slider : Int -> Html Msg
 slider bpm =
-    input
+    div [ style "display" "table-row", style "width" "100%"]
+        [
+         div [style "display" "table-cell", style "width" "20%"] []
+         ,div [style "display" "table-cell", style "width" "60%"]
+         [input
         [ type_ "range"
         , A.min "20"
         , A.max "220"
         , value (fromInt bpm)
         , id "bpmSlider"
         , step "5"
-        , style "width" "80%"
-        , style "margin" "auto"
         , onInput (toInt >> withDefault 60 >> BpmChanged)
         ]
-        []
+        []]
+        ,div [style "display" "table-cell", style "width" "20%"] []]
 
 
 note : String -> Html Msg
 note n =
-    p [ style "font-size" "15em", style "text-align" "center" ] [ text n ]
+    div [style "display" "table-row"]
+    [
+     div [style "display" "table-cell", style "width" "25%"] []
+     ,div [style "display" "table-cell"
+          , style "width" "50%"
+          , style "min-width" "300px"
+          , style "text-align" "center"] [
+          p [ style "font-size" "15em"] [ text n ]]
+    , div [style "display" "table-cell", style "width" "25%"] []
+    ]

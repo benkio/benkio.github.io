@@ -5979,15 +5979,51 @@ var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$Main$note = function (n) {
 	return A2(
-		$elm$html$Html$p,
+		$elm$html$Html$div,
 		_List_fromArray(
 			[
-				A2($elm$html$Html$Attributes$style, 'font-size', '15em'),
-				A2($elm$html$Html$Attributes$style, 'text-align', 'center')
+				A2($elm$html$Html$Attributes$style, 'display', 'table-row')
 			]),
 		_List_fromArray(
 			[
-				$elm$html$Html$text(n)
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						A2($elm$html$Html$Attributes$style, 'display', 'table-cell'),
+						A2($elm$html$Html$Attributes$style, 'width', '25%')
+					]),
+				_List_Nil),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						A2($elm$html$Html$Attributes$style, 'display', 'table-cell'),
+						A2($elm$html$Html$Attributes$style, 'width', '50%'),
+						A2($elm$html$Html$Attributes$style, 'min-width', '300px'),
+						A2($elm$html$Html$Attributes$style, 'text-align', 'center')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$p,
+						_List_fromArray(
+							[
+								A2($elm$html$Html$Attributes$style, 'font-size', '15em')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text(n)
+							]))
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						A2($elm$html$Html$Attributes$style, 'display', 'table-cell'),
+						A2($elm$html$Html$Attributes$style, 'width', '25%')
+					]),
+				_List_Nil)
 			]));
 };
 var $elm$html$Html$audio = _VirtualDom_node('audio');
@@ -6027,10 +6063,10 @@ var $author$project$Main$startButton = function (isPlaying) {
 		$elm$html$Html$button,
 		_List_fromArray(
 			[
-				A2($elm$html$Html$Attributes$style, 'width', '30%'),
 				A2($elm$html$Html$Attributes$style, 'min-width', '80px'),
 				A2($elm$html$Html$Attributes$style, 'margin', 'auto'),
 				A2($elm$html$Html$Attributes$style, 'margin-bottom', '1em'),
+				A2($elm$html$Html$Attributes$style, 'margin-top', '1em'),
 				$elm$html$Html$Attributes$class('btn btn-danger'),
 				$elm$html$Html$Events$onClick($author$project$Main$Stop)
 			]),
@@ -6041,10 +6077,10 @@ var $author$project$Main$startButton = function (isPlaying) {
 		$elm$html$Html$button,
 		_List_fromArray(
 			[
-				A2($elm$html$Html$Attributes$style, 'width', '30%'),
 				A2($elm$html$Html$Attributes$style, 'min-width', '80px'),
 				A2($elm$html$Html$Attributes$style, 'margin', 'auto'),
 				A2($elm$html$Html$Attributes$style, 'margin-bottom', '1em'),
+				A2($elm$html$Html$Attributes$style, 'margin-top', '1em'),
 				$elm$html$Html$Attributes$class('btn btn-success'),
 				$elm$html$Html$Events$onClick($author$project$Main$Start)
 			]),
@@ -6056,54 +6092,77 @@ var $author$project$Main$startButton = function (isPlaying) {
 var $author$project$Main$noteTrainerControls = function (model) {
 	return A2(
 		$elm$html$Html$div,
-		_List_Nil,
+		_List_fromArray(
+			[
+				A2($elm$html$Html$Attributes$style, 'display', 'table-row')
+			]),
 		_List_fromArray(
 			[
 				A2(
-				$elm$html$Html$p,
+				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$id('bpmSliderValue'),
-						A2($elm$html$Html$Attributes$style, 'float', 'left'),
-						A2($elm$html$Html$Attributes$style, 'width', '45%'),
+						A2($elm$html$Html$Attributes$style, 'display', 'table-cell'),
 						A2($elm$html$Html$Attributes$style, 'text-align', 'center'),
-						A2($elm$html$Html$Attributes$style, 'padding-top', '.5em'),
-						A2($elm$html$Html$Attributes$style, 'font-size', 'large')
+						A2($elm$html$Html$Attributes$style, 'min-width', '100px'),
+						A2($elm$html$Html$Attributes$style, 'width', '20%')
 					]),
 				_List_fromArray(
 					[
-						$elm$html$Html$text(
-						'BPM: ' + $elm$core$String$fromInt(model.bpm))
+						A2(
+						$elm$html$Html$p,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$id('bpmSliderValue'),
+								A2($elm$html$Html$Attributes$style, 'font-size', 'large')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text(
+								'BPM: ' + $elm$core$String$fromInt(model.bpm))
+							]))
 					])),
 				A2(
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						A2($elm$html$Html$Attributes$style, 'float', 'left'),
-						A2($elm$html$Html$Attributes$style, 'min-width', '100px'),
-						A2($elm$html$Html$Attributes$style, 'width', '30%')
+						A2($elm$html$Html$Attributes$style, 'display', 'table-cell'),
+						A2($elm$html$Html$Attributes$style, 'text-align', 'center'),
+						A2($elm$html$Html$Attributes$style, 'width', '60%')
 					]),
 				_List_fromArray(
 					[
 						$author$project$Main$startButton(model.isPlaying)
 					])),
 				A2(
-				$elm$html$Html$audio,
+				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$id('notePlayer'),
-						$elm$html$Html$Attributes$controls(true),
-						A2($elm$html$Html$Attributes$style, 'width', '100px')
+						A2($elm$html$Html$Attributes$style, 'display', 'table-cell'),
+						A2($elm$html$Html$Attributes$style, 'text-align', 'center'),
+						A2($elm$html$Html$Attributes$style, 'width', '20%')
 					]),
 				_List_fromArray(
 					[
 						A2(
-						$elm$html$Html$source,
+						$elm$html$Html$audio,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$id('notePlayerSource')
+								$elm$html$Html$Attributes$id('notePlayer'),
+								$elm$html$Html$Attributes$controls(true),
+								A2($elm$html$Html$Attributes$style, 'width', '100px'),
+								A2($elm$html$Html$Attributes$style, 'vertical-align', 'middle')
 							]),
-						_List_Nil)
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$source,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$id('notePlayerSource')
+									]),
+								_List_Nil)
+							]))
 					]))
 			]));
 };
@@ -6167,35 +6226,71 @@ var $elm$core$Maybe$withDefault = F2(
 	});
 var $author$project$Main$slider = function (bpm) {
 	return A2(
-		$elm$html$Html$input,
+		$elm$html$Html$div,
 		_List_fromArray(
 			[
-				$elm$html$Html$Attributes$type_('range'),
-				$elm$html$Html$Attributes$min('20'),
-				$elm$html$Html$Attributes$max('220'),
-				$elm$html$Html$Attributes$value(
-				$elm$core$String$fromInt(bpm)),
-				$elm$html$Html$Attributes$id('bpmSlider'),
-				$elm$html$Html$Attributes$step('5'),
-				A2($elm$html$Html$Attributes$style, 'width', '80%'),
-				A2($elm$html$Html$Attributes$style, 'margin', 'auto'),
-				$elm$html$Html$Events$onInput(
-				A2(
-					$elm$core$Basics$composeR,
-					$elm$core$String$toInt,
-					A2(
-						$elm$core$Basics$composeR,
-						$elm$core$Maybe$withDefault(60),
-						$author$project$Main$BpmChanged)))
+				A2($elm$html$Html$Attributes$style, 'display', 'table-row'),
+				A2($elm$html$Html$Attributes$style, 'width', '100%')
 			]),
-		_List_Nil);
+		_List_fromArray(
+			[
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						A2($elm$html$Html$Attributes$style, 'display', 'table-cell'),
+						A2($elm$html$Html$Attributes$style, 'width', '20%')
+					]),
+				_List_Nil),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						A2($elm$html$Html$Attributes$style, 'display', 'table-cell'),
+						A2($elm$html$Html$Attributes$style, 'width', '60%')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$input,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$type_('range'),
+								$elm$html$Html$Attributes$min('20'),
+								$elm$html$Html$Attributes$max('220'),
+								$elm$html$Html$Attributes$value(
+								$elm$core$String$fromInt(bpm)),
+								$elm$html$Html$Attributes$id('bpmSlider'),
+								$elm$html$Html$Attributes$step('5'),
+								$elm$html$Html$Events$onInput(
+								A2(
+									$elm$core$Basics$composeR,
+									$elm$core$String$toInt,
+									A2(
+										$elm$core$Basics$composeR,
+										$elm$core$Maybe$withDefault(60),
+										$author$project$Main$BpmChanged)))
+							]),
+						_List_Nil)
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						A2($elm$html$Html$Attributes$style, 'display', 'table-cell'),
+						A2($elm$html$Html$Attributes$style, 'width', '20%')
+					]),
+				_List_Nil)
+			]));
 };
 var $author$project$Main$view = function (model) {
 	return A2(
 		$elm$html$Html$div,
 		_List_fromArray(
 			[
-				$elm$html$Html$Attributes$id('sliderContainer')
+				$elm$html$Html$Attributes$id('sliderContainer'),
+				A2($elm$html$Html$Attributes$style, 'display', 'table'),
+				A2($elm$html$Html$Attributes$style, 'width', '100%')
 			]),
 		_List_fromArray(
 			[
