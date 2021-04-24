@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head></head>
+  <body>
+    <input type="range" id="volume" value="50" min="0" max="100"/>
+    <input type="range" id="time" value="1" min="0.5" max="3.0" step="0.1"/>
+    <input type="button" id="play" onClick="play();" />
+    <script type="text/javascript">
+      var audioCtx = new (window.AudioContext || window.webkitAudioContext)
+      var volume = audioCtx.createGain();
+      volume.connect(audioCtx.destination);
+
+      var sin;
+
+      function play() {
+          const timeSlider = document.getElementById("time");
+          const time = parseFloat(timeSlider.value);
+          const audioCtxTime = audioCtx.currentTime;
+          const volumeSlide = document.getElementById("volume");
+          const releaseTime = time * 0.2;
+          const attackTime = time * 0.2;
+
+          sin = audioCtx.createOscillator();
+          sin.frequency.value = 440;
+          sin.type = "sine";
+          sin.connect(volume);
+
+          console.log(attackTime + audioCtxTime);
+          console.log(audioCtxTime);
+          console.log(time);
+          console.log(releaseTime);
+          volume.gain.linearRampToValueAtTime(volumeSlide.value / 100, audioCtxTime + attackTime);
+          volume.gain.linearRampToValueAtTime(0, audioCtxTime + time - releaseTime);
+
+          sin.start(audioCtxTime);
+          sin.stop(audioCtxTime + time);
+      };
+
+
+    </script>
+  </body>
+</html>

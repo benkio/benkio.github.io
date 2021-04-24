@@ -1,0 +1,27 @@
+* MP3 -> WebAudio API
+** DONE Hello world in WebAudio API
+   Just a button that plays something.
+** Refactoring of Notes to reflect the Webaudio API
+   - Note as Int
+   - Duration
+   - etc
+* Output Menu
+  User can choose what will be the output of the trainer:
+  - Natural Notes
+  - All notes
+  - By Tonality
+* Chords
+** Implement Random Triad Chords
+   - maj
+   - min
+   - dim
+   - aug
+** Implement Random Seventh Chords
+   - maj7
+   - min7
+   - half diminished
+   - minMaj7
+* Output Menu Chords
+  - Triad Chords
+  - Seventh Chords
+  - By Tonality
