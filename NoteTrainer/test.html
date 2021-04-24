@@ -25,10 +25,6 @@
           sin.type = "sine";
           sin.connect(volume);
 
-          console.log(attackTime + audioCtxTime);
-          console.log(audioCtxTime);
-          console.log(time);
-          console.log(releaseTime);
           volume.gain.linearRampToValueAtTime(volumeSlide.value / 100, audioCtxTime + attackTime);
           volume.gain.linearRampToValueAtTime(0, audioCtxTime + time - releaseTime);
 
