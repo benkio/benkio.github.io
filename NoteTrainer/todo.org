@@ -1,10 +1,12 @@
 * MP3 -> WebAudio API
 ** DONE Hello world in WebAudio API
    Just a button that plays something.
-** Refactoring of Notes to reflect the Webaudio API
+** DONE Refactoring of Notes to reflect the Webaudio API
    - Note as Int
    - Duration
    - etc
+** TODO Better Sounds & UI
+   Explore better sounds for the oscillator, synthetizers and so on.
 * Output Menu
   User can choose what will be the output of the trainer:
   - Natural Notes

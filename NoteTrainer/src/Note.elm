@@ -1,7 +1,6 @@
-module Note exposing (Note, noteGenerator, noteToString)
+module Note exposing (Note(..), noteGenerator, noteToFrequency, noteToString)
 
 import Random exposing (Generator, weighted)
-
 
 type Note
     = A
@@ -22,8 +21,6 @@ type Note
     | Gs
     | Ab
 
-
-
 noteToString : Note -> String
 noteToString note = case note of
                         A  -> "A"
@@ -43,6 +40,26 @@ noteToString note = case note of
                         G  -> "G"
                         Gs -> "G#"
                         Ab -> "Ab"
+
+noteToFrequency : Note -> Float
+noteToFrequency note = case note of
+                        A  -> 440.00
+                        As -> 466.16
+                        Bb -> 466.16
+                        B  -> 493.88
+                        C  -> 523.25
+                        Cs -> 554.37
+                        Db -> 554.37
+                        D  -> 587.33
+                        Ds -> 622.25
+                        Eb -> 622.25
+                        E  -> 659.25
+                        F  -> 698.46
+                        Fs -> 739.99
+                        Gb -> 739.99
+                        G  -> 783.99
+                        Gs -> 830.61
+                        Ab -> 830.61
 
 noteGenerator : Random.Generator Note
 noteGenerator =

@@ -5227,11 +5227,18 @@ var $elm$core$Task$perform = F2(
 				A2($elm$core$Task$map, toMessage, task)));
 	});
 var $elm$browser$Browser$element = _Browser_element;
+var $author$project$Note$A = {$: 'A'};
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Main$init = function (_v0) {
 	return _Utils_Tuple2(
-		{bpm: 100, isPlaying: false, note: 'A'},
+		{
+			bpm: 100,
+			isPlaying: false,
+			notes: _List_fromArray(
+				[$author$project$Note$A]),
+			volume: 50
+		},
 		$elm$core$Platform$Cmd$none);
 };
 var $author$project$Main$ChangeNote = {$: 'ChangeNote'};
@@ -5762,7 +5769,6 @@ var $elm$random$Random$generate = F2(
 			$elm$random$Random$Generate(
 				A2($elm$random$Random$map, tagger, generator)));
 	});
-var $author$project$Note$A = {$: 'A'};
 var $author$project$Note$Ab = {$: 'Ab'};
 var $author$project$Note$As = {$: 'As'};
 var $author$project$Note$B = {$: 'B'};
@@ -5874,16 +5880,164 @@ var $author$project$Note$noteGenerator = A2(
 			_Utils_Tuple2(5, $author$project$Note$Gs),
 			_Utils_Tuple2(5, $author$project$Note$Ab)
 		]));
-var $elm$core$String$replace = F3(
-	function (before, after, string) {
-		return A2(
-			$elm$core$String$join,
-			after,
-			A2($elm$core$String$split, before, string));
-	});
-var $author$project$Main$noteToMP3 = function (n) {
-	return './notes/' + (A3($elm$core$String$replace, '#', 'sharp', n) + '.mp3');
+var $author$project$Main$play = _Platform_outgoingPort('play', $elm$core$Basics$identity);
+var $author$project$Main$bpmToSec = function (bpm) {
+	return 60 / bpm;
 };
+var $elm$core$Basics$composeR = F3(
+	function (f, g, x) {
+		return g(
+			f(x));
+	});
+var $elm$json$Json$Encode$float = _Json_wrap;
+var $elm$json$Json$Encode$int = _Json_wrap;
+var $elm$json$Json$Encode$list = F2(
+	function (func, entries) {
+		return _Json_wrap(
+			A3(
+				$elm$core$List$foldl,
+				_Json_addEntry(func),
+				_Json_emptyArray(_Utils_Tuple0),
+				entries));
+	});
+var $author$project$Note$noteToFrequency = function (note) {
+	switch (note.$) {
+		case 'A':
+			return 440.00;
+		case 'As':
+			return 466.16;
+		case 'Bb':
+			return 466.16;
+		case 'B':
+			return 493.88;
+		case 'C':
+			return 523.25;
+		case 'Cs':
+			return 554.37;
+		case 'Db':
+			return 554.37;
+		case 'D':
+			return 587.33;
+		case 'Ds':
+			return 622.25;
+		case 'Eb':
+			return 622.25;
+		case 'E':
+			return 659.25;
+		case 'F':
+			return 698.46;
+		case 'Fs':
+			return 739.99;
+		case 'Gb':
+			return 739.99;
+		case 'G':
+			return 783.99;
+		case 'Gs':
+			return 830.61;
+		default:
+			return 830.61;
+	}
+};
+var $elm$json$Json$Encode$object = function (pairs) {
+	return _Json_wrap(
+		A3(
+			$elm$core$List$foldl,
+			F2(
+				function (_v0, obj) {
+					var k = _v0.a;
+					var v = _v0.b;
+					return A3(_Json_addField, k, v, obj);
+				}),
+			_Json_emptyObject(_Utils_Tuple0),
+			pairs));
+};
+var $author$project$Main$toMusic = function (_v0) {
+	var notes = _v0.notes;
+	var bpm = _v0.bpm;
+	var volume = _v0.volume;
+	return $elm$json$Json$Encode$object(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				'frequencies',
+				A2(
+					$elm$json$Json$Encode$list,
+					A2($elm$core$Basics$composeR, $author$project$Note$noteToFrequency, $elm$json$Json$Encode$float),
+					notes)),
+				_Utils_Tuple2(
+				'seconds',
+				$elm$json$Json$Encode$float(
+					$author$project$Main$bpmToSec(bpm))),
+				_Utils_Tuple2(
+				'volume',
+				$elm$json$Json$Encode$int(volume))
+			]));
+};
+var $author$project$Main$update = F2(
+	function (msg, model) {
+		switch (msg.$) {
+			case 'BpmChanged':
+				var bpm = msg.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{bpm: bpm}),
+					$elm$core$Platform$Cmd$none);
+			case 'VolumeChanged':
+				var volume = msg.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{volume: volume}),
+					$elm$core$Platform$Cmd$none);
+			case 'Start':
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{isPlaying: true}),
+					$elm$core$Platform$Cmd$none);
+			case 'Stop':
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{isPlaying: false}),
+					$elm$core$Platform$Cmd$none);
+			case 'ChangeNote':
+				return _Utils_Tuple2(
+					model,
+					A2($elm$random$Random$generate, $author$project$Main$NewNote, $author$project$Note$noteGenerator));
+			default:
+				var n = msg.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{
+							notes: _List_fromArray(
+								[n])
+						}),
+					$author$project$Main$play(
+						$author$project$Main$toMusic(model)));
+		}
+	});
+var $elm$html$Html$div = _VirtualDom_node('div');
+var $elm$core$List$head = function (list) {
+	if (list.b) {
+		var x = list.a;
+		var xs = list.b;
+		return $elm$core$Maybe$Just(x);
+	} else {
+		return $elm$core$Maybe$Nothing;
+	}
+};
+var $elm$json$Json$Encode$string = _Json_wrap;
+var $elm$html$Html$Attributes$stringProperty = F2(
+	function (key, string) {
+		return A2(
+			_VirtualDom_property,
+			key,
+			$elm$json$Json$Encode$string(string));
+	});
+var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
 var $author$project$Note$noteToString = function (note) {
 	switch (note.$) {
 		case 'A':
@@ -5922,56 +6076,6 @@ var $author$project$Note$noteToString = function (note) {
 			return 'Ab';
 	}
 };
-var $elm$json$Json$Encode$string = _Json_wrap;
-var $author$project$Main$playNote = _Platform_outgoingPort('playNote', $elm$json$Json$Encode$string);
-var $author$project$Main$update = F2(
-	function (msg, model) {
-		switch (msg.$) {
-			case 'BpmChanged':
-				var bpm = msg.a;
-				return _Utils_Tuple2(
-					_Utils_update(
-						model,
-						{bpm: bpm}),
-					$elm$core$Platform$Cmd$none);
-			case 'Start':
-				return _Utils_Tuple2(
-					_Utils_update(
-						model,
-						{isPlaying: true}),
-					$elm$core$Platform$Cmd$none);
-			case 'Stop':
-				return _Utils_Tuple2(
-					_Utils_update(
-						model,
-						{isPlaying: false}),
-					$elm$core$Platform$Cmd$none);
-			case 'ChangeNote':
-				return _Utils_Tuple2(
-					model,
-					A2($elm$random$Random$generate, $author$project$Main$NewNote, $author$project$Note$noteGenerator));
-			default:
-				var n = msg.a;
-				return _Utils_Tuple2(
-					_Utils_update(
-						model,
-						{
-							note: $author$project$Note$noteToString(n)
-						}),
-					$author$project$Main$playNote(
-						$author$project$Main$noteToMP3(
-							$author$project$Note$noteToString(n))));
-		}
-	});
-var $elm$html$Html$div = _VirtualDom_node('div');
-var $elm$html$Html$Attributes$stringProperty = F2(
-	function (key, string) {
-		return A2(
-			_VirtualDom_property,
-			key,
-			$elm$json$Json$Encode$string(string));
-	});
-var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
 var $elm$html$Html$p = _VirtualDom_node('p');
 var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
 var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
@@ -6013,7 +6117,8 @@ var $author$project$Main$note = function (n) {
 							]),
 						_List_fromArray(
 							[
-								$elm$html$Html$text(n)
+								$elm$html$Html$text(
+								$author$project$Note$noteToString(n))
 							]))
 					])),
 				A2(
@@ -6026,17 +6131,46 @@ var $author$project$Main$note = function (n) {
 				_List_Nil)
 			]));
 };
-var $elm$html$Html$audio = _VirtualDom_node('audio');
-var $elm$json$Json$Encode$bool = _Json_wrap;
-var $elm$html$Html$Attributes$boolProperty = F2(
-	function (key, bool) {
+var $author$project$Main$VolumeChanged = function (a) {
+	return {$: 'VolumeChanged', a: a};
+};
+var $elm$html$Html$input = _VirtualDom_node('input');
+var $elm$html$Html$Attributes$max = $elm$html$Html$Attributes$stringProperty('max');
+var $elm$html$Html$Attributes$min = $elm$html$Html$Attributes$stringProperty('min');
+var $elm$html$Html$Events$alwaysStop = function (x) {
+	return _Utils_Tuple2(x, true);
+};
+var $elm$virtual_dom$VirtualDom$MayStopPropagation = function (a) {
+	return {$: 'MayStopPropagation', a: a};
+};
+var $elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
+var $elm$html$Html$Events$stopPropagationOn = F2(
+	function (event, decoder) {
 		return A2(
-			_VirtualDom_property,
-			key,
-			$elm$json$Json$Encode$bool(bool));
+			$elm$virtual_dom$VirtualDom$on,
+			event,
+			$elm$virtual_dom$VirtualDom$MayStopPropagation(decoder));
 	});
-var $elm$html$Html$Attributes$controls = $elm$html$Html$Attributes$boolProperty('controls');
-var $elm$html$Html$source = _VirtualDom_node('source');
+var $elm$json$Json$Decode$field = _Json_decodeField;
+var $elm$json$Json$Decode$at = F2(
+	function (fields, decoder) {
+		return A3($elm$core$List$foldr, $elm$json$Json$Decode$field, decoder, fields);
+	});
+var $elm$json$Json$Decode$string = _Json_decodeString;
+var $elm$html$Html$Events$targetValue = A2(
+	$elm$json$Json$Decode$at,
+	_List_fromArray(
+		['target', 'value']),
+	$elm$json$Json$Decode$string);
+var $elm$html$Html$Events$onInput = function (tagger) {
+	return A2(
+		$elm$html$Html$Events$stopPropagationOn,
+		'input',
+		A2(
+			$elm$json$Json$Decode$map,
+			$elm$html$Html$Events$alwaysStop,
+			A2($elm$json$Json$Decode$map, tagger, $elm$html$Html$Events$targetValue)));
+};
 var $author$project$Main$Start = {$: 'Start'};
 var $author$project$Main$Stop = {$: 'Stop'};
 var $elm$html$Html$button = _VirtualDom_node('button');
@@ -6044,7 +6178,6 @@ var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('
 var $elm$virtual_dom$VirtualDom$Normal = function (a) {
 	return {$: 'Normal', a: a};
 };
-var $elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
 var $elm$html$Html$Events$on = F2(
 	function (event, decoder) {
 		return A2(
@@ -6089,6 +6222,17 @@ var $author$project$Main$startButton = function (isPlaying) {
 				$elm$html$Html$text('Start')
 			]));
 };
+var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
+var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
+var $elm$core$Maybe$withDefault = F2(
+	function (_default, maybe) {
+		if (maybe.$ === 'Just') {
+			var value = maybe.a;
+			return value;
+		} else {
+			return _default;
+		}
+	});
 var $author$project$Main$noteTrainerControls = function (model) {
 	return A2(
 		$elm$html$Html$div,
@@ -6145,85 +6289,36 @@ var $author$project$Main$noteTrainerControls = function (model) {
 				_List_fromArray(
 					[
 						A2(
-						$elm$html$Html$audio,
+						$elm$html$Html$input,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$id('notePlayer'),
-								$elm$html$Html$Attributes$controls(true),
+								$elm$html$Html$Attributes$type_('range'),
+								$elm$html$Html$Attributes$min('0'),
+								$elm$html$Html$Attributes$max('100'),
+								$elm$html$Html$Attributes$value(
+								$elm$core$String$fromInt(model.volume)),
+								$elm$html$Html$Attributes$id('volumeSlider'),
 								A2($elm$html$Html$Attributes$style, 'width', '100px'),
-								A2($elm$html$Html$Attributes$style, 'vertical-align', 'middle')
-							]),
-						_List_fromArray(
-							[
+								A2($elm$html$Html$Attributes$style, 'vertical-align', 'middle'),
+								$elm$html$Html$Events$onInput(
 								A2(
-								$elm$html$Html$source,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$id('notePlayerSource')
-									]),
-								_List_Nil)
-							]))
+									$elm$core$Basics$composeR,
+									$elm$core$String$toInt,
+									A2(
+										$elm$core$Basics$composeR,
+										$elm$core$Maybe$withDefault(60),
+										$author$project$Main$VolumeChanged)))
+							]),
+						_List_Nil)
 					]))
 			]));
 };
 var $author$project$Main$BpmChanged = function (a) {
 	return {$: 'BpmChanged', a: a};
 };
-var $elm$core$Basics$composeR = F3(
-	function (f, g, x) {
-		return g(
-			f(x));
-	});
-var $elm$html$Html$input = _VirtualDom_node('input');
-var $elm$html$Html$Attributes$max = $elm$html$Html$Attributes$stringProperty('max');
-var $elm$html$Html$Attributes$min = $elm$html$Html$Attributes$stringProperty('min');
-var $elm$html$Html$Events$alwaysStop = function (x) {
-	return _Utils_Tuple2(x, true);
-};
-var $elm$virtual_dom$VirtualDom$MayStopPropagation = function (a) {
-	return {$: 'MayStopPropagation', a: a};
-};
-var $elm$html$Html$Events$stopPropagationOn = F2(
-	function (event, decoder) {
-		return A2(
-			$elm$virtual_dom$VirtualDom$on,
-			event,
-			$elm$virtual_dom$VirtualDom$MayStopPropagation(decoder));
-	});
-var $elm$json$Json$Decode$field = _Json_decodeField;
-var $elm$json$Json$Decode$at = F2(
-	function (fields, decoder) {
-		return A3($elm$core$List$foldr, $elm$json$Json$Decode$field, decoder, fields);
-	});
-var $elm$json$Json$Decode$string = _Json_decodeString;
-var $elm$html$Html$Events$targetValue = A2(
-	$elm$json$Json$Decode$at,
-	_List_fromArray(
-		['target', 'value']),
-	$elm$json$Json$Decode$string);
-var $elm$html$Html$Events$onInput = function (tagger) {
-	return A2(
-		$elm$html$Html$Events$stopPropagationOn,
-		'input',
-		A2(
-			$elm$json$Json$Decode$map,
-			$elm$html$Html$Events$alwaysStop,
-			A2($elm$json$Json$Decode$map, tagger, $elm$html$Html$Events$targetValue)));
-};
 var $elm$html$Html$Attributes$step = function (n) {
 	return A2($elm$html$Html$Attributes$stringProperty, 'step', n);
 };
-var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
-var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
-var $elm$core$Maybe$withDefault = F2(
-	function (_default, maybe) {
-		if (maybe.$ === 'Just') {
-			var value = maybe.a;
-			return value;
-		} else {
-			return _default;
-		}
-	});
 var $author$project$Main$slider = function (bpm) {
 	return A2(
 		$elm$html$Html$div,
@@ -6296,7 +6391,11 @@ var $author$project$Main$view = function (model) {
 			[
 				$author$project$Main$noteTrainerControls(model),
 				$author$project$Main$slider(model.bpm),
-				$author$project$Main$note(model.note)
+				$author$project$Main$note(
+				A2(
+					$elm$core$Maybe$withDefault,
+					$author$project$Note$A,
+					$elm$core$List$head(model.notes)))
 			]));
 };
 var $author$project$Main$main = $elm$browser$Browser$element(
