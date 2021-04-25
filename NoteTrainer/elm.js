@@ -6289,6 +6289,19 @@ var $author$project$Main$noteTrainerControls = function (model) {
 				_List_fromArray(
 					[
 						A2(
+						$elm$html$Html$div,
+						_List_Nil,
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$p,
+								_List_Nil,
+								_List_fromArray(
+									[
+										$elm$html$Html$text('🔉')
+									]))
+							])),
+						A2(
 						$elm$html$Html$input,
 						_List_fromArray(
 							[

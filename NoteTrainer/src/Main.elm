@@ -149,7 +149,9 @@ noteTrainerControls model =
             , style "text-align" "center"
             , style "width" "20%"
             ]
-            [ input
+            [
+             div [] [ip [] [ text "🔉"]]
+             , input
                 [ type_ "range"
                 , A.min "0"
                 , A.max "100"
