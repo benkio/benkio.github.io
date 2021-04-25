@@ -6016,7 +6016,13 @@ var $author$project$Main$update = F2(
 								[n])
 						}),
 					$author$project$Main$play(
-						$author$project$Main$toMusic(model)));
+						$author$project$Main$toMusic(
+							_Utils_update(
+								model,
+								{
+									notes: _List_fromArray(
+										[n])
+								}))));
 		}
 	});
 var $elm$html$Html$div = _VirtualDom_node('div');

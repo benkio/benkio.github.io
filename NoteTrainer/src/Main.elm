@@ -93,7 +93,7 @@ update msg model =
             ( model, generate NewNote noteGenerator )
 
         NewNote n ->
-            ( { model | notes = [ n ] }, play (toMusic model) )
+            ( { model | notes = [ n ] }, play (toMusic { model | notes = [ n ] }) )
 
 
 
