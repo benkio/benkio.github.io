@@ -69,7 +69,7 @@
 
       sin = audioCtx.createOscillator();
       sin.frequency.value = music.frequencies[0];
-      sin.type = "sine";
+      sin.type = music.oscillatorwave;
       sin.connect(volume);
 
       volume.gain.linearRampToValueAtTime(volumeSlide.value / 100, audioCtxTime + attackTime);

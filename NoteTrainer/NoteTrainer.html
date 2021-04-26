@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Note Trainer</title>
-<!-- 2021-04-25 Sun 19:07 -->
+<!-- 2021-04-26 Mon 19:34 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -81,7 +81,7 @@ app.ports.play.subscribe(function(music) {
 
     sin = audioCtx.createOscillator();
     sin.frequency.value = music.frequencies[0];
-    sin.type = "sine";
+    sin.type = music.oscillatorwave;
     sin.connect(volume);
 
     volume.gain.linearRampToValueAtTime(volumeSlide.value / 100, audioCtxTime + attackTime);

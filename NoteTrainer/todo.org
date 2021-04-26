@@ -5,9 +5,10 @@
    - Note as Int
    - Duration
    - etc
-** TODO Better Sounds & UI
-   Explore better sounds for the oscillator, synthetizers and so on.
 * Output Menu
+** Syth Wave
+   https://developer.mozilla.org/en-US/docs/Web/API/OscillatorNode/type
+** Note Choice
   User can choose what will be the output of the trainer:
   - Natural Notes
   - All notes
