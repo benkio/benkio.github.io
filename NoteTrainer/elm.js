@@ -5228,6 +5228,7 @@ var $elm$core$Task$perform = F2(
 	});
 var $elm$browser$Browser$element = _Browser_element;
 var $author$project$Note$A = {$: 'A'};
+var $author$project$Main$Sine = {$: 'Sine'};
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Main$init = function (_v0) {
@@ -5237,6 +5238,7 @@ var $author$project$Main$init = function (_v0) {
 			isPlaying: false,
 			notes: _List_fromArray(
 				[$author$project$Note$A]),
+			oscillatorWave: $author$project$Main$Sine,
 			volume: 50
 		},
 		$elm$core$Platform$Cmd$none);
@@ -5951,10 +5953,24 @@ var $elm$json$Json$Encode$object = function (pairs) {
 			_Json_emptyObject(_Utils_Tuple0),
 			pairs));
 };
+var $elm$json$Json$Encode$string = _Json_wrap;
+var $author$project$Main$waveToString = function (w) {
+	switch (w.$) {
+		case 'Sine':
+			return 'sine';
+		case 'Triangle':
+			return 'triangle';
+		case 'Square':
+			return 'square';
+		default:
+			return 'sawtooth';
+	}
+};
 var $author$project$Main$toMusic = function (_v0) {
 	var notes = _v0.notes;
 	var bpm = _v0.bpm;
 	var volume = _v0.volume;
+	var oscillatorWave = _v0.oscillatorWave;
 	return $elm$json$Json$Encode$object(
 		_List_fromArray(
 			[
@@ -5970,9 +5986,39 @@ var $author$project$Main$toMusic = function (_v0) {
 					$author$project$Main$bpmToSec(bpm))),
 				_Utils_Tuple2(
 				'volume',
-				$elm$json$Json$Encode$int(volume))
+				$elm$json$Json$Encode$int(volume)),
+				_Utils_Tuple2(
+				'oscillatorwave',
+				$elm$json$Json$Encode$string(
+					$author$project$Main$waveToString(oscillatorWave)))
 			]));
 };
+var $author$project$Main$Sawtooth = {$: 'Sawtooth'};
+var $author$project$Main$Square = {$: 'Square'};
+var $author$project$Main$Triangle = {$: 'Triangle'};
+var $author$project$Main$toWave = function (s) {
+	switch (s) {
+		case 'sine':
+			return $elm$core$Maybe$Just($author$project$Main$Sine);
+		case 'triangle':
+			return $elm$core$Maybe$Just($author$project$Main$Triangle);
+		case 'square':
+			return $elm$core$Maybe$Just($author$project$Main$Square);
+		case 'sawtooth':
+			return $elm$core$Maybe$Just($author$project$Main$Sawtooth);
+		default:
+			return $elm$core$Maybe$Nothing;
+	}
+};
+var $elm$core$Maybe$withDefault = F2(
+	function (_default, maybe) {
+		if (maybe.$ === 'Just') {
+			var value = maybe.a;
+			return value;
+		} else {
+			return _default;
+		}
+	});
 var $author$project$Main$update = F2(
 	function (msg, model) {
 		switch (msg.$) {
@@ -5989,6 +6035,18 @@ var $author$project$Main$update = F2(
 					_Utils_update(
 						model,
 						{volume: volume}),
+					$elm$core$Platform$Cmd$none);
+			case 'WaveChanged':
+				var wave = msg.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{
+							oscillatorWave: A2(
+								$elm$core$Maybe$withDefault,
+								$author$project$Main$Sine,
+								$author$project$Main$toWave(wave))
+						}),
 					$elm$core$Platform$Cmd$none);
 			case 'Start':
 				return _Utils_Tuple2(
@@ -6029,7 +6087,6 @@ var $elm$core$List$head = function (list) {
 		return $elm$core$Maybe$Nothing;
 	}
 };
-var $elm$json$Json$Encode$string = _Json_wrap;
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
 		return A2(
@@ -6134,22 +6191,22 @@ var $author$project$Main$note = function (n) {
 var $author$project$Main$VolumeChanged = function (a) {
 	return {$: 'VolumeChanged', a: a};
 };
+var $author$project$Main$WaveChanged = function (a) {
+	return {$: 'WaveChanged', a: a};
+};
 var $elm$html$Html$input = _VirtualDom_node('input');
 var $elm$html$Html$Attributes$max = $elm$html$Html$Attributes$stringProperty('max');
 var $elm$html$Html$Attributes$min = $elm$html$Html$Attributes$stringProperty('min');
-var $elm$html$Html$Events$alwaysStop = function (x) {
-	return _Utils_Tuple2(x, true);
-};
-var $elm$virtual_dom$VirtualDom$MayStopPropagation = function (a) {
-	return {$: 'MayStopPropagation', a: a};
+var $elm$virtual_dom$VirtualDom$Normal = function (a) {
+	return {$: 'Normal', a: a};
 };
 var $elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
-var $elm$html$Html$Events$stopPropagationOn = F2(
+var $elm$html$Html$Events$on = F2(
 	function (event, decoder) {
 		return A2(
 			$elm$virtual_dom$VirtualDom$on,
 			event,
-			$elm$virtual_dom$VirtualDom$MayStopPropagation(decoder));
+			$elm$virtual_dom$VirtualDom$Normal(decoder));
 	});
 var $elm$json$Json$Decode$field = _Json_decodeField;
 var $elm$json$Json$Decode$at = F2(
@@ -6162,6 +6219,25 @@ var $elm$html$Html$Events$targetValue = A2(
 	_List_fromArray(
 		['target', 'value']),
 	$elm$json$Json$Decode$string);
+var $elm_community$html_extra$Html$Events$Extra$onChange = function (onChangeAction) {
+	return A2(
+		$elm$html$Html$Events$on,
+		'change',
+		A2($elm$json$Json$Decode$map, onChangeAction, $elm$html$Html$Events$targetValue));
+};
+var $elm$html$Html$Events$alwaysStop = function (x) {
+	return _Utils_Tuple2(x, true);
+};
+var $elm$virtual_dom$VirtualDom$MayStopPropagation = function (a) {
+	return {$: 'MayStopPropagation', a: a};
+};
+var $elm$html$Html$Events$stopPropagationOn = F2(
+	function (event, decoder) {
+		return A2(
+			$elm$virtual_dom$VirtualDom$on,
+			event,
+			$elm$virtual_dom$VirtualDom$MayStopPropagation(decoder));
+	});
 var $elm$html$Html$Events$onInput = function (tagger) {
 	return A2(
 		$elm$html$Html$Events$stopPropagationOn,
@@ -6171,20 +6247,21 @@ var $elm$html$Html$Events$onInput = function (tagger) {
 			$elm$html$Html$Events$alwaysStop,
 			A2($elm$json$Json$Decode$map, tagger, $elm$html$Html$Events$targetValue)));
 };
+var $elm$html$Html$option = _VirtualDom_node('option');
+var $elm$html$Html$select = _VirtualDom_node('select');
+var $elm$json$Json$Encode$bool = _Json_wrap;
+var $elm$html$Html$Attributes$boolProperty = F2(
+	function (key, bool) {
+		return A2(
+			_VirtualDom_property,
+			key,
+			$elm$json$Json$Encode$bool(bool));
+	});
+var $elm$html$Html$Attributes$selected = $elm$html$Html$Attributes$boolProperty('selected');
 var $author$project$Main$Start = {$: 'Start'};
 var $author$project$Main$Stop = {$: 'Stop'};
 var $elm$html$Html$button = _VirtualDom_node('button');
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
-var $elm$virtual_dom$VirtualDom$Normal = function (a) {
-	return {$: 'Normal', a: a};
-};
-var $elm$html$Html$Events$on = F2(
-	function (event, decoder) {
-		return A2(
-			$elm$virtual_dom$VirtualDom$on,
-			event,
-			$elm$virtual_dom$VirtualDom$Normal(decoder));
-	});
 var $elm$html$Html$Events$onClick = function (msg) {
 	return A2(
 		$elm$html$Html$Events$on,
@@ -6197,6 +6274,9 @@ var $author$project$Main$startButton = function (isPlaying) {
 		_List_fromArray(
 			[
 				A2($elm$html$Html$Attributes$style, 'min-width', '80px'),
+				A2($elm$html$Html$Attributes$style, 'margin', 'auto'),
+				A2($elm$html$Html$Attributes$style, 'margin-bottom', '1em'),
+				A2($elm$html$Html$Attributes$style, 'margin-top', '1em'),
 				$elm$html$Html$Attributes$class('btn btn-danger'),
 				$elm$html$Html$Events$onClick($author$project$Main$Stop)
 			]),
@@ -6221,15 +6301,6 @@ var $author$project$Main$startButton = function (isPlaying) {
 };
 var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
 var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
-var $elm$core$Maybe$withDefault = F2(
-	function (_default, maybe) {
-		if (maybe.$ === 'Just') {
-			var value = maybe.a;
-			return value;
-		} else {
-			return _default;
-		}
-	});
 var $author$project$Main$noteTrainerControls = function (model) {
 	return A2(
 		$elm$html$Html$div,
@@ -6273,7 +6344,83 @@ var $author$project$Main$noteTrainerControls = function (model) {
 					]),
 				_List_fromArray(
 					[
-						$author$project$Main$startButton(model.isPlaying)
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								A2($elm$html$Html$Attributes$style, 'float', 'left'),
+								A2($elm$html$Html$Attributes$style, 'width', '50%')
+							]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$select,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$id('waveForm'),
+										A2($elm$html$Html$Attributes$style, 'color', 'black'),
+										A2($elm$html$Html$Attributes$style, 'min-width', '80px'),
+										A2($elm$html$Html$Attributes$style, 'margin', 'auto'),
+										A2($elm$html$Html$Attributes$style, 'margin-bottom', '1em'),
+										A2($elm$html$Html$Attributes$style, 'margin-top', '1em'),
+										$elm_community$html_extra$Html$Events$Extra$onChange($author$project$Main$WaveChanged)
+									]),
+								_List_fromArray(
+									[
+										A2(
+										$elm$html$Html$option,
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$selected(true),
+												$elm$html$Html$Attributes$value('sine')
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text('Sine')
+											])),
+										A2(
+										$elm$html$Html$option,
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$value('triangle')
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text('Triangle')
+											])),
+										A2(
+										$elm$html$Html$option,
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$value('square')
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text('Square')
+											])),
+										A2(
+										$elm$html$Html$option,
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$value('sawtooth')
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text('Sawtooth')
+											]))
+									]))
+							])),
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								A2($elm$html$Html$Attributes$style, 'float', 'left'),
+								A2($elm$html$Html$Attributes$style, 'width', '50%')
+							]),
+						_List_fromArray(
+							[
+								$author$project$Main$startButton(model.isPlaying)
+							]))
 					])),
 				A2(
 				$elm$html$Html$div,

@@ -1,9 +1,10 @@
 port module Main exposing (..)
 
 import Browser exposing (element)
-import Html exposing (Html, audio, button, div, h1, input, p, source, text)
-import Html.Attributes as A exposing (autoplay, class, controls, id, max, min, src, step, style, type_, value)
+import Html exposing (Html, audio, button, div, h1, input, option, p, select, source, text)
+import Html.Attributes as A exposing (autoplay, class, controls, id, max, min, selected, src, step, style, type_, value)
 import Html.Events exposing (onClick, onInput)
+import Html.Events.Extra exposing (onChange)
 import Json.Encode as E exposing (Value, float, int, list, object)
 import List exposing (head)
 import Maybe exposing (withDefault)
@@ -17,11 +18,12 @@ port play : E.Value -> Cmd msg
 
 
 toMusic : Model -> E.Value
-toMusic { notes, bpm, volume } =
+toMusic { notes, bpm, volume, oscillatorWave } =
     E.object
         [ ( "frequencies", E.list (noteToFrequency >> E.float) notes )
         , ( "seconds", E.float (bpmToSec bpm) )
         , ( "volume", E.int volume )
+        , ( "oscillatorwave", E.string (waveToString oscillatorWave) )
         ]
 
 
@@ -48,17 +50,60 @@ bpmToSec bpm =
 -- Init -------------------------------------------------------------------
 
 
+type Wave
+    = Sine
+    | Triangle
+    | Square
+    | Sawtooth
+
+
+waveToString : Wave -> String
+waveToString w =
+    case w of
+        Sine ->
+            "sine"
+
+        Triangle ->
+            "triangle"
+
+        Square ->
+            "square"
+
+        Sawtooth ->
+            "sawtooth"
+
+
+toWave : String -> Maybe Wave
+toWave s =
+    case s of
+        "sine" ->
+            Just Sine
+
+        "triangle" ->
+            Just Triangle
+
+        "square" ->
+            Just Square
+
+        "sawtooth" ->
+            Just Sawtooth
+
+        _ ->
+            Nothing
+
+
 type alias Model =
     { bpm : Int
     , volume : Int
     , isPlaying : Bool
     , notes : List Note
+    , oscillatorWave : Wave
     }
 
 
 init : () -> ( Model, Cmd msg )
 init _ =
-    ( { bpm = 100, volume = 50, isPlaying = False, notes = [ A ] }, Cmd.none )
+    ( { bpm = 100, volume = 50, isPlaying = False, notes = [ A ], oscillatorWave = Sine }, Cmd.none )
 
 
 
@@ -68,6 +113,7 @@ init _ =
 type Msg
     = BpmChanged Int
     | VolumeChanged Int
+    | WaveChanged String
     | Start
     | NewNote Note
     | ChangeNote
@@ -82,6 +128,9 @@ update msg model =
 
         VolumeChanged volume ->
             ( { model | volume = volume }, Cmd.none )
+
+        WaveChanged wave ->
+            ( { model | oscillatorWave = withDefault Sine (toWave wave) }, Cmd.none )
 
         Start ->
             ( { model | isPlaying = True }, Cmd.none )
@@ -143,15 +192,31 @@ noteTrainerControls model =
             , style "text-align" "center"
             , style "width" "60%"
             ]
-            [ startButton model.isPlaying ]
+            [ div [ style "float" "left", style "width" "50%" ]
+                [ select
+                    [ id "waveForm"
+                    , style "color" "black"
+                    , style "min-width" "80px"
+                    , style "margin" "auto"
+                    , style "margin-bottom" "1em"
+                    , style "margin-top" "1em"
+                    , onChange WaveChanged
+                    ]
+                    [ option [ selected True, value "sine" ] [ text "Sine" ]
+                    , option [ value "triangle" ] [ text "Triangle" ]
+                    , option [ value "square" ] [ text "Square" ]
+                    , option [ value "sawtooth" ] [ text "Sawtooth" ]
+                    ]
+                ]
+            , div [ style "float" "left", style "width" "50%" ] [ startButton model.isPlaying ]
+            ]
         , div
             [ style "display" "inline"
             , style "text-align" "center"
             , style "width" "20%"
             ]
-            [
-             p [style "margin-bottom" "0px"] [ text "🔉"]
-             , input
+            [ p [ style "margin-bottom" "0px" ] [ text "🔉" ]
+            , input
                 [ type_ "range"
                 , A.min "0"
                 , A.max "100"
@@ -163,7 +228,7 @@ noteTrainerControls model =
                 , onInput (toInt >> withDefault 60 >> VolumeChanged)
                 ]
                 []
-            , div [style "heigth" "10%"] []
+            , div [ style "heigth" "10%" ] []
             ]
         ]
 
@@ -173,6 +238,9 @@ startButton isPlaying =
     if isPlaying then
         button
             [ style "min-width" "80px"
+            , style "margin" "auto"
+            , style "margin-bottom" "1em"
+            , style "margin-top" "1em"
             , class "btn btn-danger"
             , onClick Stop
             ]
