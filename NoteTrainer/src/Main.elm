@@ -145,12 +145,12 @@ noteTrainerControls model =
             ]
             [ startButton model.isPlaying ]
         , div
-            [ style "display" "table-cell"
+            [ style "display" "inline"
             , style "text-align" "center"
             , style "width" "20%"
             ]
             [
-             div [] [ip [] [ text "🔉"]]
+             p [style "margin-bottom" "0px"] [ text "🔉"]
              , input
                 [ type_ "range"
                 , A.min "0"
@@ -158,10 +158,12 @@ noteTrainerControls model =
                 , value (fromInt model.volume)
                 , id "volumeSlider"
                 , style "width" "100px"
-                , style "vertical-align" "middle"
+                , style "margin-left" "auto"
+                , style "margin-right" "auto"
                 , onInput (toInt >> withDefault 60 >> VolumeChanged)
                 ]
                 []
+            , div [style "heigth" "10%"] []
             ]
         ]
 
@@ -171,9 +173,6 @@ startButton isPlaying =
     if isPlaying then
         button
             [ style "min-width" "80px"
-            , style "margin" "auto"
-            , style "margin-bottom" "1em"
-            , style "margin-top" "1em"
             , class "btn btn-danger"
             , onClick Stop
             ]
@@ -203,6 +202,7 @@ slider bpm =
                 , value (fromInt bpm)
                 , id "bpmSlider"
                 , step "5"
+                , style "margin-top" "1em"
                 , onInput (toInt >> withDefault 60 >> BpmChanged)
                 ]
                 []

@@ -6197,9 +6197,6 @@ var $author$project$Main$startButton = function (isPlaying) {
 		_List_fromArray(
 			[
 				A2($elm$html$Html$Attributes$style, 'min-width', '80px'),
-				A2($elm$html$Html$Attributes$style, 'margin', 'auto'),
-				A2($elm$html$Html$Attributes$style, 'margin-bottom', '1em'),
-				A2($elm$html$Html$Attributes$style, 'margin-top', '1em'),
 				$elm$html$Html$Attributes$class('btn btn-danger'),
 				$elm$html$Html$Events$onClick($author$project$Main$Stop)
 			]),
@@ -6282,24 +6279,21 @@ var $author$project$Main$noteTrainerControls = function (model) {
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						A2($elm$html$Html$Attributes$style, 'display', 'table-cell'),
+						A2($elm$html$Html$Attributes$style, 'display', 'inline'),
 						A2($elm$html$Html$Attributes$style, 'text-align', 'center'),
 						A2($elm$html$Html$Attributes$style, 'width', '20%')
 					]),
 				_List_fromArray(
 					[
 						A2(
-						$elm$html$Html$div,
-						_List_Nil,
+						$elm$html$Html$p,
 						_List_fromArray(
 							[
-								A2(
-								$elm$html$Html$p,
-								_List_Nil,
-								_List_fromArray(
-									[
-										$elm$html$Html$text('🔉')
-									]))
+								A2($elm$html$Html$Attributes$style, 'margin-bottom', '0px')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('🔉')
 							])),
 						A2(
 						$elm$html$Html$input,
@@ -6312,7 +6306,8 @@ var $author$project$Main$noteTrainerControls = function (model) {
 								$elm$core$String$fromInt(model.volume)),
 								$elm$html$Html$Attributes$id('volumeSlider'),
 								A2($elm$html$Html$Attributes$style, 'width', '100px'),
-								A2($elm$html$Html$Attributes$style, 'vertical-align', 'middle'),
+								A2($elm$html$Html$Attributes$style, 'margin-left', 'auto'),
+								A2($elm$html$Html$Attributes$style, 'margin-right', 'auto'),
 								$elm$html$Html$Events$onInput(
 								A2(
 									$elm$core$Basics$composeR,
@@ -6321,6 +6316,13 @@ var $author$project$Main$noteTrainerControls = function (model) {
 										$elm$core$Basics$composeR,
 										$elm$core$Maybe$withDefault(60),
 										$author$project$Main$VolumeChanged)))
+							]),
+						_List_Nil),
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								A2($elm$html$Html$Attributes$style, 'heigth', '10%')
 							]),
 						_List_Nil)
 					]))
@@ -6370,6 +6372,7 @@ var $author$project$Main$slider = function (bpm) {
 								$elm$core$String$fromInt(bpm)),
 								$elm$html$Html$Attributes$id('bpmSlider'),
 								$elm$html$Html$Attributes$step('5'),
+								A2($elm$html$Html$Attributes$style, 'margin-top', '1em'),
 								$elm$html$Html$Events$onInput(
 								A2(
 									$elm$core$Basics$composeR,
