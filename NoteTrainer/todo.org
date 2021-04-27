@@ -38,3 +38,4 @@
    - half diminished
    - minMaj7
 
+* Separate CSS

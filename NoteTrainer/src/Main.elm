@@ -165,7 +165,7 @@ subscriptions model =
 
 view : Model -> Html Msg
 view model =
-    div [ id "sliderContainer", style "display" "table", style "width" "100%" ]
+    div [ id "sliderContainer", style "width" "100%" ]
         [ noteTrainerControls model
         , slider model.bpm
         , optionPanel model
@@ -175,90 +175,61 @@ view model =
 
 noteTrainerControls : Model -> Html Msg
 noteTrainerControls model =
-    div [ style "display" "table-row" ]
+    div []
         [ div
-            [ style "display" "table-cell"
-            , style "text-align" "center"
-            , style "min-width" "100px"
-            , style "width" "20%"
+            [ style "display" "flex"
+            , style "flex-direction" "row"
+            , style "justify-content" "center"
+            , style "align-items" "center"
             ]
-            [ p
-                [ id "bpmSliderValue"
-                , style "font-size" "large"
+            [ div [ style "margin-right" ".5em" ] [ p [ id "bpmSliderValue", style "font-size" "large", style "margin" "auto" ] [ text ("BPM: " ++ fromInt model.bpm) ] ]
+            , div [ style "margin-right" ".5em", style "margin-left" ".5em" ] [ startButton model.isPlaying ]
+            , div [ style "text-align" "center", style "margin-left" ".5em" ]
+                [ p [ style "margin-bottom" "0px" ] [ text "🔉" ]
+                , input
+                    [ type_ "range"
+                    , A.min "0"
+                    , A.max "100"
+                    , value (fromInt model.volume)
+                    , id "volumeSlider"
+                    , style "width" "100px"
+                    , style "margin-left" "auto"
+                    , style "margin-right" "auto"
+                    , onInput (toInt >> withDefault 60 >> VolumeChanged)
+                    ]
+                    []
                 ]
-                [ text ("BPM: " ++ fromInt model.bpm) ]
-            ]
-        , div
-            [ style "display" "table-cell"
-            , style "text-align" "center"
-            , style "width" "60%"
-            ]
-            [ div [] [ startButton model.isPlaying ]
-            ]
-        , div
-            [ style "display" "inline"
-            , style "text-align" "center"
-            , style "width" "20%"
-            ]
-            [ p [ style "margin-bottom" "0px" ] [ text "🔉" ]
-            , input
-                [ type_ "range"
-                , A.min "0"
-                , A.max "100"
-                , value (fromInt model.volume)
-                , id "volumeSlider"
-                , style "width" "100px"
-                , style "margin-left" "auto"
-                , style "margin-right" "auto"
-                , onInput (toInt >> withDefault 60 >> VolumeChanged)
-                ]
-                []
-            , div [ style "heigth" "10%" ] []
             ]
         ]
 
 
 startButton : Bool -> Html Msg
 startButton isPlaying =
-    if isPlaying then
-        button
-            [ style "min-width" "80px"
-            , style "margin" "auto"
-            , style "margin-bottom" "1em"
-            , style "margin-top" "1em"
-            , class "btn btn-danger"
-            , onClick Stop
-            ]
-            [ text "Stop" ]
+    let
+        ( msg, btnClass, btnText ) =
+            case isPlaying of
+                True ->
+                    ( Stop, "btn-danger", "Stop" )
 
-    else
-        button
-            [ style "min-width" "80px"
-            , style "margin" "auto"
-            , style "margin-bottom" "1em"
-            , style "margin-top" "1em"
-            , class "btn btn-success"
-            , onClick Start
-            ]
-            [ text "Start" ]
-
-
-tableRowWrapper : Int -> Int -> Html Msg -> Html Msg
-tableRowWrapper wingWidth mainWidth mainHtml =
-    div [ style "display" "table-row", style "width" "100%" ]
-        [ div [ style "display" "table-cell", style "width" (fromInt wingWidth ++ "%") ] []
-        , div [ style "display" "table-cell", style "width" (fromInt mainWidth ++ "%") ]
-            [ mainHtml
-            ]
-        , div [ style "display" "table-cell", style "width" (fromInt wingWidth ++ "%") ] []
+                False ->
+                    ( Start, "btn-success", "Start" )
+    in
+    button
+        [ style "min-width" "80px"
+        , style "margin" "auto"
+        , style "margin-bottom" "1em"
+        , style "margin-top" "1em"
+        , class "btn"
+        , class btnClass
+        , onClick msg
         ]
+        [ text btnText ]
 
 
 slider : Int -> Html Msg
 slider bpm =
-    tableRowWrapper 20
-        60
-        (input
+    div [ style "max-width" "500px", style "margin" "auto" ]
+        [ input
             [ type_ "range"
             , A.min "20"
             , A.max "220"
@@ -269,53 +240,47 @@ slider bpm =
             , onInput (toInt >> withDefault 60 >> BpmChanged)
             ]
             []
-        )
+        ]
 
 
 note : Note -> Html Msg
 note n =
-    tableRowWrapper 25
-        50
-        (div
-            [ style "min-width" "300px"
-            , style "text-align" "center"
-            ]
-            [ p [ style "font-size" "15em" ] [ text (noteToString n) ]
-            ]
-        )
+    div
+        [ style "min-width" "300px"
+        , style "text-align" "center"
+        ]
+        [ p [ style "font-size" "13em" ] [ text (noteToString n) ]
+        ]
 
 
 optionPanel : Model -> Html Msg
 optionPanel model =
-    tableRowWrapper 25
-        50
-        (div [ class "panel-group", style "text-align" "center", style "margin" "1em auto" ]
-            [ div [ class "panel", class "panel-default" ]
-                [ div [ class "panel-heading" ]
-                    [ h4 [ class "panel-title" ]
-                        [ a [ attribute "data-toggle" "collapse", href "#collapseOptions" ]
-                            [ text "Note Trainer Options"
-                            ]
+    div [ class "panel-group", style "text-align" "center", style "margin" "1em auto", style "max-width" "500px" ]
+        [ div [ class "panel", class "panel-default" ]
+            [ div [ class "panel-heading" ]
+                [ h4 [ class "panel-title" ]
+                    [ a [ attribute "data-toggle" "collapse", href "#collapseOptions" ]
+                        [ text "Note Trainer Options"
                         ]
                     ]
-                , div [ id "collapseOptions", class "panel-collapse", class "collapse" ]
-                    [ div [ class "panel-body" ]
-                        [ select
-                            [ id "waveForm"
-                            , style "color" "black"
-                            , style "min-width" "80px"
-                            , style "margin" "auto"
-                            , style "margin-bottom" "1em"
-                            , style "margin-top" "1em"
-                            , onChange WaveChanged
-                            ]
-                            [ option [ selected True, value "sine" ] [ text "Sine" ]
-                            , option [ value "triangle" ] [ text "Triangle" ]
-                            , option [ value "square" ] [ text "Square" ]
-                            , option [ value "sawtooth" ] [ text "Sawtooth" ]
-                            ]
+                ]
+            , div [ id "collapseOptions", class "panel-collapse", class "collapse" ]
+                [ div [ class "panel-body" ]
+                    [ select
+                        [ id "waveForm"
+                        , style "color" "black"
+                        , style "min-width" "80px"
+                        , style "margin" "auto"
+                        , style "margin-bottom" "1em"
+                        , style "margin-top" "1em"
+                        , onChange WaveChanged
+                        ]
+                        [ option [ selected True, value "sine" ] [ text "Sine" ]
+                        , option [ value "triangle" ] [ text "Triangle" ]
+                        , option [ value "square" ] [ text "Square" ]
+                        , option [ value "sawtooth" ] [ text "Sawtooth" ]
                         ]
                     ]
                 ]
             ]
-        )
+        ]
