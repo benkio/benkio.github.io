@@ -1,7 +1,7 @@
 port module Main exposing (..)
 
 import Browser exposing (element)
-import Html exposing (Html, a, audio, button, div, h1, h4, input, option, p, select, source, text)
+import Html exposing (Html, a, audio, button, div, h1, h4, input, label, option, p, select, source, text)
 import Html.Attributes as A exposing (attribute, autoplay, class, controls, href, id, max, min, selected, src, step, style, type_, value)
 import Html.Events exposing (onClick, onInput)
 import Html.Events.Extra exposing (onChange)
@@ -265,22 +265,33 @@ optionPanel model =
                     ]
                 ]
             , div [ id "collapseOptions", class "panel-collapse", class "collapse" ]
-                [ div [ class "panel-body" ]
-                    [ select
-                        [ id "waveForm"
-                        , style "color" "black"
-                        , style "min-width" "80px"
-                        , style "margin" "auto"
-                        , style "margin-bottom" "1em"
-                        , style "margin-top" "1em"
-                        , onChange WaveChanged
-                        ]
-                        [ option [ selected True, value "sine" ] [ text "Sine" ]
-                        , option [ value "triangle" ] [ text "Triangle" ]
-                        , option [ value "square" ] [ text "Square" ]
-                        , option [ value "sawtooth" ] [ text "Sawtooth" ]
-                        ]
-                    ]
+                [ panelBody
                 ]
             ]
+        ]
+
+
+panelBody : Html Msg
+panelBody =
+    div [ class "panel-body" ]
+        [ label [ style "display" "inline-block", style "color" "black", style "margin-right" "1em" ] [ text "Waveform" ]
+        , select
+            [ id "waveForm"
+            , style "color" "black"
+            , style "min-width" "80px"
+            , style "margin" "auto"
+            , style "margin-bottom" "1em"
+            , style "margin-top" "1em"
+            , onChange WaveChanged
+            ]
+            [ option [ selected True, value "sine" ] [ text "Sine" ]
+            , option [ value "triangle" ] [ text "Triangle" ]
+            , option [ value "square" ] [ text "Square" ]
+            , option [ value "sawtooth" ] [ text "Sawtooth" ]
+            ]
+          , div [class "btn-group"] [
+               button [class "btn", class "btn-primary"] [text "All Notes"]
+              ,button [class "btn", class "btn-link"] [text "Only Natural Notes"]
+              ,button [class "btn", class "btn-link"] [text "By Tonality"] -- Dropdown?? look for bootstrap button group
+              ]
         ]

@@ -6347,9 +6347,6 @@ var $author$project$Main$noteTrainerControls = function (model) {
 					]))
 			]));
 };
-var $author$project$Main$WaveChanged = function (a) {
-	return {$: 'WaveChanged', a: a};
-};
 var $elm$html$Html$a = _VirtualDom_node('a');
 var $elm$virtual_dom$VirtualDom$attribute = F2(
 	function (key, value) {
@@ -6366,6 +6363,10 @@ var $elm$html$Html$Attributes$href = function (url) {
 		'href',
 		_VirtualDom_noJavaScriptUri(url));
 };
+var $author$project$Main$WaveChanged = function (a) {
+	return {$: 'WaveChanged', a: a};
+};
+var $elm$html$Html$label = _VirtualDom_node('label');
 var $elm_community$html_extra$Html$Events$Extra$onChange = function (onChangeAction) {
 	return A2(
 		$elm$html$Html$Events$on,
@@ -6383,6 +6384,125 @@ var $elm$html$Html$Attributes$boolProperty = F2(
 			$elm$json$Json$Encode$bool(bool));
 	});
 var $elm$html$Html$Attributes$selected = $elm$html$Html$Attributes$boolProperty('selected');
+var $author$project$Main$panelBody = A2(
+	$elm$html$Html$div,
+	_List_fromArray(
+		[
+			$elm$html$Html$Attributes$class('panel-body')
+		]),
+	_List_fromArray(
+		[
+			A2(
+			$elm$html$Html$label,
+			_List_fromArray(
+				[
+					A2($elm$html$Html$Attributes$style, 'display', 'inline-block'),
+					A2($elm$html$Html$Attributes$style, 'color', 'black'),
+					A2($elm$html$Html$Attributes$style, 'margin-right', '1em')
+				]),
+			_List_fromArray(
+				[
+					$elm$html$Html$text('Waveform')
+				])),
+			A2(
+			$elm$html$Html$select,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$id('waveForm'),
+					A2($elm$html$Html$Attributes$style, 'color', 'black'),
+					A2($elm$html$Html$Attributes$style, 'min-width', '80px'),
+					A2($elm$html$Html$Attributes$style, 'margin', 'auto'),
+					A2($elm$html$Html$Attributes$style, 'margin-bottom', '1em'),
+					A2($elm$html$Html$Attributes$style, 'margin-top', '1em'),
+					$elm_community$html_extra$Html$Events$Extra$onChange($author$project$Main$WaveChanged)
+				]),
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$option,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$selected(true),
+							$elm$html$Html$Attributes$value('sine')
+						]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text('Sine')
+						])),
+					A2(
+					$elm$html$Html$option,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$value('triangle')
+						]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text('Triangle')
+						])),
+					A2(
+					$elm$html$Html$option,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$value('square')
+						]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text('Square')
+						])),
+					A2(
+					$elm$html$Html$option,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$value('sawtooth')
+						]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text('Sawtooth')
+						]))
+				])),
+			A2(
+			$elm$html$Html$div,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class('btn-group')
+				]),
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$button,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('btn'),
+							$elm$html$Html$Attributes$class('btn-primary')
+						]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text('All Notes')
+						])),
+					A2(
+					$elm$html$Html$button,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('btn'),
+							$elm$html$Html$Attributes$class('btn-link')
+						]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text('Only Natural Notes')
+						])),
+					A2(
+					$elm$html$Html$button,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('btn'),
+							$elm$html$Html$Attributes$class('btn-link')
+						]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text('By Tonality')
+						]))
+				]))
+		]));
 var $author$project$Main$optionPanel = function (model) {
 	return A2(
 		$elm$html$Html$div,
@@ -6442,73 +6562,7 @@ var $author$project$Main$optionPanel = function (model) {
 								$elm$html$Html$Attributes$class('collapse')
 							]),
 						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$div,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$class('panel-body')
-									]),
-								_List_fromArray(
-									[
-										A2(
-										$elm$html$Html$select,
-										_List_fromArray(
-											[
-												$elm$html$Html$Attributes$id('waveForm'),
-												A2($elm$html$Html$Attributes$style, 'color', 'black'),
-												A2($elm$html$Html$Attributes$style, 'min-width', '80px'),
-												A2($elm$html$Html$Attributes$style, 'margin', 'auto'),
-												A2($elm$html$Html$Attributes$style, 'margin-bottom', '1em'),
-												A2($elm$html$Html$Attributes$style, 'margin-top', '1em'),
-												$elm_community$html_extra$Html$Events$Extra$onChange($author$project$Main$WaveChanged)
-											]),
-										_List_fromArray(
-											[
-												A2(
-												$elm$html$Html$option,
-												_List_fromArray(
-													[
-														$elm$html$Html$Attributes$selected(true),
-														$elm$html$Html$Attributes$value('sine')
-													]),
-												_List_fromArray(
-													[
-														$elm$html$Html$text('Sine')
-													])),
-												A2(
-												$elm$html$Html$option,
-												_List_fromArray(
-													[
-														$elm$html$Html$Attributes$value('triangle')
-													]),
-												_List_fromArray(
-													[
-														$elm$html$Html$text('Triangle')
-													])),
-												A2(
-												$elm$html$Html$option,
-												_List_fromArray(
-													[
-														$elm$html$Html$Attributes$value('square')
-													]),
-												_List_fromArray(
-													[
-														$elm$html$Html$text('Square')
-													])),
-												A2(
-												$elm$html$Html$option,
-												_List_fromArray(
-													[
-														$elm$html$Html$Attributes$value('sawtooth')
-													]),
-												_List_fromArray(
-													[
-														$elm$html$Html$text('Sawtooth')
-													]))
-											]))
-									]))
-							]))
+							[$author$project$Main$panelBody]))
 					]))
 			]));
 };
