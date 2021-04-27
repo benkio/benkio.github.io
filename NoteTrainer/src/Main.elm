@@ -1,8 +1,8 @@
 port module Main exposing (..)
 
 import Browser exposing (element)
-import Html exposing (Html, audio, button, div, h1, input, option, p, select, source, text)
-import Html.Attributes as A exposing (autoplay, class, controls, id, max, min, selected, src, step, style, type_, value)
+import Html exposing (Html, a, audio, button, div, h1, h4, input, option, p, select, source, text)
+import Html.Attributes as A exposing (attribute, autoplay, class, controls, href, id, max, min, selected, src, step, style, type_, value)
 import Html.Events exposing (onClick, onInput)
 import Html.Events.Extra exposing (onChange)
 import Json.Encode as E exposing (Value, float, int, list, object)
@@ -168,6 +168,7 @@ view model =
     div [ id "sliderContainer", style "display" "table", style "width" "100%" ]
         [ noteTrainerControls model
         , slider model.bpm
+        , optionPanel model
         , note (withDefault A (head model.notes))
         ]
 
@@ -192,23 +193,7 @@ noteTrainerControls model =
             , style "text-align" "center"
             , style "width" "60%"
             ]
-            [ div [ style "float" "left", style "width" "50%" ]
-                [ select
-                    [ id "waveForm"
-                    , style "color" "black"
-                    , style "min-width" "80px"
-                    , style "margin" "auto"
-                    , style "margin-bottom" "1em"
-                    , style "margin-top" "1em"
-                    , onChange WaveChanged
-                    ]
-                    [ option [ selected True, value "sine" ] [ text "Sine" ]
-                    , option [ value "triangle" ] [ text "Triangle" ]
-                    , option [ value "square" ] [ text "Square" ]
-                    , option [ value "sawtooth" ] [ text "Sawtooth" ]
-                    ]
-                ]
-            , div [ style "float" "left", style "width" "50%" ] [ startButton model.isPlaying ]
+            [ div [] [ startButton model.isPlaying ]
             ]
         , div
             [ style "display" "inline"
@@ -258,38 +243,79 @@ startButton isPlaying =
             [ text "Start" ]
 
 
+tableRowWrapper : Int -> Int -> Html Msg -> Html Msg
+tableRowWrapper wingWidth mainWidth mainHtml =
+    div [ style "display" "table-row", style "width" "100%" ]
+        [ div [ style "display" "table-cell", style "width" (fromInt wingWidth ++ "%") ] []
+        , div [ style "display" "table-cell", style "width" (fromInt mainWidth ++ "%") ]
+            [ mainHtml
+            ]
+        , div [ style "display" "table-cell", style "width" (fromInt wingWidth ++ "%") ] []
+        ]
+
+
 slider : Int -> Html Msg
 slider bpm =
-    div [ style "display" "table-row", style "width" "100%" ]
-        [ div [ style "display" "table-cell", style "width" "20%" ] []
-        , div [ style "display" "table-cell", style "width" "60%" ]
-            [ input
-                [ type_ "range"
-                , A.min "20"
-                , A.max "220"
-                , value (fromInt bpm)
-                , id "bpmSlider"
-                , step "5"
-                , style "margin-top" "1em"
-                , onInput (toInt >> withDefault 60 >> BpmChanged)
-                ]
-                []
+    tableRowWrapper 20
+        60
+        (input
+            [ type_ "range"
+            , A.min "20"
+            , A.max "220"
+            , value (fromInt bpm)
+            , id "bpmSlider"
+            , step "5"
+            , style "margin-top" "1em"
+            , onInput (toInt >> withDefault 60 >> BpmChanged)
             ]
-        , div [ style "display" "table-cell", style "width" "20%" ] []
-        ]
+            []
+        )
 
 
 note : Note -> Html Msg
 note n =
-    div [ style "display" "table-row" ]
-        [ div [ style "display" "table-cell", style "width" "25%" ] []
-        , div
-            [ style "display" "table-cell"
-            , style "width" "50%"
-            , style "min-width" "300px"
+    tableRowWrapper 25
+        50
+        (div
+            [ style "min-width" "300px"
             , style "text-align" "center"
             ]
             [ p [ style "font-size" "15em" ] [ text (noteToString n) ]
             ]
-        , div [ style "display" "table-cell", style "width" "25%" ] []
-        ]
+        )
+
+
+optionPanel : Model -> Html Msg
+optionPanel model =
+    tableRowWrapper 25
+        50
+        (div [ class "panel-group", style "text-align" "center", style "margin" "1em auto" ]
+            [ div [ class "panel", class "panel-default" ]
+                [ div [ class "panel-heading" ]
+                    [ h4 [ class "panel-title" ]
+                        [ a [ attribute "data-toggle" "collapse", href "#collapseOptions" ]
+                            [ text "Note Trainer Options"
+                            ]
+                        ]
+                    ]
+                , div [ id "collapseOptions", class "panel-collapse", class "collapse" ]
+                    [ div [ class "panel-body" ]
+                        [ select
+                            [ id "waveForm"
+                            , style "color" "black"
+                            , style "min-width" "80px"
+                            , style "margin" "auto"
+                            , style "margin-bottom" "1em"
+                            , style "margin-top" "1em"
+                            , onChange WaveChanged
+                            ]
+                            [ option [ selected True, value "sine" ] [ text "Sine" ]
+                            , option [ value "triangle" ] [ text "Triangle" ]
+                            , option [ value "square" ] [ text "Square" ]
+                            , option [ value "sawtooth" ] [ text "Sawtooth" ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        )

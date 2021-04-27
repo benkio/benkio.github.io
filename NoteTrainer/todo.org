@@ -1,4 +1,4 @@
-* MP3 -> WebAudio API
+* DONE MP3 -> WebAudio API
 ** DONE Hello world in WebAudio API
    Just a button that plays something.
 ** DONE Refactoring of Notes to reflect the Webaudio API
@@ -6,13 +6,26 @@
    - Duration
    - etc
 * Output Menu
-** Syth Wave
+** DONE Syth Wave
    https://developer.mozilla.org/en-US/docs/Web/API/OscillatorNode/type
 ** Note Choice
   User can choose what will be the output of the trainer:
   - Natural Notes
-  - All notes
+  - All notes (default)
   - By Tonality
+
+  (radiobutton)
+** Output Menu Chords
+  - Triad Chords (default)
+  - Seventh Chords
+  - By Tonality
+
+  (radiobutton)
+  dependent on [[*Chords][Chords]]
+** Super Random
+   Random on everything, chords or note, no tonality.
+** Dynamic BPM
+   not a fixed bpm, maybe within a range.
 * Chords
 ** Implement Random Triad Chords
    - maj
@@ -24,7 +37,4 @@
    - min7
    - half diminished
    - minMaj7
-* Output Menu Chords
-  - Triad Chords
-  - Seventh Chords
-  - By Tonality
+
