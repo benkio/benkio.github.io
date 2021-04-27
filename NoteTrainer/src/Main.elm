@@ -1,7 +1,7 @@
 port module Main exposing (..)
 
 import Browser exposing (element)
-import Html exposing (Html, a, audio, button, div, h1, h4, input, label, option, p, select, source, text)
+import Html exposing (Html, a, audio, button, div, h1, h4, input, label, li, option, p, select, source, span, text, ul)
 import Html.Attributes as A exposing (attribute, autoplay, class, controls, href, id, max, min, selected, src, step, style, type_, value)
 import Html.Events exposing (onClick, onInput)
 import Html.Events.Extra exposing (onChange)
@@ -92,18 +92,25 @@ toWave s =
             Nothing
 
 
+type Filter
+    = AllNotes
+    | NaturalNotes
+    | ByTonality Note
+
+
 type alias Model =
     { bpm : Int
     , volume : Int
     , isPlaying : Bool
     , notes : List Note
     , oscillatorWave : Wave
+    , filter : Filter
     }
 
 
 init : () -> ( Model, Cmd msg )
 init _ =
-    ( { bpm = 100, volume = 50, isPlaying = False, notes = [ A ], oscillatorWave = Sine }, Cmd.none )
+    ( { bpm = 100, volume = 50, isPlaying = False, notes = [ A ], oscillatorWave = Sine, filter = AllNotes }, Cmd.none )
 
 
 
@@ -265,14 +272,26 @@ optionPanel model =
                     ]
                 ]
             , div [ id "collapseOptions", class "panel-collapse", class "collapse" ]
-                [ panelBody
+                [ panelBody model
                 ]
             ]
         ]
 
 
-panelBody : Html Msg
-panelBody =
+panelBody : Model -> Html Msg
+panelBody model =
+    let
+        ( allNotesClass, naturalNotesClass, tonalityClass ) =
+            case model.filter of
+                AllNotes ->
+                    ( "btn-primary", "btn-link", "btn-link" )
+
+                NaturalNotes ->
+                    ( "btn-link", "btn-primary", "btn-link" )
+
+                ByTonality _ ->
+                    ( "btn-link", "btn-link", "btn-primary" )
+    in
     div [ class "panel-body" ]
         [ label [ style "display" "inline-block", style "color" "black", style "margin-right" "1em" ] [ text "Waveform" ]
         , select
@@ -289,9 +308,39 @@ panelBody =
             , option [ value "square" ] [ text "Square" ]
             , option [ value "sawtooth" ] [ text "Sawtooth" ]
             ]
-          , div [class "btn-group"] [
-               button [class "btn", class "btn-primary"] [text "All Notes"]
-              ,button [class "btn", class "btn-link"] [text "Only Natural Notes"]
-              ,button [class "btn", class "btn-link"] [text "By Tonality"] -- Dropdown?? look for bootstrap button group
-              ]
+        , div [ class "btn-group" ]
+            [ button [ class "btn", class allNotesClass ] [ text "All Notes" ]
+            , button [ class "btn", class naturalNotesClass ] [ text "Only Natural Notes" ]
+            , tonalityButtonGroup tonalityClass
+            ]
+        ]
+
+
+tonalityButtonGroup : String -> Html Msg
+tonalityButtonGroup tonalityClass =
+    div [ class "btn-group" ]
+        [ button
+            [ id "byTonalityDropdown"
+            , class "btn"
+            , class tonalityClass
+            , class "dropdown-toggle"
+            , attribute "data-toggle" "dropdown"
+            ]
+            [ text "By Tonality"
+            , span [ class "caret" ] []
+            ]
+        , ul [ class "dropdown-menu", attribute "role" "menu" ]
+            [ li [] [ a [ href "#" ] [ text "A" ] ]
+            , li [] [ a [ href "#" ] [ text "A#" ] ]
+            , li [] [ a [ href "#" ] [ text "B" ] ]
+            , li [] [ a [ href "#" ] [ text "C" ] ]
+            , li [] [ a [ href "#" ] [ text "C#" ] ]
+            , li [] [ a [ href "#" ] [ text "D" ] ]
+            , li [] [ a [ href "#" ] [ text "D#" ] ]
+            , li [] [ a [ href "#" ] [ text "E" ] ]
+            , li [] [ a [ href "#" ] [ text "F" ] ]
+            , li [] [ a [ href "#" ] [ text "F#" ] ]
+            , li [] [ a [ href "#" ] [ text "G" ] ]
+            , li [] [ a [ href "#" ] [ text "G#" ] ]
+            ]
         ]
