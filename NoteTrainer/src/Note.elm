@@ -2,7 +2,6 @@ module Note exposing (Note(..), noteGenerator, noteToFrequency, noteToString, al
 
 import Random exposing (Generator, weighted)
 
-
 type Note
     = A
     | As

@@ -5228,7 +5228,7 @@ var $elm$core$Task$perform = F2(
 	});
 var $elm$browser$Browser$element = _Browser_element;
 var $author$project$Note$A = {$: 'A'};
-var $author$project$Main$ChromaticScale = {$: 'ChromaticScale'};
+var $author$project$Filter$ChromaticScale = {$: 'ChromaticScale'};
 var $author$project$Wave$Sine = {$: 'Sine'};
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
@@ -5236,7 +5236,7 @@ var $author$project$Main$init = function (_v0) {
 	return _Utils_Tuple2(
 		{
 			bpm: 100,
-			filter: $author$project$Main$ChromaticScale,
+			filter: $author$project$Filter$ChromaticScale,
 			isPlaying: false,
 			notes: _List_fromArray(
 				[$author$project$Note$A]),
@@ -6396,7 +6396,7 @@ var $elm$html$Html$Attributes$boolProperty = F2(
 			$elm$json$Json$Encode$bool(bool));
 	});
 var $elm$html$Html$Attributes$selected = $elm$html$Html$Attributes$boolProperty('selected');
-var $author$project$Main$ByNoteTonality = function (a) {
+var $author$project$Filter$ByNoteTonality = function (a) {
 	return {$: 'ByNoteTonality', a: a};
 };
 var $author$project$Note$allNotes = _List_fromArray(
@@ -6470,7 +6470,7 @@ var $author$project$Main$tonalityButtonGroup = F2(
 											[
 												$elm$html$Html$Events$onClick(
 												$author$project$Main$FilterChange(
-													$author$project$Main$ByNoteTonality(n))),
+													$author$project$Filter$ByNoteTonality(n))),
 												$elm$html$Html$Attributes$class('bg-primary')
 											]),
 										_List_fromArray(
@@ -6492,7 +6492,7 @@ var $author$project$Main$tonalityButtonGroup = F2(
 											[
 												$elm$html$Html$Events$onClick(
 												$author$project$Main$FilterChange(
-													$author$project$Main$ByNoteTonality(n)))
+													$author$project$Filter$ByNoteTonality(n)))
 											]),
 										_List_fromArray(
 											[
@@ -6662,7 +6662,7 @@ var $author$project$Main$panelBody = function (model) {
 								$elm$html$Html$Attributes$class('btn'),
 								$elm$html$Html$Attributes$class(chromaticScaleClass),
 								$elm$html$Html$Events$onClick(
-								$author$project$Main$FilterChange($author$project$Main$ChromaticScale))
+								$author$project$Main$FilterChange($author$project$Filter$ChromaticScale))
 							]),
 						_List_fromArray(
 							[

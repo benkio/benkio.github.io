@@ -9,6 +9,7 @@ import Json.Encode as E exposing (Value, float, int, list, object)
 import List exposing (filterMap, head)
 import Maybe exposing (map, withDefault)
 import Note exposing (Note(..), allNotes, noteGenerator, noteToFrequency, noteToString)
+import Filter exposing (Filter(..))
 import Wave exposing (Wave(..), waveToString, toWave)
 import Random exposing (generate)
 import String exposing (append, contains, fromChar, fromInt, replace, toInt)
@@ -49,11 +50,6 @@ bpmToSec bpm =
 
 
 -- Init -------------------------------------------------------------------
-
-
-type Filter
-    = ChromaticScale
-    | ByNoteTonality Note
 
 
 type alias Model =
