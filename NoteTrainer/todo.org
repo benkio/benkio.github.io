@@ -10,8 +10,7 @@
    https://developer.mozilla.org/en-US/docs/Web/API/OscillatorNode/type
 ** TODO Note Choice
   User can choose what will be the output of the trainer:
-  - Natural Notes
-  - All notes (default)
+  - Chromatic Scale (default)
   - By Tonality
 
   (radiobutton)

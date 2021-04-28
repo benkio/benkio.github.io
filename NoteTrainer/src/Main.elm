@@ -6,11 +6,12 @@ import Html.Attributes as A exposing (attribute, autoplay, class, controls, href
 import Html.Events exposing (onClick, onInput)
 import Html.Events.Extra exposing (onChange)
 import Json.Encode as E exposing (Value, float, int, list, object)
-import List exposing (head)
-import Maybe exposing (withDefault)
-import Note exposing (Note(..), noteGenerator, noteToFrequency, noteToString)
+import List exposing (filterMap, head)
+import Maybe exposing (map, withDefault)
+import Note exposing (Note(..), allNotes, noteGenerator, noteToFrequency, noteToString)
+import Wave exposing (Wave(..), waveToString, toWave)
 import Random exposing (generate)
-import String exposing (fromChar, fromInt, replace, toInt)
+import String exposing (append, contains, fromChar, fromInt, replace, toInt)
 import Time exposing (every)
 
 
@@ -50,52 +51,9 @@ bpmToSec bpm =
 -- Init -------------------------------------------------------------------
 
 
-type Wave
-    = Sine
-    | Triangle
-    | Square
-    | Sawtooth
-
-
-waveToString : Wave -> String
-waveToString w =
-    case w of
-        Sine ->
-            "sine"
-
-        Triangle ->
-            "triangle"
-
-        Square ->
-            "square"
-
-        Sawtooth ->
-            "sawtooth"
-
-
-toWave : String -> Maybe Wave
-toWave s =
-    case s of
-        "sine" ->
-            Just Sine
-
-        "triangle" ->
-            Just Triangle
-
-        "square" ->
-            Just Square
-
-        "sawtooth" ->
-            Just Sawtooth
-
-        _ ->
-            Nothing
-
-
 type Filter
-    = AllNotes
-    | NaturalNotes
-    | ByTonality Note
+    = ChromaticScale
+    | ByNoteTonality Note
 
 
 type alias Model =
@@ -110,7 +68,7 @@ type alias Model =
 
 init : () -> ( Model, Cmd msg )
 init _ =
-    ( { bpm = 100, volume = 50, isPlaying = False, notes = [ A ], oscillatorWave = Sine, filter = AllNotes }, Cmd.none )
+    ( { bpm = 100, volume = 50, isPlaying = False, notes = [ A ], oscillatorWave = Sine, filter = ChromaticScale }, Cmd.none )
 
 
 
@@ -121,6 +79,7 @@ type Msg
     = BpmChanged Int
     | VolumeChanged Int
     | WaveChanged String
+    | FilterChange Filter
     | Start
     | NewNote Note
     | ChangeNote
@@ -138,6 +97,9 @@ update msg model =
 
         WaveChanged wave ->
             ( { model | oscillatorWave = withDefault Sine (toWave wave) }, Cmd.none )
+
+        FilterChange filter ->
+            ( { model | filter = filter }, Cmd.none )
 
         Start ->
             ( { model | isPlaying = True }, Cmd.none )
@@ -281,43 +243,62 @@ optionPanel model =
 panelBody : Model -> Html Msg
 panelBody model =
     let
-        ( allNotesClass, naturalNotesClass, tonalityClass ) =
+        ( chromaticScaleClass, tonalityClass, tonalityKey ) =
             case model.filter of
-                AllNotes ->
-                    ( "btn-primary", "btn-link", "btn-link" )
+                ChromaticScale ->
+                    ( "btn-primary", "btn-link", Nothing )
 
-                NaturalNotes ->
-                    ( "btn-link", "btn-primary", "btn-link" )
-
-                ByTonality _ ->
-                    ( "btn-link", "btn-link", "btn-primary" )
+                ByNoteTonality n ->
+                    ( "btn-link", "btn-primary", Just (noteToString n) )
     in
     div [ class "panel-body" ]
-        [ label [ style "display" "inline-block", style "color" "black", style "margin-right" "1em" ] [ text "Waveform" ]
-        , select
-            [ id "waveForm"
-            , style "color" "black"
-            , style "min-width" "80px"
-            , style "margin" "auto"
-            , style "margin-bottom" "1em"
-            , style "margin-top" "1em"
-            , onChange WaveChanged
-            ]
-            [ option [ selected True, value "sine" ] [ text "Sine" ]
-            , option [ value "triangle" ] [ text "Triangle" ]
-            , option [ value "square" ] [ text "Square" ]
-            , option [ value "sawtooth" ] [ text "Sawtooth" ]
+        [ div []
+            [ label [ style "display" "inline-block", style "color" "black", style "margin-right" "1em" ] [ text "Waveform" ]
+            , select
+                [ id "waveForm"
+                , style "color" "black"
+                , style "min-width" "80px"
+                , style "margin" "auto"
+                , style "margin-bottom" "1em"
+                , style "margin-top" "1em"
+                , onChange WaveChanged
+                ]
+                [ option [ selected True, value "sine" ] [ text "Sine" ]
+                , option [ value "triangle" ] [ text "Triangle" ]
+                , option [ value "square" ] [ text "Square" ]
+                , option [ value "sawtooth" ] [ text "Sawtooth" ]
+                ]
             ]
         , div [ class "btn-group" ]
-            [ button [ class "btn", class allNotesClass ] [ text "All Notes" ]
-            , button [ class "btn", class naturalNotesClass ] [ text "Only Natural Notes" ]
-            , tonalityButtonGroup tonalityClass
+            [ button
+                [ class "btn"
+                , class chromaticScaleClass
+                , onClick (FilterChange ChromaticScale)
+                ]
+                [ text "Chromatic Scale" ]
+            , tonalityButtonGroup tonalityClass tonalityKey
             ]
         ]
 
 
-tonalityButtonGroup : String -> Html Msg
-tonalityButtonGroup tonalityClass =
+tonalityButtonGroup : String -> Maybe String -> Html Msg
+tonalityButtonGroup tonalityClass tonalityKey =
+    let
+        menuElements =
+            filterMap
+                (\n ->
+                    case ( contains "b" (noteToString n), (map (\tn -> noteToString n == tn) >> (\x -> withDefault False x)) tonalityKey ) of
+                        ( True, _ ) ->
+                            Nothing
+
+                        ( False, True ) ->
+                            Just (li [] [ a [ onClick (FilterChange (ByNoteTonality n)), class "bg-primary" ] [ text (noteToString n) ] ])
+
+                        ( False, False ) ->
+                            Just (li [] [ a [ onClick (FilterChange (ByNoteTonality n)) ] [ text (noteToString n) ] ])
+                )
+                allNotes
+    in
     div [ class "btn-group" ]
         [ button
             [ id "byTonalityDropdown"
@@ -326,21 +307,8 @@ tonalityButtonGroup tonalityClass =
             , class "dropdown-toggle"
             , attribute "data-toggle" "dropdown"
             ]
-            [ text "By Tonality"
+            [ text ((map (append "Tonality ") >> withDefault "By Tonality") tonalityKey)
             , span [ class "caret" ] []
             ]
-        , ul [ class "dropdown-menu", attribute "role" "menu" ]
-            [ li [] [ a [ href "#" ] [ text "A" ] ]
-            , li [] [ a [ href "#" ] [ text "A#" ] ]
-            , li [] [ a [ href "#" ] [ text "B" ] ]
-            , li [] [ a [ href "#" ] [ text "C" ] ]
-            , li [] [ a [ href "#" ] [ text "C#" ] ]
-            , li [] [ a [ href "#" ] [ text "D" ] ]
-            , li [] [ a [ href "#" ] [ text "D#" ] ]
-            , li [] [ a [ href "#" ] [ text "E" ] ]
-            , li [] [ a [ href "#" ] [ text "F" ] ]
-            , li [] [ a [ href "#" ] [ text "F#" ] ]
-            , li [] [ a [ href "#" ] [ text "G" ] ]
-            , li [] [ a [ href "#" ] [ text "G#" ] ]
-            ]
+        , ul [ class "dropdown-menu", attribute "role" "menu" ] menuElements
         ]

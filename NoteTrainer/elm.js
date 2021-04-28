@@ -5228,19 +5228,19 @@ var $elm$core$Task$perform = F2(
 	});
 var $elm$browser$Browser$element = _Browser_element;
 var $author$project$Note$A = {$: 'A'};
-var $author$project$Main$AllNotes = {$: 'AllNotes'};
-var $author$project$Main$Sine = {$: 'Sine'};
+var $author$project$Main$ChromaticScale = {$: 'ChromaticScale'};
+var $author$project$Wave$Sine = {$: 'Sine'};
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Main$init = function (_v0) {
 	return _Utils_Tuple2(
 		{
 			bpm: 100,
-			filter: $author$project$Main$AllNotes,
+			filter: $author$project$Main$ChromaticScale,
 			isPlaying: false,
 			notes: _List_fromArray(
 				[$author$project$Note$A]),
-			oscillatorWave: $author$project$Main$Sine,
+			oscillatorWave: $author$project$Wave$Sine,
 			volume: 50
 		},
 		$elm$core$Platform$Cmd$none);
@@ -5907,7 +5907,7 @@ var $elm$json$Json$Encode$list = F2(
 var $author$project$Note$noteToFrequency = function (note) {
 	switch (note.$) {
 		case 'A':
-			return 440.00;
+			return 440.0;
 		case 'As':
 			return 466.16;
 		case 'Bb':
@@ -5956,7 +5956,7 @@ var $elm$json$Json$Encode$object = function (pairs) {
 			pairs));
 };
 var $elm$json$Json$Encode$string = _Json_wrap;
-var $author$project$Main$waveToString = function (w) {
+var $author$project$Wave$waveToString = function (w) {
 	switch (w.$) {
 		case 'Sine':
 			return 'sine';
@@ -5992,22 +5992,22 @@ var $author$project$Main$toMusic = function (_v0) {
 				_Utils_Tuple2(
 				'oscillatorwave',
 				$elm$json$Json$Encode$string(
-					$author$project$Main$waveToString(oscillatorWave)))
+					$author$project$Wave$waveToString(oscillatorWave)))
 			]));
 };
-var $author$project$Main$Sawtooth = {$: 'Sawtooth'};
-var $author$project$Main$Square = {$: 'Square'};
-var $author$project$Main$Triangle = {$: 'Triangle'};
-var $author$project$Main$toWave = function (s) {
+var $author$project$Wave$Sawtooth = {$: 'Sawtooth'};
+var $author$project$Wave$Square = {$: 'Square'};
+var $author$project$Wave$Triangle = {$: 'Triangle'};
+var $author$project$Wave$toWave = function (s) {
 	switch (s) {
 		case 'sine':
-			return $elm$core$Maybe$Just($author$project$Main$Sine);
+			return $elm$core$Maybe$Just($author$project$Wave$Sine);
 		case 'triangle':
-			return $elm$core$Maybe$Just($author$project$Main$Triangle);
+			return $elm$core$Maybe$Just($author$project$Wave$Triangle);
 		case 'square':
-			return $elm$core$Maybe$Just($author$project$Main$Square);
+			return $elm$core$Maybe$Just($author$project$Wave$Square);
 		case 'sawtooth':
-			return $elm$core$Maybe$Just($author$project$Main$Sawtooth);
+			return $elm$core$Maybe$Just($author$project$Wave$Sawtooth);
 		default:
 			return $elm$core$Maybe$Nothing;
 	}
@@ -6046,9 +6046,16 @@ var $author$project$Main$update = F2(
 						{
 							oscillatorWave: A2(
 								$elm$core$Maybe$withDefault,
-								$author$project$Main$Sine,
-								$author$project$Main$toWave(wave))
+								$author$project$Wave$Sine,
+								$author$project$Wave$toWave(wave))
 						}),
+					$elm$core$Platform$Cmd$none);
+			case 'FilterChange':
+				var filter = msg.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{filter: filter}),
 					$elm$core$Platform$Cmd$none);
 			case 'Start':
 				return _Utils_Tuple2(
@@ -6365,6 +6372,9 @@ var $elm$html$Html$Attributes$href = function (url) {
 		'href',
 		_VirtualDom_noJavaScriptUri(url));
 };
+var $author$project$Main$FilterChange = function (a) {
+	return {$: 'FilterChange', a: a};
+};
 var $author$project$Main$WaveChanged = function (a) {
 	return {$: 'WaveChanged', a: a};
 };
@@ -6386,258 +6396,175 @@ var $elm$html$Html$Attributes$boolProperty = F2(
 			$elm$json$Json$Encode$bool(bool));
 	});
 var $elm$html$Html$Attributes$selected = $elm$html$Html$Attributes$boolProperty('selected');
+var $author$project$Main$ByNoteTonality = function (a) {
+	return {$: 'ByNoteTonality', a: a};
+};
+var $author$project$Note$allNotes = _List_fromArray(
+	[$author$project$Note$A, $author$project$Note$As, $author$project$Note$Bb, $author$project$Note$B, $author$project$Note$C, $author$project$Note$Cs, $author$project$Note$Db, $author$project$Note$D, $author$project$Note$Ds, $author$project$Note$Eb, $author$project$Note$E, $author$project$Note$F, $author$project$Note$Fs, $author$project$Note$Gb, $author$project$Note$G, $author$project$Note$Gs, $author$project$Note$Ab]);
+var $elm$core$String$append = _String_append;
+var $elm$core$List$maybeCons = F3(
+	function (f, mx, xs) {
+		var _v0 = f(mx);
+		if (_v0.$ === 'Just') {
+			var x = _v0.a;
+			return A2($elm$core$List$cons, x, xs);
+		} else {
+			return xs;
+		}
+	});
+var $elm$core$List$filterMap = F2(
+	function (f, xs) {
+		return A3(
+			$elm$core$List$foldr,
+			$elm$core$List$maybeCons(f),
+			_List_Nil,
+			xs);
+	});
 var $elm$html$Html$li = _VirtualDom_node('li');
+var $elm$core$Maybe$map = F2(
+	function (f, maybe) {
+		if (maybe.$ === 'Just') {
+			var value = maybe.a;
+			return $elm$core$Maybe$Just(
+				f(value));
+		} else {
+			return $elm$core$Maybe$Nothing;
+		}
+	});
 var $elm$html$Html$span = _VirtualDom_node('span');
 var $elm$html$Html$ul = _VirtualDom_node('ul');
-var $author$project$Main$tonalityButtonGroup = function (tonalityClass) {
-	return A2(
-		$elm$html$Html$div,
-		_List_fromArray(
-			[
-				$elm$html$Html$Attributes$class('btn-group')
-			]),
-		_List_fromArray(
-			[
-				A2(
-				$elm$html$Html$button,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$id('byTonalityDropdown'),
-						$elm$html$Html$Attributes$class('btn'),
-						$elm$html$Html$Attributes$class(tonalityClass),
-						$elm$html$Html$Attributes$class('dropdown-toggle'),
-						A2($elm$html$Html$Attributes$attribute, 'data-toggle', 'dropdown')
-					]),
-				_List_fromArray(
-					[
-						$elm$html$Html$text('By Tonality'),
-						A2(
-						$elm$html$Html$span,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('caret')
-							]),
-						_List_Nil)
-					])),
-				A2(
-				$elm$html$Html$ul,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('dropdown-menu'),
-						A2($elm$html$Html$Attributes$attribute, 'role', 'menu')
-					]),
-				_List_fromArray(
-					[
-						A2(
-						$elm$html$Html$li,
-						_List_Nil,
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$a,
+var $author$project$Main$tonalityButtonGroup = F2(
+	function (tonalityClass, tonalityKey) {
+		var menuElements = A2(
+			$elm$core$List$filterMap,
+			function (n) {
+				var _v0 = _Utils_Tuple2(
+					A2(
+						$elm$core$String$contains,
+						'b',
+						$author$project$Note$noteToString(n)),
+					A2(
+						$elm$core$Basics$composeR,
+						$elm$core$Maybe$map(
+							function (tn) {
+								return _Utils_eq(
+									$author$project$Note$noteToString(n),
+									tn);
+							}),
+						function (x) {
+							return A2($elm$core$Maybe$withDefault, false, x);
+						})(tonalityKey));
+				if (_v0.a) {
+					return $elm$core$Maybe$Nothing;
+				} else {
+					if (_v0.b) {
+						return $elm$core$Maybe$Just(
+							A2(
+								$elm$html$Html$li,
+								_List_Nil,
 								_List_fromArray(
 									[
-										$elm$html$Html$Attributes$href('#')
-									]),
+										A2(
+										$elm$html$Html$a,
+										_List_fromArray(
+											[
+												$elm$html$Html$Events$onClick(
+												$author$project$Main$FilterChange(
+													$author$project$Main$ByNoteTonality(n))),
+												$elm$html$Html$Attributes$class('bg-primary')
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text(
+												$author$project$Note$noteToString(n))
+											]))
+									])));
+					} else {
+						return $elm$core$Maybe$Just(
+							A2(
+								$elm$html$Html$li,
+								_List_Nil,
 								_List_fromArray(
 									[
-										$elm$html$Html$text('A')
-									]))
-							])),
-						A2(
-						$elm$html$Html$li,
-						_List_Nil,
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$a,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$href('#')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('A#')
-									]))
-							])),
-						A2(
-						$elm$html$Html$li,
-						_List_Nil,
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$a,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$href('#')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('B')
-									]))
-							])),
-						A2(
-						$elm$html$Html$li,
-						_List_Nil,
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$a,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$href('#')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('C')
-									]))
-							])),
-						A2(
-						$elm$html$Html$li,
-						_List_Nil,
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$a,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$href('#')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('C#')
-									]))
-							])),
-						A2(
-						$elm$html$Html$li,
-						_List_Nil,
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$a,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$href('#')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('D')
-									]))
-							])),
-						A2(
-						$elm$html$Html$li,
-						_List_Nil,
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$a,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$href('#')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('D#')
-									]))
-							])),
-						A2(
-						$elm$html$Html$li,
-						_List_Nil,
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$a,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$href('#')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('E')
-									]))
-							])),
-						A2(
-						$elm$html$Html$li,
-						_List_Nil,
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$a,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$href('#')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('F')
-									]))
-							])),
-						A2(
-						$elm$html$Html$li,
-						_List_Nil,
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$a,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$href('#')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('F#')
-									]))
-							])),
-						A2(
-						$elm$html$Html$li,
-						_List_Nil,
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$a,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$href('#')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('G')
-									]))
-							])),
-						A2(
-						$elm$html$Html$li,
-						_List_Nil,
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$a,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$href('#')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('G#')
-									]))
-							]))
-					]))
-			]));
-};
+										A2(
+										$elm$html$Html$a,
+										_List_fromArray(
+											[
+												$elm$html$Html$Events$onClick(
+												$author$project$Main$FilterChange(
+													$author$project$Main$ByNoteTonality(n)))
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text(
+												$author$project$Note$noteToString(n))
+											]))
+									])));
+					}
+				}
+			},
+			$author$project$Note$allNotes);
+		return A2(
+			$elm$html$Html$div,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class('btn-group')
+				]),
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$button,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$id('byTonalityDropdown'),
+							$elm$html$Html$Attributes$class('btn'),
+							$elm$html$Html$Attributes$class(tonalityClass),
+							$elm$html$Html$Attributes$class('dropdown-toggle'),
+							A2($elm$html$Html$Attributes$attribute, 'data-toggle', 'dropdown')
+						]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text(
+							A2(
+								$elm$core$Basics$composeR,
+								$elm$core$Maybe$map(
+									$elm$core$String$append('Tonality ')),
+								$elm$core$Maybe$withDefault('By Tonality'))(tonalityKey)),
+							A2(
+							$elm$html$Html$span,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$class('caret')
+								]),
+							_List_Nil)
+						])),
+					A2(
+					$elm$html$Html$ul,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('dropdown-menu'),
+							A2($elm$html$Html$Attributes$attribute, 'role', 'menu')
+						]),
+					menuElements)
+				]));
+	});
 var $author$project$Main$panelBody = function (model) {
 	var _v0 = function () {
 		var _v1 = model.filter;
-		switch (_v1.$) {
-			case 'AllNotes':
-				return _Utils_Tuple3('btn-primary', 'btn-link', 'btn-link');
-			case 'NaturalNotes':
-				return _Utils_Tuple3('btn-link', 'btn-primary', 'btn-link');
-			default:
-				return _Utils_Tuple3('btn-link', 'btn-link', 'btn-primary');
+		if (_v1.$ === 'ChromaticScale') {
+			return _Utils_Tuple3('btn-primary', 'btn-link', $elm$core$Maybe$Nothing);
+		} else {
+			var n = _v1.a;
+			return _Utils_Tuple3(
+				'btn-link',
+				'btn-primary',
+				$elm$core$Maybe$Just(
+					$author$project$Note$noteToString(n)));
 		}
 	}();
-	var allNotesClass = _v0.a;
-	var naturalNotesClass = _v0.b;
-	var tonalityClass = _v0.c;
+	var chromaticScaleClass = _v0.a;
+	var tonalityClass = _v0.b;
+	var tonalityKey = _v0.c;
 	return A2(
 		$elm$html$Html$div,
 		_List_fromArray(
@@ -6647,71 +6574,77 @@ var $author$project$Main$panelBody = function (model) {
 		_List_fromArray(
 			[
 				A2(
-				$elm$html$Html$label,
-				_List_fromArray(
-					[
-						A2($elm$html$Html$Attributes$style, 'display', 'inline-block'),
-						A2($elm$html$Html$Attributes$style, 'color', 'black'),
-						A2($elm$html$Html$Attributes$style, 'margin-right', '1em')
-					]),
-				_List_fromArray(
-					[
-						$elm$html$Html$text('Waveform')
-					])),
-				A2(
-				$elm$html$Html$select,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$id('waveForm'),
-						A2($elm$html$Html$Attributes$style, 'color', 'black'),
-						A2($elm$html$Html$Attributes$style, 'min-width', '80px'),
-						A2($elm$html$Html$Attributes$style, 'margin', 'auto'),
-						A2($elm$html$Html$Attributes$style, 'margin-bottom', '1em'),
-						A2($elm$html$Html$Attributes$style, 'margin-top', '1em'),
-						$elm_community$html_extra$Html$Events$Extra$onChange($author$project$Main$WaveChanged)
-					]),
+				$elm$html$Html$div,
+				_List_Nil,
 				_List_fromArray(
 					[
 						A2(
-						$elm$html$Html$option,
+						$elm$html$Html$label,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$selected(true),
-								$elm$html$Html$Attributes$value('sine')
+								A2($elm$html$Html$Attributes$style, 'display', 'inline-block'),
+								A2($elm$html$Html$Attributes$style, 'color', 'black'),
+								A2($elm$html$Html$Attributes$style, 'margin-right', '1em')
 							]),
 						_List_fromArray(
 							[
-								$elm$html$Html$text('Sine')
+								$elm$html$Html$text('Waveform')
 							])),
 						A2(
-						$elm$html$Html$option,
+						$elm$html$Html$select,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$value('triangle')
+								$elm$html$Html$Attributes$id('waveForm'),
+								A2($elm$html$Html$Attributes$style, 'color', 'black'),
+								A2($elm$html$Html$Attributes$style, 'min-width', '80px'),
+								A2($elm$html$Html$Attributes$style, 'margin', 'auto'),
+								A2($elm$html$Html$Attributes$style, 'margin-bottom', '1em'),
+								A2($elm$html$Html$Attributes$style, 'margin-top', '1em'),
+								$elm_community$html_extra$Html$Events$Extra$onChange($author$project$Main$WaveChanged)
 							]),
 						_List_fromArray(
 							[
-								$elm$html$Html$text('Triangle')
-							])),
-						A2(
-						$elm$html$Html$option,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$value('square')
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('Square')
-							])),
-						A2(
-						$elm$html$Html$option,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$value('sawtooth')
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('Sawtooth')
+								A2(
+								$elm$html$Html$option,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$selected(true),
+										$elm$html$Html$Attributes$value('sine')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Sine')
+									])),
+								A2(
+								$elm$html$Html$option,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$value('triangle')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Triangle')
+									])),
+								A2(
+								$elm$html$Html$option,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$value('square')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Square')
+									])),
+								A2(
+								$elm$html$Html$option,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$value('sawtooth')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Sawtooth')
+									]))
 							]))
 					])),
 				A2(
@@ -6727,24 +6660,15 @@ var $author$project$Main$panelBody = function (model) {
 						_List_fromArray(
 							[
 								$elm$html$Html$Attributes$class('btn'),
-								$elm$html$Html$Attributes$class(allNotesClass)
+								$elm$html$Html$Attributes$class(chromaticScaleClass),
+								$elm$html$Html$Events$onClick(
+								$author$project$Main$FilterChange($author$project$Main$ChromaticScale))
 							]),
 						_List_fromArray(
 							[
-								$elm$html$Html$text('All Notes')
+								$elm$html$Html$text('Chromatic Scale')
 							])),
-						A2(
-						$elm$html$Html$button,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('btn'),
-								$elm$html$Html$Attributes$class(naturalNotesClass)
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('Only Natural Notes')
-							])),
-						$author$project$Main$tonalityButtonGroup(tonalityClass)
+						A2($author$project$Main$tonalityButtonGroup, tonalityClass, tonalityKey)
 					]))
 			]));
 };
