@@ -1,6 +1,6 @@
 module Filter exposing (Filter(..))
 
-import Note exposing (Note(..), noteToString)
+import Note exposing (Note)
 import List.Extra exposing (dropWhile)
 
 type Filter

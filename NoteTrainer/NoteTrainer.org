@@ -68,7 +68,7 @@
       const attackTime = music.seconds * 0.2;
 
       sin = audioCtx.createOscillator();
-      sin.frequency.value = music.frequencies[0];
+      sin.frequency.value = music.frequencies;
       sin.type = music.oscillatorwave;
       sin.connect(volume);
 

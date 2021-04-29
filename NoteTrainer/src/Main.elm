@@ -6,9 +6,9 @@ import Html.Attributes as A exposing (attribute, autoplay, class, controls, href
 import Html.Events exposing (onClick, onInput)
 import Html.Events.Extra exposing (onChange)
 import Json.Encode as E exposing (Value, float, int, list, object)
-import List exposing (filterMap, head)
-import Maybe exposing (map, withDefault)
-import Note exposing (Note(..), allNotes, noteGenerator, noteToFrequency, noteToString)
+import List as L exposing (map, head)
+import Maybe as M exposing (map, withDefault)
+import Note exposing (Note, allNotes, noteGenerator, note, a440)
 import Filter exposing (Filter(..))
 import Wave exposing (Wave(..), waveToString, toWave)
 import Random exposing (generate)
@@ -20,9 +20,9 @@ port play : E.Value -> Cmd msg
 
 
 toMusic : Model -> E.Value
-toMusic { notes, bpm, volume, oscillatorWave } =
+toMusic { note, bpm, volume, oscillatorWave } =
     E.object
-        [ ( "frequencies", E.list (noteToFrequency >> E.float) notes )
+        [ ( "frequencies", E.float (note.frequency))
         , ( "seconds", E.float (bpmToSec bpm) )
         , ( "volume", E.int volume )
         , ( "oscillatorwave", E.string (waveToString oscillatorWave) )
@@ -56,7 +56,7 @@ type alias Model =
     { bpm : Int
     , volume : Int
     , isPlaying : Bool
-    , notes : List Note
+    , note : Note
     , oscillatorWave : Wave
     , filter : Filter
     }
@@ -64,7 +64,7 @@ type alias Model =
 
 init : () -> ( Model, Cmd msg )
 init _ =
-    ( { bpm = 100, volume = 50, isPlaying = False, notes = [ A ], oscillatorWave = Sine, filter = ChromaticScale }, Cmd.none )
+    ( { bpm = 50, volume = 30, isPlaying = False, note = a440 , oscillatorWave = Sine, filter = ChromaticScale }, Cmd.none)
 
 
 
@@ -107,7 +107,7 @@ update msg model =
             ( model, generate NewNote noteGenerator )
 
         NewNote n ->
-            ( { model | notes = [ n ] }, play (toMusic model) )
+            ( { model | note = n }, play (toMusic model) )
 
 
 
@@ -134,7 +134,7 @@ view model =
         [ noteTrainerControls model
         , slider model.bpm
         , optionPanel model
-        , note (withDefault A (head model.notes))
+        , viewNote model.note
         ]
 
 
@@ -208,13 +208,13 @@ slider bpm =
         ]
 
 
-note : Note -> Html Msg
-note n =
+viewNote : Note -> Html Msg
+viewNote n =
     div
         [ style "min-width" "300px"
         , style "text-align" "center"
         ]
-        [ p [ style "font-size" "13em" ] [ text (noteToString n) ]
+        [ p [ style "font-size" "13em" ] [ text n.name ]
         ]
 
 
@@ -245,7 +245,7 @@ panelBody model =
                     ( "btn-primary", "btn-link", Nothing )
 
                 ByNoteTonality n ->
-                    ( "btn-link", "btn-primary", Just (noteToString n) )
+                    ( "btn-link", "btn-primary", Just n.name )
     in
     div [ class "panel-body" ]
         [ div []
@@ -281,17 +281,14 @@ tonalityButtonGroup : String -> Maybe String -> Html Msg
 tonalityButtonGroup tonalityClass tonalityKey =
     let
         menuElements =
-            filterMap
+            L.map
                 (\n ->
-                    case ( contains "b" (noteToString n), (map (\tn -> noteToString n == tn) >> (\x -> withDefault False x)) tonalityKey ) of
-                        ( True, _ ) ->
-                            Nothing
+                    case ((M.map ((==) n.name) >> withDefault False ) tonalityKey) of
+                        True  ->
+                            li [] [ a [ onClick (FilterChange (ByNoteTonality n)), class "bg-primary" ] [ text n.name ] ]
 
-                        ( False, True ) ->
-                            Just (li [] [ a [ onClick (FilterChange (ByNoteTonality n)), class "bg-primary" ] [ text (noteToString n) ] ])
-
-                        ( False, False ) ->
-                            Just (li [] [ a [ onClick (FilterChange (ByNoteTonality n)) ] [ text (noteToString n) ] ])
+                        False ->
+                            li [] [ a [ onClick (FilterChange (ByNoteTonality n)) ] [ text n.name ] ]
                 )
                 allNotes
     in
@@ -303,8 +300,8 @@ tonalityButtonGroup tonalityClass tonalityKey =
             , class "dropdown-toggle"
             , attribute "data-toggle" "dropdown"
             ]
-            [ text ((map (append "Tonality ") >> withDefault "By Tonality") tonalityKey)
+            [ text ((M.map (append "Tonality ") >> withDefault "By Tonality") tonalityKey)
             , span [ class "caret" ] []
             ]
-        , ul [ class "dropdown-menu", attribute "role" "menu" ] menuElements
+        , ul [ class "dropdown-menu", class "pre-scrollable",  attribute "role" "menu" ] menuElements
         ]

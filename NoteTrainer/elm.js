@@ -5227,22 +5227,14 @@ var $elm$core$Task$perform = F2(
 				A2($elm$core$Task$map, toMessage, task)));
 	});
 var $elm$browser$Browser$element = _Browser_element;
-var $author$project$Note$A = {$: 'A'};
 var $author$project$Filter$ChromaticScale = {$: 'ChromaticScale'};
 var $author$project$Wave$Sine = {$: 'Sine'};
+var $author$project$Note$a440 = {frequency: 440, midiNumber: 69, name: 'A'};
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Main$init = function (_v0) {
 	return _Utils_Tuple2(
-		{
-			bpm: 100,
-			filter: $author$project$Filter$ChromaticScale,
-			isPlaying: false,
-			notes: _List_fromArray(
-				[$author$project$Note$A]),
-			oscillatorWave: $author$project$Wave$Sine,
-			volume: 50
-		},
+		{bpm: 50, filter: $author$project$Filter$ChromaticScale, isPlaying: false, note: $author$project$Note$a440, oscillatorWave: $author$project$Wave$Sine, volume: 30},
 		$elm$core$Platform$Cmd$none);
 };
 var $author$project$Main$ChangeNote = {$: 'ChangeNote'};
@@ -5773,22 +5765,129 @@ var $elm$random$Random$generate = F2(
 			$elm$random$Random$Generate(
 				A2($elm$random$Random$map, tagger, generator)));
 	});
-var $author$project$Note$Ab = {$: 'Ab'};
-var $author$project$Note$As = {$: 'As'};
-var $author$project$Note$B = {$: 'B'};
-var $author$project$Note$Bb = {$: 'Bb'};
-var $author$project$Note$C = {$: 'C'};
-var $author$project$Note$Cs = {$: 'Cs'};
-var $author$project$Note$D = {$: 'D'};
-var $author$project$Note$Db = {$: 'Db'};
-var $author$project$Note$Ds = {$: 'Ds'};
-var $author$project$Note$E = {$: 'E'};
-var $author$project$Note$Eb = {$: 'Eb'};
-var $author$project$Note$F = {$: 'F'};
-var $author$project$Note$Fs = {$: 'Fs'};
-var $author$project$Note$G = {$: 'G'};
-var $author$project$Note$Gb = {$: 'Gb'};
-var $author$project$Note$Gs = {$: 'Gs'};
+var $elm$core$List$append = F2(
+	function (xs, ys) {
+		if (!ys.b) {
+			return xs;
+		} else {
+			return A3($elm$core$List$foldr, $elm$core$List$cons, ys, xs);
+		}
+	});
+var $elm$core$List$concat = function (lists) {
+	return A3($elm$core$List$foldr, $elm$core$List$append, _List_Nil, lists);
+};
+var $elm$core$Basics$clamp = F3(
+	function (low, high, number) {
+		return (_Utils_cmp(number, low) < 0) ? low : ((_Utils_cmp(number, high) > 0) ? high : number);
+	});
+var $author$project$Note$note = function (midiNumber) {
+	var _v0 = A3($elm$core$Basics$clamp, 69, 80, midiNumber);
+	switch (_v0) {
+		case 69:
+			return _List_fromArray(
+				[$author$project$Note$a440]);
+		case 70:
+			return _List_fromArray(
+				[
+					{frequency: 466.16, midiNumber: 70, name: 'A#'},
+					{frequency: 466.16, midiNumber: 70, name: 'Bb'}
+				]);
+		case 71:
+			return _List_fromArray(
+				[
+					{frequency: 493.88, midiNumber: 71, name: 'B'}
+				]);
+		case 72:
+			return _List_fromArray(
+				[
+					{frequency: 523.25, midiNumber: 72, name: 'C'}
+				]);
+		case 73:
+			return _List_fromArray(
+				[
+					{frequency: 554.37, midiNumber: 73, name: 'C#'},
+					{frequency: 554.37, midiNumber: 73, name: 'Db'}
+				]);
+		case 74:
+			return _List_fromArray(
+				[
+					{frequency: 587.33, midiNumber: 74, name: 'D'}
+				]);
+		case 75:
+			return _List_fromArray(
+				[
+					{frequency: 622.25, midiNumber: 75, name: 'Eb'},
+					{frequency: 622.25, midiNumber: 75, name: 'D#'}
+				]);
+		case 76:
+			return _List_fromArray(
+				[
+					{frequency: 659.25, midiNumber: 76, name: 'E'}
+				]);
+		case 77:
+			return _List_fromArray(
+				[
+					{frequency: 698.46, midiNumber: 77, name: 'F'}
+				]);
+		case 78:
+			return _List_fromArray(
+				[
+					{frequency: 739.99, midiNumber: 78, name: 'Gb'},
+					{frequency: 739.99, midiNumber: 78, name: 'F#'}
+				]);
+		case 79:
+			return _List_fromArray(
+				[
+					{frequency: 783.99, midiNumber: 79, name: 'G'}
+				]);
+		case 80:
+			return _List_fromArray(
+				[
+					{frequency: 830.61, midiNumber: 80, name: 'Ab'},
+					{frequency: 830.61, midiNumber: 80, name: 'G#'}
+				]);
+		default:
+			return _List_fromArray(
+				[$author$project$Note$a440]);
+	}
+};
+var $author$project$Note$allNotes = $elm$core$List$concat(
+	_List_fromArray(
+		[
+			$author$project$Note$note(69),
+			$author$project$Note$note(70),
+			$author$project$Note$note(71),
+			$author$project$Note$note(72),
+			$author$project$Note$note(73),
+			$author$project$Note$note(74),
+			$author$project$Note$note(75),
+			$author$project$Note$note(76),
+			$author$project$Note$note(77),
+			$author$project$Note$note(78),
+			$author$project$Note$note(79),
+			$author$project$Note$note(80)
+		]));
+var $elm$core$List$drop = F2(
+	function (n, list) {
+		drop:
+		while (true) {
+			if (n <= 0) {
+				return list;
+			} else {
+				if (!list.b) {
+					return list;
+				} else {
+					var x = list.a;
+					var xs = list.b;
+					var $temp$n = n - 1,
+						$temp$list = xs;
+					n = $temp$n;
+					list = $temp$list;
+					continue drop;
+				}
+			}
+		}
+	});
 var $elm$core$Basics$negate = function (n) {
 	return -n;
 };
@@ -5864,84 +5963,22 @@ var $elm$random$Random$weighted = F2(
 	});
 var $author$project$Note$noteGenerator = A2(
 	$elm$random$Random$weighted,
-	_Utils_Tuple2(10, $author$project$Note$A),
-	_List_fromArray(
-		[
-			_Utils_Tuple2(5, $author$project$Note$As),
-			_Utils_Tuple2(5, $author$project$Note$Bb),
-			_Utils_Tuple2(10, $author$project$Note$B),
-			_Utils_Tuple2(10, $author$project$Note$C),
-			_Utils_Tuple2(5, $author$project$Note$Cs),
-			_Utils_Tuple2(5, $author$project$Note$Db),
-			_Utils_Tuple2(10, $author$project$Note$D),
-			_Utils_Tuple2(5, $author$project$Note$Ds),
-			_Utils_Tuple2(5, $author$project$Note$Eb),
-			_Utils_Tuple2(10, $author$project$Note$E),
-			_Utils_Tuple2(10, $author$project$Note$F),
-			_Utils_Tuple2(5, $author$project$Note$Fs),
-			_Utils_Tuple2(5, $author$project$Note$Gb),
-			_Utils_Tuple2(10, $author$project$Note$G),
-			_Utils_Tuple2(5, $author$project$Note$Gs),
-			_Utils_Tuple2(5, $author$project$Note$Ab)
-		]));
+	_Utils_Tuple2(10, $author$project$Note$a440),
+	A2(
+		$elm$core$List$drop,
+		1,
+		A2(
+			$elm$core$List$map,
+			function (n) {
+				return ($elm$core$String$length(n.name) === 1) ? _Utils_Tuple2(10, n) : _Utils_Tuple2(5, n);
+			},
+			$author$project$Note$allNotes)));
 var $author$project$Main$play = _Platform_outgoingPort('play', $elm$core$Basics$identity);
 var $author$project$Main$bpmToSec = function (bpm) {
 	return 60 / bpm;
 };
-var $elm$core$Basics$composeR = F3(
-	function (f, g, x) {
-		return g(
-			f(x));
-	});
 var $elm$json$Json$Encode$float = _Json_wrap;
 var $elm$json$Json$Encode$int = _Json_wrap;
-var $elm$json$Json$Encode$list = F2(
-	function (func, entries) {
-		return _Json_wrap(
-			A3(
-				$elm$core$List$foldl,
-				_Json_addEntry(func),
-				_Json_emptyArray(_Utils_Tuple0),
-				entries));
-	});
-var $author$project$Note$noteToFrequency = function (note) {
-	switch (note.$) {
-		case 'A':
-			return 440.0;
-		case 'As':
-			return 466.16;
-		case 'Bb':
-			return 466.16;
-		case 'B':
-			return 493.88;
-		case 'C':
-			return 523.25;
-		case 'Cs':
-			return 554.37;
-		case 'Db':
-			return 554.37;
-		case 'D':
-			return 587.33;
-		case 'Ds':
-			return 622.25;
-		case 'Eb':
-			return 622.25;
-		case 'E':
-			return 659.25;
-		case 'F':
-			return 698.46;
-		case 'Fs':
-			return 739.99;
-		case 'Gb':
-			return 739.99;
-		case 'G':
-			return 783.99;
-		case 'Gs':
-			return 830.61;
-		default:
-			return 830.61;
-	}
-};
 var $elm$json$Json$Encode$object = function (pairs) {
 	return _Json_wrap(
 		A3(
@@ -5969,7 +6006,7 @@ var $author$project$Wave$waveToString = function (w) {
 	}
 };
 var $author$project$Main$toMusic = function (_v0) {
-	var notes = _v0.notes;
+	var note = _v0.note;
 	var bpm = _v0.bpm;
 	var volume = _v0.volume;
 	var oscillatorWave = _v0.oscillatorWave;
@@ -5978,10 +6015,7 @@ var $author$project$Main$toMusic = function (_v0) {
 			[
 				_Utils_Tuple2(
 				'frequencies',
-				A2(
-					$elm$json$Json$Encode$list,
-					A2($elm$core$Basics$composeR, $author$project$Note$noteToFrequency, $elm$json$Json$Encode$float),
-					notes)),
+				$elm$json$Json$Encode$float(note.frequency)),
 				_Utils_Tuple2(
 				'seconds',
 				$elm$json$Json$Encode$float(
@@ -6078,24 +6112,12 @@ var $author$project$Main$update = F2(
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{
-							notes: _List_fromArray(
-								[n])
-						}),
+						{note: n}),
 					$author$project$Main$play(
 						$author$project$Main$toMusic(model)));
 		}
 	});
 var $elm$html$Html$div = _VirtualDom_node('div');
-var $elm$core$List$head = function (list) {
-	if (list.b) {
-		var x = list.a;
-		var xs = list.b;
-		return $elm$core$Maybe$Just(x);
-	} else {
-		return $elm$core$Maybe$Nothing;
-	}
-};
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
 		return A2(
@@ -6104,75 +6126,14 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 			$elm$json$Json$Encode$string(string));
 	});
 var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
-var $author$project$Note$noteToString = function (note) {
-	switch (note.$) {
-		case 'A':
-			return 'A';
-		case 'As':
-			return 'A#';
-		case 'Bb':
-			return 'Bb';
-		case 'B':
-			return 'B';
-		case 'C':
-			return 'C';
-		case 'Cs':
-			return 'C#';
-		case 'Db':
-			return 'Db';
-		case 'D':
-			return 'D';
-		case 'Ds':
-			return 'D#';
-		case 'Eb':
-			return 'Eb';
-		case 'E':
-			return 'E';
-		case 'F':
-			return 'F';
-		case 'Fs':
-			return 'F#';
-		case 'Gb':
-			return 'Gb';
-		case 'G':
-			return 'G';
-		case 'Gs':
-			return 'G#';
-		default:
-			return 'Ab';
-	}
-};
-var $elm$html$Html$p = _VirtualDom_node('p');
-var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
-var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
-var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
-var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
-var $author$project$Main$note = function (n) {
-	return A2(
-		$elm$html$Html$div,
-		_List_fromArray(
-			[
-				A2($elm$html$Html$Attributes$style, 'min-width', '300px'),
-				A2($elm$html$Html$Attributes$style, 'text-align', 'center')
-			]),
-		_List_fromArray(
-			[
-				A2(
-				$elm$html$Html$p,
-				_List_fromArray(
-					[
-						A2($elm$html$Html$Attributes$style, 'font-size', '13em')
-					]),
-				_List_fromArray(
-					[
-						$elm$html$Html$text(
-						$author$project$Note$noteToString(n))
-					]))
-			]));
-};
 var $author$project$Main$VolumeChanged = function (a) {
 	return {$: 'VolumeChanged', a: a};
 };
+var $elm$core$Basics$composeR = F3(
+	function (f, g, x) {
+		return g(
+			f(x));
+	});
 var $elm$html$Html$input = _VirtualDom_node('input');
 var $elm$html$Html$Attributes$max = $elm$html$Html$Attributes$stringProperty('max');
 var $elm$html$Html$Attributes$min = $elm$html$Html$Attributes$stringProperty('min');
@@ -6210,6 +6171,7 @@ var $elm$html$Html$Events$onInput = function (tagger) {
 			$elm$html$Html$Events$alwaysStop,
 			A2($elm$json$Json$Decode$map, tagger, $elm$html$Html$Events$targetValue)));
 };
+var $elm$html$Html$p = _VirtualDom_node('p');
 var $author$project$Main$Start = {$: 'Start'};
 var $author$project$Main$Stop = {$: 'Stop'};
 var $elm$html$Html$button = _VirtualDom_node('button');
@@ -6230,6 +6192,10 @@ var $elm$html$Html$Events$onClick = function (msg) {
 		'click',
 		$elm$json$Json$Decode$succeed(msg));
 };
+var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
+var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
+var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
+var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$Main$startButton = function (isPlaying) {
 	var _v0 = function () {
 		if (isPlaying) {
@@ -6399,27 +6365,7 @@ var $elm$html$Html$Attributes$selected = $elm$html$Html$Attributes$boolProperty(
 var $author$project$Filter$ByNoteTonality = function (a) {
 	return {$: 'ByNoteTonality', a: a};
 };
-var $author$project$Note$allNotes = _List_fromArray(
-	[$author$project$Note$A, $author$project$Note$As, $author$project$Note$Bb, $author$project$Note$B, $author$project$Note$C, $author$project$Note$Cs, $author$project$Note$Db, $author$project$Note$D, $author$project$Note$Ds, $author$project$Note$Eb, $author$project$Note$E, $author$project$Note$F, $author$project$Note$Fs, $author$project$Note$Gb, $author$project$Note$G, $author$project$Note$Gs, $author$project$Note$Ab]);
 var $elm$core$String$append = _String_append;
-var $elm$core$List$maybeCons = F3(
-	function (f, mx, xs) {
-		var _v0 = f(mx);
-		if (_v0.$ === 'Just') {
-			var x = _v0.a;
-			return A2($elm$core$List$cons, x, xs);
-		} else {
-			return xs;
-		}
-	});
-var $elm$core$List$filterMap = F2(
-	function (f, xs) {
-		return A3(
-			$elm$core$List$foldr,
-			$elm$core$List$maybeCons(f),
-			_List_Nil,
-			xs);
-	});
 var $elm$html$Html$li = _VirtualDom_node('li');
 var $elm$core$Maybe$map = F2(
 	function (f, maybe) {
@@ -6436,71 +6382,52 @@ var $elm$html$Html$ul = _VirtualDom_node('ul');
 var $author$project$Main$tonalityButtonGroup = F2(
 	function (tonalityClass, tonalityKey) {
 		var menuElements = A2(
-			$elm$core$List$filterMap,
+			$elm$core$List$map,
 			function (n) {
-				var _v0 = _Utils_Tuple2(
-					A2(
-						$elm$core$String$contains,
-						'b',
-						$author$project$Note$noteToString(n)),
-					A2(
-						$elm$core$Basics$composeR,
-						$elm$core$Maybe$map(
-							function (tn) {
-								return _Utils_eq(
-									$author$project$Note$noteToString(n),
-									tn);
-							}),
-						function (x) {
-							return A2($elm$core$Maybe$withDefault, false, x);
-						})(tonalityKey));
-				if (_v0.a) {
-					return $elm$core$Maybe$Nothing;
+				var _v0 = A2(
+					$elm$core$Basics$composeR,
+					$elm$core$Maybe$map(
+						$elm$core$Basics$eq(n.name)),
+					$elm$core$Maybe$withDefault(false))(tonalityKey);
+				if (_v0) {
+					return A2(
+						$elm$html$Html$li,
+						_List_Nil,
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$a,
+								_List_fromArray(
+									[
+										$elm$html$Html$Events$onClick(
+										$author$project$Main$FilterChange(
+											$author$project$Filter$ByNoteTonality(n))),
+										$elm$html$Html$Attributes$class('bg-primary')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text(n.name)
+									]))
+							]));
 				} else {
-					if (_v0.b) {
-						return $elm$core$Maybe$Just(
-							A2(
-								$elm$html$Html$li,
-								_List_Nil,
+					return A2(
+						$elm$html$Html$li,
+						_List_Nil,
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$a,
 								_List_fromArray(
 									[
-										A2(
-										$elm$html$Html$a,
-										_List_fromArray(
-											[
-												$elm$html$Html$Events$onClick(
-												$author$project$Main$FilterChange(
-													$author$project$Filter$ByNoteTonality(n))),
-												$elm$html$Html$Attributes$class('bg-primary')
-											]),
-										_List_fromArray(
-											[
-												$elm$html$Html$text(
-												$author$project$Note$noteToString(n))
-											]))
-									])));
-					} else {
-						return $elm$core$Maybe$Just(
-							A2(
-								$elm$html$Html$li,
-								_List_Nil,
+										$elm$html$Html$Events$onClick(
+										$author$project$Main$FilterChange(
+											$author$project$Filter$ByNoteTonality(n)))
+									]),
 								_List_fromArray(
 									[
-										A2(
-										$elm$html$Html$a,
-										_List_fromArray(
-											[
-												$elm$html$Html$Events$onClick(
-												$author$project$Main$FilterChange(
-													$author$project$Filter$ByNoteTonality(n)))
-											]),
-										_List_fromArray(
-											[
-												$elm$html$Html$text(
-												$author$project$Note$noteToString(n))
-											]))
-									])));
-					}
+										$elm$html$Html$text(n.name)
+									]))
+							]));
 				}
 			},
 			$author$project$Note$allNotes);
@@ -6543,6 +6470,7 @@ var $author$project$Main$tonalityButtonGroup = F2(
 					_List_fromArray(
 						[
 							$elm$html$Html$Attributes$class('dropdown-menu'),
+							$elm$html$Html$Attributes$class('pre-scrollable'),
 							A2($elm$html$Html$Attributes$attribute, 'role', 'menu')
 						]),
 					menuElements)
@@ -6558,8 +6486,7 @@ var $author$project$Main$panelBody = function (model) {
 			return _Utils_Tuple3(
 				'btn-link',
 				'btn-primary',
-				$elm$core$Maybe$Just(
-					$author$project$Note$noteToString(n)));
+				$elm$core$Maybe$Just(n.name));
 		}
 	}();
 	var chromaticScaleClass = _v0.a;
@@ -6777,6 +6704,28 @@ var $author$project$Main$slider = function (bpm) {
 				_List_Nil)
 			]));
 };
+var $author$project$Main$viewNote = function (n) {
+	return A2(
+		$elm$html$Html$div,
+		_List_fromArray(
+			[
+				A2($elm$html$Html$Attributes$style, 'min-width', '300px'),
+				A2($elm$html$Html$Attributes$style, 'text-align', 'center')
+			]),
+		_List_fromArray(
+			[
+				A2(
+				$elm$html$Html$p,
+				_List_fromArray(
+					[
+						A2($elm$html$Html$Attributes$style, 'font-size', '13em')
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text(n.name)
+					]))
+			]));
+};
 var $author$project$Main$view = function (model) {
 	return A2(
 		$elm$html$Html$div,
@@ -6790,11 +6739,7 @@ var $author$project$Main$view = function (model) {
 				$author$project$Main$noteTrainerControls(model),
 				$author$project$Main$slider(model.bpm),
 				$author$project$Main$optionPanel(model),
-				$author$project$Main$note(
-				A2(
-					$elm$core$Maybe$withDefault,
-					$author$project$Note$A,
-					$elm$core$List$head(model.notes)))
+				$author$project$Main$viewNote(model.note)
 			]));
 };
 var $author$project$Main$main = $elm$browser$Browser$element(
