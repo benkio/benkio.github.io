@@ -1,8 +1,8 @@
-module Note exposing (Note, allNotes, note, noteGenerator, a440)
+module Note exposing (Note, a440, allNotes, note, allNames)
 
-import List exposing (concat, drop, map)
-import Random exposing (Generator, weighted)
-import String exposing (length)
+import List exposing (concat, map)
+import String exposing (length, left)
+import List.Extra exposing (unique)
 
 
 type alias Note =
@@ -10,8 +10,10 @@ type alias Note =
 
 
 a440 : Note
-a440 = { midiNumber = 69, frequency = 440, name = "A" }
-        
+a440 =
+    { midiNumber = 69, frequency = 440, name = "A" }
+
+
 note : Int -> List Note
 note midiNumber =
     case clamp 69 80 midiNumber of
@@ -81,18 +83,5 @@ allNotes =
         , note 79
         , note 80
         ]
-
-
-noteGenerator : Random.Generator Note
-noteGenerator =
-    weighted ( 10, a440 ) <|
-        drop 1 <|
-            map
-                (\n ->
-                    if length n.name == 1 then
-                        ( 10, n )
-
-                    else
-                        ( 5, n )
-                )
-                allNotes
+allNames : List String
+allNames = (unique << map (\n -> left 1 n.name)) allNotes

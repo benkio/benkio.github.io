@@ -8,8 +8,8 @@ import Html.Events.Extra exposing (onChange)
 import Json.Encode as E exposing (Value, float, int, list, object)
 import List as L exposing (map, head)
 import Maybe as M exposing (map, withDefault)
-import Note exposing (Note, allNotes, noteGenerator, note, a440)
-import Filter exposing (Filter(..))
+import Note exposing (Note, allNotes, note, a440)
+import Filter exposing (Filter(..), noteGenerator)
 import Wave exposing (Wave(..), waveToString, toWave)
 import Random exposing (generate)
 import String exposing (append, contains, fromChar, fromInt, replace, toInt)
@@ -104,7 +104,7 @@ update msg model =
             ( { model | isPlaying = False }, Cmd.none )
 
         ChangeNote ->
-            ( model, generate NewNote noteGenerator )
+            ( model, generate NewNote (noteGenerator model.filter))
 
         NewNote n ->
             ( { model | note = n }, play (toMusic model) )

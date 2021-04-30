@@ -5961,7 +5961,7 @@ var $elm$random$Random$weighted = F2(
 			A2($elm$random$Random$getByWeight, first, others),
 			A2($elm$random$Random$float, 0, total));
 	});
-var $author$project$Note$noteGenerator = A2(
+var $author$project$Filter$chromaticNoteGenerator = A2(
 	$elm$random$Random$weighted,
 	_Utils_Tuple2(10, $author$project$Note$a440),
 	A2(
@@ -5973,6 +5973,14 @@ var $author$project$Note$noteGenerator = A2(
 				return ($elm$core$String$length(n.name) === 1) ? _Utils_Tuple2(10, n) : _Utils_Tuple2(5, n);
 			},
 			$author$project$Note$allNotes)));
+var $author$project$Filter$noteGenerator = function (filter) {
+	if (filter.$ === 'ChromaticScale') {
+		return $author$project$Filter$chromaticNoteGenerator;
+	} else {
+		var note = filter.a;
+		return $author$project$Filter$chromaticNoteGenerator;
+	}
+};
 var $author$project$Main$play = _Platform_outgoingPort('play', $elm$core$Basics$identity);
 var $author$project$Main$bpmToSec = function (bpm) {
 	return 60 / bpm;
@@ -6106,7 +6114,10 @@ var $author$project$Main$update = F2(
 			case 'ChangeNote':
 				return _Utils_Tuple2(
 					model,
-					A2($elm$random$Random$generate, $author$project$Main$NewNote, $author$project$Note$noteGenerator));
+					A2(
+						$elm$random$Random$generate,
+						$author$project$Main$NewNote,
+						$author$project$Filter$noteGenerator(model.filter)));
 			default:
 				var n = msg.a;
 				return _Utils_Tuple2(
