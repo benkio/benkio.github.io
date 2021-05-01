@@ -1,19 +1,19 @@
 port module Main exposing (..)
 
 import Browser exposing (element)
+import Filter exposing (Filter(..), noteGenerator)
 import Html exposing (Html, a, audio, button, div, h1, h4, input, label, li, option, p, select, source, span, text, ul)
 import Html.Attributes as A exposing (attribute, autoplay, class, controls, href, id, max, min, selected, src, step, style, type_, value)
 import Html.Events exposing (onClick, onInput)
 import Html.Events.Extra exposing (onChange)
 import Json.Encode as E exposing (Value, float, int, list, object)
-import List as L exposing (map, head)
+import List as L exposing (head, map)
 import Maybe as M exposing (map, withDefault)
-import Note exposing (Note, allNotes, note, a440)
-import Filter exposing (Filter(..), noteGenerator)
-import Wave exposing (Wave(..), waveToString, toWave)
+import Note exposing (Note, a440, allNotes, note)
 import Random exposing (generate)
 import String exposing (append, contains, fromChar, fromInt, replace, toInt)
 import Time exposing (every)
+import Wave exposing (Wave(..), toWave, waveToString)
 
 
 port play : E.Value -> Cmd msg
@@ -22,7 +22,7 @@ port play : E.Value -> Cmd msg
 toMusic : Model -> E.Value
 toMusic { note, bpm, volume, oscillatorWave } =
     E.object
-        [ ( "frequencies", E.float (note.frequency))
+        [ ( "frequencies", E.float note.frequency )
         , ( "seconds", E.float (bpmToSec bpm) )
         , ( "volume", E.int volume )
         , ( "oscillatorwave", E.string (waveToString oscillatorWave) )
@@ -64,7 +64,7 @@ type alias Model =
 
 init : () -> ( Model, Cmd msg )
 init _ =
-    ( { bpm = 50, volume = 30, isPlaying = False, note = a440 , oscillatorWave = Sine, filter = ChromaticScale }, Cmd.none)
+    ( { bpm = 50, volume = 30, isPlaying = False, note = a440, oscillatorWave = Sine, filter = ChromaticScale }, Cmd.none )
 
 
 
@@ -104,10 +104,14 @@ update msg model =
             ( { model | isPlaying = False }, Cmd.none )
 
         ChangeNote ->
-            ( model, generate NewNote (noteGenerator model.filter))
+            ( model, generate NewNote (noteGenerator model.filter) )
 
         NewNote n ->
-            ( { model | note = n }, play (toMusic model) )
+            let
+                newModel =
+                    { model | note = n }
+            in
+            ( newModel, play (toMusic newModel) )
 
 
 
@@ -283,8 +287,8 @@ tonalityButtonGroup tonalityClass tonalityKey =
         menuElements =
             L.map
                 (\n ->
-                    case ((M.map ((==) n.name) >> withDefault False ) tonalityKey) of
-                        True  ->
+                    case (M.map ((==) n.name) >> withDefault False) tonalityKey of
+                        True ->
                             li [] [ a [ onClick (FilterChange (ByNoteTonality n)), class "bg-primary" ] [ text n.name ] ]
 
                         False ->
@@ -303,5 +307,5 @@ tonalityButtonGroup tonalityClass tonalityKey =
             [ text ((M.map (append "Tonality ") >> withDefault "By Tonality") tonalityKey)
             , span [ class "caret" ] []
             ]
-        , ul [ class "dropdown-menu", class "pre-scrollable",  attribute "role" "menu" ] menuElements
+        , ul [ class "dropdown-menu", class "pre-scrollable", attribute "role" "menu" ] menuElements
         ]

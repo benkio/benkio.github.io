@@ -1,13 +1,12 @@
-module Filter exposing (..)
-
---(Filter(..), noteGenerator, majorScale)
+module Filter exposing (Filter(..), noteGenerator)
 
 import List exposing (append, drop, foldl, head, map, map2, tail)
 import List.Extra exposing (dropWhile, dropWhileRight, find, scanl, unique, uniqueBy)
-import Maybe exposing (andThen, withDefault)
-import Maybe.Extra exposing (orElse)
+import Maybe exposing (withDefault)
+import Maybe.Extra exposing (isJust, orElse)
 import Note exposing (Note, a440, allNames, allNotes, noteToString)
-import Random exposing (Generator, weighted)
+import Random as R exposing (Generator, andThen, constant, weighted)
+import Random.List exposing (choose)
 import String exposing (left, length)
 import Tuple exposing (first, pair, second)
 
@@ -19,10 +18,6 @@ type Filter
 
 type alias Scale =
     List Int
-
-
-
--- List of semitones: 2 - Tone, 1 - Semitones
 
 
 majorScaleIntervals : Scale
@@ -71,21 +66,34 @@ majorScale n =
         targetNotes
 
 
-noteGenerator : Filter -> Random.Generator Note
+noteGenerator : Filter -> R.Generator Note
 noteGenerator filter =
     case filter of
         ChromaticScale ->
             chromaticNoteGenerator
 
         ByNoteTonality note ->
-            chromaticNoteGenerator
+            majorScale note |> byNoteTonalityGenerator
 
 
+byNoteTonalityGenerator : List Note -> R.Generator Note
+byNoteTonalityGenerator notes =
+    R.andThen
+        (\x ->
+            let
+                maybeResult =
+                    first x
+            in
+            if isJust maybeResult then
+                withDefault a440 maybeResult |> constant
 
--- TODO: implement
+            else
+                byNoteTonalityGenerator notes
+        )
+        (choose notes)
 
 
-chromaticNoteGenerator : Random.Generator Note
+chromaticNoteGenerator : R.Generator Note
 chromaticNoteGenerator =
     weighted ( 10, a440 ) <|
         drop 1 <|
