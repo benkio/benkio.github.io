@@ -1,7 +1,7 @@
-module Note exposing (Note, a440, allNotes, note, allNames)
+module Note exposing (Note, a440, allNotes, note, allNames, noteToString)
 
 import List exposing (concat, map)
-import String exposing (length, left)
+import String exposing (length, left, fromInt, fromFloat)
 import List.Extra exposing (unique)
 
 
@@ -83,5 +83,9 @@ allNotes =
         , note 79
         , note 80
         ]
+
 allNames : List String
 allNames = (unique << map (\n -> left 1 n.name)) allNotes
+
+noteToString : Note -> String
+noteToString n = n.name ++ " - " ++ fromInt (n.midiNumber) ++ " - " ++ fromFloat (n.frequency)
