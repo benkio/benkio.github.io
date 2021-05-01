@@ -64,7 +64,7 @@ type alias Model =
 
 init : () -> ( Model, Cmd msg )
 init _ =
-    ( { bpm = 50, volume = 30, isPlaying = False, note = a440, oscillatorWave = Sine, filter = ChromaticScale }, Cmd.none )
+    ( { bpm = 50, volume = 20, isPlaying = False, note = a440, oscillatorWave = Sine, filter = ChromaticScale }, Cmd.none )
 
 
 

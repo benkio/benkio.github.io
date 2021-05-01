@@ -5234,7 +5234,7 @@ var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Main$init = function (_v0) {
 	return _Utils_Tuple2(
-		{bpm: 50, filter: $author$project$Filter$ChromaticScale, isPlaying: false, note: $author$project$Note$a440, oscillatorWave: $author$project$Wave$Sine, volume: 30},
+		{bpm: 50, filter: $author$project$Filter$ChromaticScale, isPlaying: false, note: $author$project$Note$a440, oscillatorWave: $author$project$Wave$Sine, volume: 20},
 		$elm$core$Platform$Cmd$none);
 };
 var $author$project$Main$ChangeNote = {$: 'ChangeNote'};
