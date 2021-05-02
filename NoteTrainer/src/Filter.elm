@@ -4,7 +4,7 @@ import List exposing (append, drop, foldl, head, map, map2, tail)
 import List.Extra exposing (dropWhile, dropWhileRight, find, scanl, unique, uniqueBy)
 import Maybe exposing (withDefault)
 import Maybe.Extra exposing (isJust, orElse)
-import Note exposing (Note, a440, allNames, allNotes, noteToString)
+import Music exposing (Note, Scale,a440, allNames, allNotes, noteToString)
 import Random as R exposing (Generator, andThen, constant, weighted)
 import Random.List exposing (choose)
 import String exposing (left, length)
@@ -14,10 +14,6 @@ import Tuple exposing (first, pair, second)
 type Filter
     = ChromaticScale
     | ByNoteTonality Note
-
-
-type alias Scale =
-    List Int
 
 
 majorScaleIntervals : Scale

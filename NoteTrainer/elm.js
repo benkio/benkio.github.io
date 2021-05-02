@@ -5229,12 +5229,12 @@ var $elm$core$Task$perform = F2(
 var $elm$browser$Browser$element = _Browser_element;
 var $author$project$Filter$ChromaticScale = {$: 'ChromaticScale'};
 var $author$project$Wave$Sine = {$: 'Sine'};
-var $author$project$Note$a440 = {frequency: 440, midiNumber: 69, name: 'A'};
+var $author$project$Music$a440 = {frequency: 440, midiNumber: 69, name: 'A'};
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Main$init = function (_v0) {
 	return _Utils_Tuple2(
-		{bpm: 50, filter: $author$project$Filter$ChromaticScale, isPlaying: false, note: $author$project$Note$a440, oscillatorWave: $author$project$Wave$Sine, volume: 20},
+		{bpm: 50, filter: $author$project$Filter$ChromaticScale, isPlaying: false, note: $author$project$Music$a440, oscillatorWave: $author$project$Wave$Sine, volume: 20},
 		$elm$core$Platform$Cmd$none);
 };
 var $author$project$Main$ChangeNote = {$: 'ChangeNote'};
@@ -6050,7 +6050,7 @@ var $author$project$Filter$byNoteTonalityGenerator = function (notes) {
 		function (x) {
 			var maybeResult = x.a;
 			return $elm_community$maybe_extra$Maybe$Extra$isJust(maybeResult) ? $elm$random$Random$constant(
-				A2($elm$core$Maybe$withDefault, $author$project$Note$a440, maybeResult)) : $author$project$Filter$byNoteTonalityGenerator(notes);
+				A2($elm$core$Maybe$withDefault, $author$project$Music$a440, maybeResult)) : $author$project$Filter$byNoteTonalityGenerator(notes);
 		},
 		$elm_community$random_extra$Random$List$choose(notes));
 };
@@ -6061,12 +6061,12 @@ var $elm$core$Basics$clamp = F3(
 	function (low, high, number) {
 		return (_Utils_cmp(number, low) < 0) ? low : ((_Utils_cmp(number, high) > 0) ? high : number);
 	});
-var $author$project$Note$note = function (midiNumber) {
+var $author$project$Music$note = function (midiNumber) {
 	var _v0 = A3($elm$core$Basics$clamp, 69, 80, midiNumber);
 	switch (_v0) {
 		case 69:
 			return _List_fromArray(
-				[$author$project$Note$a440]);
+				[$author$project$Music$a440]);
 		case 70:
 			return _List_fromArray(
 				[
@@ -6129,24 +6129,24 @@ var $author$project$Note$note = function (midiNumber) {
 				]);
 		default:
 			return _List_fromArray(
-				[$author$project$Note$a440]);
+				[$author$project$Music$a440]);
 	}
 };
-var $author$project$Note$allNotes = $elm$core$List$concat(
+var $author$project$Music$allNotes = $elm$core$List$concat(
 	_List_fromArray(
 		[
-			$author$project$Note$note(69),
-			$author$project$Note$note(70),
-			$author$project$Note$note(71),
-			$author$project$Note$note(72),
-			$author$project$Note$note(73),
-			$author$project$Note$note(74),
-			$author$project$Note$note(75),
-			$author$project$Note$note(76),
-			$author$project$Note$note(77),
-			$author$project$Note$note(78),
-			$author$project$Note$note(79),
-			$author$project$Note$note(80)
+			$author$project$Music$note(69),
+			$author$project$Music$note(70),
+			$author$project$Music$note(71),
+			$author$project$Music$note(72),
+			$author$project$Music$note(73),
+			$author$project$Music$note(74),
+			$author$project$Music$note(75),
+			$author$project$Music$note(76),
+			$author$project$Music$note(77),
+			$author$project$Music$note(78),
+			$author$project$Music$note(79),
+			$author$project$Music$note(80)
 		]));
 var $elm$core$Basics$abs = function (n) {
 	return (n < 0) ? (-n) : n;
@@ -6213,7 +6213,7 @@ var $elm$random$Random$weighted = F2(
 	});
 var $author$project$Filter$chromaticNoteGenerator = A2(
 	$elm$random$Random$weighted,
-	_Utils_Tuple2(10, $author$project$Note$a440),
+	_Utils_Tuple2(10, $author$project$Music$a440),
 	A2(
 		$elm$core$List$drop,
 		1,
@@ -6222,7 +6222,7 @@ var $author$project$Filter$chromaticNoteGenerator = A2(
 			function (n) {
 				return ($elm$core$String$length(n.name) === 1) ? _Utils_Tuple2(10, n) : _Utils_Tuple2(5, n);
 			},
-			$author$project$Note$allNotes)));
+			$author$project$Music$allNotes)));
 var $elm$core$Set$Set_elm_builtin = function (a) {
 	return {$: 'Set_elm_builtin', a: a};
 };
@@ -6284,13 +6284,13 @@ var $elm_community$list_extra$List$Extra$uniqueHelp = F4(
 var $elm_community$list_extra$List$Extra$unique = function (list) {
 	return A4($elm_community$list_extra$List$Extra$uniqueHelp, $elm$core$Basics$identity, $elm$core$Set$empty, list, _List_Nil);
 };
-var $author$project$Note$allNames = A2(
+var $author$project$Music$allNames = A2(
 	$elm$core$Basics$composeL,
 	$elm_community$list_extra$List$Extra$unique,
 	$elm$core$List$map(
 		function (n) {
 			return A2($elm$core$String$left, 1, n.name);
-		}))($author$project$Note$allNotes);
+		}))($author$project$Music$allNotes);
 var $elm_community$list_extra$List$Extra$dropWhile = F2(
 	function (predicate, list) {
 		dropWhile:
@@ -6337,7 +6337,7 @@ var $author$project$Filter$majorScaleIntervals = _List_fromArray(
 	[2, 2, 1, 2, 2, 2]);
 var $elm$core$Basics$neq = _Utils_notEqual;
 var $elm$core$String$fromFloat = _String_fromNumber;
-var $author$project$Note$noteToString = function (n) {
+var $author$project$Music$noteToString = function (n) {
 	return n.name + (' - ' + ($elm$core$String$fromInt(n.midiNumber) + (' - ' + $elm$core$String$fromFloat(n.frequency))));
 };
 var $elm_community$maybe_extra$Maybe$Extra$orElse = F2(
@@ -6385,17 +6385,17 @@ var $elm_community$list_extra$List$Extra$uniqueBy = F2(
 var $author$project$Filter$majorScale = function (n) {
 	var octave = A3(
 		$elm$core$Basics$composeL,
-		$elm_community$list_extra$List$Extra$uniqueBy($author$project$Note$noteToString),
+		$elm_community$list_extra$List$Extra$uniqueBy($author$project$Music$noteToString),
 		$elm_community$list_extra$List$Extra$dropWhile(
-			$elm$core$Basics$neq($author$project$Note$a440)),
-		_Utils_ap($author$project$Note$allNotes, $author$project$Note$allNotes));
+			$elm$core$Basics$neq($author$project$Music$a440)),
+		_Utils_ap($author$project$Music$allNotes, $author$project$Music$allNotes));
 	var noteNames = A3(
 		$elm$core$Basics$composeL,
 		$elm_community$list_extra$List$Extra$unique,
 		$elm_community$list_extra$List$Extra$dropWhile(
 			$elm$core$Basics$neq(
 				A2($elm$core$String$left, 1, n.name))),
-		_Utils_ap($author$project$Note$allNames, $author$project$Note$allNames));
+		_Utils_ap($author$project$Music$allNames, $author$project$Music$allNames));
 	var midiNumbers = A3(
 		$elm_community$list_extra$List$Extra$scanl,
 		F2(
@@ -6411,7 +6411,7 @@ var $author$project$Filter$majorScale = function (n) {
 		function (target) {
 			return A2(
 				$elm$core$Maybe$withDefault,
-				$author$project$Note$a440,
+				$author$project$Music$a440,
 				A2(
 					$elm_community$maybe_extra$Maybe$Extra$orElse,
 					A2(
@@ -6892,7 +6892,7 @@ var $author$project$Main$tonalityButtonGroup = F2(
 							]));
 				}
 			},
-			$author$project$Note$allNotes);
+			$author$project$Music$allNotes);
 		return A2(
 			$elm$html$Html$div,
 			_List_fromArray(
