@@ -6312,6 +6312,17 @@ var $elm_community$list_extra$List$Extra$dropWhile = F2(
 			}
 		}
 	});
+var $elm$core$List$filter = F2(
+	function (isGood, list) {
+		return A3(
+			$elm$core$List$foldr,
+			F2(
+				function (x, xs) {
+					return isGood(x) ? A2($elm$core$List$cons, x, xs) : xs;
+				}),
+			_List_Nil,
+			list);
+	});
 var $elm_community$list_extra$List$Extra$find = F2(
 	function (predicate, list) {
 		find:
@@ -6333,8 +6344,36 @@ var $elm_community$list_extra$List$Extra$find = F2(
 			}
 		}
 	});
-var $author$project$Filter$majorScaleIntervals = _List_fromArray(
-	[2, 2, 1, 2, 2, 2]);
+var $elm$core$List$any = F2(
+	function (isOkay, list) {
+		any:
+		while (true) {
+			if (!list.b) {
+				return false;
+			} else {
+				var x = list.a;
+				var xs = list.b;
+				if (isOkay(x)) {
+					return true;
+				} else {
+					var $temp$isOkay = isOkay,
+						$temp$list = xs;
+					isOkay = $temp$isOkay;
+					list = $temp$list;
+					continue any;
+				}
+			}
+		}
+	});
+var $elm$core$List$member = F2(
+	function (x, xs) {
+		return A2(
+			$elm$core$List$any,
+			function (a) {
+				return _Utils_eq(a, x);
+			},
+			xs);
+	});
 var $elm$core$Basics$neq = _Utils_notEqual;
 var $elm$core$String$fromFloat = _String_fromNumber;
 var $author$project$Music$noteToString = function (n) {
@@ -6382,62 +6421,89 @@ var $elm_community$list_extra$List$Extra$uniqueBy = F2(
 	function (f, list) {
 		return A4($elm_community$list_extra$List$Extra$uniqueHelp, f, $elm$core$Set$empty, list, _List_Nil);
 	});
-var $author$project$Filter$majorScale = function (n) {
-	var octave = A3(
-		$elm$core$Basics$composeL,
-		$elm_community$list_extra$List$Extra$uniqueBy($author$project$Music$noteToString),
-		$elm_community$list_extra$List$Extra$dropWhile(
-			$elm$core$Basics$neq($author$project$Music$a440)),
-		_Utils_ap($author$project$Music$allNotes, $author$project$Music$allNotes));
-	var noteNames = A3(
-		$elm$core$Basics$composeL,
-		$elm_community$list_extra$List$Extra$unique,
-		$elm_community$list_extra$List$Extra$dropWhile(
-			$elm$core$Basics$neq(
-				A2($elm$core$String$left, 1, n.name))),
-		_Utils_ap($author$project$Music$allNames, $author$project$Music$allNames));
-	var midiNumbers = A3(
-		$elm_community$list_extra$List$Extra$scanl,
-		F2(
-			function (interval, prevNoteMidiNum) {
-				var x = interval + prevNoteMidiNum;
-				return (x > 80) ? ((x - 80) + 68) : x;
-			}),
-		n.midiNumber,
-		$author$project$Filter$majorScaleIntervals);
-	var targetNotes = A3($elm$core$List$map2, $elm$core$Tuple$pair, noteNames, midiNumbers);
-	return A2(
-		$elm$core$List$map,
-		function (target) {
-			return A2(
-				$elm$core$Maybe$withDefault,
-				$author$project$Music$a440,
+var $author$project$Filter$computeByIntervals = F2(
+	function (n, degreeNInterval) {
+		var octave = A3(
+			$elm$core$Basics$composeL,
+			$elm_community$list_extra$List$Extra$uniqueBy($author$project$Music$noteToString),
+			$elm_community$list_extra$List$Extra$dropWhile(
+				$elm$core$Basics$neq(n)),
+			_Utils_ap($author$project$Music$allNotes, $author$project$Music$allNotes));
+		var noteNames = A2(
+			$elm$core$List$map,
+			$elm$core$Tuple$second,
+			A2(
+				$elm$core$List$filter,
+				function (x) {
+					return A2(
+						$elm$core$List$member,
+						x.a,
+						A2(
+							$elm$core$List$cons,
+							0,
+							A2($elm$core$List$map, $elm$core$Tuple$first, degreeNInterval)));
+				},
 				A2(
-					$elm_community$maybe_extra$Maybe$Extra$orElse,
+					$elm$core$List$indexedMap,
+					$elm$core$Tuple$pair,
+					A3(
+						$elm$core$Basics$composeL,
+						$elm_community$list_extra$List$Extra$unique,
+						$elm_community$list_extra$List$Extra$dropWhile(
+							$elm$core$Basics$neq(
+								A2($elm$core$String$left, 1, n.name))),
+						_Utils_ap($author$project$Music$allNames, $author$project$Music$allNames)))));
+		var midiNumbers = A3(
+			$elm_community$list_extra$List$Extra$scanl,
+			F2(
+				function (interval, prevNoteMidiNum) {
+					var x = interval + prevNoteMidiNum;
+					return (x > 80) ? ((x - 80) + 68) : x;
+				}),
+			n.midiNumber,
+			A2($elm$core$List$map, $elm$core$Tuple$second, degreeNInterval));
+		var targetNotes = A3($elm$core$List$map2, $elm$core$Tuple$pair, noteNames, midiNumbers);
+		return A2(
+			$elm$core$List$map,
+			function (target) {
+				return A2(
+					$elm$core$Maybe$withDefault,
+					$author$project$Music$a440,
 					A2(
-						$elm_community$list_extra$List$Extra$find,
-						function (x) {
-							return _Utils_eq(x.midiNumber, target.b);
-						},
-						octave),
-					A2(
-						$elm_community$list_extra$List$Extra$find,
-						function (x) {
-							return _Utils_eq(
-								A2($elm$core$String$left, 1, x.name),
-								target.a) && _Utils_eq(x.midiNumber, target.b);
-						},
-						octave)));
-		},
-		targetNotes);
-};
+						$elm_community$maybe_extra$Maybe$Extra$orElse,
+						A2(
+							$elm_community$list_extra$List$Extra$find,
+							function (x) {
+								return _Utils_eq(x.midiNumber, target.b);
+							},
+							octave),
+						A2(
+							$elm_community$list_extra$List$Extra$find,
+							function (x) {
+								return _Utils_eq(
+									A2($elm$core$String$left, 1, x.name),
+									target.a) && _Utils_eq(x.midiNumber, target.b);
+							},
+							octave)));
+			},
+			targetNotes);
+	});
+var $author$project$Filter$majorScaleIntervals = _List_fromArray(
+	[
+		_Utils_Tuple2(1, 2),
+		_Utils_Tuple2(2, 2),
+		_Utils_Tuple2(3, 1),
+		_Utils_Tuple2(4, 2),
+		_Utils_Tuple2(5, 2),
+		_Utils_Tuple2(6, 2)
+	]);
 var $author$project$Filter$noteGenerator = function (filter) {
 	if (filter.$ === 'ChromaticScale') {
 		return $author$project$Filter$chromaticNoteGenerator;
 	} else {
 		var note = filter.a;
 		return $author$project$Filter$byNoteTonalityGenerator(
-			$author$project$Filter$majorScale(note));
+			A2($author$project$Filter$computeByIntervals, note, $author$project$Filter$majorScaleIntervals));
 	}
 };
 var $author$project$Main$play = _Platform_outgoingPort('play', $elm$core$Basics$identity);

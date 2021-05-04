@@ -1,4 +1,4 @@
-module Music exposing (Note, Scale, a440, allNotes, note, allNames, noteToString)
+module Music exposing (Note, a440, allNotes, note, allNames, noteToString)
 
 import List exposing (concat, map)
 import String exposing (length, left, fromInt, fromFloat)
@@ -7,10 +7,6 @@ import List.Extra exposing (unique)
 
 type alias Note =
     { midiNumber : Int, frequency : Float, name : String }
-
-type alias Scale =
-    List Int
-
 
 a440 : Note
 a440 =
