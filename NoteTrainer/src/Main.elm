@@ -62,8 +62,6 @@ type alias Model =
     , filter : Filter
     }
 
-type OutputType = Triad | Tetrad | Note
-
 init : () -> ( Model, Cmd msg )
 init _ =
     ( { bpm = 50, volume = 20, isPlaying = False, notes = [ a440 ], outputType = Note, oscillatorWave = Sine, filter = ChromaticScale }, Cmd.none )
