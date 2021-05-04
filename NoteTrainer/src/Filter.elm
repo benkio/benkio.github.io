@@ -17,18 +17,6 @@ type Filter
     | ByNoteTonality Note
 
 
-majorScaleIntervals : List ( Int, Int )
-majorScaleIntervals =
-    [ ( 1, 2 ), ( 2, 2 ), ( 3, 1 ), ( 4, 2 ), ( 5, 2 ), ( 6, 2 ) ]
-
-
-majorChord : List ( Int, Int )
-majorChord =
-    [ ( 2, 4 ), ( 4, 3 ) ]
-
-minorChord : List ( Int, Int)
-minorChord = [ ( 2, 3 ), ( 4, 4 )]
-
 computeByIntervals : Note -> List ( Int, Int ) -> List Note
 computeByIntervals n degreeNInterval =
     let
@@ -75,18 +63,30 @@ computeByIntervals n degreeNInterval =
         )
         targetNotes
 
+generator : Filter -> OutputType -> R.Generator [Note]
+generator filter outputType = case outputType of
+                                  Triad -> triadGenerator filter
+                                  Tetrad -> tetradGenerator filter
+                                  Note -> noteGenerator filter
 
-noteGenerator : Filter -> R.Generator Note
+
+triadGenerator : Filter -> R.Generator [Note]
+triadGenerator filter = Debug.todo "Implement the random generator for the triad chord"
+
+tetradGenerator : Filter -> R.Generator [Note]
+tetradGenerator filter = Debug.todo "Implement the random generator for the tetrad chord"
+
+noteGenerator : Filter -> R.Generator [Note]
 noteGenerator filter =
     case filter of
         ChromaticScale ->
             chromaticNoteGenerator
 
         ByNoteTonality note ->
-            computeByIntervals note majorScaleIntervals |> byNoteTonalityGenerator
+            computeByIntervals note (scaleToIntervals majorScale) |> byNoteTonalityGenerator
 
 
-byNoteTonalityGenerator : List Note -> R.Generator Note
+byNoteTonalityGenerator : List Note -> R.Generator [Note]
 byNoteTonalityGenerator notes =
     R.andThen
         (\x ->
@@ -101,9 +101,9 @@ byNoteTonalityGenerator notes =
                 byNoteTonalityGenerator notes
         )
         (choose notes)
+            |> R.map (\x -> [x])
 
-
-chromaticNoteGenerator : R.Generator Note
+chromaticNoteGenerator : R.Generator [Note]
 chromaticNoteGenerator =
     weighted ( 10, a440 ) <|
         drop 1 <|
@@ -116,3 +116,4 @@ chromaticNoteGenerator =
                         ( 5, n )
                 )
                 allNotes
+        |> R.map (\x -> [x])

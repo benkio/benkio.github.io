@@ -1,16 +1,77 @@
-module Music exposing (Note, a440, allNotes, note, allNames, noteToString)
+module Music exposing (Note, a440, allNames, allNotes, augmentedChord, diminishedChord, majorChord, majorScale, minorChord, note, noteToString, scaleToIntervals, chordToIntervals)
 
 import List exposing (concat, map)
-import String exposing (length, left, fromInt, fromFloat)
 import List.Extra exposing (unique)
+import String exposing (fromFloat, fromInt, left, length)
 
 
 type alias Note =
     { midiNumber : Int, frequency : Float, name : String }
 
+
+
+type Scale
+    = MajorScale { intervals : List ( Int, Int ) }
+
+
+type Chord
+    = MajorTriad { intervals : List ( Int, Int ) }
+    | MinorTriad { intervals : List ( Int, Int ) }
+    | AugmentedTriad { intervals : List ( Int, Int ) }
+    | DimishedTriad { intervals : List ( Int, Int ) }
+
+
 a440 : Note
 a440 =
     { midiNumber = 69, frequency = 440, name = "A" }
+
+
+majorScale : Scale
+majorScale =
+    MajorScale { intervals = [ ( 1, 2 ), ( 2, 2 ), ( 3, 1 ), ( 4, 2 ), ( 5, 2 ), ( 6, 2 ) ] }
+
+
+majorChord : Chord
+majorChord =
+    MajorTriad { intervals = [ ( 2, 4 ), ( 4, 3 ) ] }
+
+
+minorChord : Chord
+minorChord =
+    MinorTriad { intervals = [ ( 2, 3 ), ( 4, 4 ) ] }
+
+
+diminishedChord : Chord
+diminishedChord =
+    DimishedTriad { intervals = [ ( 2, 3 ), ( 4, 3 ) ] }
+
+
+augmentedChord : Chord
+augmentedChord =
+    AugmentedTriad { intervals = [ ( 2, 4 ), ( 4, 4 ) ] }
+
+
+scaleToIntervals : Scale -> List ( Int, Int )
+scaleToIntervals scale =
+    case scale of
+        MajorScale { intervals } ->
+            intervals
+
+
+chordToIntervals : Chord -> List ( Int, Int )
+chordToIntervals chord =
+    case chord of
+        MajorTriad { intervals } ->
+            intervals
+
+        MinorTriad { intervals } ->
+            intervals
+
+        AugmentedTriad { intervals } ->
+            intervals
+
+        DimishedTriad { intervals } ->
+            intervals
 
 
 note : Int -> List Note
@@ -83,8 +144,12 @@ allNotes =
         , note 80
         ]
 
+
 allNames : List String
-allNames = (unique << map (\n -> left 1 n.name)) allNotes
+allNames =
+    (unique << map (\n -> left 1 n.name)) allNotes
+
 
 noteToString : Note -> String
-noteToString n = n.name ++ " - " ++ fromInt (n.midiNumber) ++ " - " ++ fromFloat (n.frequency)
+noteToString n =
+    n.name ++ " - " ++ fromInt n.midiNumber ++ " - " ++ fromFloat n.frequency

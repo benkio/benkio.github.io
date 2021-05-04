@@ -8,13 +8,13 @@
 * Output Menu
 ** DONE Syth Wave
    https://developer.mozilla.org/en-US/docs/Web/API/OscillatorNode/type
-** TODO Note Choice
+** DONE Note Choice
   User can choose what will be the output of the trainer:
   - Chromatic Scale (default)
   - By Tonality
 
   (radiobutton)
-*** TODO NEXT STREAM onClick + business logic
+*** DONE NEXT STREAM onClick + business logic
 ** Output Menu Chords
   - Triad Chords (default)
   - Seventh Chords
