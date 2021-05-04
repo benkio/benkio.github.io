@@ -5228,13 +5228,23 @@ var $elm$core$Task$perform = F2(
 	});
 var $elm$browser$Browser$element = _Browser_element;
 var $author$project$Filter$ChromaticScale = {$: 'ChromaticScale'};
+var $author$project$Main$Note = {$: 'Note'};
 var $author$project$Wave$Sine = {$: 'Sine'};
 var $author$project$Music$a440 = {frequency: 440, midiNumber: 69, name: 'A'};
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Main$init = function (_v0) {
 	return _Utils_Tuple2(
-		{bpm: 50, filter: $author$project$Filter$ChromaticScale, isPlaying: false, note: $author$project$Music$a440, oscillatorWave: $author$project$Wave$Sine, volume: 20},
+		{
+			bpm: 50,
+			filter: $author$project$Filter$ChromaticScale,
+			isPlaying: false,
+			notes: _List_fromArray(
+				[$author$project$Music$a440]),
+			oscillatorWave: $author$project$Wave$Sine,
+			outputType: $author$project$Main$Note,
+			volume: 20
+		},
 		$elm$core$Platform$Cmd$none);
 };
 var $author$project$Main$ChangeNote = {$: 'ChangeNote'};
@@ -6512,6 +6522,15 @@ var $author$project$Main$bpmToSec = function (bpm) {
 };
 var $elm$json$Json$Encode$float = _Json_wrap;
 var $elm$json$Json$Encode$int = _Json_wrap;
+var $elm$json$Json$Encode$list = F2(
+	function (func, entries) {
+		return _Json_wrap(
+			A3(
+				$elm$core$List$foldl,
+				_Json_addEntry(func),
+				_Json_emptyArray(_Utils_Tuple0),
+				entries));
+	});
 var $elm$json$Json$Encode$object = function (pairs) {
 	return _Json_wrap(
 		A3(
@@ -6539,7 +6558,7 @@ var $author$project$Wave$waveToString = function (w) {
 	}
 };
 var $author$project$Main$toMusic = function (_v0) {
-	var note = _v0.note;
+	var notes = _v0.notes;
 	var bpm = _v0.bpm;
 	var volume = _v0.volume;
 	var oscillatorWave = _v0.oscillatorWave;
@@ -6548,7 +6567,12 @@ var $author$project$Main$toMusic = function (_v0) {
 			[
 				_Utils_Tuple2(
 				'frequencies',
-				$elm$json$Json$Encode$float(note.frequency)),
+				A2(
+					$elm$json$Json$Encode$list,
+					function (x) {
+						return $elm$json$Json$Encode$float(x.frequency);
+					},
+					notes)),
 				_Utils_Tuple2(
 				'seconds',
 				$elm$json$Json$Encode$float(
@@ -6615,6 +6639,13 @@ var $author$project$Main$update = F2(
 						model,
 						{filter: filter}),
 					$elm$core$Platform$Cmd$none);
+			case 'OutputChange':
+				var outputType = msg.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{outputType: outputType}),
+					$elm$core$Platform$Cmd$none);
 			case 'Start':
 				return _Utils_Tuple2(
 					_Utils_update(
@@ -6638,7 +6669,10 @@ var $author$project$Main$update = F2(
 				var n = msg.a;
 				var newModel = _Utils_update(
 					model,
-					{note: n});
+					{
+						notes: _List_fromArray(
+							[n])
+					});
 				return _Utils_Tuple2(
 					newModel,
 					$author$project$Main$play(
@@ -6869,18 +6903,14 @@ var $elm$html$Html$Attributes$href = function (url) {
 var $author$project$Main$FilterChange = function (a) {
 	return {$: 'FilterChange', a: a};
 };
+var $author$project$Main$OutputChange = function (a) {
+	return {$: 'OutputChange', a: a};
+};
+var $author$project$Main$Tetrad = {$: 'Tetrad'};
+var $author$project$Main$Triad = {$: 'Triad'};
 var $author$project$Main$WaveChanged = function (a) {
 	return {$: 'WaveChanged', a: a};
 };
-var $elm$html$Html$label = _VirtualDom_node('label');
-var $elm_community$html_extra$Html$Events$Extra$onChange = function (onChangeAction) {
-	return A2(
-		$elm$html$Html$Events$on,
-		'change',
-		A2($elm$json$Json$Decode$map, onChangeAction, $elm$html$Html$Events$targetValue));
-};
-var $elm$html$Html$option = _VirtualDom_node('option');
-var $elm$html$Html$select = _VirtualDom_node('select');
 var $elm$json$Json$Encode$bool = _Json_wrap;
 var $elm$html$Html$Attributes$boolProperty = F2(
 	function (key, bool) {
@@ -6889,7 +6919,31 @@ var $elm$html$Html$Attributes$boolProperty = F2(
 			key,
 			$elm$json$Json$Encode$bool(bool));
 	});
+var $elm$html$Html$Attributes$checked = $elm$html$Html$Attributes$boolProperty('checked');
+var $elm$html$Html$label = _VirtualDom_node('label');
+var $elm$html$Html$Attributes$name = $elm$html$Html$Attributes$stringProperty('name');
+var $elm_community$html_extra$Html$Events$Extra$onChange = function (onChangeAction) {
+	return A2(
+		$elm$html$Html$Events$on,
+		'change',
+		A2($elm$json$Json$Decode$map, onChangeAction, $elm$html$Html$Events$targetValue));
+};
+var $elm$json$Json$Decode$bool = _Json_decodeBool;
+var $elm$html$Html$Events$targetChecked = A2(
+	$elm$json$Json$Decode$at,
+	_List_fromArray(
+		['target', 'checked']),
+	$elm$json$Json$Decode$bool);
+var $elm$html$Html$Events$onCheck = function (tagger) {
+	return A2(
+		$elm$html$Html$Events$on,
+		'change',
+		A2($elm$json$Json$Decode$map, tagger, $elm$html$Html$Events$targetChecked));
+};
+var $elm$html$Html$option = _VirtualDom_node('option');
+var $elm$html$Html$select = _VirtualDom_node('select');
 var $elm$html$Html$Attributes$selected = $elm$html$Html$Attributes$boolProperty('selected');
+var $elm$html$Html$span = _VirtualDom_node('span');
 var $author$project$Filter$ByNoteTonality = function (a) {
 	return {$: 'ByNoteTonality', a: a};
 };
@@ -6905,7 +6959,6 @@ var $elm$core$Maybe$map = F2(
 			return $elm$core$Maybe$Nothing;
 		}
 	});
-var $elm$html$Html$span = _VirtualDom_node('span');
 var $elm$html$Html$ul = _VirtualDom_node('ul');
 var $author$project$Main$tonalityButtonGroup = F2(
 	function (tonalityClass, tonalityKey) {
@@ -7124,6 +7177,111 @@ var $author$project$Main$panelBody = function (model) {
 								$elm$html$Html$text('Chromatic Scale')
 							])),
 						A2($author$project$Main$tonalityButtonGroup, tonalityClass, tonalityKey)
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_Nil,
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$label,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('radio-inline')
+							]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$input,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$name('outputRadio'),
+										$elm$html$Html$Attributes$type_('radio'),
+										$elm$html$Html$Events$onCheck(
+										function (v) {
+											return $author$project$Main$OutputChange($author$project$Main$Triad);
+										}),
+										$elm$html$Html$Attributes$checked(
+										_Utils_eq(model.outputType, $author$project$Main$Triad))
+									]),
+								_List_Nil),
+								A2(
+								$elm$html$Html$span,
+								_List_fromArray(
+									[
+										A2($elm$html$Html$Attributes$style, 'color', 'black')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text(' Triads')
+									]))
+							])),
+						A2(
+						$elm$html$Html$label,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('radio-inline')
+							]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$input,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$name('outputRadio'),
+										$elm$html$Html$Attributes$type_('radio'),
+										$elm$html$Html$Events$onCheck(
+										function (v) {
+											return $author$project$Main$OutputChange($author$project$Main$Tetrad);
+										}),
+										$elm$html$Html$Attributes$checked(
+										_Utils_eq(model.outputType, $author$project$Main$Tetrad))
+									]),
+								_List_Nil),
+								A2(
+								$elm$html$Html$span,
+								_List_fromArray(
+									[
+										A2($elm$html$Html$Attributes$style, 'color', 'black')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text(' Tetrad')
+									]))
+							])),
+						A2(
+						$elm$html$Html$label,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('radio-inline')
+							]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$input,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$name('outputRadio'),
+										$elm$html$Html$Attributes$type_('radio'),
+										$elm$html$Html$Events$onCheck(
+										function (v) {
+											return $author$project$Main$OutputChange($author$project$Main$Note);
+										}),
+										$elm$html$Html$Attributes$checked(
+										_Utils_eq(model.outputType, $author$project$Main$Note))
+									]),
+								_List_Nil),
+								A2(
+								$elm$html$Html$span,
+								_List_fromArray(
+									[
+										A2($elm$html$Html$Attributes$style, 'color', 'black')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text(' Note')
+									]))
+							]))
 					]))
 			]));
 };
@@ -7267,7 +7425,11 @@ var $author$project$Main$view = function (model) {
 				$author$project$Main$noteTrainerControls(model),
 				$author$project$Main$slider(model.bpm),
 				$author$project$Main$optionPanel(model),
-				$author$project$Main$viewNote(model.note)
+				$author$project$Main$viewNote(
+				A2(
+					$elm$core$Basics$composeL,
+					$elm$core$Maybe$withDefault($author$project$Music$a440),
+					$elm$core$List$head)(model.notes))
 			]));
 };
 var $author$project$Main$main = $elm$browser$Browser$element(

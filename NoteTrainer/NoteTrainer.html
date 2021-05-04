@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Note Trainer</title>
-<!-- 2021-04-29 Thu 18:38 -->
+<!-- 2021-05-04 Tue 18:36 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -80,7 +80,7 @@ app.ports.play.subscribe(function(music) {
     const attackTime = music.seconds * 0.2;
 
     sin = audioCtx.createOscillator();
-    sin.frequency.value = music.frequencies;
+    sin.frequency.value = music.frequencies[0];
     sin.type = music.oscillatorwave;
     sin.connect(volume);
 

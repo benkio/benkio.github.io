@@ -1,4 +1,4 @@
-module Filter exposing (Filter(..), noteGenerator)
+module Filter exposing (..)--(Filter(..), noteGenerator)
 
 
 import List exposing (append, drop, filter, foldl, head, indexedMap, map, map2, member, tail)
@@ -26,6 +26,8 @@ majorChord : List ( Int, Int )
 majorChord =
     [ ( 2, 4 ), ( 4, 3 ) ]
 
+minorChord : List ( Int, Int)
+minorChord = [ ( 2, 3 ), ( 4, 4 )]
 
 computeByIntervals : Note -> List ( Int, Int ) -> List Note
 computeByIntervals n degreeNInterval =

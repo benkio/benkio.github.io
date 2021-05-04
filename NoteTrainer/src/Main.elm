@@ -3,8 +3,8 @@ port module Main exposing (..)
 import Browser exposing (element)
 import Filter exposing (Filter(..), noteGenerator)
 import Html exposing (Html, a, audio, button, div, h1, h4, input, label, li, option, p, select, source, span, text, ul)
-import Html.Attributes as A exposing (attribute, autoplay, class, controls, href, id, max, min, selected, src, step, style, type_, value)
-import Html.Events exposing (onClick, onInput)
+import Html.Attributes as A exposing (attribute, autoplay, class, controls, href, id, max, min, selected, src, step, style, type_, value, checked, name)
+import Html.Events exposing (onClick, onInput, onCheck)
 import Html.Events.Extra exposing (onChange)
 import Json.Encode as E exposing (Value, float, int, list, object)
 import List as L exposing (head, map)
@@ -20,9 +20,9 @@ port play : E.Value -> Cmd msg
 
 
 toMusic : Model -> E.Value
-toMusic { note, bpm, volume, oscillatorWave } =
+toMusic { notes, bpm, volume, oscillatorWave } =
     E.object
-        [ ( "frequencies", E.float note.frequency )
+        [ ( "frequencies", E.list (\x -> E.float x.frequency) notes )
         , ( "seconds", E.float (bpmToSec bpm) )
         , ( "volume", E.int volume )
         , ( "oscillatorwave", E.string (waveToString oscillatorWave) )
@@ -56,15 +56,17 @@ type alias Model =
     { bpm : Int
     , volume : Int
     , isPlaying : Bool
-    , note : Note
+    , notes : List Note
+    , outputType : OutputType
     , oscillatorWave : Wave
     , filter : Filter
     }
 
+type OutputType = Triad | Tetrad | Note
 
 init : () -> ( Model, Cmd msg )
 init _ =
-    ( { bpm = 50, volume = 20, isPlaying = False, note = a440, oscillatorWave = Sine, filter = ChromaticScale }, Cmd.none )
+    ( { bpm = 50, volume = 20, isPlaying = False, notes = [ a440 ], outputType = Note, oscillatorWave = Sine, filter = ChromaticScale }, Cmd.none )
 
 
 
@@ -76,6 +78,7 @@ type Msg
     | VolumeChanged Int
     | WaveChanged String
     | FilterChange Filter
+    | OutputChange OutputType
     | Start
     | NewNote Note
     | ChangeNote
@@ -97,6 +100,10 @@ update msg model =
         FilterChange filter ->
             ( { model | filter = filter }, Cmd.none )
 
+        OutputChange outputType ->
+            ( { model | outputType = outputType }, Cmd.none )
+
+
         Start ->
             ( { model | isPlaying = True }, Cmd.none )
 
@@ -109,7 +116,7 @@ update msg model =
         NewNote n ->
             let
                 newModel =
-                    { model | note = n }
+                    { model | notes = [n] }
             in
             ( newModel, play (toMusic newModel) )
 
@@ -138,7 +145,7 @@ view model =
         [ noteTrainerControls model
         , slider model.bpm
         , optionPanel model
-        , viewNote model.note
+        , viewNote <| (withDefault a440 << head) model.notes
         ]
 
 
@@ -278,6 +285,10 @@ panelBody model =
                 [ text "Chromatic Scale" ]
             , tonalityButtonGroup tonalityClass tonalityKey
             ]
+        ,div []
+            [label  [class "radio-inline"] [input [name "outputRadio", type_ "radio", onCheck (\v -> OutputChange Triad), checked (model.outputType == Triad)] [], span [style "color" "black"] [text " Triads"]]
+            , label [class "radio-inline"] [input [name "outputRadio", type_ "radio", onCheck (\v -> OutputChange Tetrad), checked (model.outputType == Tetrad)] [], span [style "color" "black"] [text " Tetrad"]]
+            , label [class "radio-inline"] [input [name "outputRadio", type_ "radio", onCheck (\v -> OutputChange Note), checked (model.outputType == Note)] [], span [style "color" "black"] [text " Note"]]]
         ]
 
 
