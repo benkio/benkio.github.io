@@ -9,7 +9,7 @@ import Html.Events.Extra exposing (onChange)
 import Json.Encode as E exposing (Value, float, int, list, object)
 import List as L exposing (head, map)
 import Maybe as M exposing (map, withDefault)
-import Music exposing (Note, a440, allNotes, note)
+import Music exposing (Music, a440, allNotes, mkNote)
 import Random exposing (generate)
 import String exposing (append, contains, fromChar, fromInt, replace, toInt)
 import Time exposing (every)
@@ -56,7 +56,7 @@ type alias Model =
     { bpm : Int
     , volume : Int
     , isPlaying : Bool
-    , notes : List Note
+    , music : Music
     , outputType : OutputType
     , oscillatorWave : Wave
     , filter : Filter

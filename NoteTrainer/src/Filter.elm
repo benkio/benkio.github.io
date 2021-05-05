@@ -5,7 +5,7 @@ import List as L exposing (append, drop, filter, foldl, head, indexedMap, map, m
 import List.Extra exposing (dropWhile, dropWhileRight, find, scanl, unique, uniqueBy)
 import Maybe exposing (withDefault)
 import Maybe.Extra exposing (isJust, orElse)
-import Music exposing (Note, a440, allNames, allNotes, noteToString, scaleToIntervals, majorScale, triadChords, majorChord, chordToIntervals)
+import Music exposing (Note, Music(..), a440, allNames, allNotes, noteToString, scaleToIntervals, majorScale, triadChords, majorChord, chordToIntervals, musicToNotes)
 import Random as R exposing (Generator, andThen, constant, weighted, map, int)
 import Random.List exposing (choose)
 import String exposing (left, length)
@@ -63,24 +63,27 @@ computeByIntervals n degreeNInterval =
         )
         targetNotes
 
-generator : Filter -> OutputType -> R.Generator (List Note)
+generator : Filter -> OutputType -> R.Generator Music
 generator filter outputType = case outputType of
                                   Triad -> triadGenerator filter
                                   Tetrad -> tetradGenerator filter
                                   SingleNote -> noteGenerator filter
 
 
-triadGenerator : Filter -> R.Generator (List Note)
+triadGenerator : Filter -> R.Generator Music
 triadGenerator filter =
     case filter of
         ChromaticScale -> let chordGenerator = choose triadChords |> R.map (\x -> withDefault majorChord (first x))
-                          in R.map2 (\note chord -> computeByIntervals (note |> head >> withDefault a440) (chordToIntervals chord)) chromaticNoteGenerator chordGenerator
+                          in R.map2 (\notes chord ->
+                                         let note = notes |> musicToNotes |> head >> withDefault a440
+                                             chordWithRoot = chord <| note
+                                         in computeByIntervals note (chordToIntervals chordWithRoot) |> chordWithRoot) chromaticNoteGenerator chordGenerator
         ByNoteTonality note -> Debug.todo "Implement the random generator for the triad chord by tonality"
 
-tetradGenerator : Filter -> R.Generator (List Note)
+tetradGenerator : Filter -> R.Generator Music
 tetradGenerator filter = Debug.todo "Implement the random generator for the tetrad chord"
 
-noteGenerator : Filter -> R.Generator (List Note)
+noteGenerator : Filter -> R.Generator Music
 noteGenerator filter =
     case filter of
         ChromaticScale ->
@@ -90,7 +93,7 @@ noteGenerator filter =
             computeByIntervals note (scaleToIntervals majorScale) |> byNoteTonalityGenerator
 
 
-byNoteTonalityGenerator : List Note -> R.Generator (List Note)
+byNoteTonalityGenerator : List Note -> R.Generator Music
 byNoteTonalityGenerator notes =
     R.andThen
         (\x ->
@@ -99,14 +102,14 @@ byNoteTonalityGenerator notes =
                     first x
             in
             if isJust maybeResult then
-                [withDefault a440 maybeResult] |> R.constant
+                withDefault a440 maybeResult |> Melody |> R.constant
 
             else
                 byNoteTonalityGenerator notes
         )
         (choose notes)
 
-chromaticNoteGenerator : R.Generator (List Note)
+chromaticNoteGenerator : R.Generator Music
 chromaticNoteGenerator =
     (weighted ( 10, a440 ) <|
         drop 1 <|
@@ -119,4 +122,4 @@ chromaticNoteGenerator =
                         ( 5, n )
                 )
                 allNotes)
-        |> R.map (\x -> [x])
+        |> R.map Melody

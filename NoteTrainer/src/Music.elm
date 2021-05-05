@@ -1,4 +1,4 @@
-module Music exposing (Note, a440, allNames, allNotes, augmentedChord, chordToIntervals, diminishedChord, majorChord, majorScale, minorChord, note, noteToString, scaleToIntervals, triadChords)
+module Music exposing (Music(..), Note, a440, allNames, allNotes, augmentedChord, chordToIntervals, diminishedChord, majorChord, majorScale, minorChord, mkNote, musicToNotes, noteToString, scaleToIntervals, triadChords)
 
 import List exposing (concat, map)
 import List.Extra exposing (unique)
@@ -14,10 +14,15 @@ type Scale
 
 
 type Chord
-    = MajorTriad { intervals : List ( Int, Int ) }
-    | MinorTriad { intervals : List ( Int, Int ) }
-    | AugmentedTriad { intervals : List ( Int, Int ) }
-    | DimishedTriad { intervals : List ( Int, Int ) }
+    = MajorTriad { intervals : List ( Int, Int ), rootNote : Note, notes : List Note }
+    | MinorTriad { intervals : List ( Int, Int ), rootNote : Note, notes : List Note }
+    | AugmentedTriad { intervals : List ( Int, Int ), rootNote : Note, notes : List Note }
+    | DimishedTriad { intervals : List ( Int, Int ), rootNote : Note, notes : List Note }
+
+
+type Music
+    = Melody Note
+    | Harmony Chord
 
 
 a440 : Note
@@ -30,27 +35,27 @@ majorScale =
     MajorScale { intervals = [ ( 1, 2 ), ( 2, 2 ), ( 3, 1 ), ( 4, 2 ), ( 5, 2 ), ( 6, 2 ) ] }
 
 
-majorChord : Chord
-majorChord =
-    MajorTriad { intervals = [ ( 2, 4 ), ( 4, 3 ) ] }
+majorChord : Note -> List Note -> Chord
+majorChord n ns =
+    MajorTriad { intervals = [ ( 2, 4 ), ( 4, 3 ) ], rootNote = n, notes = ns }
 
 
-minorChord : Chord
-minorChord =
-    MinorTriad { intervals = [ ( 2, 3 ), ( 4, 4 ) ] }
+minorChord : Note -> List Note -> Chord
+minorChord n ns =
+    MinorTriad { intervals = [ ( 2, 3 ), ( 4, 4 ) ], rootNote = n, notes = ns }
 
 
-diminishedChord : Chord
-diminishedChord =
-    DimishedTriad { intervals = [ ( 2, 3 ), ( 4, 3 ) ] }
+diminishedChord : Note -> List Note -> Chord
+diminishedChord n ns =
+    DimishedTriad { intervals = [ ( 2, 3 ), ( 4, 3 ) ], rootNote = n, notes = ns }
 
 
-augmentedChord : Chord
-augmentedChord =
-    AugmentedTriad { intervals = [ ( 2, 4 ), ( 4, 4 ) ] }
+augmentedChord : Note -> List Note -> Chord
+augmentedChord n ns =
+    AugmentedTriad { intervals = [ ( 2, 4 ), ( 4, 4 ) ], rootNote = n, notes = ns }
 
 
-triadChords : List Chord
+triadChords : List (Note -> List Note -> Chord)
 triadChords =
     [ majorChord
     , minorChord
@@ -82,8 +87,8 @@ chordToIntervals chord =
             intervals
 
 
-note : Int -> List Note
-note midiNumber =
+mkNote : Int -> List Note
+mkNote midiNumber =
     case clamp 69 80 midiNumber of
         69 ->
             [ a440 ]
@@ -138,18 +143,18 @@ note midiNumber =
 allNotes : List Note
 allNotes =
     concat
-        [ note 69
-        , note 70
-        , note 71
-        , note 72
-        , note 73
-        , note 74
-        , note 75
-        , note 76
-        , note 77
-        , note 78
-        , note 79
-        , note 80
+        [ mkNote 69
+        , mkNote 70
+        , mkNote 71
+        , mkNote 72
+        , mkNote 73
+        , mkNote 74
+        , mkNote 75
+        , mkNote 76
+        , mkNote 77
+        , mkNote 78
+        , mkNote 79
+        , mkNote 80
         ]
 
 
@@ -161,3 +166,45 @@ allNames =
 noteToString : Note -> String
 noteToString n =
     n.name ++ " - " ++ fromInt n.midiNumber ++ " - " ++ fromFloat n.frequency
+
+
+chordToString : Chord -> ( String, String )
+chordToString chord =
+    case chord of
+        MajorTriad { rootNote } ->
+            ( rootNote.name, "" )
+
+        MinorTriad { rootNote } ->
+            ( rootNote.name, "min" )
+
+        AugmentedTriad { rootNote } ->
+            ( rootNote.name, "aug" )
+
+        DimishedTriad { rootNote } ->
+            ( rootNote.name, "dim" )
+
+
+chordToNotes : Chord -> List Note
+chordToNotes chord =
+    case chord of
+        MajorTriad { notes } ->
+            notes
+
+        MinorTriad { notes } ->
+            notes
+
+        AugmentedTriad { notes } ->
+            notes
+
+        DimishedTriad { notes } ->
+            notes
+
+
+musicToNotes : Music -> List Note
+musicToNotes music =
+    case music of
+        Melody note ->
+            [ note ]
+
+        Harmony chord ->
+            chordToNotes chord
