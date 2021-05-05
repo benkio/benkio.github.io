@@ -1,4 +1,4 @@
-module Music exposing (Note, a440, allNames, allNotes, augmentedChord, diminishedChord, majorChord, majorScale, minorChord, note, noteToString, scaleToIntervals, chordToIntervals)
+module Music exposing (Note, a440, allNames, allNotes, augmentedChord, chordToIntervals, diminishedChord, majorChord, majorScale, minorChord, note, noteToString, scaleToIntervals, triadChords)
 
 import List exposing (concat, map)
 import List.Extra exposing (unique)
@@ -7,7 +7,6 @@ import String exposing (fromFloat, fromInt, left, length)
 
 type alias Note =
     { midiNumber : Int, frequency : Float, name : String }
-
 
 
 type Scale
@@ -49,6 +48,15 @@ diminishedChord =
 augmentedChord : Chord
 augmentedChord =
     AugmentedTriad { intervals = [ ( 2, 4 ), ( 4, 4 ) ] }
+
+
+triadChords : List Chord
+triadChords =
+    [ majorChord
+    , minorChord
+    , diminishedChord
+    , augmentedChord
+    ]
 
 
 scaleToIntervals : Scale -> List ( Int, Int )

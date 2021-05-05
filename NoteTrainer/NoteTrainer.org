@@ -55,29 +55,40 @@
       node: document.getElementById('NoteTrainer')
   });
 
-  var audioCtx = new (window.AudioContext || window.webkitAudioContext)
-  var volume = audioCtx.createGain();
-  volume.connect(audioCtx.destination);
+  var audioCtx;
+  var volume;
+  var volumeSlide;
 
-  var sin;
+  $(document).ready(function(){
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)
+      volume = audioCtx.createGain();
+      volumeSlide = document.getElementById("volumeSlider");
+
+      volume.connect(audioCtx.destination);
+      console.log(volumeSlide.value / 100);
+      volume.gain.value = volumeSlide.value / 10;
+  });
 
   app.ports.play.subscribe(function(music) {
       const audioCtxTime = audioCtx.currentTime;
-      const volumeSlide = document.getElementById("volumeSlider");
       const releaseTime = music.seconds * 0.2;
       const attackTime = music.seconds * 0.2;
-
-      sin = audioCtx.createOscillator();
-      sin.frequency.value = music.frequencies[0];
-      sin.type = music.oscillatorwave;
-      sin.connect(volume);
 
       volume.gain.linearRampToValueAtTime(volumeSlide.value / 100, audioCtxTime + attackTime);
       volume.gain.linearRampToValueAtTime(0, audioCtxTime + music.seconds - releaseTime);
 
-      sin.start(audioCtxTime);
-      sin.stop(audioCtxTime + music.seconds);
+      var synths = music.frequencies.map(frequency => {
+          var synth = audioCtx.createOscillator();
+          synth.frequency.value = frequency;
+          synth.type = music.oscillatorwave;
+          synth.connect(volume);
+          return synth;
+      });
 
+      synths.forEach((synth) => {
+          synth.start(audioCtxTime);
+          synth.stop(audioCtxTime + music.seconds);
+      });
   });
 #+end_src
 #+call: ../templates.org:inline-js("embedElm")

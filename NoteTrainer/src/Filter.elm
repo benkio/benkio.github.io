@@ -1,12 +1,12 @@
-module Filter exposing (..)--(Filter(..), noteGenerator)
+module Filter exposing (Filter(..), OutputType(..), generator)
 
 
-import List exposing (append, drop, filter, foldl, head, indexedMap, map, map2, member, tail)
+import List as L exposing (append, drop, filter, foldl, head, indexedMap, map, map2, member, tail)
 import List.Extra exposing (dropWhile, dropWhileRight, find, scanl, unique, uniqueBy)
 import Maybe exposing (withDefault)
 import Maybe.Extra exposing (isJust, orElse)
-import Music exposing (Note, a440, allNames, allNotes, noteToString, scaleToIntervals, majorScale)
-import Random as R exposing (Generator, andThen, constant, weighted, map)
+import Music exposing (Note, a440, allNames, allNotes, noteToString, scaleToIntervals, majorScale, triadChords, majorChord, chordToIntervals)
+import Random as R exposing (Generator, andThen, constant, weighted, map, int)
 import Random.List exposing (choose)
 import String exposing (left, length)
 import Tuple exposing (first, pair, second)
@@ -15,7 +15,7 @@ type Filter
     = ChromaticScale
     | ByNoteTonality Note
 
-type OutputType = Triad | Tetrad | Note
+type OutputType = Triad | Tetrad | SingleNote
 
 computeByIntervals : Note -> List ( Int, Int ) -> List Note
 computeByIntervals n degreeNInterval =
@@ -29,8 +29,8 @@ computeByIntervals n degreeNInterval =
                 |> unique
                 << dropWhile ((/=) (left 1 n.name))
                 |> indexedMap Tuple.pair
-                |> filter (\x -> member (first x) (0 :: map first degreeNInterval))
-                |> map second
+                |> filter (\x -> member (first x) (0 :: L.map first degreeNInterval))
+                |> L.map second
 
         midiNumbers =
             scanl
@@ -46,12 +46,12 @@ computeByIntervals n degreeNInterval =
                         x
                 )
                 n.midiNumber
-                (map second degreeNInterval)
+                (L.map second degreeNInterval)
 
         targetNotes =
             map2 pair noteNames midiNumbers
     in
-    map
+    L.map
         (\target ->
             find
                 (\x ->
@@ -67,11 +67,15 @@ generator : Filter -> OutputType -> R.Generator (List Note)
 generator filter outputType = case outputType of
                                   Triad -> triadGenerator filter
                                   Tetrad -> tetradGenerator filter
-                                  Note -> noteGenerator filter
+                                  SingleNote -> noteGenerator filter
 
 
 triadGenerator : Filter -> R.Generator (List Note)
-triadGenerator filter = Debug.todo "Implement the random generator for the triad chord"
+triadGenerator filter =
+    case filter of
+        ChromaticScale -> let chordGenerator = choose triadChords |> R.map (\x -> withDefault majorChord (first x))
+                          in R.map2 (\note chord -> computeByIntervals (note |> head >> withDefault a440) (chordToIntervals chord)) chromaticNoteGenerator chordGenerator
+        ByNoteTonality note -> Debug.todo "Implement the random generator for the triad chord by tonality"
 
 tetradGenerator : Filter -> R.Generator (List Note)
 tetradGenerator filter = Debug.todo "Implement the random generator for the tetrad chord"
@@ -95,13 +99,12 @@ byNoteTonalityGenerator notes =
                     first x
             in
             if isJust maybeResult then
-                withDefault a440 maybeResult |> R.map (\y -> [y])
+                [withDefault a440 maybeResult] |> R.constant
 
             else
                 byNoteTonalityGenerator notes
         )
         (choose notes)
-            |> R.map (\x -> [x])
 
 chromaticNoteGenerator : R.Generator (List Note)
 chromaticNoteGenerator =

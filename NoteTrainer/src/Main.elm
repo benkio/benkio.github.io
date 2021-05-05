@@ -1,7 +1,7 @@
 port module Main exposing (..)
 
 import Browser exposing (element)
-import Filter exposing (Filter(..), noteGenerator)
+import Filter exposing (Filter(..), OutputType(..), generator)
 import Html exposing (Html, a, audio, button, div, h1, h4, input, label, li, option, p, select, source, span, text, ul)
 import Html.Attributes as A exposing (attribute, autoplay, class, controls, href, id, max, min, selected, src, step, style, type_, value, checked, name)
 import Html.Events exposing (onClick, onInput, onCheck)
@@ -64,7 +64,7 @@ type alias Model =
 
 init : () -> ( Model, Cmd msg )
 init _ =
-    ( { bpm = 50, volume = 20, isPlaying = False, notes = [ a440 ], outputType = Note, oscillatorWave = Sine, filter = ChromaticScale }, Cmd.none )
+    ( { bpm = 50, volume = 20, isPlaying = False, notes = [ a440 ], outputType = SingleNote, oscillatorWave = Sine, filter = ChromaticScale }, Cmd.none )
 
 
 
@@ -78,7 +78,7 @@ type Msg
     | FilterChange Filter
     | OutputChange OutputType
     | Start
-    | NewNote Note
+    | NewNote (List Note)
     | ChangeNote
     | Stop
 
@@ -109,12 +109,12 @@ update msg model =
             ( { model | isPlaying = False }, Cmd.none )
 
         ChangeNote ->
-            ( model, generate NewNote (noteGenerator model.filter) )
+            ( model, generate NewNote (generator model.filter model.outputType) )
 
-        NewNote n ->
+        NewNote ns ->
             let
                 newModel =
-                    { model | notes = [n] }
+                    { model | notes = ns }
             in
             ( newModel, play (toMusic newModel) )
 
@@ -286,7 +286,7 @@ panelBody model =
         ,div []
             [label  [class "radio-inline"] [input [name "outputRadio", type_ "radio", onCheck (\v -> OutputChange Triad), checked (model.outputType == Triad)] [], span [style "color" "black"] [text " Triads"]]
             , label [class "radio-inline"] [input [name "outputRadio", type_ "radio", onCheck (\v -> OutputChange Tetrad), checked (model.outputType == Tetrad)] [], span [style "color" "black"] [text " Tetrad"]]
-            , label [class "radio-inline"] [input [name "outputRadio", type_ "radio", onCheck (\v -> OutputChange Note), checked (model.outputType == Note)] [], span [style "color" "black"] [text " Note"]]]
+            , label [class "radio-inline"] [input [name "outputRadio", type_ "radio", onCheck (\v -> OutputChange SingleNote), checked (model.outputType == SingleNote)] [], span [style "color" "black"] [text " Note"]]]
         ]
 
 

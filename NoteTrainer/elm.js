@@ -5228,8 +5228,8 @@ var $elm$core$Task$perform = F2(
 	});
 var $elm$browser$Browser$element = _Browser_element;
 var $author$project$Filter$ChromaticScale = {$: 'ChromaticScale'};
-var $author$project$Main$Note = {$: 'Note'};
 var $author$project$Wave$Sine = {$: 'Sine'};
+var $author$project$Filter$SingleNote = {$: 'SingleNote'};
 var $author$project$Music$a440 = {frequency: 440, midiNumber: 69, name: 'A'};
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
@@ -5242,7 +5242,7 @@ var $author$project$Main$init = function (_v0) {
 			notes: _List_fromArray(
 				[$author$project$Music$a440]),
 			oscillatorWave: $author$project$Wave$Sine,
-			outputType: $author$project$Main$Note,
+			outputType: $author$project$Filter$SingleNote,
 			volume: 20
 		},
 		$elm$core$Platform$Cmd$none);
@@ -6060,7 +6060,10 @@ var $author$project$Filter$byNoteTonalityGenerator = function (notes) {
 		function (x) {
 			var maybeResult = x.a;
 			return $elm_community$maybe_extra$Maybe$Extra$isJust(maybeResult) ? $elm$random$Random$constant(
-				A2($elm$core$Maybe$withDefault, $author$project$Music$a440, maybeResult)) : $author$project$Filter$byNoteTonalityGenerator(notes);
+				_List_fromArray(
+					[
+						A2($elm$core$Maybe$withDefault, $author$project$Music$a440, maybeResult)
+					])) : $author$project$Filter$byNoteTonalityGenerator(notes);
 		},
 		$elm_community$random_extra$Random$List$choose(notes));
 };
@@ -6222,17 +6225,23 @@ var $elm$random$Random$weighted = F2(
 			A2($elm$random$Random$float, 0, total));
 	});
 var $author$project$Filter$chromaticNoteGenerator = A2(
-	$elm$random$Random$weighted,
-	_Utils_Tuple2(10, $author$project$Music$a440),
+	$elm$random$Random$map,
+	function (x) {
+		return _List_fromArray(
+			[x]);
+	},
 	A2(
-		$elm$core$List$drop,
-		1,
+		$elm$random$Random$weighted,
+		_Utils_Tuple2(10, $author$project$Music$a440),
 		A2(
-			$elm$core$List$map,
-			function (n) {
-				return ($elm$core$String$length(n.name) === 1) ? _Utils_Tuple2(10, n) : _Utils_Tuple2(5, n);
-			},
-			$author$project$Music$allNotes)));
+			$elm$core$List$drop,
+			1,
+			A2(
+				$elm$core$List$map,
+				function (n) {
+					return ($elm$core$String$length(n.name) === 1) ? _Utils_Tuple2(10, n) : _Utils_Tuple2(5, n);
+				},
+				$author$project$Music$allNotes))));
 var $elm$core$Set$Set_elm_builtin = function (a) {
 	return {$: 'Set_elm_builtin', a: a};
 };
@@ -6498,24 +6507,174 @@ var $author$project$Filter$computeByIntervals = F2(
 			},
 			targetNotes);
 	});
-var $author$project$Filter$majorScaleIntervals = _List_fromArray(
-	[
-		_Utils_Tuple2(1, 2),
-		_Utils_Tuple2(2, 2),
-		_Utils_Tuple2(3, 1),
-		_Utils_Tuple2(4, 2),
-		_Utils_Tuple2(5, 2),
-		_Utils_Tuple2(6, 2)
-	]);
+var $author$project$Music$MajorScale = function (a) {
+	return {$: 'MajorScale', a: a};
+};
+var $author$project$Music$majorScale = $author$project$Music$MajorScale(
+	{
+		intervals: _List_fromArray(
+			[
+				_Utils_Tuple2(1, 2),
+				_Utils_Tuple2(2, 2),
+				_Utils_Tuple2(3, 1),
+				_Utils_Tuple2(4, 2),
+				_Utils_Tuple2(5, 2),
+				_Utils_Tuple2(6, 2)
+			])
+	});
+var $author$project$Music$scaleToIntervals = function (scale) {
+	var intervals = scale.a.intervals;
+	return intervals;
+};
 var $author$project$Filter$noteGenerator = function (filter) {
 	if (filter.$ === 'ChromaticScale') {
 		return $author$project$Filter$chromaticNoteGenerator;
 	} else {
 		var note = filter.a;
 		return $author$project$Filter$byNoteTonalityGenerator(
-			A2($author$project$Filter$computeByIntervals, note, $author$project$Filter$majorScaleIntervals));
+			A2(
+				$author$project$Filter$computeByIntervals,
+				note,
+				$author$project$Music$scaleToIntervals($author$project$Music$majorScale)));
 	}
 };
+var $elm$core$Debug$todo = _Debug_todo;
+var $author$project$Filter$tetradGenerator = function (filter) {
+	return _Debug_todo(
+		'Filter',
+		{
+			start: {line: 81, column: 26},
+			end: {line: 81, column: 36}
+		})('Implement the random generator for the tetrad chord');
+};
+var $author$project$Music$chordToIntervals = function (chord) {
+	switch (chord.$) {
+		case 'MajorTriad':
+			var intervals = chord.a.intervals;
+			return intervals;
+		case 'MinorTriad':
+			var intervals = chord.a.intervals;
+			return intervals;
+		case 'AugmentedTriad':
+			var intervals = chord.a.intervals;
+			return intervals;
+		default:
+			var intervals = chord.a.intervals;
+			return intervals;
+	}
+};
+var $elm$core$Basics$composeR = F3(
+	function (f, g, x) {
+		return g(
+			f(x));
+	});
+var $author$project$Music$MajorTriad = function (a) {
+	return {$: 'MajorTriad', a: a};
+};
+var $author$project$Music$majorChord = $author$project$Music$MajorTriad(
+	{
+		intervals: _List_fromArray(
+			[
+				_Utils_Tuple2(2, 4),
+				_Utils_Tuple2(4, 3)
+			])
+	});
+var $elm$random$Random$map2 = F3(
+	function (func, _v0, _v1) {
+		var genA = _v0.a;
+		var genB = _v1.a;
+		return $elm$random$Random$Generator(
+			function (seed0) {
+				var _v2 = genA(seed0);
+				var a = _v2.a;
+				var seed1 = _v2.b;
+				var _v3 = genB(seed1);
+				var b = _v3.a;
+				var seed2 = _v3.b;
+				return _Utils_Tuple2(
+					A2(func, a, b),
+					seed2);
+			});
+	});
+var $author$project$Music$AugmentedTriad = function (a) {
+	return {$: 'AugmentedTriad', a: a};
+};
+var $author$project$Music$augmentedChord = $author$project$Music$AugmentedTriad(
+	{
+		intervals: _List_fromArray(
+			[
+				_Utils_Tuple2(2, 4),
+				_Utils_Tuple2(4, 4)
+			])
+	});
+var $author$project$Music$DimishedTriad = function (a) {
+	return {$: 'DimishedTriad', a: a};
+};
+var $author$project$Music$diminishedChord = $author$project$Music$DimishedTriad(
+	{
+		intervals: _List_fromArray(
+			[
+				_Utils_Tuple2(2, 3),
+				_Utils_Tuple2(4, 3)
+			])
+	});
+var $author$project$Music$MinorTriad = function (a) {
+	return {$: 'MinorTriad', a: a};
+};
+var $author$project$Music$minorChord = $author$project$Music$MinorTriad(
+	{
+		intervals: _List_fromArray(
+			[
+				_Utils_Tuple2(2, 3),
+				_Utils_Tuple2(4, 4)
+			])
+	});
+var $author$project$Music$triadChords = _List_fromArray(
+	[$author$project$Music$majorChord, $author$project$Music$minorChord, $author$project$Music$diminishedChord, $author$project$Music$augmentedChord]);
+var $author$project$Filter$triadGenerator = function (filter) {
+	if (filter.$ === 'ChromaticScale') {
+		var chordGenerator = A2(
+			$elm$random$Random$map,
+			function (x) {
+				return A2($elm$core$Maybe$withDefault, $author$project$Music$majorChord, x.a);
+			},
+			$elm_community$random_extra$Random$List$choose($author$project$Music$triadChords));
+		return A3(
+			$elm$random$Random$map2,
+			F2(
+				function (note, chord) {
+					return A2(
+						$author$project$Filter$computeByIntervals,
+						A3(
+							$elm$core$Basics$composeR,
+							$elm$core$List$head,
+							$elm$core$Maybe$withDefault($author$project$Music$a440),
+							note),
+						$author$project$Music$chordToIntervals(chord));
+				}),
+			$author$project$Filter$chromaticNoteGenerator,
+			chordGenerator);
+	} else {
+		var note = filter.a;
+		return _Debug_todo(
+			'Filter',
+			{
+				start: {line: 78, column: 32},
+				end: {line: 78, column: 42}
+			})('Implement the random generator for the triad chord by tonality');
+	}
+};
+var $author$project$Filter$generator = F2(
+	function (filter, outputType) {
+		switch (outputType.$) {
+			case 'Triad':
+				return $author$project$Filter$triadGenerator(filter);
+			case 'Tetrad':
+				return $author$project$Filter$tetradGenerator(filter);
+			default:
+				return $author$project$Filter$noteGenerator(filter);
+		}
+	});
 var $author$project$Main$play = _Platform_outgoingPort('play', $elm$core$Basics$identity);
 var $author$project$Main$bpmToSec = function (bpm) {
 	return 60 / bpm;
@@ -6664,15 +6823,12 @@ var $author$project$Main$update = F2(
 					A2(
 						$elm$random$Random$generate,
 						$author$project$Main$NewNote,
-						$author$project$Filter$noteGenerator(model.filter)));
+						A2($author$project$Filter$generator, model.filter, model.outputType)));
 			default:
-				var n = msg.a;
+				var ns = msg.a;
 				var newModel = _Utils_update(
 					model,
-					{
-						notes: _List_fromArray(
-							[n])
-					});
+					{notes: ns});
 				return _Utils_Tuple2(
 					newModel,
 					$author$project$Main$play(
@@ -6691,11 +6847,6 @@ var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id'
 var $author$project$Main$VolumeChanged = function (a) {
 	return {$: 'VolumeChanged', a: a};
 };
-var $elm$core$Basics$composeR = F3(
-	function (f, g, x) {
-		return g(
-			f(x));
-	});
 var $elm$html$Html$input = _VirtualDom_node('input');
 var $elm$html$Html$Attributes$max = $elm$html$Html$Attributes$stringProperty('max');
 var $elm$html$Html$Attributes$min = $elm$html$Html$Attributes$stringProperty('min');
@@ -6906,8 +7057,8 @@ var $author$project$Main$FilterChange = function (a) {
 var $author$project$Main$OutputChange = function (a) {
 	return {$: 'OutputChange', a: a};
 };
-var $author$project$Main$Tetrad = {$: 'Tetrad'};
-var $author$project$Main$Triad = {$: 'Triad'};
+var $author$project$Filter$Tetrad = {$: 'Tetrad'};
+var $author$project$Filter$Triad = {$: 'Triad'};
 var $author$project$Main$WaveChanged = function (a) {
 	return {$: 'WaveChanged', a: a};
 };
@@ -7199,10 +7350,10 @@ var $author$project$Main$panelBody = function (model) {
 										$elm$html$Html$Attributes$type_('radio'),
 										$elm$html$Html$Events$onCheck(
 										function (v) {
-											return $author$project$Main$OutputChange($author$project$Main$Triad);
+											return $author$project$Main$OutputChange($author$project$Filter$Triad);
 										}),
 										$elm$html$Html$Attributes$checked(
-										_Utils_eq(model.outputType, $author$project$Main$Triad))
+										_Utils_eq(model.outputType, $author$project$Filter$Triad))
 									]),
 								_List_Nil),
 								A2(
@@ -7232,10 +7383,10 @@ var $author$project$Main$panelBody = function (model) {
 										$elm$html$Html$Attributes$type_('radio'),
 										$elm$html$Html$Events$onCheck(
 										function (v) {
-											return $author$project$Main$OutputChange($author$project$Main$Tetrad);
+											return $author$project$Main$OutputChange($author$project$Filter$Tetrad);
 										}),
 										$elm$html$Html$Attributes$checked(
-										_Utils_eq(model.outputType, $author$project$Main$Tetrad))
+										_Utils_eq(model.outputType, $author$project$Filter$Tetrad))
 									]),
 								_List_Nil),
 								A2(
@@ -7265,10 +7416,10 @@ var $author$project$Main$panelBody = function (model) {
 										$elm$html$Html$Attributes$type_('radio'),
 										$elm$html$Html$Events$onCheck(
 										function (v) {
-											return $author$project$Main$OutputChange($author$project$Main$Note);
+											return $author$project$Main$OutputChange($author$project$Filter$SingleNote);
 										}),
 										$elm$html$Html$Attributes$checked(
-										_Utils_eq(model.outputType, $author$project$Main$Note))
+										_Utils_eq(model.outputType, $author$project$Filter$SingleNote))
 									]),
 								_List_Nil),
 								A2(
