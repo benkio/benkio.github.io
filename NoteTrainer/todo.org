@@ -15,10 +15,10 @@
 
   (radiobutton)
 *** DONE NEXT STREAM onClick + business logic
-** Output Menu Chords
+** DONE Output Menu Chords
   - Triad Chords (default)
   - Seventh Chords
-  - By Tonality
+  - Notes
 
   (radiobutton)
   dependent on [[*Chords][Chords]]
@@ -27,15 +27,24 @@
 ** Dynamic BPM
    not a fixed bpm, maybe within a range.
 * Chords
-** Implement Random Triad Chords
+** DONE Implement Random Triad Chords
    - maj
    - min
    - dim
    - aug
-** Implement Random Seventh Chords
+** DONE Implement Triad Chord By Tonality
+
+   - Implement note degree algorithm. Compare with root note
+   - Generate a note in the tonality
+   - Find the generated note degree
+   - Dictionary: Degree -> Chord
+   - Compute Chord internals & return
+
+** Implement Random Tetrad Chords
    - maj7
    - min7
    - half diminished
    - minMaj7
 
+** Implement Tetrad Chord By Tonality
 * Separate CSS

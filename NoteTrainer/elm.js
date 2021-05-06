@@ -6540,8 +6540,8 @@ var $author$project$Filter$tetradGenerator = function (filter) {
 	return _Debug_todo(
 		'Filter',
 		{
-			start: {line: 113, column: 5},
-			end: {line: 113, column: 15}
+			start: {line: 153, column: 5},
+			end: {line: 153, column: 15}
 		})('Implement the random generator for the tetrad chord');
 };
 var $author$project$Music$Harmony = function (a) {
@@ -6568,6 +6568,22 @@ var $elm$core$Basics$composeR = F3(
 		return g(
 			f(x));
 	});
+var $elm$core$Basics$ge = _Utils_ge;
+var $author$project$Filter$computeNoteDegree = F3(
+	function (rootNote, targetNote, degreeNInterval) {
+		var semitonesToTarget = (_Utils_cmp(targetNote.midiNumber, rootNote.midiNumber) > -1) ? (targetNote.midiNumber - rootNote.midiNumber) : (((targetNote.midiNumber - 68) + 80) - rootNote.midiNumber);
+		return A3(
+			$elm$core$List$foldl,
+			F2(
+				function (dis, taracc) {
+					return (!taracc.a) ? taracc : _Utils_Tuple2(taracc.a - dis.b, dis.a);
+				}),
+			_Utils_Tuple2(semitonesToTarget, 0),
+			A2(
+				$elm$core$List$cons,
+				_Utils_Tuple2(0, 0),
+				degreeNInterval)).b;
+	});
 var $author$project$Music$MajorTriad = function (a) {
 	return {$: 'MajorTriad', a: a};
 };
@@ -6584,6 +6600,61 @@ var $author$project$Music$majorChord = F2(
 				rootNote: n
 			});
 	});
+var $author$project$Music$DimishedTriad = function (a) {
+	return {$: 'DimishedTriad', a: a};
+};
+var $author$project$Music$diminishedChord = F2(
+	function (n, ns) {
+		return $author$project$Music$DimishedTriad(
+			{
+				intervals: _List_fromArray(
+					[
+						_Utils_Tuple2(2, 3),
+						_Utils_Tuple2(4, 3)
+					]),
+				notes: ns,
+				rootNote: n
+			});
+	});
+var $elm$core$Dict$fromList = function (assocs) {
+	return A3(
+		$elm$core$List$foldl,
+		F2(
+			function (_v0, dict) {
+				var key = _v0.a;
+				var value = _v0.b;
+				return A3($elm$core$Dict$insert, key, value, dict);
+			}),
+		$elm$core$Dict$empty,
+		assocs);
+};
+var $author$project$Music$MinorTriad = function (a) {
+	return {$: 'MinorTriad', a: a};
+};
+var $author$project$Music$minorChord = F2(
+	function (n, ns) {
+		return $author$project$Music$MinorTriad(
+			{
+				intervals: _List_fromArray(
+					[
+						_Utils_Tuple2(2, 3),
+						_Utils_Tuple2(4, 4)
+					]),
+				notes: ns,
+				rootNote: n
+			});
+	});
+var $author$project$Music$majorScaleHarmonization = $elm$core$Dict$fromList(
+	_List_fromArray(
+		[
+			_Utils_Tuple2(0, $author$project$Music$majorChord),
+			_Utils_Tuple2(1, $author$project$Music$minorChord),
+			_Utils_Tuple2(2, $author$project$Music$minorChord),
+			_Utils_Tuple2(3, $author$project$Music$majorChord),
+			_Utils_Tuple2(4, $author$project$Music$majorChord),
+			_Utils_Tuple2(5, $author$project$Music$minorChord),
+			_Utils_Tuple2(6, $author$project$Music$diminishedChord)
+		]));
 var $elm$random$Random$map2 = F3(
 	function (func, _v0, _v1) {
 		var genA = _v0.a;
@@ -6643,38 +6714,6 @@ var $author$project$Music$augmentedChord = F2(
 				rootNote: n
 			});
 	});
-var $author$project$Music$DimishedTriad = function (a) {
-	return {$: 'DimishedTriad', a: a};
-};
-var $author$project$Music$diminishedChord = F2(
-	function (n, ns) {
-		return $author$project$Music$DimishedTriad(
-			{
-				intervals: _List_fromArray(
-					[
-						_Utils_Tuple2(2, 3),
-						_Utils_Tuple2(4, 3)
-					]),
-				notes: ns,
-				rootNote: n
-			});
-	});
-var $author$project$Music$MinorTriad = function (a) {
-	return {$: 'MinorTriad', a: a};
-};
-var $author$project$Music$minorChord = F2(
-	function (n, ns) {
-		return $author$project$Music$MinorTriad(
-			{
-				intervals: _List_fromArray(
-					[
-						_Utils_Tuple2(2, 3),
-						_Utils_Tuple2(4, 4)
-					]),
-				notes: ns,
-				rootNote: n
-			});
-	});
 var $author$project$Music$triadChords = _List_fromArray(
 	[$author$project$Music$majorChord, $author$project$Music$minorChord, $author$project$Music$diminishedChord, $author$project$Music$augmentedChord]);
 var $author$project$Filter$triadGenerator = function (filter) {
@@ -6710,12 +6749,47 @@ var $author$project$Filter$triadGenerator = function (filter) {
 			chordGenerator);
 	} else {
 		var note = filter.a;
-		return _Debug_todo(
-			'Filter',
-			{
-				start: {line: 108, column: 13},
-				end: {line: 108, column: 23}
-			})('Implement the random generator for the triad chord by tonality');
+		return A2(
+			$elm$random$Random$map,
+			A2(
+				$elm$core$Basics$composeR,
+				$author$project$Music$musicToNotes,
+				A2(
+					$elm$core$Basics$composeR,
+					$elm$core$List$head,
+					A2(
+						$elm$core$Basics$composeR,
+						$elm$core$Maybe$withDefault($author$project$Music$a440),
+						function (n) {
+							return function (chordWithRoot) {
+								return $author$project$Music$Harmony(
+									chordWithRoot(
+										A2(
+											$author$project$Filter$computeByIntervals,
+											n,
+											$author$project$Music$chordToIntervals(
+												chordWithRoot(_List_Nil)))));
+							}(
+								function (c) {
+									return c(n);
+								}(
+									A2(
+										$elm$core$Maybe$withDefault,
+										$author$project$Music$majorChord,
+										A2(
+											$elm$core$Dict$get,
+											A3(
+												$author$project$Filter$computeNoteDegree,
+												note,
+												n,
+												$author$project$Music$scaleToIntervals($author$project$Music$majorScale)),
+											$author$project$Music$majorScaleHarmonization))));
+						}))),
+			$author$project$Filter$byNoteTonalityGenerator(
+				A2(
+					$author$project$Filter$computeByIntervals,
+					note,
+					$author$project$Music$scaleToIntervals($author$project$Music$majorScale))));
 	}
 };
 var $author$project$Filter$generator = F2(

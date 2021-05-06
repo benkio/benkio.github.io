@@ -1,10 +1,11 @@
 module Filter exposing (Filter(..), OutputType(..), generator)
 
+import Dict exposing (get)
 import List as L exposing (append, drop, filter, foldl, head, indexedMap, map, map2, member, tail)
 import List.Extra exposing (dropWhile, dropWhileRight, find, scanl, unique, uniqueBy)
 import Maybe exposing (withDefault)
 import Maybe.Extra exposing (isJust, orElse)
-import Music exposing (Music(..), Note, a440, allNames, allNotes, chordToIntervals, majorChord, majorScale, musicToNotes, noteToString, scaleToIntervals, triadChords)
+import Music exposing (..)
 import Random as R exposing (Generator, andThen, constant, int, map, weighted)
 import Random.List exposing (choose)
 import String exposing (left, length)
@@ -69,6 +70,33 @@ computeByIntervals n degreeNInterval =
         targetNotes
 
 
+computeNoteDegree : Note -> Note -> List ( Int, Int ) -> Int
+computeNoteDegree rootNote targetNote degreeNInterval =
+    let
+        semitonesToTarget =
+            if targetNote.midiNumber >= rootNote.midiNumber then
+                targetNote.midiNumber - rootNote.midiNumber
+
+            else
+                ((targetNote.midiNumber - 68) + 80) - rootNote.midiNumber
+    in
+    foldl
+        (\dis taracc ->
+            if first taracc == 0 then
+                taracc
+
+            else
+                ( first taracc - second dis, first dis )
+        )
+        ( semitonesToTarget, 0 )
+        (( 0, 0 ) :: degreeNInterval)
+        |> second
+
+
+
+-- Generator --------------------------------------------------------------
+
+
 generator : Filter -> OutputType -> R.Generator Music
 generator filter outputType =
     case outputType of
@@ -105,7 +133,19 @@ triadGenerator filter =
                 chordGenerator
 
         ByNoteTonality note ->
-            Debug.todo "Implement the random generator for the triad chord by tonality"
+            computeByIntervals note (scaleToIntervals majorScale)
+                |> byNoteTonalityGenerator
+                |> R.map
+                    (musicToNotes
+                        >> head
+                        >> withDefault a440
+                        >> (\n ->
+                                get (computeNoteDegree note n (scaleToIntervals majorScale)) majorScaleHarmonization
+                                    |> withDefault majorChord
+                                    |> (\c -> c n)
+                                    |> (\chordWithRoot -> computeByIntervals n ([] |> chordWithRoot |> chordToIntervals) |> chordWithRoot |> Harmony)
+                           )
+                    )
 
 
 tetradGenerator : Filter -> R.Generator Music

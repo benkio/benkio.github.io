@@ -1,9 +1,9 @@
-module Music exposing (Music(..), Note, a440, allNames, allNotes, augmentedChord, chordToIntervals, chordToString, diminishedChord, majorChord, majorScale, minorChord, mkNote, musicToNotes, noteToString, scaleToIntervals, triadChords)
+module Music exposing (..)
 
 import List exposing (concat, map)
 import List.Extra exposing (unique)
 import String exposing (fromFloat, fromInt, left, length)
-
+import Dict exposing (Dict, fromList)
 
 type alias Note =
     { midiNumber : Int, frequency : Float, name : String }
@@ -34,6 +34,16 @@ majorScale : Scale
 majorScale =
     MajorScale { intervals = [ ( 1, 2 ), ( 2, 2 ), ( 3, 1 ), ( 4, 2 ), ( 5, 2 ), ( 6, 2 ) ] }
 
+majorScaleHarmonization : Dict Int (Note -> List Note -> Chord)
+majorScaleHarmonization = fromList [
+                           (0, majorChord)
+                          , (1, minorChord)
+                          , (2, minorChord)
+                          , (3, majorChord)
+                          , (4, majorChord)
+                          , (5, minorChord)
+                          , (6, diminishedChord)
+                          ]
 
 majorChord : Note -> List Note -> Chord
 majorChord n ns =
