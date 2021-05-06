@@ -1,4 +1,4 @@
-module Music exposing (Music(..), Note, a440, allNames, allNotes, augmentedChord, chordToIntervals, diminishedChord, majorChord, majorScale, minorChord, mkNote, musicToNotes, noteToString, scaleToIntervals, triadChords)
+module Music exposing (Music(..), Note, a440, allNames, allNotes, augmentedChord, chordToIntervals, chordToString, diminishedChord, majorChord, majorScale, minorChord, mkNote, musicToNotes, noteToString, scaleToIntervals, triadChords)
 
 import List exposing (concat, map)
 import List.Extra exposing (unique)

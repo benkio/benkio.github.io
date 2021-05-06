@@ -3,16 +3,17 @@ port module Main exposing (..)
 import Browser exposing (element)
 import Filter exposing (Filter(..), OutputType(..), generator)
 import Html exposing (Html, a, audio, button, div, h1, h4, input, label, li, option, p, select, source, span, text, ul)
-import Html.Attributes as A exposing (attribute, autoplay, class, controls, href, id, max, min, selected, src, step, style, type_, value, checked, name)
-import Html.Events exposing (onClick, onInput, onCheck)
+import Html.Attributes as A exposing (attribute, autoplay, checked, class, controls, href, id, max, min, name, selected, src, step, style, type_, value)
+import Html.Events exposing (onCheck, onClick, onInput)
 import Html.Events.Extra exposing (onChange)
 import Json.Encode as E exposing (Value, float, int, list, object)
 import List as L exposing (head, map)
 import Maybe as M exposing (map, withDefault)
-import Music exposing (Music, a440, allNotes, mkNote)
+import Music exposing (Music(..), a440, allNotes, chordToString, mkNote, musicToNotes)
 import Random exposing (generate)
 import String exposing (append, contains, fromChar, fromInt, replace, toInt)
 import Time exposing (every)
+import Tuple exposing (first, second)
 import Wave exposing (Wave(..), toWave, waveToString)
 
 
@@ -20,9 +21,9 @@ port play : E.Value -> Cmd msg
 
 
 toMusic : Model -> E.Value
-toMusic { notes, bpm, volume, oscillatorWave } =
+toMusic { music, bpm, volume, oscillatorWave } =
     E.object
-        [ ( "frequencies", E.list (\x -> E.float x.frequency) notes )
+        [ ( "frequencies", E.list (\x -> E.float x.frequency) <| musicToNotes <| music )
         , ( "seconds", E.float (bpmToSec bpm) )
         , ( "volume", E.int volume )
         , ( "oscillatorwave", E.string (waveToString oscillatorWave) )
@@ -62,9 +63,10 @@ type alias Model =
     , filter : Filter
     }
 
+
 init : () -> ( Model, Cmd msg )
 init _ =
-    ( { bpm = 50, volume = 20, isPlaying = False, notes = [ a440 ], outputType = SingleNote, oscillatorWave = Sine, filter = ChromaticScale }, Cmd.none )
+    ( { bpm = 50, volume = 20, isPlaying = False, music = Melody a440, outputType = SingleNote, oscillatorWave = Sine, filter = ChromaticScale }, Cmd.none )
 
 
 
@@ -78,7 +80,7 @@ type Msg
     | FilterChange Filter
     | OutputChange OutputType
     | Start
-    | NewNote (List Note)
+    | NewMusic Music
     | ChangeNote
     | Stop
 
@@ -101,7 +103,6 @@ update msg model =
         OutputChange outputType ->
             ( { model | outputType = outputType }, Cmd.none )
 
-
         Start ->
             ( { model | isPlaying = True }, Cmd.none )
 
@@ -109,12 +110,12 @@ update msg model =
             ( { model | isPlaying = False }, Cmd.none )
 
         ChangeNote ->
-            ( model, generate NewNote (generator model.filter model.outputType) )
+            ( model, generate NewMusic (generator model.filter model.outputType) )
 
-        NewNote ns ->
+        NewMusic m ->
             let
                 newModel =
-                    { model | notes = ns }
+                    { model | music = m }
             in
             ( newModel, play (toMusic newModel) )
 
@@ -143,7 +144,7 @@ view model =
         [ noteTrainerControls model
         , slider model.bpm
         , optionPanel model
-        , viewNote <| (withDefault a440 << head) model.notes
+        , viewMusic model.music
         ]
 
 
@@ -217,14 +218,32 @@ slider bpm =
         ]
 
 
-viewNote : Note -> Html Msg
-viewNote n =
-    div
-        [ style "min-width" "300px"
-        , style "text-align" "center"
-        ]
-        [ p [ style "font-size" "13em" ] [ text n.name ]
-        ]
+viewMusic : Music -> Html Msg
+viewMusic music =
+    case music of
+        Melody n ->
+            div
+                [ style "min-width" "300px"
+                , style "text-align" "center"
+                ]
+                [ p [ style "font-size" "13em" ] [ text n.name ]
+                ]
+
+        Harmony h ->
+            let
+                chordString =
+                    chordToString h
+            in
+            div
+                [ style "min-width" "300px"
+                , style "display" "flex"
+                , style "flex-direction" "row"
+                , style "justify-content" "center"
+                , style "align-items" "center"
+                ]
+                [ p [ style "font-size" "13em" ] [ text (first chordString) ]
+                , p [ style "font-size" "5em" ] [ text (second chordString) ]
+                ]
 
 
 optionPanel : Model -> Html Msg
@@ -283,10 +302,11 @@ panelBody model =
                 [ text "Chromatic Scale" ]
             , tonalityButtonGroup tonalityClass tonalityKey
             ]
-        ,div []
-            [label  [class "radio-inline"] [input [name "outputRadio", type_ "radio", onCheck (\v -> OutputChange Triad), checked (model.outputType == Triad)] [], span [style "color" "black"] [text " Triads"]]
-            , label [class "radio-inline"] [input [name "outputRadio", type_ "radio", onCheck (\v -> OutputChange Tetrad), checked (model.outputType == Tetrad)] [], span [style "color" "black"] [text " Tetrad"]]
-            , label [class "radio-inline"] [input [name "outputRadio", type_ "radio", onCheck (\v -> OutputChange SingleNote), checked (model.outputType == SingleNote)] [], span [style "color" "black"] [text " Note"]]]
+        , div []
+            [ label [ class "radio-inline" ] [ input [ name "outputRadio", type_ "radio", onCheck (\v -> OutputChange Triad), checked (model.outputType == Triad) ] [], span [ style "color" "black" ] [ text " Triads" ] ]
+            , label [ class "radio-inline" ] [ input [ name "outputRadio", type_ "radio", onCheck (\v -> OutputChange Tetrad), checked (model.outputType == Tetrad) ] [], span [ style "color" "black" ] [ text " Tetrad" ] ]
+            , label [ class "radio-inline" ] [ input [ name "outputRadio", type_ "radio", onCheck (\v -> OutputChange SingleNote), checked (model.outputType == SingleNote) ] [], span [ style "color" "black" ] [ text " Note" ] ]
+            ]
         ]
 
 

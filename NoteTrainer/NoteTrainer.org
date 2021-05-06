@@ -66,7 +66,7 @@
 
       volume.connect(audioCtx.destination);
       console.log(volumeSlide.value / 100);
-      volume.gain.value = volumeSlide.value / 10;
+      volume.gain.value = volumeSlide.value / 100;
   });
 
   app.ports.play.subscribe(function(music) {
