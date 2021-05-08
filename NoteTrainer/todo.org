@@ -1,63 +1,70 @@
-* DONE MP3 -> WebAudio API
-** DONE Hello world in WebAudio API
-   Just a button that plays something.
-** DONE Refactoring of Notes to reflect the Webaudio API
-   - Note as Int
-   - Duration
-   - etc
-* Output Menu
-** DONE Syth Wave
-   https://developer.mozilla.org/en-US/docs/Web/API/OscillatorNode/type
-** DONE Note Choice
-  User can choose what will be the output of the trainer:
-  - Chromatic Scale (default)
-  - By Tonality
+* Features
+** Output Menu
+*** DONE Syth Wave
+    https://developer.mozilla.org/en-US/docs/Web/API/OscillatorNode/type
+*** DONE Note Choice
+   User can choose what will be the output of the trainer:
+   - Chromatic Scale (default)
+   - By Tonality
 
-  (radiobutton)
-*** DONE NEXT STREAM onClick + business logic
-** DONE Output Menu Chords
-  - Triad Chords (default)
-  - Seventh Chords
-  - Notes
+   (radiobutton)
+**** DONE NEXT STREAM onClick + business logic
+*** DONE Output Menu Chords
+   - Triad Chords (default)
+   - Seventh Chords
+   - Notes
 
-  (radiobutton)
-  dependent on [[*Chords][Chords]]
-** Super Random
-   Random on everything, chords or note, no tonality.
-** Dynamic BPM
-   not a fixed bpm, maybe within a range.
-* Chords
-** DONE Implement Random Triad Chords
-   - maj
-   - min
-   - dim
-   - aug
-** DONE Implement Triad Chord By Tonality
+   (radiobutton)
+   dependent on [[*Chords][Chords]]
+*** Super Random
+    Random on everything, chords or note, no tonality.
+*** Dynamic BPM
+    not a fixed bpm, maybe within a range.
+** Chords
+*** DONE Implement Random Triad Chords
+    - maj
+    - min
+    - dim
+    - aug
+*** DONE Implement Triad Chord By Tonality
 
-   - Implement note degree algorithm. Compare with root note
-   - Generate a note in the tonality
-   - Find the generated note degree
-   - Dictionary: Degree -> Chord
-   - Compute Chord internals & return
+    - Implement note degree algorithm. Compare with root note
+    - Generate a note in the tonality
+    - Find the generated note degree
+    - Dictionary: Degree -> Chord
+    - Compute Chord internals & return
 
-** Implement Random Tetrad Chords
-   - maj7
-   - min7
-   - half diminished
-   - minMaj7
+*** Implement Random Tetrad Chords
+    - maj7
+    - min7
+    - half diminished
+    - minMaj7
 
-** Implement Tetrad Chord By Tonality
-* Separate CSS
-* Ear Training
+*** Implement Tetrad Chord By Tonality
+** Ear Training
 
-  Instead of playing notes/chords by BPM, you play them only once, but
-  the note/chord are hidden. You can reveal the actual note/chord by a
-  specific checkbox. The user can try to guess the note/chord by
-  ear.
+   Instead of playing notes/chords by BPM, you play them only once, but
+   the note/chord are hidden. You can reveal the actual note/chord by a
+   specific checkbox. The user can try to guess the note/chord by
+   ear.
 
-  (optional) With an input where the user insert the answer and a
-  banner for success or failure
+   (optional) With an input where the user insert the answer and a
+   banner for success or failure
 
-  Consider implementing the thing in a different page for
-  clarity. Then, you might need a dropdown into the navbar, called
-  "Music Tools", where you list the /Note Trainer/ and the /Ear Trainer/.
+   Consider implementing the thing in a different page for
+   clarity. Then, you might need a dropdown into the navbar, called
+   "Music Tools", where you list the /Note Trainer/ and the /Ear Trainer/.
+
+* Tech Tasks
+** DONE MP3 -> WebAudio API
+*** DONE Hello world in WebAudio API
+    Just a button that plays something.
+*** DONE Refactoring of Notes to reflect the Webaudio API
+    - Note as Int
+    - Duration
+    - etc
+** Separate CSS
+** View Component in a Separate Module
+
+   Move the view component in a separate module so you can eventually
+   import them in multiple pages.
