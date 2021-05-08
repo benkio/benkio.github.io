@@ -55,6 +55,14 @@
    clarity. Then, you might need a dropdown into the navbar, called
    "Music Tools", where you list the /Note Trainer/ and the /Ear Trainer/.
 
+*** Intervals
+
+    Play 2 notes and let the user guess the right interval.
+
+    (optional) let the user decide the starting note of the random
+    internal. This might mean that you need to add more notes to cover
+    2 octaves and rework the current algorithms.
+
 * Tech Tasks
 ** DONE MP3 -> WebAudio API
 *** DONE Hello world in WebAudio API
@@ -68,3 +76,4 @@
 
    Move the view component in a separate module so you can eventually
    import them in multiple pages.
+** Add Tests
