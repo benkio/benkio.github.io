@@ -6549,13 +6549,34 @@ var $author$project$Music$Harmony = function (a) {
 };
 var $author$project$Music$chordToIntervals = function (chord) {
 	switch (chord.$) {
-		case 'MajorTriad':
+		case 'Major':
 			var intervals = chord.a.intervals;
 			return intervals;
-		case 'MinorTriad':
+		case 'MajorSeven':
 			var intervals = chord.a.intervals;
 			return intervals;
-		case 'AugmentedTriad':
+		case 'MajorMinorSeven':
+			var intervals = chord.a.intervals;
+			return intervals;
+		case 'Minor':
+			var intervals = chord.a.intervals;
+			return intervals;
+		case 'MinorSeven':
+			var intervals = chord.a.intervals;
+			return intervals;
+		case 'MinorMajorSeven':
+			var intervals = chord.a.intervals;
+			return intervals;
+		case 'Augmented':
+			var intervals = chord.a.intervals;
+			return intervals;
+		case 'AugmentedSeven':
+			var intervals = chord.a.intervals;
+			return intervals;
+		case 'Dimished':
+			var intervals = chord.a.intervals;
+			return intervals;
+		case 'DimishedSeven':
 			var intervals = chord.a.intervals;
 			return intervals;
 		default:
@@ -6584,12 +6605,12 @@ var $author$project$Filter$computeNoteDegree = F3(
 				_Utils_Tuple2(0, 0),
 				degreeNInterval)).b;
 	});
-var $author$project$Music$MajorTriad = function (a) {
-	return {$: 'MajorTriad', a: a};
+var $author$project$Music$Major = function (a) {
+	return {$: 'Major', a: a};
 };
 var $author$project$Music$majorChord = F2(
 	function (n, ns) {
-		return $author$project$Music$MajorTriad(
+		return $author$project$Music$Major(
 			{
 				intervals: _List_fromArray(
 					[
@@ -6600,12 +6621,12 @@ var $author$project$Music$majorChord = F2(
 				rootNote: n
 			});
 	});
-var $author$project$Music$DimishedTriad = function (a) {
-	return {$: 'DimishedTriad', a: a};
+var $author$project$Music$Dimished = function (a) {
+	return {$: 'Dimished', a: a};
 };
 var $author$project$Music$diminishedChord = F2(
 	function (n, ns) {
-		return $author$project$Music$DimishedTriad(
+		return $author$project$Music$Dimished(
 			{
 				intervals: _List_fromArray(
 					[
@@ -6628,12 +6649,12 @@ var $elm$core$Dict$fromList = function (assocs) {
 		$elm$core$Dict$empty,
 		assocs);
 };
-var $author$project$Music$MinorTriad = function (a) {
-	return {$: 'MinorTriad', a: a};
+var $author$project$Music$Minor = function (a) {
+	return {$: 'Minor', a: a};
 };
 var $author$project$Music$minorChord = F2(
 	function (n, ns) {
-		return $author$project$Music$MinorTriad(
+		return $author$project$Music$Minor(
 			{
 				intervals: _List_fromArray(
 					[
@@ -6674,13 +6695,34 @@ var $elm$random$Random$map2 = F3(
 	});
 var $author$project$Music$chordToNotes = function (chord) {
 	switch (chord.$) {
-		case 'MajorTriad':
+		case 'Major':
 			var notes = chord.a.notes;
 			return notes;
-		case 'MinorTriad':
+		case 'MajorSeven':
 			var notes = chord.a.notes;
 			return notes;
-		case 'AugmentedTriad':
+		case 'MajorMinorSeven':
+			var notes = chord.a.notes;
+			return notes;
+		case 'Minor':
+			var notes = chord.a.notes;
+			return notes;
+		case 'MinorSeven':
+			var notes = chord.a.notes;
+			return notes;
+		case 'MinorMajorSeven':
+			var notes = chord.a.notes;
+			return notes;
+		case 'Augmented':
+			var notes = chord.a.notes;
+			return notes;
+		case 'AugmentedSeven':
+			var notes = chord.a.notes;
+			return notes;
+		case 'Dimished':
+			var notes = chord.a.notes;
+			return notes;
+		case 'DimishedSeven':
 			var notes = chord.a.notes;
 			return notes;
 		default:
@@ -6698,12 +6740,12 @@ var $author$project$Music$musicToNotes = function (music) {
 		return $author$project$Music$chordToNotes(chord);
 	}
 };
-var $author$project$Music$AugmentedTriad = function (a) {
-	return {$: 'AugmentedTriad', a: a};
+var $author$project$Music$Augmented = function (a) {
+	return {$: 'Augmented', a: a};
 };
 var $author$project$Music$augmentedChord = F2(
 	function (n, ns) {
-		return $author$project$Music$AugmentedTriad(
+		return $author$project$Music$Augmented(
 			{
 				intervals: _List_fromArray(
 					[
@@ -7671,18 +7713,39 @@ var $author$project$Main$slider = function (bpm) {
 };
 var $author$project$Music$chordToString = function (chord) {
 	switch (chord.$) {
-		case 'MajorTriad':
+		case 'Major':
 			var rootNote = chord.a.rootNote;
 			return _Utils_Tuple2(rootNote.name, '');
-		case 'MinorTriad':
+		case 'MajorSeven':
+			var rootNote = chord.a.rootNote;
+			return _Utils_Tuple2(rootNote.name, 'M7');
+		case 'MajorMinorSeven':
+			var rootNote = chord.a.rootNote;
+			return _Utils_Tuple2(rootNote.name, '7');
+		case 'Minor':
 			var rootNote = chord.a.rootNote;
 			return _Utils_Tuple2(rootNote.name, 'min');
-		case 'AugmentedTriad':
+		case 'MinorSeven':
 			var rootNote = chord.a.rootNote;
-			return _Utils_Tuple2(rootNote.name, 'aug');
-		default:
+			return _Utils_Tuple2(rootNote.name, 'm7');
+		case 'MinorMajorSeven':
+			var rootNote = chord.a.rootNote;
+			return _Utils_Tuple2(rootNote.name, 'mΔ7');
+		case 'Augmented':
+			var rootNote = chord.a.rootNote;
+			return _Utils_Tuple2(rootNote.name, '#5');
+		case 'AugmentedSeven':
+			var rootNote = chord.a.rootNote;
+			return _Utils_Tuple2(rootNote.name, 'M7#5');
+		case 'Dimished':
 			var rootNote = chord.a.rootNote;
 			return _Utils_Tuple2(rootNote.name, 'dim');
+		case 'DimishedSeven':
+			var rootNote = chord.a.rootNote;
+			return _Utils_Tuple2(rootNote.name, 'o7');
+		default:
+			var rootNote = chord.a.rootNote;
+			return _Utils_Tuple2(rootNote.name, 'm7b5');
 	}
 };
 var $author$project$Main$viewMusic = function (music) {
