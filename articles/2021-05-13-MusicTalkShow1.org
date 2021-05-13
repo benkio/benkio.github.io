@@ -19,7 +19,7 @@
   :HTML_CONTAINER_CLASS: text-center navbar navbar-inverse navbar-fixed-top
   :CUSTOM_ID: navbar
   :END:
-#+INCLUDE: "../Fragments/BlogNavbarFragment.html" export html
+  #+INCLUDE: "../Fragments/BlogNavbarFragment.html" export html
 
 * [ITA] - Music Talk Show 1
   :PROPERTIES:
@@ -27,28 +27,28 @@
   :END:
   *Created: <2021-05-13 Thu>*
 ** Abstract
-  :PROPERTIES:
-  :CUSTOM_ID: ArticleAbstract
-  :END:
+   :PROPERTIES:
+   :CUSTOM_ID: ArticleAbstract
+   :END:
 
-  Prima live riguardante i fondamenti della musica o più semplicemente
-  si esplorano concetti di musica, cencando di imparare qualcosa nel
-  processo. Si possono recuperare i concetti andando a rivedere la
-  live con i dovuti timestamps. In ogni sezione, collezionerò i vari
-  link trattati nella live, eg. wikipedia.
+   Prima live riguardante i fondamenti della musica o più semplicemente
+   si esplorano concetti di musica, cencando di imparare qualcosa nel
+   processo. Si possono recuperare i concetti andando a rivedere la
+   live con i dovuti timestamps. In ogni sezione, collezionerò i vari
+   link trattati nella live, eg. wikipedia.
 
-  Il tutto viene fatto live su Twitch. Di seguito gli argomenti
-  trattati:
-  - Introduzione
-  - Il Suono
-  - Teoria Musicale
-  - Note: A440, sistema temperato
-  - Intervalli
+   Il tutto viene fatto live su Twitch. Di seguito gli argomenti
+   trattati:
+   - Introduzione 0:07:00
+   - Il Suono 0:10:57
+   - Teoria Musicale 0:36:59
+   - Note: A440, sistema temperato 0:56:36
+   - Intervalli Parte 1 1:25:05
 
-** Content
-  :PROPERTIES:
-  :CUSTOM_ID: ArticleContent
-  :END:
+** Talk Links
+   :PROPERTIES:
+   :CUSTOM_ID: ArticleContent
+   :END:
 
 *** Introduzione
     :PROPERTIES:
@@ -56,24 +56,46 @@
     :END:
 
 *** Suono
-  :PROPERTIES:
-  :CUSTOM_ID: ArticleContentSound
-  :END:
+    :PROPERTIES:
+    :CUSTOM_ID: ArticleContentSound
+    :END:
+
+    + [[https://www.youtube.com/watch?v=TnsCsR2wDdk][What’s that ringing in your ears? - Marc Fagelson]]
+    + [[https://it.wikipedia.org/wiki/Suono][Suono - Wikipedia]]
+    + [[https://it.wikipedia.org/wiki/Volume_(acustica)][Volume - Wikipedia]]
+    + [[https://it.wikipedia.org/wiki/Frequenza][Frequenza - Wikipedia]]
 
 *** Teoria Musicale
     :PROPERTIES:
     :CUSTOM_ID: ArticleContentMusicTheory
     :END:
 
+    [[https://it.wikipedia.org/wiki/Teoria_musicale][Teoria Musicale - Wikipedia]]
+
 *** Note
     :PROPERTIES:
     :CUSTOM_ID: ArticleContentNote
     :END:
 
-*** Intervalli
-  :PROPERTIES:
-  :CUSTOM_ID: ArticleContentIntervals
-  :END:
+    + [[https://en.wikipedia.org/wiki/A440_(pitch_standard)][Pitch Standard - Wikipedia]]
+    + [[https://en.wikipedia.org/wiki/Elvis_Presley#Discography][Elvis Presley - Discografia - Wikipedia]]
+    + [[https://en.wikipedia.org/wiki/Second][Second - Wikipedia]]
+    + [[https://www.youtube.com/watch?v=MJumWa_K-8k][The History of Musical Pitch - Music History]]
+    + [[https://youtu.be/1Hqm0dYKUx4][Why It's Impossible to Tune a Piano]]
+    + [[https://en.wikipedia.org/wiki/Pitch_(music)][Pitch - Wikipedia]]
+    + [[https://en.wikipedia.org/wiki/Octave][Octave - Wikipedia]]
+    + [[https://en.wikipedia.org/wiki/Harmonic_series_(music)][Harmonic Series - Wikipedia]]
+
+*** Intervalli Parte 1
+    :PROPERTIES:
+    :CUSTOM_ID: ArticleContentIntervals
+    :END:
+
+    + [[https://en.wikipedia.org/wiki/Fundamental_frequency][Fundamental Frequency - Wikipedia]]
+    + [[https://en.wikipedia.org/wiki/Just_intonation][Just Intonation - Wikipedia]]
+    + [[https://en.wikipedia.org/wiki/Equal_temperament][Equal Temperament - Wikipedia]]
+    + [[https://www.youtube.com/watch?v=RuT6Y53LYH4][The Broken Scales Of Wendy Carlos]]
+    + [[https://www.dailymotion.com/video/x2j1gy2][Wendy Carlos – Beauty In The Beast]]
 
 ** Video
    :PROPERTIES:
@@ -82,32 +104,33 @@
 
    Link to the live
 
+
 * Share Buttons
   :PROPERTIES:
   :CUSTOM_ID: ShareButtons
   :END:
-#+BEGIN_EXPORT html
-<!-- AddToAny BEGIN -->
-<hr>
-<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
-<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
-<a class="a2a_button_facebook"></a>
-<a class="a2a_button_twitter"></a>
-<a class="a2a_button_whatsapp"></a>
-<a class="a2a_button_telegram"></a>
-<a class="a2a_button_linkedin"></a>
-<a class="a2a_button_email"></a>
-</div>
-<script async src="https://static.addtoany.com/menu/page.js"></script>
-<!-- AddToAny END -->
-#+END_EXPORT
+  #+BEGIN_EXPORT html
+  <!-- AddToAny BEGIN -->
+  <hr>
+  <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+  <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+  <a class="a2a_button_facebook"></a>
+  <a class="a2a_button_twitter"></a>
+  <a class="a2a_button_whatsapp"></a>
+  <a class="a2a_button_telegram"></a>
+  <a class="a2a_button_linkedin"></a>
+  <a class="a2a_button_email"></a>
+  </div>
+  <script async src="https://static.addtoany.com/menu/page.js"></script>
+  <!-- AddToAny END -->
+  #+END_EXPORT
 
-#+begin_export html
-<script type="text/javascript">
-$(function() {
-  $('#text-table-of-contents > ul li').first().css("display", "none");
-  $('#text-table-of-contents > ul li').last().css("display", "none");
-  $('#table-of-contents').addClass("visible-lg")
-});
-</script>
-#+end_export
+  #+begin_export html
+  <script type="text/javascript">
+  $(function() {
+    $('#text-table-of-contents > ul li').first().css("display", "none");
+    $('#text-table-of-contents > ul li').last().css("display", "none");
+    $('#table-of-contents').addClass("visible-lg")
+  });
+  </script>
+  #+end_export
