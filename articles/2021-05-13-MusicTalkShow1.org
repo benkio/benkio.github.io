@@ -1,0 +1,113 @@
+#+OPTIONS: num:nil toc:t H:4
+#+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:nil
+#+TITLE: [ITA] - Music Talk Show 1
+#+DESCRIPTION: [ITA] - Music Talk Show 1
+#+KEYWORDS: [ITA] - Music Talk Show 1
+#+CREATOR: Enrico Benini
+#+HTML_HEAD_EXTRA: <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA: <link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/main.css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/blog.css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/article.css">
+
+* Blog
+  :PROPERTIES:
+  :HTML_CONTAINER_CLASS: text-center navbar navbar-inverse navbar-fixed-top
+  :CUSTOM_ID: navbar
+  :END:
+#+INCLUDE: "../Fragments/BlogNavbarFragment.html" export html
+
+* [ITA] - Music Talk Show 1
+  :PROPERTIES:
+  :CUSTOM_ID: Article
+  :END:
+  *Created: <2021-05-13 Thu>*
+** Abstract
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleAbstract
+  :END:
+
+  Prima live riguardante i fondamenti della musica o più semplicemente
+  si esplorano concetti di musica, cencando di imparare qualcosa nel
+  processo. Si possono recuperare i concetti andando a rivedere la
+  live con i dovuti timestamps. In ogni sezione, collezionerò i vari
+  link trattati nella live, eg. wikipedia.
+
+  Il tutto viene fatto live su Twitch. Di seguito gli argomenti
+  trattati:
+  - Introduzione
+  - Il Suono
+  - Teoria Musicale
+  - Note: A440, sistema temperato
+  - Intervalli
+
+** Content
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleContent
+  :END:
+
+*** Introduzione
+    :PROPERTIES:
+    :CUSTOM_ID: ArticleContentIntroduction
+    :END:
+
+*** Suono
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleContentSound
+  :END:
+
+*** Teoria Musicale
+    :PROPERTIES:
+    :CUSTOM_ID: ArticleContentMusicTheory
+    :END:
+
+*** Note
+    :PROPERTIES:
+    :CUSTOM_ID: ArticleContentNote
+    :END:
+
+*** Intervalli
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleContentIntervals
+  :END:
+
+** Video
+   :PROPERTIES:
+   :CUSTOM_ID: ArticleVideo
+   :END:
+
+   Link to the live
+
+* Share Buttons
+  :PROPERTIES:
+  :CUSTOM_ID: ShareButtons
+  :END:
+#+BEGIN_EXPORT html
+<!-- AddToAny BEGIN -->
+<hr>
+<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+<a class="a2a_button_facebook"></a>
+<a class="a2a_button_twitter"></a>
+<a class="a2a_button_whatsapp"></a>
+<a class="a2a_button_telegram"></a>
+<a class="a2a_button_linkedin"></a>
+<a class="a2a_button_email"></a>
+</div>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+<!-- AddToAny END -->
+#+END_EXPORT
+
+#+begin_export html
+<script type="text/javascript">
+$(function() {
+  $('#text-table-of-contents > ul li').first().css("display", "none");
+  $('#text-table-of-contents > ul li').last().css("display", "none");
+  $('#table-of-contents').addClass("visible-lg")
+});
+</script>
+#+end_export
