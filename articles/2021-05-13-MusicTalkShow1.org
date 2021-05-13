@@ -102,7 +102,7 @@
    :CUSTOM_ID: ArticleVideo
    :END:
 
-   Link to the live
+   [[https://youtu.be/k4TKS5jY2XQ][Link to the live vod]]
 
 
 * Share Buttons
