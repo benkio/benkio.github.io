@@ -21,6 +21,7 @@
   :END:
   #+INCLUDE: "../Fragments/BlogNavbarFragment.html" export html
 
+
 * [ITA] - Music Talk Show 1
   :PROPERTIES:
   :CUSTOM_ID: Article
@@ -102,8 +103,14 @@
    :CUSTOM_ID: ArticleVideo
    :END:
 
-   [[https://youtu.be/k4TKS5jY2XQ][Link to the live vod]]
-
+#+begin_export html
+<figure>
+<div class="video-container"><iframe class="responsive-iframe" src="https://www.youtube.com/embed/k4TKS5jY2XQ?rel=0" allowfullscreen></iframe></div>
+<figcaption>
+Music Talk Show #1
+</figcaption>
+</figure>
+#+end_export
 
 * Share Buttons
   :PROPERTIES:
