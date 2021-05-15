@@ -37,6 +37,7 @@
 
    Il tutto viene fatto live su Twitch. Di seguito gli argomenti
    trattati:
+   - Come funzionano i Pick up della chitarra a livello fisico?
    - Recap Show precedente
    - Intervalli & Scala Cromatica
    - Scala Maggiore
