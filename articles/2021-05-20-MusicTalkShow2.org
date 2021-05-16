@@ -47,6 +47,8 @@
    :CUSTOM_ID: ArticleContent
    :END:
 
+Intro To The Harmonic Series - TWO MINUTE MUSIC THEORY #31 - https://www.youtube.com/watch?v=OATjHiOuc70&pp=qAMBugMGCgJpdBAB
+
 ** Video
    :PROPERTIES:
    :CUSTOM_ID: ArticleVideo
