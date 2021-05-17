@@ -241,8 +241,8 @@ viewMusic music =
                 , style "justify-content" "center"
                 , style "align-items" "center"
                 ]
-                [ p [ style "font-size" "13em" ] [ text (first chordString) ]
-                , p [ style "font-size" "5em" ] [ text (second chordString) ]
+                [ p [ style "font-size" "9em" ] [ text (first chordString) ]
+                , p [ style "font-size" "3em" ] [ text (second chordString) ]
                 ]
 
 

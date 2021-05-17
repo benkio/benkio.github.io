@@ -81,7 +81,7 @@ majorSevenChord n ns =
 
 majorMinorSevenChord : Note -> List Note -> Chord
 majorMinorSevenChord n ns =
-    Major { intervals = [ ( 2, 4 ), ( 4, 3 ), ( 6, 3 ) ], rootNote = n, notes = ns }
+    MajorMinorSeven { intervals = [ ( 2, 4 ), ( 4, 3 ), ( 6, 3 ) ], rootNote = n, notes = ns }
 
 
 minorChord : Note -> List Note -> Chord

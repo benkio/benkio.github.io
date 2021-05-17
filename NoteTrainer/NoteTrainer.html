@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Note Trainer</title>
-<!-- 2021-05-06 Thu 18:06 -->
+<!-- 2021-05-17 Mon 17:56 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -77,7 +77,6 @@ $(document).ready(function(){
     volumeSlide = document.getElementById("volumeSlider");
 
     volume.connect(audioCtx.destination);
-    console.log(volumeSlide.value / 100);
     volume.gain.value = volumeSlide.value / 100;
 });
 

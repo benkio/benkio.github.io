@@ -65,7 +65,6 @@
       volumeSlide = document.getElementById("volumeSlider");
 
       volume.connect(audioCtx.destination);
-      console.log(volumeSlide.value / 100);
       volume.gain.value = volumeSlide.value / 100;
   });
 

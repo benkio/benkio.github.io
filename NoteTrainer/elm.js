@@ -5777,6 +5777,9 @@ var $elm$random$Random$generate = F2(
 			$elm$random$Random$Generate(
 				A2($elm$random$Random$map, tagger, generator)));
 	});
+var $author$project$Music$Harmony = function (a) {
+	return {$: 'Harmony', a: a};
+};
 var $elm$random$Random$andThen = F2(
 	function (callback, _v0) {
 		var genA = _v0.a;
@@ -6067,6 +6070,43 @@ var $author$project$Filter$byNoteTonalityGenerator = function (notes) {
 		},
 		$elm_community$random_extra$Random$List$choose(notes));
 };
+var $author$project$Music$chordToIntervals = function (chord) {
+	switch (chord.$) {
+		case 'Major':
+			var intervals = chord.a.intervals;
+			return intervals;
+		case 'MajorSeven':
+			var intervals = chord.a.intervals;
+			return intervals;
+		case 'MajorMinorSeven':
+			var intervals = chord.a.intervals;
+			return intervals;
+		case 'Minor':
+			var intervals = chord.a.intervals;
+			return intervals;
+		case 'MinorSeven':
+			var intervals = chord.a.intervals;
+			return intervals;
+		case 'MinorMajorSeven':
+			var intervals = chord.a.intervals;
+			return intervals;
+		case 'Augmented':
+			var intervals = chord.a.intervals;
+			return intervals;
+		case 'AugmentedSeven':
+			var intervals = chord.a.intervals;
+			return intervals;
+		case 'Dimished':
+			var intervals = chord.a.intervals;
+			return intervals;
+		case 'DimishedSeven':
+			var intervals = chord.a.intervals;
+			return intervals;
+		default:
+			var intervals = chord.a.intervals;
+			return intervals;
+	}
+};
 var $elm$core$List$concat = function (lists) {
 	return A3($elm$core$List$foldr, $elm$core$List$append, _List_Nil, lists);
 };
@@ -6239,6 +6279,11 @@ var $author$project$Filter$chromaticNoteGenerator = A2(
 					return ($elm$core$String$length(n.name) === 1) ? _Utils_Tuple2(10, n) : _Utils_Tuple2(5, n);
 				},
 				$author$project$Music$allNotes))));
+var $elm$core$Basics$composeR = F3(
+	function (f, g, x) {
+		return g(
+			f(x));
+	});
 var $elm$core$Set$Set_elm_builtin = function (a) {
 	return {$: 'Set_elm_builtin', a: a};
 };
@@ -6504,91 +6549,6 @@ var $author$project$Filter$computeByIntervals = F2(
 			},
 			targetNotes);
 	});
-var $author$project$Music$MajorScale = function (a) {
-	return {$: 'MajorScale', a: a};
-};
-var $author$project$Music$majorScale = $author$project$Music$MajorScale(
-	{
-		intervals: _List_fromArray(
-			[
-				_Utils_Tuple2(1, 2),
-				_Utils_Tuple2(2, 2),
-				_Utils_Tuple2(3, 1),
-				_Utils_Tuple2(4, 2),
-				_Utils_Tuple2(5, 2),
-				_Utils_Tuple2(6, 2)
-			])
-	});
-var $author$project$Music$scaleToIntervals = function (scale) {
-	var intervals = scale.a.intervals;
-	return intervals;
-};
-var $author$project$Filter$noteGenerator = function (filter) {
-	if (filter.$ === 'ChromaticScale') {
-		return $author$project$Filter$chromaticNoteGenerator;
-	} else {
-		var note = filter.a;
-		return $author$project$Filter$byNoteTonalityGenerator(
-			A2(
-				$author$project$Filter$computeByIntervals,
-				note,
-				$author$project$Music$scaleToIntervals($author$project$Music$majorScale)));
-	}
-};
-var $elm$core$Debug$todo = _Debug_todo;
-var $author$project$Filter$tetradGenerator = function (filter) {
-	return _Debug_todo(
-		'Filter',
-		{
-			start: {line: 153, column: 5},
-			end: {line: 153, column: 15}
-		})('Implement the random generator for the tetrad chord');
-};
-var $author$project$Music$Harmony = function (a) {
-	return {$: 'Harmony', a: a};
-};
-var $author$project$Music$chordToIntervals = function (chord) {
-	switch (chord.$) {
-		case 'Major':
-			var intervals = chord.a.intervals;
-			return intervals;
-		case 'MajorSeven':
-			var intervals = chord.a.intervals;
-			return intervals;
-		case 'MajorMinorSeven':
-			var intervals = chord.a.intervals;
-			return intervals;
-		case 'Minor':
-			var intervals = chord.a.intervals;
-			return intervals;
-		case 'MinorSeven':
-			var intervals = chord.a.intervals;
-			return intervals;
-		case 'MinorMajorSeven':
-			var intervals = chord.a.intervals;
-			return intervals;
-		case 'Augmented':
-			var intervals = chord.a.intervals;
-			return intervals;
-		case 'AugmentedSeven':
-			var intervals = chord.a.intervals;
-			return intervals;
-		case 'Dimished':
-			var intervals = chord.a.intervals;
-			return intervals;
-		case 'DimishedSeven':
-			var intervals = chord.a.intervals;
-			return intervals;
-		default:
-			var intervals = chord.a.intervals;
-			return intervals;
-	}
-};
-var $elm$core$Basics$composeR = F3(
-	function (f, g, x) {
-		return g(
-			f(x));
-	});
 var $elm$core$Basics$ge = _Utils_ge;
 var $author$project$Filter$computeNoteDegree = F3(
 	function (rootNote, targetNote, degreeNInterval) {
@@ -6605,77 +6565,21 @@ var $author$project$Filter$computeNoteDegree = F3(
 				_Utils_Tuple2(0, 0),
 				degreeNInterval)).b;
 	});
-var $author$project$Music$Major = function (a) {
-	return {$: 'Major', a: a};
+var $author$project$Music$MajorScale = function (a) {
+	return {$: 'MajorScale', a: a};
 };
-var $author$project$Music$majorChord = F2(
-	function (n, ns) {
-		return $author$project$Music$Major(
-			{
-				intervals: _List_fromArray(
-					[
-						_Utils_Tuple2(2, 4),
-						_Utils_Tuple2(4, 3)
-					]),
-				notes: ns,
-				rootNote: n
-			});
+var $author$project$Music$majorScale = $author$project$Music$MajorScale(
+	{
+		intervals: _List_fromArray(
+			[
+				_Utils_Tuple2(1, 2),
+				_Utils_Tuple2(2, 2),
+				_Utils_Tuple2(3, 1),
+				_Utils_Tuple2(4, 2),
+				_Utils_Tuple2(5, 2),
+				_Utils_Tuple2(6, 2)
+			])
 	});
-var $author$project$Music$Dimished = function (a) {
-	return {$: 'Dimished', a: a};
-};
-var $author$project$Music$diminishedChord = F2(
-	function (n, ns) {
-		return $author$project$Music$Dimished(
-			{
-				intervals: _List_fromArray(
-					[
-						_Utils_Tuple2(2, 3),
-						_Utils_Tuple2(4, 3)
-					]),
-				notes: ns,
-				rootNote: n
-			});
-	});
-var $elm$core$Dict$fromList = function (assocs) {
-	return A3(
-		$elm$core$List$foldl,
-		F2(
-			function (_v0, dict) {
-				var key = _v0.a;
-				var value = _v0.b;
-				return A3($elm$core$Dict$insert, key, value, dict);
-			}),
-		$elm$core$Dict$empty,
-		assocs);
-};
-var $author$project$Music$Minor = function (a) {
-	return {$: 'Minor', a: a};
-};
-var $author$project$Music$minorChord = F2(
-	function (n, ns) {
-		return $author$project$Music$Minor(
-			{
-				intervals: _List_fromArray(
-					[
-						_Utils_Tuple2(2, 3),
-						_Utils_Tuple2(4, 4)
-					]),
-				notes: ns,
-				rootNote: n
-			});
-	});
-var $author$project$Music$majorScaleHarmonization = $elm$core$Dict$fromList(
-	_List_fromArray(
-		[
-			_Utils_Tuple2(0, $author$project$Music$majorChord),
-			_Utils_Tuple2(1, $author$project$Music$minorChord),
-			_Utils_Tuple2(2, $author$project$Music$minorChord),
-			_Utils_Tuple2(3, $author$project$Music$majorChord),
-			_Utils_Tuple2(4, $author$project$Music$majorChord),
-			_Utils_Tuple2(5, $author$project$Music$minorChord),
-			_Utils_Tuple2(6, $author$project$Music$diminishedChord)
-		]));
 var $elm$random$Random$map2 = F3(
 	function (func, _v0, _v1) {
 		var genA = _v0.a;
@@ -6740,6 +6644,259 @@ var $author$project$Music$musicToNotes = function (music) {
 		return $author$project$Music$chordToNotes(chord);
 	}
 };
+var $author$project$Music$scaleToIntervals = function (scale) {
+	var intervals = scale.a.intervals;
+	return intervals;
+};
+var $author$project$Filter$chordGenerator = F4(
+	function (filter, chords, defaultChord, majorScaleHarmonization) {
+		if (filter.$ === 'ChromaticScale') {
+			var chordGenerator1 = A2(
+				$elm$random$Random$map,
+				A2(
+					$elm$core$Basics$composeR,
+					$elm$core$Tuple$first,
+					$elm$core$Maybe$withDefault(defaultChord)),
+				$elm_community$random_extra$Random$List$choose(chords));
+			return A3(
+				$elm$random$Random$map2,
+				F2(
+					function (notes, chord) {
+						var note = A3(
+							$elm$core$Basics$composeR,
+							$elm$core$List$head,
+							$elm$core$Maybe$withDefault($author$project$Music$a440),
+							$author$project$Music$musicToNotes(notes));
+						var chordWithRoot = function (ns) {
+							return A2(chord, note, ns);
+						};
+						return $author$project$Music$Harmony(
+							chordWithRoot(
+								A2(
+									$author$project$Filter$computeByIntervals,
+									note,
+									$author$project$Music$chordToIntervals(
+										chordWithRoot(_List_Nil)))));
+					}),
+				$author$project$Filter$chromaticNoteGenerator,
+				chordGenerator1);
+		} else {
+			var note = filter.a;
+			return A2(
+				$elm$random$Random$map,
+				A2(
+					$elm$core$Basics$composeR,
+					$author$project$Music$musicToNotes,
+					A2(
+						$elm$core$Basics$composeR,
+						$elm$core$List$head,
+						A2(
+							$elm$core$Basics$composeR,
+							$elm$core$Maybe$withDefault($author$project$Music$a440),
+							function (n) {
+								return function (chordWithRoot) {
+									return $author$project$Music$Harmony(
+										chordWithRoot(
+											A2(
+												$author$project$Filter$computeByIntervals,
+												n,
+												$author$project$Music$chordToIntervals(
+													chordWithRoot(_List_Nil)))));
+								}(
+									function (c) {
+										return c(n);
+									}(
+										A2(
+											$elm$core$Maybe$withDefault,
+											defaultChord,
+											A2(
+												$elm$core$Dict$get,
+												A3(
+													$author$project$Filter$computeNoteDegree,
+													note,
+													n,
+													$author$project$Music$scaleToIntervals($author$project$Music$majorScale)),
+												majorScaleHarmonization))));
+							}))),
+				$author$project$Filter$byNoteTonalityGenerator(
+					A2(
+						$author$project$Filter$computeByIntervals,
+						note,
+						$author$project$Music$scaleToIntervals($author$project$Music$majorScale))));
+		}
+	});
+var $author$project$Music$Major = function (a) {
+	return {$: 'Major', a: a};
+};
+var $author$project$Music$majorChord = F2(
+	function (n, ns) {
+		return $author$project$Music$Major(
+			{
+				intervals: _List_fromArray(
+					[
+						_Utils_Tuple2(2, 4),
+						_Utils_Tuple2(4, 3)
+					]),
+				notes: ns,
+				rootNote: n
+			});
+	});
+var $author$project$Music$MajorSeven = function (a) {
+	return {$: 'MajorSeven', a: a};
+};
+var $author$project$Music$majorSevenChord = F2(
+	function (n, ns) {
+		return $author$project$Music$MajorSeven(
+			{
+				intervals: _List_fromArray(
+					[
+						_Utils_Tuple2(2, 4),
+						_Utils_Tuple2(4, 3),
+						_Utils_Tuple2(6, 4)
+					]),
+				notes: ns,
+				rootNote: n
+			});
+	});
+var $author$project$Filter$noteGenerator = function (filter) {
+	if (filter.$ === 'ChromaticScale') {
+		return $author$project$Filter$chromaticNoteGenerator;
+	} else {
+		var note = filter.a;
+		return $author$project$Filter$byNoteTonalityGenerator(
+			A2(
+				$author$project$Filter$computeByIntervals,
+				note,
+				$author$project$Music$scaleToIntervals($author$project$Music$majorScale)));
+	}
+};
+var $author$project$Music$AugmentedSeven = function (a) {
+	return {$: 'AugmentedSeven', a: a};
+};
+var $author$project$Music$augmentedSevenChord = F2(
+	function (n, ns) {
+		return $author$project$Music$AugmentedSeven(
+			{
+				intervals: _List_fromArray(
+					[
+						_Utils_Tuple2(2, 4),
+						_Utils_Tuple2(4, 4),
+						_Utils_Tuple2(6, 2)
+					]),
+				notes: ns,
+				rootNote: n
+			});
+	});
+var $author$project$Music$DimishedSeven = function (a) {
+	return {$: 'DimishedSeven', a: a};
+};
+var $author$project$Music$diminishedSevenChord = F2(
+	function (n, ns) {
+		return $author$project$Music$DimishedSeven(
+			{
+				intervals: _List_fromArray(
+					[
+						_Utils_Tuple2(2, 3),
+						_Utils_Tuple2(4, 3),
+						_Utils_Tuple2(6, 3)
+					]),
+				notes: ns,
+				rootNote: n
+			});
+	});
+var $author$project$Music$HalfDimishedSeven = function (a) {
+	return {$: 'HalfDimishedSeven', a: a};
+};
+var $author$project$Music$halfDiminishedSevenChord = F2(
+	function (n, ns) {
+		return $author$project$Music$HalfDimishedSeven(
+			{
+				intervals: _List_fromArray(
+					[
+						_Utils_Tuple2(2, 3),
+						_Utils_Tuple2(4, 3),
+						_Utils_Tuple2(6, 4)
+					]),
+				notes: ns,
+				rootNote: n
+			});
+	});
+var $author$project$Music$MajorMinorSeven = function (a) {
+	return {$: 'MajorMinorSeven', a: a};
+};
+var $author$project$Music$majorMinorSevenChord = F2(
+	function (n, ns) {
+		return $author$project$Music$MajorMinorSeven(
+			{
+				intervals: _List_fromArray(
+					[
+						_Utils_Tuple2(2, 4),
+						_Utils_Tuple2(4, 3),
+						_Utils_Tuple2(6, 3)
+					]),
+				notes: ns,
+				rootNote: n
+			});
+	});
+var $author$project$Music$MinorMajorSeven = function (a) {
+	return {$: 'MinorMajorSeven', a: a};
+};
+var $author$project$Music$minorMajorSevenChord = F2(
+	function (n, ns) {
+		return $author$project$Music$MinorMajorSeven(
+			{
+				intervals: _List_fromArray(
+					[
+						_Utils_Tuple2(2, 3),
+						_Utils_Tuple2(4, 4),
+						_Utils_Tuple2(6, 4)
+					]),
+				notes: ns,
+				rootNote: n
+			});
+	});
+var $author$project$Music$MinorSeven = function (a) {
+	return {$: 'MinorSeven', a: a};
+};
+var $author$project$Music$minorSevenChord = F2(
+	function (n, ns) {
+		return $author$project$Music$MinorSeven(
+			{
+				intervals: _List_fromArray(
+					[
+						_Utils_Tuple2(2, 3),
+						_Utils_Tuple2(4, 4),
+						_Utils_Tuple2(6, 3)
+					]),
+				notes: ns,
+				rootNote: n
+			});
+	});
+var $author$project$Music$tetradChords = _List_fromArray(
+	[$author$project$Music$majorSevenChord, $author$project$Music$majorMinorSevenChord, $author$project$Music$minorSevenChord, $author$project$Music$minorMajorSevenChord, $author$project$Music$augmentedSevenChord, $author$project$Music$diminishedSevenChord, $author$project$Music$halfDiminishedSevenChord]);
+var $elm$core$Dict$fromList = function (assocs) {
+	return A3(
+		$elm$core$List$foldl,
+		F2(
+			function (_v0, dict) {
+				var key = _v0.a;
+				var value = _v0.b;
+				return A3($elm$core$Dict$insert, key, value, dict);
+			}),
+		$elm$core$Dict$empty,
+		assocs);
+};
+var $author$project$Music$tetradMajorScaleHarmonization = $elm$core$Dict$fromList(
+	_List_fromArray(
+		[
+			_Utils_Tuple2(0, $author$project$Music$majorSevenChord),
+			_Utils_Tuple2(1, $author$project$Music$minorSevenChord),
+			_Utils_Tuple2(2, $author$project$Music$minorSevenChord),
+			_Utils_Tuple2(3, $author$project$Music$majorSevenChord),
+			_Utils_Tuple2(4, $author$project$Music$majorMinorSevenChord),
+			_Utils_Tuple2(5, $author$project$Music$minorSevenChord),
+			_Utils_Tuple2(6, $author$project$Music$halfDiminishedSevenChord)
+		]));
 var $author$project$Music$Augmented = function (a) {
 	return {$: 'Augmented', a: a};
 };
@@ -6756,91 +6913,58 @@ var $author$project$Music$augmentedChord = F2(
 				rootNote: n
 			});
 	});
+var $author$project$Music$Dimished = function (a) {
+	return {$: 'Dimished', a: a};
+};
+var $author$project$Music$diminishedChord = F2(
+	function (n, ns) {
+		return $author$project$Music$Dimished(
+			{
+				intervals: _List_fromArray(
+					[
+						_Utils_Tuple2(2, 3),
+						_Utils_Tuple2(4, 3)
+					]),
+				notes: ns,
+				rootNote: n
+			});
+	});
+var $author$project$Music$Minor = function (a) {
+	return {$: 'Minor', a: a};
+};
+var $author$project$Music$minorChord = F2(
+	function (n, ns) {
+		return $author$project$Music$Minor(
+			{
+				intervals: _List_fromArray(
+					[
+						_Utils_Tuple2(2, 3),
+						_Utils_Tuple2(4, 4)
+					]),
+				notes: ns,
+				rootNote: n
+			});
+	});
 var $author$project$Music$triadChords = _List_fromArray(
 	[$author$project$Music$majorChord, $author$project$Music$minorChord, $author$project$Music$diminishedChord, $author$project$Music$augmentedChord]);
-var $author$project$Filter$triadGenerator = function (filter) {
-	if (filter.$ === 'ChromaticScale') {
-		var chordGenerator = A2(
-			$elm$random$Random$map,
-			A2(
-				$elm$core$Basics$composeR,
-				$elm$core$Tuple$first,
-				$elm$core$Maybe$withDefault($author$project$Music$majorChord)),
-			$elm_community$random_extra$Random$List$choose($author$project$Music$triadChords));
-		return A3(
-			$elm$random$Random$map2,
-			F2(
-				function (notes, chord) {
-					var note = A3(
-						$elm$core$Basics$composeR,
-						$elm$core$List$head,
-						$elm$core$Maybe$withDefault($author$project$Music$a440),
-						$author$project$Music$musicToNotes(notes));
-					var chordWithRoot = function (ns) {
-						return A2(chord, note, ns);
-					};
-					return $author$project$Music$Harmony(
-						chordWithRoot(
-							A2(
-								$author$project$Filter$computeByIntervals,
-								note,
-								$author$project$Music$chordToIntervals(
-									chordWithRoot(_List_Nil)))));
-				}),
-			$author$project$Filter$chromaticNoteGenerator,
-			chordGenerator);
-	} else {
-		var note = filter.a;
-		return A2(
-			$elm$random$Random$map,
-			A2(
-				$elm$core$Basics$composeR,
-				$author$project$Music$musicToNotes,
-				A2(
-					$elm$core$Basics$composeR,
-					$elm$core$List$head,
-					A2(
-						$elm$core$Basics$composeR,
-						$elm$core$Maybe$withDefault($author$project$Music$a440),
-						function (n) {
-							return function (chordWithRoot) {
-								return $author$project$Music$Harmony(
-									chordWithRoot(
-										A2(
-											$author$project$Filter$computeByIntervals,
-											n,
-											$author$project$Music$chordToIntervals(
-												chordWithRoot(_List_Nil)))));
-							}(
-								function (c) {
-									return c(n);
-								}(
-									A2(
-										$elm$core$Maybe$withDefault,
-										$author$project$Music$majorChord,
-										A2(
-											$elm$core$Dict$get,
-											A3(
-												$author$project$Filter$computeNoteDegree,
-												note,
-												n,
-												$author$project$Music$scaleToIntervals($author$project$Music$majorScale)),
-											$author$project$Music$majorScaleHarmonization))));
-						}))),
-			$author$project$Filter$byNoteTonalityGenerator(
-				A2(
-					$author$project$Filter$computeByIntervals,
-					note,
-					$author$project$Music$scaleToIntervals($author$project$Music$majorScale))));
-	}
-};
+var $author$project$Music$triadMajorScaleHarmonization = $elm$core$Dict$fromList(
+	_List_fromArray(
+		[
+			_Utils_Tuple2(0, $author$project$Music$majorChord),
+			_Utils_Tuple2(1, $author$project$Music$minorChord),
+			_Utils_Tuple2(2, $author$project$Music$minorChord),
+			_Utils_Tuple2(3, $author$project$Music$majorChord),
+			_Utils_Tuple2(4, $author$project$Music$majorChord),
+			_Utils_Tuple2(5, $author$project$Music$minorChord),
+			_Utils_Tuple2(6, $author$project$Music$diminishedChord)
+		]));
 var $author$project$Filter$generator = F2(
 	function (filter, outputType) {
 		switch (outputType.$) {
 			case 'Triad':
-				return $author$project$Filter$triadGenerator(filter);
+				return A4($author$project$Filter$chordGenerator, filter, $author$project$Music$triadChords, $author$project$Music$majorChord, $author$project$Music$triadMajorScaleHarmonization);
 			case 'Tetrad':
-				return $author$project$Filter$tetradGenerator(filter);
+				return A4($author$project$Filter$chordGenerator, filter, $author$project$Music$tetradChords, $author$project$Music$majorSevenChord, $author$project$Music$tetradMajorScaleHarmonization);
 			default:
 				return $author$project$Filter$noteGenerator(filter);
 		}
@@ -7790,7 +7914,7 @@ var $author$project$Main$viewMusic = function (music) {
 					$elm$html$Html$p,
 					_List_fromArray(
 						[
-							A2($elm$html$Html$Attributes$style, 'font-size', '13em')
+							A2($elm$html$Html$Attributes$style, 'font-size', '9em')
 						]),
 					_List_fromArray(
 						[
@@ -7800,7 +7924,7 @@ var $author$project$Main$viewMusic = function (music) {
 					$elm$html$Html$p,
 					_List_fromArray(
 						[
-							A2($elm$html$Html$Attributes$style, 'font-size', '5em')
+							A2($elm$html$Html$Attributes$style, 'font-size', '3em')
 						]),
 					_List_fromArray(
 						[

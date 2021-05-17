@@ -20,7 +20,7 @@
     Random on everything, chords or note, no tonality.
 *** Dynamic BPM
     not a fixed bpm, maybe within a range.
-** Chords
+** DONE Chords
 *** DONE Implement Random Triad Chords
     - maj
     - min
@@ -34,13 +34,13 @@
     - Dictionary: Degree -> Chord
     - Compute Chord internals & return
 
-*** Implement Random Tetrad Chords
+*** DONE Implement Random Tetrad Chords
     - maj7
     - min7
     - half diminished
     - minMaj7
 
-*** Implement Tetrad Chord By Tonality
+*** DONE Implement Tetrad Chord By Tonality
 ** Ear Training
 
    Instead of playing notes/chords by BPM, you play them only once, but

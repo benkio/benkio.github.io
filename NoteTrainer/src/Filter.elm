@@ -1,6 +1,6 @@
 module Filter exposing (Filter(..), OutputType(..), generator)
 
-import Dict exposing (get)
+import Dict exposing (Dict, get)
 import List as L exposing (append, drop, filter, foldl, head, indexedMap, map, map2, member, tail)
 import List.Extra exposing (dropWhile, dropWhileRight, find, scanl, unique, uniqueBy)
 import Maybe exposing (withDefault)
@@ -101,22 +101,22 @@ generator : Filter -> OutputType -> R.Generator Music
 generator filter outputType =
     case outputType of
         Triad ->
-            triadGenerator filter
+            chordGenerator filter triadChords majorChord triadMajorScaleHarmonization
 
         Tetrad ->
-            tetradGenerator filter
+            chordGenerator filter tetradChords majorSevenChord tetradMajorScaleHarmonization
 
         SingleNote ->
             noteGenerator filter
 
 
-triadGenerator : Filter -> R.Generator Music
-triadGenerator filter =
+chordGenerator : Filter -> List (Note -> List Note -> Chord) -> (Note -> List Note -> Chord) -> Dict Int (Note -> List Note -> Chord) -> R.Generator Music
+chordGenerator filter chords defaultChord majorScaleHarmonization =
     case filter of
         ChromaticScale ->
             let
-                chordGenerator =
-                    choose triadChords |> R.map (first >> withDefault majorChord)
+                chordGenerator1 =
+                    choose chords |> R.map (first >> withDefault defaultChord)
             in
             R.map2
                 (\notes chord ->
@@ -130,7 +130,7 @@ triadGenerator filter =
                     computeByIntervals note ([] |> chordWithRoot |> chordToIntervals) |> chordWithRoot |> Harmony
                 )
                 chromaticNoteGenerator
-                chordGenerator
+                chordGenerator1
 
         ByNoteTonality note ->
             computeByIntervals note (scaleToIntervals majorScale)
@@ -141,16 +141,11 @@ triadGenerator filter =
                         >> withDefault a440
                         >> (\n ->
                                 get (computeNoteDegree note n (scaleToIntervals majorScale)) majorScaleHarmonization
-                                    |> withDefault majorChord
+                                    |> withDefault defaultChord
                                     |> (\c -> c n)
                                     |> (\chordWithRoot -> computeByIntervals n ([] |> chordWithRoot |> chordToIntervals) |> chordWithRoot |> Harmony)
                            )
                     )
-
-
-tetradGenerator : Filter -> R.Generator Music
-tetradGenerator filter =
-    Debug.todo "Implement the random generator for the tetrad chord"
 
 
 noteGenerator : Filter -> R.Generator Music
