@@ -27,25 +27,33 @@
   :CUSTOM_ID: Article
   :END:
   *Created: <2021-05-13 Thu>*
-** Abstract
-   :PROPERTIES:
-   :CUSTOM_ID: ArticleAbstract
-   :END:
+*** Abstract
+    :PROPERTIES:
+    :CUSTOM_ID: ArticleAbstract
+    :END:
 
-   Secondo appuntamento per quanto riguarda il discorso di Teoria
-   musicale.
+    Secondo appuntamento per quanto riguarda il discorso di Teoria
+    musicale.
 
-   Il tutto viene fatto live su Twitch. Di seguito gli argomenti
-   trattati:
-   - Come funzionano i Pick up della chitarra a livello fisico?
-   - Recap Show precedente
-   - Intervalli & Scala Cromatica
-   - Scala Maggiore
+    Il tutto viene fatto live su Twitch. Di seguito gli argomenti
+    trattati:
+    - Come funzionano i Pick up della chitarra a livello fisico? 00:02:00
+    - Recap Show precedente 0:19:53
+    - Intervalli & Scala Cromatica
+    - Scala Maggiore
 
 ** Talk Links
    :PROPERTIES:
    :CUSTOM_ID: ArticleContent
    :END:
+
+*** Pick-Up chitarra
+
+https://it.wikipedia.org/wiki/Risonanza_acustica
+https://it.wikipedia.org/wiki/Pick-up_(elettronica)
+https://en.wikipedia.org/wiki/P-90
+https://en.wikipedia.org/wiki/Silent_guitar
+
 
 Intro To The Harmonic Series - TWO MINUTE MUSIC THEORY #31 - https://www.youtube.com/watch?v=OATjHiOuc70&pp=qAMBugMGCgJpdBAB
 
