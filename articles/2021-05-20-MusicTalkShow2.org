@@ -38,24 +38,40 @@
     Il tutto viene fatto live su Twitch. Di seguito gli argomenti
     trattati:
     - Come funzionano i Pick up della chitarra a livello fisico? 00:02:00
-    - Recap Show precedente 0:19:53
-    - Intervalli & Scala Cromatica
-    - Scala Maggiore
+    - Recap Show precedente 0:25:25
+    - Intervalli & Scala Cromatica 0:35:17
+    - Scala Maggiore 1:15:14
 
 ** Talk Links
    :PROPERTIES:
    :CUSTOM_ID: ArticleContent
    :END:
 
-*** Pick-Up chitarra
+*** Pick-up chitarra
 
-https://it.wikipedia.org/wiki/Risonanza_acustica
-https://it.wikipedia.org/wiki/Pick-up_(elettronica)
-https://en.wikipedia.org/wiki/P-90
-https://en.wikipedia.org/wiki/Silent_guitar
+- [[https://it.wikipedia.org/wiki/Risonanza_acustica][Risonanza Acustica]]
+- [[https://it.wikipedia.org/wiki/Pick-up_(elettronica)][Pick-up]]
+- [[https://en.wikipedia.org/wiki/P-90][P-90]]
+- [[https://en.wikipedia.org/wiki/Silent_guitar][Silent Guitar]]
+- [[https://www.trechitarre.com/come-funzionano-pickup-chitarra/][Come funzionano i Pick-up]]
 
+*** Recap Show Precedente
 
-Intro To The Harmonic Series - TWO MINUTE MUSIC THEORY #31 - https://www.youtube.com/watch?v=OATjHiOuc70&pp=qAMBugMGCgJpdBAB
+- [[https://www.youtube.com/watch?v=OATjHiOuc70&pp=qAMBugMGCgJpdBAB][Intro To The Harmonic Series - TWO MINUTE MUSIC THEORY #31]]
+- [[https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Music_intervals_frequency_ratio_equal_tempered_pythagorean_comparison.svg/2880px-Music_intervals_frequency_ratio_equal_tempered_pythagorean_comparison.svg.png][Approssimazione degli Intervalli]]
+-[[https://en.wikipedia.org/wiki/Musical_note#Note_names_and_their_history][Storia delle Note]]
+
+*** Intervalli e Scala Cromatica
+
+[[https://en.wikipedia.org/wiki/Interval_(music)][- Intervalli]]
+- [[https://en.wikipedia.org/wiki/Tritone][Tritono]]
+
+*** Scala Maggiore
+
+- [[https://en.wikipedia.org/wiki/Major_scale][Scala Maggiore]]
+- [[https://en.wikipedia.org/wiki/Scale_(music)][Scala Musicale]]
+- [[https://en.wikipedia.org/wiki/Diatonic_scale#Tuning][Scala Diatonica]]
+- [[https://en.wikipedia.org/wiki/Heptatonic_scale][Scala Heptatonica]]
 
 ** Video
    :PROPERTIES:
