@@ -59,11 +59,11 @@
 
 - [[https://www.youtube.com/watch?v=OATjHiOuc70&pp=qAMBugMGCgJpdBAB][Intro To The Harmonic Series - TWO MINUTE MUSIC THEORY #31]]
 - [[https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Music_intervals_frequency_ratio_equal_tempered_pythagorean_comparison.svg/2880px-Music_intervals_frequency_ratio_equal_tempered_pythagorean_comparison.svg.png][Approssimazione degli Intervalli]]
--[[https://en.wikipedia.org/wiki/Musical_note#Note_names_and_their_history][Storia delle Note]]
+- [[https://en.wikipedia.org/wiki/Musical_note#Note_names_and_their_history][Storia delle Note]]
 
 *** Intervalli e Scala Cromatica
 
-[[https://en.wikipedia.org/wiki/Interval_(music)][- Intervalli]]
+- [[https://en.wikipedia.org/wiki/Interval_(music)][Intervalli]]
 - [[https://en.wikipedia.org/wiki/Tritone][Tritono]]
 
 *** Scala Maggiore
