@@ -80,7 +80,7 @@
 
 #+begin_export html
 <figure>
-<div class="video-container"><iframe class="responsive-iframe" src="" allowfullscreen></iframe></div>
+<div class="video-container"><iframe class="responsive-iframe" src="https://www.youtube.com/embed/suijWXQvrjE?rel=0" allowfullscreen></iframe></div>
 <figcaption>
 Music Talk Show #2
 </figcaption>
