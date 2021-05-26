@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Static Personal Website with Org Mode</title>
-<!-- 2021-04-12 Mon 18:46 -->
+<!-- 2021-05-26 Wed 19:23 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -73,7 +73,8 @@ $(function() {
     <li><a title="Home" href="../index.html"><i class="fas fa-home fa-3x" aria-hidden="true"></i></a></li>
     <li><a title="Article List" href="../articleList.html" class="navbar-text h3">Article List</a></li>
 <li><a title="Book List" href="../bookList.html" class="navbar-text h3">Book List</a></li>
-<li><a title="Album List" href="../albumList.html" class="navbar-text h3">Album List</a></li>
+    <li><a title="Album List" href="../albumList.html" class="navbar-text h3">Album List</a></li>
+    <li><a title="Note Trainer" href="./NoteTrainer/NoteTrainer.html" class="navbar-text h3">Note Trainer</a></li>
   </ul>
 </div>
 </div>
@@ -234,7 +235,9 @@ page in this way:
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #ff7f24;">#+html:</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">&lt;ul</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">id="pagination"</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">class="pagination</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">pagination-lg"&gt;&lt;/ul&gt;</span>
+<pre class="src src-org"><span style="color: #ff7f24;">#+html:</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">&lt;div</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">id='wrap5'</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">data-include="article5"&gt;&lt;/div&gt;</span>
+
+<span style="color: #ff7f24;">#+html:</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">&lt;ul</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">id="pagination"</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">class="pagination</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">pagination-lg"&gt;&lt;/ul&gt;</span>
 </pre>
 </div>
 
@@ -248,7 +251,8 @@ populate the empty article tags:
 </p>
 <div class="org-src-container">
 
-<pre class="src src-javascript">#+END_SRC
+<pre class="src src-javascript">}
+#+END_SRC
 #+call:<span style="color: #262626; background-color: #0d0d0d;"> </span>templates.org:inline-js(<span style="color: #ffa07a;">"pagination"</span>)
 
 #+name:<span style="color: #262626; background-color: #0d0d0d;"> </span>populateArticles
@@ -284,7 +288,6 @@ populate the empty article tags:
 articlesElementsZip.forEach(<span style="color: #00ffff;">function</span>(<span style="color: #eedd82;">tuple</span>)<span style="color: #262626; background-color: #0d0d0d;"> </span>{
 <span style="color: #262626; background-color: #0d0d0d;">    </span><span style="color: #00ffff;">const</span><span style="color: #262626; background-color: #0d0d0d;"> </span>[<span style="color: #eedd82;">element</span>,<span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #eedd82;">title</span>,<span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #00ffff;">abstract</span>]<span style="color: #262626; background-color: #0d0d0d;"> </span>=<span style="color: #262626; background-color: #0d0d0d;"> </span>tuple;
 <span style="color: #262626; background-color: #0d0d0d;">    </span>$(<span style="color: #ffa07a;">"#"</span><span style="color: #262626; background-color: #0d0d0d;"> </span>+<span style="color: #262626; background-color: #0d0d0d;"> </span>element).html($(<span style="color: #ffa07a;">'&lt;div&gt;'</span>).append(title).append(<span style="color: #00ffff;">abstract</span>));
-});
 </pre>
 </div>
 
@@ -347,7 +350,6 @@ for<span style="color: #262626; background-color: #0d0d0d;"> </span>(var<span st
 <span style="color: #262626; background-color: #0d0d0d;">    </span>$("#pagination").append(
 <span style="color: #262626; background-color: #0d0d0d;">        </span>'&lt;li<span style="color: #262626; background-color: #0d0d0d;"> </span>'<span style="color: #262626; background-color: #0d0d0d;"> </span>+<span style="color: #262626; background-color: #0d0d0d;"> </span>active<span style="color: #262626; background-color: #0d0d0d;"> </span>+<span style="color: #262626; background-color: #0d0d0d;"> </span>'&gt;&lt;a<span style="color: #262626; background-color: #0d0d0d;"> </span>href="'<span style="color: #262626; background-color: #0d0d0d;"> </span>+<span style="color: #262626; background-color: #0d0d0d;"> </span>window.location.href.split('?')[0]<span style="color: #262626; background-color: #0d0d0d;"> </span>+<span style="color: #262626; background-color: #0d0d0d;"> </span>'?page='<span style="color: #262626; background-color: #0d0d0d;"> </span>+<span style="color: #262626; background-color: #0d0d0d;"> </span>(i+1)<span style="color: #262626; background-color: #0d0d0d;"> </span>+<span style="color: #262626; background-color: #0d0d0d;"> </span>'"&gt;'<span style="color: #262626; background-color: #0d0d0d;"> </span>+<span style="color: #262626; background-color: #0d0d0d;"> </span>(i+1)<span style="color: #262626; background-color: #0d0d0d;"> </span>+<span style="color: #262626; background-color: #0d0d0d;"> </span>'&lt;/a&gt;&lt;/li&gt;'
 <span style="color: #262626; background-color: #0d0d0d;">    </span>);
-}
 </pre>
 </div>
 </div>

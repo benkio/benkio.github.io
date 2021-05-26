@@ -2,11 +2,10 @@
 <html lang="en">
 <head>
 <title>NixOs Checkout</title>
-<!-- 2021-02-22 Mon 01:02 -->
+<!-- 2021-05-26 Wed 19:37 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
-<meta name="author" content="benkio">
 
 <link  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -75,7 +74,8 @@ $(function() {
     <li><a title="Home" href="../index.html"><i class="fas fa-home fa-3x" aria-hidden="true"></i></a></li>
     <li><a title="Article List" href="../articleList.html" class="navbar-text h3">Article List</a></li>
 <li><a title="Book List" href="../bookList.html" class="navbar-text h3">Book List</a></li>
-<li><a title="Album List" href="../albumList.html" class="navbar-text h3">Album List</a></li>
+    <li><a title="Album List" href="../albumList.html" class="navbar-text h3">Album List</a></li>
+    <li><a title="Note Trainer" href="./NoteTrainer/NoteTrainer.html" class="navbar-text h3">Note Trainer</a></li>
   </ul>
 </div>
 </div>
@@ -210,26 +210,26 @@ difficult to do, you need to:
 
 <div class="org-src-container">
 
-<pre class="src src-shell"><span style="color: #ff7f24;">#</span> <span style="color: #ff7f24;">for</span> <span style="color: #ff7f24;">Legacy</span> <span style="color: #ff7f24;">boot,</span> <span style="color: #ff7f24;">see</span> <span style="color: #ff7f24;">manual</span> <span style="color: #ff7f24;">for</span> <span style="color: #ff7f24;">uefi</span>
-sudo parted /dev/sda -- mklabel msdos
- <span style="color: #ff7f24;">#</span> <span style="color: #ff7f24;">Create</span> <span style="color: #ff7f24;">primary</span> <span style="color: #ff7f24;">partition,</span> <span style="color: #ff7f24;">but</span> <span style="color: #ff7f24;">8gb</span> <span style="color: #ff7f24;">for</span> <span style="color: #ff7f24;">the</span> <span style="color: #ff7f24;">swap</span>
-sudo parted /dev/sda -- mkpart primary 1MiB -8GiB
-<span style="color: #ff7f24;">#</span> <span style="color: #ff7f24;">Create</span> <span style="color: #ff7f24;">the</span> <span style="color: #ff7f24;">Swap</span> <span style="color: #ff7f24;">partition</span>
-sudo parted /dev/sda -- mkpart primary linux-swap -8GiB 100%
-<span style="color: #ff7f24;">#</span> <span style="color: #ff7f24;">Format</span> <span style="color: #ff7f24;">primary</span> <span style="color: #ff7f24;">partition</span>
-sudo mkfs.ext4 -L nixos /dev/sda1
-<span style="color: #ff7f24;">#</span> <span style="color: #ff7f24;">Format</span> <span style="color: #ff7f24;">Swap</span>
-sudo mkswap -L swap /dev/sda2
-<span style="color: #ff7f24;">#</span> <span style="color: #ff7f24;">Mount</span> <span style="color: #ff7f24;">the</span> <span style="color: #ff7f24;">primary</span> <span style="color: #ff7f24;">partition</span> <span style="color: #ff7f24;">into</span> <span style="color: #ff7f24;">mnt</span>
-sudo mount /dev/disk/by-label/nixos /mnt
-<span style="color: #ff7f24;">#</span> <span style="color: #ff7f24;">Enable</span> <span style="color: #ff7f24;">the</span> <span style="color: #ff7f24;">swap</span>
-sudo swapon /dev/sda2
-<span style="color: #ff7f24;">#</span> <span style="color: #ff7f24;">Generate</span> <span style="color: #ff7f24;">the</span> <span style="color: #ff7f24;">configuration</span>
-sudo nixos-generate-config --root /mnt
-<span style="color: #ff7f24;">#</span> <span style="color: #ff7f24;">Edit</span> <span style="color: #ff7f24;">configurations</span>
-sudo nano /mnt/etc/nixos/configuration.nix
-<span style="color: #ff7f24;">#</span> <span style="color: #ff7f24;">Install</span> <span style="color: #ff7f24;">the</span> <span style="color: #ff7f24;">system</span>
-sudo nixos-install
+<pre class="src src-shell"><span style="color: #ff7f24;">#</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">for</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">Legacy</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">boot,</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">see</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">manual</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">for</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">uefi</span>
+sudo<span style="color: #262626; background-color: #0d0d0d;"> </span>parted<span style="color: #262626; background-color: #0d0d0d;"> </span>/dev/sda<span style="color: #262626; background-color: #0d0d0d;"> </span>--<span style="color: #262626; background-color: #0d0d0d;"> </span>mklabel<span style="color: #262626; background-color: #0d0d0d;"> </span>msdos
+<span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">#</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">Create</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">primary</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">partition,</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">but</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">8gb</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">for</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">the</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">swap</span>
+sudo<span style="color: #262626; background-color: #0d0d0d;"> </span>parted<span style="color: #262626; background-color: #0d0d0d;"> </span>/dev/sda<span style="color: #262626; background-color: #0d0d0d;"> </span>--<span style="color: #262626; background-color: #0d0d0d;"> </span>mkpart<span style="color: #262626; background-color: #0d0d0d;"> </span>primary<span style="color: #262626; background-color: #0d0d0d;"> </span>1MiB<span style="color: #262626; background-color: #0d0d0d;"> </span>-8GiB
+<span style="color: #ff7f24;">#</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">Create</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">the</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">Swap</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">partition</span>
+sudo<span style="color: #262626; background-color: #0d0d0d;"> </span>parted<span style="color: #262626; background-color: #0d0d0d;"> </span>/dev/sda<span style="color: #262626; background-color: #0d0d0d;"> </span>--<span style="color: #262626; background-color: #0d0d0d;"> </span>mkpart<span style="color: #262626; background-color: #0d0d0d;"> </span>primary<span style="color: #262626; background-color: #0d0d0d;"> </span>linux-swap<span style="color: #262626; background-color: #0d0d0d;"> </span>-8GiB<span style="color: #262626; background-color: #0d0d0d;"> </span>100%
+<span style="color: #ff7f24;">#</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">Format</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">primary</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">partition</span>
+sudo<span style="color: #262626; background-color: #0d0d0d;"> </span>mkfs.ext4<span style="color: #262626; background-color: #0d0d0d;"> </span>-L<span style="color: #262626; background-color: #0d0d0d;"> </span>nixos<span style="color: #262626; background-color: #0d0d0d;"> </span>/dev/sda1
+<span style="color: #ff7f24;">#</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">Format</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">Swap</span>
+sudo<span style="color: #262626; background-color: #0d0d0d;"> </span>mkswap<span style="color: #262626; background-color: #0d0d0d;"> </span>-L<span style="color: #262626; background-color: #0d0d0d;"> </span>swap<span style="color: #262626; background-color: #0d0d0d;"> </span>/dev/sda2
+<span style="color: #ff7f24;">#</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">Mount</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">the</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">primary</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">partition</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">into</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">mnt</span>
+sudo<span style="color: #262626; background-color: #0d0d0d;"> </span>mount<span style="color: #262626; background-color: #0d0d0d;"> </span>/dev/disk/by-label/nixos<span style="color: #262626; background-color: #0d0d0d;"> </span>/mnt
+<span style="color: #ff7f24;">#</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">Enable</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">the</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">swap</span>
+sudo<span style="color: #262626; background-color: #0d0d0d;"> </span>swapon<span style="color: #262626; background-color: #0d0d0d;"> </span>/dev/sda2
+<span style="color: #ff7f24;">#</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">Generate</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">the</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">configuration</span>
+sudo<span style="color: #262626; background-color: #0d0d0d;"> </span>nixos-generate-config<span style="color: #262626; background-color: #0d0d0d;"> </span>--root<span style="color: #262626; background-color: #0d0d0d;"> </span>/mnt
+<span style="color: #ff7f24;">#</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">Edit</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">configurations</span>
+sudo<span style="color: #262626; background-color: #0d0d0d;"> </span>nano<span style="color: #262626; background-color: #0d0d0d;"> </span>/mnt/etc/nixos/configuration.nix
+<span style="color: #ff7f24;">#</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">Install</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">the</span><span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ff7f24;">system</span>
+sudo<span style="color: #262626; background-color: #0d0d0d;"> </span>nixos-install
 </pre>
 </div>
 
@@ -303,7 +303,7 @@ configuration I got:
 </p>
 <div class="org-src-container">
 
-<pre class="src src-shell">error: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: The name ca.desrt.dconf was not provided by any .service files
+<pre class="src src-shell">error:<span style="color: #262626; background-color: #0d0d0d;"> </span>GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown:<span style="color: #262626; background-color: #0d0d0d;"> </span>The<span style="color: #262626; background-color: #0d0d0d;"> </span>name<span style="color: #262626; background-color: #0d0d0d;"> </span>ca.desrt.dconf<span style="color: #262626; background-color: #0d0d0d;"> </span>was<span style="color: #262626; background-color: #0d0d0d;"> </span>not<span style="color: #262626; background-color: #0d0d0d;"> </span>provided<span style="color: #262626; background-color: #0d0d0d;"> </span>by<span style="color: #262626; background-color: #0d0d0d;"> </span>any<span style="color: #262626; background-color: #0d0d0d;"> </span>.service<span style="color: #262626; background-color: #0d0d0d;"> </span>files
 </pre>
 </div>
 
@@ -321,7 +321,7 @@ Well, after the restart, <code>XMonad</code> started but I got this new error:
 
 <div class="org-src-container">
 
-<pre class="src src-shell">org.freedesktop.DBus.Error.ServiceUnknown: The name org.blueman.Mechanism was not provided by any .service files
+<pre class="src src-shell">org.freedesktop.DBus.Error.ServiceUnknown:<span style="color: #262626; background-color: #0d0d0d;"> </span>The<span style="color: #262626; background-color: #0d0d0d;"> </span>name<span style="color: #262626; background-color: #0d0d0d;"> </span>org.blueman.Mechanism<span style="color: #262626; background-color: #0d0d0d;"> </span>was<span style="color: #262626; background-color: #0d0d0d;"> </span>not<span style="color: #262626; background-color: #0d0d0d;"> </span>provided<span style="color: #262626; background-color: #0d0d0d;"> </span>by<span style="color: #262626; background-color: #0d0d0d;"> </span>any<span style="color: #262626; background-color: #0d0d0d;"> </span>.service<span style="color: #262626; background-color: #0d0d0d;"> </span>files
 </pre>
 </div>
 
@@ -373,7 +373,7 @@ have any software available from the ones I specified into my
 
 <div class="org-src-container">
 
-<pre class="src src-shell">error: attribute <span style="color: #ffa07a;">'anything'</span> missing, at /mix/var/nix/profiles/pre-user/root/channels/home-manager/modules/programs/matplotlib.nix
+<pre class="src src-shell">error:<span style="color: #262626; background-color: #0d0d0d;"> </span>attribute<span style="color: #262626; background-color: #0d0d0d;"> </span><span style="color: #ffa07a;">'anything'</span><span style="color: #262626; background-color: #0d0d0d;"> </span>missing,<span style="color: #262626; background-color: #0d0d0d;"> </span>at<span style="color: #262626; background-color: #0d0d0d;"> </span>/mix/var/nix/profiles/pre-user/root/channels/home-manager/modules/programs/matplotlib.nix
 </pre>
 </div>
 
@@ -392,7 +392,7 @@ does)
 <div class="outline-text-4" id="text-">
 <p>
 I'm not that kind of person who stops at first issue, so let's keep
-trying and trying again. 
+trying and trying again.
 </p>
 <ul class="org-ul">
 <li>I restarted from a new <code>NixOs</code> machine
