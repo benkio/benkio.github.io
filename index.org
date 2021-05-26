@@ -87,7 +87,7 @@ Etiam laoreet quam sed arcu.  Lorem ipsum dolor sit amet, consectetuer adipiscin
 
 ** 
   :PROPERTIES:
-  :HTML_CONTAINER_CLASS: col-sm-2 col-xs-4
+  :HTML_CONTAINER_CLASS: col-sm-2 col-xs-3
   :END:
 
 #+html: <a title="Linkedin Profile" href="https://www.linkedin.com/in/enrico-benini-442558a5/"><i class="fab fa-3x fa-linkedin" aria-hidden="true"></i></a>
@@ -104,20 +104,20 @@ Etiam laoreet quam sed arcu.  Lorem ipsum dolor sit amet, consectetuer adipiscin
 
 ** 
   :PROPERTIES:
-  :HTML_CONTAINER_CLASS: col-sm-2 col-xs-4
+  :HTML_CONTAINER_CLASS: col-sm-2 col-xs-3
   :END:
 #+html: <a title="telegram" href="https://t.me/benkio"><i class="fab fa-3x fa-telegram" aria-hidden="true"></i></a>
 
 ** 
   :PROPERTIES:
-  :HTML_CONTAINER_CLASS: col-sm-2 hidden-xs
+  :HTML_CONTAINER_CLASS: col-sm-2 col-xs-3
   :END:
 
 #+html: <a title="twitch" href="https://www.twitch.tv/benkio89"><i class="fab fa-3x fa-twitch" aria-hidden="true"></i></a>
 
 ** 
   :PROPERTIES:
-  :HTML_CONTAINER_CLASS: col-sm-2 col-xs-4
+  :HTML_CONTAINER_CLASS: col-sm-2 col-xs-3
   :CUSTOM_ID: text-email
   :END:
 #+html: <a title="email" href="mailto: benkio89@gmail.com"><i class="fas fa-3x fa-envelope" aria-hidden="true"></i><div class="hidden-xs">benkio89@gmail.com</div></a>
