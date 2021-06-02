@@ -1,8 +1,8 @@
 #+OPTIONS: num:nil toc:t H:4
 #+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:nil
-#+TITLE: [ITA] - Music Talk Show 2
-#+DESCRIPTION: [ITA] - Music Talk Show 2
-#+KEYWORDS: [ITA] - Music Talk Show 2
+#+TITLE: Music Talk Show 3
+#+DESCRIPTION: Music Talk Show 3
+#+KEYWORDS: Music Talk Show 3
 #+CREATOR: Enrico Benini
 #+HTML_HEAD_EXTRA: <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon">
 #+HTML_HEAD_EXTRA: <link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
@@ -21,59 +21,38 @@
   :END:
   #+INCLUDE: "../Fragments/BlogNavbarFragment.html" export html
 
-
-* [ITA] - Music Talk Show 2
+* Music Talk Show 3
   :PROPERTIES:
   :CUSTOM_ID: Article
   :END:
-  *Created: <2021-05-13 Thu>*
-*** Abstract
-    :PROPERTIES:
-    :CUSTOM_ID: ArticleAbstract
-    :END:
+  *Created: <2021-06-02 Wed>*
+** Abstract
+   :PROPERTIES:
+   :CUSTOM_ID: ArticleAbstract
+   :END:
 
-    Secondo appuntamento per quanto riguarda il discorso di Teoria
-    musicale.
+   Terzo appuntamento per quanto riguarda il discorso di Teoria
+   musicale.
 
-    Il tutto viene fatto live su Twitch. Di seguito gli argomenti
-    trattati:
-    - Come funzionano i Pick up della chitarra a livello fisico? 00:02:00
-    - Recap Show precedente 0:25:25
-    - Intervalli & Scala Cromatica 0:35:17
-    - Scala Maggiore 1:15:14
+   Il tutto viene fatto live su Twitch. Di seguito gli argomenti
+   trattati:
+        - Recap Show precedente
+        - I Modi della Scala Maggiore
+        - Gli Accordi
+        - Armonizzazione della Scala Maggiore
 
-    [[https://benkio.github.io/articles/2021-05-13-MusicTalkShow1.html][<< Previous Episode]] - [[https://benkio.github.io/articles/2021-06-02-MusicTalkShow3.html][Next Episode >>]]
+   [[https://benkio.github.io/articles/2021-05-20-MusicTalkShow2.html][<< Previous Episode]]
 
 ** Talk Links
    :PROPERTIES:
    :CUSTOM_ID: ArticleContent
    :END:
 
-*** Pick-up chitarra
+*** Modi della Scala Maggiore
 
-- [[https://it.wikipedia.org/wiki/Risonanza_acustica][Risonanza Acustica]]
-- [[https://it.wikipedia.org/wiki/Pick-up_(elettronica)][Pick-up]]
-- [[https://en.wikipedia.org/wiki/P-90][P-90]]
-- [[https://en.wikipedia.org/wiki/Silent_guitar][Silent Guitar]]
-- [[https://www.trechitarre.com/come-funzionano-pickup-chitarra/][Come funzionano i Pick-up]]
+*** Accordi
 
-*** Recap Show Precedente
-
-- [[https://www.youtube.com/watch?v=OATjHiOuc70&pp=qAMBugMGCgJpdBAB][Intro To The Harmonic Series - TWO MINUTE MUSIC THEORY #31]]
-- [[https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Music_intervals_frequency_ratio_equal_tempered_pythagorean_comparison.svg/2880px-Music_intervals_frequency_ratio_equal_tempered_pythagorean_comparison.svg.png][Approssimazione degli Intervalli]]
-- [[https://en.wikipedia.org/wiki/Musical_note#Note_names_and_their_history][Storia delle Note]]
-
-*** Intervalli e Scala Cromatica
-
-- [[https://en.wikipedia.org/wiki/Interval_(music)][Intervalli]]
-- [[https://en.wikipedia.org/wiki/Tritone][Tritono]]
-
-*** Scala Maggiore
-
-- [[https://en.wikipedia.org/wiki/Major_scale][Scala Maggiore]]
-- [[https://en.wikipedia.org/wiki/Scale_(music)][Scala Musicale]]
-- [[https://en.wikipedia.org/wiki/Diatonic_scale#Tuning][Scala Diatonica]]
-- [[https://en.wikipedia.org/wiki/Heptatonic_scale][Scala Heptatonica]]
+*** Armonizzazione Scala Maggiore
 
 ** Video
    :PROPERTIES:
@@ -82,7 +61,7 @@
 
 #+begin_export html
 <figure>
-<div class="video-container"><iframe class="responsive-iframe" src="https://www.youtube.com/embed/suijWXQvrjE?rel=0" allowfullscreen></iframe></div>
+<div class="video-container"><iframe class="responsive-iframe" src="" allowfullscreen></iframe></div>
 <figcaption>
 Music Talk Show #2
 </figcaption>
