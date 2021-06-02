@@ -100,6 +100,12 @@
     + [[https://www.youtube.com/watch?v=RuT6Y53LYH4][The Broken Scales Of Wendy Carlos]]
     + [[https://www.dailymotion.com/video/x2j1gy2][Wendy Carlos – Beauty In The Beast]]
 
+
+*** Extras
+
+  + [[https://youtu.be/INW7IORhqT0][The Piano That (almost) Changed Everything]]
+  + [[https://youtu.be/c6UCeZptMpA][Perchè le note musicali sono 7]]
+
 ** Video
    :PROPERTIES:
    :CUSTOM_ID: ArticleVideo
