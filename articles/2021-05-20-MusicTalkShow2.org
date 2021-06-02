@@ -42,6 +42,8 @@
     - Intervalli & Scala Cromatica 0:35:17
     - Scala Maggiore 1:15:14
 
+    [[https://benkio.github.io/articles/2021-05-13-MusicTalkShow1.html][<< Previous Episode]]
+
 ** Talk Links
    :PROPERTIES:
    :CUSTOM_ID: ArticleContent
