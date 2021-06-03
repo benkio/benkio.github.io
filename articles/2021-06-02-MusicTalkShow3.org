@@ -36,10 +36,9 @@
 
    Il tutto viene fatto live su Twitch. Di seguito gli argomenti
    trattati:
-        - Recap Show precedente
-        - I Modi della Scala Maggiore
-        - Gli Accordi
-        - Armonizzazione della Scala Maggiore
+        - Recap Show precedente 00:07:00
+        - I Modi della Scala Maggiore 00:19:00
+        - Gli Accordi 1:15:00
 
    [[https://benkio.github.io/articles/2021-05-20-MusicTalkShow2.html][<< Previous Episode]]
 
@@ -48,11 +47,21 @@
    :CUSTOM_ID: ArticleContent
    :END:
 
+*** Recap
+
+- [[https://youtu.be/3AYKQyALBIM?t=141][Major Second - Justin Guitar]]
+- [[https://www.youtube.com/watch?v=oIDl_CvIn8A][Synphony of Destruction - Rick Beato]]
+
 *** Modi della Scala Maggiore
+
+- [[https://it.wikipedia.org/wiki/Modo_(musica)][Modo - Wikipedia]]
 
 *** Accordi
 
-*** Armonizzazione Scala Maggiore
+- [[https://it.wikipedia.org/wiki/Rivolto][Rivolto]]
+- [[https://it.wikipedia.org/wiki/Accordo_(musica)][Accordo]]
+- [[https://it.wikipedia.org/wiki/Triade_(musica)][Triade]]
+- [[https://www.youtube.com/watch?v=NF-kLy44Hls][Lucio save the dance - Draft Punk]]
 
 ** Video
    :PROPERTIES:
@@ -61,9 +70,9 @@
 
 #+begin_export html
 <figure>
-<div class="video-container"><iframe class="responsive-iframe" src="" allowfullscreen></iframe></div>
+<div class="video-container"><iframe class="responsive-iframe" src="https://www.youtube.com/embed/LYR8tklEaVQ?rel=0" allowfullscreen></iframe></div>
 <figcaption>
-Music Talk Show #2
+Music Talk Show #3
 </figcaption>
 </figure>
 #+end_export
