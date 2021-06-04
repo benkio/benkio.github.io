@@ -46,7 +46,7 @@
    - Note: A440, sistema temperato 0:56:36
    - Intervalli Parte 1 1:25:05
 
-   [[https://benkio.github.io/articles/2021-05-20-MusicTalkShow2.html][Next Episode >>]]
+   [[./2021-05-20-MusicTalkShow2.html][Next Episode >>]]
 
 ** Talk Links
    :PROPERTIES:

@@ -40,7 +40,7 @@
         - I Modi della Scala Maggiore 00:19:00
         - Gli Accordi 1:15:00
 
-   [[https://benkio.github.io/articles/2021-05-20-MusicTalkShow2.html][<< Previous Episode]]
+   [[./2021-05-20-MusicTalkShow2.html][<< Previous Episode]]
 
 ** Talk Links
    :PROPERTIES:
