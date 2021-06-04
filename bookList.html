@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Book List</title>
-<!-- 2021-04-12 Mon 19:07 -->
+<!-- 2021-06-04 Fri 12:37 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -26,6 +26,7 @@ $(function() {
 <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="js/elementSearch.js"></script>
 <link rel="stylesheet" href="css/main.css">
 <link rel="stylesheet" href="css/blog.css">
 <style>body { padding-top: 100px; }</style>
@@ -71,6 +72,7 @@ $(function() {
 <b><b>Created:</b></b> <span class="timestamp-wrapper"><span class="timestamp">&lt;2020-06-21 Sun&gt;</span></span>
 </p>
 
+<input type="text" id="elementSearch" onkeyup="elementSearch('bookList')" placeholder="Search for Books.." title="Type in an Book Title">
 <ul id="bookList" class="list-group">
 <a target="_blank" href="https://www.youtube.com/watch?v=LeZC-nKwKvo" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">1984 (Ita Audiobook)</a>
 <a target="_blank" href="https://en.wikipedia.org/wiki/A_Column_of_Fire" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">A Column of Fire</a>

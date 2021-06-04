@@ -10,6 +10,7 @@
 #+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
 #+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
 #+HTML_HEAD_EXTRA:  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+#+HTML_HEAD_EXTRA:  <script src="js/elementSearch.js"></script>
 #+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="css/main.css">
 #+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="css/blog.css">
 
@@ -48,6 +49,7 @@
   **Created:** <2020-06-21 Sun>
 
   #+BEGIN_EXPORT HTML
+  <input type="text" id="elementSearch" onkeyup="elementSearch('bookList')" placeholder="Search for Books.." title="Type in an Book Title">
   <ul id="bookList" class="list-group">
   <a target="_blank" href="https://www.youtube.com/watch?v=LeZC-nKwKvo" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">1984 (Ita Audiobook)</a>
   <a target="_blank" href="https://en.wikipedia.org/wiki/A_Column_of_Fire" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">A Column of Fire</a>
