@@ -64,6 +64,12 @@
 - [[https://it.wikipedia.org/wiki/Accordo_di_settima][Accordo di Settima]]
 - [[https://www.youtube.com/watch?v=NF-kLy44Hls][Lucio save the dance - Draft Punk]]
 
+*** Extras
+
+   #+html: <img src="2021-06-02-MusicTalkShow3/diatonicModes.jpg" style="width:50%; max-height: 300px; margin-bottom: 1em;"></img>
+
+   #+html: <img src="2021-06-02-MusicTalkShow3/triads.jpg" style="width:50%; max-height: 300px; margin-bottom: 1em;"></img>
+
 ** Video
    :PROPERTIES:
    :CUSTOM_ID: ArticleVideo
