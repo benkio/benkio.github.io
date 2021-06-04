@@ -10,6 +10,7 @@
 #+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
 #+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
 #+HTML_HEAD_EXTRA:  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+#+HTML_HEAD_EXTRA:  <script src="js/elementSearch.js"></script>
 #+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="css/main.css">
 #+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="css/blog.css">
 #+HTML_HEAD_EXTRA: <style>body { padding-top: 100px; }</style>
@@ -47,6 +48,7 @@
 
 #+BEGIN_EXPORT HTML
 
+<input type="text" id="elementSearch" onkeyup="elementSearch('ArticleList')" placeholder="Search for articles.." title="Type in an Article Title">
 <ul id="ArticleList" class="list-group">
   <!-- <a href="#" class="list-group-item list-group-item-action">Article 1</a> -->
 </ul>
@@ -59,29 +61,27 @@
 
 #+name: populateArticles
 #+begin_src javascript :exports none
- // Pagination 0 based
- var articlesZip = [];
+  // Pagination 0 based
+  var articlesZip = [];
 
- for (var i = 0; i < htmlArticles.length; i++) {
-     articlesZip.push([htmlArticles[i], htmlArticlesPaths[i]]);
- }
+  for (var i = 0; i < htmlArticles.length; i++) {
+      articlesZip.push([htmlArticles[i], htmlArticlesPaths[i]]);
+  }
 
- const htmlArticlesTitle = articlesZip.map(function(tuple) {
-   const [articleContent, articlePath] = tuple;
-   const articleTitle = $($.parseHTML(articleContent)).find("#Article").text();
-   return $('<a href="' + articlePath + '" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">' + articleTitle + '</a>').hover(function(){
-  $(this).css("background-color", "#99ccff");
-  }, function(){
-  $(this).css("background-color", "#202020");
+  const htmlArticlesTitle = articlesZip.map(function(tuple) {
+      const [articleContent, articlePath] = tuple;
+      const articleTitle = $($.parseHTML(articleContent)).find("#Article").text();
+      return $('<a href="' + articlePath + '" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">' + articleTitle + '</a>').hover(function(){
+          $(this).css("background-color", "#99ccff");
+      }, function(){
+          $(this).css("background-color", "#202020");
+      });
   });
- });
-
- 
 
 
-htmlArticlesTitle.forEach(function(listElement) {
-     $("#ArticleList").append(listElement);
- });
+  htmlArticlesTitle.forEach(function(listElement) {
+      $("#ArticleList").append(listElement);
+  });
 
 #+end_src
 #+call: templates.org:inline-js("populateArticles")

@@ -6,3 +6,7 @@ body { padding-top: 70px; }
 #Articles { display: none; }
 #Books { display: none; }
 #Albums { display: none; }
+#elementSearch {
+    color: black;
+    margin: 1em;
+}
