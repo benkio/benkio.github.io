@@ -49,6 +49,17 @@
    :END:
 
 *** Link Interessanti
+
+    - [[https://youtu.be/De97zQi5rzc][Music Theory Masterclass 1: Drilling the Basics]] by Rick Beato
+    - [[https://www.youtube.com/watch?v=GF9n9unaBXk][Music Theory Masterclass 2: Chord Progressions and Harmony]] by Rick Beato
+    - [[https://www.youtube.com/watch?v=kSux13Yy4pM][As Much GUITAR THEORY As I Can Teach In 1 Hour]] by Rick Beato
+    - [[https://www.youtube.com/watch?v=lxnfkcilKtg][Conosci DAVVERO le DIFFERENZE tra i PICKUP? 🎸]] by Shape Your Tone
+    - [[https://youtu.be/XwmOlpbfpsM][Tritone Vs 5° Diminuito Vs 4° Aumentato | Teoria musicale Q+A]] by Music Theory For Guitar
+    - [[https://youtu.be/bwaeBUYcO5o][Demonstrating All 7 Modes in Parallel [MODAL MUSIC THEORY]​]] by Signals Music Studio
+
+**** Extra
+    - [[https://youtu.be/qk8uobP4uJE][Demonstrating The Modes of Harmonic Minor [MUSIC THEORY / SCALES]​]] by Signals Music Studio
+
 *** Armonizzazione Scala Maggiore
 *** Tensione Risoluzione & Cadenze
 *** Dominanti Secondarie
