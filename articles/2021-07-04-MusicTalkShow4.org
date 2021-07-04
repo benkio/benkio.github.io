@@ -36,9 +36,10 @@
 
    Il tutto viene fatto live su Twitch. Di seguito gli argomenti
    trattati:
-        - Link interessanti del mese
-        - Armonizzazione Scala Maggiore
-        - Tensione-Risoluzione & Cadenze
+        - Link interessanti del mese 0:00:33
+        - Armonizzazione Scala Maggiore 0:07:49
+        - Progressione Armonica, Tensione-Risoluzione & Cadenze 0:38:00 
+        - Interscambio modale 
         - Dominanti Secondarie
 
    [[./2021-06-02-MusicTalkShow3.html][<< Previous Episode]]
@@ -61,7 +62,17 @@
     - [[https://youtu.be/qk8uobP4uJE][Demonstrating The Modes of Harmonic Minor [MUSIC THEORY / SCALES]​]] by Signals Music Studio
 
 *** Armonizzazione Scala Maggiore
-*** Tensione Risoluzione & Cadenze
+
+    - [[https://www.musicoff.com/strumenti/teoria/armonizzazione-della-scala-maggiore/][Armonizzazione Scala Maggiore]] by MusicOff
+    - [[https://antoniopisacane.com/armonizzazione-della-scala-maggiore/][Armonizzazione Scala Maggiore]] by Antonio Pisacane
+
+*** Progressione Armonica, Tensione Risoluzione & Cadenze
+
+    - [[https://it.wikipedia.org/wiki/Progressione_armonica][Progressione Armonica]] by Wikipedia
+    - [[https://it.wikipedia.org/wiki/Cadenza][Cadenze]] by Wikipedia
+
+*** Interscambio Modale
+
 *** Dominanti Secondarie
 
 ** Video
@@ -71,9 +82,9 @@
 
 #+begin_export html
 <figure>
-<div class="video-container"><iframe class="responsive-iframe" src="" allowfullscreen></iframe></div>
+<div class="video-container"><iframe class="responsive-iframe" src="https://youtu.be/QJXpvuhG2U8" allowfullscreen></iframe></div>
 <figcaption>
-Music Talk Show #4
+Music Talk Show #4 p1
 </figcaption>
 </figure>
 #+end_export
