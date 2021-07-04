@@ -1,8 +1,8 @@
 #+OPTIONS: num:nil toc:t H:4
 #+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:nil
-#+TITLE: [ITA] - Music Talk Show 3
-#+DESCRIPTION: [ITA] - Music Talk Show 3
-#+KEYWORDS: [ITA] - Music Talk Show 3
+#+TITLE: [ITA] - Music Talk Show 4
+#+DESCRIPTION: [ITA] - Music Talk Show 4
+#+KEYWORDS: [ITA] - Music Talk Show 4
 #+CREATOR: Enrico Benini
 #+HTML_HEAD_EXTRA: <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon">
 #+HTML_HEAD_EXTRA: <link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
@@ -21,7 +21,7 @@
   :END:
   #+INCLUDE: "../Fragments/BlogNavbarFragment.html" export html
 
-* [ITA] - Music Talk Show 3
+* [ITA] - Music Talk Show 4
   :PROPERTIES:
   :CUSTOM_ID: Article
   :END:
@@ -31,44 +31,27 @@
    :CUSTOM_ID: ArticleAbstract
    :END:
 
-   Terzo appuntamento per quanto riguarda il discorso di Teoria
-   musicale.
+   Quarto appuntamento per quanto riguarda il discorso di Teoria
+   musicale dopo un bel po'.
 
    Il tutto viene fatto live su Twitch. Di seguito gli argomenti
    trattati:
-        - Recap Show precedente 00:07:00
-        - I Modi della Scala Maggiore 00:19:00
-        - Gli Accordi 1:15:00
+        - Link interessanti del mese
+        - Armonizzazione Scala Maggiore
+        - Tensione-Risoluzione & Cadenze
+        - Dominanti Secondarie
 
-   [[./2021-05-20-MusicTalkShow2.html][<< Previous Episode]] [[./2021-07-04-MusicTalkShow4.html][>> Next Episode]]
+   [[./2021-06-02-MusicTalkShow3.html][<< Previous Episode]]
 
 ** Talk Links
    :PROPERTIES:
    :CUSTOM_ID: ArticleContent
    :END:
 
-*** Recap
-
-- [[https://youtu.be/3AYKQyALBIM?t=141][Major Second - Justin Guitar]]
-- [[https://www.youtube.com/watch?v=oIDl_CvIn8A][Synphony of Destruction - Rick Beato]]
-
-*** Modi della Scala Maggiore
-
-- [[https://it.wikipedia.org/wiki/Modo_(musica)][Modo - Wikipedia]]
-
-*** Accordi
-
-- [[https://it.wikipedia.org/wiki/Rivolto][Rivolto]]
-- [[https://it.wikipedia.org/wiki/Accordo_(musica)][Accordo]]
-- [[https://it.wikipedia.org/wiki/Triade_(musica)][Triade]]
-- [[https://it.wikipedia.org/wiki/Accordo_di_settima][Accordo di Settima]]
-- [[https://www.youtube.com/watch?v=NF-kLy44Hls][Lucio save the dance - Draft Punk]]
-
-*** Extras
-
-   #+html: <img src="2021-06-02-MusicTalkShow3/diatonicModes.jpg" style="width:50%; max-height: 300px; margin-bottom: 1em;"></img>
-
-   #+html: <img src="2021-06-02-MusicTalkShow3/triads.jpg" style="width:50%; max-height: 300px; margin-bottom: 1em;"></img>
+*** Link Interessanti
+*** Armonizzazione Scala Maggiore
+*** Tensione Risoluzione & Cadenze
+*** Dominanti Secondarie
 
 ** Video
    :PROPERTIES:
@@ -77,9 +60,9 @@
 
 #+begin_export html
 <figure>
-<div class="video-container"><iframe class="responsive-iframe" src="https://www.youtube.com/embed/LYR8tklEaVQ?rel=0" allowfullscreen></iframe></div>
+<div class="video-container"><iframe class="responsive-iframe" src="" allowfullscreen></iframe></div>
 <figcaption>
-Music Talk Show #3
+Music Talk Show #4
 </figcaption>
 </figure>
 #+end_export
