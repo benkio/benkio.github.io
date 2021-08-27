@@ -54,7 +54,7 @@ n#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/blog.css">
     Problem:  [[https://projecteuler.net/problem=1][Multiples of 3 and 5]]
 
     Solution:
-    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2FprojectEuler.hs%23L7-9&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fhaskell%2FprojectEuler.hs%23L7-9&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
 
 *** Even Fibonacci Numbers
     :PROPERTIES:
@@ -64,7 +64,7 @@ n#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/blog.css">
     Problem: [[https://projecteuler.net/problem=2][Even Fibonacci Numbers]]
 
     Solution:
-    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2FprojectEuler.hs%23L11-15&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fhaskell%2FprojectEuler.hs%23L11-15&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
 
 *** Large Prime Factor
     :PROPERTIES:
@@ -74,7 +74,7 @@ n#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/blog.css">
     Problem: [[https://projecteuler.net/problem=3][Largest Prime Factor]]
 
     Solution:
-    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2FprojectEuler.hs%23L17-31&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fhaskell%2FprojectEuler.hs%23L17-31&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
 
 *** Largest Palindrome Product
     :PROPERTIES:
@@ -84,7 +84,7 @@ n#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/blog.css">
     Problem: [[https://projecteuler.net/problem=4][Largest Palindrome Product]]
 
     Solution:
-    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2FprojectEuler.hs%23L33-38&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fhaskell%2FprojectEuler.hs%23L33-38&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
 
 *** Smallest Multiple
     :PROPERTIES:
@@ -94,7 +94,7 @@ n#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/blog.css">
     Problem: [[https://projecteuler.net/problem=5][Smallest Multiple]]
 
     Solution:
-    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2FprojectEuler.hs%23L40-42&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fhaskell%2FprojectEuler.hs%23L40-42&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
 
 *** Sum Square Difference
     :PROPERTIES:
@@ -104,7 +104,7 @@ n#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/blog.css">
     Problem: [[https://projecteuler.net/problem=6][Sum Square Difference]]
 
     Solution:
-    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2FprojectEuler.hs%23L44-49&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fhaskell%2FprojectEuler.hs%23L44-49&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
 
 *** 10001st prime
     :PROPERTIES:
@@ -114,7 +114,7 @@ n#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/blog.css">
     Problem: [[https://projecteuler.net/problem=7][10001st prime]]
 
     Solution:
-    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2FprojectEuler.hs%23L51-62&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fhaskell%2FprojectEuler.hs%23L51-62&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
 
 *** Largest product in a series
     :PROPERTIES:
@@ -124,7 +124,7 @@ n#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/blog.css">
     Problem: [[https://projecteuler.net/problem=8][Largest product in a series]]
 
     Solution:
-    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2FprojectEuler.hs%23L64-76&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fhaskell%2FprojectEuler.hs%23L64-76&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
 
 *** Special Pythagorean triplet
     :PROPERTIES:
@@ -134,7 +134,7 @@ n#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/blog.css">
     Problem: [[https://projecteuler.net/problem=9][Special Pythagorean triplet]]
 
     Solution:
-    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2FprojectEuler.hs%23L78-96&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fhaskell%2FprojectEuler.hs%23L78-96&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
     
 *** Summation of Primes
     :PROPERTIES:
@@ -148,7 +148,7 @@ n#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/blog.css">
     Problem: [[https://projecteuler.net/problem=10][Summation of primes]]
 
     Solution:
-    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2FprojectEuler.hs%23L98-105&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fhaskell%2FprojectEuler.hs%23L98-105&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
 
 ** Conclusions
    :PROPERTIES:
