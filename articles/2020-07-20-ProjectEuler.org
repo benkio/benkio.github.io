@@ -188,7 +188,10 @@
    :CUSTOM_ID: ArticleConclusions
    :END:
 
-   learning never ends 😃
+   Doing the exercises in ~Scala~ I encountered some problems using
+   ~Long~ and ranges. So, some solutions are not ideal, but them
+   works. Here the (frustration) [[https://twitter.com/benkio89/status/1431546742953152516][tweet]] as a reference
+   learning never ends
 
 * Share Buttons
   :PROPERTIES:
