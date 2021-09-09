@@ -136,7 +136,7 @@ After that, we need to add some custom js to treat those variables and
 populate the empty article tags:
 
 <<populateArticlesSnippet>>
-#+include: "../blog.org" :lines "68-105" src javascript -n
+#+include: "../blog.org" :lines "72-108" src javascript -n
 
 Obviously, all of this came at a cost, in particular:
  + In case of an article addition/deletion/renaming, we need to
@@ -168,7 +168,7 @@ Obviously, all of this came at a cost, in particular:
 
      Here you can see the complete js code snippet for the pagination:
 
-#+include: "../blog.org" :lines "52-68" src org -n
+#+include: "../blog.org" :lines "56-70" src org -n
 
 ** Conclusions
   :PROPERTIES:

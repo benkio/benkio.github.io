@@ -10,8 +10,8 @@ video {
     height: auto;
 }
 .src {
-    background-color: #1c1c1c;
-    color: rgba(255,255,255,.6);
+    background-color: #fff;
+    color: rgba(0, 0, 0, 0.6);
 }
 @media only screen and (max-width: 600px) {
     audio {
