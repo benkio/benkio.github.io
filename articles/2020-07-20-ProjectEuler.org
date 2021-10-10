@@ -57,7 +57,7 @@
     Problem:  [[https://projecteuler.net/problem=1][Multiples of 3 and 5]]
 
     Solution Haskell:
-    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fprojecteulerhaskell%2Fsrc%2FProjectEuler.hs%23L7-9&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fprojecteulerhaskell%2Fsrc%2FProjectEuler.hs%23L5-7&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
 
     Solution Scala:
     #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fprojecteulerscala%2Fsrc%2Fmain%2Fscala%2FProjectEuler.scala%23L5-L8&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
@@ -70,7 +70,7 @@
     Problem: [[https://projecteuler.net/problem=2][Even Fibonacci Numbers]]
 
     Solution Haskell:
-    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fprojecteulerhaskell%2Fsrc%2FProjectEuler.hs%23L11-15&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fprojecteulerhaskell%2Fsrc%2FProjectEuler.hs%23L9-13&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
 
     Solution Scala:
     #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fprojecteulerscala%2Fsrc%2Fmain%2Fscala%2FProjectEuler.scala%23L10-L16&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
@@ -83,7 +83,7 @@
     Problem: [[https://projecteuler.net/problem=3][Largest Prime Factor]]
 
     Solution Haskell:
-    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fprojecteulerhaskell%2Fsrc%2FProjectEuler.hs%23L17-30&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fprojecteulerhaskell%2Fsrc%2FProjectEuler.hs%23L15-30&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
 
     Solution Scala:
     #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fprojecteulerscala%2Fsrc%2Fmain%2Fscala%2FProjectEuler.scala%23L18-L27&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
@@ -96,7 +96,7 @@
     Problem: [[https://projecteuler.net/problem=4][Largest Palindrome Product]]
 
     Solution Haskell:
-    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fprojecteulerhaskell%2Fsrc%2FProjectEuler.hs%23L31-37&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fprojecteulerhaskell%2Fsrc%2FProjectEuler.hs%23L32-37&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
 
     Solution Scala:
     #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fprojecteulerscala%2Fsrc%2Fmain%2Fscala%2FProjectEuler.scala%23L29-L31&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
@@ -109,7 +109,7 @@
     Problem: [[https://projecteuler.net/problem=5][Smallest Multiple]]
 
     Solution Haskell:
-    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fprojecteulerhaskell%2Fsrc%2FProjectEuler.hs%23L38-41&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fprojecteulerhaskell%2Fsrc%2FProjectEuler.hs%23L39-41&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
 
     Solution Scala:
     #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fprojecteulerscala%2Fsrc%2Fmain%2Fscala%2FProjectEuler.scala%23L33-L34&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
@@ -122,7 +122,7 @@
     Problem: [[https://projecteuler.net/problem=6][Sum Square Difference]]
 
     Solution Haskell:
-    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fprojecteulerhaskell%2Fsrc%2FProjectEuler.hs%23L42-48&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fprojecteulerhaskell%2Fsrc%2FProjectEuler.hs%23L43-49&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
 
     Solution Scala:
     #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fprojecteulerscala%2Fsrc%2Fmain%2Fscala%2FProjectEuler.scala%23L36-L39&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
@@ -135,7 +135,7 @@
     Problem: [[https://projecteuler.net/problem=7][10001st prime]]
 
     Solution Haskell:
-    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fprojecteulerhaskell%2Fsrc%2FProjectEuler.hs%23L49-52&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fprojecteulerhaskell%2Fsrc%2FProjectEuler.hs%23L51-53&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
 
     Solution Scala:
     #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fprojecteulerscala%2Fsrc%2Fmain%2Fscala%2FProjectEuler.scala%23L41-L46&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
@@ -148,7 +148,7 @@
     Problem: [[https://projecteuler.net/problem=8][Largest product in a series]]
 
     Solution Haskell:
-    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fprojecteulerhaskell%2Fsrc%2FProjectEuler.hs%23L53-66&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fprojecteulerhaskell%2Fsrc%2FProjectEuler.hs%23L55-67&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
 
     Solution Scala:
     #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fprojecteulerscala%2Fsrc%2Fmain%2Fscala%2FProjectEuler.scala%23L48-L51&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
@@ -161,7 +161,7 @@
     Problem: [[https://projecteuler.net/problem=9][Special Pythagorean triplet]]
 
     Solution Haskell:
-    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fprojecteulerhaskell%2Fsrc%2FProjectEuler.hs%23L67-86&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fprojecteulerhaskell%2Fsrc%2FProjectEuler.hs%23L69-80&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
 
     Solution Scala:
     #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fprojecteulerscala%2Fsrc%2Fmain%2Fscala%2FProjectEuler.scala%23L53-L62&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
@@ -178,7 +178,7 @@
     Problem: [[https://projecteuler.net/problem=10][Summation of primes]]
 
     Solution Haskell:
-    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fprojecteulerhaskell%2Fsrc%2FProjectEuler.hs%23L87-89&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+    #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fprojecteulerhaskell%2Fsrc%2FProjectEuler.hs%23L90-92&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
 
     Solution Scala:
     #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FGeneralExercises%2Fblob%2Fmaster%2FProjectEuler%2Fprojecteulerscala%2Fsrc%2Fmain%2Fscala%2FProjectEuler.scala%23L64-L71&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
