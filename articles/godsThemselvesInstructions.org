@@ -1,0 +1,193 @@
+#+OPTIONS: num:nil toc:t H:4
+#+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:nil
+#+TITLE: Instructions Audiobook "The God Themselves"
+#+DESCRIPTION: Instructions Audiobook "The God Themselves"
+#+KEYWORDS: Instructions Audiobook "The God Themselves"
+#+CREATOR: Enrico Benini
+#+HTML_HEAD_EXTRA: <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA: <link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/main.css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/blog.css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/article.css">
+
+* Blog
+  :PROPERTIES:
+  :HTML_CONTAINER_CLASS: text-center navbar navbar-inverse navbar-fixed-top
+  :CUSTOM_ID: navbar
+  :END:
+#+INCLUDE: "../Fragments/BlogNavbarFragment.html" export html
+
+* Instructions Audiobook "The God Themselves"
+  :PROPERTIES:
+  :CUSTOM_ID: Article
+  :END:
+  *Created: <2021-12-03 Fri>*
+
+** Content
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleContent
+  :END:
+  
+*** Requirements
+
+    - Install [[http://www.ffmpeg.org/][ffmpeg]]
+    - Install [[https://www.gnu.org/software/wget/][wget]]
+
+*** Instructions
+
+  - Place yourself in an empty folder
+  - Run the following commands to download the book chapters:
+
+  #+begin_src shell
+    wget -O "Gods Themselves 01.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2001.mp3
+    wget -O "Gods Themselves 02.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2002.mp3
+    wget -O "Gods Themselves 03.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2003.mp3
+    wget -O "Gods Themselves 04.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2004.mp3
+    wget -O "Gods Themselves 05.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2005.mp3
+    wget -O "Gods Themselves 06.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2006.mp3
+    wget -O "Gods Themselves 07.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2007.mp3
+    wget -O "Gods Themselves 08.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2008.mp3
+    wget -O "Gods Themselves 09.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2009.mp3
+    wget -O "Gods Themselves 10.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2010.mp3
+    wget -O "Gods Themselves 11.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2011.mp3
+    wget -O "Gods Themselves 12.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2012.mp3
+    wget -O "Gods Themselves 13.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2013.mp3
+    wget -O "Gods Themselves 14.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2014.mp3
+    wget -O "Gods Themselves 15.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2015.mp3
+    wget -O "Gods Themselves 16.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2016.mp3
+    wget -O "Gods Themselves 17.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2017.mp3
+    wget -O "Gods Themselves 18.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2018.mp3
+    wget -O "Gods Themselves 19.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2019.mp3
+    wget -O "Gods Themselves 20.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2020.mp3
+    wget -O "Gods Themselves 21.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2021.mp3
+    wget -O "Gods Themselves 22.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2022.mp3
+    wget -O "Gods Themselves 23.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2023.mp3
+    wget -O "Gods Themselves 24.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2024.mp3
+    wget -O "Gods Themselves 25.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2025.mp3
+    wget -O "Gods Themselves 26.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2026.mp3
+    wget -O "Gods Themselves 27.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2027.mp3
+    wget -O "Gods Themselves 28.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2028.mp3
+    wget -O "Gods Themselves 29.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2029.mp3
+    wget -O "Gods Themselves 30.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2030.mp3
+    wget -O "Gods Themselves 31.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2031.mp3
+    wget -O "Gods Themselves 32.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2032.mp3
+    wget -O "Gods Themselves 33.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2033.mp3
+    wget -O "Gods Themselves 34.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2034.mp3
+    wget -O "Gods Themselves 35.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2035.mp3
+    wget -O "Gods Themselves 36.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2036.mp3
+    wget -O "Gods Themselves 37.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2037.mp3
+    wget -O "Gods Themselves 38.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2038.mp3
+    wget -O "Gods Themselves 39.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2039.mp3
+    wget -O "Gods Themselves 40.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2040.mp3
+    wget -O "Gods Themselves 41.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2041.mp3
+    wget -O "Gods Themselves 42.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2042.mp3
+    wget -O "Gods Themselves 43.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2043.mp3
+    wget -O "Gods Themselves 44.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2044.mp3
+    wget -O "Gods Themselves 45.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2045.mp3
+    wget -O "Gods Themselves 46.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2046.mp3
+    wget -O "Gods Themselves 47.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2047.mp3
+    wget -O "Gods Themselves 48.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2048.mp3
+    wget -O "Gods Themselves 49.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2049.mp3
+    wget -O "Gods Themselves 50.mp3" https://archive.org/download/IsaacAsimovAudioBookCollection/1972%20-%20The%20Gods%20Themselves%20%28Brick%29%2064k%2011.26.20%20%7B330mb%7D/Gods%20Themselves%2050.mp3
+  #+end_src
+
+  - Create a file with the following content, call it ~chapters.txt~
+
+  #+begin_src shell
+    file 'Gods Themselves 01.mp3'
+    file 'Gods Themselves 02.mp3'
+    file 'Gods Themselves 03.mp3'
+    file 'Gods Themselves 04.mp3'
+    file 'Gods Themselves 05.mp3'
+    file 'Gods Themselves 06.mp3'
+    file 'Gods Themselves 07.mp3'
+    file 'Gods Themselves 08.mp3'
+    file 'Gods Themselves 09.mp3'
+    file 'Gods Themselves 10.mp3'
+    file 'Gods Themselves 11.mp3'
+    file 'Gods Themselves 12.mp3'
+    file 'Gods Themselves 13.mp3'
+    file 'Gods Themselves 14.mp3'
+    file 'Gods Themselves 15.mp3'
+    file 'Gods Themselves 16.mp3'
+    file 'Gods Themselves 17.mp3'
+    file 'Gods Themselves 18.mp3'
+    file 'Gods Themselves 19.mp3'
+    file 'Gods Themselves 20.mp3'
+    file 'Gods Themselves 21.mp3'
+    file 'Gods Themselves 22.mp3'
+    file 'Gods Themselves 23.mp3'
+    file 'Gods Themselves 24.mp3'
+    file 'Gods Themselves 25.mp3'
+    file 'Gods Themselves 26.mp3'
+    file 'Gods Themselves 27.mp3'
+    file 'Gods Themselves 28.mp3'
+    file 'Gods Themselves 29.mp3'
+    file 'Gods Themselves 30.mp3'
+    file 'Gods Themselves 31.mp3'
+    file 'Gods Themselves 32.mp3'
+    file 'Gods Themselves 33.mp3'
+    file 'Gods Themselves 34.mp3'
+    file 'Gods Themselves 35.mp3'
+    file 'Gods Themselves 36.mp3'
+    file 'Gods Themselves 37.mp3'
+    file 'Gods Themselves 38.mp3'
+    file 'Gods Themselves 39.mp3'
+    file 'Gods Themselves 40.mp3'
+    file 'Gods Themselves 41.mp3'
+    file 'Gods Themselves 42.mp3'
+    file 'Gods Themselves 43.mp3'
+    file 'Gods Themselves 44.mp3'
+    file 'Gods Themselves 45.mp3'
+    file 'Gods Themselves 46.mp3'
+    file 'Gods Themselves 47.mp3'
+    file 'Gods Themselves 48.mp3'
+    file 'Gods Themselves 49.mp3'
+    file 'Gods Themselves 50.mp3'
+  #+end_src
+
+  - Run the following command ~ffmpeg -f concat -safe 0 -i chapters.txt -c copy "The God Themselves.mp3"~
+
+*** Reference
+
+    - https://trac.ffmpeg.org/wiki/Concatenate
+
+** Conclusions
+
+   Now you should have a file of 11h26 minutes you can listen to. You
+   can delete the single chapters as well as the ~chapters.txt~ file.
+
+   Enjoy 😃
+* Share Buttons
+  :PROPERTIES:
+  :CUSTOM_ID: ShareButtons
+  :END:
+#+BEGIN_EXPORT html
+<!-- AddToAny BEGIN -->
+<hr>
+<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+<a class="a2a_button_facebook"></a>
+<a class="a2a_button_twitter"></a>
+<a class="a2a_button_whatsapp"></a>
+<a class="a2a_button_telegram"></a>
+<a class="a2a_button_linkedin"></a>
+<a class="a2a_button_email"></a>
+</div>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+<!-- AddToAny END -->
+#+END_EXPORT
+
+#+begin_export html
+<script type="text/javascript">
+$(function() {
+  $('#text-table-of-contents > ul li').first().css("display", "none");
+  $('#text-table-of-contents > ul li').last().css("display", "none");
+  $('#table-of-contents').addClass("visible-lg")
+});
+</script>
+#+end_export
