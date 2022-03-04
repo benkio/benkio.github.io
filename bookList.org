@@ -47,6 +47,7 @@
   :END:
 
   **Created:** <2020-06-21 Sun>
+  [[https://www.goodreads.com/user/show/148546738-enrico-benini][Good Reads Account]]
 
   #+BEGIN_EXPORT HTML
   <input type="text" id="elementSearch" onkeyup="elementSearch('bookList')" placeholder="Search for Books.." title="Type in an Book Title">
