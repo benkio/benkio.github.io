@@ -99,7 +99,7 @@
 
 #+BEGIN_EXPORT HTML
 <p id="totalBookCount"></p>
-<ul id="wanna__bookList" class="list-group">
+<ul id="wanna_read_bookList" class="list-group">
   <a target="_blank" href="https://en.wikipedia.org/wiki/23_Things_They_Don%27t_Tell_You_About_Capitalism"                                    class="list-group-item list-group-item-action book" style="color: #fff; background-color: #202020;" >23 Things They Don't Tell You About Capitalism</a>
   <a target="_blank" href="https://www.amazon.co.uk/Agile-Good-Hype-Bertrand-Meyer/dp/3319051547"                                             class="list-group-item list-group-item-action book" style="color: #fff; background-color: #202020;" >Agile!: The Good, the Hype and the Ugly</a>
   <a target="_blank" href="https://www.goodreads.com/book/show/25666050-algorithms-to-live-by"                                                class="list-group-item list-group-item-action book" style="color: #fff; background-color: #202020;" >Algorithms to Live By: The Computer Science of Human Decisions</a>
@@ -156,7 +156,12 @@ $(function() {
   $('#text-table-of-contents > ul li').first().css("display", "none");
   $('#text-table-of-contents > ul li:nth-child(2)').first().css("display", "none");
   $('#bookList > a').hover(function(){
-  $(this).css("background-color", "#99ccff");
+  $(this).css("background-color", "#000033");
+  }, function(){
+  $(this).css("background-color", "#202020");
+  });
+  $('#wanna_read_bookList > a').hover(function(){
+  $(this).css("background-color", "#660066");
   }, function(){
   $(this).css("background-color", "#202020");
   });
