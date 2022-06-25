@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Album List</title>
-<!-- 2022-06-25 Sat 12:44 -->
+<!-- 2022-06-25 Sat 12:46 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -38,8 +38,11 @@ $(function() {
 <div id="text-table-of-contents" class="bs-docs-sidebar">
 <ul class="nav">
 <li><a href="#navbar">Album List</a></li>
-<li><a href="#Albums">Albums</a></li>
+<li><a href="#Albums">Albums</a>
+<ul class="nav">
 <li><a href="#WannaAlbums">Wanna Albums</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </nav>
@@ -145,11 +148,10 @@ $(function() {
     <a target="_blank" href="https://www.youtube.com/results?search_query=The+Zenith+Rise+-+I+Built+The+Sky"                                class="list-group-item list-group-item-action album" style="color: #fff; background-color: #202020;">The Zenith Rise - I Built The Sky</a>
 </ul>
 </div>
-</div>
 
-<div id="outline-container-WannaAlbums" class="outline-2">
-<h2 id="WannaAlbums"><a id="sec-" name="sec-"></a>Wanna Albums</h2>
-<div class="outline-text-2" id="text-WannaAlbums">
+<div id="outline-container-WannaAlbums" class="outline-3">
+<h3 id="WannaAlbums"><a id="sec-" name="sec-"></a>Wanna Albums</h3>
+<div class="outline-text-3" id="text-WannaAlbums">
 <ul id="wannaAlbumList" class="list-group">
   <a target="_blank" href="https://www.amazon.it/dp/B00003OP2J/?coliid=I1YQO30SBHCBAB&colid=22QBHENP44UR0&psc=0&ref_=lv_ov_lig_dp_it" class="list-group-item list-group-item-action wannaAlbum" style="color: #fff; background-color: #202020;">Criteria for a Black Widow - Annihilator</a>
   <a target="_blank" href="https://www.youtube.com/watch?v=KjU4o5cyWS4"                                                               class="list-group-item list-group-item-action wannaAlbum" style="color: #fff; background-color: #202020;">Gun to Mouth Salvation - Carnal Forge</a>
@@ -176,6 +178,7 @@ $(function() {
   $('#totalAlbumCount').text("Total Albums: " + $('.album').length)
 });
 </script>
+</div>
 </div>
 </div>
 </div></div></div>
