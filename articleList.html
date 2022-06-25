@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Article List</title>
-<!-- 2022-06-25 Sat 12:18 -->
+<!-- 2022-01-12 Wed 23:49 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -84,7 +84,7 @@ for (var i = 0; i < htmlArticles.length; i++) {
 const htmlArticlesTitle = articlesZip.map(function(tuple) {
     const [articleContent, articlePath] = tuple;
     const articleTitle = $($.parseHTML(articleContent)).find("#Article").text();
-    return $('<a href="' + articlePath + '" class="list-group-item list-group-item-action article">' + articleTitle + '</a>').hover(function(){
+    return $('<a href="' + articlePath + '" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">' + articleTitle + '</a>').hover(function(){
         $(this).css("background-color", "#99ccff");
     }, function(){
         $(this).css("background-color", "#202020");
