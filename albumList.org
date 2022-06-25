@@ -120,6 +120,26 @@
   </ul>
 #+END_EXPORT
 
+* Wanna Albums
+  :PROPERTIES:
+  :CUSTOM_ID: Albums
+  :END:
+
+  #+BEGIN_EXPORT HTML
+  <ul id="wannaAlbumList" class="list-group">
+    <a target="_blank" href="https://www.amazon.it/dp/B00003OP2J/?coliid=I1YQO30SBHCBAB&colid=22QBHENP44UR0&psc=0&ref_=lv_ov_lig_dp_it" class="list-group-item list-group-item-action wannaAlbum" style="color: #fff; background-color: #202020;">Criteria for a Black Widow - Annihilator</a>
+    <a target="_blank" href="https://www.youtube.com/watch?v=KjU4o5cyWS4"                                                               class="list-group-item list-group-item-action wannaAlbum" style="color: #fff; background-color: #202020;">Gun to Mouth Salvation - Carnal Forge</a>
+    <a target="_blank" href="https://www.amazon.it/dp/B000TX6EUS/?coliid=I3UMBV6ZTF6QGV&colid=22QBHENP44UR0&psc=1&ref_=lv_ov_lig_dp_it" class="list-group-item list-group-item-action wannaAlbum" style="color: #fff; background-color: #202020;">Lead Sails Paper Anchor - Atreyu</a>
+    <a target="_blank" href="https://www.youtube.com/watch?v=lwPebRYeJTo"                                                               class="list-group-item list-group-item-action wannaAlbum" style="color: #fff; background-color: #202020;">Lean Into It - Mr.Big</a>
+    <a target="_blank" href="https://www.youtube.com/watch?v=QNOU4vXu_Ao"                                                               class="list-group-item list-group-item-action wannaAlbum" style="color: #fff; background-color: #202020;">Nevermind - Nirvana</a>
+    <a target="_blank" href="https://www.youtube.com/watch?v=D81an4ayrjk"                                                               class="list-group-item list-group-item-action wannaAlbum" style="color: #fff; background-color: #202020;">Pandemonium - Malrun</a>
+    <a target="_blank" href="https://www.youtube.com/watch?v=z4MT_pdG7Kw"                                                               class="list-group-item list-group-item-action wannaAlbum" style="color: #fff; background-color: #202020;">Spiritual Black Dimensions - Dimmu Borgir</a>
+    <a target="_blank" href="https://www.youtube.com/watch?v=r0kgU_cibkU"                                                               class="list-group-item list-group-item-action wannaAlbum" style="color: #fff; background-color: #202020;">Spiritual Machines - Paul Wardingham</a>
+    <a target="_blank" href="https://www.youtube.com/watch?v=7nCcD_M13Sw"                                                               class="list-group-item list-group-item-action wannaAlbum" style="color: #fff; background-color: #202020;">Technical Difficulties - Racer X</a>
+    <a target="_blank" href="https://en.wikipedia.org/wiki/The_Last_in_Line"                                                            class="list-group-item list-group-item-action wannaAlbum" style="color: #fff; background-color: #202020;">The Last in Line - Dio</a>
+  </ul>
+#+END_EXPORT
+
 #+begin_export html
 <script type="text/javascript">
 $(function() {
