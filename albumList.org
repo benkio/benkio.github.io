@@ -122,7 +122,7 @@
 
 * Wanna Albums
   :PROPERTIES:
-  :CUSTOM_ID: Albums
+  :CUSTOM_ID: WannaAlbums
   :END:
 
   #+BEGIN_EXPORT HTML
