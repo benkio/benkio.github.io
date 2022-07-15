@@ -56,7 +56,7 @@
 #+END_EXPORT
 
 
-#+CALL: templates.org:compileOrgArticles()
+#+CALL: templates.org:compileOrgFiles("./articles/")
 #+CALL: templates.org:articlesRelativePaths()
 
 #+name: populateArticles

@@ -7,8 +7,8 @@
  "</script>")
 #+end_src
 
-#+name: compileOrgArticles
-#+begin_src elisp :exports none :results output
+#+name: compileOrgFiles
+#+begin_src elisp :exports none :results output :var path=""
   (setq timeToArchiveInMonth 4)
   (mapc
    (lambda (f) (progn
@@ -18,7 +18,7 @@
                    (org-twbs-export-to-html)
                    (kill-buffer)
                    )))
-   (directory-files "./articles/" t "\.org$"))
+   (directory-files path t "\.org$"))
   (mapc
    (lambda (f) (progn
                  (when (< (elt (decode-time (elt (file-attributes f) 5)) 4) timeToArchiveInMonth)
@@ -29,7 +29,7 @@
                    (save-buffer)
                    (kill-buffer)
                    )))
-   (directory-files "./articles/" t "\.html$"))
+   (directory-files path t "\.html$"))
 #+end_src
 
 #+name: articlesRelativePaths

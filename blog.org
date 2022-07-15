@@ -50,7 +50,7 @@
 
 #+html: <ul id="pagination" class="pagination pagination-lg"></ul>
 
-#+CALL: templates.org:compileOrgArticles()
+#+CALL: templates.org:compileOrgFiles("./articles/")
 #+CALL: templates.org:articlesRelativePaths()
 
 #+NAME: pagination
