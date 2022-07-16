@@ -8,11 +8,13 @@
 #+end_src
 
 #+name: compileOrgFiles
-#+begin_src elisp :exports none :results output :var path=""
-  (setq timeToArchiveInMonth 4)
+#+begin_src elisp :exports none :results none :var path="./articles/"
+  (setq timeToArchiveInMonth 4
+        timeToArchiveInMonthSeconds (* timeToArchiveInMonth 2592000)
+        )
   (mapc
    (lambda (f) (progn
-                 (when (< (elt (decode-time (elt (file-attributes f) 5)) 4) timeToArchiveInMonth)
+                 (when (time-less-p (time-add (current-time) (- 0 timeToArchiveInMonthSeconds )) (nth 5 (file-attributes f)))
                    (message "compile org file %s" f)
                    (find-file f)
                    (org-twbs-export-to-html)
@@ -21,7 +23,7 @@
    (directory-files path t "\.org$"))
   (mapc
    (lambda (f) (progn
-                 (when (< (elt (decode-time (elt (file-attributes f) 5)) 4) timeToArchiveInMonth)
+                 (when (time-less-p (time-add (current-time) (- 0 timeToArchiveInMonthSeconds )) (nth 5 (file-attributes f)))
                    (message "post compilation processing - file %s" f)
                    (find-file f)
                    (while (re-search-forward "<span style=\"color: #262626; background-color: #0d0d0d;\">\\([ ]*\\)</span>" nil t)
