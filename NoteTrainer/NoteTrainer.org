@@ -90,4 +90,4 @@
       });
   });
 #+end_src
-#+call: ../templates.org:inline-js("embedElm")
+#+call: ../templates.org:inline-js(blk="embedElm")

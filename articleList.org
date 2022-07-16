@@ -56,7 +56,7 @@
 #+END_EXPORT
 
 
-#+CALL: templates.org:compileOrgFiles("./articles/")
+#+CALL: templates.org:compileOrgFiles(path="./articles/")
 #+CALL: templates.org:articlesRelativePaths()
 
 #+name: populateArticles
@@ -84,4 +84,4 @@
   });
 
 #+end_src
-#+call: templates.org:inline-js("populateArticles")
+#+call: templates.org:inline-js(blk="populateArticles")
