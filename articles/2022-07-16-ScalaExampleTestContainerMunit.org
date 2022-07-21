@@ -1,7 +1,7 @@
 #+OPTIONS: num:nil toc:t H:4
 #+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:nil
-#+TITLE: Scala Example: TestContainers With DockerComposeContainer And MUnit
-#+DESCRIPTION: Scala Example: TestContainers With DockerComposeContainer and MUnit
+#+TITLE: Scala Example: TestContainers and MUnit
+#+DESCRIPTION: Scala Example: TestContainers and MUnit
 #+KEYWORDS: Scala TestContainers DockerComposeContainer MUnit
 #+CREATOR: Enrico Benini
 #+HTML_HEAD_EXTRA: <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon">
@@ -21,7 +21,7 @@
   :END:
 #+INCLUDE: "../Fragments/BlogNavbarFragment.html" export html
 
-* Scala Example: TestContainers With DockerComposeContainer and MUnit
+* Scala Example: TestContainers and MUnit
   :PROPERTIES:
   :CUSTOM_ID: Article
   :END:
@@ -60,21 +60,28 @@
 
     #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FmyTelegramBot%2Fblob%2Fb2fb9d26cb9b9dbc9660374ed90a805e02f5df3e%2Fproject%2FSettings.scala%23L75&style=github&showBorder=on&showCopy=on"></script>
 
-*** Docker-Compose
+*** Case 1: Single Test Container
+
+  Most simple case, where you declare a single container in your test
+  to use. In the following example a ~PostgreSQLContainer~ is shown.
+
+  #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FmyTelegramBot%2Fblob%2F7d13e9470231d27027efc3183cb89e563fe5ccd5%2FbotDB%2Fsrc%2Fit%2Fscala%2Fcom%2Fbenkio%2FbotDB%2FITSpec.scala&style=github&showBorder=on&showCopy=on"></script>
+
+*** Case 2: Docker-Compose
 
   Here there's ~flyway~ as well to run the migrations. Not necessary for this example.
 
 #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FmyTelegramBot%2Fblob%2Fb2fb9d26cb9b9dbc9660374ed90a805e02f5df3e%2FbotDB%2Fdocker-compose.yml&style=github&showBorder=on&showCopy=on"></script>
 
-*** Scala Code
-
-**** DockerComposeContainer Definition
+**** Scala Code
+***** DockerComposeContainer Definition
 
 #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FmyTelegramBot%2Fblob%2F5177bf67616c1d68ac4c9cddd151e5e28461c205%2FbotDB%2Fsrc%2Fit%2Fscala%2Fcom%2Fbenkio%2FbotDB%2FContainerSuite.scala&style=github&showBorder=on&showCopy=on"></script>
 
-**** Simple MUnit Spec file
+***** Simple MUnit Spec file
 
 #+html: <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FmyTelegramBot%2Fblob%2Fb2fb9d26cb9b9dbc9660374ed90a805e02f5df3e%2FbotDB%2Fsrc%2Fit%2Fscala%2Fcom%2Fbenkio%2FbotDB%2FComposeSpec.scala&style=github&showBorder=on&showCopy=on"></script>
+
 
 * Share Buttons
   :PROPERTIES:
