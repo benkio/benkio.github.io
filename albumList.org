@@ -126,6 +126,8 @@
   :CUSTOM_ID: WannaAlbums
   :END:
 
+  Condition: get the physical copy
+
   #+BEGIN_EXPORT HTML
   <ul id="wannaAlbumList" class="list-group">
     <a target="_blank" href="https://steroidpuppets.bandcamp.com/album/earthguest"                                                      class="list-group-item list-group-item-action wannaAlbum" style="color: #fff; background-color: #202020;">Earthguest - Steroid Puppets</a>
