@@ -84,11 +84,7 @@ for (var i = 0; i < htmlArticles.length; i++) {
 const htmlArticlesTitle = articlesZip.map(function(tuple) {
     const [articleContent, articlePath] = tuple;
     const articleTitle = $($.parseHTML(articleContent)).find("#Article").text();
-    return $('<a href="' + articlePath + '" class="list-group-item list-group-item-action" style="color: #fff; background-color: #202020;">' + articleTitle + '</a>').hover(function(){
-        $(this).css("background-color", "#99ccff");
-    }, function(){
-        $(this).css("background-color", "#202020");
-    });
+    return $('<a href="' + articlePath + '" class="list-group-item list-group-item-action">' + articleTitle + '</a>');
 });
 
 

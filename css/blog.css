@@ -10,3 +10,19 @@ body { padding-top: 70px; }
     color: black;
     margin: 1em;
 }
+.list-group-item{
+    background-color: rgb(255,255,255);
+}
+a.list-group-item {
+    color: rgb(255,255,255);
+    background-color: #202020;
+}
+a.list-group-item:hover, a.list-group-item:focus, a.list-group-item:active, a.list-group-item.active, .open>.dropdown-togglea.list-group-item {
+    background-color: #3d3d3d;
+    color: rgb(255,255,255);
+}
+.dropdown-menu > li > a { color: rgb(255,255,255); }
+.dropdown-menu > li > a:hover {
+    background-color: #3d3d3d;
+    color: rgb(255,255,255);
+}
