@@ -118,6 +118,7 @@
       <a target="_blank" href="https://www.youtube.com/results?search_query=Vulgar+Display+Of+Power+-+Pantera"                                class="list-group-item list-group-item-action album">Vulgar Display Of Power - Pantera</a>
       <a target="_blank" href="https://www.youtube.com/results?search_query=War+Eternal+-+Arch+Enemy"                                         class="list-group-item list-group-item-action album">War Eternal - Arch Enemy</a>
       <a target="_blank" href="https://www.youtube.com/results?search_query=Women+And+Children+First+-+Van+Halen"                             class="list-group-item list-group-item-action album">Women And Children First - Van Halen</a>
+      <a target="_blank" href="https://www.youtube.com/watch?v=UmWQt3XI_T4"                                                                   class="list-group-item list-group-item-action album">Your Love - Lari Basilio</a>
       <a target="_blank" href="https://www.youtube.com/results?search_query=The+Zenith+Rise+-+I+Built+The+Sky"                                class="list-group-item list-group-item-action album">The Zenith Rise - I Built The Sky</a>
   </ul>
 #+END_EXPORT
