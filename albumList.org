@@ -134,6 +134,7 @@
   #+BEGIN_EXPORT HTML
   <ul id="wannaAlbumList" class="list-group">
     <a target="_blank" href="https://steroidpuppets.bandcamp.com/album/earthguest"                                                      class="list-group-item list-group-item-action wannaAlbum">Earthguest - Steroid Puppets</a>
+    <a target="_blank" href="https://www.youtube.com/watch?v=9c2Ny3IN1sA"                                                               class="list-group-item list-group-item-action wannaAlbum">Far More - Lari Basilio</a>
     <a target="_blank" href="https://www.amazon.it/dp/B00003OP2J/?coliid=I1YQO30SBHCBAB&colid=22QBHENP44UR0&psc=0&ref_=lv_ov_lig_dp_it" class="list-group-item list-group-item-action wannaAlbum">Criteria for a Black Widow - Annihilator</a>
     <a target="_blank" href="https://www.youtube.com/watch?v=KjU4o5cyWS4"                                                               class="list-group-item list-group-item-action wannaAlbum">Gun to Mouth Salvation - Carnal Forge</a>
     <a target="_blank" href="https://www.amazon.it/dp/B000TX6EUS/?coliid=I3UMBV6ZTF6QGV&colid=22QBHENP44UR0&psc=1&ref_=lv_ov_lig_dp_it" class="list-group-item list-group-item-action wannaAlbum">Lead Sails Paper Anchor - Atreyu</a>
