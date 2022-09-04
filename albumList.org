@@ -91,6 +91,7 @@
       <a target="_blank" href="https://www.youtube.com/results?search_query=Master+Of+Puppets+-+Metallica"                                    class="list-group-item list-group-item-action album">Master Of Puppets - Metallica</a>
       <a target="_blank" href="https://www.youtube.com/results?search_query=Metal+-+Annihilator"                                              class="list-group-item list-group-item-action album">Metal - Annihilator</a>
       <a target="_blank" href="https://www.youtube.com/results?search_query=Metal+[Bonus+CD]+-+Best+Of+-+Annihilator"                         class="list-group-item list-group-item-action album">Metal [Bonus CD] - Best Of - Annihilator</a>
+      <a target="_blank" href="https://youtu.be/0FyHXlBsZbs"                                                                                  class="list-group-item list-group-item-action album">The Mountain - Haken</a>
       <a target="_blank" href="https://www.youtube.com/results?search_query=Multiversum+-+Luca+Mantovanelli"                                  class="list-group-item list-group-item-action album">Multiversum - Luca Mantovanelli</a>
       <a target="_blank" href="https://www.youtube.com/results?search_query=Mutter+-+Rammstein"                                               class="list-group-item list-group-item-action album">Mutter - Rammstein</a>
       <a target="_blank" href="https://jasonkui.bandcamp.com/album/naka"                                                                      class="list-group-item list-group-item-action album">Naka - Jason Kui</a>
