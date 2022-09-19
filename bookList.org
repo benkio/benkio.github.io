@@ -128,6 +128,7 @@
   <a target="_blank" href="https://www.goodreads.com/en/book/show/977262"                                                                     class="list-group-item list-group-item-action wa_book">Asimov's New Guide to Science</a>
   <a target="_blank" href="https://www.amazon.it/dp/8832757001/?coliid=I1PKWAF03M8ZNY&colid=22QBHENP44UR0&psc=1&ref_=lv_ov_lig_dp_it"         class="list-group-item list-group-item-action wa_book">Belzebubs</a>
   <a target="_blank" href="https://readberserk.com/"                                                                                          class="list-group-item list-group-item-action wa_book">Berserk</a>
+  <a target="_blank" href="https://en.wikipedia.org/wiki/Bullet_Train_(novel)"                                                                class="list-group-item list-group-item-action wa_book">Bullet Train</a>
   <a target="_blank" href="https://en.wikipedia.org/wiki/Cathedral_of_the_Sea"                                                                class="list-group-item list-group-item-action wa_book">Cathedral of the Sea</a>
   <a target="_blank" href="https://www.amazon.com/CommitStrip-Rise-Coders-Issartial/dp/2954706228"                                            class="list-group-item list-group-item-action wa_book">CommitStrip: Rise of the Coders</a>
   <a target="_blank" href="https://www.amazon.co.uk/Complete-Learn-Guitar-Chords-Manual/dp/1864693177"                                        class="list-group-item list-group-item-action wa_book">Complete Learn to Play Guitar Chords Manual</a>
@@ -139,6 +140,7 @@
   <a target="_blank" href="https://www.amazon.it/dp/B017OG3GVM/?coliid=I1AC8AQ93R9O79&colid=22QBHENP44UR0&psc=0&ref_=lv_ov_lig_dp_it"         class="list-group-item list-group-item-action wa_book">Guitar for Dummies</a>
   <a target="_blank" href="https://en.wikipedia.org/wiki/His_Dark_Materials"                                                                  class="list-group-item list-group-item-action wa_book">His Dark Materials</a>
   <a target="_blank" href="https://www.goodreads.com/book/show/26240779-how-to-listen-to-jazz"                                                class="list-group-item list-group-item-action wa_book">How to Listen to Jazz</a>
+  <a target="_blank" href="https://en.wikipedia.org/wiki/How_Do_You_Live%3F_(novel)"                                                          class="list-group-item list-group-item-action wa_book">How Do You Live?</a>
   <a target="_blank" href="https://en.wikipedia.org/wiki/Howl%27s_Moving_Castle"                                                              class="list-group-item list-group-item-action wa_book">Howl's Moving Castle</a>
   <a target="_blank" href="https://www.amazon.com/stratagemmi-segreta-strategia-trionfare-quotidiana/dp/8880937006"                           class="list-group-item list-group-item-action wa_book">I Trentasei Stratagemmi</a>
   <a target="_blank" href="https://mitpress.mit.edu/books/ideas-created-future"                                                               class="list-group-item list-group-item-action wa_book">Ideas That Created the Future</a>
