@@ -1,0 +1,104 @@
+#+OPTIONS: num:nil toc:t H:4
+#+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:nil
+#+TITLE: Scripting with Scala CLI & Os-lib
+#+DESCRIPTION: Scripting with Scala CLI & Os-lib
+#+KEYWORDS: Scripting with Scala CLI & Os-lib
+#+CREATOR: Enrico Benini
+#+HTML_HEAD_EXTRA: <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA: <link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/main.css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/blog.css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/article.css">
+
+* Blog
+  :PROPERTIES:
+  :HTML_CONTAINER_CLASS: text-center navbar navbar-inverse navbar-fixed-top
+  :CUSTOM_ID: navbar
+  :END:
+#+INCLUDE: "../Fragments/BlogNavbarFragment.html" export html
+
+* Scripting with Scala CLI & Os-lib
+  :PROPERTIES:
+  :CUSTOM_ID: Article
+  :END:
+  *Created: <2022-10-08 Sat>*
+** Abstract
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleAbstract
+  :END:
+
+  In this article I will show how I refactored some existing scripts
+  written in [[https://scala-cli.virtuslab.org/][scala-cli]] using the [[https://github.com/com-lihaoyi/os-lib][os-lib]].
+
+** Use Cases & Motivations
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleContent
+  :END:
+
+  Everyone has his own scripts for various tasks and I'm no exception.
+  At the time of writing I have 2:
+  - One for converting movies to a format compatible with my mom's
+    TV. Movies needs to be in Xvid, 720p, a specific bit rate, mp3
+    audio track, and be not bigger then 1GB (if so it must be
+    splitted). I discovered this by trial and error.
+  - One for generating GIF (muted video chunks with subtitles, to be
+    precise) staring from YouTube links.
+
+  For these task I rely on [[https://scala-cli.virtuslab.org/][scala-cli]], ~ffmpeg~, ~yt-dlp~ and classic
+  Unix commands such as ~rm~ and ~mv~.
+
+  Everything works as expected and anyone with a little trace of
+  intelligence would keep the situation as it is. At least until
+  something goes wrong. However, being a Scala engineer, I heard about
+  "the lihaoyi ecosystem" several times and I've never had a chance
+  to play with it. Plus, the above scripts use the [[https://www.scala-lang.org/api/2.13.x/scala/sys/process/index.html][sys.process._]]
+  package and I'm not really super fan about it. So I thought: "why
+  just don't refactor the scripts using the [[https://github.com/com-lihaoyi/os-lib][os-lib]]?". This way I can
+  both the goals of getting rid of the [[https://www.scala-lang.org/api/2.13.x/scala/sys/process/index.html][sys.process._]] and try something
+  from lihaoyi.
+
+  Moreover, apart from the library README and [[https://www.lihaoyi.com/post/HowtoworkwithFilesinScala.html][this article]] from Li
+  Haoyi himself, I couldn't find a lot of examples of its usages,
+  especially in a "real" situation. The library is a porting of
+  [[https://docs.python.org/3/library/os.html][Python's Os library]] and there are examples of it around for sure,
+  but no one wants to have to translate from a language to another
+  when he is looking for examples.
+
+** Conclusions
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleConclusions
+  :END:
+
+* Share Buttons
+  :PROPERTIES:
+  :CUSTOM_ID: ShareButtons
+  :END:
+#+BEGIN_EXPORT html
+<!-- AddToAny BEGIN -->
+<hr>
+<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+<a class="a2a_button_facebook"></a>
+<a class="a2a_button_twitter"></a>
+<a class="a2a_button_whatsapp"></a>
+<a class="a2a_button_telegram"></a>
+<a class="a2a_button_linkedin"></a>
+<a class="a2a_button_email"></a>
+</div>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+<!-- AddToAny END -->
+#+END_EXPORT
+
+#+begin_export html
+<script type="text/javascript">
+$(function() {
+  $('#text-table-of-contents > ul li').first().css("display", "none");
+  $('#text-table-of-contents > ul li').last().css("display", "none");
+  $('#table-of-contents').addClass("visible-lg")
+});
+</script>
+#+end_export
