@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Scripting with Scala CLI &amp; Os-lib</title>
-<!-- 2022-10-09 Sun 00:35 -->
+<!-- 2022-10-10 Mon 21:54 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -41,6 +41,14 @@ $(function() {
 <ul class="nav">
 <li><a href="#ArticleAbstract">Abstract</a></li>
 <li><a href="#ArticleContent">Use Cases &amp; Motivations</a></li>
+<li><a href="#sec-">Insert Script Dependency</a></li>
+<li><a href="#sec-">Movie Convertion Script</a>
+<ul class="nav">
+<li><a href="#sec-">File Paths</a></li>
+<li><a href="#sec-">List Files</a></li>
+<li><a href="#sec-">Move Files</a></li>
+</ul>
+</li>
 <li><a href="#ArticleConclusions">Conclusions</a></li>
 </ul>
 </li>
@@ -103,8 +111,6 @@ splitted). I discovered this by trial and error.
 </li>
 <li>One for generating GIF (muted video chunks with subtitles, to be
 precise) staring from YouTube links.
-</li>
-</ul>
 
 <p>
 For these task I rely on <a href="https://scala-cli.virtuslab.org/">scala-cli</a>, <code>ffmpeg</code>, <code>yt-dlp</code> and classic
@@ -117,22 +123,184 @@ intelligence would keep the situation as it is. At least until
 something goes wrong. However, being a Scala engineer, I heard about
 "the lihaoyi ecosystem" several times and I've never had a chance
 to play with it. Plus, the above scripts use the <a href="https://www.scala-lang.org/api/2.13.x/scala/sys/process/index.html">sys.process._</a>
-package and I'm not really super fan about it. So I thought: "why
-just don't refactor the scripts using the <a href="https://github.com/com-lihaoyi/os-lib">os-lib</a>?". This way I can
+package and I'm not really super fan of it. So I thought: "why
+just I don't refactor the scripts using the <a href="https://github.com/com-lihaoyi/os-lib">os-lib</a>?". This way I can
 both the goals of getting rid of the <a href="https://www.scala-lang.org/api/2.13.x/scala/sys/process/index.html">sys.process._</a> and try something
 from lihaoyi.
 </p>
 
 <p>
-Moreover, apart from the library README and <a href="https://www.lihaoyi.com/post/HowtoworkwithFilesinScala.html">this article</a> from Li
-Haoyi himself, I couldn't find a lot of examples of its usages,
+Moreover, apart from the library <a href="https://github.com/com-lihaoyi/os-lib#cookbook">README Cookbook</a> and <a href="https://www.lihaoyi.com/post/HowtoworkwithFilesinScala.html">this article</a>
+from Li Haoyi himself, check them out if you want to explore the
+library, I couldn't find a lot of examples of its usages,
 especially in a "real" situation. The library is a porting of
 <a href="https://docs.python.org/3/library/os.html">Python's Os library</a> and there are examples of it around for sure,
 but no one wants to have to translate from a language to another
 when he is looking for examples.
 </p>
+</li>
+</ul>
 </div>
 </div>
+
+<div id="outline-container-sec-" class="outline-3">
+<h3 id="sec-">Insert Script Dependency</h3>
+<div class="outline-text-3" id="text-">
+<p>
+The first thing you want to do is to add the <a href="https://github.com/com-lihaoyi/os-lib">os-lib</a> to your
+<a href="https://scala-cli.virtuslab.org/">  scala-cli</a>. At the moment of writing the latest version is <code>0.8.1</code>.
+Just add this snippet at the very top of your script
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-scala"><span style="color: #ff7f24;">#!/usr/bin/env scala-cli</span>
+<span style="color: #00ffff;">using</span> lib <span style="color: #ffa07a;">"com.lihaoyi::os-lib:0.8.1"</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-" class="outline-3">
+<h3 id="sec-">Movie Convertion Script</h3>
+<div class="outline-text-3" id="text-">
+</div><div id="outline-container-sec-" class="outline-4">
+<h4 id="sec-">File Paths</h4>
+<div class="outline-text-4" id="text-">
+<p>
+Let's convert simple file path strings to the ones used by the
+library. Note how I had to specify a temporary existing directory
+for the script to work and store intermediate results. Meanwhile the
+<a href="https://github.com/com-lihaoyi/os-lib/">os-lib</a> provides a <a href="https://github.com/com-lihaoyi/os-lib#ostempdir">temp dir</a> operation to get it.
+</p>
+
+<p>
+I can then change the other paths as well to start straight away
+from the <code>home directory</code>. This will make it more flexible since I
+can easily move the script without having to update the paths.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-scala"><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Before</span>
+<span style="color: #00ffff;">val</span> <span style="color: #eedd82;">tempPath</span> <span style="color: #00ffff;">=</span> <span style="color: #ffa07a;">"/Users/benkio/temp"</span>
+<span style="color: #00ffff;">val</span> <span style="color: #eedd82;">startingPath</span> <span style="color: #00ffff;">=</span> <span style="color: #ffa07a;">"/Users/benkio/temp/test"</span>
+<span style="color: #00ffff;">val</span> <span style="color: #eedd82;">destinationPath</span> <span style="color: #00ffff;">=</span> <span style="color: #ffa07a;">"/Users/benkio/temp/convertedFilms"</span>
+
+<span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">After</span>
+
+<span style="color: #00ffff;">val</span> <span style="color: #eedd82;">tempPath</span> <span style="color: #00ffff;">=</span> os.temp.dir()
+<span style="color: #00ffff;">val</span> <span style="color: #eedd82;">startingPath</span> <span style="color: #00ffff;">=</span> os.home/<span style="color: #ffa07a;">"temp"</span>/<span style="color: #ffa07a;">"test"</span>
+<span style="color: #00ffff;">val</span> <span style="color: #eedd82;">destinationPath</span> <span style="color: #00ffff;">=</span> os.home/<span style="color: #ffa07a;">"temp"</span>/<span style="color: #ffa07a;">"convertedFilms"</span>
+</pre>
+</div>
+
+<p>
+Note: on the <a href="https://github.com/com-lihaoyi/os-lib#ospath">README os.Path section</a> you could find that you can
+create a path using just the <code>'</code> prefix. However, if you try you
+might get this error:
+</p>
+
+<pre class="example">
+[error] ./convertFilms.sc:18:31: symbol literal 'temp is no longer supported,
+[error] use a string literal "temp" or an application Symbol("temp") instead,
+[error] or enclose in braces '{temp} if you want a quoted expression.
+[error] For now, you can also `import language.deprecated.symbolLiterals` to accept
+[error] the idiom, but this possibility might no longer be available in the future.
+[error] val destinationPath = os.home/'temp/'convertedFilms
+</pre>
+
+<p>
+That's why I ended up using simple strings.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-" class="outline-4">
+<h4 id="sec-">List Files</h4>
+<div class="outline-text-4" id="text-">
+<p>
+Right now, there is this function in the script:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-scala"><span style="color: #00ffff;">def</span> <span style="color: #87cefa;">getListOfFiles</span>(dir<span style="color: #00ffff;">:</span> <span style="color: #98fb98;">File</span>, prefix<span style="color: #00ffff;">:</span> <span style="color: #98fb98;">String</span>)<span style="color: #00ffff;">:</span> <span style="color: #98fb98;">List</span>[<span style="color: #7fffd4;">File</span>] <span style="color: #00ffff;">=</span> {
+dir.listFiles.filter(<span style="color: #00ffff;">_</span>.isFile).toList.filter { file <span style="color: #00ffff;">=&gt;</span>
+    file.getName.startsWith(prefix)
+  }
+}
+</pre>
+</div>
+
+<p>
+Starting from a folder, This will just return a list of files with a
+given prefix. Please close an eye on the double <code>filter</code> call.
+</p>
+
+<p>
+I can now simply replace this using <code>os.list</code> and then filter the
+results with the same <code>filter</code> used above.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-scala">os.list(tempPath).filter(p <span style="color: #00ffff;">=&gt;</span> os.isFile(p) &amp;&amp; p.last.startsWith(inputFilename))
+</pre>
+</div>
+<p>
+I want to underline this error message I got, really really nice!
+</p>
+
+<pre class="example">
+value IsFile is not a member of os - did you mean os.isFile?
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-" class="outline-4">
+<h4 id="sec-">Move Files</h4>
+<div class="outline-text-4" id="text-">
+<p>
+We can then move the files listed and filtered in the previous
+section with just a simple <code>foreach</code> and the help of the
+<code>os.move.into</code>.
+</p>
+
+<p>
+Beware the semantic differences between the move operations since
+they could remove everything from the destination before performing
+the operation, eg <code>os.move.over</code>, or just fail if the destination
+does not exsists, eg <code>os.move</code>
+</p>
+
+<p>
+The result becomes:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-scala"><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Before</span>
+<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">moveCommand</span>(inputFilename<span style="color: #00ffff;">:</span> <span style="color: #98fb98;">String</span>)<span style="color: #00ffff;">:</span><span style="color: #98fb98;">Unit</span> <span style="color: #00ffff;">=</span> {
+  <span style="color: #00ffff;">val</span> <span style="color: #eedd82;">filesToMove</span> <span style="color: #00ffff;">=</span> getListOfFiles(<span style="color: #00ffff;">new</span> <span style="color: #98fb98;">File</span>(tempPath), inputFilename)
+  filesToMove.foreach { file <span style="color: #00ffff;">=&gt;</span>
+    <span style="color: #00ffff;">val</span> <span style="color: #eedd82;">moveCmd</span> <span style="color: #00ffff;">=</span> s<span style="color: #ffa07a;">"""mv </span><span style="color: #eedd82;">$tempPath</span><span style="color: #ffa07a;">/</span><span style="color: #eedd82;">${file.getName}</span><span style="color: #ffa07a;"> "</span><span style="color: #eedd82;">$destinationPath</span><span style="color: #ffa07a;">/""""</span>
+    moveCmd !
+  }
+}
+
+<span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">After</span>
+
+<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">moveCommand</span>(inputFilename<span style="color: #00ffff;">:</span> <span style="color: #98fb98;">String</span>)<span style="color: #00ffff;">:</span> <span style="color: #98fb98;">Unit</span> <span style="color: #00ffff;">=</span>
+  os.list(tempPath)
+    .filter(p <span style="color: #00ffff;">=&gt;</span> os.isFile(p) &amp;&amp; p.last.startsWith(inputFilename))
+    .foreach(f <span style="color: #00ffff;">=&gt;</span> os.move.into(f, destinationPath))
+</pre>
+</div>
+</div>
+</div>
+</div>
+
 
 <div id="outline-container-ArticleConclusions" class="outline-3">
 <h3 id="ArticleConclusions"><a id="sec-" name="sec-"></a>Conclusions</h3>
