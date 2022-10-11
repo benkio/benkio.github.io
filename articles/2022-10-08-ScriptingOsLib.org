@@ -121,6 +121,104 @@ At the time of writing I have 2:
 
   That's why I ended up using simple strings.
 
+*** Script Entry Point
+
+  In order to understand what this script is supposed to do, we need
+  to have a look at its entry point. This will now be effected by the
+  introduction of the [[https://github.com/com-lihaoyi/os-lib][os-lib]], but it will provide the context to
+  understand each step.
+
+  #+begin_src scala
+  val inputFiles: List[(String, String)] = List(
+    ("movie.avi", "movie"),
+    ("film.mkv", "film")
+  )
+
+  inputFiles.foreach { //1
+    case (inputFile, filename) => {
+      ffmpegCommand(inputFile, filename) //2
+      splitCommand(filename)             //3
+      removeCommand(filename)            //4
+      moveCommand(filename)              //5
+    }
+  }
+  #+end_src
+
+  What it does is:
+  1. cycle through each pair in input where the first one is the
+     actual file to be converted and the second one is the output
+     filename without extension. For each pair this will:
+  2. Run the ffmpeg command with the specific input to produce a video
+     compatible with the target TV: right bitrate, resolution, codec,
+     container, audio codec...
+  3. Split the result of the previous step in chunks of max 1GB.
+  4. Remove the output of step 2. We are only interested in the chunks
+     from step 3.
+  5. Move the chunks for the step 3 to the destination path.
+
+*** FFMPEG Command
+  Previously we just craft the command as a simple string with
+  interpolated input and run & forget it with the ~!~
+  command. Instead, the [[https://github.com/com-lihaoyi/os-lib][os-lib]] provides a [[https://github.com/com-lihaoyi/os-lib#osproccall][os.call]] that will run a
+  command [[https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/Shellable.html][Shellable]] process synchronously.
+
+  #+begin_src scala
+    // Before
+    def ffmpegCommand(inputFile: String, outputFilename: String): Unit = {
+      val ffmpegCmd =
+        s"""ffmpeg -i "$startingPath/$inputFile" -c:v libxvid -b:v 1500k -c:a libmp3lame -qscale:a 4 -vf scale=720:-1 "$tempPath/$outputFilename.avi""""
+      ffmpegCmd !
+    }
+
+    // After
+    def ffmpegCommand(inputFile: String, outputFilename: String): os.CommandResult =
+      os.proc(
+        "ffmpeg",
+        "-i",
+        startingPath / inputFile,
+        "-c:v",
+        "libxvid",
+        "-b:v",
+        "1500k",
+        "-c:a",
+        "libmp3lame",
+        "-qscale:a",
+        "4",
+        "-vf",
+        "scale=720:-1",
+        tempPath / s"$outputFilename.avi"
+      ).call()
+  #+end_src
+
+  Another noticeable change here is the fact that we return a
+  [[https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/CommandResult.html][os.CommandResult]] instead of ~Unit~. This will be later used to check
+  the ~exitcode~ of the ~ffmpeg~ process.
+
+  One could wonder why I didn't go for [[https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html][os.spawn]] instead of [[https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html][os.call]] in
+  order to take advantage of sub-processing and parallelise the whole
+  script. The issue here is that we don't know in advance how many
+  files we will have to convert. In the scenario where there are
+  several input files, having the [[https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html][os.spawn]] will cause tons of
+  long-live ffmpeg sub-processes that will hang the whole system.
+
+*** Split Command
+# TODO: write this section
+*** Remove Command
+  The remove command is quite straight forward to translate to the new
+  library since it exposes a [[https://github.com/com-lihaoyi/os-lib#osremove][os.remove]] that remove a file if exists.
+
+  #+begin_src scala
+    // Before
+    def removeCommand(inputFilename: String): Unit = {
+      val removeCmd = s"""rm "$tempPath/$inputFilename.avi""""
+      removeCmd !
+    }
+
+    // After
+    def removeCommand(inputFilename: String): Unit =
+      os.remove(tempPath/s"$inputFilename.avi")
+  #+end_src
+
 *** List Files
 
   Right now, there is this function in the script:
@@ -172,7 +270,6 @@ At the time of writing I have 2:
     }
 
     // After
-
     def moveCommand(inputFilename: String): Unit =
       os.list(tempPath)
         .filter(p => os.isFile(p) && p.last.startsWith(inputFilename))
@@ -180,11 +277,16 @@ At the time of writing I have 2:
   #+end_src
 
 
+
+# change the entry point to be parallel?? is it convenient? the whole
+# system could collapse, maybe restrict to 2 processes in parallel.
+# link the discussion about parallelism in ffmpeg command section
 ** Conclusions
   :PROPERTIES:
   :CUSTOM_ID: ArticleConclusions
   :END:
-
+** References
+# link to the final gist
 * Share Buttons
   :PROPERTIES:
   :CUSTOM_ID: ShareButtons

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Scripting with Scala CLI &amp; Os-lib</title>
-<!-- 2022-10-10 Mon 21:54 -->
+<!-- 2022-10-11 Tue 21:08 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -45,11 +45,16 @@ $(function() {
 <li><a href="#sec-">Movie Convertion Script</a>
 <ul class="nav">
 <li><a href="#sec-">File Paths</a></li>
+<li><a href="#sec-">Script Entry Point</a></li>
+<li><a href="#sec-">FFMPEG Command</a></li>
+<li><a href="#sec-">Split Command</a></li>
+<li><a href="#sec-">Remove Command</a></li>
 <li><a href="#sec-">List Files</a></li>
 <li><a href="#sec-">Move Files</a></li>
 </ul>
 </li>
 <li><a href="#ArticleConclusions">Conclusions</a></li>
+<li><a href="#sec-">References</a></li>
 </ul>
 </li>
 <li><a href="#ShareButtons">Share Buttons</a></li>
@@ -217,6 +222,143 @@ That's why I ended up using simple strings.
 </div>
 
 <div id="outline-container-sec-" class="outline-4">
+<h4 id="sec-">Script Entry Point</h4>
+<div class="outline-text-4" id="text-">
+<p>
+In order to understand what this script is supposed to do, we need
+to have a look at its entry point. This will now be effected by the
+introduction of the <a href="https://github.com/com-lihaoyi/os-lib">os-lib</a>, but it will provide the context to
+understand each step.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-scala"><span style="color: #00ffff;">val</span> <span style="color: #eedd82;">inputFiles</span><span style="color: #00ffff;">:</span> <span style="color: #98fb98;">List</span>[(<span style="color: #7fffd4;">String</span>, <span style="color: #7fffd4;">String</span>)] <span style="color: #00ffff;">=</span> <span style="color: #7fffd4;">List</span>(
+  (<span style="color: #ffa07a;">"movie.avi"</span>, <span style="color: #ffa07a;">"movie"</span>),
+  (<span style="color: #ffa07a;">"film.mkv"</span>, <span style="color: #ffa07a;">"film"</span>)
+)
+
+inputFiles.foreach { <span style="color: #ff7f24;">//</span><span style="color: #ff7f24;">1</span>
+  <span style="color: #00ffff;">case</span> (<span style="color: #eedd82;">inputFile</span>, <span style="color: #eedd82;">filename</span>) <span style="color: #00ffff;">=&gt;</span> {
+    ffmpegCommand(inputFile, filename) <span style="color: #ff7f24;">//</span><span style="color: #ff7f24;">2</span>
+    splitCommand(filename)             <span style="color: #ff7f24;">//</span><span style="color: #ff7f24;">3</span>
+    removeCommand(filename)            <span style="color: #ff7f24;">//</span><span style="color: #ff7f24;">4</span>
+    moveCommand(filename)              <span style="color: #ff7f24;">//</span><span style="color: #ff7f24;">5</span>
+  }
+}
+</pre>
+</div>
+
+<p>
+What it does is:
+</p>
+<ol class="org-ol">
+<li>cycle through each pair in input where the first one is the
+actual file to be converted and the second one is the output
+filename without extension. For each pair this will:
+</li>
+<li>Run the ffmpeg command with the specific input to produce a video
+compatible with the target TV: right bitrate, resolution, codec,
+container, audio codec&#x2026;
+</li>
+<li>Split the result of the previous step in chunks of max 1GB.
+</li>
+<li>Remove the output of step 2. We are only interested in the chunks
+from step 3.
+</li>
+<li>Move the chunks for the step 3 to the destination path.
+</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-sec-" class="outline-4">
+<h4 id="sec-">FFMPEG Command</h4>
+<div class="outline-text-4" id="text-">
+<p>
+Previously we just craft the command as a simple string with
+interpolated input and run &amp; forget it with the <code>!</code>
+command. Instead, the <a href="https://github.com/com-lihaoyi/os-lib">os-lib</a> provides a <a href="https://github.com/com-lihaoyi/os-lib#osproccall">os.call</a> that will run a
+command <a href="https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/Shellable.html">Shellable</a> process synchronously.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-scala"><span style="color: #ff7f24;">//</span><span style="color: #ff7f24;">Before</span>
+<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">ffmpegCommand</span>(inputFile<span style="color: #00ffff;">:</span> <span style="color: #98fb98;">String</span>, outputFilename<span style="color: #00ffff;">:</span> <span style="color: #98fb98;">String</span>)<span style="color: #00ffff;">:</span> <span style="color: #98fb98;">Unit</span> <span style="color: #00ffff;">=</span> {
+  <span style="color: #00ffff;">val</span> <span style="color: #eedd82;">ffmpegCmd</span> <span style="color: #00ffff;">=</span>
+    s<span style="color: #ffa07a;">"""ffmpeg -i "</span><span style="color: #eedd82;">$startingPath</span><span style="color: #ffa07a;">/</span><span style="color: #eedd82;">$inputFile</span><span style="color: #ffa07a;">" -c:v libxvid -b:v 1500k -c:a libmp3lame -qscale:a 4 -vf scale=720:-1 "</span><span style="color: #eedd82;">$tempPath</span><span style="color: #ffa07a;">/</span><span style="color: #eedd82;">$outputFilename</span><span style="color: #ffa07a;">.avi""""</span>
+  ffmpegCmd !
+}
+
+<span style="color: #ff7f24;">//</span><span style="color: #ff7f24;">After</span>
+<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">ffmpegCommand</span>(inputFile<span style="color: #00ffff;">:</span> <span style="color: #98fb98;">String</span>, outputFilename<span style="color: #00ffff;">:</span> <span style="color: #98fb98;">String</span>)<span style="color: #00ffff;">:</span> <span style="color: #98fb98;">os</span>.<span style="color: #7fffd4;">CommandResult</span> <span style="color: #00ffff;">=</span>
+  os.proc(
+    <span style="color: #ffa07a;">"ffmpeg"</span>,
+    <span style="color: #ffa07a;">"-i"</span>,
+    startingPath / inputFile,
+    <span style="color: #ffa07a;">"-c:v"</span>,
+    <span style="color: #ffa07a;">"libxvid"</span>,
+    <span style="color: #ffa07a;">"-b:v"</span>,
+    <span style="color: #ffa07a;">"1500k"</span>,
+    <span style="color: #ffa07a;">"-c:a"</span>,
+    <span style="color: #ffa07a;">"libmp3lame"</span>,
+    <span style="color: #ffa07a;">"-qscale:a"</span>,
+    <span style="color: #ffa07a;">"4"</span>,
+    <span style="color: #ffa07a;">"-vf"</span>,
+    <span style="color: #ffa07a;">"scale=720:-1"</span>,
+    tempPath / s<span style="color: #ffa07a;">"</span><span style="color: #eedd82;">$outputFilename</span><span style="color: #ffa07a;">.avi"</span>
+  ).call()
+</pre>
+</div>
+
+<p>
+Another noticeable change here is the fact that we return a
+<a href="https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/CommandResult.html">os.CommandResult</a> instead of <code>Unit</code>. This will be later used to check
+the <code>exitcode</code> of the <code>ffmpeg</code> process.
+</p>
+
+<p>
+One could wonder why I didn't go for <a href="https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html">os.spawn</a> instead of <a href="https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html">os.call</a> in
+order to take advantage of sub-processing and parallelise the whole
+script. The issue here is that we don't know in advance how many
+files we will have to convert. In the scenario where there are
+several input files, having the <a href="https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html">os.spawn</a> will cause tons of
+long-live ffmpeg sub-processes that will hang the whole system.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-" class="outline-4">
+<h4 id="sec-">Split Command</h4>
+<div class="outline-text-4" id="text-">
+</div>
+</div>
+<div id="outline-container-sec-" class="outline-4">
+<h4 id="sec-">Remove Command</h4>
+<div class="outline-text-4" id="text-">
+<p>
+The remove command is quite straight forward to translate to the new
+library since it exposes a <a href="https://github.com/com-lihaoyi/os-lib#osremove">os.remove</a> that remove a file if exists.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-scala"><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Before</span>
+<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">removeCommand</span>(inputFilename<span style="color: #00ffff;">:</span> <span style="color: #98fb98;">String</span>)<span style="color: #00ffff;">:</span> <span style="color: #98fb98;">Unit</span> <span style="color: #00ffff;">=</span> {
+  <span style="color: #00ffff;">val</span> <span style="color: #eedd82;">removeCmd</span> <span style="color: #00ffff;">=</span> s<span style="color: #ffa07a;">"""rm "</span><span style="color: #eedd82;">$tempPath</span><span style="color: #ffa07a;">/</span><span style="color: #eedd82;">$inputFilename</span><span style="color: #ffa07a;">.avi""""</span>
+  removeCmd !
+}
+
+<span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">After</span>
+<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">removeCommand</span>(inputFilename<span style="color: #00ffff;">:</span> <span style="color: #98fb98;">String</span>)<span style="color: #00ffff;">:</span> <span style="color: #98fb98;">Unit</span> <span style="color: #00ffff;">=</span>
+  os.remove(tempPath/s<span style="color: #ffa07a;">"</span><span style="color: #eedd82;">$inputFilename</span><span style="color: #ffa07a;">.avi"</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-" class="outline-4">
 <h4 id="sec-">List Files</h4>
 <div class="outline-text-4" id="text-">
 <p>
@@ -290,7 +432,6 @@ The result becomes:
 }
 
 <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">After</span>
-
 <span style="color: #00ffff;">def</span> <span style="color: #87cefa;">moveCommand</span>(inputFilename<span style="color: #00ffff;">:</span> <span style="color: #98fb98;">String</span>)<span style="color: #00ffff;">:</span> <span style="color: #98fb98;">Unit</span> <span style="color: #00ffff;">=</span>
   os.list(tempPath)
     .filter(p <span style="color: #00ffff;">=&gt;</span> os.isFile(p) &amp;&amp; p.last.startsWith(inputFilename))
@@ -300,15 +441,17 @@ The result becomes:
 </div>
 </div>
 </div>
-
-
 <div id="outline-container-ArticleConclusions" class="outline-3">
 <h3 id="ArticleConclusions"><a id="sec-" name="sec-"></a>Conclusions</h3>
 <div class="outline-text-3" id="text-ArticleConclusions">
 </div>
 </div>
+<div id="outline-container-sec-" class="outline-3">
+<h3 id="sec-">References</h3>
+<div class="outline-text-3" id="text-">
 </div>
-
+</div>
+</div>
 <div id="outline-container-ShareButtons" class="outline-2">
 <h2 id="ShareButtons"><a id="sec-" name="sec-"></a>Share Buttons</h2>
 <div class="outline-text-2" id="text-ShareButtons">
