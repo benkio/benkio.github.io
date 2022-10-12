@@ -194,7 +194,7 @@ At the time of writing I have 2:
   [[https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/CommandResult.html][os.CommandResult]] instead of ~Unit~. This will be later used to check
   the ~exitcode~ of the ~ffmpeg~ process.
 
-  One could wonder why I didn't go for [[https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html][os.spawn]] instead of [[https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html][os.call]] in
+  <<spawn>>One could wonder why I didn't go for [[https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html][os.spawn]] instead of [[https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html][os.call]] in
   order to take advantage of sub-processing and parallelise the whole
   script. The issue here is that we don't know in advance how many
   files we will have to convert. In the scenario where there are
@@ -202,7 +202,66 @@ At the time of writing I have 2:
   long-live ffmpeg sub-processes that will hang the whole system.
 
 *** Split Command
-# TODO: write this section
+  The Split command still uses ~ffmpeg~ since we want these files to
+  be playable and ~ffmpeg~ guarantees to produce a video file. We
+  can't just split the bytes, you know. The idea here is to split by
+  time: 1 chunk per hour. We don't have a way to read the length of
+  the movie, but we can assume it will be at most 3 hours.
+
+  So, we can build a long command to do it. Again, converting it to
+  the new library will just be a long long call with quite some
+  parameters.
+
+  #+begin_src scala
+     // Before
+     def splitCommand(inputFilename: String): Unit = {
+      val splitCmd =
+        s"""ffmpeg -v quiet -y -i "$tempPath/$inputFilename.avi" -vcodec copy -acodec copy -ss 00:00:00 -t 01:00:00 -sn "$tempPath/${inputFilename}_1.avi" -vcodec copy -acodec copy -ss 01:00:00 -t 01:00:00 -sn "$tempPath/${inputFilename}_2.avi" -vcodec copy -acodec copy -ss 02:00:00 -t 01:00:00 -sn "$tempPath/${inputFilename}_3.avi""""
+      splitCmd !
+    }
+
+    // After
+    def splitCommand(inputFilename: String): os.CommandResult =
+      os.proc(
+        "ffmpeg",
+        "-v",
+        "quiet",
+        "-y",
+        "-i",
+        tempPath / "$inputFilename.avi",
+        "-vcodec",
+        "copy",
+        "-acodec",
+        "copy",
+        "-ss",
+        "00:00:00",
+        "-t",
+        "01:00:00",
+        "-sn",
+        tempPath / "${inputFilename}_1.avi",
+        "-vcodec",
+        "copy",
+        "-acodec",
+        "copy",
+        "-ss",
+        "01:00:00",
+        "-t",
+        "01:00:00",
+        "-sn",
+        tempPath / "${inputFilename}_2.avi",
+        "-vcodec",
+        "copy",
+        "-acodec",
+        "copy",
+        "-ss",
+        "02:00:00",
+        "-t",
+        "01:00:00",
+        "-sn",
+        tempPath / "${inputFilename}_3.avi"
+      ).call()
+  #+end_src
+
 *** Remove Command
   The remove command is quite straight forward to translate to the new
   library since it exposes a [[https://github.com/com-lihaoyi/os-lib#osremove][os.remove]] that remove a file if exists.
@@ -276,15 +335,96 @@ At the time of writing I have 2:
         .foreach(f => os.move.into(f, destinationPath))
   #+end_src
 
+*** Final Cleanup
 
+  Now we can finally remove the useless imports! We can get rid of:
 
-# change the entry point to be parallel?? is it convenient? the whole
-# system could collapse, maybe restrict to 2 processes in parallel.
-# link the discussion about parallelism in ffmpeg command section
+#+begin_src scala
+    import sys.process._
+    import scala.language.postfixOps
+    import java.io.File
+  #+end_src
+
+*** Parallel Collection
+
+  We introduced the idea of parallelise the computation in [[spawn][the ffmpeg
+  subsection]] when we talked about [[https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html][os.spawn]], saying it's not convenient
+  at that point. However, we can do something using [[https://github.com/scala/scala-parallel-collections][parallel collections]].
+
+  Since everything starts with a ~List~, we can just import the
+  [[https://github.com/scala/scala-parallel-collections][parallel collections]] lib and import, then use the ~par~ method to
+  convert it to ~ParSeq~. Moreover, we have to limit the amout of
+  parallelism and we can do it by creating and setting a
+  ~ForkJoinPoll~ manually as [[https://docs.scala-lang.org/overviews/parallel-collections/configuration.html][this documentation]].
+
+  Finally, we can check the exit code of important commands. Of course
+  this will not scale and it's ugly code: ~foreach~, nested ifs,
+  ~println~... But we are still doing scripting here! 😛
+
+  The final entry point looks like this:
+
+  #+begin_src scala
+    val inputFiles: ParSeq[(String, String)] = List(
+      ("movie.avi", "movie"),
+      ("film.avi", "film")
+    ).par
+
+    val forkJoinPool = new java.util.concurrent.ForkJoinPool(2)
+    inputFiles.tasksupport = new ForkJoinTaskSupport(forkJoinPool)
+
+    inputFiles.foreach {
+      case (inputFile, filename) => {
+        val ffmpegExitCode = ffmpegCommand(inputFile, filename).exitCode
+        if (ffmpegExitCode == 0) {
+          val splitExitCode = splitCommand(filename).exitCode
+          if (splitExitCode == 0) moveCommand(filename)
+          else println(s"split failed for $filename")
+        } else println(s"ffmpeg command failed for $inputFile")
+        removeCommand(filename)
+      }
+    }
+  #+end_src
+
+*** Testing
+
+  I just tried the script after the above changes and I discovered
+  that it just hang 😯 🤕
+
+  After some ~println~ and debugging it turned out that the starting
+  paths defined at the beginning of the files didn't quite work as
+  expected: when I add an additional value with ~path/file~ to
+  construct the final path and then call ~toString~ inside a
+  ~println~ everything blocked somehow!! 💀
+
+  The solution was to convert the above paths to ~def~ and pass the
+  final file as input in other to build the file in place. Plus, I had
+  to drop the temporary directory in favour of an existing one for the
+  same reason above.
+
+  The final change is:
+
+  #+bengin_src scala
+  def tempPath(inputFile:String) = os.home/"temp"/"test"/inputFile
+  def startingPath(inputFile:String): os.Path = os.home/"temp"/"test"/inputFile
+  val destinationPath = os.home/"temp"/"convertedFilms"
+  #+end_src_
+
+  Maybe I did some error along the way? missing some import? I don't
+  know really. If you have more experience with the library, you can
+  find the final code in the [[*References][References]] section.
+
+  Apart from this inconvenience, once it was fixed, the script worked
+  as expected: starting 2 ~ffmpeg~ processes in parallel for
+  conversion, executing the split and cleanup.
+
+  Side note: the little price for concurrency is the overlap of the
+  processes outputs as you might expect in a multithread program.
+** Youtube to GIF Script
 ** Conclusions
   :PROPERTIES:
   :CUSTOM_ID: ArticleConclusions
   :END:
+
 ** References
 # link to the final gist
 * Share Buttons
