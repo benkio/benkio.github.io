@@ -404,8 +404,10 @@ At the time of writing I have 2:
   The final change is:
 
   #+bengin_src scala
-  def tempPath(inputFile:String) = os.home/"temp"/"test"/inputFile
-  def startingPath(inputFile:String): os.Path = os.home/"temp"/"test"/inputFile
+  def tempPath(inputFile:String) =
+    if (inputFile.isEmpty) os.home/"temp" else os.home/"temp"/inputFile
+  def startingPath(inputFile:String): os.Path =
+    if (inputFile.isEmpty) os.home/"temp"/"test" else os.home/"temp"/"test"/inputFile
   val destinationPath = os.home/"temp"/"convertedFilms"
   #+end_src_
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Scripting with Scala CLI &amp; Os-lib</title>
-<!-- 2022-10-12 Wed 23:51 -->
+<!-- 2022-10-13 Thu 00:00 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -610,8 +610,10 @@ The final change is:
 
 <p>
 #+bengin<sub>src</sub> scala
-def tempPath(inputFile:String) = os.home/"temp"<i>"test"/inputFile
-def startingPath(inputFile:String): os.Path = os.home</i>"temp"<i>"test"/inputFile
+def tempPath(inputFile:String) =
+  if (inputFile.isEmpty) os.home/"temp" else os.home/"temp"/inputFile
+def startingPath(inputFile:String): os.Path =
+  if (inputFile.isEmpty) os.home/"temp"<i>"test" else os.home</i>"temp"<i>"test"/inputFile
 val destinationPath = os.home</i>"temp"/"convertedFilms"
 #+end<sub>src</sub>_
 </p>
