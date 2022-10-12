@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Scripting with Scala CLI &amp; Os-lib</title>
-<!-- 2022-10-13 Thu 00:00 -->
+<!-- 2022-10-13 Thu 00:27 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -567,13 +567,14 @@ inputFiles.tasksupport <span style="color: #00ffff;">=</span> <span style="color
 
 inputFiles.foreach {
   <span style="color: #00ffff;">case</span> (<span style="color: #eedd82;">inputFile</span>, <span style="color: #eedd82;">filename</span>) <span style="color: #00ffff;">=&gt;</span> {
-    <span style="color: #00ffff;">val</span> <span style="color: #eedd82;">ffmpegExitCode</span> <span style="color: #00ffff;">=</span> ffmpegCommand(inputFile, filename).exitCode
-    <span style="color: #00ffff;">if</span> (ffmpegExitCode == <span style="color: #7fffd4;">0</span>) {
-      <span style="color: #00ffff;">val</span> <span style="color: #eedd82;">splitExitCode</span> <span style="color: #00ffff;">=</span> splitCommand(filename).exitCode
-      <span style="color: #00ffff;">if</span> (splitExitCode == <span style="color: #7fffd4;">0</span>) moveCommand(filename)
+    <span style="color: #00ffff;">val</span> <span style="color: #eedd82;">ffmpegEC</span> <span style="color: #00ffff;">=</span> ffmpegCommand(inputFile, filename).exitCode
+    <span style="color: #00ffff;">if</span> (ffmpegEC == <span style="color: #7fffd4;">0</span>) {
+      <span style="color: #00ffff;">val</span> <span style="color: #eedd82;">splitEC</span> <span style="color: #00ffff;">=</span> splitCommand(filename).exitCode
+      <span style="color: #00ffff;">if</span> (splitEC == <span style="color: #7fffd4;">0</span>)
+        removeCommand(filename)
+        moveCommand(filename)
       <span style="color: #00ffff;">else</span> println(s<span style="color: #ffa07a;">"split failed for </span><span style="color: #eedd82;">$filename</span><span style="color: #ffa07a;">"</span>)
     } <span style="color: #00ffff;">else</span> println(s<span style="color: #ffa07a;">"ffmpeg command failed for </span><span style="color: #eedd82;">$inputFile</span><span style="color: #ffa07a;">"</span>)
-    removeCommand(filename)
   }
 }
 </pre>
@@ -613,12 +614,26 @@ The final change is:
 def tempPath(inputFile:String) =
   if (inputFile.isEmpty) os.home/"temp" else os.home/"temp"/inputFile
 def startingPath(inputFile:String): os.Path =
-  if (inputFile.isEmpty) os.home/"temp"<i>"test" else os.home</i>"temp"<i>"test"/inputFile
-val destinationPath = os.home</i>"temp"/"convertedFilms"
+  if (inputFile.isEmpty) os.home/"temp"<i>"test" else os.home</i>"temp"/"test"/inputFile
 #+end<sub>src</sub>_
 </p>
 
 <p>
+I also had to put the <code>destinationPath</code> directly into the <code>move</code>
+function (probably a def would work as well), in this way:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-scala"><span style="color: #00ffff;">def</span> <span style="color: #87cefa;">moveCommand</span>(inputFilename<span style="color: #00ffff;">:</span> <span style="color: #98fb98;">String</span>)<span style="color: #00ffff;">:</span> <span style="color: #98fb98;">Unit</span> <span style="color: #00ffff;">=</span>
+  os.list(tempPath(<span style="color: #ffa07a;">""</span>))
+    .filter(p <span style="color: #00ffff;">=&gt;</span> os.isFile(p) &amp;&amp; p.last.startsWith(inputFilename))
+    .foreach(os.move.into(<span style="color: #00ffff;">_</span>, os.home/<span style="color: #ffa07a;">"temp"</span>/<span style="color: #ffa07a;">"convertedFilms"</span>))
+</pre>
+</div>
+
+<p>
+I tried to use <code>lazy val</code>, but it didn't help as well.
 Maybe I did some error along the way? missing some import? I don't
 know really. If you have more experience with the library, you can
 find the final code in the <a href="#sec-">References</a> section.

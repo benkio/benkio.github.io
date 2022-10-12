@@ -374,13 +374,14 @@ At the time of writing I have 2:
 
     inputFiles.foreach {
       case (inputFile, filename) => {
-        val ffmpegExitCode = ffmpegCommand(inputFile, filename).exitCode
-        if (ffmpegExitCode == 0) {
-          val splitExitCode = splitCommand(filename).exitCode
-          if (splitExitCode == 0) moveCommand(filename)
+        val ffmpegEC = ffmpegCommand(inputFile, filename).exitCode
+        if (ffmpegEC == 0) {
+          val splitEC = splitCommand(filename).exitCode
+          if (splitEC == 0)
+            removeCommand(filename)
+            moveCommand(filename)
           else println(s"split failed for $filename")
         } else println(s"ffmpeg command failed for $inputFile")
-        removeCommand(filename)
       }
     }
   #+end_src
@@ -408,9 +409,19 @@ At the time of writing I have 2:
     if (inputFile.isEmpty) os.home/"temp" else os.home/"temp"/inputFile
   def startingPath(inputFile:String): os.Path =
     if (inputFile.isEmpty) os.home/"temp"/"test" else os.home/"temp"/"test"/inputFile
-  val destinationPath = os.home/"temp"/"convertedFilms"
   #+end_src_
 
+  I also had to put the ~destinationPath~ directly into the ~move~
+  function (probably a def would work as well), in this way:
+
+  #+begin_src scala
+    def moveCommand(inputFilename: String): Unit =
+      os.list(tempPath(""))
+        .filter(p => os.isFile(p) && p.last.startsWith(inputFilename))
+        .foreach(os.move.into(_, os.home/"temp"/"convertedFilms"))
+  #+end_src
+
+  I tried to use ~lazy val~, but it didn't help as well.
   Maybe I did some error along the way? missing some import? I don't
   know really. If you have more experience with the library, you can
   find the final code in the [[*References][References]] section.
