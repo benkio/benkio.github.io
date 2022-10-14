@@ -81,7 +81,6 @@ At the time of writing I have 2:
   #+end_src
 
 ** Movie Convertion Script
-
 *** File Paths
 
   Let's convert simple file path strings to the ones used by the
@@ -100,7 +99,6 @@ At the time of writing I have 2:
     val destinationPath = "/Users/benkio/temp/convertedFilms"
 
     // After
-
     val tempPath = os.temp.dir()
     val startingPath = os.home/"temp"/"test"
     val destinationPath = os.home/"temp"/"convertedFilms"
@@ -433,13 +431,162 @@ At the time of writing I have 2:
   Side note: the little price for concurrency is the overlap of the
   processes outputs as you might expect in a multithread program.
 ** Youtube to GIF Script
+  This script also includes some additional code for: converting time
+  measures and modeling the input of subtitles, the subtitle position
+  and fonts, the cutting of the video, the spacing between subtitles
+  and so on. In order to focus only on the library and keep this
+  article short I'll just skip all of that. Please follow the link in
+  the [[*References][References]] section if you are interested.
+
+*** File Paths
+  We have already talked about [[*File Paths][File Paths]] in the previous
+  section. Here I just share the changes in this specific case.
+
+  #+begin_src scala
+    // Before
+    val path = "/Users/benkio/temp"
+    // After
+    def path(file: String = ""): os.Path =
+      if (file.isEmpty) os.home/"temp" else os.home/"temp"/file
+  #+end_src
+*** File System Functions
+  The /Youtube to Gif/ script takes advantage of more file system
+  functions compared to previous script and here is actually where
+  [[https://github.com/com-lihaoyi/os-lib][os-lib]] shines. In particular, other than move files, list files, and call
+  external commands, here we need also to write content to
+  files.
+
+  Finally, before we needed to change directory and then run
+  the specified command in order to collect the result in a specific
+  place. with [[https://github.com/com-lihaoyi/os-lib][os-lib]] we can specify the path directly on the call of
+  the process and same an additional step.
+
+  #+begin_src scala
+    // Before
+    // File System Functions
+
+    def changeDirectory(dir: String): Unit = System.setProperty("user.dir", dir)
+    def moveToTemp = changeDirectory(path)
+    def writeSubtitles(content: String, outputFilename: String): Unit = {
+      println("srt content: " + content)
+      Files.write(Paths.get(outputFilename), content.getBytes(StandardCharsets.UTF_8))
+    }
+    def removeCommand(inputFilename:String): Unit = {
+      val removeCmd = s"""rm "$path/$inputFilename""""
+      println("removeCmd: " + removeCmd)
+      "sleep 1" #&& removeCmd !
+    }
+
+    def getListOfOutputFiles():List[File] = new File(path).listFiles.filter(f => f.isFile && f.getName.startsWith("gif")).toList
+
+    def renameFile(inputFilename: String, outputFilename: String): Unit = {
+      val renameCmd = s"""mv "$path/$inputFilename" "$path/$outputFilename" """
+      println("rename: " + renameCmd)
+      renameCmd !
+    }
+
+    def burnSubtitlesInVideo(inputFilename: String, subtitleFilename:String,  outputFilename: String): Unit = {
+      val ffmpegBurnSubtitlesInVideo = s"""ffmpeg -i $inputFilename -vf "subtitles=$subtitleFilename" $outputFilename"""
+      println("ffmpegBurnSubtitlesInVideo: " + ffmpegBurnSubtitlesInVideo)
+      ffmpegBurnSubtitlesInVideo !
+    }
+
+    // After
+    // File System Functions
+
+    def writeSubtitles(content: String, outputFile: os.Path): Unit =
+      os.write(outputFile, content.getBytes(StandardCharsets.UTF_8))
+
+    def removeCommand(inputFilename: String): Unit =
+      os.remove(path(inputFilename))
+
+    def getListOfOutputFiles(): IndexedSeq[os.Path] =
+      os.list(path()).filter(f => os.isFile(f) && "gif[0-9]+.mp4".r.matches(f.last))
+
+    def renameFile(inputFilename: String, outputFilename: String): Unit =
+      os.move(path(inputFilename), path(outputFilename))
+
+    def burnSubtitlesInVideo(
+      inputFilename: String,
+      subtitleFilename: String,
+      outputFilename: String
+    ): Unit =
+      os.proc(
+        "ffmpeg",
+        "-i",
+        path(inputFilename),
+        "-vf",
+        s""""subtitles=$subtitleFilename"""",
+        path(outputFilename)
+      ).call()
+  #+end_src
+*** Piping Commands
+
+  In order to download just a specific chunk of youtube video you need
+  to get the direct stream url, inject it into a non-trivial ~ffmpeg~
+  command with the right timestamps and then run such process. To do
+  so, we can take advantage of the output from the tool ~yt-dlp~ that
+  will return the video stream url to inject and then run ~ffmpeg~.
+
+  Before it was done this way:
+
+  #+begin_src scala
+    // Before
+    def downloadFileToDir(youtubeVideo: YoutubeVideo, outputFilename: String): Unit = {
+      moveToTemp
+      if (!File(s"$path/$outputFilename").exists) {
+        val ytDlpCommand = s"""yt-dlp -f "best[ext=mp4]" -g ${youtubeVideo.url}"""
+        println(s"ytDlpCommand: $ytDlpCommand")
+        val ytDlpCommandOutputUrl = (ytDlpCommand !!).lines.findFirst().get
+        val ffmpegCommand = s"""ffmpeg -i "$ytDlpCommandOutputUrl" -ss ${secondsToString(youtubeVideo.from.toMillis / 1000)} -to ${secondsToString(youtubeVideo.to.toMillis / 1000)} -an "$outputFilename.mp4""""
+        println("ffmpegCommand: " + ffmpegCommand)
+        ffmpegCommand !
+      }
+    }
+    // After
+    def downloadFileToDir(
+      youtubeVideo: YoutubeVideo,
+      outputFilename: String
+    ): Unit =
+      if (!os.exists(path(outputFilename)))
+        os.proc("yt-dlp", "-f", s""""[best=ext=mp4]"""", "-g", youtubeVideo.url)
+          .call(cwd = path())
+          .out
+          .lines()
+          .headOption
+          .map(ytDlpCommandOutputUrl =>
+            os.proc(
+              "ffmpeg",
+              "-i",
+              s""""$ytDlpCommandOutputUrl"""",
+              "-ss",
+              secondsToString(youtubeVideo.from.toMillis / 1000),
+              "-to",
+              secondsToString(youtubeVideo.to.toMillis / 1000),
+              "-an",
+              s""""$outputFilename.mp4""""
+            )
+          )
+          .getOrElse(())
+  #+end_src
+
+  If you look at the documentation of the library, they show a very
+  nice way to pipe commands into one another. Here I just preferred to
+  call them one after the other and pass the result manually since I'm
+  quite new to this library and the commands are quite long by
+  themselves. Probably there's a better/more elegant way to achieve
+  this, if so, just reach out to me and let me know. I'll be happy to
+  give it a try.
+
+*** Testing
+# TODO
 ** Conclusions
   :PROPERTIES:
   :CUSTOM_ID: ArticleConclusions
   :END:
-
+# TODO
 ** References
-# link to the final gist
+# TODO: add the youtube to gif link
 - [[https://gist.github.com/benkio/6fac65fdaec44842712be716f46169e1][convertFilms.sc script]]
 * Share Buttons
   :PROPERTIES:
