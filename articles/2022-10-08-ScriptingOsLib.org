@@ -31,7 +31,7 @@
 :CUSTOM_ID: ArticleAbstract
 :END:
 
-In this article I will show how I refactored some existing scripts
+In this article, I will show how I refactored some existing scripts
 written in [[https://scala-cli.virtuslab.org/][scala-cli]] using the [[https://github.com/com-lihaoyi/os-lib][os-lib]].
 
 ** Use Cases & Motivations
@@ -39,35 +39,35 @@ written in [[https://scala-cli.virtuslab.org/][scala-cli]] using the [[https://g
 :CUSTOM_ID: ArticleContent
 :END:
 
-Everyone has his own scripts for various tasks and I'm no exception.
-At the time of writing I have 2:
-  - One for converting movies to a format compatible with my mom's
-    TV. Movies needs to be in Xvid, 720p, a specific bit rate, mp3
-    audio track, and be not bigger then 1GB (if so it must be
-    splitted). I discovered this by trial and error.
-  - One for generating GIF (muted video chunks with subtitles, to be
-    precise) staring from YouTube links.
+  Everyone has his own scripts for various tasks and I'm no exception.
+  At the time of writing I have 2:
+    - One for converting movies to a format compatible with my mom's
+      TV. Movies need to be in Xvid, 720p, with a specific bit rate, mp3
+      audio track, and be not bigger than 1GB (if so it must be
+      split). I discovered this by trial and error.
+    - One for generating GIFs (muted video chunks with subtitles, to be
+      precise) starting from YouTube links.
 
-    For these task I rely on [[https://scala-cli.virtuslab.org/][scala-cli]], ~ffmpeg~, ~yt-dlp~ and classic
-    Unix commands such as ~rm~ and ~mv~.
+  For these tasks I rely on [[https://scala-cli.virtuslab.org/][scala-cli]], ~ffmpeg~, ~yt-dlp~ and classic
+  Unix commands such as ~rm~ and ~mv~.
 
-    Everything works as expected and anyone with a little trace of
-    intelligence would keep the situation as it is. At least until
-    something goes wrong. However, being a Scala engineer, I heard about
-    "the lihaoyi ecosystem" several times and I've never had a chance
-    to play with it. Plus, the above scripts use the [[https://www.scala-lang.org/api/2.13.x/scala/sys/process/index.html][sys.process._]]
-    package and I'm not really super fan of it. So I thought: "why
-    just I don't refactor the scripts using the [[https://github.com/com-lihaoyi/os-lib][os-lib]]?". This way I can
-    both the goals of getting rid of the [[https://www.scala-lang.org/api/2.13.x/scala/sys/process/index.html][sys.process._]] and try something
-    from lihaoyi.
+  Everything works as expected and anyone with a little trace of
+  intelligence would keep the situation as it is. At least until
+  something goes wrong. However, being a Scala engineer, I heard about
+  "the lihaoyi ecosystem" several times and I've never had a chance
+  to play with it. Plus, the above scripts use the [[https://www.scala-lang.org/api/2.13.x/scala/sys/process/index.html][sys.process._]]
+  package and I'm not really a super fan of it. So I thought: "why
+  just I don't refactor the scripts using the [[https://github.com/com-lihaoyi/os-lib][os-lib]]?". This way I can
+  both the goals of getting rid of the [[https://www.scala-lang.org/api/2.13.x/scala/sys/process/index.html][sys.process._]] and try something
+  from lihaoyi.
 
-    Moreover, apart from the library [[https://github.com/com-lihaoyi/os-lib#cookbook][README Cookbook]] and [[https://www.lihaoyi.com/post/HowtoworkwithFilesinScala.html][this article]]
-    from Li Haoyi himself, check them out if you want to explore the
-    library, I couldn't find a lot of examples of its usages,
-    especially in a "real" situation. The library is a porting of
-    [[https://docs.python.org/3/library/os.html][Python's Os library]] and there are examples of it around for sure,
-    but no one wants to have to translate from a language to another
-    when he is looking for examples.
+  Moreover, apart from the library [[https://github.com/com-lihaoyi/os-lib#cookbook][README Cookbook]] and [[https://www.lihaoyi.com/post/HowtoworkwithFilesinScala.html][this article]]
+  from Li Haoyi himself, check them out if you want to explore the
+  library, I couldn't find a lot of examples of its usage,
+  especially in a "real" situation. The library is a porting of
+  [[https://docs.python.org/3/library/os.html][Python's Os library]] and there are examples of it around for sure,
+  but no one wants to have to translate from one language to another
+  when he is looking for examples.
 
 ** Insert Script Dependency
 
@@ -80,17 +80,18 @@ At the time of writing I have 2:
     using lib "com.lihaoyi::os-lib:0.8.1"
   #+end_src
 
-** Movie Convertion Script
+** Movie Conversion Script
 *** File Paths
 
-  Let's convert simple file path strings to the ones used by the
+  Let's convert simple file path strings to the types used by the
   library. Note how I had to specify a temporary existing directory
-  for the script to work and store intermediate results. Meanwhile the
-  [[https://github.com/com-lihaoyi/os-lib/][os-lib]] provides a [[https://github.com/com-lihaoyi/os-lib#ostempdir][temp dir]] operation to get it.
+  for the script to work and store intermediate results. Instead, the
+  [[https://github.com/com-lihaoyi/os-lib/][os-lib]] provides a [[https://github.com/com-lihaoyi/os-lib#ostempdir][temp dir]] operation out of the box.
 
   I can then change the other paths as well to start straight away
   from the ~home directory~. This will make it more flexible since I
-  can easily move the script without having to update the paths.
+  can easily move the script from one machine to another, let say a
+  Macbook one to a Linux one, without having to update the paths.
 
   #+begin_src scala
     // Before
@@ -122,9 +123,9 @@ At the time of writing I have 2:
 *** Script Entry Point
 
   In order to understand what this script is supposed to do, we need
-  to have a look at its entry point. This will now be effected by the
-  introduction of the [[https://github.com/com-lihaoyi/os-lib][os-lib]], but it will provide the context to
-  understand each step.
+  to have a look at its entry point. This will be affected by the
+  introduction of the [[https://github.com/com-lihaoyi/os-lib][os-lib]] later on, but I introduce it here to
+  provide more context to understand each step.
 
   #+begin_src scala
   val inputFiles: List[(String, String)] = List(
@@ -145,19 +146,23 @@ At the time of writing I have 2:
   What it does is:
   1. cycle through each pair in input where the first one is the
      actual file to be converted and the second one is the output
-     filename without extension. For each pair this will:
-  2. Run the ffmpeg command with the specific input to produce a video
+     filename without extension. We could think about extracting the
+     output file name straight from the first value, but often the
+     input values have non-consistent names, so it's better to give
+     the user a way to specify the output name. For each pair this will:
+  2. Run the ~ffmpeg~ command with the specific input to produce a video
      compatible with the target TV: right bitrate, resolution, codec,
-     container, audio codec...
+     container, audio codec... This will output a full converted movie.
   3. Split the result of the previous step in chunks of max 1GB.
   4. Remove the output of step 2. We are only interested in the chunks
      from step 3.
-  5. Move the chunks for the step 3 to the destination path.
+  5. Move the chunks for step 3 to the destination path.
 
 *** FFMPEG Command
+
   Previously we just craft the command as a simple string with
-  interpolated input and run & forget it with the ~!~
-  command. Instead, the [[https://github.com/com-lihaoyi/os-lib][os-lib]] provides a [[https://github.com/com-lihaoyi/os-lib#osproccall][os.call]] that will run a
+  interpolated input and "run & forget" it with the ~!~
+  command. Instead, the [[https://github.com/com-lihaoyi/os-lib][os-lib]] provides [[https://github.com/com-lihaoyi/os-lib#osproccall][os.call]] that will run a
   command [[https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/Shellable.html][Shellable]] process synchronously.
 
   #+begin_src scala
@@ -188,23 +193,27 @@ At the time of writing I have 2:
       ).call()
   #+end_src
 
-  Another noticeable change here is the fact that we return a
+  Another noticeable change here is the fact that we return an
   [[https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/CommandResult.html][os.CommandResult]] instead of ~Unit~. This will be later used to check
   the ~exitcode~ of the ~ffmpeg~ process.
 
   <<spawn>>One could wonder why I didn't go for [[https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html][os.spawn]] instead of [[https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html][os.call]] in
-  order to take advantage of sub-processing and parallelise the whole
+  order to take advantage of sub-processing and parallelize the whole
   script. The issue here is that we don't know in advance how many
   files we will have to convert. In the scenario where there are
   several input files, having the [[https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html][os.spawn]] will cause tons of
-  long-live ffmpeg sub-processes that will hang the whole system.
+  long-live ~ffmpeg~ sub-processes that will hang the whole system.
 
 *** Split Command
+
   The Split command still uses ~ffmpeg~ since we want these files to
   be playable and ~ffmpeg~ guarantees to produce a video file. We
   can't just split the bytes, you know. The idea here is to split by
-  time: 1 chunk per hour. We don't have a way to read the length of
-  the movie, but we can assume it will be at most 3 hours.
+  time: 1 chunk per hour. Ideally we could run ~ffmpeg~ to the input
+  file, parse its duration and modify the split command accordingly,
+  but it will complicate the script for little value, so we can assume
+  it will be at most 3 hours. This is an improvement that could be
+  made eventually.
 
   So, we can build a long command to do it. Again, converting it to
   the new library will just be a long long call with quite some
@@ -261,8 +270,9 @@ At the time of writing I have 2:
   #+end_src
 
 *** Remove Command
-  The remove command is quite straight forward to translate to the new
-  library since it exposes a [[https://github.com/com-lihaoyi/os-lib#osremove][os.remove]] that remove a file if exists.
+
+  The remove command is straightforward to translate to the new
+  library since it exposes [[https://github.com/com-lihaoyi/os-lib#osremove][os.remove]] that removes a file if exists.
 
   #+begin_src scala
     // Before
@@ -289,13 +299,14 @@ At the time of writing I have 2:
   #+end_src
 
   Starting from a folder, This will just return a list of files with a
-  given prefix. Please close an eye on the double ~filter~ call.
+  given prefix. Please close an eye on the double ~filter~ call, I
+  just realized it 😅
 
   I can now simply replace this using ~os.list~ and then filter the
   results with the same ~filter~ used above.
 
   #+begin_src scala
-    os.list(tempPath).filter(p => os.isFile(p) && p.last.startsWith(inputFilename))
+    os.list(path()).filter(f => os.isFile(f) && "gif[0-9]+.mp4".r.matches(f.last))
   #+end_src
   I want to underline this error message I got, really really nice!
 
@@ -312,7 +323,7 @@ At the time of writing I have 2:
   Beware the semantic differences between the move operations since
   they could remove everything from the destination before performing
   the operation, eg ~os.move.over~, or just fail if the destination
-  does not exsists, eg ~os.move~
+  does not exist, eg ~os.move~
 
   The result becomes:
 
@@ -345,17 +356,17 @@ At the time of writing I have 2:
 
 *** Parallel Collection
 
-  We introduced the idea of parallelise the computation in [[spawn][the ffmpeg
+  We introduced the idea of parallelising the computation in [[spawn][the ffmpeg
   subsection]] when we talked about [[https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html][os.spawn]], saying it's not convenient
   at that point. However, we can do something using [[https://github.com/scala/scala-parallel-collections][parallel collections]].
 
-  Since everything starts with a ~List~, we can just import the
-  [[https://github.com/scala/scala-parallel-collections][parallel collections]] lib and import, then use the ~par~ method to
-  convert it to ~ParSeq~. Moreover, we have to limit the amout of
+  Since everything starts with a ~List~, we can just add the [[https://github.com/scala/scala-parallel-collections][parallel
+  collections]] lib dependency and import, then use the ~par~ method to
+  convert it to ~ParSeq~. Moreover, we have to limit the amount of
   parallelism and we can do it by creating and setting a
   ~ForkJoinPoll~ manually as [[https://docs.scala-lang.org/overviews/parallel-collections/configuration.html][this documentation]].
 
-  Finally, we can check the exit code of important commands. Of course
+  Finally, we can check the exit code of important commands. Of course,
   this will not scale and it's ugly code: ~foreach~, nested ifs,
   ~println~... But we are still doing scripting here! 😛
 
@@ -393,21 +404,21 @@ At the time of writing I have 2:
   paths defined at the beginning of the files didn't quite work as
   expected: when I add an additional value with ~path/file~ to
   construct the final path and then call ~toString~ inside a
-  ~println~ everything blocked somehow!! 💀
+  ~println~ everything is blocked somehow!! 💀
 
   The solution was to convert the above paths to ~def~ and pass the
   final file as input in other to build the file in place. Plus, I had
-  to drop the temporary directory in favour of an existing one for the
+  to drop the temporary directory in favor of an existing one for the
   same reason above.
 
   The final change is:
 
-  #+bengin_src scala
+  #+begin_src scala
   def tempPath(inputFile:String) =
     if (inputFile.isEmpty) os.home/"temp" else os.home/"temp"/inputFile
   def startingPath(inputFile:String): os.Path =
     if (inputFile.isEmpty) os.home/"temp"/"test" else os.home/"temp"/"test"/inputFile
-  #+end_src_
+  #+end_src
 
   I also had to put the ~destinationPath~ directly into the ~move~
   function (probably a def would work as well), in this way:
@@ -420,25 +431,28 @@ At the time of writing I have 2:
   #+end_src
 
   I tried to use ~lazy val~, but it didn't help as well.
-  Maybe I did some error along the way? missing some import? I don't
-  know really. If you have more experience with the library, you can
+  Maybe I did some errors along the way? missing some import? I don't
+  know really. If you have more experience with the library and you
+  know where the problem is please let me know. You can
   find the final code in the [[*References][References]] section.
 
   Apart from this inconvenience, once it was fixed, the script worked
-  as expected: starting 2 ~ffmpeg~ processes in parallel for
-  conversion, executing the split and cleanup.
+  as expected: starting 2 ~ffmpeg~ processes in parallel, executing
+  the split, and cleanup 🥳 🎉
 
   Side note: the little price for concurrency is the overlap of the
-  processes outputs as you might expect in a multithread program.
+  processes' outputs as you might expect in a multi-thread program.
 ** Youtube to GIF Script
-  This script also includes some additional code for: converting time
-  measures and modeling the input of subtitles, the subtitle position
-  and fonts, the cutting of the video, the spacing between subtitles
+
+  This script also includes some additional code for converting time
+  measures, modeling the input of subtitles, subtitle position,
+  fonts, cutting of the video, spacing between subtitles,
   and so on. In order to focus only on the library and keep this
-  article short I'll just skip all of that. Please follow the link in
+  article short, I'll just skip all of that. Please follow the link in
   the [[*References][References]] section if you are interested.
 
 *** File Paths
+
   We have already talked about [[*File Paths][File Paths]] in the previous
   section. Here I just share the changes in this specific case.
 
@@ -450,16 +464,17 @@ At the time of writing I have 2:
       if (file.isEmpty) os.home/"temp" else os.home/"temp"/file
   #+end_src
 *** File System Functions
-  The /Youtube to Gif/ script takes advantage of more file system
-  functions compared to previous script and here is actually where
-  [[https://github.com/com-lihaoyi/os-lib][os-lib]] shines. In particular, other than move files, list files, and call
-  external commands, here we need also to write content to
-  files.
 
-  Finally, before we needed to change directory and then run
+  The /Youtube to Gif/ script takes advantage of more file system
+  functions compared to the previous script and here is actually where
+  [[https://github.com/com-lihaoyi/os-lib][os-lib]] shines. In particular, other than moving files, listing
+  files, and calling external commands, here we need also to write
+  content to files.
+
+  Finally, we needed to change the directory and then run
   the specified command in order to collect the result in a specific
-  place. with [[https://github.com/com-lihaoyi/os-lib][os-lib]] we can specify the path directly on the call of
-  the process and same an additional step.
+  place. With [[https://github.com/com-lihaoyi/os-lib][os-lib]] we can specify the path directly on the call of
+  the process and save an additional step.
 
   #+begin_src scala
     // Before
@@ -516,17 +531,17 @@ At the time of writing I have 2:
         "-i",
         path(inputFilename),
         "-vf",
-        s""""subtitles=$subtitleFilename"""",
+        s"subtitles=$subtitleFilename",
         path(outputFilename)
       ).call()
   #+end_src
 *** Piping Commands
 
-  In order to download just a specific chunk of youtube video you need
-  to get the direct stream url, inject it into a non-trivial ~ffmpeg~
+  In order to download just a specific chunk of the youtube video you need
+  to get the direct stream URL, inject it into a non-trivial ~ffmpeg~
   command with the right timestamps and then run such process. To do
   so, we can take advantage of the output from the tool ~yt-dlp~ that
-  will return the video stream url to inject and then run ~ffmpeg~.
+  will return the video stream URL to inject and then run ~ffmpeg~.
 
   Before it was done this way:
 
@@ -549,7 +564,7 @@ At the time of writing I have 2:
       outputFilename: String
     ): Unit =
       if (!os.exists(path(outputFilename)))
-        os.proc("yt-dlp", "-f", s""""[best=ext=mp4]"""", "-g", youtubeVideo.url)
+        os.proc("yt-dlp", "-f", "best[ext=mp4]", "-g", youtubeVideo.url)
           .call(cwd = path())
           .out
           .lines()
@@ -558,14 +573,14 @@ At the time of writing I have 2:
             os.proc(
               "ffmpeg",
               "-i",
-              s""""$ytDlpCommandOutputUrl"""",
+              s"$ytDlpCommandOutputUrl",
               "-ss",
               secondsToString(youtubeVideo.from.toMillis / 1000),
               "-to",
               secondsToString(youtubeVideo.to.toMillis / 1000),
               "-an",
-              s""""$outputFilename.mp4""""
-            )
+              path(s"$outputFilename.mp4")
+            ).call(cwd = path())
           )
           .getOrElse(())
   #+end_src
@@ -579,15 +594,36 @@ At the time of writing I have 2:
   give it a try.
 
 *** Testing
-# TODO
+
+  This time the testing phase didn't bring any unexpected surprises. I
+  just had to fix a couple of imprecisions in the way the commands
+  were translated to the new library. After that everything worked as
+  expected.
 ** Conclusions
   :PROPERTIES:
   :CUSTOM_ID: ArticleConclusions
   :END:
-# TODO
+
+  As you can see by yourself, the [[https://github.com/com-lihaoyi/os-lib][os-lib]] works and improves the
+  interaction between your scala code and the underlying file system &
+  processes as promised: adding more type safety to things like
+  ~paths~ and abstracting from the reference OS. You don't have to
+  rely on specific platform command syntax and everything becomes more
+  cross-platform. It will definitely be my go-to lib for scripting
+  from now on.
+
+  The only downside I see is the fact that you lose some control over
+  what is actually running, as you don't have full direct
+  visibility on the command. I wasn't able to find how to get a simple
+  command string from the [[https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/Shellable.html][Shellable]] even if it should be quite simple,
+  something like ~shellable.value.mkString(" ")~, but I would like to
+  have that exposed by the library. A Minor thing by the way.
+
+      #+html: <img src="https://dl.dropboxusercontent.com/s/mc89ejapzsc29w7/ytai_Buonanotte.gif" alt="Buonanotte by Youtubo">
+
 ** References
-# TODO: add the youtube to gif link
 - [[https://gist.github.com/benkio/6fac65fdaec44842712be716f46169e1][convertFilms.sc script]]
+- [[https://gist.github.com/benkio/103960b7b5a5781c222df1c4e31544a2][youtubeToGif.sc script]]
 * Share Buttons
   :PROPERTIES:
   :CUSTOM_ID: ShareButtons
