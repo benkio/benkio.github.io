@@ -1,0 +1,930 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Scripting with Scala CLI &amp; Os-lib</title>
+<!-- 2022-10-16 Sun 11:53 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="Org-mode">
+<meta name="author" content="benkio">
+
+<link  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<style>body { margin-bottom: 0px; }</style><script>
+$(function() {
+    'use strict';
+
+    $('.bs-docs-sidebar li').first().addClass('active');
+
+    $(document.body).scrollspy({target: '.bs-docs-sidebar'});
+
+    $('.bs-docs-sidebar').affix();
+});
+</script><link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon">
+<link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/blog.css">
+<link rel="stylesheet" href="../css/article.css">
+</head>
+<body>
+<div id="content" class="container">
+<div class="row"><div class="col-md-3 col-md-push-9"><nav id="table-of-contents">
+<div id="text-table-of-contents" class="bs-docs-sidebar">
+<ul class="nav">
+<li><a href="#navbar">Blog</a></li>
+<li><a href="#Article">Scripting with Scala CLI &amp; Os-lib</a>
+<ul class="nav">
+<li><a href="#ArticleAbstract">Abstract</a></li>
+<li><a href="#ArticleContent">Use Cases &amp; Motivations</a></li>
+<li><a href="#sec-">Insert Script Dependency</a></li>
+<li><a href="#sec-">Movie Conversion Script</a>
+<ul class="nav">
+<li><a href="#sec-">File Paths</a></li>
+<li><a href="#sec-">Script Entry Point</a></li>
+<li><a href="#sec-">FFMPEG Command</a></li>
+<li><a href="#sec-">Split Command</a></li>
+<li><a href="#sec-">Remove Command</a></li>
+<li><a href="#sec-">List Files</a></li>
+<li><a href="#sec-">Move Files</a></li>
+<li><a href="#sec-">Final Cleanup</a></li>
+<li><a href="#sec-">Parallel Collection</a></li>
+<li><a href="#sec-">Testing</a></li>
+</ul>
+</li>
+<li><a href="#sec-">Youtube to GIF Script</a>
+<ul class="nav">
+<li><a href="#sec-">File Paths</a></li>
+<li><a href="#sec-">File System Functions</a></li>
+<li><a href="#sec-">Piping Commands</a></li>
+<li><a href="#sec-">Testing</a></li>
+</ul>
+</li>
+<li><a href="#ArticleConclusions">Conclusions</a></li>
+<li><a href="#sec-">References</a></li>
+</ul>
+</li>
+<li><a href="#ShareButtons">Share Buttons</a></li>
+</ul>
+</div>
+</nav>
+</div><div class="col-md-9 col-md-pull-3"><h1 class="title">Scripting with Scala CLI &amp; Os-lib</h1>
+
+<div id="outline-container-navbar" class="outline-2 text-center navbar navbar-inverse navbar-fixed-top">
+<h2 id="navbar"><a id="sec-" name="sec-"></a>Blog</h2>
+<div class="outline-text-2" id="text-navbar">
+<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapsableNavbar">
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+</button>
+<a title="Home" href="../blog.html"><h1 id="navbarTitle" class="navbar-text">Blog</h1></a>
+<div class="collapse navbar-collapse" id="collapsableNavbar">
+  <ul class="nav navbar-nav">
+    <li><a title="Home" href="../index.html"><i class="fas fa-home fa-3x" aria-hidden="true"></i></a></li>
+    <li><a title="Article List" href="../articleList.html" class="navbar-text h3">Article List</a></li>
+<li><a title="Book List" href="../bookList.html" class="navbar-text h3">Book List</a></li>
+    <li><a title="Album List" href="../albumList.html" class="navbar-text h3">Album List</a></li>
+    <li><a title="Note Trainer" href="../NoteTrainer/NoteTrainer.html" class="navbar-text h3">Note Trainer</a></li>
+  </ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-Article" class="outline-2">
+<h2 id="Article"><a id="sec-" name="sec-"></a>Scripting with Scala CLI &amp; Os-lib</h2>
+<div class="outline-text-2" id="text-Article">
+<p>
+<b>Created: <span class="timestamp-wrapper"><span class="timestamp">&lt;2022-10-08 Sat&gt;</span></span></b>
+</p>
+</div>
+<div id="outline-container-ArticleAbstract" class="outline-3">
+<h3 id="ArticleAbstract"><a id="sec-" name="sec-"></a>Abstract</h3>
+<div class="outline-text-3" id="text-ArticleAbstract">
+<p>
+In this article, I will show how I refactored some existing scripts
+written in <a href="https://scala-cli.virtuslab.org/">scala-cli</a> using the <a href="https://github.com/com-lihaoyi/os-lib">os-lib</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-ArticleContent" class="outline-3">
+<h3 id="ArticleContent"><a id="sec-" name="sec-"></a>Use Cases &amp; Motivations</h3>
+<div class="outline-text-3" id="text-ArticleContent">
+<p>
+Everyone has his own scripts for various tasks and I'm no exception.
+At the time of writing I have 2:
+</p>
+<ul class="org-ul">
+<li>One for converting movies to a format compatible with my mom's
+TV. Movies need to be in Xvid, 720p, with a specific bit rate, mp3
+audio track, and be not bigger than 1GB (if so it must be
+split). I discovered this by trial and error.
+</li>
+<li>One for generating GIFs (muted video chunks with subtitles, to be
+precise) starting from YouTube links.
+</li>
+</ul>
+
+<p>
+For these tasks I rely on <a href="https://scala-cli.virtuslab.org/">scala-cli</a>, <code>ffmpeg</code>, <code>yt-dlp</code> and classic
+Unix commands such as <code>rm</code> and <code>mv</code>.
+</p>
+
+<p>
+Everything works as expected and anyone with a little trace of
+intelligence would keep the situation as it is. At least until
+something goes wrong. However, being a Scala engineer, I heard about
+"the lihaoyi ecosystem" several times and I've never had a chance
+to play with it. Plus, the above scripts use the <a href="https://www.scala-lang.org/api/2.13.x/scala/sys/process/index.html">sys.process._</a>
+package and I'm not really a super fan of it. So I thought: "why
+just I don't refactor the scripts using the <a href="https://github.com/com-lihaoyi/os-lib">os-lib</a>?". This way I can
+both the goals of getting rid of the <a href="https://www.scala-lang.org/api/2.13.x/scala/sys/process/index.html">sys.process._</a> and try something
+from lihaoyi.
+</p>
+
+<p>
+Moreover, apart from the library <a href="https://github.com/com-lihaoyi/os-lib#cookbook">README Cookbook</a> and <a href="https://www.lihaoyi.com/post/HowtoworkwithFilesinScala.html">this article</a>
+from Li Haoyi himself, check them out if you want to explore the
+library, I couldn't find a lot of examples of its usage,
+especially in a "real" situation. The library is a porting of
+<a href="https://docs.python.org/3/library/os.html">Python's Os library</a> and there are examples of it around for sure,
+but no one wants to have to translate from one language to another
+when he is looking for examples.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-" class="outline-3">
+<h3 id="sec-">Insert Script Dependency</h3>
+<div class="outline-text-3" id="text-">
+<p>
+The first thing you want to do is to add the <a href="https://github.com/com-lihaoyi/os-lib">os-lib</a> to your
+<a href="https://scala-cli.virtuslab.org/">  scala-cli</a>. At the moment of writing the latest version is <code>0.8.1</code>.
+Just add this snippet at the very top of your script
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-scala"><span style="color: #b22222;">#!/usr/bin/env scala-cli</span>
+<span style="color: #a020f0;">using</span> lib <span style="color: #8b2252;">"com.lihaoyi::os-lib:0.8.1"</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-" class="outline-3">
+<h3 id="sec-">Movie Conversion Script</h3>
+<div class="outline-text-3" id="text-">
+</div><div id="outline-container-sec-" class="outline-4">
+<h4 id="sec-">File Paths</h4>
+<div class="outline-text-4" id="text-">
+<p>
+Let's convert simple file path strings to the types used by the
+library. Note how I had to specify a temporary existing directory
+for the script to work and store intermediate results. Instead, the
+<a href="https://github.com/com-lihaoyi/os-lib/">os-lib</a> provides a <a href="https://github.com/com-lihaoyi/os-lib#ostempdir">temp dir</a> operation out of the box.
+</p>
+
+<p>
+I can then change the other paths as well to start straight away
+from the <code>home directory</code>. This will make it more flexible since I
+can easily move the script from one machine to another, let say a
+Macbook one to a Linux one, without having to update the paths.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-scala"><span style="color: #b22222;">// </span><span style="color: #b22222;">Before</span>
+<span style="color: #a020f0;">val</span> <span style="color: #a0522d;">tempPath</span> <span style="color: #a020f0;">=</span> <span style="color: #8b2252;">"/Users/benkio/temp"</span>
+<span style="color: #a020f0;">val</span> <span style="color: #a0522d;">startingPath</span> <span style="color: #a020f0;">=</span> <span style="color: #8b2252;">"/Users/benkio/temp/test"</span>
+<span style="color: #a020f0;">val</span> <span style="color: #a0522d;">destinationPath</span> <span style="color: #a020f0;">=</span> <span style="color: #8b2252;">"/Users/benkio/temp/convertedFilms"</span>
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">After</span>
+<span style="color: #a020f0;">val</span> <span style="color: #a0522d;">tempPath</span> <span style="color: #a020f0;">=</span> os.temp.dir()
+<span style="color: #a020f0;">val</span> <span style="color: #a0522d;">startingPath</span> <span style="color: #a020f0;">=</span> os.home/<span style="color: #8b2252;">"temp"</span>/<span style="color: #8b2252;">"test"</span>
+<span style="color: #a020f0;">val</span> <span style="color: #a0522d;">destinationPath</span> <span style="color: #a020f0;">=</span> os.home/<span style="color: #8b2252;">"temp"</span>/<span style="color: #8b2252;">"convertedFilms"</span>
+</pre>
+</div>
+
+<p>
+Note: on the <a href="https://github.com/com-lihaoyi/os-lib#ospath">README os.Path section</a> you could find that you can
+create a path using just the <code>'</code> prefix. However, if you try you
+might get this error:
+</p>
+
+<pre class="example">
+[error] ./convertFilms.sc:18:31: symbol literal 'temp is no longer supported,
+[error] use a string literal "temp" or an application Symbol("temp") instead,
+[error] or enclose in braces '{temp} if you want a quoted expression.
+[error] For now, you can also `import language.deprecated.symbolLiterals` to accept
+[error] the idiom, but this possibility might no longer be available in the future.
+[error] val destinationPath = os.home/'temp/'convertedFilms
+</pre>
+
+<p>
+That's why I ended up using simple strings.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-" class="outline-4">
+<h4 id="sec-">Script Entry Point</h4>
+<div class="outline-text-4" id="text-">
+<p>
+In order to understand what this script is supposed to do, we need
+to have a look at its entry point. This will be affected by the
+introduction of the <a href="https://github.com/com-lihaoyi/os-lib">os-lib</a> later on, but I introduce it here to
+provide more context to understand each step.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-scala"><span style="color: #a020f0;">val</span> <span style="color: #a0522d;">inputFiles</span><span style="color: #a020f0;">:</span> <span style="color: #228b22;">List</span>[(<span style="color: #008b8b;">String</span>, <span style="color: #008b8b;">String</span>)] <span style="color: #a020f0;">=</span> <span style="color: #008b8b;">List</span>(
+  (<span style="color: #8b2252;">"movie.avi"</span>, <span style="color: #8b2252;">"movie"</span>),
+  (<span style="color: #8b2252;">"film.mkv"</span>, <span style="color: #8b2252;">"film"</span>)
+)
+
+inputFiles.foreach { <span style="color: #b22222;">//</span><span style="color: #b22222;">1</span>
+  <span style="color: #a020f0;">case</span> (<span style="color: #a0522d;">inputFile</span>, <span style="color: #a0522d;">filename</span>) <span style="color: #a020f0;">=&gt;</span> {
+    ffmpegCommand(inputFile, filename) <span style="color: #b22222;">//</span><span style="color: #b22222;">2</span>
+    splitCommand(filename)             <span style="color: #b22222;">//</span><span style="color: #b22222;">3</span>
+    removeCommand(filename)            <span style="color: #b22222;">//</span><span style="color: #b22222;">4</span>
+    moveCommand(filename)              <span style="color: #b22222;">//</span><span style="color: #b22222;">5</span>
+  }
+}
+</pre>
+</div>
+
+<p>
+What it does is:
+</p>
+<ol class="org-ol">
+<li>cycle through each pair in input where the first one is the
+actual file to be converted and the second one is the output
+filename without extension. We could think about extracting the
+output file name straight from the first value, but often the
+input values have non-consistent names, so it's better to give
+the user a way to specify the output name. For each pair this will:
+</li>
+<li>Run the <code>ffmpeg</code> command with the specific input to produce a video
+compatible with the target TV: right bitrate, resolution, codec,
+container, audio codec&#x2026; This will output a full converted movie.
+</li>
+<li>Split the result of the previous step in chunks of max 1GB.
+</li>
+<li>Remove the output of step 2. We are only interested in the chunks
+from step 3.
+</li>
+<li>Move the chunks for step 3 to the destination path.
+</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-sec-" class="outline-4">
+<h4 id="sec-">FFMPEG Command</h4>
+<div class="outline-text-4" id="text-">
+<p>
+Previously we just craft the command as a simple string with
+interpolated input and "run &amp; forget" it with the <code>!</code>
+command. Instead, the <a href="https://github.com/com-lihaoyi/os-lib">os-lib</a> provides <a href="https://github.com/com-lihaoyi/os-lib#osproccall">os.call</a> that will run a
+command <a href="https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/Shellable.html">Shellable</a> process synchronously.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-scala"><span style="color: #b22222;">// </span><span style="color: #b22222;">Before</span>
+<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">ffmpegCommand</span>(inputFile<span style="color: #a020f0;">:</span> <span style="color: #228b22;">String</span>, outputFilename<span style="color: #a020f0;">:</span> <span style="color: #228b22;">String</span>)<span style="color: #a020f0;">:</span> <span style="color: #228b22;">Unit</span> <span style="color: #a020f0;">=</span> {
+  <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">ffmpegCmd</span> <span style="color: #a020f0;">=</span>
+    s<span style="color: #8b2252;">"""ffmpeg -i "</span><span style="color: #a0522d;">$startingPath</span><span style="color: #8b2252;">/</span><span style="color: #a0522d;">$inputFile</span><span style="color: #8b2252;">" -c:v libxvid -b:v 1500k -c:a libmp3lame -qscale:a 4 -vf scale=720:-1 "</span><span style="color: #a0522d;">$tempPath</span><span style="color: #8b2252;">/</span><span style="color: #a0522d;">$outputFilename</span><span style="color: #8b2252;">.avi""""</span>
+  ffmpegCmd !
+}
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">After</span>
+<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">ffmpegCommand</span>(inputFile<span style="color: #a020f0;">:</span> <span style="color: #228b22;">String</span>, outputFilename<span style="color: #a020f0;">:</span> <span style="color: #228b22;">String</span>)<span style="color: #a020f0;">:</span> <span style="color: #228b22;">os</span>.<span style="color: #008b8b;">CommandResult</span> <span style="color: #a020f0;">=</span>
+  os.proc(
+    <span style="color: #8b2252;">"ffmpeg"</span>,
+    <span style="color: #8b2252;">"-i"</span>,
+    startingPath / inputFile,
+    <span style="color: #8b2252;">"-c:v"</span>,
+    <span style="color: #8b2252;">"libxvid"</span>,
+    <span style="color: #8b2252;">"-b:v"</span>,
+    <span style="color: #8b2252;">"1500k"</span>,
+    <span style="color: #8b2252;">"-c:a"</span>,
+    <span style="color: #8b2252;">"libmp3lame"</span>,
+    <span style="color: #8b2252;">"-qscale:a"</span>,
+    <span style="color: #8b2252;">"4"</span>,
+    <span style="color: #8b2252;">"-vf"</span>,
+    <span style="color: #8b2252;">"scale=720:-1"</span>,
+    tempPath / s<span style="color: #8b2252;">"</span><span style="color: #a0522d;">$outputFilename</span><span style="color: #8b2252;">.avi"</span>
+  ).call()
+</pre>
+</div>
+
+<p>
+Another noticeable change here is the fact that we return an
+<a href="https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/CommandResult.html">os.CommandResult</a> instead of <code>Unit</code>. This will be later used to check
+the <code>exitcode</code> of the <code>ffmpeg</code> process.
+</p>
+
+<p>
+<a id="spawn" name="spawn"></a>One could wonder why I didn't go for <a href="https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html">os.spawn</a> instead of <a href="https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html">os.call</a> in
+order to take advantage of sub-processing and parallelize the whole
+script. The issue here is that we don't know in advance how many
+files we will have to convert. In the scenario where there are
+several input files, having the <a href="https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html">os.spawn</a> will cause tons of
+long-live <code>ffmpeg</code> sub-processes that will hang the whole system.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-" class="outline-4">
+<h4 id="sec-">Split Command</h4>
+<div class="outline-text-4" id="text-">
+<p>
+The Split command still uses <code>ffmpeg</code> since we want these files to
+be playable and <code>ffmpeg</code> guarantees to produce a video file. We
+can't just split the bytes, you know. The idea here is to split by
+time: 1 chunk per hour. Ideally we could run <code>ffmpeg</code> to the input
+file, parse its duration and modify the split command accordingly,
+but it will complicate the script for little value, so we can assume
+it will be at most 3 hours. This is an improvement that could be
+made eventually.
+</p>
+
+<p>
+So, we can build a long command to do it. Again, converting it to
+the new library will just be a long long call with quite some
+parameters.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-scala"> <span style="color: #b22222;">// </span><span style="color: #b22222;">Before</span>
+ <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">splitCommand</span>(inputFilename<span style="color: #a020f0;">:</span> <span style="color: #228b22;">String</span>)<span style="color: #a020f0;">:</span> <span style="color: #228b22;">Unit</span> <span style="color: #a020f0;">=</span> {
+  <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">splitCmd</span> <span style="color: #a020f0;">=</span>
+    s<span style="color: #8b2252;">"""ffmpeg -v quiet -y -i "</span><span style="color: #a0522d;">$tempPath</span><span style="color: #8b2252;">/</span><span style="color: #a0522d;">$inputFilename</span><span style="color: #8b2252;">.avi" -vcodec copy -acodec copy -ss 00:00:00 -t 01:00:00 -sn "</span><span style="color: #a0522d;">$tempPath</span><span style="color: #8b2252;">/</span><span style="color: #a0522d;">${inputFilename}</span><span style="color: #8b2252;">_1.avi" -vcodec copy -acodec copy -ss 01:00:00 -t 01:00:00 -sn "</span><span style="color: #a0522d;">$tempPath</span><span style="color: #8b2252;">/</span><span style="color: #a0522d;">${inputFilename}</span><span style="color: #8b2252;">_2.avi" -vcodec copy -acodec copy -ss 02:00:00 -t 01:00:00 -sn "</span><span style="color: #a0522d;">$tempPath</span><span style="color: #8b2252;">/</span><span style="color: #a0522d;">${inputFilename}</span><span style="color: #8b2252;">_3.avi""""</span>
+  splitCmd !
+}
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">After</span>
+<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">splitCommand</span>(inputFilename<span style="color: #a020f0;">:</span> <span style="color: #228b22;">String</span>)<span style="color: #a020f0;">:</span> <span style="color: #228b22;">os</span>.<span style="color: #008b8b;">CommandResult</span> <span style="color: #a020f0;">=</span>
+  os.proc(
+    <span style="color: #8b2252;">"ffmpeg"</span>,
+    <span style="color: #8b2252;">"-v"</span>,
+    <span style="color: #8b2252;">"quiet"</span>,
+    <span style="color: #8b2252;">"-y"</span>,
+    <span style="color: #8b2252;">"-i"</span>,
+    tempPath / <span style="color: #8b2252;">"$inputFilename.avi"</span>,
+    <span style="color: #8b2252;">"-vcodec"</span>,
+    <span style="color: #8b2252;">"copy"</span>,
+    <span style="color: #8b2252;">"-acodec"</span>,
+    <span style="color: #8b2252;">"copy"</span>,
+    <span style="color: #8b2252;">"-ss"</span>,
+    <span style="color: #8b2252;">"00:00:00"</span>,
+    <span style="color: #8b2252;">"-t"</span>,
+    <span style="color: #8b2252;">"01:00:00"</span>,
+    <span style="color: #8b2252;">"-sn"</span>,
+    tempPath / <span style="color: #8b2252;">"${inputFilename}_1.avi"</span>,
+    <span style="color: #8b2252;">"-vcodec"</span>,
+    <span style="color: #8b2252;">"copy"</span>,
+    <span style="color: #8b2252;">"-acodec"</span>,
+    <span style="color: #8b2252;">"copy"</span>,
+    <span style="color: #8b2252;">"-ss"</span>,
+    <span style="color: #8b2252;">"01:00:00"</span>,
+    <span style="color: #8b2252;">"-t"</span>,
+    <span style="color: #8b2252;">"01:00:00"</span>,
+    <span style="color: #8b2252;">"-sn"</span>,
+    tempPath / <span style="color: #8b2252;">"${inputFilename}_2.avi"</span>,
+    <span style="color: #8b2252;">"-vcodec"</span>,
+    <span style="color: #8b2252;">"copy"</span>,
+    <span style="color: #8b2252;">"-acodec"</span>,
+    <span style="color: #8b2252;">"copy"</span>,
+    <span style="color: #8b2252;">"-ss"</span>,
+    <span style="color: #8b2252;">"02:00:00"</span>,
+    <span style="color: #8b2252;">"-t"</span>,
+    <span style="color: #8b2252;">"01:00:00"</span>,
+    <span style="color: #8b2252;">"-sn"</span>,
+    tempPath / <span style="color: #8b2252;">"${inputFilename}_3.avi"</span>
+  ).call()
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-" class="outline-4">
+<h4 id="sec-">Remove Command</h4>
+<div class="outline-text-4" id="text-">
+<p>
+The remove command is straightforward to translate to the new
+library since it exposes <a href="https://github.com/com-lihaoyi/os-lib#osremove">os.remove</a> that removes a file if exists.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-scala"><span style="color: #b22222;">// </span><span style="color: #b22222;">Before</span>
+<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">removeCommand</span>(inputFilename<span style="color: #a020f0;">:</span> <span style="color: #228b22;">String</span>)<span style="color: #a020f0;">:</span> <span style="color: #228b22;">Unit</span> <span style="color: #a020f0;">=</span> {
+  <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">removeCmd</span> <span style="color: #a020f0;">=</span> s<span style="color: #8b2252;">"""rm "</span><span style="color: #a0522d;">$tempPath</span><span style="color: #8b2252;">/</span><span style="color: #a0522d;">$inputFilename</span><span style="color: #8b2252;">.avi""""</span>
+  removeCmd !
+}
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">After</span>
+<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">removeCommand</span>(inputFilename<span style="color: #a020f0;">:</span> <span style="color: #228b22;">String</span>)<span style="color: #a020f0;">:</span> <span style="color: #228b22;">Unit</span> <span style="color: #a020f0;">=</span>
+  os.remove(tempPath/s<span style="color: #8b2252;">"</span><span style="color: #a0522d;">$inputFilename</span><span style="color: #8b2252;">.avi"</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-" class="outline-4">
+<h4 id="sec-">List Files</h4>
+<div class="outline-text-4" id="text-">
+<p>
+Right now, there is this function in the script:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-scala"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">getListOfFiles</span>(dir<span style="color: #a020f0;">:</span> <span style="color: #228b22;">File</span>, prefix<span style="color: #a020f0;">:</span> <span style="color: #228b22;">String</span>)<span style="color: #a020f0;">:</span> <span style="color: #228b22;">List</span>[<span style="color: #008b8b;">File</span>] <span style="color: #a020f0;">=</span> {
+dir.listFiles.filter(<span style="color: #a020f0;">_</span>.isFile).toList.filter { file <span style="color: #a020f0;">=&gt;</span>
+    file.getName.startsWith(prefix)
+  }
+}
+</pre>
+</div>
+
+<p>
+Starting from a folder, This will just return a list of files with a
+given prefix. Please close an eye on the double <code>filter</code> call, I
+just realized it 😅
+</p>
+
+<p>
+I can now simply replace this using <code>os.list</code> and then filter the
+results with the same <code>filter</code> used above.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-scala">os.list(path()).filter(f <span style="color: #a020f0;">=&gt;</span> os.isFile(f) &amp;&amp; <span style="color: #8b2252;">"gif[0-9]+.mp4"</span>.r.matches(f.last))
+</pre>
+</div>
+<p>
+I want to underline this error message I got, really really nice!
+</p>
+
+<pre class="example">
+value IsFile is not a member of os - did you mean os.isFile?
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-" class="outline-4">
+<h4 id="sec-">Move Files</h4>
+<div class="outline-text-4" id="text-">
+<p>
+We can then move the files listed and filtered in the previous
+section with just a simple <code>foreach</code> and the help of the
+<code>os.move.into</code>.
+</p>
+
+<p>
+Beware the semantic differences between the move operations since
+they could remove everything from the destination before performing
+the operation, eg <code>os.move.over</code>, or just fail if the destination
+does not exist, eg <code>os.move</code>
+</p>
+
+<p>
+The result becomes:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-scala"><span style="color: #b22222;">// </span><span style="color: #b22222;">Before</span>
+<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">moveCommand</span>(inputFilename<span style="color: #a020f0;">:</span> <span style="color: #228b22;">String</span>)<span style="color: #a020f0;">:</span><span style="color: #228b22;">Unit</span> <span style="color: #a020f0;">=</span> {
+  <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">filesToMove</span> <span style="color: #a020f0;">=</span> getListOfFiles(<span style="color: #a020f0;">new</span> <span style="color: #228b22;">File</span>(tempPath), inputFilename)
+  filesToMove.foreach { file <span style="color: #a020f0;">=&gt;</span>
+    <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">moveCmd</span> <span style="color: #a020f0;">=</span> s<span style="color: #8b2252;">"""mv </span><span style="color: #a0522d;">$tempPath</span><span style="color: #8b2252;">/</span><span style="color: #a0522d;">${file.getName}</span><span style="color: #8b2252;"> "</span><span style="color: #a0522d;">$destinationPath</span><span style="color: #8b2252;">/""""</span>
+    moveCmd !
+  }
+}
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">After</span>
+<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">moveCommand</span>(inputFilename<span style="color: #a020f0;">:</span> <span style="color: #228b22;">String</span>)<span style="color: #a020f0;">:</span> <span style="color: #228b22;">Unit</span> <span style="color: #a020f0;">=</span>
+  os.list(tempPath)
+    .filter(p <span style="color: #a020f0;">=&gt;</span> os.isFile(p) &amp;&amp; p.last.startsWith(inputFilename))
+    .foreach(f <span style="color: #a020f0;">=&gt;</span> os.move.into(f, destinationPath))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-" class="outline-4">
+<h4 id="sec-">Final Cleanup</h4>
+<div class="outline-text-4" id="text-">
+<p>
+Now we can finally remove the useless imports! We can get rid of:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-scala"><span style="color: #a020f0;">import</span> sys.process.<span style="color: #a020f0;">_</span>
+<span style="color: #a020f0;">import</span> scala.language.postfixOps
+<span style="color: #a020f0;">import</span> java.io.<span style="color: #008b8b;">File</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-" class="outline-4">
+<h4 id="sec-">Parallel Collection</h4>
+<div class="outline-text-4" id="text-">
+<p>
+We introduced the idea of parallelising the computation in <a href="#spawn">the ffmpeg
+subsection</a> when we talked about <a href="https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html">os.spawn</a>, saying it's not convenient
+at that point. However, we can do something using <a href="https://github.com/scala/scala-parallel-collections">parallel collections</a>.
+</p>
+
+<p>
+Since everything starts with a <code>List</code>, we can just add the <a href="https://github.com/scala/scala-parallel-collections">parallel
+collections</a> lib dependency and import, then use the <code>par</code> method to
+convert it to <code>ParSeq</code>. Moreover, we have to limit the amount of
+parallelism and we can do it by creating and setting a
+<code>ForkJoinPoll</code> manually as <a href="https://docs.scala-lang.org/overviews/parallel-collections/configuration.html">this documentation</a>.
+</p>
+
+<p>
+Finally, we can check the exit code of important commands. Of course,
+this will not scale and it's ugly code: <code>foreach</code>, nested ifs,
+<code>println</code>&#x2026; But we are still doing scripting here! 😛
+</p>
+
+<p>
+The final entry point looks like this:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-scala"><span style="color: #a020f0;">val</span> <span style="color: #a0522d;">inputFiles</span><span style="color: #a020f0;">:</span> <span style="color: #228b22;">ParSeq</span>[(<span style="color: #008b8b;">String</span>, <span style="color: #008b8b;">String</span>)] <span style="color: #a020f0;">=</span> <span style="color: #008b8b;">List</span>(
+  (<span style="color: #8b2252;">"movie.avi"</span>, <span style="color: #8b2252;">"movie"</span>),
+  (<span style="color: #8b2252;">"film.avi"</span>, <span style="color: #8b2252;">"film"</span>)
+).par
+
+<span style="color: #a020f0;">val</span> <span style="color: #a0522d;">forkJoinPool</span> <span style="color: #a020f0;">=</span> <span style="color: #a020f0;">new</span> <span style="color: #228b22;">java</span>.util.concurrent.<span style="color: #008b8b;">ForkJoinPool</span>(<span style="color: #008b8b;">2</span>)
+inputFiles.tasksupport <span style="color: #a020f0;">=</span> <span style="color: #a020f0;">new</span> <span style="color: #228b22;">ForkJoinTaskSupport</span>(forkJoinPool)
+
+inputFiles.foreach {
+  <span style="color: #a020f0;">case</span> (<span style="color: #a0522d;">inputFile</span>, <span style="color: #a0522d;">filename</span>) <span style="color: #a020f0;">=&gt;</span> {
+    <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">ffmpegEC</span> <span style="color: #a020f0;">=</span> ffmpegCommand(inputFile, filename).exitCode
+    <span style="color: #a020f0;">if</span> (ffmpegEC == <span style="color: #008b8b;">0</span>) {
+      <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">splitEC</span> <span style="color: #a020f0;">=</span> splitCommand(filename).exitCode
+      <span style="color: #a020f0;">if</span> (splitEC == <span style="color: #008b8b;">0</span>)
+        removeCommand(filename)
+        moveCommand(filename)
+      <span style="color: #a020f0;">else</span> println(s<span style="color: #8b2252;">"split failed for </span><span style="color: #a0522d;">$filename</span><span style="color: #8b2252;">"</span>)
+    } <span style="color: #a020f0;">else</span> println(s<span style="color: #8b2252;">"ffmpeg command failed for </span><span style="color: #a0522d;">$inputFile</span><span style="color: #8b2252;">"</span>)
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-" class="outline-4">
+<h4 id="sec-">Testing</h4>
+<div class="outline-text-4" id="text-">
+<p>
+I just tried the script after the above changes and I discovered
+that it just hang 😯 🤕
+</p>
+
+<p>
+After some <code>println</code> and debugging it turned out that the starting
+paths defined at the beginning of the files didn't quite work as
+expected: when I add an additional value with <code>path/file</code> to
+construct the final path and then call <code>toString</code> inside a
+<code>println</code> everything is blocked somehow!! 💀
+</p>
+
+<p>
+The solution was to convert the above paths to <code>def</code> and pass the
+final file as input in other to build the file in place. Plus, I had
+to drop the temporary directory in favor of an existing one for the
+same reason above.
+</p>
+
+<p>
+The final change is:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-scala"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">tempPath</span>(inputFile<span style="color: #a020f0;">:</span><span style="color: #228b22;">String</span>) <span style="color: #a020f0;">=</span>
+  <span style="color: #a020f0;">if</span> (inputFile.isEmpty) os.home/<span style="color: #8b2252;">"temp"</span> <span style="color: #a020f0;">else</span> os.home/<span style="color: #8b2252;">"temp"</span>/inputFile
+<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">startingPath</span>(inputFile<span style="color: #a020f0;">:</span><span style="color: #228b22;">String</span>)<span style="color: #a020f0;">:</span> <span style="color: #228b22;">os</span>.<span style="color: #008b8b;">Path</span> <span style="color: #a020f0;">=</span>
+  <span style="color: #a020f0;">if</span> (inputFile.isEmpty) os.home/<span style="color: #8b2252;">"temp"</span>/<span style="color: #8b2252;">"test"</span> <span style="color: #a020f0;">else</span> os.home/<span style="color: #8b2252;">"temp"</span>/<span style="color: #8b2252;">"test"</span>/inputFile
+</pre>
+</div>
+
+<p>
+I also had to put the <code>destinationPath</code> directly into the <code>move</code>
+function (probably a def would work as well), in this way:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-scala"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">moveCommand</span>(inputFilename<span style="color: #a020f0;">:</span> <span style="color: #228b22;">String</span>)<span style="color: #a020f0;">:</span> <span style="color: #228b22;">Unit</span> <span style="color: #a020f0;">=</span>
+  os.list(tempPath(<span style="color: #8b2252;">""</span>))
+    .filter(p <span style="color: #a020f0;">=&gt;</span> os.isFile(p) &amp;&amp; p.last.startsWith(inputFilename))
+    .foreach(os.move.into(<span style="color: #a020f0;">_</span>, os.home/<span style="color: #8b2252;">"temp"</span>/<span style="color: #8b2252;">"convertedFilms"</span>))
+</pre>
+</div>
+
+<p>
+I tried to use <code>lazy val</code>, but it didn't help as well.
+Maybe I did some errors along the way? missing some import? I don't
+know really. If you have more experience with the library and you
+know where the problem is please let me know. You can
+find the final code in the <a href="#sec-">References</a> section.
+</p>
+
+<p>
+Apart from this inconvenience, once it was fixed, the script worked
+as expected: starting 2 <code>ffmpeg</code> processes in parallel, executing
+the split, and cleanup 🥳 🎉
+</p>
+
+<p>
+Side note: the little price for concurrency is the overlap of the
+processes' outputs as you might expect in a multi-thread program.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-" class="outline-3">
+<h3 id="sec-">Youtube to GIF Script</h3>
+<div class="outline-text-3" id="text-">
+<p>
+This script also includes some additional code for converting time
+measures, modeling the input of subtitles, subtitle position,
+fonts, cutting of the video, spacing between subtitles,
+and so on. In order to focus only on the library and keep this
+article short, I'll just skip all of that. Please follow the link in
+the <a href="#sec-">References</a> section if you are interested.
+</p>
+</div>
+
+<div id="outline-container-sec-" class="outline-4">
+<h4 id="sec-">File Paths</h4>
+<div class="outline-text-4" id="text-">
+<p>
+We have already talked about <a href="#sec-">File Paths</a> in the previous
+section. Here I just share the changes in this specific case.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-scala"><span style="color: #b22222;">// </span><span style="color: #b22222;">Before</span>
+<span style="color: #a020f0;">val</span> <span style="color: #a0522d;">path</span> <span style="color: #a020f0;">=</span> <span style="color: #8b2252;">"/Users/benkio/temp"</span>
+<span style="color: #b22222;">// </span><span style="color: #b22222;">After</span>
+<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">path</span>(file<span style="color: #a020f0;">:</span> <span style="color: #228b22;">String</span> <span style="color: #a020f0;">=</span> <span style="color: #8b2252;">""</span>)<span style="color: #a020f0;">:</span> <span style="color: #228b22;">os</span>.<span style="color: #008b8b;">Path</span> <span style="color: #a020f0;">=</span>
+  <span style="color: #a020f0;">if</span> (file.isEmpty) os.home/<span style="color: #8b2252;">"temp"</span> <span style="color: #a020f0;">else</span> os.home/<span style="color: #8b2252;">"temp"</span>/file
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-" class="outline-4">
+<h4 id="sec-">File System Functions</h4>
+<div class="outline-text-4" id="text-">
+<p>
+The <i>Youtube to Gif</i> script takes advantage of more file system
+functions compared to the previous script and here is actually where
+<a href="https://github.com/com-lihaoyi/os-lib">os-lib</a> shines. In particular, other than moving files, listing
+files, and calling external commands, here we need also to write
+content to files.
+</p>
+
+<p>
+Finally, we needed to change the directory and then run
+the specified command in order to collect the result in a specific
+place. With <a href="https://github.com/com-lihaoyi/os-lib">os-lib</a> we can specify the path directly on the call of
+the process and save an additional step.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-scala"><span style="color: #b22222;">// </span><span style="color: #b22222;">Before</span>
+<span style="color: #b22222;">// </span><span style="color: #b22222;">File System Functions</span>
+
+<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">changeDirectory</span>(dir<span style="color: #a020f0;">:</span> <span style="color: #228b22;">String</span>)<span style="color: #a020f0;">:</span> <span style="color: #228b22;">Unit</span> <span style="color: #a020f0;">=</span> <span style="color: #008b8b;">System</span>.setProperty(<span style="color: #8b2252;">"user.dir"</span>, dir)
+<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">moveToTemp</span> <span style="color: #a020f0;">=</span> changeDirectory(path)
+<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">writeSubtitles</span>(content<span style="color: #a020f0;">:</span> <span style="color: #228b22;">String</span>, outputFilename<span style="color: #a020f0;">:</span> <span style="color: #228b22;">String</span>)<span style="color: #a020f0;">:</span> <span style="color: #228b22;">Unit</span> <span style="color: #a020f0;">=</span> {
+  println(<span style="color: #8b2252;">"srt content: "</span> + content)
+  <span style="color: #008b8b;">Files</span>.write(<span style="color: #008b8b;">Paths</span>.get(outputFilename), content.getBytes(<span style="color: #008b8b;">StandardCharsets</span>.<span style="color: #008b8b;">UTF_8</span>))
+}
+<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">removeCommand</span>(inputFilename<span style="color: #a020f0;">:</span><span style="color: #228b22;">String</span>)<span style="color: #a020f0;">:</span> <span style="color: #228b22;">Unit</span> <span style="color: #a020f0;">=</span> {
+  <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">removeCmd</span> <span style="color: #a020f0;">=</span> s<span style="color: #8b2252;">"""rm "</span><span style="color: #a0522d;">$path</span><span style="color: #8b2252;">/</span><span style="color: #a0522d;">$inputFilename</span><span style="color: #8b2252;">""""</span>
+  println(<span style="color: #8b2252;">"removeCmd: "</span> + removeCmd)
+  <span style="color: #8b2252;">"sleep 1"</span> #&amp;&amp; removeCmd !
+}
+
+<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">getListOfOutputFiles</span>()<span style="color: #a020f0;">:</span><span style="color: #228b22;">List</span>[<span style="color: #008b8b;">File</span>] <span style="color: #a020f0;">=</span> <span style="color: #a020f0;">new</span> <span style="color: #228b22;">File</span>(path).listFiles.filter(f <span style="color: #a020f0;">=&gt;</span> f.isFile &amp;&amp; f.getName.startsWith(<span style="color: #8b2252;">"gif"</span>)).toList
+
+<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">renameFile</span>(inputFilename<span style="color: #a020f0;">:</span> <span style="color: #228b22;">String</span>, outputFilename<span style="color: #a020f0;">:</span> <span style="color: #228b22;">String</span>)<span style="color: #a020f0;">:</span> <span style="color: #228b22;">Unit</span> <span style="color: #a020f0;">=</span> {
+  <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">renameCmd</span> <span style="color: #a020f0;">=</span> s<span style="color: #8b2252;">"""mv "</span><span style="color: #a0522d;">$path</span><span style="color: #8b2252;">/</span><span style="color: #a0522d;">$inputFilename</span><span style="color: #8b2252;">" "</span><span style="color: #a0522d;">$path</span><span style="color: #8b2252;">/</span><span style="color: #a0522d;">$outputFilename</span><span style="color: #8b2252;">" """</span>
+  println(<span style="color: #8b2252;">"rename: "</span> + renameCmd)
+  renameCmd !
+}
+
+<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">burnSubtitlesInVideo</span>(inputFilename<span style="color: #a020f0;">:</span> <span style="color: #228b22;">String</span>, subtitleFilename<span style="color: #a020f0;">:</span><span style="color: #228b22;">String</span>,  outputFilename<span style="color: #a020f0;">:</span> <span style="color: #228b22;">String</span>)<span style="color: #a020f0;">:</span> <span style="color: #228b22;">Unit</span> <span style="color: #a020f0;">=</span> {
+  <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">ffmpegBurnSubtitlesInVideo</span> <span style="color: #a020f0;">=</span> s<span style="color: #8b2252;">"""ffmpeg -i </span><span style="color: #a0522d;">$inputFilename</span><span style="color: #8b2252;"> -vf "subtitles=</span><span style="color: #a0522d;">$subtitleFilename</span><span style="color: #8b2252;">" </span><span style="color: #a0522d;">$outputFilename</span><span style="color: #8b2252;">"""</span>
+  println(<span style="color: #8b2252;">"ffmpegBurnSubtitlesInVideo: "</span> + ffmpegBurnSubtitlesInVideo)
+  ffmpegBurnSubtitlesInVideo !
+}
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">After</span>
+<span style="color: #b22222;">// </span><span style="color: #b22222;">File System Functions</span>
+
+<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">writeSubtitles</span>(content<span style="color: #a020f0;">:</span> <span style="color: #228b22;">String</span>, outputFile<span style="color: #a020f0;">:</span> <span style="color: #228b22;">os</span>.<span style="color: #008b8b;">Path</span>)<span style="color: #a020f0;">:</span> <span style="color: #228b22;">Unit</span> <span style="color: #a020f0;">=</span>
+  os.write(outputFile, content.getBytes(<span style="color: #008b8b;">StandardCharsets</span>.<span style="color: #008b8b;">UTF_8</span>))
+
+<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">removeCommand</span>(inputFilename<span style="color: #a020f0;">:</span> <span style="color: #228b22;">String</span>)<span style="color: #a020f0;">:</span> <span style="color: #228b22;">Unit</span> <span style="color: #a020f0;">=</span>
+  os.remove(path(inputFilename))
+
+<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">getListOfOutputFiles</span>()<span style="color: #a020f0;">:</span> <span style="color: #228b22;">IndexedSeq</span>[os.<span style="color: #008b8b;">Path</span>] <span style="color: #a020f0;">=</span>
+  os.list(path()).filter(f <span style="color: #a020f0;">=&gt;</span> os.isFile(f) &amp;&amp; <span style="color: #8b2252;">"gif[0-9]+.mp4"</span>.r.matches(f.last))
+
+<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">renameFile</span>(inputFilename<span style="color: #a020f0;">:</span> <span style="color: #228b22;">String</span>, outputFilename<span style="color: #a020f0;">:</span> <span style="color: #228b22;">String</span>)<span style="color: #a020f0;">:</span> <span style="color: #228b22;">Unit</span> <span style="color: #a020f0;">=</span>
+  os.move(path(inputFilename), path(outputFilename))
+
+<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">burnSubtitlesInVideo</span>(
+  inputFilename<span style="color: #a020f0;">:</span> <span style="color: #228b22;">String</span>,
+  subtitleFilename<span style="color: #a020f0;">:</span> <span style="color: #228b22;">String</span>,
+  outputFilename<span style="color: #a020f0;">:</span> <span style="color: #228b22;">String</span>
+)<span style="color: #a020f0;">:</span> <span style="color: #228b22;">Unit</span> <span style="color: #a020f0;">=</span>
+  os.proc(
+    <span style="color: #8b2252;">"ffmpeg"</span>,
+    <span style="color: #8b2252;">"-i"</span>,
+    path(inputFilename),
+    <span style="color: #8b2252;">"-vf"</span>,
+    s<span style="color: #8b2252;">"subtitles=</span><span style="color: #a0522d;">$subtitleFilename</span><span style="color: #8b2252;">"</span>,
+    path(outputFilename)
+  ).call()
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-" class="outline-4">
+<h4 id="sec-">Piping Commands</h4>
+<div class="outline-text-4" id="text-">
+<p>
+In order to download just a specific chunk of the youtube video you need
+to get the direct stream URL, inject it into a non-trivial <code>ffmpeg</code>
+command with the right timestamps and then run such process. To do
+so, we can take advantage of the output from the tool <code>yt-dlp</code> that
+will return the video stream URL to inject and then run <code>ffmpeg</code>.
+</p>
+
+<p>
+Before it was done this way:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-scala"><span style="color: #b22222;">// </span><span style="color: #b22222;">Before</span>
+<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">downloadFileToDir</span>(youtubeVideo<span style="color: #a020f0;">:</span> <span style="color: #228b22;">YoutubeVideo</span>, outputFilename<span style="color: #a020f0;">:</span> <span style="color: #228b22;">String</span>)<span style="color: #a020f0;">:</span> <span style="color: #228b22;">Unit</span> <span style="color: #a020f0;">=</span> {
+  moveToTemp
+  <span style="color: #a020f0;">if</span> (!<span style="color: #008b8b;">File</span>(s<span style="color: #8b2252;">"</span><span style="color: #a0522d;">$path</span><span style="color: #8b2252;">/</span><span style="color: #a0522d;">$outputFilename</span><span style="color: #8b2252;">"</span>).exists) {
+    <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">ytDlpCommand</span> <span style="color: #a020f0;">=</span> s<span style="color: #8b2252;">"""yt-dlp -f "best[ext=mp4]" -g </span><span style="color: #a0522d;">${youtubeVideo.url}</span><span style="color: #8b2252;">"""</span>
+    println(s<span style="color: #8b2252;">"ytDlpCommand: </span><span style="color: #a0522d;">$ytDlpCommand</span><span style="color: #8b2252;">"</span>)
+    <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">ytDlpCommandOutputUrl</span> <span style="color: #a020f0;">=</span> (ytDlpCommand !!).lines.findFirst().get
+    <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">ffmpegCommand</span> <span style="color: #a020f0;">=</span> s<span style="color: #8b2252;">"""ffmpeg -i "</span><span style="color: #a0522d;">$ytDlpCommandOutputUrl</span><span style="color: #8b2252;">" -ss </span><span style="color: #a0522d;">${secondsToString(youtubeVideo.from.toMillis / 1000)}</span><span style="color: #8b2252;"> -to </span><span style="color: #a0522d;">${secondsToString(youtubeVideo.to.toMillis / 1000)}</span><span style="color: #8b2252;"> -an "</span><span style="color: #a0522d;">$outputFilename</span><span style="color: #8b2252;">.mp4""""</span>
+    println(<span style="color: #8b2252;">"ffmpegCommand: "</span> + ffmpegCommand)
+    ffmpegCommand !
+  }
+}
+<span style="color: #b22222;">// </span><span style="color: #b22222;">After</span>
+<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">downloadFileToDir</span>(
+  youtubeVideo<span style="color: #a020f0;">:</span> <span style="color: #228b22;">YoutubeVideo</span>,
+  outputFilename<span style="color: #a020f0;">:</span> <span style="color: #228b22;">String</span>
+)<span style="color: #a020f0;">:</span> <span style="color: #228b22;">Unit</span> <span style="color: #a020f0;">=</span>
+  <span style="color: #a020f0;">if</span> (!os.exists(path(outputFilename)))
+    os.proc(<span style="color: #8b2252;">"yt-dlp"</span>, <span style="color: #8b2252;">"-f"</span>, <span style="color: #8b2252;">"best[ext=mp4]"</span>, <span style="color: #8b2252;">"-g"</span>, youtubeVideo.url)
+      .call(cwd <span style="color: #a020f0;">=</span> path())
+      .out
+      .lines()
+      .headOption
+      .map(ytDlpCommandOutputUrl <span style="color: #a020f0;">=&gt;</span>
+        os.proc(
+          <span style="color: #8b2252;">"ffmpeg"</span>,
+          <span style="color: #8b2252;">"-i"</span>,
+          s<span style="color: #8b2252;">"</span><span style="color: #a0522d;">$ytDlpCommandOutputUrl</span><span style="color: #8b2252;">"</span>,
+          <span style="color: #8b2252;">"-ss"</span>,
+          secondsToString(youtubeVideo.from.toMillis / <span style="color: #008b8b;">1000</span>),
+          <span style="color: #8b2252;">"-to"</span>,
+          secondsToString(youtubeVideo.to.toMillis / <span style="color: #008b8b;">1000</span>),
+          <span style="color: #8b2252;">"-an"</span>,
+          path(s<span style="color: #8b2252;">"</span><span style="color: #a0522d;">$outputFilename</span><span style="color: #8b2252;">.mp4"</span>)
+        ).call(cwd <span style="color: #a020f0;">=</span> path())
+      )
+      .getOrElse(())
+</pre>
+</div>
+
+<p>
+If you look at the documentation of the library, they show a very
+nice way to pipe commands into one another. Here I just preferred to
+call them one after the other and pass the result manually since I'm
+quite new to this library and the commands are quite long by
+themselves. Probably there's a better/more elegant way to achieve
+this, if so, just reach out to me and let me know. I'll be happy to
+give it a try.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-" class="outline-4">
+<h4 id="sec-">Testing</h4>
+<div class="outline-text-4" id="text-">
+<p>
+This time the testing phase didn't bring any unexpected surprises. I
+just had to fix a couple of imprecisions in the way the commands
+were translated to the new library. After that everything worked as
+expected.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-ArticleConclusions" class="outline-3">
+<h3 id="ArticleConclusions"><a id="sec-" name="sec-"></a>Conclusions</h3>
+<div class="outline-text-3" id="text-ArticleConclusions">
+<p>
+As you can see by yourself, the <a href="https://github.com/com-lihaoyi/os-lib">os-lib</a> works and improves the
+interaction between your scala code and the underlying file system &amp;
+processes as promised: adding more type safety to things like
+<code>paths</code> and abstracting from the reference OS. You don't have to
+rely on specific platform command syntax and everything becomes more
+cross-platform. It will definitely be my go-to lib for scripting
+from now on.
+</p>
+
+<p>
+The only downside I see is the fact that you lose some control over
+what is actually running, as you don't have full direct
+visibility on the command. I wasn't able to find how to get a simple
+command string from the <a href="https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/Shellable.html">Shellable</a> even if it should be quite simple,
+something like <code>shellable.value.mkString(" ")</code>, but I would like to
+have that exposed by the library. A Minor thing by the way.
+</p>
+
+<img src="https://dl.dropboxusercontent.com/s/mc89ejapzsc29w7/ytai_Buonanotte.gif" alt="Buonanotte by Youtubo">
+</div>
+</div>
+
+<div id="outline-container-sec-" class="outline-3">
+<h3 id="sec-">References</h3>
+<div class="outline-text-3" id="text-">
+<ul class="org-ul">
+<li><a href="https://gist.github.com/benkio/6fac65fdaec44842712be716f46169e1">convertFilms.sc script</a>
+</li>
+<li><a href="https://gist.github.com/benkio/103960b7b5a5781c222df1c4e31544a2">youtubeToGif.sc script</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-ShareButtons" class="outline-2">
+<h2 id="ShareButtons"><a id="sec-" name="sec-"></a>Share Buttons</h2>
+<div class="outline-text-2" id="text-ShareButtons">
+<!-- AddToAny BEGIN -->
+<hr>
+<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+<a class="a2a_button_facebook"></a>
+<a class="a2a_button_twitter"></a>
+<a class="a2a_button_whatsapp"></a>
+<a class="a2a_button_telegram"></a>
+<a class="a2a_button_linkedin"></a>
+<a class="a2a_button_email"></a>
+</div>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+<!-- AddToAny END -->
+
+<script type="text/javascript">
+$(function() {
+  $('#text-table-of-contents > ul li').first().css("display", "none");
+  $('#text-table-of-contents > ul li').last().css("display", "none");
+  $('#table-of-contents').addClass("visible-lg")
+});
+</script>
+</div>
+</div>
+</div></div></div>
+</body>
+</html>

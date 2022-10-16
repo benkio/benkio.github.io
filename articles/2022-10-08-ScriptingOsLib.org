@@ -1,0 +1,655 @@
+#+OPTIONS: num:nil toc:t H:4
+#+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:nil
+#+TITLE: Scripting with Scala CLI & Os-lib
+#+DESCRIPTION: Scripting with Scala CLI & Os-lib
+#+KEYWORDS: Scripting with Scala CLI & Os-lib
+#+CREATOR: Enrico Benini
+#+HTML_HEAD_EXTRA: <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA: <link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/main.css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/blog.css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/article.css">
+
+* Blog
+:PROPERTIES:
+:HTML_CONTAINER_CLASS: text-center navbar navbar-inverse navbar-fixed-top
+:CUSTOM_ID: navbar
+:END:
+#+INCLUDE: "../Fragments/BlogNavbarFragment.html" export html
+
+* Scripting with Scala CLI & Os-lib
+:PROPERTIES:
+:CUSTOM_ID: Article
+:END:
+*Created: <2022-10-08 Sat>*
+** Abstract
+:PROPERTIES:
+:CUSTOM_ID: ArticleAbstract
+:END:
+
+In this article, I will show how I refactored some existing scripts
+written in [[https://scala-cli.virtuslab.org/][scala-cli]] using the [[https://github.com/com-lihaoyi/os-lib][os-lib]].
+
+** Use Cases & Motivations
+:PROPERTIES:
+:CUSTOM_ID: ArticleContent
+:END:
+
+  Everyone has his own scripts for various tasks and I'm no exception.
+  At the time of writing I have 2:
+    - One for converting movies to a format compatible with my mom's
+      TV. Movies need to be in Xvid, 720p, with a specific bit rate, mp3
+      audio track, and be not bigger than 1GB (if so it must be
+      split). I discovered this by trial and error.
+    - One for generating GIFs (muted video chunks with subtitles, to be
+      precise) starting from YouTube links.
+
+  For these tasks I rely on [[https://scala-cli.virtuslab.org/][scala-cli]], ~ffmpeg~, ~yt-dlp~ and classic
+  Unix commands such as ~rm~ and ~mv~.
+
+  Everything works as expected and anyone with a little trace of
+  intelligence would keep the situation as it is. At least until
+  something goes wrong. However, being a Scala engineer, I heard about
+  "the lihaoyi ecosystem" several times and I've never had a chance
+  to play with it. Plus, the above scripts use the [[https://www.scala-lang.org/api/2.13.x/scala/sys/process/index.html][sys.process._]]
+  package and I'm not really a super fan of it. So I thought: "why
+  just I don't refactor the scripts using the [[https://github.com/com-lihaoyi/os-lib][os-lib]]?". This way I can
+  both the goals of getting rid of the [[https://www.scala-lang.org/api/2.13.x/scala/sys/process/index.html][sys.process._]] and try something
+  from lihaoyi.
+
+  Moreover, apart from the library [[https://github.com/com-lihaoyi/os-lib#cookbook][README Cookbook]] and [[https://www.lihaoyi.com/post/HowtoworkwithFilesinScala.html][this article]]
+  from Li Haoyi himself, check them out if you want to explore the
+  library, I couldn't find a lot of examples of its usage,
+  especially in a "real" situation. The library is a porting of
+  [[https://docs.python.org/3/library/os.html][Python's Os library]] and there are examples of it around for sure,
+  but no one wants to have to translate from one language to another
+  when he is looking for examples.
+
+** Insert Script Dependency
+
+  The first thing you want to do is to add the [[https://github.com/com-lihaoyi/os-lib][os-lib]] to your
+[[https://scala-cli.virtuslab.org/][  scala-cli]]. At the moment of writing the latest version is ~0.8.1~.
+  Just add this snippet at the very top of your script
+
+  #+begin_src scala
+    #!/usr/bin/env scala-cli
+    using lib "com.lihaoyi::os-lib:0.8.1"
+  #+end_src
+
+** Movie Conversion Script
+*** File Paths
+
+  Let's convert simple file path strings to the types used by the
+  library. Note how I had to specify a temporary existing directory
+  for the script to work and store intermediate results. Instead, the
+  [[https://github.com/com-lihaoyi/os-lib/][os-lib]] provides a [[https://github.com/com-lihaoyi/os-lib#ostempdir][temp dir]] operation out of the box.
+
+  I can then change the other paths as well to start straight away
+  from the ~home directory~. This will make it more flexible since I
+  can easily move the script from one machine to another, let say a
+  Macbook one to a Linux one, without having to update the paths.
+
+  #+begin_src scala
+    // Before
+    val tempPath = "/Users/benkio/temp"
+    val startingPath = "/Users/benkio/temp/test"
+    val destinationPath = "/Users/benkio/temp/convertedFilms"
+
+    // After
+    val tempPath = os.temp.dir()
+    val startingPath = os.home/"temp"/"test"
+    val destinationPath = os.home/"temp"/"convertedFilms"
+  #+end_src
+
+  Note: on the [[https://github.com/com-lihaoyi/os-lib#ospath][README os.Path section]] you could find that you can
+  create a path using just the ~'~ prefix. However, if you try you
+  might get this error:
+
+  #+begin_example
+  [error] ./convertFilms.sc:18:31: symbol literal 'temp is no longer supported,
+  [error] use a string literal "temp" or an application Symbol("temp") instead,
+  [error] or enclose in braces '{temp} if you want a quoted expression.
+  [error] For now, you can also `import language.deprecated.symbolLiterals` to accept
+  [error] the idiom, but this possibility might no longer be available in the future.
+  [error] val destinationPath = os.home/'temp/'convertedFilms
+  #+end_example
+
+  That's why I ended up using simple strings.
+
+*** Script Entry Point
+
+  In order to understand what this script is supposed to do, we need
+  to have a look at its entry point. This will be affected by the
+  introduction of the [[https://github.com/com-lihaoyi/os-lib][os-lib]] later on, but I introduce it here to
+  provide more context to understand each step.
+
+  #+begin_src scala
+  val inputFiles: List[(String, String)] = List(
+    ("movie.avi", "movie"),
+    ("film.mkv", "film")
+  )
+
+  inputFiles.foreach { //1
+    case (inputFile, filename) => {
+      ffmpegCommand(inputFile, filename) //2
+      splitCommand(filename)             //3
+      removeCommand(filename)            //4
+      moveCommand(filename)              //5
+    }
+  }
+  #+end_src
+
+  What it does is:
+  1. cycle through each pair in input where the first one is the
+     actual file to be converted and the second one is the output
+     filename without extension. We could think about extracting the
+     output file name straight from the first value, but often the
+     input values have non-consistent names, so it's better to give
+     the user a way to specify the output name. For each pair this will:
+  2. Run the ~ffmpeg~ command with the specific input to produce a video
+     compatible with the target TV: right bitrate, resolution, codec,
+     container, audio codec... This will output a full converted movie.
+  3. Split the result of the previous step in chunks of max 1GB.
+  4. Remove the output of step 2. We are only interested in the chunks
+     from step 3.
+  5. Move the chunks for step 3 to the destination path.
+
+*** FFMPEG Command
+
+  Previously we just craft the command as a simple string with
+  interpolated input and "run & forget" it with the ~!~
+  command. Instead, the [[https://github.com/com-lihaoyi/os-lib][os-lib]] provides [[https://github.com/com-lihaoyi/os-lib#osproccall][os.call]] that will run a
+  command [[https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/Shellable.html][Shellable]] process synchronously.
+
+  #+begin_src scala
+    // Before
+    def ffmpegCommand(inputFile: String, outputFilename: String): Unit = {
+      val ffmpegCmd =
+        s"""ffmpeg -i "$startingPath/$inputFile" -c:v libxvid -b:v 1500k -c:a libmp3lame -qscale:a 4 -vf scale=720:-1 "$tempPath/$outputFilename.avi""""
+      ffmpegCmd !
+    }
+
+    // After
+    def ffmpegCommand(inputFile: String, outputFilename: String): os.CommandResult =
+      os.proc(
+        "ffmpeg",
+        "-i",
+        startingPath / inputFile,
+        "-c:v",
+        "libxvid",
+        "-b:v",
+        "1500k",
+        "-c:a",
+        "libmp3lame",
+        "-qscale:a",
+        "4",
+        "-vf",
+        "scale=720:-1",
+        tempPath / s"$outputFilename.avi"
+      ).call()
+  #+end_src
+
+  Another noticeable change here is the fact that we return an
+  [[https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/CommandResult.html][os.CommandResult]] instead of ~Unit~. This will be later used to check
+  the ~exitcode~ of the ~ffmpeg~ process.
+
+  <<spawn>>One could wonder why I didn't go for [[https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html][os.spawn]] instead of [[https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html][os.call]] in
+  order to take advantage of sub-processing and parallelize the whole
+  script. The issue here is that we don't know in advance how many
+  files we will have to convert. In the scenario where there are
+  several input files, having the [[https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html][os.spawn]] will cause tons of
+  long-live ~ffmpeg~ sub-processes that will hang the whole system.
+
+*** Split Command
+
+  The Split command still uses ~ffmpeg~ since we want these files to
+  be playable and ~ffmpeg~ guarantees to produce a video file. We
+  can't just split the bytes, you know. The idea here is to split by
+  time: 1 chunk per hour. Ideally we could run ~ffmpeg~ to the input
+  file, parse its duration and modify the split command accordingly,
+  but it will complicate the script for little value, so we can assume
+  it will be at most 3 hours. This is an improvement that could be
+  made eventually.
+
+  So, we can build a long command to do it. Again, converting it to
+  the new library will just be a long long call with quite some
+  parameters.
+
+  #+begin_src scala
+     // Before
+     def splitCommand(inputFilename: String): Unit = {
+      val splitCmd =
+        s"""ffmpeg -v quiet -y -i "$tempPath/$inputFilename.avi" -vcodec copy -acodec copy -ss 00:00:00 -t 01:00:00 -sn "$tempPath/${inputFilename}_1.avi" -vcodec copy -acodec copy -ss 01:00:00 -t 01:00:00 -sn "$tempPath/${inputFilename}_2.avi" -vcodec copy -acodec copy -ss 02:00:00 -t 01:00:00 -sn "$tempPath/${inputFilename}_3.avi""""
+      splitCmd !
+    }
+
+    // After
+    def splitCommand(inputFilename: String): os.CommandResult =
+      os.proc(
+        "ffmpeg",
+        "-v",
+        "quiet",
+        "-y",
+        "-i",
+        tempPath / "$inputFilename.avi",
+        "-vcodec",
+        "copy",
+        "-acodec",
+        "copy",
+        "-ss",
+        "00:00:00",
+        "-t",
+        "01:00:00",
+        "-sn",
+        tempPath / "${inputFilename}_1.avi",
+        "-vcodec",
+        "copy",
+        "-acodec",
+        "copy",
+        "-ss",
+        "01:00:00",
+        "-t",
+        "01:00:00",
+        "-sn",
+        tempPath / "${inputFilename}_2.avi",
+        "-vcodec",
+        "copy",
+        "-acodec",
+        "copy",
+        "-ss",
+        "02:00:00",
+        "-t",
+        "01:00:00",
+        "-sn",
+        tempPath / "${inputFilename}_3.avi"
+      ).call()
+  #+end_src
+
+*** Remove Command
+
+  The remove command is straightforward to translate to the new
+  library since it exposes [[https://github.com/com-lihaoyi/os-lib#osremove][os.remove]] that removes a file if exists.
+
+  #+begin_src scala
+    // Before
+    def removeCommand(inputFilename: String): Unit = {
+      val removeCmd = s"""rm "$tempPath/$inputFilename.avi""""
+      removeCmd !
+    }
+
+    // After
+    def removeCommand(inputFilename: String): Unit =
+      os.remove(tempPath/s"$inputFilename.avi")
+  #+end_src
+
+*** List Files
+
+  Right now, there is this function in the script:
+
+  #+begin_src scala
+  def getListOfFiles(dir: File, prefix: String): List[File] = {
+  dir.listFiles.filter(_.isFile).toList.filter { file =>
+      file.getName.startsWith(prefix)
+    }
+  }
+  #+end_src
+
+  Starting from a folder, This will just return a list of files with a
+  given prefix. Please close an eye on the double ~filter~ call, I
+  just realized it 😅
+
+  I can now simply replace this using ~os.list~ and then filter the
+  results with the same ~filter~ used above.
+
+  #+begin_src scala
+    os.list(path()).filter(f => os.isFile(f) && "gif[0-9]+.mp4".r.matches(f.last))
+  #+end_src
+  I want to underline this error message I got, really really nice!
+
+  #+begin_example
+    value IsFile is not a member of os - did you mean os.isFile?
+  #+end_example
+
+*** Move Files
+
+  We can then move the files listed and filtered in the previous
+  section with just a simple ~foreach~ and the help of the
+  ~os.move.into~.
+
+  Beware the semantic differences between the move operations since
+  they could remove everything from the destination before performing
+  the operation, eg ~os.move.over~, or just fail if the destination
+  does not exist, eg ~os.move~
+
+  The result becomes:
+
+  #+begin_src scala
+    // Before
+    def moveCommand(inputFilename: String):Unit = {
+      val filesToMove = getListOfFiles(new File(tempPath), inputFilename)
+      filesToMove.foreach { file =>
+        val moveCmd = s"""mv $tempPath/${file.getName} "$destinationPath/""""
+        moveCmd !
+      }
+    }
+
+    // After
+    def moveCommand(inputFilename: String): Unit =
+      os.list(tempPath)
+        .filter(p => os.isFile(p) && p.last.startsWith(inputFilename))
+        .foreach(f => os.move.into(f, destinationPath))
+  #+end_src
+
+*** Final Cleanup
+
+  Now we can finally remove the useless imports! We can get rid of:
+
+#+begin_src scala
+    import sys.process._
+    import scala.language.postfixOps
+    import java.io.File
+  #+end_src
+
+*** Parallel Collection
+
+  We introduced the idea of parallelising the computation in [[spawn][the ffmpeg
+  subsection]] when we talked about [[https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html][os.spawn]], saying it's not convenient
+  at that point. However, we can do something using [[https://github.com/scala/scala-parallel-collections][parallel collections]].
+
+  Since everything starts with a ~List~, we can just add the [[https://github.com/scala/scala-parallel-collections][parallel
+  collections]] lib dependency and import, then use the ~par~ method to
+  convert it to ~ParSeq~. Moreover, we have to limit the amount of
+  parallelism and we can do it by creating and setting a
+  ~ForkJoinPoll~ manually as [[https://docs.scala-lang.org/overviews/parallel-collections/configuration.html][this documentation]].
+
+  Finally, we can check the exit code of important commands. Of course,
+  this will not scale and it's ugly code: ~foreach~, nested ifs,
+  ~println~... But we are still doing scripting here! 😛
+
+  The final entry point looks like this:
+
+  #+begin_src scala
+    val inputFiles: ParSeq[(String, String)] = List(
+      ("movie.avi", "movie"),
+      ("film.avi", "film")
+    ).par
+
+    val forkJoinPool = new java.util.concurrent.ForkJoinPool(2)
+    inputFiles.tasksupport = new ForkJoinTaskSupport(forkJoinPool)
+
+    inputFiles.foreach {
+      case (inputFile, filename) => {
+        val ffmpegEC = ffmpegCommand(inputFile, filename).exitCode
+        if (ffmpegEC == 0) {
+          val splitEC = splitCommand(filename).exitCode
+          if (splitEC == 0)
+            removeCommand(filename)
+            moveCommand(filename)
+          else println(s"split failed for $filename")
+        } else println(s"ffmpeg command failed for $inputFile")
+      }
+    }
+  #+end_src
+
+*** Testing
+
+  I just tried the script after the above changes and I discovered
+  that it just hang 😯 🤕
+
+  After some ~println~ and debugging it turned out that the starting
+  paths defined at the beginning of the files didn't quite work as
+  expected: when I add an additional value with ~path/file~ to
+  construct the final path and then call ~toString~ inside a
+  ~println~ everything is blocked somehow!! 💀
+
+  The solution was to convert the above paths to ~def~ and pass the
+  final file as input in other to build the file in place. Plus, I had
+  to drop the temporary directory in favor of an existing one for the
+  same reason above.
+
+  The final change is:
+
+  #+begin_src scala
+  def tempPath(inputFile:String) =
+    if (inputFile.isEmpty) os.home/"temp" else os.home/"temp"/inputFile
+  def startingPath(inputFile:String): os.Path =
+    if (inputFile.isEmpty) os.home/"temp"/"test" else os.home/"temp"/"test"/inputFile
+  #+end_src
+
+  I also had to put the ~destinationPath~ directly into the ~move~
+  function (probably a def would work as well), in this way:
+
+  #+begin_src scala
+    def moveCommand(inputFilename: String): Unit =
+      os.list(tempPath(""))
+        .filter(p => os.isFile(p) && p.last.startsWith(inputFilename))
+        .foreach(os.move.into(_, os.home/"temp"/"convertedFilms"))
+  #+end_src
+
+  I tried to use ~lazy val~, but it didn't help as well.
+  Maybe I did some errors along the way? missing some import? I don't
+  know really. If you have more experience with the library and you
+  know where the problem is please let me know. You can
+  find the final code in the [[*References][References]] section.
+
+  Apart from this inconvenience, once it was fixed, the script worked
+  as expected: starting 2 ~ffmpeg~ processes in parallel, executing
+  the split, and cleanup 🥳 🎉
+
+  Side note: the little price for concurrency is the overlap of the
+  processes' outputs as you might expect in a multi-thread program.
+** Youtube to GIF Script
+
+  This script also includes some additional code for converting time
+  measures, modeling the input of subtitles, subtitle position,
+  fonts, cutting of the video, spacing between subtitles,
+  and so on. In order to focus only on the library and keep this
+  article short, I'll just skip all of that. Please follow the link in
+  the [[*References][References]] section if you are interested.
+
+*** File Paths
+
+  We have already talked about [[*File Paths][File Paths]] in the previous
+  section. Here I just share the changes in this specific case.
+
+  #+begin_src scala
+    // Before
+    val path = "/Users/benkio/temp"
+    // After
+    def path(file: String = ""): os.Path =
+      if (file.isEmpty) os.home/"temp" else os.home/"temp"/file
+  #+end_src
+*** File System Functions
+
+  The /Youtube to Gif/ script takes advantage of more file system
+  functions compared to the previous script and here is actually where
+  [[https://github.com/com-lihaoyi/os-lib][os-lib]] shines. In particular, other than moving files, listing
+  files, and calling external commands, here we need also to write
+  content to files.
+
+  Finally, we needed to change the directory and then run
+  the specified command in order to collect the result in a specific
+  place. With [[https://github.com/com-lihaoyi/os-lib][os-lib]] we can specify the path directly on the call of
+  the process and save an additional step.
+
+  #+begin_src scala
+    // Before
+    // File System Functions
+
+    def changeDirectory(dir: String): Unit = System.setProperty("user.dir", dir)
+    def moveToTemp = changeDirectory(path)
+    def writeSubtitles(content: String, outputFilename: String): Unit = {
+      println("srt content: " + content)
+      Files.write(Paths.get(outputFilename), content.getBytes(StandardCharsets.UTF_8))
+    }
+    def removeCommand(inputFilename:String): Unit = {
+      val removeCmd = s"""rm "$path/$inputFilename""""
+      println("removeCmd: " + removeCmd)
+      "sleep 1" #&& removeCmd !
+    }
+
+    def getListOfOutputFiles():List[File] = new File(path).listFiles.filter(f => f.isFile && f.getName.startsWith("gif")).toList
+
+    def renameFile(inputFilename: String, outputFilename: String): Unit = {
+      val renameCmd = s"""mv "$path/$inputFilename" "$path/$outputFilename" """
+      println("rename: " + renameCmd)
+      renameCmd !
+    }
+
+    def burnSubtitlesInVideo(inputFilename: String, subtitleFilename:String,  outputFilename: String): Unit = {
+      val ffmpegBurnSubtitlesInVideo = s"""ffmpeg -i $inputFilename -vf "subtitles=$subtitleFilename" $outputFilename"""
+      println("ffmpegBurnSubtitlesInVideo: " + ffmpegBurnSubtitlesInVideo)
+      ffmpegBurnSubtitlesInVideo !
+    }
+
+    // After
+    // File System Functions
+
+    def writeSubtitles(content: String, outputFile: os.Path): Unit =
+      os.write(outputFile, content.getBytes(StandardCharsets.UTF_8))
+
+    def removeCommand(inputFilename: String): Unit =
+      os.remove(path(inputFilename))
+
+    def getListOfOutputFiles(): IndexedSeq[os.Path] =
+      os.list(path()).filter(f => os.isFile(f) && "gif[0-9]+.mp4".r.matches(f.last))
+
+    def renameFile(inputFilename: String, outputFilename: String): Unit =
+      os.move(path(inputFilename), path(outputFilename))
+
+    def burnSubtitlesInVideo(
+      inputFilename: String,
+      subtitleFilename: String,
+      outputFilename: String
+    ): Unit =
+      os.proc(
+        "ffmpeg",
+        "-i",
+        path(inputFilename),
+        "-vf",
+        s"subtitles=$subtitleFilename",
+        path(outputFilename)
+      ).call()
+  #+end_src
+*** Piping Commands
+
+  In order to download just a specific chunk of the youtube video you need
+  to get the direct stream URL, inject it into a non-trivial ~ffmpeg~
+  command with the right timestamps and then run such process. To do
+  so, we can take advantage of the output from the tool ~yt-dlp~ that
+  will return the video stream URL to inject and then run ~ffmpeg~.
+
+  Before it was done this way:
+
+  #+begin_src scala
+    // Before
+    def downloadFileToDir(youtubeVideo: YoutubeVideo, outputFilename: String): Unit = {
+      moveToTemp
+      if (!File(s"$path/$outputFilename").exists) {
+        val ytDlpCommand = s"""yt-dlp -f "best[ext=mp4]" -g ${youtubeVideo.url}"""
+        println(s"ytDlpCommand: $ytDlpCommand")
+        val ytDlpCommandOutputUrl = (ytDlpCommand !!).lines.findFirst().get
+        val ffmpegCommand = s"""ffmpeg -i "$ytDlpCommandOutputUrl" -ss ${secondsToString(youtubeVideo.from.toMillis / 1000)} -to ${secondsToString(youtubeVideo.to.toMillis / 1000)} -an "$outputFilename.mp4""""
+        println("ffmpegCommand: " + ffmpegCommand)
+        ffmpegCommand !
+      }
+    }
+    // After
+    def downloadFileToDir(
+      youtubeVideo: YoutubeVideo,
+      outputFilename: String
+    ): Unit =
+      if (!os.exists(path(outputFilename)))
+        os.proc("yt-dlp", "-f", "best[ext=mp4]", "-g", youtubeVideo.url)
+          .call(cwd = path())
+          .out
+          .lines()
+          .headOption
+          .map(ytDlpCommandOutputUrl =>
+            os.proc(
+              "ffmpeg",
+              "-i",
+              s"$ytDlpCommandOutputUrl",
+              "-ss",
+              secondsToString(youtubeVideo.from.toMillis / 1000),
+              "-to",
+              secondsToString(youtubeVideo.to.toMillis / 1000),
+              "-an",
+              path(s"$outputFilename.mp4")
+            ).call(cwd = path())
+          )
+          .getOrElse(())
+  #+end_src
+
+  If you look at the documentation of the library, they show a very
+  nice way to pipe commands into one another. Here I just preferred to
+  call them one after the other and pass the result manually since I'm
+  quite new to this library and the commands are quite long by
+  themselves. Probably there's a better/more elegant way to achieve
+  this, if so, just reach out to me and let me know. I'll be happy to
+  give it a try.
+
+*** Testing
+
+  This time the testing phase didn't bring any unexpected surprises. I
+  just had to fix a couple of imprecisions in the way the commands
+  were translated to the new library. After that everything worked as
+  expected.
+** Conclusions
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleConclusions
+  :END:
+
+  As you can see by yourself, the [[https://github.com/com-lihaoyi/os-lib][os-lib]] works and improves the
+  interaction between your scala code and the underlying file system &
+  processes as promised: adding more type safety to things like
+  ~paths~ and abstracting from the reference OS. You don't have to
+  rely on specific platform command syntax and everything becomes more
+  cross-platform. It will definitely be my go-to lib for scripting
+  from now on.
+
+  The only downside I see is the fact that you lose some control over
+  what is actually running, as you don't have full direct
+  visibility on the command. I wasn't able to find how to get a simple
+  command string from the [[https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/Shellable.html][Shellable]] even if it should be quite simple,
+  something like ~shellable.value.mkString(" ")~, but I would like to
+  have that exposed by the library. A Minor thing by the way.
+
+      #+html: <img src="https://dl.dropboxusercontent.com/s/mc89ejapzsc29w7/ytai_Buonanotte.gif" alt="Buonanotte by Youtubo">
+
+** References
+- [[https://gist.github.com/benkio/6fac65fdaec44842712be716f46169e1][convertFilms.sc script]]
+- [[https://gist.github.com/benkio/103960b7b5a5781c222df1c4e31544a2][youtubeToGif.sc script]]
+* Share Buttons
+  :PROPERTIES:
+  :CUSTOM_ID: ShareButtons
+  :END:
+#+BEGIN_EXPORT html
+<!-- AddToAny BEGIN -->
+<hr>
+<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+<a class="a2a_button_facebook"></a>
+<a class="a2a_button_twitter"></a>
+<a class="a2a_button_whatsapp"></a>
+<a class="a2a_button_telegram"></a>
+<a class="a2a_button_linkedin"></a>
+<a class="a2a_button_email"></a>
+</div>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+<!-- AddToAny END -->
+#+END_EXPORT
+
+#+begin_export html
+<script type="text/javascript">
+$(function() {
+  $('#text-table-of-contents > ul li').first().css("display", "none");
+  $('#text-table-of-contents > ul li').last().css("display", "none");
+  $('#table-of-contents').addClass("visible-lg")
+});
+</script>
+#+end_export
