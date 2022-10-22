@@ -123,6 +123,7 @@
 <p id="totalBookCount"></p>
 <ul id="wanna_read_bookList" class="list-group">
   <a target="_blank" href="https://en.wikipedia.org/wiki/23_Things_They_Don%27t_Tell_You_About_Capitalism"                                    class="list-group-item list-group-item-action wa_book">23 Things They Don't Tell You About Capitalism</a>
+  <a target="_blank" href="https://www.amazon.co.uk/Monster-Calls-Patrick-Ness/dp/1406361801"                                                 class="list-group-item list-group-item-action wa_book">A Monster Calls</a>
   <a target="_blank" href="https://www.amazon.co.uk/Agile-Good-Hype-Bertrand-Meyer/dp/3319051547"                                             class="list-group-item list-group-item-action wa_book">Agile!: The Good, the Hype and the Ugly</a>
   <a target="_blank" href="https://www.goodreads.com/book/show/25666050-algorithms-to-live-by"                                                class="list-group-item list-group-item-action wa_book">Algorithms to Live By: The Computer Science of Human Decisions</a>
   <a target="_blank" href="https://alita-manga.com/"                                                                                          class="list-group-item list-group-item-action wa_book">Alita</a>
@@ -165,7 +166,7 @@
   <a target="_blank" href="https://www.amazon.it/dp/B0B3MDGT1V/ref=dp-kindle-redirect?_encoding=UTF8&btkr=1"                                  class="list-group-item list-group-item-action wa_book">Libro 2</a>
   <a target="_blank" href="https://en.wikipedia.org/wiki/Lolita"                                                                              class="list-group-item list-group-item-action wa_book">Lolita</a>
   <a target="_blank" href="https://telegra.ph/Raccolta-di-racconti-di-Howard-Phillips-Lovecraft-10-28-2"                                      class="list-group-item list-group-item-action wa_book">Lovecraft</a>
-  <a target="_blank" href="https://madeinabyss-manga-new.com/"                                                                                class="list-group-item list-group-item-action wa_book">Made in Abyss - from Volume 27</a>
+  <!-- <a target="_blank" href="https://madeinabyss-manga-new.com/"                                                                                class="list-group-item list-group-item-action wa_book">Made in Abyss - from Volume 27</a> -->
   <a target="_blank" href="https://mitpress.mit.edu/books/musimathics-volume-1"                                                               class="list-group-item list-group-item-action wa_book">Musimathics - Vol 1</a>
   <a target="_blank" href="https://mitpress.mit.edu/books/musimathics-volume-2"                                                               class="list-group-item list-group-item-action wa_book">Musimathics - Vol 2</a>
   <a target="_blank" href="https://www.amazon.it/dp/8823851270/?coliid=IR418QZ13T9Y0&colid=22QBHENP44UR0&psc=1&ref_=lv_ov_lig_dp_it"          class="list-group-item list-group-item-action wa_book">Oltre le occasioni perdute. Dal transistor allo smartphone. 60 anni di storia in presa diretta</a>
@@ -189,6 +190,7 @@
   <a target="_blank" href="https://www.goodreads.com/book/show/113171.The_Jazz_Theory_Book"                                                   class="list-group-item list-group-item-action wa_book">The Jazz Theory Book</a>
   <a target="_blank" href="https://en.wikipedia.org/wiki/The_Witcher"                                                                         class="list-group-item list-group-item-action wa_book">The Witcher</a>
   <a target="_blank" href="https://smile.amazon.co.uk/dp/0670921394/ref=cm_sw_r_cp_apa_i_b8P7EbV4ZEJ14"                                       class="list-group-item list-group-item-action wa_book">The World Beyond Your Head: How to Flourish in an Age of Distraction</a>
+  <a target="_blank" href="https://en.wikipedia.org/wiki/The_Vampire_Chronicles"                                                              class="list-group-item list-group-item-action wa_book">The Vampire Chronicles</a>
   <a target="_blank" href="https://amzn.eu/8QIdizf"                                                                                           class="list-group-item list-group-item-action wa_book">There's a War Going On But No One Can See It: 'A brilliant page-turner'</a>
   <a target="_blank" href="https://en.wikipedia.org/wiki/Thinking,_Fast_and_Slow"                                                             class="list-group-item list-group-item-action wa_book">Thinking, Fast and Slow</a>
   <a target="_blank" href="https://www.amazon.it/dp/0791801624/?coliid=I25BGOMWA9LRH4&colid=22QBHENP44UR0&psc=0&ref_=lv_ov_lig_dp_it"         class="list-group-item list-group-item-action wa_book">Unwritten Laws of Engineering</a>
