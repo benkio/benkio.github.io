@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
 <title>NixOs Checkout</title>
-<!-- 2021-05-26 Wed 19:41 -->
+<!-- 2022-10-24 Mon 19:00 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
+<meta name="author" content="benkio">
 
 <link  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -210,25 +211,25 @@ difficult to do, you need to:
 
 <div class="org-src-container">
 
-<pre class="src src-shell"><span style="color: #ff7f24;">#</span> <span style="color: #ff7f24;">for</span> <span style="color: #ff7f24;">Legacy</span> <span style="color: #ff7f24;">boot,</span> <span style="color: #ff7f24;">see</span> <span style="color: #ff7f24;">manual</span> <span style="color: #ff7f24;">for</span> <span style="color: #ff7f24;">uefi</span>
+<pre class="src src-shell"><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">for Legacy boot, see manual for uefi</span>
 sudo parted /dev/sda -- mklabel msdos
- <span style="color: #ff7f24;">#</span> <span style="color: #ff7f24;">Create</span> <span style="color: #ff7f24;">primary</span> <span style="color: #ff7f24;">partition,</span> <span style="color: #ff7f24;">but</span> <span style="color: #ff7f24;">8gb</span> <span style="color: #ff7f24;">for</span> <span style="color: #ff7f24;">the</span> <span style="color: #ff7f24;">swap</span>
+ <span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Create primary partition, but 8gb for the swap</span>
 sudo parted /dev/sda -- mkpart primary 1MiB -8GiB
-<span style="color: #ff7f24;">#</span> <span style="color: #ff7f24;">Create</span> <span style="color: #ff7f24;">the</span> <span style="color: #ff7f24;">Swap</span> <span style="color: #ff7f24;">partition</span>
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Create the Swap partition</span>
 sudo parted /dev/sda -- mkpart primary linux-swap -8GiB 100%
-<span style="color: #ff7f24;">#</span> <span style="color: #ff7f24;">Format</span> <span style="color: #ff7f24;">primary</span> <span style="color: #ff7f24;">partition</span>
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Format primary partition</span>
 sudo mkfs.ext4 -L nixos /dev/sda1
-<span style="color: #ff7f24;">#</span> <span style="color: #ff7f24;">Format</span> <span style="color: #ff7f24;">Swap</span>
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Format Swap</span>
 sudo mkswap -L swap /dev/sda2
-<span style="color: #ff7f24;">#</span> <span style="color: #ff7f24;">Mount</span> <span style="color: #ff7f24;">the</span> <span style="color: #ff7f24;">primary</span> <span style="color: #ff7f24;">partition</span> <span style="color: #ff7f24;">into</span> <span style="color: #ff7f24;">mnt</span>
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Mount the primary partition into mnt</span>
 sudo mount /dev/disk/by-label/nixos /mnt
-<span style="color: #ff7f24;">#</span> <span style="color: #ff7f24;">Enable</span> <span style="color: #ff7f24;">the</span> <span style="color: #ff7f24;">swap</span>
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Enable the swap</span>
 sudo swapon /dev/sda2
-<span style="color: #ff7f24;">#</span> <span style="color: #ff7f24;">Generate</span> <span style="color: #ff7f24;">the</span> <span style="color: #ff7f24;">configuration</span>
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Generate the configuration</span>
 sudo nixos-generate-config --root /mnt
-<span style="color: #ff7f24;">#</span> <span style="color: #ff7f24;">Edit</span> <span style="color: #ff7f24;">configurations</span>
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Edit configurations</span>
 sudo nano /mnt/etc/nixos/configuration.nix
-<span style="color: #ff7f24;">#</span> <span style="color: #ff7f24;">Install</span> <span style="color: #ff7f24;">the</span> <span style="color: #ff7f24;">system</span>
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Install the system</span>
 sudo nixos-install
 </pre>
 </div>
@@ -574,6 +575,25 @@ $(function() {
   $('#table-of-contents').addClass("visible-lg")
 });
 </script>
+<div id="disqus_thread"></div>
+<script>
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://benkio-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
 </div>
 </div></div></div>
