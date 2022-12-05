@@ -46,10 +46,11 @@
   :END:
 
   **Created:** <2020-06-21 Sun>
-  [[https://youtube.com/playlist?list=PLO1i4nEhzCLaszits0vM6cJJoCIqzTwn7][Musica Da Ascoltare]]
 
   #+BEGIN_EXPORT HTML
-  <input type="text" id="elementSearch" onkeyup="elementSearch('albumList')" placeholder="Search for albums.." title="Type in a Album Title">
+  <p style="text-align: center">Next Up Music Playlist</p>
+  <iframe src="https://www.youtube-nocookie.com/embed/videoseries?list=PLO1i4nEhzCLaszits0vM6cJJoCIqzTwn7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" style="display: block;width: 80%;margin-left: auto;margin-right: auto;" allowfullscreen></iframe>
+  <input type="text" id="elementSearch" onkeyup="elementSearch('albumList')" placeholder="Search for albums.." title="Type in a Album Title" style="text-align: center; width: 80%;margin-left: auto;margin-right: auto; display: block;">
   <p id="totalAlbumCount"></p>
   <ul id="albumList" class="list-group">
       <a target="_blank" href="https://www.youtube.com/results?search_query=...And+Justice+For+All+-+Metallica"                               class="list-group-item list-group-item-action album">...And Justice For All - Metallica</a>
