@@ -161,6 +161,7 @@
     <a target="_blank" href="https://www.youtube.com/watch?v=7nCcD_M13Sw"                                                               class="list-group-item list-group-item-action wannaAlbum">Technical Difficulties - Racer X</a>
     <a target="_blank" href="https://en.wikipedia.org/wiki/The_Last_in_Line"                                                            class="list-group-item list-group-item-action wannaAlbum">The Last in Line - Dio</a>
     <a target="_blank" href="https://youtu.be/hpN6nOYEHMk"                                                                              class="list-group-item list-group-item-action wannaAlbum">Unleashing The Shadows - Eletro Nomicon</a>
+    <a target="_blank" href="https://youtu.be/WWKFrzNbCq8"                                                                              class="list-group-item list-group-item-action wannaAlbum">Volume - Wide Eyes</a>
     <a target="_blank" href="https://youtu.be/WKc-_JGGX2A"                                                                              class="list-group-item list-group-item-action wannaAlbum">The Way Forward - Intervals</a>
   </ul>
 #+END_EXPORT
