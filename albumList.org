@@ -137,7 +137,15 @@
   :CUSTOM_ID: WannaAlbums
   :END:
 
-  Price reference with shipment to UK. Red means it's digital only, do not purcase if not strictly necessary. Price source: Bandcamp, Amazon, and Discgos.
+  Legend:
+  #+BEGIN_EXPORT HTML
+  <ul>
+    <li><span style="background-color:red;">Red:</span> means it's digital only, do not purchase if not strictly necessary.</li>
+    <li><span style="background-color:blue;">Blue:</span> means the album is already purchased, but it didn't arrive or wasn't archivied yet. Don't buy.</li>
+  </ul>
+  #+END_EXPORT
+
+  Price source: Bandcamp, Amazon, and Discgos. Price reference with shipment to UK.
 
   #+BEGIN_EXPORT HTML
   <ul id="wannaAlbumList" class="list-group">
