@@ -13,26 +13,6 @@
 #+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="css/main.css">
 #+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="css/index.css">
 
-#+INCLUDE: "./templates.org"
-
-#+name: textFading
-#+begin_src javascript :exports none
-let text = ['Software Engineer 💾', 'FP Enthusiast 🤓', 'Guitar Player 🎸', 'Cat Lover 😻', 'Freak 🤪'];
-var textIndex = 1;
-$(document).ready(function(){
-  setInterval(function(){
-    let opacity = Number($("#subtitle").css("opacity"));
-    if (opacity == 0) {
-      textIndex = textIndex > 4? 0: textIndex;
-      $("#subtitle").text(text[textIndex])
-      textIndex += 1;;
-    }
-    $("#subtitle").fadeTo(500, (opacity + 1)%2);
-  }, 2000);
-});
-#+end_src
-
-
 * Header
   :PROPERTIES:
   :CUSTOM_ID: header
