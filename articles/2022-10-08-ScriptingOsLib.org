@@ -619,7 +619,7 @@ written in [[https://scala-cli.virtuslab.org/][scala-cli]] using the [[https://g
   something like ~shellable.value.mkString(" ")~, but I would like to
   have that exposed by the library. A Minor thing by the way.
 
-      #+html: <img src="https://dl.dropboxusercontent.com/s/mc89ejapzsc29w7/ytai_Buonanotte.gif" alt="Buonanotte by Youtubo">
+      #+html: <img src="https://www.dropbox.com/s/und6zl8mlvyk9i0/ytai_Buonanotte.mp4?dl=1" alt="Buonanotte by Youtubo">
 
 ** References
 - [[https://gist.github.com/benkio/6fac65fdaec44842712be716f46169e1][convertFilms.sc script]]

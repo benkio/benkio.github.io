@@ -299,11 +299,11 @@
 
 *** References
 
-    - [[https://bitbucket.org/benkio89/.emacs.d/src/master/][Emacs configuration]]
-    - [[https://bitbucket.org/benkio89/.emacs.d/src/master/orgConfig/functions/languageTemplateFunctions.org][Template Functions]]
-    - [[https://bitbucket.org/benkio89/.emacs.d/src/master/orgConfig/functions/scala.org][Scala Functions]]
-    - [[https://bitbucket.org/benkio89/.emacs.d/src/master/orgConfig/functions/haskell.org][Haskell Functions]]
-    - [[https://bitbucket.org/benkio89/.emacs.d/src/master/orgConfig/functions/typescript.org][Typescript Functions]]
+    - [[https://github.com/benkio/emacs-config/blob/master/config.org][Emacs configuration]]
+    - [[https://github.com/benkio/emacs-config/blob/master/config.org?plain=1#L2099][Template Functions]]
+    - [[https://github.com/benkio/emacs-config/blob/master/config.org?plain=1#L2324][Scala Functions]]
+    - [[https://github.com/benkio/emacs-config/blob/master/config.org?plain=1#L2519][Haskell Functions]]
+    - [[https://github.com/benkio/emacs-config/blob/master/config.org?plain=1#L2735][Typescript Functions]]
 
 * Share Buttons
   :PROPERTIES:

@@ -33,7 +33,7 @@
    [[https://projecteuler.net/][Project Euler]] is a collection of math based problems you can try to
    solve using a programming language, for fun.
 
-   #+html: <img src="https://mliumztazidk.i.optimole.com/5yrf4Xo-0ZmlwmlF/w:auto/h:auto/q:auto/https://epjapanesey.com/wp-content/uploads/2019/04/Saitamas-Quote-Im-A-Guy-Whos-A-Hero-For-Fun.png" style="width:50%; max-height: 300px; margin-bottom: 1em;"></img>
+   #+html: <img src="https://i.pinimg.com/originals/e5/49/15/e54915681f932a51e33bb1dec210faba.jpg" style="width:50%; max-height: 300px; margin-bottom: 1em;"></img>
 
    Therefore, I decided to start doing some of them, using Haskell as a
    language. That's quite similar to other site like [[https://www.hackerrank.com/][HackerRank]]. You

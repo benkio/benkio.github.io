@@ -515,7 +515,7 @@ Perhaps:
     Commercial Haskell is far different from the plain language, due
     to the high amount of pieces involved that completely turn
     upside-down the syntax. As a reference to it I link a proper book
-    discussing [[http://dev.stephendiehl.com/hask/][What I Wish I Knew When Learning Haskell]]. I hope to
+    discussing [[https://github.com/sdiehl/wiwinwlh][What I Wish I Knew When Learning Haskell]]. I hope to
     find the time to read this one day.
 
 *** Final words
