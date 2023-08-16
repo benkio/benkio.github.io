@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Note Trainer</title>
-<!-- 2023-08-16 Wed 12:12 -->
+<!-- 2023-08-16 Wed 14:07 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -64,7 +64,44 @@ $(function() {
 <div id="NoteTrainer"></div>
 
 <script type="text/javascript">
+var app = Elm.Main.init({
+    node: document.getElementById('NoteTrainer')
+});
 
+var audioCtx;
+var volume;
+var volumeSlide;
+
+$(document).ready(function(){
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)
+    volume = audioCtx.createGain();
+    volumeSlide = document.getElementById("volumeSlider");
+
+    volume.connect(audioCtx.destination);
+    volume.gain.value = volumeSlide.value / 100;
+});
+
+app.ports.play.subscribe(function(music) {
+    const audioCtxTime = audioCtx.currentTime;
+    const releaseTime = music.seconds * 0.2;
+    const attackTime = music.seconds * 0.2;
+
+    volume.gain.linearRampToValueAtTime(volumeSlide.value / 100, audioCtxTime + attackTime);
+    volume.gain.linearRampToValueAtTime(0, audioCtxTime + music.seconds - releaseTime);
+
+    var synths = music.frequencies.map(frequency => {
+        var synth = audioCtx.createOscillator();
+        synth.frequency.value = frequency;
+        synth.type = music.oscillatorwave;
+        synth.connect(volume);
+        return synth;
+    });
+
+    synths.forEach((synth) => {
+        synth.start(audioCtxTime);
+        synth.stop(audioCtxTime + music.seconds);
+    });
+});
 </script>
 </div>
 </div>
