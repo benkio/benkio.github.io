@@ -142,7 +142,7 @@ Positive Grid Spark Unboxing
      particular, the problem was with the connectivity between the amp
      and the PC.
 
-     Positive Grid provides a specific [[https://help.positivegrid.com/hc/en-us/articles/360039598451-Installing-Windows-Driver-for-Spark-Video-Tutorial-][ASIO driver]] for the Spark amp,
+     Positive Grid provides a specific [[https://help.positivegrid.com/hc/en-us/articles/360039598451-Installing-Windows-Driver-for-Spark-Video-Tutorial-][ASIO Driver]] for the Spark amp,
      but even if I have that installed, it seems that the USB
      connection is not reliable. It often disconnects and was
      impossible to take a recording or jam along. Meanwhile, the
