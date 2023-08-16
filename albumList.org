@@ -49,7 +49,7 @@
 
   #+BEGIN_EXPORT HTML
   <p style="text-align: center">Next Up Music Playlist</p>
-  <iframe src="https://www.youtube-nocookie.com/embed/videoseries?list=PLO1i4nEhzCLaszits0vM6cJJoCIqzTwn7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" style="display: block;width: 80%;margin-left: auto;margin-right: auto;" allowfullscreen></iframe>
+  <iframe src="https://www.youtube.com/embed/videoseries?list=PLO1i4nEhzCLaszits0vM6cJJoCIqzTwn7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" style="display: block;width: 80%;margin-left: auto;margin-right: auto;" allowfullscreen></iframe>
   <input type="text" id="elementSearch" onkeyup="elementSearch('albumList')" placeholder="Search for albums.." title="Type in a Album Title" style="text-align: center; width: 80%;margin-left: auto;margin-right: auto; display: block;">
   <p id="totalAlbumCount"></p>
   <ul id="albumList"                                                                                                  class="list-group">
@@ -72,7 +72,7 @@
       <a target="_blank" href="https://youtu.be/NB7Zb9QVklE"                                                          class="list-group-item list-group-item-action album">Cowboys From Hell - Pantera</a>
       <a target="_blank" href="https://youtu.be/yKM3Shq-JyI"                                                          class="list-group-item list-group-item-action album">Cryptic Writings [Remaster] - Megadeth</a>
       <a target="_blank" href="https://youtube.com/playlist?list=PL079F019399AD0059"                                  class="list-group-item list-group-item-action album">Criteria for a Black Widow - Annihilator</a>
-      <a target="_blank" href="https://youtu.be/_bpe80AA7qs"                                                          class="list-group-item list-group-item-action album">The Dethalbum - Dethklok</a>
+      <a target="_blank" href="https://youtu.be/s3HYrXaWPGo"                                                          class="list-group-item list-group-item-action album">The Dethalbum - Dethklok</a>
       <a target="_blank" href="https://youtu.be/hqx6iOs_yIA"                                                          class="list-group-item list-group-item-action album">Diluvium - Obscura</a>
       <a target="_blank" href="https://youtu.be/ZV3lCOMP060"                                                          class="list-group-item list-group-item-action album">Diver Down - Van Halen</a>
       <a target="_blank" href="https://youtu.be/naElQtYgmn4"                                                          class="list-group-item list-group-item-action album">Doomsday Machine - Arch Enemy</a>
@@ -84,7 +84,7 @@
       <a target="_blank" href="https://youtu.be/y1qRJDmUgRA"                                                          class="list-group-item list-group-item-action album">Fair Warning - Van Halen</a>
       <a target="_blank" href="https://youtube.com/results?search_query=Ghostbusters:+Original+Soundtrack+Album+-+V+" class="list-group-item list-group-item-action album">Ghostbusters: Original Soundtrack Album - V
       <a target="_blank" href="https://youtu.be/f_T8v8imSV4"                                                          class="list-group-item list-group-item-action album">Holy Diver - Dio</a>
-      <a target="_blank" href="https://youtu.be/nWQPdVgeSZs"                                                          class="list-group-item list-group-item-action album">I - Meshuggah</a>
+      <a target="_blank" href="https://youtu.be/Dw3SdOFmubU"                                                          class="list-group-item list-group-item-action album">I - Meshuggah</a>
       <a target="_blank" href="https://youtu.be/K0najyrwX6c"                                                          class="list-group-item list-group-item-action album">Images And Words - Dream Theater</a>
       <a target="_blank" href="https://youtube.com/playlist?list=PLYPKApk7wp1cHaC-RpMaeCKQ0AuxubVzx"                  class="list-group-item list-group-item-action album">L''Inferno dei Vivi - Richard Benson</a>
       <a target="_blank" href="https://youtu.be/-84b8WcPTWo"                                                          class="list-group-item list-group-item-action album">Ironshore - Oni</a>
@@ -105,7 +105,7 @@
       <a target="_blank" href="https://youtu.be/QNOU4vXu_Ao"                                                          class="list-group-item list-group-item-action album">Nevermind - Nirvana</a>
       <a target="_blank" href="https://youtube.com/playlist?list=PL188FE1A560B2A862"                                  class="list-group-item list-group-item-action album">Overcome - All That Remains</a>
       <a target="_blank" href="https://youtu.be/H1MEvSJyO_U"                                                          class="list-group-item list-group-item-action album">Painkiller - Judas Priest</a>
-      <a target="_blank" href="https://youtu.be/dBYP8S-63rw"                                                          class="list-group-item list-group-item-action album">Rage Against the Machine - Rage Against the Machine</a>
+      <a target="_blank" href="https://youtu.be/MAnsR_7VYKQ"                                                          class="list-group-item list-group-item-action album">Rage Against the Machine - Rage Against the Machine</a>
       <a target="_blank" href="https://youtu.be/OVwEKr38MzQ"                                                          class="list-group-item list-group-item-action album">Pornograffitti - Extreme</a>
       <a target="_blank" href="https://youtu.be/lTJg4P1zo4E"                                                          class="list-group-item list-group-item-action album">Puritanical Euphoric Misanthropia - Dimmu Borgir</a>
       <a target="_blank" href="https://youtu.be/N94S9u0kTLA"                                                          class="list-group-item list-group-item-action album">Reise, Reise - Rammstein</a>
@@ -131,7 +131,7 @@
       <a target="_blank" href="https://youtu.be/GGNW2AMAqgo"                                                          class="list-group-item list-group-item-action album">War Eternal - Arch Enemy</a>
       <a target="_blank" href="https://youtu.be/yLu4GbCUMRI"                                                          class="list-group-item list-group-item-action album">Women And Children First - Van Halen</a>
       <a target="_blank" href="https://youtu.be/PNjiQt1GbH8"                                                          class="list-group-item list-group-item-action album">yeah, whatever - Owane</a>
-      <a target="_blank" href="https://youtu.be/UmWQt3XI_T4"                                                          class="list-group-item list-group-item-action album">Your Love - Lari Basilio</a>
+      <a target="_blank" href="https://youtu.be/9c2Ny3IN1sA"                                                          class="list-group-item list-group-item-action album">Your Love - Lari Basilio</a>
       <a target="_blank" href="https://youtu.be/w3WIa_Z35p0"                                                          class="list-group-item list-group-item-action album">The Zenith Rise - I Built The Sky</a>
   </ul>
 #+END_EXPORT
@@ -157,7 +157,7 @@
     <a target="_blank" href="https://youtu.be/t2CmTc75Ugg"                                                                              class="list-group-item list-group-item-action wannaAlbum">£11.43 | Antipop - Primus</a>
     <a target="_blank" href="https://www.youtube.com/watch?v=sWlkFqOYnko"                                                               class="list-group-item list-group-item-action wannaAlbum">€13.99 | Ascendancy - Kadinja</a>
     <a target="_blank" href="https://youtu.be/1QCfbbW4NEw"                                                                              class="list-group-item list-group-item-action wannaAlbum"><p style="display:inline;background-color:red;">£7</p>     | Cassini - Sithu Aye</a>
-    <a target="_blank" href="https://youtu.be/BiGvz_JUShA"                                                                              class="list-group-item list-group-item-action wannaAlbum">£29.97 | Centrifugal Funk - The Mark Varney Project</a>
+    <a target="_blank" href="https://youtu.be/CQguu2Ke9Oc"                                                                              class="list-group-item list-group-item-action wannaAlbum">£29.97 | Centrifugal Funk - The Mark Varney Project</a>
     <a target="_blank" href="https://youtube.com/playlist?list=PL3ERHH3tuEjNOol2pOaCD_Tv8VAYi8P00"                                      class="list-group-item list-group-item-action wannaAlbum">€57.26 | Ciao 2020 - Various Artist</a>
     <a target="_blank" href="https://www.amazon.com/dp/B00L904YUC/ref=dm_rwp_pur_lnd_albm_unrg"                                         class="list-group-item list-group-item-action wannaAlbum">£13    | Digital Dream Sequence - Trioscapes</a>
     <a target="_blank" href="https://masterbootrecord.bandcamp.com/album/direct-memory-access"                                          class="list-group-item list-group-item-action wannaAlbum">£10    | Direct Memory Access - Master Boot Record</a>

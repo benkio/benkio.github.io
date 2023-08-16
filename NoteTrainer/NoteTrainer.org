@@ -4,8 +4,8 @@
 
 #+DESCRIPTION: Note Trainer
 #+KEYWORDS: Note Trainer
-#+HTML_HEAD_EXTRA: <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-#+HTML_HEAD_EXTRA: <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA: <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA: <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
 #+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 #+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
 #+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
@@ -49,45 +49,4 @@
 <div id="NoteTrainer"></div>
 #+END_EXPORT
 
-#+name: embedElm
-#+begin_src javascript :exports none
-  var app = Elm.Main.init({
-      node: document.getElementById('NoteTrainer')
-  });
-
-  var audioCtx;
-  var volume;
-  var volumeSlide;
-
-  $(document).ready(function(){
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)
-      volume = audioCtx.createGain();
-      volumeSlide = document.getElementById("volumeSlider");
-
-      volume.connect(audioCtx.destination);
-      volume.gain.value = volumeSlide.value / 100;
-  });
-
-  app.ports.play.subscribe(function(music) {
-      const audioCtxTime = audioCtx.currentTime;
-      const releaseTime = music.seconds * 0.2;
-      const attackTime = music.seconds * 0.2;
-
-      volume.gain.linearRampToValueAtTime(volumeSlide.value / 100, audioCtxTime + attackTime);
-      volume.gain.linearRampToValueAtTime(0, audioCtxTime + music.seconds - releaseTime);
-
-      var synths = music.frequencies.map(frequency => {
-          var synth = audioCtx.createOscillator();
-          synth.frequency.value = frequency;
-          synth.type = music.oscillatorwave;
-          synth.connect(volume);
-          return synth;
-      });
-
-      synths.forEach((synth) => {
-          synth.start(audioCtxTime);
-          synth.stop(audioCtxTime + music.seconds);
-      });
-  });
-#+end_src
 #+call: ../templates.org:inline-js(blk="embedElm")

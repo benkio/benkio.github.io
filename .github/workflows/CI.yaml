@@ -1,0 +1,21 @@
+name: Github Page CI
+
+on:
+  push:
+    branches:
+        - "**"
+
+
+jobs:
+  check_urls:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Link Checker
+        uses: lycheeverse/lychee-action@v1.8.0
+        with:
+          # Twitter and mailto doesn't seems to be reachable even if they work 🤔
+          args: --exclude "(https.*twitter\.com.*|.*benkio89\@gmail\.com.*)"
+          fail: true
