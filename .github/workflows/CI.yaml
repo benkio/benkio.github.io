@@ -17,5 +17,5 @@ jobs:
         uses: lycheeverse/lychee-action@v1.8.0
         with:
           # Twitter and mailto doesn't seems to be reachable even if they work 🤔
-          args: --exclude "(https.*twitter\.com.*|.*benkio89\@gmail\.com.*)"
+          args: . --exclude "(https.*twitter\.com.*|.*benkio89\@gmail\.com.*)"
           fail: true
