@@ -142,14 +142,14 @@ Positive Grid Spark Unboxing
      particular, the problem was with the connectivity between the amp
      and the PC.
 
-     Positive Grid provides a specific [[https://help.positivegrid.com/hc/en-us/articles/360039598451-Installing-Windows-Driver-for-Spark-Video-Tutorial-][ASIO Driver]] for the Spark amp,
+     Positive Grid provides a specific ASIO driver for the Spark amp,
      but even if I have that installed, it seems that the USB
      connection is not reliable. It often disconnects and was
      impossible to take a recording or jam along. Meanwhile, the
      Bluetooth connection works without any problem.
 
      In the end, I realized that they keep updating the driver. In
-     fact, going to [[https://help.positivegrid.com/hc/en-us/articles/360039598451-Installing-Windows-Driver-for-Spark-Video-Tutorial-][the driver page]] right now I see /Updated:
+     fact, going to the driver page right now I see /Updated:
      Yesterday/. Therefore, I just installed the new driver, restarted
      the PC and it seemed to work fine.
 
