@@ -4,8 +4,8 @@
 #+DESCRIPTION: Spark Amp Review
 #+KEYWORDS: Spark Amp Review
 #+CREATOR: Enrico Benini
-#+HTML_HEAD_EXTRA: <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon">
-#+HTML_HEAD_EXTRA: <link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA: <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA: <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
 #+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 #+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
 #+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
@@ -142,14 +142,14 @@ Positive Grid Spark Unboxing
      particular, the problem was with the connectivity between the amp
      and the PC.
 
-     Positive Grid provides a specific [[https://help.positivegrid.com/hc/en-us/articles/360039598451-Spark-Windows-ASIO-Driver-][ASIO driver]] for the Spark amp,
+     Positive Grid provides a specific ASIO driver for the Spark amp,
      but even if I have that installed, it seems that the USB
      connection is not reliable. It often disconnects and was
      impossible to take a recording or jam along. Meanwhile, the
      Bluetooth connection works without any problem.
 
      In the end, I realized that they keep updating the driver. In
-     fact, going to [[https://help.positivegrid.com/hc/en-us/articles/360039598451-Spark-Windows-ASIO-Driver-][the driver page]] right now I see /Updated:
+     fact, going to the driver page right now I see /Updated:
      Yesterday/. Therefore, I just installed the new driver, restarted
      the PC and it seemed to work fine.
 
