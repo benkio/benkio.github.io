@@ -49,7 +49,7 @@ Etiam laoreet quam sed arcu.  Lorem ipsum dolor sit amet, consectetuer adipiscin
   :HTML_CONTAINER_CLASS: col-sm-2 col-xs-3
   :END:
 
-#+html: <a title="Instagram Profile" href="https://www.instagram.com/benkio48/"><i class="fab fa-3x fa-instagram" aria-hidden="true"></i></a>
+#+html: <a title="Instagram Profile" href="https://www.instagram.com/benkio48"><i class="fab fa-3x fa-instagram" aria-hidden="true"></i></a>
 
 ** 
   :PROPERTIES:
