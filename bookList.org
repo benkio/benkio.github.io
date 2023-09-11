@@ -127,6 +127,15 @@
 
 ** Wanna Read
 
+  Legend:
+  #+BEGIN_EXPORT HTML
+  <ul>
+    <li><span style="background-color:red;">Red:</span> means it's, probably a manga to read online, do not purchase if not strictly necessary.</li>
+    <li><span style="background-color:blue;">Blue:</span> means the album is already purchased, but it didn't arrive or wasn't archivied yet. Don't buy.</li>
+  </ul>
+  #+END_EXPORT
+
+
 #+BEGIN_EXPORT HTML
 <p id="totalBookCount"></p>
 <ul id="wanna_read_bookList" class="list-group">
@@ -134,14 +143,14 @@
   <a target="_blank" href="https://www.amazon.co.uk/Monster-Calls-Patrick-Ness/dp/1406361801"                                                 class="list-group-item list-group-item-action wa_book">A Monster Calls</a>
   <a target="_blank" href="https://www.amazon.co.uk/Agile-Good-Hype-Bertrand-Meyer/dp/3319051547"                                             class="list-group-item list-group-item-action wa_book">Agile!: The Good, the Hype and the Ugly</a>
   <a target="_blank" href="https://www.goodreads.com/book/show/25666050-algorithms-to-live-by"                                                class="list-group-item list-group-item-action wa_book">Algorithms to Live By: The Computer Science of Human Decisions</a>
-  <a target="_blank" href="https://alita-manga.com/"                                                                                          class="list-group-item list-group-item-action wa_book">Alita</a>
+  <a target="_blank" href="https://alita-manga.com/"                                                                                          class="list-group-item list-group-item-action wa_book"><p style="display:inline;background-color:red;">Alita</p></a>
   <a target="_blank" href="https://www.goodreads.com/en/book/show/977262"                                                                     class="list-group-item list-group-item-action wa_book">Asimov's New Guide to Science</a>
   <a target="_blank" href="https://www.amazon.com/Short-History-Nearly-Everything/dp/076790818X"                                              class="list-group-item list-group-item-action wa_book">A Short History of Nearly Everything</a>
   <a target="_blank" href="https://www.amazon.com/Astrophysics-People-Hurry-deGrasse-Tyson/dp/0393609391"                                     class="list-group-item list-group-item-action wa_book">Astrophysics for People in a Hurry</a>
   <a target="_blank" href="https://www.amazon.it/dp/8832757001/?coliid=I1PKWAF03M8ZNY&colid=22QBHENP44UR0&psc=1&ref_=lv_ov_lig_dp_it"         class="list-group-item list-group-item-action wa_book">Belzebubs</a>
-  <a target="_blank" href="https://readberserk.com/"                                                                                          class="list-group-item list-group-item-action wa_book">Berserk</a>
+  <a target="_blank" href="https://readberserk.com/"                                                                                          class="list-group-item list-group-item-action wa_book"><p style="display:inline;background-color:red;">Berserk</p></a>
   <a target="_blank" href="https://en.wikipedia.org/wiki/Bullet_Train_(novel)"                                                                class="list-group-item list-group-item-action wa_book">Bullet Train</a>
-  <a target="_blank" href="https://claymoremanga.online/manga/claymore-vol-11-chapter-62-kindred-of-paradise-part-1/"                         class="list-group-item list-group-item-action wa_book">Claymore</a>
+  <a target="_blank" href="https://claymoremanga.online/manga/claymore-vol-11-chapter-62-kindred-of-paradise-part-1/"                         class="list-group-item list-group-item-action wa_book"><p style="display:inline;background-color:red;">Claymore</p></a>
   <a target="_blank" href="https://en.wikipedia.org/wiki/Chaos:_Making_a_New_Science"                                                         class="list-group-item list-group-item-action wa_book">Chaos: Making a New Science</a>
   <a target="_blank" href="https://amzn.eu/d/crRvCjf"                                                                                         class="list-group-item list-group-item-action wa_book">Carnage: Volume 1: In The Court Of Crimson</a>
   <a target="_blank" href="https://en.wikipedia.org/wiki/Cathedral_of_the_Sea"                                                                class="list-group-item list-group-item-action wa_book">Cathedral of the Sea</a>
@@ -179,7 +188,7 @@
   <a target="_blank" href="https://www.amazon.it/dp/B0B3MDGT1V/ref=dp-kindle-redirect?_encoding=UTF8&btkr=1"                                  class="list-group-item list-group-item-action wa_book">Libro 2</a>
   <a target="_blank" href="https://en.wikipedia.org/wiki/Lolita"                                                                              class="list-group-item list-group-item-action wa_book">Lolita</a>
   <a target="_blank" href="https://www.amazon.it/Tutti-romanzi-racconti-Ediz-integrale/dp/8854187828/"                                        class="list-group-item list-group-item-action wa_book">Lovecraft, Tutti i romanzi e i racconti. Ediz. integrale</a>
-  <!-- <a target="_blank" href="https://madeinabyss-manga-new.com/"                                                                           class="list-group-item list-group-item-action wa_book">Made in Abyss - from Volume 27</a> -->
+  <a target="_blank" href="https://madeinabyss-manga-new.com/"                                                                                class="list-group-item list-group-item-action wa_book"><p style="display:inline;background-color:red;">Made in Abyss</p></a>
   <a target="_blank" href="https://www.amazon.co.uk/Marvel-Platinum-Definitive-Wolverine-Reloaded/dp/1846535379"                              class="list-group-item list-group-item-action wa_book">Marvel Platinum: The Definitive Wolverine Reloaded</a>
   <a target="_blank" href="https://store.heavymusicartwork.com/collections/books/products/mondo-black"                                        class="list-group-item list-group-item-action wa_book">Mondo Black</a>
   <a target="_blank" href="https://store.heavymusicartwork.com/products/mondo-death"                                                          class="list-group-item list-group-item-action wa_book">Mondo Death</a>
@@ -189,7 +198,7 @@
   <a target="_blank" href="https://www.amazon.it/dp/0141043024/?coliid=I2HGVZMJBML81R&colid=22QBHENP44UR0&psc=1&ref_=lv_ov_lig_dp_it"         class="list-group-item list-group-item-action wa_book">Outliers. The story of success</a>
   <a target="_blank" href="https://www.amazon.it/PERCH%C3%89-CACHIAMO-immersivo-meraviglioso-dellespulsione/dp/B09TWB1CN3"                    class="list-group-item list-group-item-action wa_book">Perché Cachiamo</a>
   <a target="_blank" href="https://en.wikipedia.org/wiki/Prelude_to_Foundation"                                                               class="list-group-item list-group-item-action wa_book">Prelude to Foundation</a>
-  <a target="_blank" href="https://promisedneverland.com/"                                                                                    class="list-group-item list-group-item-action wa_book">Promised Neverland - from Volume 38</a>
+  <a target="_blank" href="https://promisedneverland.com/"                                                                                    class="list-group-item list-group-item-action wa_book"><p style="display:inline;background-color:red;">Promised Neverland - from Volume 38</p></a>
   <a target="_blank" href="https://rickbeato.com/products/the-beato-book-interactive?_pos=1&_sid=20fbc9b6e&_ss=r"                             class="list-group-item list-group-item-action wa_book">Rick Beato Book</a>
   <a target="_blank" href="https://www.goodreads.com/series/68908-samurai-kids"                                                               class="list-group-item list-group-item-action wa_book">Samurai Kids</a>
   <a target="_blank" href="https://en.wikipedia.org/wiki/Scythe_(novel)"                                                                      class="list-group-item list-group-item-action wa_book">Scythe</a>
@@ -203,8 +212,6 @@
   <a target="_blank" href="https://amzn.eu/d/9Gcdtbs"                                                                                         class="list-group-item list-group-item-action wa_book">The Armour of Light</a>
   <a target="_blank" href="https://en.wikipedia.org/wiki/The_Ballad_of_Songbirds_and_Snakes"                                                  class="list-group-item list-group-item-action wa_book">The Ballad of Songbirds and Snakes</a>
   <a target="_blank" href="https://en.wikipedia.org/wiki/The_Dark_Tower_(series)"                                                             class="list-group-item list-group-item-action wa_book">The Dark Tower</a>
-  <a target="_blank" href="https://en.wikipedia.org/wiki/Shannara#The_Defenders_of_Shannara"                                                  class="list-group-item list-group-item-action wa_book">The Defenders of Shannara</a>
-  <a target="_blank" href="https://en.wikipedia.org/wiki/Shannara#The_Fall_of_Shannara"                                                       class="list-group-item list-group-item-action wa_book">The Fall of Shannara</a>
   <a target="_blank" href="https://www.goodreads.com/book/show/177539.The_History_of_Jazz"                                                    class="list-group-item list-group-item-action wa_book">The History of Jazz</a>
   <a target="_blank" href="https://www.goodreads.com/book/show/34749290-the-influential-mind"                                                 class="list-group-item list-group-item-action wa_book">The Influential Mind: What the Brain Reveals About Our Power to Change Others</a>
   <a target="_blank" href="https://www.goodreads.com/book/show/113171.The_Jazz_Theory_Book"                                                   class="list-group-item list-group-item-action wa_book">The Jazz Theory Book</a>
