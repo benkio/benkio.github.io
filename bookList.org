@@ -131,7 +131,7 @@
   #+BEGIN_EXPORT HTML
   <ul>
     <li><span style="background-color:red;">Red:</span> means it's, probably a manga to read online, do not purchase if not strictly necessary.</li>
-    <li><span style="background-color:blue;">Blue:</span> means the album is already purchased, but it didn't arrive or wasn't archivied yet. Don't buy.</li>
+    <li><span style="background-color:blue;">Blue:</span> means the book is already purchased, but it didn't arrive or wasn't archivied yet. Don't buy.</li>
   </ul>
   #+END_EXPORT
 
