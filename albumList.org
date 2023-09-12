@@ -77,7 +77,7 @@
       <a target="_blank" href="https://www.youtube.com/watch?v=OVwEKr38MzQ"                              class="list-group-item list-group-item-action album">Extreme - Pornograffitti</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=hJ8sErDmJ8k"                              class="list-group-item list-group-item-action album">Fleshgod Apocalypse - King</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=TymQWWtIU1c"                              class="list-group-item list-group-item-action album">Ghostbusters: Original Soundtrack Album</a>
-      <a target="_blank" href="https://www.youtube.com/watch?v=vWJGbJhVTTQ"                              class="list-group-item list-group-item-action album">Giacomo Toni - Nafta</a>
+      <a target="_blank" href="https://www.youtube.com/playlist?list=PLR5-ZzXZIhpI1Cfxk_xlwpIPiMgmdSG9F" class="list-group-item list-group-item-action album">Giacomo Toni - Nafta</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=KO5ad84UixQ"                              class="list-group-item list-group-item-action album">Guns N' Roses - Appetite For Destruction</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=0FyHXlBsZbs"                              class="list-group-item list-group-item-action album">Haken - The Mountain</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=DO61NWKkyWQ"                              class="list-group-item list-group-item-action album">Haken - Visions</a>
@@ -94,8 +94,8 @@
       <a target="_blank" href="https://www.youtube.com/watch?v=BOu3bAYxYAA"                              class="list-group-item list-group-item-action album">Killswitch Engage - Alive Or Just Breathing</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=vutytgFZ7W0"                              class="list-group-item list-group-item-action album">Kreator - Enemy Of God</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=W_b4FAtoDV4"                              class="list-group-item list-group-item-action album">Lamb Of God - Ashes Of The Wake</a>
-      <a target="_blank" href="https://www.youtube.com/watch?v=SXAPuVUzd1E"                              class="list-group-item list-group-item-action album">Lamb Of God - Sacrament</a>
-      <a target="_blank" href="https://www.youtube.com/watch?v=9c2Ny3IN1sA"                              class="list-group-item list-group-item-action album">Lari Basilio - Your Love</a>
+      <a target="_blank" href="https://youtube.com/playlist?list=PLxy1hNzYBr7W1xxK2dcg-8pLlp4r_7L7o"     class="list-group-item list-group-item-action album">Lamb Of God - Sacrament</a>
+      <a target="_blank" href="https://youtube.com/playlist?list=PLCjLGgbfOxryR5bW6jz2UTvTSyvJjYJaP"     class="list-group-item list-group-item-action album">Lari Basilio - Your Love</a>
       <a target="_blank" href="https://www.youtube.com/playlist?list=PLjud9YtAo4wnCgSm0hlTbVxhvrdm82-KL" class="list-group-item list-group-item-action album">Luca Mantovanelli - Multiversum</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=C4eWSMMZrL4"                              class="list-group-item list-group-item-action album">Magic Pie - The Suffering Joy</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=gPpBtzAS7zw"                              class="list-group-item list-group-item-action album">Megadeth - Cryptic Writings [Remaster]</a>
@@ -115,7 +115,7 @@
       <a target="_blank" href="https://www.youtube.com/watch?v=OiZrdL6eGp4"                              class="list-group-item list-group-item-action album">Paul Gilbert - Space Ship One [Bonus Track]</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=PpieGB80EqU"                              class="list-group-item list-group-item-action album">Paul Wardingham - Assimilate Regenerate</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=7nCcD_M13Sw"                              class="list-group-item list-group-item-action album">Racer X - Technical Difficulties</a>
-      <a target="_blank" href="https://www.youtube.com/watch?v=_0Fudohj3ig"                              class="list-group-item list-group-item-action album">Rage Against the Machine - Rage Against the Machine</a>
+      <a target="_blank" href="https://youtu.be/MAnsR_7VYKQ"                                             class="list-group-item list-group-item-action album">Rage Against the Machine - Rage Against the Machine</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=Tvu4YgxmtPw"                              class="list-group-item list-group-item-action album">Rammstein - Mutter</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=N94S9u0kTLA"                              class="list-group-item list-group-item-action album">Rammstein - Reise, Reise</a>
       <a target="_blank" href="https://www.youtube.com/playlist?list=PLYPKApk7wp1cHaC-RpMaeCKQ0AuxubVzx" class="list-group-item list-group-item-action album">Richard Benson - L''Inferno dei Vivi</a>
