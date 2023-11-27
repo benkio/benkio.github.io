@@ -56,6 +56,7 @@
       <a target="_blank" href="https://www.youtube.com/watch?v=2-fR2rrmw3I"                                 class="list-group-item list-group-item-action album">AC/DC - Back In Black</a>
       <a target="_blank" href="https://youtube.com/playlist?list=PL188FE1A560B2A862"                        class="list-group-item list-group-item-action album">All That Remains - Overcome</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=IMeJ5br9jGA"                                 class="list-group-item list-group-item-action album">All That Remains - The Fall of Ideals</a>
+      <a target="_blank" href="https://www.youtube.com/watch?v=yXrF0_hoeCA"                                 class="list-group-item list-group-item-action album">Agitator - Mental Violence</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=1WsQEsfZNco"                                 class="list-group-item list-group-item-action album">Amon Amarth - Jomsviking</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=1xtedxA8ehM"                                 class="list-group-item list-group-item-action album">Annihilator - Carnival Diablos</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=YwgAR-fHfk4"                                 class="list-group-item list-group-item-action album">Annihilator - Criteria for a Black Widow</a>
@@ -180,7 +181,6 @@
     <a target="_blank" href="https://en.wikipedia.org/wiki/The_Last_in_Line"                                                            class="list-group-item list-group-item-action wannaAlbum">£7.25  | The Last in Line - Dio</a>
     <a target="_blank" href="https://youtu.be/MoJTemOjaw0"                                                                              class="list-group-item list-group-item-action wannaAlbum"><p style="display:inline;background-color:red;">$10    </p>| Natural Evolution - HAAMOJA</a>
     <a target="_blank" href="https://www.youtube.com/watch?v=kt8o5dtNVyk"                                                               class="list-group-item list-group-item-action wannaAlbum">£13.21 | Never Turn Your Back on a Friend - Budgie</a>
-    <a target="_blank" href="https://www.youtube.com/watch?v=yXrF0_hoeCA"                                                               class="list-group-item list-group-item-action wannaAlbum">£14    | Mental Violence - Agitator</a>
     <a target="_blank" href="https://www.youtube.com/watch?v=hkj1nt_u2U8"                                                               class="list-group-item list-group-item-action wannaAlbum">£18    | Open Source - Kiko Loureiro</a>
     <a target="_blank" href="https://reflections.bandcamp.com/album/willow"                                                             class="list-group-item list-group-item-action wannaAlbum"><p style="display:inline;background-color:red;">$12    </p>| Willow - Reflections</a>
     <a target="_blank" href="https://www.youtube.com/watch?v=r0kgU_cibkU"                                                               class="list-group-item list-group-item-action wannaAlbum">$24    | Spiritual Machines - Paul Wardingham</a>
