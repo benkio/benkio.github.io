@@ -1,7 +1,6 @@
 #+OPTIONS: html-postamble:auto toc:nil num:nil
 #+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:nil
 #+TITLE: Blog
-
 #+DESCRIPTION: Blog
 #+KEYWORDS: Blog
 #+HTML_HEAD_EXTRA: <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
@@ -50,7 +49,6 @@
 
 #+html: <ul id="pagination" class="pagination pagination-lg"></ul>
 
-#+CALL: templates.org:compileOrgFiles(path="./articles/")
 #+CALL: templates.org:articlesRelativePaths()
 
 #+NAME: pagination
@@ -69,7 +67,7 @@ for (var i = 0; i < (htmlArticles.length/perPage); i++) {
 #+END_SRC
 #+CALL: templates.org:inline-js(blk="pagination")
 
-#+name: populateArticles
+#+name: blog_populateArticles
 #+begin_src javascript :exports none
 // Pagination 0 based
 const htmlArticlesPaginated = htmlArticles.slice(page, page + perPage);
@@ -105,4 +103,4 @@ articlesElementsZip.forEach(function(tuple) {
 });
 
 #+end_src
-#+call: templates.org:inline-js("populateArticles")
+#+call: templates.org:inline-js(blk="blog_populateArticles")

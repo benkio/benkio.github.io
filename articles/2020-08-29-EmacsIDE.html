@@ -2,11 +2,10 @@
 <html lang="en">
 <head>
 <title>Emacs IDE - Build your own Metals</title>
-<!-- 2023-08-16 Wed 12:14 -->
+<!-- 2023-12-02 Sat 20:00 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
-<meta name="author" content="benkio">
 
 <link  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -267,32 +266,32 @@ the feature <code>extract-code-line-or-region</code> is built.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">extract-code-line-or-region-template</span> (value function postDefinitionSyntaxValue postDefinitionSyntaxFunc EndSyntaxValue EndSyntaxFunc name parameters from to)
-  <span style="color: #8b2252;">"Template for extracting code to value or function:</span>
-<span style="color: #8b2252;">   Based on the input it this extract the selected code to the closest empty line above.</span>
-<span style="color: #8b2252;">   - Value: syntax for values in target laguage</span>
-<span style="color: #8b2252;">   - function: syntax for function in target laguage</span>
-<span style="color: #8b2252;">   - postDefinitionSyntax: what you put between the name + parameters and the body of the function/value. eg (= in scala)</span>
-<span style="color: #8b2252;">   - EndSyntax: what to put at the end of the definition of value/function body. Eg in js it's ';' for value but '</span><span style="color: #008b8b;">}</span><span style="color: #8b2252;">' for functionsxs</span>
-<span style="color: #8b2252;">   - name: name of the extracted value/function</span>
-<span style="color: #8b2252;">   - from: start of the region</span>
-<span style="color: #8b2252;">   - to: end of the region</span>
-<span style="color: #8b2252;">  "</span>
-  <span style="color: #b22222;">;; </span><span style="color: #b22222;">extract code, cut if region or cut from point to end of the line</span>
-  (<span style="color: #a020f0;">setq</span> code (buffer-substring from to))
+<pre class="src src-emacs-lisp">(<span style="color: #00ffff;">defun</span> <span style="color: #87cefa;">extract-code-line-or-region-template</span> (value function postDefinitionSyntaxValue postDefinitionSyntaxFunc EndSyntaxValue EndSyntaxFunc name parameters from to)
+  <span style="color: #ffa07a;">"Template for extracting code to value or function:</span>
+<span style="color: #ffa07a;">   Based on the input it this extract the selected code to the closest empty line above.</span>
+<span style="color: #ffa07a;">   - Value: syntax for values in target laguage</span>
+<span style="color: #ffa07a;">   - function: syntax for function in target laguage</span>
+<span style="color: #ffa07a;">   - postDefinitionSyntax: what you put between the name + parameters and the body of the function/value. eg (= in scala)</span>
+<span style="color: #ffa07a;">   - EndSyntax: what to put at the end of the definition of value/function body. Eg in js it's ';' for value but '</span><span style="color: #7fffd4;">}</span><span style="color: #ffa07a;">' for functionsxs</span>
+<span style="color: #ffa07a;">   - name: name of the extracted value/function</span>
+<span style="color: #ffa07a;">   - from: start of the region</span>
+<span style="color: #ffa07a;">   - to: end of the region</span>
+<span style="color: #ffa07a;">  "</span>
+  <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">extract code, cut if region or cut from point to end of the line</span>
+  (<span style="color: #00ffff;">setq</span> code (buffer-substring from to))
   (delete-region from to)
 
-  <span style="color: #b22222;">;; </span><span style="color: #b22222;">Generate code</span>
-  (<span style="color: #a020f0;">setq</span> resultDefinition (<span style="color: #a020f0;">if</span> (string-blank-p parameters)
+  <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Generate code</span>
+  (<span style="color: #00ffff;">setq</span> resultDefinition (<span style="color: #00ffff;">if</span> (string-blank-p parameters)
                              (concat value name postDefinitionSyntaxValue code EndSyntaxValue)
                            (concat function name parameters postDefinitionSyntaxFunc code EndSyntaxFunc)))
-  (<span style="color: #a020f0;">setq</span> resultReference (<span style="color: #a020f0;">if</span> (string-blank-p parameters)
+  (<span style="color: #00ffff;">setq</span> resultReference (<span style="color: #00ffff;">if</span> (string-blank-p parameters)
                             name
                           (concat name parameters)))
-  <span style="color: #b22222;">;; </span><span style="color: #b22222;">Put the resultReference at point</span>
+  <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Put the resultReference at point</span>
   (insert resultReference)
-  <span style="color: #b22222;">;; </span><span style="color: #b22222;">Move to the closest ^$ line and insert the resultDefinition</span>
-  (re-search-backward <span style="color: #8b2252;">"^$"</span>)
+  <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Move to the closest ^$ line and insert the resultDefinition</span>
+  (re-search-backward <span style="color: #ffa07a;">"^$"</span>)
   (insert resultDefinition)
   )
 </pre>
@@ -356,32 +355,32 @@ Haskell version
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">hs-extract-code-line-or-region</span> (name <span style="color: #228b22;">&amp;optional</span> parameters from to)
-  <span style="color: #8b2252;">"Extract the code to val or def:</span>
-<span style="color: #8b2252;">   Require:</span>
-<span style="color: #8b2252;">     - Name of the val/def</span>
-<span style="color: #8b2252;">     - Optional list of parameters (if empty it will be a val)</span>
+<pre class="src src-emacs-lisp">(<span style="color: #00ffff;">defun</span> <span style="color: #87cefa;">hs-extract-code-line-or-region</span> (name <span style="color: #98fb98;">&amp;optional</span> parameters from to)
+  <span style="color: #ffa07a;">"Extract the code to val or def:</span>
+<span style="color: #ffa07a;">   Require:</span>
+<span style="color: #ffa07a;">     - Name of the val/def</span>
+<span style="color: #ffa07a;">     - Optional list of parameters (if empty it will be a val)</span>
 
-<span style="color: #8b2252;">   if no code region is selected then it extracts the rest of the line from current position</span>
-<span style="color: #8b2252;">   Return type not specified.</span>
-<span style="color: #8b2252;">  "</span>
-  (<span style="color: #a020f0;">interactive</span> (list
-                (read-string <span style="color: #8b2252;">"value/function name: "</span> )
-                (<span style="color: #a020f0;">progn</span>
-                  (<span style="color: #a020f0;">setq</span>
-                   param (read-string <span style="color: #8b2252;">"param name (RET to finish): "</span>)
+<span style="color: #ffa07a;">   if no code region is selected then it extracts the rest of the line from current position</span>
+<span style="color: #ffa07a;">   Return type not specified.</span>
+<span style="color: #ffa07a;">  "</span>
+  (<span style="color: #00ffff;">interactive</span> (list
+                (read-string <span style="color: #ffa07a;">"value/function name: "</span> )
+                (<span style="color: #00ffff;">progn</span>
+                  (<span style="color: #00ffff;">setq</span>
+                   param (read-string <span style="color: #ffa07a;">"param name (RET to finish): "</span>)
                    params nil
                    )
-                  (<span style="color: #a020f0;">while</span> (not (equal <span style="color: #8b2252;">""</span> (s-trim param)))
-                    (<span style="color: #a020f0;">push</span> (s-trim param) params)
-                    (<span style="color: #a020f0;">setq</span> param (read-string <span style="color: #8b2252;">"param name (RET to finish): "</span>))
+                  (<span style="color: #00ffff;">while</span> (not (equal <span style="color: #ffa07a;">""</span> (s-trim param)))
+                    (<span style="color: #00ffff;">push</span> (s-trim param) params)
+                    (<span style="color: #00ffff;">setq</span> param (read-string <span style="color: #ffa07a;">"param name (RET to finish): "</span>))
                     )
-                  (concat <span style="color: #8b2252;">" "</span> (mapconcat 'identity (reverse params) <span style="color: #8b2252;">" "</span>))
+                  (concat <span style="color: #ffa07a;">" "</span> (mapconcat 'identity (reverse params) <span style="color: #ffa07a;">" "</span>))
                   )
-                (<span style="color: #a020f0;">if</span> (use-region-p) (region-beginning) (point))
-                (<span style="color: #a020f0;">if</span> (use-region-p) (region-end) (line-end-position))
+                (<span style="color: #00ffff;">if</span> (use-region-p) (region-beginning) (point))
+                (<span style="color: #00ffff;">if</span> (use-region-p) (region-end) (line-end-position))
                 ))
-  (funcall 'extract-code-line-or-region-template <span style="color: #8b2252;">""</span> <span style="color: #8b2252;">""</span> <span style="color: #8b2252;">" = "</span> <span style="color: #8b2252;">" = "</span> <span style="color: #8b2252;">""</span> <span style="color: #8b2252;">""</span> name parameters from to)
+  (funcall 'extract-code-line-or-region-template <span style="color: #ffa07a;">""</span> <span style="color: #ffa07a;">""</span> <span style="color: #ffa07a;">" = "</span> <span style="color: #ffa07a;">" = "</span> <span style="color: #ffa07a;">""</span> <span style="color: #ffa07a;">""</span> name parameters from to)
   )
 </pre>
 </div>
