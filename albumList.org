@@ -76,6 +76,7 @@
       <a target="_blank" href="https://www.youtube.com/watch?v=hMCVe0cs4DI"                                 class="list-group-item list-group-item-action album">Deep Purple - Machine Head</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=s3HYrXaWPGo"                                 class="list-group-item list-group-item-action album">Dethklok - The Dethalbum</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=lTJg4P1zo4E"                                 class="list-group-item list-group-item-action album">Dimmu Borgir - Puritanical Euphoric Misanthropia</a>
+      <a target="_blank" href="https://www.youtube.com/watch?v=f_T8v8imSV4"                                 class="list-group-item list-group-item-action album">Dio - Holy Diver</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=K0najyrwX6c"                                 class="list-group-item list-group-item-action album">Dream Theater - Images And Words</a>
       <a target="_blank" href="https://youtube.com/playlist?list=OLAK5uy_n13aY2Gw6hojMZpFj5MzMvh_47Nlt54BQ" class="list-group-item list-group-item-action album">Enterprise Earth - The Chosen</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=OVwEKr38MzQ"                                 class="list-group-item list-group-item-action album">Extreme - Pornograffitti</a>
@@ -85,7 +86,6 @@
       <a target="_blank" href="https://www.youtube.com/watch?v=KO5ad84UixQ"                                 class="list-group-item list-group-item-action album">Guns N' Roses - Appetite For Destruction</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=0FyHXlBsZbs"                                 class="list-group-item list-group-item-action album">Haken - The Mountain</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=DO61NWKkyWQ"                                 class="list-group-item list-group-item-action album">Haken - Visions</a>
-      <a target="_blank" href="https://www.youtube.com/watch?v=f_T8v8imSV4"                                 class="list-group-item list-group-item-action album">Holy Diver - Dio</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=w3WIa_Z35p0"                                 class="list-group-item list-group-item-action album">I Built The Sky - The Zenith Rise</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=cqqv24yGoeo"                                 class="list-group-item list-group-item-action album">Ihsahn - Amr</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=3qydyLXGnZU"                                 class="list-group-item list-group-item-action album">In Flames - The Jester Race (Reissue 2014)</a>
