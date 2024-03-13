@@ -42,7 +42,7 @@ Proin quam nisl, tincidunt et, mattis eget, convallis nec, purus.  Aenean in sem
 Etiam laoreet quam sed arcu.  Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  Donec hendrerit tempor tellus.  Donec pretium posuere tellus.  Proin quam nisl, tincidunt et, mattis eget, convallis nec, purus.  Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.  Nulla posuere.  Donec vitae dolor.  Nullam tristique diam non turpis.  Cras placerat accumsan nulla.  Nullam rutrum.  Nam vestibulum accumsan nisl.
 
 
-#+html: <img class="img-circle"  src="https://www.gravatar.com/avatar/aa7f68a32b011ac94698a7a1cb16ffc8?s=200">
+#+html: <img class="img-circle" src="https://www.gravatar.com/avatar/aa7f68a32b011ac94698a7a1cb16ffc8?s=200" onmouseover="this.src='./images/benkioAvatar.png';" onmouseout="this.src='https://www.gravatar.com/avatar/aa7f68a32b011ac94698a7a1cb16ffc8?s=200';" />
 
 * Hello, I'm Enrico
   :PROPERTIES:

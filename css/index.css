@@ -19,6 +19,9 @@
     color: inherit;
     text-decoration: inherit;
 }
+#text-about-me-content-text {
+    line-height: 1em;
+}
 #subtitle { font-size: 2em; }
 .outline-2 #sec- {display: none;}
 .outline-3 {
