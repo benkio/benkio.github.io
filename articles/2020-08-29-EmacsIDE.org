@@ -60,8 +60,8 @@
   *However*, installing metals in emacs ended up being a real pain in
   the ass:
 
-  + [[https://www.reddit.com/r/emacs/comments/idsyxi/having_a_hard_time_setting_up_doom_scala_metals/][Having a hard time setting up Doom + Scala (Metals) + Gradle +
-    monorepo]]
+  + Having a hard time setting up Doom + Scala (Metals) + Gradle +
+    monorepo - ~https://www.reddit.com/r/emacs/comments/idsyxi/having_a_hard_time_setting_up_doom_scala_metals/~
   + [[https://twitter.com/NicolasRinaudo/status/1204143009807425536][Metals in VSCode vs Metals in Emacs]]
 
 

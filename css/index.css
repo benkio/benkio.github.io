@@ -11,6 +11,17 @@
 #text-MainContent {
     line-height: normal;
 }
+#text-about-me-header-collapse{
+    line-height: normal;
+    font-size: 2em;
+}
+#about-me-header-link {
+    color: inherit;
+    text-decoration: inherit;
+}
+#text-about-me-content-text {
+    line-height: 1em;
+}
 #subtitle { font-size: 2em; }
 .outline-2 #sec- {display: none;}
 .outline-3 {
@@ -19,10 +30,13 @@
 #outline-container-text-email {
     line-height: 1em;
 }
-#text-email { display: none; }
-#enter      { display: none; }
-#header     { display: none; }
-#footer     { display: none; }
+#text-email               { display: none; }
+#enter                    { display: none; }
+#about-me-header          { display: none; }
+#about-me-header-collapse { display: none; }
+#about-me-content         { display: none; }
+#header                   { display: none; }
+#footer                   { display: none; }
 #outline-container-footer { font-size: 0px; }
 #outline-container-header { font-size: 0px; }
 
