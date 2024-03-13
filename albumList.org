@@ -55,11 +55,11 @@
   <ul id="albumList"                                                                                        class="list-group">
       <a target="_blank" href="https://www.youtube.com/watch?v=2-fR2rrmw3I"                                 class="list-group-item list-group-item-action album">AC/DC - Back In Black</a>
       <a target="_blank" href="https://youtube.com/playlist?list=PL188FE1A560B2A862"                        class="list-group-item list-group-item-action album">All That Remains - Overcome</a>
-      <a target="_blank" href="https://www.youtube.com/watch?v=IMeJ5br9jGA"                                 class="list-group-item list-group-item-action album">All That Remains - The Fall of Ideals</a>
+      <a target="_blank" href="https://youtu.be/iEi8q-lGByY"                                                class="list-group-item list-group-item-action album">All That Remains - The Fall of Ideals</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=yXrF0_hoeCA"                                 class="list-group-item list-group-item-action album">Agitator - Mental Violence</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=1WsQEsfZNco"                                 class="list-group-item list-group-item-action album">Amon Amarth - Jomsviking</a>
-      <a target="_blank" href="https://www.youtube.com/watch?v=1xtedxA8ehM"                                 class="list-group-item list-group-item-action album">Annihilator - Carnival Diablos</a>
-      <a target="_blank" href="https://www.youtube.com/watch?v=YwgAR-fHfk4"                                 class="list-group-item list-group-item-action album">Annihilator - Criteria for a Black Widow</a>
+      <a target="_blank" href="https://youtu.be/geWSgKCrQ-8"                                                class="list-group-item list-group-item-action album">Annihilator - Carnival Diablos</a>
+      <a target="_blank" href="https://www.youtube.com/watch?v=TjZwd1CtpHs"                                 class="list-group-item list-group-item-action album">Annihilator - Criteria for a Black Widow</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=o0-U7A4gLWc"                                 class="list-group-item list-group-item-action album">Annihilator - King of the Kill</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=q9PlPdmX9fE"                                 class="list-group-item list-group-item-action album">Annihilator - Metal</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=naElQtYgmn4"                                 class="list-group-item list-group-item-action album">Arch Enemy - Doomsday Machine</a>
@@ -94,7 +94,7 @@
       <a target="_blank" href="https://www.youtube.com/watch?v=sm0j33oxav4"                                 class="list-group-item list-group-item-action album">Joe Satriani - Surfing With The Alien</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=0Bg8oo7PZVY"                                 class="list-group-item list-group-item-action album">Joe Satriani - The Extremist</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=IUj6nDs_Mqg"                                 class="list-group-item list-group-item-action album">John Petrucci - Suspended Animation</a>
-      <a target="_blank" href="https://www.youtube.com/watch?v=H1MEvSJyO_U"                                 class="list-group-item list-group-item-action album">Judas Priest - Painkiller</a>
+      <a target="_blank" href="https://youtube.com/playlist?list=PL6ogdCG3tAWjnVY04Ic42nh6s4tVXAAM6"        class="list-group-item list-group-item-action album">Judas Priest - Painkiller</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=BOu3bAYxYAA"                                 class="list-group-item list-group-item-action album">Killswitch Engage - Alive Or Just Breathing</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=vutytgFZ7W0"                                 class="list-group-item list-group-item-action album">Kreator - Enemy Of God</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=W_b4FAtoDV4"                                 class="list-group-item list-group-item-action album">Lamb Of God - Ashes Of The Wake</a>
@@ -102,7 +102,7 @@
       <a target="_blank" href="https://youtube.com/playlist?list=PLCjLGgbfOxryR5bW6jz2UTvTSyvJjYJaP"        class="list-group-item list-group-item-action album">Lari Basilio - Your Love</a>
       <a target="_blank" href="https://www.youtube.com/playlist?list=PLjud9YtAo4wnCgSm0hlTbVxhvrdm82-KL"    class="list-group-item list-group-item-action album">Luca Mantovanelli - Multiversum</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=C4eWSMMZrL4"                                 class="list-group-item list-group-item-action album">Magic Pie - The Suffering Joy</a>
-      <a target="_blank" href="https://www.youtube.com/watch?v=gPpBtzAS7zw"                                 class="list-group-item list-group-item-action album">Megadeth - Cryptic Writings [Remaster]</a>
+      <a target="_blank" href="https://www.youtube.com/watch?v=2OTuz0o7K1U"                                 class="list-group-item list-group-item-action album">Megadeth - Cryptic Writings</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=Ti_imhKBjXA"                                 class="list-group-item list-group-item-action album">Megadeth - Rust In Peace</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=WbhlzTbJBoQ"                                 class="list-group-item list-group-item-action album">Meshuggah - I</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=QnXOSUQ5HJY"                                 class="list-group-item list-group-item-action album">Metallica - ...And Justice For All</a>
@@ -138,7 +138,7 @@
       <a target="_blank" href="https://www.youtube.com/watch?v=tUuYKBiuo-w"                                 class="list-group-item list-group-item-action album">Van Halen - Van Halen II</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=REtGa3L0XXg"                                 class="list-group-item list-group-item-action album">Van Halen - Van Halen</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=IMdrIrk44yA"                                 class="list-group-item list-group-item-action album">Van Halen - Women And Children First</a>
-      <a target="_blank" href="https://www.youtube.com/watch?v=nd2LO02Zw9k"                                 class="list-group-item list-group-item-action album">Yngwie J. Malmsteen's Rising Force - Rising Force</a>
+      <a target="_blank" href="https://youtu.be/0m3Vg48QeUY"                                                class="list-group-item list-group-item-action album">Yngwie J. Malmsteen's Rising Force - Rising Force</a>
   </ul>
 #+END_EXPORT
 
@@ -163,7 +163,7 @@
     <a target="_blank" href="https://youtu.be/t2CmTc75Ugg"                                                                              class="list-group-item list-group-item-action wannaAlbum">£11.43 | Antipop - Primus</a>
     <a target="_blank" href="https://www.youtube.com/watch?v=sWlkFqOYnko"                                                               class="list-group-item list-group-item-action wannaAlbum">€13.99 | Ascendancy - Kadinja</a>
     <a target="_blank" href="https://youtube.com/playlist?list=PLLVeC2nHZ9w0u7qcsSspMLpCgE8rk94o0"                                      class="list-group-item list-group-item-action wannaAlbum">€15.10 | At the Dream's Edge - Chimp Spinner</a>
-    <a target="_blank" href="https://youtube.com/playlist?list=OLAK5uy_mZcvkvIwPfHR-lEz_t9cSl-VMhs3GT800&si=t8ff6jc1W5Ex59k-"           class="list-group-item list-group-item-action wannaAlbum"><p style="display:inline;background-color:red;">£3</p>     | Bloom - Anup Sastry</a>
+    <a target="_blank" href="https://youtube.com/playlist?list=OLAK5uy_mZcvkvIwPfHR-lEz_t9cSl-VMhs3GT800"                               class="list-group-item list-group-item-action wannaAlbum"><p style="display:inline;background-color:red;">£3</p>     | Bloom - Anup Sastry</a>
     <a target="_blank" href="https://youtu.be/1QCfbbW4NEw"                                                                              class="list-group-item list-group-item-action wannaAlbum"><p style="display:inline;background-color:red;">£7</p>     | Cassini - Sithu Aye</a>
     <a target="_blank" href="https://thekiffness.bandcamp.com/album/cat-jams"                                                           class="list-group-item list-group-item-action wannaAlbum"><p style="display:inline;background-color:red;">£7</p>     | Cat Jams EP - The Kiffness</a>
     <a target="_blank" href="https://youtu.be/CQguu2Ke9Oc"                                                                              class="list-group-item list-group-item-action wannaAlbum">£29.97 | Centrifugal Funk - The Mark Varney Project</a>
@@ -174,7 +174,7 @@
     <a target="_blank" href="https://psycroptic.bandcamp.com/album/divine-council"                                                      class="list-group-item list-group-item-action wannaAlbum">$13.99 | Divine Council - Psycroptic</a>
     <a target="_blank" href="https://steroidpuppets.bandcamp.com/album/earthguest"                                                      class="list-group-item list-group-item-action wannaAlbum"><p style="display:inline;background-color:red;">£8.02</p>  | Earthguest - Steroid Puppets</a>
     <a target="_blank" href="https://cloudkicker.bandcamp.com/album/the-discovery"                                                      class="list-group-item list-group-item-action wannaAlbum"><p style="display:inline;background-color:red;">$7     </p>| The Enigma Division - The Enigma Division</a>
-    <a target="_blank" href="https://anupsastry.bandcamp.com/album/titan"                                                                class="list-group-item list-group-item-action wannaAlbum"><p style="display:inline;background-color:red;">£3</p>     | Titan - Anup Sastry</a>
+    <a target="_blank" href="https://anupsastry.bandcamp.com/album/titan"                                                               class="list-group-item list-group-item-action wannaAlbum"><p style="display:inline;background-color:red;">£3</p>     | Titan - Anup Sastry</a>
     <a target="_blank" href="https://www.youtube.com/watch?v=9c2Ny3IN1sA"                                                               class="list-group-item list-group-item-action wannaAlbum">$15    | Far More - Lari Basilio</a>
     <a target="_blank" href="https://youtu.be/16EfK9ecjPU"                                                                              class="list-group-item list-group-item-action wannaAlbum">£25.79 | Fear Inoculum - Tool</a>
     <a target="_blank" href="https://anupsastry.bandcamp.com/album/lion"                                                                class="list-group-item list-group-item-action wannaAlbum"><p style="display:inline;background-color:red;">£3</p>     | Lion - Anup Sastry</a>
@@ -193,7 +193,7 @@
     <a target="_blank" href="https://www.youtube.com/watch?v=r0kgU_cibkU"                                                               class="list-group-item list-group-item-action wannaAlbum">$24    | Spiritual Machines - Paul Wardingham</a>
     <a target="_blank" href="https://www.youtube.com/playlist?list=OLAK5uy_nDqZgJGiWUHBqVYfEOgeegAECXrTGKY9E"                           class="list-group-item list-group-item-action wannaAlbum"><p style="display:inline;background-color:red;">$10    </p>| Spiral of Reflection - Ascend the Helix</a>
     <a target="_blank" href="https://www.youtube.com/watch?v=qo2Ji6iNQEE"                                                               class="list-group-item list-group-item-action wannaAlbum">£38.48 | Snarky Puppy (Texas) - We Like It Here</a>
-    <a target="_blank" href="https://youtu.be/WWKFrzNbCq8"                                                                              class="list-group-item list-group-item-action wannaAlbum"><p style="display:inline;background-color:red;">Free</p>   | Volume - Wide Eyes</a>
+    <a target="_blank" href="https://www.youtube.com/watch?v=k0zCt_NZIsU"                                                               class="list-group-item list-group-item-action wannaAlbum"><p style="display:inline;background-color:red;">Free</p>   | Volume - Wide Eyes</a>
     <a target="_blank" href="https://youtu.be/WKc-_JGGX2A"                                                                              class="list-group-item list-group-item-action wannaAlbum">£27.80 | The Way Forward - Intervals</a>
     <a target="_blank" href="https://youtube.com/playlist?list=OLAK5uy_lnF3h2kmzBMUCYz-KQjyRvPmNZznvWP5s"                               class="list-group-item list-group-item-action wannaAlbum"><p style="display:inline;background-color:red;">$10    </p>| You Wan't Believe What Happens Next! - Arch Echo</a>
   </ul>
