@@ -17,7 +17,7 @@
 
 #+name: textFading
 #+begin_src javascript :exports none
-let text = ['Software Engineer 💾', 'FP Enthusiast 🤓', 'Guitar Player 🎸', 'Cat Lover 😻', 'Freak 🤪', 'Metalhead 🤘', 'INTJ 🧠'];
+let text = ['Software Engineer 💾', 'FP Enthusiast 🤓', 'Guitar Player 🎸', 'Cat Lover 😻', 'Freak 🤪', 'Metalhead 🤘', 'INTJ 🧠', 'Italian 🇮🇹'];
 var textIndex = 1;
 $(document).ready(function(){
   setInterval(function(){
@@ -37,8 +37,8 @@ $(document).ready(function(){
   :PROPERTIES:
   :CUSTOM_ID: header
   :END:
-Aliquam erat volutpat.  Nunc eleifend leo vitae magna.  In id erat non orci commodo Nam euismod tellus id erat. Pellentesque condimentum, magna ut suscipit hendrerit, ipsum augue ornare nulla, non luctus diam neque sit amet urna.  
-Proin quam nisl, tincidunt et, mattis eget, convallis nec, purus.  Aenean in sem ac leo mollis blandit.  Phasellus neque orci, porta a, aliquet quis, semper a, massa.  Phasellus purus.  Vivamus id enim.  Cras placerat accumsan nulla.  Nulla posuere.  
+Aliquam erat volutpat.  Nunc eleifend leo vitae magna.  In id erat non orci commodo Nam euismod tellus id erat. Pellentesque condimentum, magna ut suscipit hendrerit, ipsum augue ornare nulla, non luctus diam neque sit amet urna.
+Proin quam nisl, tincidunt et, mattis eget, convallis nec, purus.  Aenean in sem ac leo mollis blandit.  Phasellus neque orci, porta a, aliquet quis, semper a, massa.  Phasellus purus.  Vivamus id enim.  Cras placerat accumsan nulla.  Nulla posuere.
 Etiam laoreet quam sed arcu.  Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  Donec hendrerit tempor tellus.  Donec pretium posuere tellus.  Proin quam nisl, tincidunt et, mattis eget, convallis nec, purus.  Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.  Nulla posuere.  Donec vitae dolor.  Nullam tristique diam non turpis.  Cras placerat accumsan nulla.  Nullam rutrum.  Nam vestibulum accumsan nisl.
 
 
@@ -189,7 +189,20 @@ Etiam laoreet quam sed arcu.  Lorem ipsum dolor sit amet, consectetuer adipiscin
   :HTML_CONTAINER_CLASS: col-xs-8 collapse
   :END:
 
-cock
+167cm/5'6ft - 62 - 72 kg
+
+Just another human animal who tries to get through life.
+
+Curious about everything that exists: I might jump from mythology to physics, geopolitics, economics, etc However, my main interest remains the tech world. I have a terrible memory, mainly because it is overflowed with silly things, memes, quotes, and internet trash. The memory space is already exhausted 😄
+
+I spend my free time mainly playing electric guitar, doing coding challenges, carrying on personal projects, working out, and hanging out with friends.
+Always looking forward to the next metal gig or festival, searching for new bands to listen to, books to read, and movies/TV series to watch. Too many things to do and nothing gets done in the end 😄
+
+Very friendly and chill, it's hard to upset me, for that, there's already the software and you can't compete with it. Introvert, so don't expect me to be the center of the party, probably I'll stay quiet if in a group environment and listen, but I always try to add something to a conversation if possible. Sometimes I lack empathy because I address everything as a problem to solve and I apply logic for that, forgetting about other's emotions, but I'm trying to improve on that side.
+
+I used to play basketball, with awful results. I always like a good hike or long walk outside as well as going to a museum. Italian, but I can't cook at all.
+
+If you see someone chasing cats and making weird noises, it's probably me.
 
 ** 
   :PROPERTIES:
