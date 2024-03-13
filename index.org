@@ -13,6 +13,26 @@
 #+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="css/main.css">
 #+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="css/index.css">
 
+#+INCLUDE: "./templates.org"
+
+#+name: textFading
+#+begin_src javascript :exports none
+let text = ['Software Engineer 💾', 'FP Enthusiast 🤓', 'Guitar Player 🎸', 'Cat Lover 😻', 'Freak 🤪', 'Metalhead 🤘', 'INTJ 🧠'];
+var textIndex = 1;
+$(document).ready(function(){
+  setInterval(function(){
+    let opacity = Number($("#subtitle").css("opacity"));
+    if (opacity == 0) {
+      textIndex = textIndex >= text.length? 0: textIndex;
+      $("#subtitle").text(text[textIndex])
+      textIndex += 1;;
+    }
+    $("#subtitle").fadeTo(500, (opacity + 1)%2);
+  }, 2000);
+});
+#+end_src
+
+
 * Header
   :PROPERTIES:
   :CUSTOM_ID: header
@@ -130,6 +150,52 @@ Etiam laoreet quam sed arcu.  Lorem ipsum dolor sit amet, consectetuer adipiscin
   :HTML_CONTAINER_CLASS: col-xs-4
   :END:
 
+* About Me Header
+  :PROPERTIES:
+  :CUSTOM_ID: about-me-header
+  :HTML_CONTAINER_CLASS: text-center container
+  :END:
+** 
+  :PROPERTIES:
+  :HTML_CONTAINER_CLASS: col-xs-2
+  :END:
+
+** 
+  :PROPERTIES:
+  :CUSTOM_ID: about-me-header-collapse
+  :HTML_CONTAINER_CLASS: col-xs-8
+  :END:
+
+#+html: <a id="about-me-header-link" href="#outline-container-about-me-content-text" data-toggle="collapse">⌄ About Me ⌄</a>
+
+** 
+  :PROPERTIES:
+  :HTML_CONTAINER_CLASS: col-xs-2
+  :END:
+
+* About Me Content
+  :PROPERTIES:
+  :CUSTOM_ID: about-me-content
+  :HTML_CONTAINER_CLASS: text-center container
+  :END:
+** 
+  :PROPERTIES:
+  :HTML_CONTAINER_CLASS: col-xs-2
+  :END:
+
+** 
+  :PROPERTIES:
+  :CUSTOM_ID: about-me-content-text
+  :HTML_CONTAINER_CLASS: col-xs-8 collapse
+  :END:
+
+cock
+
+** 
+  :PROPERTIES:
+  :HTML_CONTAINER_CLASS: col-xs-2
+  :END:
+
 * Footer
   :PROPERTIES:
   :CUSTOM_ID: footer
@@ -137,4 +203,4 @@ Etiam laoreet quam sed arcu.  Lorem ipsum dolor sit amet, consectetuer adipiscin
   :END:
   Aliquam erat volutpat.  Nunc eleifend leo vitae magna.  In id erat non orci commodo lobortis.  Proin neque massa, cursus ut, gravida ut, lobortis eget, lacus.  Sed diam.  Praesent fermentum tempor tellus.  Nullam tempus.  Mauris ac felis vel velit tristique imperdiet.  Donec at pede.  Etiam vel neque nec dui dignissim bibendum.  Vivamus id enim.  Phasellus neque orci, porta a, aliquet quis, semper a, massa.  Phasellus purus.  Pellentesque tristique imperdiet tortor.  Nam euismod tellus id erat.
 
-#+call: inline-js("textFading")
+#+call: templates.org:inline-js("textFading")
