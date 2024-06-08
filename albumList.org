@@ -92,6 +92,7 @@
       <a target="_blank" href="https://www.youtube.com/watch?v=cqqv24yGoeo"                                 class="list-group-item list-group-item-action album">Ihsahn - Amr</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=3qydyLXGnZU"                                 class="list-group-item list-group-item-action album">In Flames - The Jester Race (Reissue 2014)</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=KhL4lK3uoYo"                                 class="list-group-item list-group-item-action album">Intervals - Circadian</a>
+      <a target="_blank" href="https://youtube.com/playlist?list=PLuj-WzKNCr785EnREjtZAuZo-NKoYejwk"        class="list-group-item list-group-item-action album">Intervals - Memory Palace</a>
       <a target="_blank" href="https://jasonkui.bandcamp.com/album/naka"                                    class="list-group-item list-group-item-action album">Jason Kui - Naka</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=sm0j33oxav4"                                 class="list-group-item list-group-item-action album">Joe Satriani - Surfing With The Alien</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=0Bg8oo7PZVY"                                 class="list-group-item list-group-item-action album">Joe Satriani - The Extremist</a>
