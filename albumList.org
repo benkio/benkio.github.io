@@ -165,6 +165,7 @@
 
   #+BEGIN_EXPORT HTML
   <ul id="wannaAlbumList" class="list-group">
+    <a target="_blank" href="https://www.youtube.com/playlist?list=PLCKp_J1GOMgB6ET77QRqfcZMU0iBJrmHf"                                  class="list-group-item list-group-item-action wannaAlbum">£11.49 | A quiet place to die - Alpha wolf</a>
     <a target="_blank" href="https://youtu.be/uNJhrIATZ0M"                                                                              class="list-group-item list-group-item-action wannaAlbum">£16.40 | Aathma - Persefone</a>
     <a target="_blank" href="https://youtu.be/t2CmTc75Ugg"                                                                              class="list-group-item list-group-item-action wannaAlbum">£11.43 | Antipop - Primus</a>
     <a target="_blank" href="https://youtube.com/playlist?list=OLAK5uy_mpowo9JKkEbG9YOyFjV_6_J3czWDK0By8"                               class="list-group-item list-group-item-action wannaAlbum">£13    | Parrhesia - Animals as Leaders</a>
