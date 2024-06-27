@@ -56,6 +56,7 @@
       <a target="_blank" href="https://www.youtube.com/watch?v=2-fR2rrmw3I"                                 class="list-group-item list-group-item-action album">AC/DC - Back In Black</a>
       <a target="_blank" href="https://youtube.com/playlist?list=PL188FE1A560B2A862"                        class="list-group-item list-group-item-action album">All That Remains - Overcome</a>
       <a target="_blank" href="https://youtu.be/iEi8q-lGByY"                                                class="list-group-item list-group-item-action album">All That Remains - The Fall of Ideals</a>
+      <a target="_blank" href="https://www.youtube.com/playlist?list=PLCKp_J1GOMgB6ET77QRqfcZMU0iBJrmHf"    class="list-group-item list-group-item-action album">Alpha Wolf - A Quiet Place to Die</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=yXrF0_hoeCA"                                 class="list-group-item list-group-item-action album">Agitator - Mental Violence</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=1WsQEsfZNco"                                 class="list-group-item list-group-item-action album">Amon Amarth - Jomsviking</a>
       <a target="_blank" href="https://youtu.be/geWSgKCrQ-8"                                                class="list-group-item list-group-item-action album">Annihilator - Carnival Diablos</a>
@@ -166,7 +167,6 @@
 
   #+BEGIN_EXPORT HTML
   <ul id="wannaAlbumList" class="list-group">
-    <a target="_blank" href="https://www.youtube.com/playlist?list=PLCKp_J1GOMgB6ET77QRqfcZMU0iBJrmHf"                                  class="list-group-item list-group-item-action wannaAlbum"><p style="display:inline;background-color:blue;">£11.49 | A quiet place to die - Alpha wolf</p></a>
     <a target="_blank" href="https://youtu.be/uNJhrIATZ0M"                                                                              class="list-group-item list-group-item-action wannaAlbum">£16.40 | Aathma - Persefone</a>
     <a target="_blank" href="https://youtube.com/playlist?list=OLAK5uy_mpowo9JKkEbG9YOyFjV_6_J3czWDK0By8"                               class="list-group-item list-group-item-action wannaAlbum">£13    | Parrhesia - Animals as Leaders</a>
     <a target="_blank" href="https://youtube.com/playlist?list=PLLVeC2nHZ9w0u7qcsSspMLpCgE8rk94o0"                                      class="list-group-item list-group-item-action wannaAlbum">€15.10 | At the Dream's Edge - Chimp Spinner</a>
