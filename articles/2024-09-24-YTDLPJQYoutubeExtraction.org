@@ -32,7 +32,7 @@
   :END:
 
   In this article I summarise the steps you need to take in order to
-  extract data from YouTube using the ~yt-dlp~ and ~jq~.
+  extract data from YouTube using the [[https://github.com/yt-dlp/yt-dlp][yt-dlp]] and [[https://jqlang.github.io/jq/][jq]].
 
   The first one is able to generate a JSON containing all the data of
   a given YouTube link. In particular, it can work with YouTube
@@ -53,7 +53,7 @@
 
   Therefore, we need a way to extract data easily from the site and try
   to get the best result, so we don't actually need to parse extremely
-  complicated JSON. Fortunately ~yt-dlp~ and ~jq~ comes for the rescue.
+  complicated JSON. Fortunately [[https://github.com/yt-dlp/yt-dlp][yt-dlp]] and [[https://jqlang.github.io/jq/][jq]] comes for the rescue.
 
 *** Get Data from YouTube
 
@@ -77,7 +77,7 @@
   - 38MB for a playlist of 71 videos
   - 80MB for a channel of 182 videos
 
-  This puts a size of a sigle video ~0.5MB.  ~yt-dlp~ takes quite some
+  This puts a size of a sigle video ~0.5MB. [[https://github.com/yt-dlp/yt-dlp][yt-dlp]] takes quite some
   time to put together such information.
   In our case it's fine since we plan to run it periodically and not
   that often. An optimization could be to save the JSONs locally and
@@ -94,10 +94,16 @@
 
 *** Extract Data from the JSON
 
+  In this section I'm not gonna dive into the details on how to use
+  the [[https://jqlang.github.io/jq/][jq]] commnd and do another tutorial, but rather I'll explain what
+  was my goal and the end result command to reach that goal. Maybe
+  some specific bits will be explained because particularly
+  interesting.
+
 **** Single YouTube Video
 **** YouTube Playlist
 **** YouTube Channel
- 
+**** Automatic Captions
 ** Conclusions
   :PROPERTIES:
   :CUSTOM_ID: ArticleConclusions

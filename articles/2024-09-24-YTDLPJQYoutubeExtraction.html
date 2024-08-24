@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Extract Data From Youtube with `yt-dlp` And `jq`</title>
-<!-- 2024-08-24 Sat 23:55 -->
+<!-- 2024-08-25 Sun 00:05 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -50,6 +50,7 @@ $(function() {
 <li><a href="#sec-">Single YouTube Video</a></li>
 <li><a href="#sec-">YouTube Playlist</a></li>
 <li><a href="#sec-">YouTube Channel</a></li>
+<li><a href="#sec-">Automatic Captions</a></li>
 </ul>
 </li>
 </ul>
@@ -97,7 +98,7 @@ $(function() {
 <div class="outline-text-3" id="text-ArticleAbstract">
 <p>
 In this article I summarise the steps you need to take in order to
-extract data from YouTube using the <code>yt-dlp</code> and <code>jq</code>.
+extract data from YouTube using the <a href="https://github.com/yt-dlp/yt-dlp">yt-dlp</a> and <a href="https://jqlang.github.io/jq/">jq</a>.
 </p>
 
 <p>
@@ -129,7 +130,7 @@ with any new content coming out from YouTube. For details check <a href="https:/
 <p>
 Therefore, we need a way to extract data easily from the site and try
 to get the best result, so we don't actually need to parse extremely
-complicated JSON. Fortunately <code>~yt-dlp</code> and <code>jq</code> comes for the rescue.
+complicated JSON. Fortunately <a href="https://github.com/yt-dlp/yt-dlp">yt-dlp</a> and <a href="https://jqlang.github.io/jq/">jq</a> comes for the rescue.
 </p>
 </div>
 </div>
@@ -177,11 +178,8 @@ the target playlist//channel. In my usecases, I saw a size of:
 </ul>
 
 <p>
-This puts a size of a sigle video <code>0.5MB.  ~yt-dlp</code> takes quite some
+This puts a size of a sigle video ~0.5MB. <a href="https://github.com/yt-dlp/yt-dlp">yt-dlp</a> takes quite some
 time to put together such information.
-</p>
-
-<p>
 In our case it's fine since we plan to run it periodically and not
 that often. An optimization could be to save the JSONs locally and
 re-download them only when they become obsolete, eg 1 month old.
@@ -206,7 +204,16 @@ extension is TXT 🤷
 <div id="outline-container-sec-" class="outline-4">
 <h4 id="sec-">Extract Data from the JSON</h4>
 <div class="outline-text-4" id="text-">
-</div><div id="outline-container-sec-" class="outline-5">
+<p>
+In this section I'm not gonna dive into the details on how to use
+the <a href="https://jqlang.github.io/jq/">jq</a> commnd and do another tutorial, but rather I'll explain what
+was my goal and the end result command to reach that goal. Maybe
+some specific bits will be explained because particularly
+interesting.
+</p>
+</div>
+
+<div id="outline-container-sec-" class="outline-5">
 <h5 id="sec-">Single YouTube Video</h5>
 </div>
 <div id="outline-container-sec-" class="outline-5">
@@ -215,9 +222,11 @@ extension is TXT 🤷
 <div id="outline-container-sec-" class="outline-5">
 <h5 id="sec-">YouTube Channel</h5>
 </div>
+<div id="outline-container-sec-" class="outline-5">
+<h5 id="sec-">Automatic Captions</h5>
 </div>
 </div>
-
+</div>
 <div id="outline-container-ArticleConclusions" class="outline-3">
 <h3 id="ArticleConclusions"><a id="sec-" name="sec-"></a>Conclusions</h3>
 <div class="outline-text-3" id="text-ArticleConclusions">
