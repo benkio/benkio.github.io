@@ -1,0 +1,139 @@
+#+OPTIONS: num:nil toc:t H:4
+#+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:nil
+#+TITLE: Extract Data From Youtube with `yt-dlp` And `jq`
+#+DESCRIPTION: Extract Data From Youtube with `yt-dlp` And `jq`
+#+KEYWORDS: Extract Data From Youtube with `yt-dlp` And `jq`
+#+CREATOR: Enrico Benini
+#+HTML_HEAD_EXTRA: <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA: <link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/main.css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/blog.css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/article.css">
+
+* Blog
+  :PROPERTIES:
+  :HTML_CONTAINER_CLASS: text-center navbar navbar-inverse navbar-fixed-top
+  :CUSTOM_ID: navbar
+  :END:
+#+INCLUDE: "../Fragments/BlogNavbarFragment.html" export html
+
+* Extract Data From Youtube with `yt-dlp` And `jq`
+  :PROPERTIES:
+  :CUSTOM_ID: Article
+  :END:
+  *Created: <2024-08-24 Sat>*
+** Abstract
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleAbstract
+  :END:
+
+  In this article I summarise the steps you need to take in order to
+  extract data from YouTube using the ~yt-dlp~ and ~jq~.
+
+  The first one is able to generate a JSON containing all the data of
+  a given YouTube link. In particular, it can work with YouTube
+  playlists and channels too.
+
+  The second one is able to query a JSON and return a new JSON with
+  the data we are interested in.
+
+** Content
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleContent
+  :END:
+
+*** Motivation
+
+  All started with the need of automatically fill the [[https://github.com/benkio/sBots][sBots]] database
+  with any new content coming out from YouTube. For details check [[https://github.com/benkio/sBots/issues/461][this issue]].
+
+  Therefore, we need a way to extract data easily from the site and try
+  to get the best result, so we don't actually need to parse extremely
+  complicated JSON. Fortunately ~yt-dlp~ and ~jq~ comes for the rescue.
+
+*** Get Data from YouTube
+
+  After a brief investigation, we can just run the following command:
+
+  ~yt-dlp -J <<youtubeLink>>~
+
+  This works with a YouTube:
+  - video ([[file:2024-09-24-YTDLPJQYoutubeExtraction/video.json][JSON]])
+  - playlist ([[file:2024-09-24-YTDLPJQYoutubeExtraction/barbero.json][JSON]])
+  - channel ([[file:2024-09-24-YTDLPJQYoutubeExtraction/youtubo.json][JSON]])
+
+  Yielding different JSONs. However, each JSON is then wrapped inside
+  the others: the YouTube video JSON structure could be found inside
+  the playlist JSON one. Same happens between the playlist and the
+  channel.This makes the next phase easier as some of the etraction
+  logic could be reused.
+
+  The size of such JSON could be quite big accondingly on how big is
+  the target playlist//channel. In my usecases, I saw a size of:
+  - 38MB for a playlist of 71 videos
+  - 80MB for a channel of 182 videos
+
+  This puts a size of a sigle video ~0.5MB.  ~yt-dlp~ takes quite some
+  time to put together such information.
+  In our case it's fine since we plan to run it periodically and not
+  that often. An optimization could be to save the JSONs locally and
+  re-download them only when they become obsolete, eg 1 month old.
+
+*** Get Automatic Caption Data
+
+  Each [[file:2024-09-24-YTDLPJQYoutubeExtraction/video.json][YouTube video JSON]] also contains a field related to the
+  automatic captions where several URLs can be found. Between the
+  available formats, json is available to download. This new JSON
+  contains all the captions allowing us to extract the transcript of
+  the video itself. [[file:2024-09-24-YTDLPJQYoutubeExtraction/f.txt][here]] an example of such JSON. Fun fact, its
+  extension is TXT 🤷
+
+*** Extract Data from the JSON
+
+**** Single YouTube Video
+**** YouTube Playlist
+**** YouTube Channel
+ 
+** Conclusions
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleConclusions
+  :END:
+
+** References
+
+- [[https://github.com/yt-dlp/yt-dlp][yt-dlp repository]]
+- [[https://jqlang.github.io/jq/][jq site]]
+
+* Share Buttons
+  :PROPERTIES:
+  :CUSTOM_ID: ShareButtons
+  :END:
+#+BEGIN_EXPORT html
+<!-- AddToAny BEGIN -->
+<hr>
+<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+<a class="a2a_button_facebook"></a>
+<a class="a2a_button_twitter"></a>
+<a class="a2a_button_whatsapp"></a>
+<a class="a2a_button_telegram"></a>
+<a class="a2a_button_linkedin"></a>
+<a class="a2a_button_email"></a>
+</div>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+<!-- AddToAny END -->
+#+END_EXPORT
+
+#+begin_export html
+<script type="text/javascript">
+$(function() {
+  $('#text-table-of-contents > ul li').first().css("display", "none");
+  $('#text-table-of-contents > ul li').last().css("display", "none");
+  $('#table-of-contents').addClass("visible-lg")
+});
+</script>
+#+end_export

@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Extract Data From Youtube with `yt-dlp` And `jq`</title>
+<!-- 2024-08-24 Sat 23:55 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="Org-mode">
+<meta name="author" content="Enrico Benini">
+
+<link  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<style>body { margin-bottom: 0px; }</style><script>
+$(function() {
+    'use strict';
+
+    $('.bs-docs-sidebar li').first().addClass('active');
+
+    $(document.body).scrollspy({target: '.bs-docs-sidebar'});
+
+    $('.bs-docs-sidebar').affix();
+});
+</script><link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon">
+<link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/blog.css">
+<link rel="stylesheet" href="../css/article.css">
+</head>
+<body>
+<div id="content" class="container">
+<div class="row"><div class="col-md-3 col-md-push-9"><nav id="table-of-contents">
+<div id="text-table-of-contents" class="bs-docs-sidebar">
+<ul class="nav">
+<li><a href="#navbar">Blog</a></li>
+<li><a href="#Article">Extract Data From Youtube with `yt-dlp` And `jq`</a>
+<ul class="nav">
+<li><a href="#ArticleAbstract">Abstract</a></li>
+<li><a href="#ArticleContent">Content</a>
+<ul class="nav">
+<li><a href="#sec-">Motivation</a></li>
+<li><a href="#sec-">Get Data from YouTube</a></li>
+<li><a href="#sec-">Get Automatic Caption Data</a></li>
+<li><a href="#sec-">Extract Data from the JSON</a>
+<ul class="nav">
+<li><a href="#sec-">Single YouTube Video</a></li>
+<li><a href="#sec-">YouTube Playlist</a></li>
+<li><a href="#sec-">YouTube Channel</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#ArticleConclusions">Conclusions</a></li>
+<li><a href="#sec-">References</a></li>
+</ul>
+</li>
+<li><a href="#ShareButtons">Share Buttons</a></li>
+</ul>
+</div>
+</nav>
+</div><div class="col-md-9 col-md-pull-3"><h1 class="title">Extract Data From Youtube with `yt-dlp` And `jq`</h1>
+
+<div id="outline-container-navbar" class="outline-2 text-center navbar navbar-inverse navbar-fixed-top">
+<h2 id="navbar"><a id="sec-" name="sec-"></a>Blog</h2>
+<div class="outline-text-2" id="text-navbar">
+<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapsableNavbar">
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+</button>
+<a title="Home" href="../blog.html"><h1 id="navbarTitle" class="navbar-text">Blog</h1></a>
+<div class="collapse navbar-collapse" id="collapsableNavbar">
+  <ul class="nav navbar-nav">
+    <li><a title="Home" href="../index.html"><i class="fas fa-home fa-3x" aria-hidden="true"></i></a></li>
+    <li><a title="Article List" href="../articleList.html" class="navbar-text h3">Article List</a></li>
+<li><a title="Book List" href="../bookList.html" class="navbar-text h3">Book List</a></li>
+    <li><a title="Album List" href="../albumList.html" class="navbar-text h3">Album List</a></li>
+    <li><a title="Note Trainer" href="../NoteTrainer/NoteTrainer.html" class="navbar-text h3">Note Trainer</a></li>
+  </ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-Article" class="outline-2">
+<h2 id="Article"><a id="sec-" name="sec-"></a>Extract Data From Youtube with `yt-dlp` And `jq`</h2>
+<div class="outline-text-2" id="text-Article">
+<p>
+<b>Created: <span class="timestamp-wrapper"><span class="timestamp">&lt;2024-08-24 Sat&gt;</span></span></b>
+</p>
+</div>
+<div id="outline-container-ArticleAbstract" class="outline-3">
+<h3 id="ArticleAbstract"><a id="sec-" name="sec-"></a>Abstract</h3>
+<div class="outline-text-3" id="text-ArticleAbstract">
+<p>
+In this article I summarise the steps you need to take in order to
+extract data from YouTube using the <code>yt-dlp</code> and <code>jq</code>.
+</p>
+
+<p>
+The first one is able to generate a JSON containing all the data of
+a given YouTube link. In particular, it can work with YouTube
+playlists and channels too.
+</p>
+
+<p>
+The second one is able to query a JSON and return a new JSON with
+the data we are interested in.
+</p>
+</div>
+</div>
+
+<div id="outline-container-ArticleContent" class="outline-3">
+<h3 id="ArticleContent"><a id="sec-" name="sec-"></a>Content</h3>
+<div class="outline-text-3" id="text-ArticleContent">
+</div>
+
+<div id="outline-container-sec-" class="outline-4">
+<h4 id="sec-">Motivation</h4>
+<div class="outline-text-4" id="text-">
+<p>
+All started with the need of automatically fill the <a href="https://github.com/benkio/sBots">sBots</a> database
+with any new content coming out from YouTube. For details check <a href="https://github.com/benkio/sBots/issues/461">this issue</a>.
+</p>
+
+<p>
+Therefore, we need a way to extract data easily from the site and try
+to get the best result, so we don't actually need to parse extremely
+complicated JSON. Fortunately <code>~yt-dlp</code> and <code>jq</code> comes for the rescue.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-" class="outline-4">
+<h4 id="sec-">Get Data from YouTube</h4>
+<div class="outline-text-4" id="text-">
+<p>
+After a brief investigation, we can just run the following command:
+</p>
+
+<p>
+<code>yt-dlp -J &lt;&lt;youtubeLink&gt;&gt;</code>
+</p>
+
+<p>
+This works with a YouTube:
+</p>
+<ul class="org-ul">
+<li>video (<a href="2024-09-24-YTDLPJQYoutubeExtraction/video.json">JSON</a>)
+</li>
+<li>playlist (<a href="2024-09-24-YTDLPJQYoutubeExtraction/barbero.json">JSON</a>)
+</li>
+<li>channel (<a href="2024-09-24-YTDLPJQYoutubeExtraction/youtubo.json">JSON</a>)
+</li>
+</ul>
+
+<p>
+Yielding different JSONs. However, each JSON is then wrapped inside
+the others: the YouTube video JSON structure could be found inside
+the playlist JSON one. Same happens between the playlist and the
+channel.This makes the next phase easier as some of the etraction
+logic could be reused.
+</p>
+
+<p>
+The size of such JSON could be quite big accondingly on how big is
+the target playlist//channel. In my usecases, I saw a size of:
+</p>
+<ul class="org-ul">
+<li>38MB for a playlist of 71 videos
+</li>
+<li>80MB for a channel of 182 videos
+</li>
+</ul>
+
+<p>
+This puts a size of a sigle video <code>0.5MB.  ~yt-dlp</code> takes quite some
+time to put together such information.
+</p>
+
+<p>
+In our case it's fine since we plan to run it periodically and not
+that often. An optimization could be to save the JSONs locally and
+re-download them only when they become obsolete, eg 1 month old.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-" class="outline-4">
+<h4 id="sec-">Get Automatic Caption Data</h4>
+<div class="outline-text-4" id="text-">
+<p>
+Each <a href="2024-09-24-YTDLPJQYoutubeExtraction/video.json">YouTube video JSON</a> also contains a field related to the
+automatic captions where several URLs can be found. Between the
+available formats, json is available to download. This new JSON
+contains all the captions allowing us to extract the transcript of
+the video itself. <a href="2024-09-24-YTDLPJQYoutubeExtraction/f.txt">here</a> an example of such JSON. Fun fact, its
+extension is TXT 🤷
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-" class="outline-4">
+<h4 id="sec-">Extract Data from the JSON</h4>
+<div class="outline-text-4" id="text-">
+</div><div id="outline-container-sec-" class="outline-5">
+<h5 id="sec-">Single YouTube Video</h5>
+</div>
+<div id="outline-container-sec-" class="outline-5">
+<h5 id="sec-">YouTube Playlist</h5>
+</div>
+<div id="outline-container-sec-" class="outline-5">
+<h5 id="sec-">YouTube Channel</h5>
+</div>
+</div>
+</div>
+
+<div id="outline-container-ArticleConclusions" class="outline-3">
+<h3 id="ArticleConclusions"><a id="sec-" name="sec-"></a>Conclusions</h3>
+<div class="outline-text-3" id="text-ArticleConclusions">
+</div>
+</div>
+
+<div id="outline-container-sec-" class="outline-3">
+<h3 id="sec-">References</h3>
+<div class="outline-text-3" id="text-">
+<ul class="org-ul">
+<li><a href="https://github.com/yt-dlp/yt-dlp">yt-dlp repository</a>
+</li>
+<li><a href="https://jqlang.github.io/jq/">jq site</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-ShareButtons" class="outline-2">
+<h2 id="ShareButtons"><a id="sec-" name="sec-"></a>Share Buttons</h2>
+<div class="outline-text-2" id="text-ShareButtons">
+<!-- AddToAny BEGIN -->
+<hr>
+<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+<a class="a2a_button_facebook"></a>
+<a class="a2a_button_twitter"></a>
+<a class="a2a_button_whatsapp"></a>
+<a class="a2a_button_telegram"></a>
+<a class="a2a_button_linkedin"></a>
+<a class="a2a_button_email"></a>
+</div>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+<!-- AddToAny END -->
+
+<script type="text/javascript">
+$(function() {
+  $('#text-table-of-contents > ul li').first().css("display", "none");
+  $('#text-table-of-contents > ul li').last().css("display", "none");
+  $('#table-of-contents').addClass("visible-lg")
+});
+</script>
+</div>
+</div>
+</div></div></div>
+</body>
+</html>
