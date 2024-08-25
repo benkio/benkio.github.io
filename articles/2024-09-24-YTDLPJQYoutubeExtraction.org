@@ -31,15 +31,15 @@
   :CUSTOM_ID: ArticleAbstract
   :END:
 
-  In this article I summarise the steps you need to take in order to
-  extract data from YouTube using the [[https://github.com/yt-dlp/yt-dlp][yt-dlp]] and [[https://jqlang.github.io/jq/][jq]].
+  In this article, I summarise the steps you need to take to extract
+  data from YouTube using the [[https://github.com/yt-dlp/yt-dlp][yt-dlp]] and [[https://jqlang.github.io/jq/][jq]].
 
-  The first one is able to generate a JSON containing all the data of
-  a given YouTube link. In particular, it can work with YouTube
-  playlists and channels too.
+  The first one can generate a JSON containing all the data of a given
+  YouTube link. In particular, it can work with YouTube playlists and
+  channels too.
 
-  The second one is able to query a JSON and return a new JSON with
-  the data we are interested in.
+  The second one can query a JSON and return a new JSON with the data
+  we are interested in.
 
 ** Content
   :PROPERTIES:
@@ -48,7 +48,7 @@
 
 *** Motivation
 
-  All started with the need of automatically fill the [[https://github.com/benkio/sBots][sBots]] database
+  It All started with the need to automatically fill the [[https://github.com/benkio/sBots][sBots]] database
   with any new content coming out from YouTube. For details check [[https://github.com/benkio/sBots/issues/461][this issue]].
 
   Therefore, we need a way to extract data easily from the site and try
@@ -61,25 +61,25 @@
 
   ~yt-dlp -J <<youtubeLink>>~
 
-  This works with a YouTube:
+  This works with YouTube:
   - video ([[file:2024-09-24-YTDLPJQYoutubeExtraction/video.json][JSON]])
   - playlist ([[file:2024-09-24-YTDLPJQYoutubeExtraction/barbero.json][JSON]])
   - channel ([[file:2024-09-24-YTDLPJQYoutubeExtraction/youtubo.json][JSON]])
 
-  Yielding different JSONs. However, each JSON is then wrapped inside
-  the others: the YouTube video JSON structure could be found inside
-  the playlist JSON one. Same happens between the playlist and the
-  channel.This makes the next phase easier as some of the etraction
+  It is yielding different JSONs. However, each JSON is then wrapped
+  inside the others: the YouTube video JSON structure could be found
+  inside the playlist JSON one. The Same happens between the playlist
+  and the channel. This makes the next phase easier as some extraction
   logic could be reused.
 
-  The size of such JSON could be quite big accondingly on how big is
-  the target playlist//channel. In my usecases, I saw a size of:
+  The size of such JSON could be quite big depending on how big the
+  target playlist//channel. In my use cases, I saw a size of:
   - 38MB for a playlist of 71 videos
   - 80MB for a channel of 182 videos
 
-  This puts a size of a sigle video ~0.5MB. [[https://github.com/yt-dlp/yt-dlp][yt-dlp]] takes quite some
+  This puts the size of a single video ~0.5MB. [[https://github.com/yt-dlp/yt-dlp][yt-dlp]] takes quite some
   time to put together such information.
-  In our case it's fine since we plan to run it periodically and not
+  In our case, it's fine since we plan to run it periodically and not
   that often. An optimization could be to save the JSONs locally and
   re-download them only when they become obsolete, eg 1 month old.
 
@@ -87,27 +87,109 @@
 
   Each [[file:2024-09-24-YTDLPJQYoutubeExtraction/video.json][YouTube video JSON]] also contains a field related to the
   automatic captions where several URLs can be found. Between the
-  available formats, json is available to download. This new JSON
+  available formats, JSON is available to download. This new JSON
   contains all the captions allowing us to extract the transcript of
-  the video itself. [[file:2024-09-24-YTDLPJQYoutubeExtraction/f.txt][here]] an example of such JSON. Fun fact, its
+  the video itself. [[file:2024-09-24-YTDLPJQYoutubeExtraction/f.txt][here]] is an example of such JSON. Fun fact, its
   extension is TXT 🤷
 
 *** Extract Data from the JSON
 
-  In this section I'm not gonna dive into the details on how to use
-  the [[https://jqlang.github.io/jq/][jq]] commnd and do another tutorial, but rather I'll explain what
+  In this section, I'm not gonna dive into the details on how to use
+  the [[https://jqlang.github.io/jq/][jq]] command and do another tutorial, but rather I'll explain what
   was my goal and the end result command to reach that goal. Maybe
   some specific bits will be explained because particularly
   interesting.
 
-**** Single YouTube Video
+**** COMMENT Single YouTube Video
+
+  In the [[file:2024-09-24-YTDLPJQYoutubeExtraction/video.json][single video JSON]] file we can find quite some information. In
+  my use case, we are interested only into: ~title~, ~upload date~,
+  ~duration~ and ~description~. In particular, it would be nice to
+  generate an output JSON that contains, as keys, the same name of the
+  database table we want to put the data in.
+
+  [[https://jqlang.github.io/jq/][jq]] allows you to do exactly that by the following command:
+
+  ~jq '. | {show_url: .webpage_url, show_title: .title, show_upload_date: .upload_date, show_duration: .duration, show_description: .description }'~
+
+  This is particularly easy as there's no need to filter or traverse
+  any array. It's just plenty top-level field extraction. In the
+  following examples a more complex scenario will be shown.
+
 **** YouTube Playlist
+
+  In this case, we have to expand the previous command by generating a
+  JSON array this time by traversing the playlist. This can be done
+  with the following command:
+
+#+begin_src bash
+  cat barbero.json | jq 'del(..|nulls) | [.entries[] | {show_url: .webpage_url, show_title: .title, show_upload_date: .upload_date, show_duration: .duration, show_description: .description, show_is_live: .is_live, show_origin_automatic_caption: .automatic_captions | with_entries(if (.key|test(".*orig")) then ( {key: .key, value: .value } ) else empty end)[][] | select(.ext|contains("json")) | .url }]'
+#+end_src
+
+  The highlights here are:
+  - ~del(..|nulls)~: that eliminates all the ~null~ values in the
+    JSON. Necessary as we will get an error if we are gonna try to
+    extract data from a ~null~ value.
+  - The outer square parenthesis. If omitted we will get a series of
+    JSON objects one after the other, but not a valid JSON.
+  - The traverse of an array value (eg. ~.entries[]~). With the ~[]~
+    at the end it means: compute all the entries from now on.
+  - ~with_entries(if (.key|test(".*orig")) then ( {key: .key, value:
+    .value } ) else empty end)~ it's quite complicated, but basically,
+    it's a way to filter the fields by matching a regexp. Only the
+    field ending with ~orig~ will be considered. We are interested in the
+    automatic caption of the original language only.
+  - ~select(.ext|contains("json"))~ filter the entries whose ~.ext~
+    field value contains the word ~json~. We are not interested in
+    other formats, only on JSON.
+
 **** YouTube Channel
+
+  A [[file:2024-09-24-YTDLPJQYoutubeExtraction/youtubo.json][YouTube Channel's JSON]] adds one more layer to the previous case
+  because we might have multiple "playlists", one for:
+  - Videos
+  - Shorts
+  - Live
+
+  Therefore, we need to inspect the file and get to the right playlist
+  before applying the previous transformation. The resulting command
+  is:
+
+#+BEGIN_SRC bash
+  cat youtubo.json | jq 'del(..|nulls) | .entries[] | select(.title|contains("Videos")) | [.entries[] | {show_url: .webpage_url, show_title: .title, show_upload_date: .upload_date, show_duration: .duration, show_description: .description, show_is_live: .is_live, show_origin_automatic_caption: .automatic_captions | with_entries(if (.key|test(".*orig")) then ( {key: .key, value: .value } ) else empty end)[][] | select(.ext|contains("json")) | .url }]'
+#+END_SRC
+
+  You can see at the beginning of the [[https://jqlang.github.io/jq/][jq]] command an additional
+  ~.entries[]~ step followed by a filter by the values of the
+  ~.title~. That brings up the ~Videos~ playlist. The rest of the
+  command is the same as above. If we want to focus on other playlists
+  we just have to filter by a different category.
+
 **** Automatic Captions
+
+  Once we can get the URL for the ~automatic captions~ and
+  retrieve the JSON, we need to extract the text from it. Here is an
+  example of the [[file:2024-09-24-YTDLPJQYoutubeExtraction/f.txt][automatic caption's JSON]]
+
+  The command to do that is the following:
+
+  ~cat f.txt | jq '[.events[] | select(.segs != null) | .segs[] | .utf8]'~
+
+  We still want a resulting JSON array, but the events should contain
+  some text (the ~select~ clause filter). Then we are interested only
+  in that field ignoring the rest.
+
 ** Conclusions
   :PROPERTIES:
   :CUSTOM_ID: ArticleConclusions
   :END:
+
+  I hope you learned how to extract data from YouTube and that could
+  be useful for your projects or just for fun. The takeaway here is to
+  invest some time into learning [[https://jqlang.github.io/jq/][the jq command]] as it's really useful
+  to manipulate JSONs and get what you want out of it. It also has
+  multiple [[https://jqplay.org/][online playgrounds]] you can use to test your expressions if
+  you want.
 
 ** References
 

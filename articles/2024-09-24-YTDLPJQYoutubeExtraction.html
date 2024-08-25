@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Extract Data From Youtube with `yt-dlp` And `jq`</title>
-<!-- 2024-08-25 Sun 00:05 -->
+<!-- 2024-08-25 Sun 23:45 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -47,7 +47,6 @@ $(function() {
 <li><a href="#sec-">Get Automatic Caption Data</a></li>
 <li><a href="#sec-">Extract Data from the JSON</a>
 <ul class="nav">
-<li><a href="#sec-">Single YouTube Video</a></li>
 <li><a href="#sec-">YouTube Playlist</a></li>
 <li><a href="#sec-">YouTube Channel</a></li>
 <li><a href="#sec-">Automatic Captions</a></li>
@@ -97,19 +96,19 @@ $(function() {
 <h3 id="ArticleAbstract"><a id="sec-" name="sec-"></a>Abstract</h3>
 <div class="outline-text-3" id="text-ArticleAbstract">
 <p>
-In this article I summarise the steps you need to take in order to
-extract data from YouTube using the <a href="https://github.com/yt-dlp/yt-dlp">yt-dlp</a> and <a href="https://jqlang.github.io/jq/">jq</a>.
+In this article, I summarise the steps you need to take to extract
+data from YouTube using the <a href="https://github.com/yt-dlp/yt-dlp">yt-dlp</a> and <a href="https://jqlang.github.io/jq/">jq</a>.
 </p>
 
 <p>
-The first one is able to generate a JSON containing all the data of
-a given YouTube link. In particular, it can work with YouTube
-playlists and channels too.
+The first one can generate a JSON containing all the data of a given
+YouTube link. In particular, it can work with YouTube playlists and
+channels too.
 </p>
 
 <p>
-The second one is able to query a JSON and return a new JSON with
-the data we are interested in.
+The second one can query a JSON and return a new JSON with the data
+we are interested in.
 </p>
 </div>
 </div>
@@ -123,7 +122,7 @@ the data we are interested in.
 <h4 id="sec-">Motivation</h4>
 <div class="outline-text-4" id="text-">
 <p>
-All started with the need of automatically fill the <a href="https://github.com/benkio/sBots">sBots</a> database
+It All started with the need to automatically fill the <a href="https://github.com/benkio/sBots">sBots</a> database
 with any new content coming out from YouTube. For details check <a href="https://github.com/benkio/sBots/issues/461">this issue</a>.
 </p>
 
@@ -147,7 +146,7 @@ After a brief investigation, we can just run the following command:
 </p>
 
 <p>
-This works with a YouTube:
+This works with YouTube:
 </p>
 <ul class="org-ul">
 <li>video (<a href="2024-09-24-YTDLPJQYoutubeExtraction/video.json">JSON</a>)
@@ -159,16 +158,16 @@ This works with a YouTube:
 </ul>
 
 <p>
-Yielding different JSONs. However, each JSON is then wrapped inside
-the others: the YouTube video JSON structure could be found inside
-the playlist JSON one. Same happens between the playlist and the
-channel.This makes the next phase easier as some of the etraction
+It is yielding different JSONs. However, each JSON is then wrapped
+inside the others: the YouTube video JSON structure could be found
+inside the playlist JSON one. The Same happens between the playlist
+and the channel. This makes the next phase easier as some extraction
 logic could be reused.
 </p>
 
 <p>
-The size of such JSON could be quite big accondingly on how big is
-the target playlist//channel. In my usecases, I saw a size of:
+The size of such JSON could be quite big depending on how big the
+target playlist//channel. In my use cases, I saw a size of:
 </p>
 <ul class="org-ul">
 <li>38MB for a playlist of 71 videos
@@ -178,9 +177,9 @@ the target playlist//channel. In my usecases, I saw a size of:
 </ul>
 
 <p>
-This puts a size of a sigle video ~0.5MB. <a href="https://github.com/yt-dlp/yt-dlp">yt-dlp</a> takes quite some
+This puts the size of a single video ~0.5MB. <a href="https://github.com/yt-dlp/yt-dlp">yt-dlp</a> takes quite some
 time to put together such information.
-In our case it's fine since we plan to run it periodically and not
+In our case, it's fine since we plan to run it periodically and not
 that often. An optimization could be to save the JSONs locally and
 re-download them only when they become obsolete, eg 1 month old.
 </p>
@@ -193,9 +192,9 @@ re-download them only when they become obsolete, eg 1 month old.
 <p>
 Each <a href="2024-09-24-YTDLPJQYoutubeExtraction/video.json">YouTube video JSON</a> also contains a field related to the
 automatic captions where several URLs can be found. Between the
-available formats, json is available to download. This new JSON
+available formats, JSON is available to download. This new JSON
 contains all the captions allowing us to extract the transcript of
-the video itself. <a href="2024-09-24-YTDLPJQYoutubeExtraction/f.txt">here</a> an example of such JSON. Fun fact, its
+the video itself. <a href="2024-09-24-YTDLPJQYoutubeExtraction/f.txt">here</a> is an example of such JSON. Fun fact, its
 extension is TXT 🤷
 </p>
 </div>
@@ -205,8 +204,8 @@ extension is TXT 🤷
 <h4 id="sec-">Extract Data from the JSON</h4>
 <div class="outline-text-4" id="text-">
 <p>
-In this section I'm not gonna dive into the details on how to use
-the <a href="https://jqlang.github.io/jq/">jq</a> commnd and do another tutorial, but rather I'll explain what
+In this section, I'm not gonna dive into the details on how to use
+the <a href="https://jqlang.github.io/jq/">jq</a> command and do another tutorial, but rather I'll explain what
 was my goal and the end result command to reach that goal. Maybe
 some specific bits will be explained because particularly
 interesting.
@@ -214,22 +213,124 @@ interesting.
 </div>
 
 <div id="outline-container-sec-" class="outline-5">
-<h5 id="sec-">Single YouTube Video</h5>
-</div>
-<div id="outline-container-sec-" class="outline-5">
 <h5 id="sec-">YouTube Playlist</h5>
+<div class="outline-text-5" id="text-">
+<p>
+In this case, we have to expand the previous command by generating a
+JSON array this time by traversing the playlist. This can be done
+with the following command:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-bash">cat barbero.json | jq <span style="color: #ffa07a;">'del(..|nulls) | [.entries[] | {show_url: .webpage_url, show_title: .title, show_upload_date: .upload_date, show_duration: .duration, show_description: .description, show_is_live: .is_live, show_origin_automatic_caption: .automatic_captions | with_entries(if (.key|test(".*orig")) then ( {key: .key, value: .value } ) else empty end)[][] | select(.ext|contains("json")) | .url }]'</span>
+</pre>
 </div>
+
+<p>
+The highlights here are:
+</p>
+<ul class="org-ul">
+<li><code>del(..|nulls)</code>: that eliminates all the <code>null</code> values in the
+JSON. Necessary as we will get an error if we are gonna try to
+extract data from a <code>null</code> value.
+</li>
+<li>The outer square parenthesis. If omitted we will get a series of
+JSON objects one after the other, but not a valid JSON.
+</li>
+<li>The traverse of an array value (eg. <code>.entries[]</code>). With the <code>[]</code>
+at the end it means: compute all the entries from now on.
+</li>
+<li><code>with_entries(if (.key|test(".*orig")) then ( {key: .key, value:
+    .value } ) else empty end)</code> it's quite complicated, but basically,
+it's a way to filter the fields by matching a regexp. Only the
+field ending with <code>orig</code> will be considered. We are interested in the
+automatic caption of the original language only.
+</li>
+<li><code>select(.ext|contains("json"))</code> filter the entries whose <code>.ext</code>
+field value contains the word <code>json</code>. We are not interested in
+other formats, only on JSON.
+</li>
+</ul>
+</div>
+</div>
+
 <div id="outline-container-sec-" class="outline-5">
 <h5 id="sec-">YouTube Channel</h5>
+<div class="outline-text-5" id="text-">
+<p>
+A <a href="2024-09-24-YTDLPJQYoutubeExtraction/youtubo.json">YouTube Channel's JSON</a> adds one more layer to the previous case
+because we might have multiple "playlists", one for:
+</p>
+<ul class="org-ul">
+<li>Videos
+</li>
+<li>Shorts
+</li>
+<li>Live
+</li>
+</ul>
+
+<p>
+Therefore, we need to inspect the file and get to the right playlist
+before applying the previous transformation. The resulting command
+is:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-bash">cat youtubo.json | jq <span style="color: #ffa07a;">'del(..|nulls) | .entries[] | select(.title|contains("Videos")) | [.entries[] | {show_url: .webpage_url, show_title: .title, show_upload_date: .upload_date, show_duration: .duration, show_description: .description, show_is_live: .is_live, show_origin_automatic_caption: .automatic_captions | with_entries(if (.key|test(".*orig")) then ( {key: .key, value: .value } ) else empty end)[][] | select(.ext|contains("json")) | .url }]'</span>
+</pre>
 </div>
+
+<p>
+You can see at the beginning of the <a href="https://jqlang.github.io/jq/">jq</a> command an additional
+<code>.entries[]</code> step followed by a filter by the values of the
+<code>.title</code>. That brings up the <code>Videos</code> playlist. The rest of the
+command is the same as above. If we want to focus on other playlists
+we just have to filter by a different category.
+</p>
+</div>
+</div>
+
 <div id="outline-container-sec-" class="outline-5">
 <h5 id="sec-">Automatic Captions</h5>
+<div class="outline-text-5" id="text-">
+<p>
+Once we can get the URL for the <code>automatic captions</code> and
+retrieve the JSON, we need to extract the text from it. Here is an
+example of the <a href="2024-09-24-YTDLPJQYoutubeExtraction/f.txt">automatic caption's JSON</a>
+</p>
+
+<p>
+The command to do that is the following:
+</p>
+
+<p>
+<code>cat f.txt | jq '[.events[] | select(.segs != null) | .segs[] | .utf8]'</code>
+</p>
+
+<p>
+We still want a resulting JSON array, but the events should contain
+some text (the <code>select</code> clause filter). Then we are interested only
+in that field ignoring the rest.
+</p>
 </div>
 </div>
 </div>
+</div>
+
 <div id="outline-container-ArticleConclusions" class="outline-3">
 <h3 id="ArticleConclusions"><a id="sec-" name="sec-"></a>Conclusions</h3>
 <div class="outline-text-3" id="text-ArticleConclusions">
+<p>
+I hope you learned how to extract data from YouTube and that could
+be useful for your projects or just for fun. The takeaway here is to
+invest some time into learning <a href="https://jqlang.github.io/jq/">the jq command</a> as it's really useful
+to manipulate JSONs and get what you want out of it. It also has
+multiple <a href="https://jqplay.org/">online playgrounds</a> you can use to test your expressions if
+you want.
+</p>
 </div>
 </div>
 
