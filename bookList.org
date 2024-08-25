@@ -150,9 +150,9 @@
     <a target="_blank" href="https://youtu.be/zJsQK6ZUeIY"                                                           class="list-group-item list-group-item-action book"                                    >The Master and Margarita <span class="label label-info">Audiobook Ita</span></a>
     <a target="_blank" href="https://www.amazon.co.uk/Patient-Equation-Data-Driven-Precision-Medicine/dp/111962214X" class="list-group-item list-group-item-action book"                                    >The Patient Equation: The Precision Medicine Revolution in the Age of COVID-19 and Beyond</a>
     <a target="_blank" href="https://en.wikipedia.org/wiki/The_Problem_of_Cell_13"                                   class="list-group-item list-group-item-action book"                                    >The Problem of Cell 13</a>
-    <a target="_blank" href="https://www.goodreads.com/book/show/52684290-the-star-wars-book"                        class="list-group-item list-group-item-action book"                                    >The Star Wars Book: Expand Your Knowledge of a Galaxy Far, Far Away</a>
-    <a target="_blank" href="https://www.goodreads.com/book/show/57648017-the-storyteller"                           class="list-group-item list-group-item-action book"                                    >The Storyteller: Tales of Life and Music</a>
-    <a target="_blank" href="https://www.goodreads.com/book/show/59773383-venezia-metal"                             class="list-group-item list-group-item-action book"                                    >Venezia Metal</a>
+    <a target="_blank" href="https://www.amazon.co.uk/Star-Wars-Book-Expand-knowledge/dp/0241409977"                 class="list-group-item list-group-item-action book"                                    >The Star Wars Book: Expand Your Knowledge of a Galaxy Far, Far Away</a>
+    <a target="_blank" href="https://www.amazon.co.uk/Storyteller-Tales-Life-Music/dp/1398503703"                    class="list-group-item list-group-item-action book"                                    >The Storyteller: Tales of Life and Music</a>
+    <a target="_blank" href="https://www.amazon.co.uk/Venezia-Metal-Italian-Marco-Crescizz-ebook/dp/B09MS9PCYK"      class="list-group-item list-group-item-action book"                                    >Venezia Metal</a>
     <a target="_blank" href="https://smunix.github.io/dev.stephendiehl.com/hask/tutorial.pdf"                        class="list-group-item list-group-item-action book"                                    >What I Wish I Knew When Learning Haskell</a>
   </ul>
 #+END_EXPORT
@@ -263,7 +263,7 @@
   <a target="_blank" href="https://www.amazon.co.uk/What-If-Scientific-Hypothetical-Questions/dp/1848549563"                                  class="list-group-item list-group-item-action wa_book">What If?: Serious Scientific Answer to Absurd Hypothetical Questions: Serious Scientific Answers to Absurd Hypothetical Questions</a>
   <a target="_blank" href="https://www.amazon.co.uk/What-Additional-Scientific-Hypothetical-Questions/dp/147368062X"                          class="list-group-item list-group-item-action wa_book">What If?2: Additional Serious Scientific Answers to Absurd Hypothetical Questions</a>
   <a target="_blank" href="https://www.amazon.co.uk/What-We-Owe-Future-Million-Year/dp/0861542509/ref=sr_1_1?keywords=what+we+owe+the+future" class="list-group-item list-group-item-action wa_book">What We Owe The Future: A Million-Year View</a>
-  <a target="_blank" href="https://www.goodreads.com/book/show/14669425-who-is-alexander-grothendieck-anarchy-mathematics-spirituality-solit" class="list-group-item list-group-item-action wa_book">Who is Alexander Grothendieck? Anarchy, Mathematics, Spirituality, Solitude: A Biography (Part 1: Anarchy)</a>
+  <a target="_blank" href="https://www.amazon.co.uk/gp/product/3842340923"                                                                    class="list-group-item list-group-item-action wa_book">Who is Alexander Grothendieck? Anarchy, Mathematics, Spirituality, Solitude: A Biography (Part 1: Anarchy)</a>
   <a target="_blank" href="https://www.amazon.it/dp/068483877X/?coliid=I2WOXTJ78H39UD&colid=22QBHENP44UR0&psc=1&ref_=lv_ov_lig_dp_it"         class="list-group-item list-group-item-action wa_book">Zen Guitar</a>
 <h1></h1>
 </ul>

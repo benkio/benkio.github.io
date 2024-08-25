@@ -35,7 +35,7 @@
 *** Requirements
 
     - Install [[http://www.ffmpeg.org/][ffmpeg]]
-    - Install [[https://www.gnu.org/software/wget/][wget]]
+    - Install [[https://en.wikipedia.org/wiki/Wget][wget]]
 
 *** Instructions
 
