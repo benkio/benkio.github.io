@@ -105,6 +105,7 @@
       <a target="_blank" href="https://www.youtube.com/watch?v=W_b4FAtoDV4"                                 class="list-group-item list-group-item-action album">Lamb Of God - Ashes Of The Wake</a>
       <a target="_blank" href="https://youtube.com/playlist?list=PLxy1hNzYBr7W1xxK2dcg-8pLlp4r_7L7o"        class="list-group-item list-group-item-action album">Lamb Of God - Sacrament</a>
       <a target="_blank" href="https://youtube.com/playlist?list=PLCjLGgbfOxryR5bW6jz2UTvTSyvJjYJaP"        class="list-group-item list-group-item-action album">Lari Basilio - Your Love</a>
+      <a target="_blank" href="https://youtube.com/playlist?list=OLAK5uy_libS-pwvkY6__XNrqKE2gtnS9mDNZDPLw" class="list-group-item list-group-item-action album">Lokust - Infidel</a>
       <a target="_blank" href="https://www.youtube.com/playlist?list=PLjud9YtAo4wnCgSm0hlTbVxhvrdm82-KL"    class="list-group-item list-group-item-action album">Luca Mantovanelli - Multiversum</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=C4eWSMMZrL4"                                 class="list-group-item list-group-item-action album">Magic Pie - The Suffering Joy</a>
       <a target="_blank" href="https://youtu.be/rvYqjBYuq-4"                                                class="list-group-item list-group-item-action album">Master Boot Record - Interrupt Request</a>
@@ -189,7 +190,6 @@
     <a target="_blank" href="https://everforthright.bandcamp.com/album/ever-forthright"                                                 class="list-group-item list-group-item-action wannaAlbum"><p style="display:inline;background-color:red;" >$6     </p>| Ever Forthright - Ever Forthright</a>
     <a target="_blank" href="httpshttps://mammothprog.bandcamp.com/album/everything-that-is-you"                                        class="list-group-item list-group-item-action wannaAlbum">$12    | Everything That Is You - Thrailkill</a>
     <a target="_blank" href="https://youtu.be/16EfK9ecjPU"                                                                              class="list-group-item list-group-item-action wannaAlbum">£25.79 | Fear Inoculum - Tool</a>
-    <a target="_blank" href="https://www.youtube.com/playlist?list=OLAK5uy_libS-pwvkY6__XNrqKE2gtnS9mDNZDPLw"                           class="list-group-item list-group-item-action wannaAlbum">£13    | infidel - Lokust</a>
     <a target="_blank" href="https://anupsastry.bandcamp.com/album/lion"                                                                class="list-group-item list-group-item-action wannaAlbum"><p style="display:inline;background-color:red;" >£3     </p>| Lion - Anup Sastry</a>
     <a target="_blank" href="https://frontieres.bandcamp.com/album/la-trilogie"                                                         class="list-group-item list-group-item-action wannaAlbum"><p style="display:inline;background-color:red;" >£12    </p>| La trilogie - Frontières</a>
     <a target="_blank" href="https://en.wikipedia.org/wiki/The_Last_in_Line"                                                            class="list-group-item list-group-item-action wannaAlbum">£7.25  | The Last in Line - Dio</a>
