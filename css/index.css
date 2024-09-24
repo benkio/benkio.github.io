@@ -16,16 +16,19 @@
     font-size: 2em;
 }
 #about-me-header-link {
-    color: inherit;
+    color: #FFF;
     text-decoration: inherit;
 }
 #text-about-me-content-text {
     line-height: 1em;
 }
 #subtitle { font-size: 2em; }
-.outline-2 #sec- {display: none;}
+.outline-2 #sec- {
+    font-size: 1.4em;
+    color: #FFF;
+}
 .outline-3 {
-    line-height: 5em;
+    line-height: 1.3em;
 }
 #outline-container-text-email {
     line-height: 1em;
