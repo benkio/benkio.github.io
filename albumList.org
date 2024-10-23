@@ -109,6 +109,8 @@
       <a target="_blank" href="https://youtube.com/playlist?list=OLAK5uy_libS-pwvkY6__XNrqKE2gtnS9mDNZDPLw" class="list-group-item list-group-item-action album">Lokust - Infidel</a>
       <a target="_blank" href="https://www.youtube.com/playlist?list=PLjud9YtAo4wnCgSm0hlTbVxhvrdm82-KL"    class="list-group-item list-group-item-action album">Luca Mantovanelli - Multiversum</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=C4eWSMMZrL4"                                 class="list-group-item list-group-item-action album">Magic Pie - The Suffering Joy</a>
+      <a target="_blank" href="https://youtu.be/gzuK4AXAbcc"                                                class="list-group-item list-group-item-action album">Master Boot Record - Hardwarez</a>
+      <a target="_blank" href="https://youtu.be/t6KFfYdNPh8"                                                class="list-group-item list-group-item-action album">Master Boot Record - Internet Protocol</a>
       <a target="_blank" href="https://youtu.be/rvYqjBYuq-4"                                                class="list-group-item list-group-item-action album">Master Boot Record - Interrupt Request</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=2OTuz0o7K1U"                                 class="list-group-item list-group-item-action album">Megadeth - Cryptic Writings</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=Ti_imhKBjXA"                                 class="list-group-item list-group-item-action album">Megadeth - Rust In Peace</a>
