@@ -154,7 +154,7 @@
       <a target="_blank" href="https://www.youtube.com/watch?v=VWDWleAzYH0"                                 class="list-group-item list-group-item-action album">Van Halen - Van Halen II</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=REtGa3L0XXg"                                 class="list-group-item list-group-item-action album">Van Halen - Van Halen</a>
       <a target="_blank" href="https://www.youtube.com/watch?v=IMdrIrk44yA"                                 class="list-group-item list-group-item-action album">Van Halen - Women And Children First</a>
-      <a target="_blank" href="https://youtu.be/0m3Vg48QeUY"                                                class="list-group-item list-group-item-action album">Yngwie J. Malmsteen's Rising Force - Rising Force</a>
+      <a target="_blank" href="https://youtube.com/playlist?list=PLibJfpH7HQ8PAKHuwNEPShWnPF2BQ3_y4"        class="list-group-item list-group-item-action album">Yngwie J. Malmsteen's Rising Force - Rising Force</a>
   </ul>
 #+END_EXPORT
 
