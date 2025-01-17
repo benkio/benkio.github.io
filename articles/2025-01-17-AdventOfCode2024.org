@@ -1,0 +1,102 @@
+#+OPTIONS: num:nil toc:t H:4
+#+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:nil
+#+TITLE: Advent Of Code 2024
+#+DESCRIPTION: Advent Of Code 2024
+#+KEYWORDS: Advent Of Code 2024
+#+CREATOR: Enrico Benini
+#+HTML_HEAD_EXTRA: <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA: <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/main.css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/blog.css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/article.css">
+
+* Blog
+  :PROPERTIES:
+  :HTML_CONTAINER_CLASS: text-center navbar navbar-inverse navbar-fixed-top
+  :CUSTOM_ID: navbar
+  :END:
+#+INCLUDE: "../Fragments/BlogNavbarFragment.html" export html
+
+* Advent Of Code 2024
+  :PROPERTIES:
+  :CUSTOM_ID: Article
+  :END:
+  *Created: <2025-01-17 Fri>*
+** Abstract
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleAbstract
+  :END:
+
+  This time I was quicker then last year definitely and it was
+  simpler. I don't think I'm becoming a better programmer, but rather
+  the site dimished the difficulty. At least I didn't have to struggle
+  much 😎
+
+  You can find all the code in here: [[https://github.com/benkio/GeneralExercises/tree/master/AdventOfCode][Advent Of Code
+  Repository]]
+
+** Content
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleContent
+  :END:
+
+#+BEGIN_EXPORT html
+<figure>
+  <img src="./2025-01-17-AdventOfCode2024/AdventOfCodeCompleted.png" alt="Completed Screen of Advent of Code" align="left" title="Advent Of Code Completed" class="img-fluid" style="width:100%;"/>
+  <figcaption>Advent of Code Final Screen</figcaption>
+</figure>
+
+<br/>
+
+<div class="embed-responsive embed-responsive-16by9">
+  <video controls autoplay loop>
+    <source src="./2025-01-17-AdventOfCode2024/AdventOfCodeCalendar.mp4" type="video/mp4">
+  </video>
+</div>
+<p>The Advent of Code Calendar Animation</p>
+
+#+END_EXPORT
+
+** Conclusions
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleConclusions
+  :END:
+
+  This time I initiated a ~Lib~ with common algorithm that might be
+  useful for next years 🤞
+
+  Just remember to *have fun* 😉
+
+* Share Buttons
+  :PROPERTIES:
+  :CUSTOM_ID: ShareButtons
+  :END:
+#+BEGIN_EXPORT html
+<!-- AddToAny BEGIN -->
+<hr>
+<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+<a class="a2a_button_facebook"></a>
+<a class="a2a_button_twitter"></a>
+<a class="a2a_button_whatsapp"></a>
+<a class="a2a_button_telegram"></a>
+<a class="a2a_button_linkedin"></a>
+<a class="a2a_button_email"></a>
+</div>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+<!-- AddToAny END -->
+#+END_EXPORT
+
+#+begin_export html
+<script type="text/javascript">
+$(function() {
+  $('#text-table-of-contents > ul li').first().css("display", "none");
+  $('#text-table-of-contents > ul li').last().css("display", "none");
+  $('#table-of-contents').addClass("visible-lg")
+});
+</script>
+#+end_export
+#+INCLUDE: ../Fragments/disqusFragment.html export html
