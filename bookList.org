@@ -99,6 +99,7 @@
         <span class="caret"></span></button>
       <ul class="dropdown-menu" style="background-color: #323232; width: 100%; padding: 0px 0px 0px 0px;">
         <li>  <a target="_blank" href="https://youtu.be/fgcY19Rkt5s"                                            class="list-group-item list-group-item-action book" >The Caves of Steel <span class="label label-info">Audiobook Ita</span></a></li>
+        <li>  <a target="_blank" href="https://www.amazon.co.uk/Mans-Guide-Women-Gottman/dp/1623361842"         class="list-group-item list-group-item-action book" >The Man's Guide to Women: Scientifically Proven Secrets from the Love Lab About What Women Really Want</li>
         <li>  <a target="_blank" href="https://www.youtube.com/watch?v=nIB-kYEvmG0"                             class="list-group-item list-group-item-action book" >The Naked Sun <span class="label label-info">Audiobook Ita</span></a></li>
         <li>  <a target="_blank" href="https://youtu.be/y6hcgIw8zEM" style="display: inline-block; width: 50%"  class="list-group-item list-group-item-action book" >The Robots of Dawn - Pt 1 <span class="label label-info">Audiobook Ita</span></a><a target="_blank" href="https://youtu.be/-kpk1zqH0-k" class="list-group-item list-group-item-action book" style="display: inline-block; width: 50%">The Robots of Dawn - Pt 2 <span class="label label-info">Audiobook Ita</span></a></li>
       </ul>
