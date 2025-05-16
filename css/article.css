@@ -1,17 +1,10 @@
 #ShareButtons { display: none; }
-h1, h2, h3, h4, h5 {
-    color: white;
-}
 audio {
     width: 200px;
 }
 video {
     width: 100%;
     height: auto;
-}
-.src {
-    background-color: #333;
-    color: #fff;
 }
 @media only screen and (max-width: 600px) {
     audio {
