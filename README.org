@@ -1,5 +1,7 @@
 * Benkio Personal Site
 
+[[Check Links][https://github.com/benkio/benkio.github.io/actions/workflows/CI.yaml/badge.svg]]
+
 [[https://www.gravatar.com/avatar/aa7f68a32b011ac94698a7a1cb16ffc8?s=200][Benkio's Avatar]]
 
 Enrico Benini's Personal Site (AKA Benkio)
