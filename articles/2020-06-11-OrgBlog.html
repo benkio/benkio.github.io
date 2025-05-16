@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
 <title>Static Personal Website with Org Mode</title>
-<!-- 2023-12-02 Sat 20:00 -->
+<!-- 2025-05-16 Fri 20:19 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
+<meta name="author" content="Enrico Benini">
 
 <link  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -58,7 +59,6 @@ $(function() {
 </div>
 </nav>
 </div><div class="col-md-9 col-md-pull-3"><h1 class="title">Static Personal Website with Org Mode</h1>
-
 <div id="outline-container-navbar" class="outline-2 text-center navbar navbar-inverse navbar-fixed-top">
 <h2 id="navbar"><a id="sec-" name="sec-"></a>Blog</h2>
 <div class="outline-text-2" id="text-navbar">
@@ -79,7 +79,6 @@ $(function() {
 </div>
 </div>
 </div>
-
 <div id="outline-container-Article" class="outline-2">
 <h2 id="Article"><a id="sec-" name="sec-"></a>Static Personal Website with Org Mode</h2>
 <div class="outline-text-2" id="text-Article">
@@ -119,7 +118,6 @@ Keep reading to discover the pitfalls and advantages of this approach.
 </p>
 </div>
 </div>
-
 <div id="outline-container-ArticleContent" class="outline-3">
 <h3 id="ArticleContent"><a id="sec-" name="sec-"></a>Content</h3>
 <div class="outline-text-3" id="text-ArticleContent">
@@ -128,7 +126,6 @@ In this section, I will run you through the main features of the site, inserting
 links to the code where necessary.
 </p>
 </div>
-
 <div id="outline-container-ArticleContentFeatures" class="outline-4">
 <h4 id="ArticleContentFeatures"><a id="sec-" name="sec-"></a>Features</h4>
 <div class="outline-text-4" id="text-ArticleContentFeatures">
@@ -187,7 +184,6 @@ the final result. I got the responsiveness and all the styling
 </p>
 </div>
 </div>
-
 <div id="outline-container-ArticleContentFeaturesDynamic" class="outline-5">
 <h5 id="ArticleContentFeaturesDynamic"><a id="sec-" name="sec-"></a>Article List and Blog Dynamic Content</h5>
 <div class="outline-text-5" id="text-ArticleContentFeaturesDynamic">
@@ -235,7 +231,7 @@ page in this way:
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #ff7f24;">#+html: &lt;ul id="pagination" class="pagination pagination-lg"&gt;&lt;/ul&gt;</span>
+<pre class="src src-org"><span style="color: #ff7f24;">html: &lt;ul id="pagination" class="pagination pagination-lg"&gt;&lt;/ul&gt;</span>
 </pre>
 </div>
 
@@ -307,7 +303,6 @@ dynamic nature only to a subset of the articles.
 </ul>
 </div>
 </div>
-
 <div id="outline-container-ArticleContentFeaturesPagination" class="outline-5">
 <h5 id="ArticleContentFeaturesPagination"><a id="sec-" name="sec-"></a>Pagination</h5>
 <div class="outline-text-5" id="text-ArticleContentFeaturesPagination">
@@ -342,15 +337,14 @@ for (var i = 0; i &lt; (htmlArticles.length/perPage); i++) {
         '&lt;li ' + active + '&gt;&lt;a href="' + window.location.href.split('?')[0] + '?page=' + (i+1) + '"&gt;' + (i+1) + '&lt;/a&gt;&lt;/li&gt;'
     );
 }
-<span style="color: #ff7f24;">#+END_SRC</span>
-<span style="color: #ff7f24;">#+CALL: templates.org:inline-js(blk="pagination")</span>
+<span style="color: #ff7f24; font-size: 80%;">SRC</span>
+<span style="color: #ff7f24;">CALL: templates.org:inline-js(blk="pagination")</span>
 </pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-
 <div id="outline-container-ArticleConclusions" class="outline-3">
 <h3 id="ArticleConclusions"><a id="sec-" name="sec-"></a>Conclusions</h3>
 <div class="outline-text-3" id="text-ArticleConclusions">
@@ -375,7 +369,6 @@ also gain these benefits:
 </div>
 </div>
 </div>
-
 <div id="outline-container-ShareButtons" class="outline-2">
 <h2 id="ShareButtons"><a id="sec-" name="sec-"></a>Share Buttons</h2>
 <div class="outline-text-2" id="text-ShareButtons">

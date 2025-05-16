@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
 <title>Gilded Rose Kata</title>
-<!-- 2023-12-02 Sat 20:00 -->
+<!-- 2025-05-16 Fri 20:19 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
+<meta name="author" content="Enrico Benini">
 
 <link  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -45,6 +46,7 @@ $(function() {
 <li><a href="#SolutionApproachContent">Solution Approach</a>
 <ul class="nav">
 <li><a href="#SolutionApproachTestsContent">Tests</a></li>
+<li><a href="#SolutionApproachSplitMonsterContent">Split the Monster</a></li>
 <li><a href="#SolutionApproachMutationContent">Dealing With Mutation once and for All</a></li>
 <li><a href="#SolutionApproachRefinementNewFeatureContent">Refinement &amp; New feature</a></li>
 </ul>
@@ -67,7 +69,6 @@ $(function() {
 </div>
 </nav>
 </div><div class="col-md-9 col-md-pull-3"><h1 class="title">Gilded Rose Kata</h1>
-
 <div id="outline-container-navbar" class="outline-2 text-center navbar navbar-inverse navbar-fixed-top">
 <h2 id="navbar"><a id="sec-" name="sec-"></a>Blog</h2>
 <div class="outline-text-2" id="text-navbar">
@@ -88,7 +89,6 @@ $(function() {
 </div>
 </div>
 </div>
-
 <div id="outline-container-Article" class="outline-2">
 <h2 id="Article"><a id="sec-" name="sec-"></a>Gilded Rose Kata</h2>
 <div class="outline-text-2" id="text-Article">
@@ -129,12 +129,10 @@ Both points 1 and 2 will be language-independent
 </p>
 </div>
 </div>
-
 <div id="outline-container-ArticleContent" class="outline-3">
 <h3 id="ArticleContent"><a id="sec-" name="sec-"></a>Content</h3>
 <div class="outline-text-3" id="text-ArticleContent">
 </div>
-
 <div id="outline-container-CodebaseStateContent" class="outline-4">
 <h4 id="CodebaseStateContent"><a id="sec-" name="sec-"></a>Codebase State</h4>
 <div class="outline-text-4" id="text-CodebaseStateContent">
@@ -213,7 +211,6 @@ from Javascript.
 </ol>
 </div>
 </div>
-
 <div id="outline-container-SolutionApproachContent" class="outline-4">
 <h4 id="SolutionApproachContent"><a id="sec-" name="sec-"></a>Solution Approach</h4>
 <div class="outline-text-4" id="text-SolutionApproachContent">
@@ -223,7 +220,6 @@ come up with a plan. Here, I'll prioritise the tasks we need to do
 in order to make this code better and solve the Kata.
 </p>
 </div>
-
 <div id="outline-container-SolutionApproachTestsContent" class="outline-5">
 <h5 id="SolutionApproachTestsContent"><a id="sec-" name="sec-"></a>Tests</h5>
 <div class="outline-text-5" id="text-SolutionApproachTestsContent">
@@ -304,7 +300,121 @@ to a property becomes quite a natural process.
 </p>
 </div>
 </div>
+<div id="outline-container-SolutionApproachSplitMonsterContent" class="outline-5">
+<h5 id="SolutionApproachSplitMonsterContent"><a id="sec-" name="sec-"></a>Split the Monster</h5>
+<div class="outline-text-5" id="text-SolutionApproachSplitMonsterContent">
+<p>
+Once we have the testing set up properly, we can start to break
+stuff using the 🔨.
+</p>
 
+<p>
+The Most annoying thing in the codebase is the giant stand-alone
+function. I will tackle this by splitting that function into
+sub-functions. Then, repeat the same approach for the outcoming
+functions. This recursive process will terminate when the
+functions I end up with have a small number of lines of code,
+one single mutation in it or just one if statement. Simple as that.
+</p>
+
+<p>
+A little but key detail in all of this is that each function will
+return a value, and the parent function will be a composition of
+its child.
+</p>
+
+<p>
+This works well when you have 2 consecutive if-statements or an
+if-else-statement:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-scala"><span style="color: #ff7f24;">// Before</span>
+<span style="color: #00ffff;">if</span> (<span style="color: #eedd82;">condition1</span>) {
+  <span style="color: #00ffff;">if</span> (<span style="color: #eedd82;">condition2</span>) {
+   <span style="color: #ff7f24;">// Stuff</span>
+  } <span style="color: #00ffff;">else</span> <span style="color: #ff7f24;">// Stuff</span>
+}
+<span style="color: #00ffff;">if</span> (<span style="color: #eedd82;">condition3</span>) {
+<span style="color: #ff7f24;">// Stuff</span>
+} <span style="color: #00ffff;">else</span> <span style="color: #ff7f24;">// Stuff</span>
+
+<span style="color: #ff7f24;">// After</span>
+<span style="color: #eedd82;">def</span> <span style="color: #eedd82;">f1</span>(<span style="color: #eedd82;">params</span>): <span style="color: #98fb98;">StuffType</span> = <span style="color: #98fb98;">if</span> (<span style="color: #98fb98;">condition1</span>) { <span style="color: #87cefa;">f2</span>(<span style="color: #eedd82;">params</span>) } <span style="color: #eedd82;">else</span> <span style="color: #ff7f24;">// Previous state (identity)</span>
+<span style="color: #98fb98;">def</span> <span style="color: #eedd82;">f2</span>(<span style="color: #98fb98;">params</span>): <span style="color: #eedd82;">StuffType</span> <span style="color: #98fb98;">=</span> <span style="color: #00ffff;">if</span> (<span style="color: #eedd82;">condition2</span>) {<span style="color: #ff7f24;">/* Stuff */</span> } <span style="color: #00ffff;">else</span> <span style="color: #ff7f24;">// Stuff</span>
+<span style="color: #eedd82;">def</span> <span style="color: #eedd82;">f3</span>(<span style="color: #eedd82;">params</span>): <span style="color: #98fb98;">StuffType</span> = <span style="color: #98fb98;">if</span> (<span style="color: #98fb98;">condition3</span>) {<span style="color: #ff7f24;">/* Stuff */</span> } <span style="color: #eedd82;">else</span> <span style="color: #ff7f24;">// Stuff</span>
+<span style="color: #98fb98;">val</span> <span style="color: #eedd82;">r1</span> <span style="color: #98fb98;">=</span> <span style="color: #eedd82;">f1</span>(<span style="color: #98fb98;">args</span>)
+<span style="color: #00ffff;">val</span> <span style="color: #eedd82;">r2</span> = <span style="color: #87cefa;">f3</span>(<span style="color: #eedd82;">args</span>) <span style="color: #ff7f24;">// This might probably require r1 as input</span>
+<span style="color: #eedd82;">r2</span>
+</pre>
+</div>
+
+<p>
+This might seems controversial and more complicated, but it helps
+to put the computations in context. This way, you don't need to
+go and look into the content of the functions, you can just skip
+their implementation details and get an overall feeling of the
+data-flow. Just imagine if the <code>Stuff</code> size is hundred of lines,
+but you are interested only in <code>f3</code>. After this refactoring, you can
+just search for <code>f3</code>, go to his definition, and forget about the
+rest. Plus, by doing so, we can move the functions away, to a
+different file for instance.
+</p>
+
+<p>
+You might also notice I added an else to the first if that wasn't
+there. That's because I want the wrapping function to actually
+return a type and, since there wasn't an else in that case, the
+result will be the previous input. When the else branch is chosen
+the <code>f1</code> function will behave as the <a href="https://en.wikipedia.org/wiki/Identity_function">Identity Function</a>. With this
+trick, we are finally able to put types back into play!
+</p>
+
+<p>
+In the very end, I want also to grab your attention on the way
+this approach penetrates the nested ifs and allows us to collapse the
+structure. Of course, we could also merge <code>condition1</code> and
+<code>condition2</code>, and we might actually decide to do that in a later
+stage, but let us suppose we will discover that the same logic of
+<code>f2</code> is reused. This way, we can just call <code>f2</code> since it's
+independent from the rest.
+</p>
+
+<p>
+<b>Edit:</b> a very important aspect when comes to refactoring is <b>KNOW WHEN TO COMMIT</b>. 
+In my opinion, the right time is when all of the
+following conditions hold:
+</p>
+<ol class="org-ol">
+<li>Your tests are green
+</li>
+<li>You are not in the middle of a change (you know what to do
+next)
+</li>
+<li>You are on stand-by, thinking about the next move (related to
+point 2)
+</li>
+</ol>
+
+<p>
+Doing like that, will ensure that you commit quite often and you
+can roll back to a <i>safe-state</i> without loosing too much
+time. Otherwise, you might don't want to roll back because your
+last commit was 2h ago, but you can't carry on because you are
+stuck for some reason.
+</p>
+
+<p>
+<b>Edit:</b> Since this specific problem is mainly just nested if, at
+some point, we actually want to merge them together and collapse
+some of the independent functions into one. You might think that
+we will roll back to the start, but we can instead take
+advantage of specific language constructs, like pattern matching,
+to keep the structure flat.
+</p>
+</div>
+</div>
 <div id="outline-container-SolutionApproachMutationContent" class="outline-5">
 <h5 id="SolutionApproachMutationContent"><a id="sec-" name="sec-"></a>Dealing With Mutation once and for All</h5>
 <div class="outline-text-5" id="text-SolutionApproachMutationContent">
@@ -333,7 +443,6 @@ copy of the input with the requested changes.
 </p>
 </div>
 </div>
-
 <div id="outline-container-SolutionApproachRefinementNewFeatureContent" class="outline-5">
 <h5 id="SolutionApproachRefinementNewFeatureContent"><a id="sec-" name="sec-"></a>Refinement &amp; New feature</h5>
 <div class="outline-text-5" id="text-SolutionApproachRefinementNewFeatureContent">
@@ -380,7 +489,6 @@ little as possible in the beginning, only when it's really necessary.
 </div>
 </div>
 </div>
-
 <div id="outline-container-ScalaContent" class="outline-4">
 <h4 id="ScalaContent"><a id="sec-" name="sec-"></a>Scala Kata</h4>
 <div class="outline-text-4" id="text-ScalaContent">
@@ -427,7 +535,6 @@ the new item easily. Work is done! <a href="https://github.com/benkio/GeneralExe
 </p>
 </div>
 </div>
-
 <div id="outline-container-HaskellContent" class="outline-4">
 <h4 id="HaskellContent"><a id="sec-" name="sec-"></a>Haskell Kata</h4>
 <div class="outline-text-4" id="text-HaskellContent">
@@ -483,7 +590,6 @@ functions
 <h3 id="ArticleConclusions"><a id="sec-" name="sec-"></a>Conclusions</h3>
 <div class="outline-text-3" id="text-ArticleConclusions">
 </div>
-
 <div id="outline-container-MainChallengesConclusion" class="outline-4">
 <h4 id="MainChallengesConclusion"><a id="sec-" name="sec-"></a>Main Challenges</h4>
 <div class="outline-text-4" id="text-MainChallengesConclusion">
@@ -533,7 +639,6 @@ possible, with the minimal set of dependencies as possible.
 </p>
 </div>
 </div>
-
 <div id="outline-container-LaguagesComparisonConclusions" class="outline-4">
 <h4 id="LaguagesComparisonConclusions"><a id="sec-" name="sec-"></a>Languages Comparison</h4>
 <div class="outline-text-4" id="text-LaguagesComparisonConclusions">
@@ -656,7 +761,6 @@ find the time to read this one day.
 </p>
 </div>
 </div>
-
 <div id="outline-container-LaguagesComparisonConclusions" class="outline-4">
 <h4 id="LaguagesComparisonConclusions"><a id="sec-" name="sec-"></a>Final words</h4>
 <div class="outline-text-4" id="text-LaguagesComparisonConclusions">
@@ -685,7 +789,6 @@ May the force be with you
 </div>
 </div>
 </div>
-
 <div id="outline-container-ShareButtons" class="outline-2">
 <h2 id="ShareButtons"><a id="sec-" name="sec-"></a>Share Buttons</h2>
 <div class="outline-text-2" id="text-ShareButtons">
