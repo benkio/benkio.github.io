@@ -1,5 +1,10 @@
 * Benkio Personal Site
 
+#+begin_src markdown
+  [![Check Links](https://github.com/org/repo/actions/workflows/links.yml/badge.svg)](https://github.com/org/repo/actions/workflows/links.yml)
+#+end_src
+
+
 [[https://www.gravatar.com/avatar/aa7f68a32b011ac94698a7a1cb16ffc8?s=200][Benkio's Avatar]]
 
 Enrico Benini's Personal Site (AKA Benkio)
