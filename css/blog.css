@@ -7,22 +7,22 @@ body { padding-top: 70px; }
 #Books { display: none; }
 #Albums { display: none; }
 #elementSearch {
-    color: black;
+    color: var(--background-color);
     margin: 1em;
 }
 .list-group-item{
-    background-color: rgb(255,255,255);
+    background-color: var(--text-color);
 }
 a.list-group-item {
-    color: rgb(255,255,255);
-    background-color: #202020;
+    color: var(--text-color);
+    background-color: var(--background-color);
 }
 a.list-group-item:hover, a.list-group-item:focus, a.list-group-item:active, a.list-group-item.active, .open>.dropdown-togglea.list-group-item {
-    background-color: #3d3d3d;
-    color: rgb(255,255,255);
+    background-color: var(--header-1-color);
+    color: var(--text-color);
 }
-.dropdown-menu > li > a { color: rgb(255,255,255); }
+.dropdown-menu > li > a { color: var(--text-color); }
 .dropdown-menu > li > a:hover {
-    background-color: #3d3d3d;
-    color: rgb(255,255,255);
+    background-color: var(--header-1-color);
+    color: var(--text-color);
 }

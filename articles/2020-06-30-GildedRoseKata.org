@@ -174,7 +174,7 @@
 
      to a property becomes quite a natural process.
 
-**** COMMENT Split the Monster
+**** Split the Monster
      :PROPERTIES:
      :CUSTOM_ID: SolutionApproachSplitMonsterContent
      :END:
