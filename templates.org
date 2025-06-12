@@ -11,6 +11,7 @@
 #+begin_src elisp :exports none :results none :var path="./articles/"
   (setq timeToArchiveInMonth 4
         timeToArchiveInMonthSeconds (* timeToArchiveInMonth 2592000)
+        ;; path "./articles/"
         )
   (mapc
    (lambda (f) (progn
@@ -21,17 +22,17 @@
                    (kill-buffer)
                    )))
    (directory-files path t "\.org$"))
-  (mapc
-   (lambda (f) (progn
-                 (when (time-less-p (time-add (current-time) (- 0 timeToArchiveInMonthSeconds )) (nth 5 (file-attributes f)))
-                   (message "post compilation processing - file %s" f)
-                   (find-file f)
-                   (while (re-search-forward "<span style=\"color: #262626; background-color: #0d0d0d;\">\\([ ]*\\)</span>" nil t)
-                     (replace-match "\\1"))
-                   (save-buffer)
-                   (kill-buffer)
-                   )))
-   (directory-files path t "\.html$"))
+  ;; (mapc
+  ;;  (lambda (f) (progn
+  ;;                (when (time-less-p (time-add (current-time) (- 0 timeToArchiveInMonthSeconds )) (nth 5 (file-attributes f)))
+  ;;                  (message "post compilation processing - file %s" f)
+  ;;                  (find-file f)
+  ;;                  (while (re-search-forward "<span style=\"color: #262626; background-color: #0d0d0d;\">\\([ ]*\\)</span>" nil t)
+  ;;                    (replace-match "\\1"))
+  ;;                  (save-buffer)
+  ;;                  (kill-buffer)
+  ;;                  )))
+  ;;  (directory-files path t "\.html$"))
 #+end_src
 
 #+name: articlesRelativePaths

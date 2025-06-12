@@ -15,7 +15,8 @@
 
 * Blog
   :PROPERTIES:
-  :HTML_CONTAINER_CLASS: text-center navbar navbar-inverse navbar-fixed-top
+  :HTML_CONTAINER: nav
+  :HTML_CONTAINER_CLASS: navbar navbar-inverse navbar-fixed-top
   :CUSTOM_ID: navbar
   :END:
 #+INCLUDE: "../Fragments/BlogNavbarFragment.html" export html

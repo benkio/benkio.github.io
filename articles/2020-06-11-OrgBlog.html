@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Static Personal Website with Org Mode</title>
-<!-- 2025-05-16 Fri 20:19 -->
+<!-- 2025-06-12 Thu 02:42 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -59,26 +59,31 @@ $(function() {
 </div>
 </nav>
 </div><div class="col-md-9 col-md-pull-3"><h1 class="title">Static Personal Website with Org Mode</h1>
-<div id="outline-container-navbar" class="outline-2 text-center navbar navbar-inverse navbar-fixed-top">
+<nav id="outline-container-navbar" class="outline-2 navbar navbar-inverse navbar-fixed-top">
 <h2 id="navbar"><a id="sec-" name="sec-"></a>Blog</h2>
 <div class="outline-text-2" id="text-navbar">
-<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapsableNavbar">
-  <span class="icon-bar"></span>
-  <span class="icon-bar"></span>
-  <span class="icon-bar"></span>
-</button>
-<a title="Home" href="../blog.html"><h1 id="navbarTitle" class="navbar-text">Blog</h1></a>
-<div class="collapse navbar-collapse" id="collapsableNavbar">
-  <ul class="nav navbar-nav">
-    <li><a title="Home" href="../index.html"><i class="fas fa-home fa-3x" aria-hidden="true"></i></a></li>
-    <li><a title="Article List" href="../articleList.html" class="navbar-text h3">Article List</a></li>
-<li><a title="Book List" href="../bookList.html" class="navbar-text h3">Book List</a></li>
-    <li><a title="Album List" href="../albumList.html" class="navbar-text h3">Album List</a></li>
-    <li><a title="Note Trainer" href="../NoteTrainer/NoteTrainer.html" class="navbar-text h3">Note Trainer</a></li>
-  </ul>
+<div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapsableNavbar">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="./../index.html">
+      <img class="img-circle" src="https://www.gravatar.com/avatar/aa7f68a32b011ac94698a7a1cb16ffc8?s=200" width="50px"/>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="collapsableNavbar">
+    <ul class="nav navbar-nav">
+      <li><a title="Article List" href="./../articleList.html" class="navbar-text h3">Article List</a></li>
+      <li><a title="Book List" href="./../bookList.html" class="navbar-text h3">Book List</a></li>
+      <li><a title="Album List" href="./../albumList.html" class="navbar-text h3">Album List</a></li>
+      <li><a title="Note Trainer" href="./../NoteTrainer/NoteTrainer.html" class="navbar-text h3">Note Trainer</a></li>
+    </ul>
+  </div>
 </div>
 </div>
-</div>
+</nav>
 <div id="outline-container-Article" class="outline-2">
 <h2 id="Article"><a id="sec-" name="sec-"></a>Static Personal Website with Org Mode</h2>
 <div class="outline-text-2" id="text-Article">
@@ -231,7 +236,9 @@ page in this way:
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #ff7f24;">html: &lt;ul id="pagination" class="pagination pagination-lg"&gt;&lt;/ul&gt;</span>
+<pre class="src src-org"><span style="color: #87cefa;">:END:</span>
+<span style="color: #ff7f24;">html: &lt;div id='wrap1' data-include="article1"&gt;&lt;/div&gt;</span>
+<span style="color: #ff7f24;">html: &lt;div id='wrap2' data-include="article2"&gt;&lt;/div&gt;</span>
 </pre>
 </div>
 
@@ -245,7 +252,13 @@ populate the empty article tags:
 </p>
 <div class="org-src-container">
 
-<pre class="src src-javascript"><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Pagination 0 based</span>
+<pre class="src src-javascript">}
+#+END_SRC
+#+CALL: templates.org:inline-js(blk=<span style="color: #ffa07a;">"pagination"</span>)
+
+#+name: blog_populateArticles
+#+begin_src javascript :exports none
+<span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Pagination 0 based</span>
 <span style="color: #00ffff;">const</span> <span style="color: #eedd82;">htmlArticlesPaginated</span> = htmlArticles.slice(page, page + perPage);
 <span style="color: #00ffff;">const</span> <span style="color: #eedd82;">htmlArticlesPathsPaginated</span> = htmlArticlesPaths.slice(page, page + perPage);
 
@@ -275,11 +288,6 @@ populate the empty article tags:
 
 articlesElementsZip.forEach(<span style="color: #00ffff;">function</span>(<span style="color: #eedd82;">tuple</span>) {
     <span style="color: #00ffff;">const</span> [<span style="color: #eedd82;">element</span>, <span style="color: #eedd82;">title</span>, <span style="color: #00ffff;">abstract</span>] = tuple;
-    $(<span style="color: #ffa07a;">"#"</span> + element).html($(<span style="color: #ffa07a;">'&lt;div&gt;'</span>).append(title).append(<span style="color: #00ffff;">abstract</span>));
-});
-
-#+end_src
-#+call: templates.org:inline-js(blk=<span style="color: #ffa07a;">"blog_populateArticles"</span>)
 </pre>
 </div>
 
@@ -326,7 +334,13 @@ Here you can see the complete js code snippet for the pagination:
 
 <div class="org-src-container">
 
-<pre class="src src-org">const page = ((new URLSearchParams(window.location.search).get('page') || 1) - 1) * 5;
+<pre class="src src-org"><span style="color: #ff7f24;">html: &lt;ul id="pagination" class="pagination pagination-lg"&gt;&lt;/ul&gt;</span>
+
+<span style="color: #ff7f24;">CALL: templates.org:articlesRelativePaths()</span>
+
+<span style="color: #ff7f24;">NAME: pagination</span>
+<span style="font-size: 80%;">SRC</span> javascript :exports none
+const page = ((new URLSearchParams(window.location.search).get('page') || 1) - 1) * 5;
 const perPage = 5;
 for (var i = 0; i &lt; (htmlArticles.length/perPage); i++) {
     var active = "";
@@ -334,11 +348,6 @@ for (var i = 0; i &lt; (htmlArticles.length/perPage); i++) {
 <span style="color: #b3b3b3;">        active = "class=</span>'active'";
     }
     $("#pagination").append(
-        '&lt;li ' + active + '&gt;&lt;a href="' + window.location.href.split('?')[0] + '?page=' + (i+1) + '"&gt;' + (i+1) + '&lt;/a&gt;&lt;/li&gt;'
-    );
-}
-<span style="color: #ff7f24; font-size: 80%;">SRC</span>
-<span style="color: #ff7f24;">CALL: templates.org:inline-js(blk="pagination")</span>
 </pre>
 </div>
 </div>
