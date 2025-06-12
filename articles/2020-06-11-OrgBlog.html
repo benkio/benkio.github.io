@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Static Personal Website with Org Mode</title>
-<!-- 2025-06-12 Thu 02:53 -->
+<!-- 2025-06-12 Thu 03:18 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -75,6 +75,7 @@ $(function() {
   </div>
   <div class="collapse navbar-collapse" id="collapsableNavbar">
     <ul class="nav navbar-nav">
+      <li><a title="Blog" href="./../blog.html" class="navbar-text h3">Blog</a></li>
       <li><a title="Articles" href="./../articles.html" class="navbar-text h3">Articles</a></li>
       <li><a title="Books" href="./../books.html" class="navbar-text h3">Books</a></li>
       <li><a title="Albums" href="./../albums.html" class="navbar-text h3">Albums</a></li>
@@ -236,9 +237,9 @@ page in this way:
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #87cefa;">:END:</span>
+<pre class="src src-org"><span style="color: #00ffff;">:CUSTOM_ID:</span> <span style="color: #E5E5E5; background-color: #262626;">Articles</span>
+<span style="color: #87cefa;">:END:</span>
 <span style="color: #ff7f24;">html: &lt;div id='wrap1' data-include="article1"&gt;&lt;/div&gt;</span>
-<span style="color: #ff7f24;">html: &lt;div id='wrap2' data-include="article2"&gt;&lt;/div&gt;</span>
 </pre>
 </div>
 
@@ -252,7 +253,8 @@ populate the empty article tags:
 </p>
 <div class="org-src-container">
 
-<pre class="src src-javascript">}
+<pre class="src src-javascript">    );
+}
 #+END_SRC
 #+CALL: templates.org:inline-js(blk=<span style="color: #ffa07a;">"pagination"</span>)
 
@@ -287,7 +289,6 @@ populate the empty article tags:
 }
 
 articlesElementsZip.forEach(<span style="color: #00ffff;">function</span>(<span style="color: #eedd82;">tuple</span>) {
-    <span style="color: #00ffff;">const</span> [<span style="color: #eedd82;">element</span>, <span style="color: #eedd82;">title</span>, <span style="color: #00ffff;">abstract</span>] = tuple;
 </pre>
 </div>
 
@@ -347,7 +348,6 @@ for (var i = 0; i &lt; (htmlArticles.length/perPage); i++) {
     if ((page/perPage) <span style="color: #b3b3b3;">== i) {</span>
 <span style="color: #b3b3b3;">        active = "class=</span>'active'";
     }
-    $("#pagination").append(
 </pre>
 </div>
 </div>

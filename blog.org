@@ -33,6 +33,7 @@
   </div>
   <div class="collapse navbar-collapse" id="collapsableNavbar">
     <ul class="nav navbar-nav">
+      <li><a title="Blog" href="./blog.html" class="navbar-text h3">Blog</a></li>
       <li><a title="Articles" href="./articles.html" class="navbar-text h3">Articles</a></li>
       <li><a title="Books" href="./books.html" class="navbar-text h3">Books</a></li>
       <li><a title="Albums" href="./albums.html" class="navbar-text h3">Albums</a></li>
@@ -110,3 +111,4 @@ articlesElementsZip.forEach(function(tuple) {
 
 #+end_src
 #+call: templates.org:inline-js(blk="blog_populateArticles")
+#+call: templates.org:compileOrgFiles()
