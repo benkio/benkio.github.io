@@ -1,4 +1,4 @@
-#+OPTIONS: num:nil toc:t H:4
+#+OPTIONS: num:nil toc:nil
 #+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:nil
 #+TITLE: Book List
 #+DESCRIPTION: Book List
@@ -276,9 +276,6 @@
 #+begin_export html
 <script type="text/javascript">
 $(function() {
-  $('#text-table-of-contents > ul li').first().css("display", "none");
-  $('#text-table-of-contents > ul li:nth-child(2)').first().css("display", "none");
-  $('#table-of-contents').addClass("visible-lg")
   $('#totalBookCount').text("Total Books: " + $('.book').length)
 });
 </script>
