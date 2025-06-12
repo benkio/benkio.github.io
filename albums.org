@@ -1,9 +1,9 @@
 #+OPTIONS: num:nil toc:nil
 #+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:nil
-#+TITLE: Album List
+#+TITLE: Albums
 
-#+DESCRIPTION: Album List
-#+KEYWORDS: Album List
+#+DESCRIPTION: Albums
+#+KEYWORDS: Albums
 #+HTML_HEAD_EXTRA:  <base target="_blank">
 #+HTML_HEAD_EXTRA: <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 #+HTML_HEAD_EXTRA: <link rel="icon" href="images/favicon.ico" type="image/x-icon">
@@ -16,7 +16,7 @@
 #+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="css/blog.css">
 #+HTML_HEAD_EXTRA: <style>body { padding-top: 100px; }</style>
 
-* Album List
+* Albums
 :PROPERTIES:
 :HTML_CONTAINER: nav
 :HTML_CONTAINER_CLASS: navbar navbar-inverse navbar-fixed-top
@@ -37,9 +37,9 @@
   </div>
   <div class="collapse navbar-collapse" id="collapsableNavbar">
     <ul class="nav navbar-nav">
-      <li><a target="_self" title="Article List" href="./articleList.html" class="navbar-text h3">Article List</a></li>
-      <li><a target="_self" title="Book List" href="./bookList.html" class="navbar-text h3">Book List</a></li>
-      <li><a target="_self" title="Album List" href="./albumList.html" class="navbar-text h3">Album List</a></li>
+      <li><a target="_self" title="Articles" href="./articles.html" class="navbar-text h3">Articles</a></li>
+      <li><a target="_self" title="Books" href="./books.html" class="navbar-text h3">Books</a></li>
+      <li><a target="_self" title="Albums" href="./albums.html" class="navbar-text h3">Albums</a></li>
       <li><a target="_self" title="Note Trainer" href="./NoteTrainer/NoteTrainer.html" class="navbar-text h3">Note Trainer</a></li>
     </ul>
   </div>
@@ -59,9 +59,9 @@
   <iframe src="https://www.youtube.com/embed/videoseries?list=PLO1i4nEhzCLaszits0vM6cJJoCIqzTwn7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" style="display: block;width: 80%;margin-left: auto;margin-right: auto;" allowfullscreen></iframe>
   <br/>
   <div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://t.me/baldrecommendations" data-iframely-url="//iframely.net/URTbcao"></a></div></div><script async src="//iframely.net/embed.js"></script>
-  <input type="text" id="elementSearch" onkeyup="elementSearch('albumList')" placeholder="Search for albums.." title="Type in a Album Title" style="text-align: center; width: 80%;margin-left: auto;margin-right: auto; display: block;">
+  <input type="text" id="elementSearch" onkeyup="elementSearch('albums')" placeholder="Search for albums.." title="Type in a Album Title" style="text-align: center; width: 80%;margin-left: auto;margin-right: auto; display: block;">
   <p id="totalAlbumCount"></p>
-  <ul id="albumList"                                                                                        class="list-group">
+  <ul id="albums"                                                                                        class="list-group">
       <a href="https://www.youtube.com/watch?v=2-fR2rrmw3I"                                 class="list-group-item list-group-item-action album">AC/DC - Back In Black</a>
       <a href="https://youtube.com/playlist?list=PL188FE1A560B2A862"                        class="list-group-item list-group-item-action album">All That Remains - Overcome</a>
       <a href="https://youtu.be/iEi8q-lGByY"                                                class="list-group-item list-group-item-action album">All That Remains - The Fall of Ideals</a>
@@ -187,7 +187,7 @@ Legend:
 Price source: Bandcamp, Amazon, and Discgos. Price reference with shipment to UK.
 
 #+BEGIN_EXPORT HTML
-<ul id="wannaAlbumList" class="list-group">
+<ul id="wannaAlbums" class="list-group">
   <a href="https://youtu.be/TVIdVhq40o0"                                                                              class="list-group-item list-group-item-action wannaAlbum"><p style="display:inline;background-color:red;" >Free   </p>| Anomalous - Animate the:end</a>
   <a href="https://jessezuretti.bandcamp.com/album/argent-shock"                                                      class="list-group-item list-group-item-action wannaAlbum"><p style="display:inline;background-color:red;" >$9.99  </p>| Argent Shock - Jesse Zuretti</a>
   <a href="https://www.youtube.com/watch?v=Oc4vbdv-1O4"                                                               class="list-group-item list-group-item-action wannaAlbum">£20    | Buy High - Portraits</a>

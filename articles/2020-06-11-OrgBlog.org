@@ -96,7 +96,7 @@
      the final result. I got the responsiveness and all the styling
      (almost) for free, icons included (+ [[https://fontawesome.com/][fontawesome]] for the homepage).
 
-**** Article List and Blog Dynamic Content
+**** Articles and Blog Dynamic Content
   :PROPERTIES:
   :CUSTOM_ID: ArticleContentFeaturesDynamic
   :END:
@@ -112,7 +112,7 @@
 
      Using this method we can access other HTML files, such as this
      article page, manipulate their content, and generate our data for
-     the targeted page. Two examples are The [[https://benkio.github.io/blog.html][Blog]] page and the [[https://benkio.github.io/articleList.html][Article
+     the targeted page. Two examples are The [[https://benkio.github.io/blog.html][Blog]] page and the [[https://benkio.github.io/articles.html][Article
      List]] page.
 
      Both occasions, there are two Js arrays, called
@@ -120,7 +120,7 @@
      subset of the HTML structure (Title and Abstract) of the
      Articles, and the latter contains the relative path of them.
      Starting from those arrays we can zip it and create the list of
-     articles: minimal in the case of the [[https://benkio.github.io/articleList.html][Article List]] page and with
+     articles: minimal in the case of the [[https://benkio.github.io/articles.html][Articles]] page and with
      some preview in the case of the [[https://benkio.github.io/blog.html][Blog]] page.
 
      In addition, in order to achieve some simple sorting, we just

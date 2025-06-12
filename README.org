@@ -11,8 +11,8 @@ Enrico Benini's Personal Site (AKA Benkio)
 - Copy ~articleTemplate.org.orig~
 - Change the title and fill in the contents. Abstract section is mandatory
 - run ~org-twbs-export-to-html~
-- Go to ~articleList.org~
+- Go to ~articles.org~
 - run ~org-twbs-export-to-html~
 - Go to ~blog.org~
 - run ~org-twbs-export-to-html~
-- Commit the new files, ~blog.html~ & ~articleList.html~
+- Commit the new files, ~blog.html~ & ~articles.html~
