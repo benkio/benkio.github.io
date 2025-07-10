@@ -95,17 +95,99 @@ Look at the org files modified within 4 months and compile them using ~org-twbs-
 
 Given a CVS file path:
 - Read it
-- Create a string representing a html bootstrap card
+- Create a string representing a html bootstrap buttons
 - Return it
 
-#+begin_src emacs-lisp
+#+name: booksToButtons
+#+begin_src elisp :exports none :results html :var csvFilePath="" type=""
   (require 'pcsv)
 
-  (setq csvFilePath "./data/books.csv"
-        csvFileContentLines (cdr (pcsv-parse-file csvFilePath))
-        ;; <button type="button" class="btn btn-info m-auto" onclick="window.open('https://www.amazon.it/vulcano-musicali-Domenico-intervistato-Puracchio/dp/8899813302','_blank');" >Il vulcano, Schana Wana e altri mondi musicali</button>
+  (defun getTypeIndex (type)
+    "Given the input type (book, wantedBook, albums...) it returns the index of the csv type column"
+    (cond
+     ((string-equal type "book") 4)
+     ((string-equal type "wantedBook") 3)
+     (t -1)
+     )
+    )
+
+  (defun getTypeLinkIndex (type)
+    "Given the input type (book, wantedBook, albums...) it returns the index of the csv link column"
+    (cond
+     ((string-equal type "book") 5)
+     ((string-equal type "wantedBook") 5)
+     (t -1)
+     )
+    )
+
+  (defun getTypeTitleIndex (type)
+    "Given the input type (book, wantedBook, albums...) it returns the index of the csv title column"
+    (cond
+     ((string-equal type "book") 2)
+     ((string-equal type "wantedBook") 1)
+     (t -1)
+     )
+    )
+
+  (defun getTypeStatusIndex (type)
+    "Given the input type (book, wantedBook, albums...) it returns the index of the csv status column"
+    (cond
+     ((string-equal type "wantedBook") 4)
+     (t -1)
+     )
+    )
+
+  (defun contentTypeToButtonLabel (content type)
+    "Given the content and type it returns the related button label"
+    (setq
+     contentStatus (nth (getTypeIndex type) content)
+     buttonLabel (cond
+                   ((string-equal contentStatus "Audiobook Ita") "<span class=\"label label-primary\">Audiobook Ita</span>")
+                   ((string-equal contentStatus "Audiobook Eng") "<span class=\"label label-success\">Audiobook Eng</span>")
+                   ((string-equal contentStatus "Manga") "<span class=\"label label-warning\">Manga</span>")
+                   (t "")
+                   ))
+    buttonLabel
+    )
+
+  (defun contentStatusToButtonStyleClass (content type)
+    "Given the content and type it returns the related button style class"
+    (setq
+     contentStatus (nth (getTypeStatusIndex type) content)
+     buttonStyle (cond
+                   ((string-equal contentStatus "Available Online") "btn-danger")
+                   ((string-equal contentStatus "Readable Online") "btn-success")
+                   ((string-equal contentStatus "Purchased") "btn-primary")
+                   (t "btn-dark")
+                   ))
+    buttonStyle
+    )
+
+  (defun csvListToButton (content type)
+    "Given a csv list, generate a bootstra button string"
+    (setq
+     buttonLabel (contentTypeToButtonLabel content type)
+     buttonStyleClass (contentStatusToButtonStyleClass content type)
+     )
+    (concat
+     "<button type=\"button\" class=\"btn btn-lg "
+     type
+     " "
+     buttonStyleClass
+     "\" style=\"margin: 5px;\" onclick=\"window.open('"
+     (nth (getTypeLinkIndex type) content) ;; link
+     "','_blank');\" >"
+     (nth (getTypeTitleIndex type) content) ;; title
+     " "
+     buttonLabel
+     "</button>"
+     )
+    )
+
+  (setq csvFileContentLines (cdr (pcsv-parse-file csvFilePath))
+        csvFileButtons (mapcar (lambda (csvLine) (csvListToButton csvLine type)) csvFileContentLines)
         )
 
-  (message csvFileContentLines)
+  (mapconcat 'identity csvFileButtons "\n")
 #+end_src
 
