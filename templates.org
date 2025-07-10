@@ -1,3 +1,4 @@
+* Wrap input into a javascript tag
 #+name: inline-js
 #+begin_src elisp :exports none :results html :var blk=""
 (concat
@@ -6,6 +7,10 @@
  "\n"
  "</script>")
 #+end_src
+
+* Compile Org Files
+
+Look at the org files modified within 4 months and compile them using ~org-twbs-export-to-html~
 
 #+name: compileOrgFiles
 #+begin_src elisp :exports none :results none :var path="./articles/"
@@ -34,6 +39,14 @@
   ;;                  )))
   ;;  (directory-files path t "\.html$"))
 #+end_src
+
+* Articles HTML files to JS
+
+- Gets all the HTML files
+- Read it's contents and strip the unecessary values
+- Insert the contents (Abstracts) into a js array
+- Wrap it with javascript tag
+- Return the Text
 
 #+name: articlesRelativePaths
 #+begin_src elisp :exports none :results html
