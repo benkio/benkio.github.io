@@ -90,3 +90,22 @@ Look at the org files modified within 4 months and compile them using ~org-twbs-
      "</script>")
     )
 #+end_src
+
+* Parse CSV File
+
+Given a CVS file path:
+- Read it
+- Create a string representing a html bootstrap card
+- Return it
+
+#+begin_src emacs-lisp
+  (require 'pcsv)
+
+  (setq csvFilePath "./data/books.csv"
+        csvFileContentLines (cdr (pcsv-parse-file csvFilePath))
+        ;; <button type="button" class="btn btn-info m-auto" onclick="window.open('https://www.amazon.it/vulcano-musicali-Domenico-intervistato-Puracchio/dp/8899813302','_blank');" >Il vulcano, Schana Wana e altri mondi musicali</button>
+        )
+
+  (message csvFileContentLines)
+#+end_src
+
