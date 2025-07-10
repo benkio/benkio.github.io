@@ -57,7 +57,9 @@
   [[https://www.goodreads.com/user/show/148546738-enrico-benini][Good Reads Account]]
 
   #+BEGIN_EXPORT HTML
-  <input type="text" id="elementSearch" onkeyup="elementSearch('books')" placeholder="Search for Books.." title="Type in an Book Title">
+  <div class="col-10">
+    <input type="text" class="form-control" id="elementSearch" onkeyup="elementSearch('books')" placeholder="Search for Books..." title="Type in a Book Title" style="height: 4em;">
+  </div>
   <p id="totalBookCount"></p>
   <hr>
 #+END_EXPORT
