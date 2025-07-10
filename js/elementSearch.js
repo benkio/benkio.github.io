@@ -1,7 +1,7 @@
-function elementSearch() {
+function elementSearch(type) {
     var filter = $("#elementSearch").val().toLowerCase();
     var testCondition = elem => filter === "" || $(elem).text().toLowerCase().includes(filter);
-    $(".book").each((index, elem) => {
+    $("." + type).each((index, elem) => {
         if (testCondition(elem)) {
             $(elem).show();
         } else {

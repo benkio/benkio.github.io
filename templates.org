@@ -103,7 +103,9 @@ Given a CVS file path:
   (require 'pcsv)
 
   (defun getTypeIndex (type)
-    "Given the input type (book, wantedBook, albums...) it returns the index of the csv type column"
+    "Given the input type (book, wantedBook, albums...) it returns the index of the csv type column
+    Audiobook Eng/Ita, Manga
+    "
     (cond
      ((string-equal type "book") 4)
      ((string-equal type "wantedBook") 3)
@@ -115,7 +117,9 @@ Given a CVS file path:
     "Given the input type (book, wantedBook, albums...) it returns the index of the csv link column"
     (cond
      ((string-equal type "book") 5)
+     ((string-equal type "album") 2)
      ((string-equal type "wantedBook") 5)
+     ((string-equal type "wantedAlbum") 4)
      (t -1)
      )
     )
@@ -124,15 +128,20 @@ Given a CVS file path:
     "Given the input type (book, wantedBook, albums...) it returns the index of the csv title column"
     (cond
      ((string-equal type "book") 2)
+     ((string-equal type "album") 1)
      ((string-equal type "wantedBook") 1)
+     ((string-equal type "wantedAlbum") 1)
      (t -1)
      )
     )
 
   (defun getTypeStatusIndex (type)
-    "Given the input type (book, wantedBook, albums...) it returns the index of the csv status column"
+    "Given the input type (book, wantedBook, albums...) it returns the index of the csv status column
+     Digital Only, Available/Readable Online, Purchased
+    "
     (cond
      ((string-equal type "wantedBook") 4)
+     ((string-equal type "wantedAlbum") 3)
      (t -1)
      )
     )
@@ -156,6 +165,7 @@ Given a CVS file path:
      contentStatus (nth (getTypeStatusIndex type) content)
      buttonStyle (cond
                    ((string-equal contentStatus "Available Online") "btn-danger")
+                   ((string-equal contentStatus "Digital Only") "btn-danger")
                    ((string-equal contentStatus "Readable Online") "btn-success")
                    ((string-equal contentStatus "Purchased") "btn-primary")
                    (t "btn-dark")
