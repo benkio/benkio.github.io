@@ -146,6 +146,18 @@ Given a CVS file path:
      )
     )
 
+  (defun getTypeSubtitleIndex (type)
+    "Given the input type (book, wantedBook, albums...) it returns the index of the csv status column
+    "
+    (cond
+     ((string-equal type "book") 3)
+     ((string-equal type "wantedBook") 2)
+     ((string-equal type "album") 0)
+     ((string-equal type "wantedAlbum") 0)
+     (t -1)
+     )
+    )
+
   (defun contentTypeToButtonLabel (content type)
     "Given the content and type it returns the related button label"
     (setq
@@ -178,6 +190,8 @@ Given a CVS file path:
     (setq
      buttonLabel (contentTypeToButtonLabel content type)
      buttonStyleClass (contentStatusToButtonStyleClass content type)
+     buttonSubtitle (if (string-equal "" (nth (getTypeSubtitleIndex type) content)) "" (concat "<br>" (nth (getTypeSubtitleIndex type) content)))
+     buttonExtra (if (string-equal "wantedAlbum" type) (concat "<br>" (nth 2 content)) "") ;; wantedAlbum price
      )
     (concat
      "<button type=\"button\" class=\"btn btn-lg "
@@ -190,6 +204,8 @@ Given a CVS file path:
      (nth (getTypeTitleIndex type) content) ;; title
      " "
      buttonLabel
+     buttonSubtitle
+     buttonExtra
      "</button>"
      )
     )
