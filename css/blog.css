@@ -1,11 +1,6 @@
-body { padding-top: 70px; }
-
 /* navbar */
 
 #navbar { display: none; }
-#navbarContainer { display: none; }
-#navbarHeader { display: none; }
-#navbarLinks { display: none; }
 
 /* hinding headers */
 #Articles { display: none; }

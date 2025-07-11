@@ -8,6 +8,33 @@
  "</script>")
 #+end_src
 
+* Navbar
+
+#+name: navbar
+#+begin_src elisp :exports none :results html :var page=1
+  (setq blogActive        (if (eq page 1) "active" "")
+        articlesActive    (if (eq page 2) "active" "")
+        booksActive       (if (eq page 3) "active" "")
+        albumsActive      (if (eq page 4) "active" "")
+        noteTrainerActive (if (eq page 5) "active" "")
+        )
+
+  (format "<a target=\"_self\" class=\"navbar-brand\" href=\"./index.html\">
+    <img class=\"img-circle rounded-circle\" src=\"https://www.gravatar.com/avatar/aa7f68a32b011ac94698a7a1cb16ffc8?s=200\" width=\"50px\"/>
+  </a>
+  <button class=\"navbar-toggler\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">
+    <span class=\"navbar-toggler-icon\"></span>
+  </button>
+  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">
+    <ul class=\"navbar-nav me-auto mb-2 mb-lg-0\">
+      <li class=\"nav-item\"> <a class=\"nav-link fs-4 %s\"        aria-current=\"page\" target=\"_self\" href=\"/blog.html\">Blog</a> </li>
+      <li class=\"nav-item\"> <a class=\"nav-link fs-4 %s\"        aria-current=\"page\" target=\"_self\" href=\"/articles.html\">Articles</a> </li>
+      <li class=\"nav-item\"> <a class=\"nav-link fs-4 %s\"        aria-current=\"page\" target=\"_self\" href=\"/books.html\">Books</a> </li>
+      <li class=\"nav-item\"> <a class=\"nav-link fs-4 %s\" aria-current=\"page\" target=\"_self\" href=\"/albums.html\">Albums</a> </li>
+      <li class=\"nav-item\"> <a class=\"nav-link fs-4 %s\"        aria-current=\"page\" target=\"_self\" href=\"/NoteTrainer/NoteTrainer.html\">Note Trainer</a> </li>
+    </ul>
+  </div>" blogActive articlesActive booksActive albumsActive noteTrainerActive)
+#+END_SRC
 * Compile Org Files
 
 Look at the org files modified within 4 months and compile them using ~org-twbs-export-to-html~
@@ -195,7 +222,7 @@ Given a CVS file path:
      buttonExtra (if (string-equal "wantedAlbum" type) (concat "<br>" (nth 2 content)) "") ;; wantedAlbum price
      )
     (concat
-     "<button type=\"button\" class=\"btn btn-lg "
+     "<button type=\"button\" class=\"btn "
      type
      " "
      buttonStyleClass

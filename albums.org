@@ -4,73 +4,72 @@
 
 #+DESCRIPTION: Albums
 #+KEYWORDS: Albums
-#+HTML_HEAD_EXTRA:  <base target="_blank">
+#+HTML_HEAD_EXTRA: <base target="_blank">
 #+HTML_HEAD_EXTRA: <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 #+HTML_HEAD_EXTRA: <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
-#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
-#+HTML_HEAD_EXTRA:  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-#+HTML_HEAD_EXTRA:  <script src="js/elementSearch.js"></script>
-#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="css/main.css">
-#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="css/blog.css">
-#+HTML_HEAD_EXTRA: <style>body { padding-top: 100px; }</style>
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+#+HTML_HEAD_EXTRA: <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA: <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA: <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+#+HTML_HEAD_EXTRA: <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+#+HTML_HEAD_EXTRA: <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+#+HTML_HEAD_EXTRA: <script src="js/elementSearch.js"></script>
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" href="css/main.css">
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" href="css/blog.css">
 
 * Albums
 :PROPERTIES:
 :HTML_CONTAINER: nav
-:HTML_CONTAINER_CLASS: navbar navbar-inverse navbar-fixed-top
+:HTML_CONTAINER_CLASS: navbar bg-dark border-bottom border-body navbar-fixed-top navbar-expand-lg bg-body-tertiary
 :CUSTOM_ID: navbar
 :END:
 
-#+BEGIN_EXPORT html
-<div class="container-fluid">
-  <div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapsableNavbar">
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-    <a target="_self" class="navbar-brand" href="./index.html">
-      <img class="img-circle" src="https://www.gravatar.com/avatar/aa7f68a32b011ac94698a7a1cb16ffc8?s=200" width="50px"/>
-    </a>
-  </div>
-  <div class="collapse navbar-collapse" id="collapsableNavbar">
-    <ul class="nav navbar-nav">
-      <li><a target="_self" title="Blog" href="./blog.html" class="navbar-text h3">Blog</a></li>
-      <li><a target="_self" title="Articles" href="./articles.html" class="navbar-text h3">Articles</a></li>
-      <li><a target="_self" title="Books" href="./books.html" class="navbar-text h3">Books</a></li>
-      <li><a target="_self" title="Albums" href="./albums.html" class="navbar-text h3">Albums</a></li>
-      <li><a target="_self" title="Note Trainer" href="./NoteTrainer/NoteTrainer.html" class="navbar-text h3">Note Trainer</a></li>
-    </ul>
-  </div>
-</div>
-#+END_EXPORT
+#+CALL: templates.org:navbar(4)
 
 
 * Albums
 :PROPERTIES:
 :CUSTOM_ID: Albums
+:HTML_CONTAINER_CLASS: row
 :END:
 
 **Created:** <2020-06-21 Sun>
 
   #+BEGIN_EXPORT HTML
-  <p style="text-align: center">Next Up Music Playlist</p>
-  <iframe src="https://www.youtube.com/embed/videoseries?list=PLO1i4nEhzCLaszits0vM6cJJoCIqzTwn7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" style="display: block;width: 80%;margin-left: auto;margin-right: auto;" allowfullscreen></iframe>
-  <br/>
-  <div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://t.me/baldrecommendations" data-iframely-url="//iframely.net/URTbcao"></a></div></div><script async src="//iframely.net/embed.js"></script>
-  <div class="col-10">
-    <input type="text" class="form-control" id="elementSearch" onkeyup="elementSearch('album')" placeholder="Search for albums..." title="Type in an album Title" style="text-align: center; width: 80%;margin-left: auto;margin-right: auto; display: block;">
+  <div class="row align-items-center">
+    <div class="col-sm-4 mb-3 mb-sm-0">
+      <div class="card text-center">
+        <div class="card-body">
+          <div class="ratio ratio-4x3">
+            <iframe src="https://www.youtube.com/embed/videoseries?si=7T2jEtIYNBoX3y5V&amp;list=PLO1i4nEhzCLaszits0vM6cJJoCIqzTwn7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <h5 class="card-title">Next Up Music Playlist</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-8">
+      <div class="card">
+        <div class="card-body">
+          <div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://t.me/baldrecommendations" data-iframely-url="//iframely.net/URTbcao?theme=light"></a></div></div><script async src="//iframely.net/embed.js"></script>
+        </div>
+      </div>
+    </div>
   </div>
-  <p id="totalAlbumCount"></p>
+
+  <br/>
+  <div class="col-10 text-center">
+    <input type="text" class="form-control" id="elementSearch" onkeyup="elementSearch('album')" placeholder="Search for albums..." title="Type in an album Title" style="text-align: center; width: 80%;margin-left: auto;margin-right: auto; display: block;">
+    <p id="totalAlbumCount"></p>
+  </div>
   #+END_EXPORT
 
 #+CALL: templates.org:csvToButtonsLinks("./data/albums.csv","album")
 
-** Wanna Albums
+* Wanna Albums
 :PROPERTIES:
 :CUSTOM_ID: WannaAlbums
+:HTML_CONTAINER_CLASS: row
+:HTML_HEADLINE_CLASS: m-auto col-10 text-center
 :END:
 
 Legend:
@@ -90,5 +89,13 @@ Price source: Bandcamp, Amazon, and Discgos. Price reference with shipment to UK
 $(function() {
   $('#totalAlbumCount').text("Total Albums: " + $('.album').length)
 });
+
+/* Attributes and classes that I can't add by plain org */
+
+document.getElementById("content").classList.add("container-fluid");
+document.getElementById("text-navbar").classList.add("container-fluid");
+document.getElementById("outline-container-navbar").setAttribute("data-bs-theme", "dark");
+document.getElementById("text-Albums").classList.add("m-auto", "col-10");
+document.getElementById("text-WannaAlbums").classList.add("m-auto","col-10");
 </script>
 #+end_export
