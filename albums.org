@@ -64,7 +64,7 @@
     <input type="text" class="form-control" id="elementSearch" onkeyup="elementSearch('album')" placeholder="Search for albums..." title="Type in an album Title" style="text-align: center; width: 80%;margin-left: auto;margin-right: auto; display: block;">
   </div>
   <p id="totalAlbumCount"></p>
-#+END_EXPORT
+  #+END_EXPORT
 
 #+CALL: templates.org:csvToButtonsLinks("./data/albums.csv","album")
 
