@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Extract Data From Youtube with `yt-dlp` And `jq`</title>
-<!-- 2025-06-12 Thu 03:18 -->
+<!-- 2025-07-11 Fri 10:37 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -221,7 +221,7 @@ with the following command:
 
 <div class="org-src-container">
 
-<pre class="src src-bash">cat barbero.json | jq <span style="color: #ffa07a;">'del(..|nulls) | [.entries[] | {show_url: .webpage_url, show_title: .title, show_upload_date: .upload_date, show_duration: .duration, show_description: .description, show_is_live: .is_live, show_origin_automatic_caption: .automatic_captions | with_entries(if (.key|test(".*orig")) then ( {key: .key, value: .value } ) else empty end)[][] | select(.ext|contains("json")) | .url }]'</span>
+<pre class="src src-bash">cat barbero.json | jq <span style="color: #8b2252;">'del(..|nulls) | [.entries[] | {show_url: .webpage_url, show_title: .title, show_upload_date: .upload_date, show_duration: .duration, show_description: .description, show_is_live: .is_live, show_origin_automatic_caption: .automatic_captions | with_entries(if (.key|test(".*orig")) then ( {key: .key, value: .value } ) else empty end)[][] | select(.ext|contains("json")) | .url }]'</span>
 </pre>
 </div>
 
@@ -276,7 +276,7 @@ is:
 
 <div class="org-src-container">
 
-<pre class="src src-bash">cat youtubo.json | jq <span style="color: #ffa07a;">'del(..|nulls) | .entries[] | select(.title|contains("Videos")) | [.entries[] | {show_url: .webpage_url, show_title: .title, show_upload_date: .upload_date, show_duration: .duration, show_description: .description, show_is_live: .is_live, show_origin_automatic_caption: .automatic_captions | with_entries(if (.key|test(".*orig")) then ( {key: .key, value: .value } ) else empty end)[][] | select(.ext|contains("json")) | .url }]'</span>
+<pre class="src src-bash">cat youtubo.json | jq <span style="color: #8b2252;">'del(..|nulls) | .entries[] | select(.title|contains("Videos")) | [.entries[] | {show_url: .webpage_url, show_title: .title, show_upload_date: .upload_date, show_duration: .duration, show_description: .description, show_is_live: .is_live, show_origin_automatic_caption: .automatic_captions | with_entries(if (.key|test(".*orig")) then ( {key: .key, value: .value } ) else empty end)[][] | select(.ext|contains("json")) | .url }]'</span>
 </pre>
 </div>
 

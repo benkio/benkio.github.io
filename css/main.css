@@ -46,3 +46,11 @@ b, dt, h5 {
     background-color: var(--background-code-color);
     color: var(--code-color);
 }
+.btn-dark {
+  background-color: var(--background-code-color);
+  border-color: var(--header-1-color);
+}
+.btn.focus, .btn:focus, .btn:hover {
+  color: var(--enhance-text-color);
+  text-decoration: none;
+}

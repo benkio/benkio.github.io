@@ -1,3 +1,4 @@
+* Wrap input into a javascript tag
 #+name: inline-js
 #+begin_src elisp :exports none :results html :var blk=""
 (concat
@@ -6,6 +7,10 @@
  "\n"
  "</script>")
 #+end_src
+
+* Compile Org Files
+
+Look at the org files modified within 4 months and compile them using ~org-twbs-export-to-html~
 
 #+name: compileOrgFiles
 #+begin_src elisp :exports none :results none :var path="./articles/"
@@ -34,6 +39,14 @@
   ;;                  )))
   ;;  (directory-files path t "\.html$"))
 #+end_src
+
+* Articles HTML files to JS
+
+- Gets all the HTML files
+- Read it's contents and strip the unecessary values
+- Insert the contents (Abstracts) into a js array
+- Wrap it with javascript tag
+- Return the Text
 
 #+name: articlesRelativePaths
 #+begin_src elisp :exports none :results html
@@ -77,3 +90,131 @@
      "</script>")
     )
 #+end_src
+
+* Parse CSV File
+
+Given a CVS file path:
+- Read it
+- Create a string representing a html bootstrap buttons
+- Return it
+
+#+name: csvToButtonsLinks
+#+begin_src elisp :exports none :results html :var csvFilePath="" type=""
+  (require 'pcsv)
+  (require 'seq)
+
+  (defun getTypeIndex (type)
+    "Given the input type (book, wantedBook, albums...) it returns the index of the csv type column
+    Audiobook Eng/Ita, Manga
+    "
+    (cond
+     ((string-equal type "book") 4)
+     ((string-equal type "wantedBook") 3)
+     (t -1)
+     )
+    )
+
+  (defun getTypeLinkIndex (type)
+    "Given the input type (book, wantedBook, albums...) it returns the index of the csv link column"
+    (cond
+     ((string-equal type "book") 5)
+     ((string-equal type "album") 2)
+     ((string-equal type "wantedBook") 5)
+     ((string-equal type "wantedAlbum") 4)
+     (t -1)
+     )
+    )
+
+  (defun getTypeTitleIndex (type)
+    "Given the input type (book, wantedBook, albums...) it returns the index of the csv title column"
+    (cond
+     ((string-equal type "book") 2)
+     ((string-equal type "album") 1)
+     ((string-equal type "wantedBook") 1)
+     ((string-equal type "wantedAlbum") 1)
+     (t -1)
+     )
+    )
+
+  (defun getTypeStatusIndex (type)
+    "Given the input type (book, wantedBook, albums...) it returns the index of the csv status column
+     Digital Only, Available/Readable Online, Purchased
+    "
+    (cond
+     ((string-equal type "wantedBook") 4)
+     ((string-equal type "wantedAlbum") 3)
+     (t -1)
+     )
+    )
+
+  (defun getTypeSubtitleIndex (type)
+    "Given the input type (book, wantedBook, albums...) it returns the index of the csv status column
+    "
+    (cond
+     ((string-equal type "book") 3)
+     ((string-equal type "wantedBook") 2)
+     ((string-equal type "album") 0)
+     ((string-equal type "wantedAlbum") 0)
+     (t -1)
+     )
+    )
+
+  (defun contentTypeToButtonLabel (content type)
+    "Given the content and type it returns the related button label"
+    (setq
+     contentStatus (nth (getTypeIndex type) content)
+     buttonLabel (cond
+                   ((string-equal contentStatus "Audiobook Ita") "<span class=\"label label-primary\">Audiobook Ita</span>")
+                   ((string-equal contentStatus "Audiobook Eng") "<span class=\"label label-success\">Audiobook Eng</span>")
+                   ((string-equal contentStatus "Manga") "<span class=\"label label-warning\">Manga</span>")
+                   (t "")
+                   ))
+    buttonLabel
+    )
+
+  (defun contentStatusToButtonStyleClass (content type)
+    "Given the content and type it returns the related button style class"
+    (setq
+     contentStatus (nth (getTypeStatusIndex type) content)
+     buttonStyle (cond
+                   ((string-equal contentStatus "Available Online") "btn-danger")
+                   ((string-equal contentStatus "Digital Only") "btn-danger")
+                   ((string-equal contentStatus "Readable Online") "btn-success")
+                   ((string-equal contentStatus "Purchased") "btn-primary")
+                   (t "btn-dark")
+                   ))
+    buttonStyle
+    )
+
+  (defun csvListToButton (content type)
+    "Given a csv list, generate a bootstra button string"
+    (setq
+     buttonLabel (contentTypeToButtonLabel content type)
+     buttonStyleClass (contentStatusToButtonStyleClass content type)
+     buttonSubtitle (if (string-equal "" (nth (getTypeSubtitleIndex type) content)) "" (concat "<br>" (nth (getTypeSubtitleIndex type) content)))
+     buttonExtra (if (string-equal "wantedAlbum" type) (concat "<br>" (nth 2 content)) "") ;; wantedAlbum price
+     )
+    (concat
+     "<button type=\"button\" class=\"btn btn-lg "
+     type
+     " "
+     buttonStyleClass
+     "\" style=\"margin: 5px;\" onclick=\"window.open('"
+     (nth (getTypeLinkIndex type) content) ;; link
+     "','_blank');\" >"
+     (nth (getTypeTitleIndex type) content) ;; title
+     " "
+     buttonLabel
+     buttonSubtitle
+     buttonExtra
+     "</button>"
+     )
+    )
+
+  (setq csvFileContentLines (cdr (pcsv-parse-file csvFilePath))
+        csvFileButtons (mapcar (lambda (csvLine) (csvListToButton csvLine type)) csvFileContentLines)
+        )
+
+  (mapconcat 'identity csvFileButtons "\n")
+#+end_src
+

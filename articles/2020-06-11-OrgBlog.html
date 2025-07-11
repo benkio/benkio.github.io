@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Static Personal Website with Org Mode</title>
-<!-- 2025-06-12 Thu 03:18 -->
+<!-- 2025-07-11 Fri 10:37 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -237,9 +237,9 @@ page in this way:
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #00ffff;">:CUSTOM_ID:</span> <span style="color: #E5E5E5; background-color: #262626;">Articles</span>
-<span style="color: #87cefa;">:END:</span>
-<span style="color: #ff7f24;">html: &lt;div id='wrap1' data-include="article1"&gt;&lt;/div&gt;</span>
+<pre class="src src-org"><span style="color: #a020f0;">:CUSTOM_ID:</span> <span style="color: #657b83; background-color: #fdf6e3;">Articles</span>
+<span style="color: #0000ff;">:END:</span>
+<span style="color: #b22222;">html: &lt;div id='wrap1' data-include="article1"&gt;&lt;/div&gt;</span>
 </pre>
 </div>
 
@@ -256,39 +256,39 @@ populate the empty article tags:
 <pre class="src src-javascript">    );
 }
 #+END_SRC
-#+CALL: templates.org:inline-js(blk=<span style="color: #ffa07a;">"pagination"</span>)
+#+CALL: templates.org:inline-js(blk=<span style="color: #8b2252;">"pagination"</span>)
 
 #+name: blog_populateArticles
 #+begin_src javascript :exports none
-<span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Pagination 0 based</span>
-<span style="color: #00ffff;">const</span> <span style="color: #eedd82;">htmlArticlesPaginated</span> = htmlArticles.slice(page, page + perPage);
-<span style="color: #00ffff;">const</span> <span style="color: #eedd82;">htmlArticlesPathsPaginated</span> = htmlArticlesPaths.slice(page, page + perPage);
+<span style="color: #b22222;">// </span><span style="color: #b22222;">Pagination 0 based</span>
+<span style="color: #a020f0;">const</span> <span style="color: #a0522d;">htmlArticlesPaginated</span> = htmlArticles.slice(page, page + perPage);
+<span style="color: #a020f0;">const</span> <span style="color: #a0522d;">htmlArticlesPathsPaginated</span> = htmlArticlesPaths.slice(page, page + perPage);
 
-<span style="color: #00ffff;">var</span> <span style="color: #eedd82;">articleDivs</span> = $(<span style="color: #ffa07a;">"[data-include]"</span>).map(<span style="color: #00ffff;">function</span>() { <span style="color: #00ffff;">return</span> <span style="color: #7fffd4;">this</span>.id; });
+<span style="color: #a020f0;">var</span> <span style="color: #a0522d;">articleDivs</span> = $(<span style="color: #8b2252;">"[data-include]"</span>).map(<span style="color: #a020f0;">function</span>() { <span style="color: #a020f0;">return</span> <span style="color: #008b8b;">this</span>.id; });
 
-<span style="color: #00ffff;">var</span> <span style="color: #eedd82;">articlesZip</span> = [];
-<span style="color: #00ffff;">var</span> <span style="color: #eedd82;">articlesElementsZip</span> = [];
+<span style="color: #a020f0;">var</span> <span style="color: #a0522d;">articlesZip</span> = [];
+<span style="color: #a020f0;">var</span> <span style="color: #a0522d;">articlesElementsZip</span> = [];
 
-<span style="color: #00ffff;">for</span> (<span style="color: #00ffff;">var</span> <span style="color: #eedd82;">i</span> = 0; i &lt; htmlArticlesPaginated.length; i++) {
+<span style="color: #a020f0;">for</span> (<span style="color: #a020f0;">var</span> <span style="color: #a0522d;">i</span> = 0; i &lt; htmlArticlesPaginated.length; i++) {
     articlesZip.push([htmlArticlesPaginated[i], htmlArticlesPathsPaginated[i]]);
 }
 
-<span style="color: #00ffff;">var</span> <span style="color: #eedd82;">htmlArticlesTitle</span> = articlesZip.map(<span style="color: #00ffff;">function</span>(<span style="color: #eedd82;">tuple</span>) {
-  <span style="color: #00ffff;">const</span> [<span style="color: #eedd82;">articleContent</span>, <span style="color: #eedd82;">articlePath</span>] = tuple;
-  <span style="color: #00ffff;">return</span> $($.parseHTML(articleContent)).find(<span style="color: #ffa07a;">"#Article"</span>).wrap(<span style="color: #00ffff;">function</span> (){
-    <span style="color: #00ffff;">return</span> <span style="color: #ffa07a;">"&lt;a href='"</span> + articlePath + <span style="color: #ffa07a;">"'&gt;&lt;/a&gt;"</span>
+<span style="color: #a020f0;">var</span> <span style="color: #a0522d;">htmlArticlesTitle</span> = articlesZip.map(<span style="color: #a020f0;">function</span>(<span style="color: #a0522d;">tuple</span>) {
+  <span style="color: #a020f0;">const</span> [<span style="color: #a0522d;">articleContent</span>, <span style="color: #a0522d;">articlePath</span>] = tuple;
+  <span style="color: #a020f0;">return</span> $($.parseHTML(articleContent)).find(<span style="color: #8b2252;">"#Article"</span>).wrap(<span style="color: #a020f0;">function</span> (){
+    <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"&lt;a href='"</span> + articlePath + <span style="color: #8b2252;">"'&gt;&lt;/a&gt;"</span>
   }).parent();
 });
 
-<span style="color: #00ffff;">var</span> <span style="color: #eedd82;">htmlArticlesAbstract</span> = htmlArticlesPaginated.map(<span style="color: #00ffff;">function</span>(<span style="color: #eedd82;">articleContent</span>) {
-  <span style="color: #00ffff;">return</span> $($.parseHTML(articleContent)).find(<span style="color: #ffa07a;">"#outline-container-ArticleAbstract"</span>);
+<span style="color: #a020f0;">var</span> <span style="color: #a0522d;">htmlArticlesAbstract</span> = htmlArticlesPaginated.map(<span style="color: #a020f0;">function</span>(<span style="color: #a0522d;">articleContent</span>) {
+  <span style="color: #a020f0;">return</span> $($.parseHTML(articleContent)).find(<span style="color: #8b2252;">"#outline-container-ArticleAbstract"</span>);
 });
 
-<span style="color: #00ffff;">for</span> (<span style="color: #00ffff;">var</span> <span style="color: #eedd82;">i</span> = 0; i &lt; htmlArticlesPaginated.length; i++) {
+<span style="color: #a020f0;">for</span> (<span style="color: #a020f0;">var</span> <span style="color: #a0522d;">i</span> = 0; i &lt; htmlArticlesPaginated.length; i++) {
     articlesElementsZip.push([articleDivs[i], htmlArticlesTitle[i], htmlArticlesAbstract[i]]);
 }
 
-articlesElementsZip.forEach(<span style="color: #00ffff;">function</span>(<span style="color: #eedd82;">tuple</span>) {
+articlesElementsZip.forEach(<span style="color: #a020f0;">function</span>(<span style="color: #a0522d;">tuple</span>) {
 </pre>
 </div>
 
@@ -335,18 +335,18 @@ Here you can see the complete js code snippet for the pagination:
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #ff7f24;">html: &lt;ul id="pagination" class="pagination pagination-lg"&gt;&lt;/ul&gt;</span>
+<pre class="src src-org"><span style="color: #b22222;">html: &lt;ul id="pagination" class="pagination pagination-lg"&gt;&lt;/ul&gt;</span>
 
-<span style="color: #ff7f24;">CALL: templates.org:articlesRelativePaths()</span>
+<span style="color: #b22222;">CALL: templates.org:articlesRelativePaths()</span>
 
-<span style="color: #ff7f24;">NAME: pagination</span>
+<span style="color: #b22222;">NAME: pagination</span>
 <span style="font-size: 80%;">SRC</span> javascript :exports none
 const page = ((new URLSearchParams(window.location.search).get('page') || 1) - 1) * 5;
 const perPage = 5;
 for (var i = 0; i &lt; (htmlArticles.length/perPage); i++) {
     var active = "";
-    if ((page/perPage) <span style="color: #b3b3b3;">== i) {</span>
-<span style="color: #b3b3b3;">        active = "class=</span>'active'";
+    if ((page/perPage) <span style="color: #7f7f7f;">== i) {</span>
+<span style="color: #7f7f7f;">        active = "class=</span>'active'";
     }
 </pre>
 </div>
