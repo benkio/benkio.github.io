@@ -98,9 +98,10 @@ Given a CVS file path:
 - Create a string representing a html bootstrap buttons
 - Return it
 
-#+name: booksToButtons
+#+name: csvToButtonsLinks
 #+begin_src elisp :exports none :results html :var csvFilePath="" type=""
   (require 'pcsv)
+  (require 'seq)
 
   (defun getTypeIndex (type)
     "Given the input type (book, wantedBook, albums...) it returns the index of the csv type column
