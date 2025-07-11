@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Gilded Rose Kata</title>
-<!-- 2025-06-12 Thu 03:18 -->
+<!-- 2025-07-11 Fri 10:37 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -336,23 +336,23 @@ if-else-statement:
 
 <div class="org-src-container">
 
-<pre class="src src-scala"><span style="color: #ff7f24;">// Before</span>
-<span style="color: #00ffff;">if</span> (<span style="color: #eedd82;">condition1</span>) {
-  <span style="color: #00ffff;">if</span> (<span style="color: #eedd82;">condition2</span>) {
-   <span style="color: #ff7f24;">// Stuff</span>
-  } <span style="color: #00ffff;">else</span> <span style="color: #ff7f24;">// Stuff</span>
+<pre class="src src-scala"><span style="color: #b22222;">// Before</span>
+<span style="color: #a020f0;">if</span> (<span style="color: #a0522d;">condition1</span>) {
+  <span style="color: #a020f0;">if</span> (<span style="color: #a0522d;">condition2</span>) {
+   <span style="color: #b22222;">// Stuff</span>
+  } <span style="color: #a020f0;">else</span> <span style="color: #b22222;">// Stuff</span>
 }
-<span style="color: #00ffff;">if</span> (<span style="color: #eedd82;">condition3</span>) {
-<span style="color: #ff7f24;">// Stuff</span>
-} <span style="color: #00ffff;">else</span> <span style="color: #ff7f24;">// Stuff</span>
+<span style="color: #a020f0;">if</span> (<span style="color: #a0522d;">condition3</span>) {
+<span style="color: #b22222;">// Stuff</span>
+} <span style="color: #a020f0;">else</span> <span style="color: #b22222;">// Stuff</span>
 
-<span style="color: #ff7f24;">// After</span>
-<span style="color: #eedd82;">def</span> <span style="color: #eedd82;">f1</span>(<span style="color: #eedd82;">params</span>): <span style="color: #98fb98;">StuffType</span> = <span style="color: #98fb98;">if</span> (<span style="color: #98fb98;">condition1</span>) { <span style="color: #87cefa;">f2</span>(<span style="color: #eedd82;">params</span>) } <span style="color: #eedd82;">else</span> <span style="color: #ff7f24;">// Previous state (identity)</span>
-<span style="color: #98fb98;">def</span> <span style="color: #eedd82;">f2</span>(<span style="color: #98fb98;">params</span>): <span style="color: #eedd82;">StuffType</span> <span style="color: #98fb98;">=</span> <span style="color: #00ffff;">if</span> (<span style="color: #eedd82;">condition2</span>) {<span style="color: #ff7f24;">/* Stuff */</span> } <span style="color: #00ffff;">else</span> <span style="color: #ff7f24;">// Stuff</span>
-<span style="color: #eedd82;">def</span> <span style="color: #eedd82;">f3</span>(<span style="color: #eedd82;">params</span>): <span style="color: #98fb98;">StuffType</span> = <span style="color: #98fb98;">if</span> (<span style="color: #98fb98;">condition3</span>) {<span style="color: #ff7f24;">/* Stuff */</span> } <span style="color: #eedd82;">else</span> <span style="color: #ff7f24;">// Stuff</span>
-<span style="color: #98fb98;">val</span> <span style="color: #eedd82;">r1</span> <span style="color: #98fb98;">=</span> <span style="color: #eedd82;">f1</span>(<span style="color: #98fb98;">args</span>)
-<span style="color: #00ffff;">val</span> <span style="color: #eedd82;">r2</span> = <span style="color: #87cefa;">f3</span>(<span style="color: #eedd82;">args</span>) <span style="color: #ff7f24;">// This might probably require r1 as input</span>
-<span style="color: #eedd82;">r2</span>
+<span style="color: #b22222;">// After</span>
+<span style="color: #a0522d;">def</span> <span style="color: #a0522d;">f1</span>(<span style="color: #a0522d;">params</span>): <span style="color: #228b22;">StuffType</span> = <span style="color: #228b22;">if</span> (<span style="color: #228b22;">condition1</span>) { <span style="color: #0000ff;">f2</span>(<span style="color: #a0522d;">params</span>) } <span style="color: #a0522d;">else</span> <span style="color: #b22222;">// Previous state (identity)</span>
+<span style="color: #228b22;">def</span> <span style="color: #a0522d;">f2</span>(<span style="color: #228b22;">params</span>): <span style="color: #a0522d;">StuffType</span> <span style="color: #228b22;">=</span> <span style="color: #a020f0;">if</span> (<span style="color: #a0522d;">condition2</span>) {<span style="color: #b22222;">/* Stuff */</span> } <span style="color: #a020f0;">else</span> <span style="color: #b22222;">// Stuff</span>
+<span style="color: #a0522d;">def</span> <span style="color: #a0522d;">f3</span>(<span style="color: #a0522d;">params</span>): <span style="color: #228b22;">StuffType</span> = <span style="color: #228b22;">if</span> (<span style="color: #228b22;">condition3</span>) {<span style="color: #b22222;">/* Stuff */</span> } <span style="color: #a0522d;">else</span> <span style="color: #b22222;">// Stuff</span>
+<span style="color: #228b22;">val</span> <span style="color: #a0522d;">r1</span> <span style="color: #228b22;">=</span> <span style="color: #a0522d;">f1</span>(<span style="color: #228b22;">args</span>)
+<span style="color: #a020f0;">val</span> <span style="color: #a0522d;">r2</span> = <span style="color: #0000ff;">f3</span>(<span style="color: #a0522d;">args</span>) <span style="color: #b22222;">// This might probably require r1 as input</span>
+<span style="color: #a0522d;">r2</span>
 </pre>
 </div>
 
@@ -729,11 +729,11 @@ let me open a small parenthesis in here
 
 <div class="org-src-container">
 
-<pre class="src src-haskell">    src<span style="color: #eedd82;">/</span>GildedRose.hs<span style="color: #98fb98;">:</span>53<span style="color: #98fb98;">:</span>29<span style="color: #98fb98;">:</span> <span style="color: #98fb98;">Warning:</span> <span style="color: #98fb98;">Redundant</span> <span style="color: #00ffff;">if</span>
-<span style="color: #98fb98;">Found</span><span style="color: #87cefa;">:</span>
-  <span style="color: #00ffff;">if</span> sellIn <span style="color: #eedd82;">&lt;</span> 6 <span style="color: #00ffff;">then</span> <span style="color: #00ffff;">if</span> quality <span style="color: #eedd82;">&lt;</span> 48 <span style="color: #00ffff;">then</span> 1 <span style="color: #00ffff;">else</span> 0 <span style="color: #00ffff;">else</span> 0
-<span style="color: #98fb98;">Perhaps</span><span style="color: #87cefa;">:</span>
-  <span style="color: #00ffff;">if</span> (sellIn <span style="color: #eedd82;">&lt;</span> 6) <span style="color: #eedd82;">&amp;&amp;</span> (quality <span style="color: #eedd82;">&lt;</span> 48) <span style="color: #00ffff;">then</span> 1 <span style="color: #00ffff;">else</span> 0
+<pre class="src src-haskell">    src<span style="color: #a0522d;">/</span>GildedRose.hs<span style="color: #228b22;">:</span>53<span style="color: #228b22;">:</span>29<span style="color: #228b22;">:</span> <span style="color: #228b22;">Warning:</span> <span style="color: #228b22;">Redundant</span> <span style="color: #a020f0;">if</span>
+<span style="color: #228b22;">Found</span><span style="color: #0000ff;">:</span>
+  <span style="color: #a020f0;">if</span> sellIn <span style="color: #a0522d;">&lt;</span> 6 <span style="color: #a020f0;">then</span> <span style="color: #a020f0;">if</span> quality <span style="color: #a0522d;">&lt;</span> 48 <span style="color: #a020f0;">then</span> 1 <span style="color: #a020f0;">else</span> 0 <span style="color: #a020f0;">else</span> 0
+<span style="color: #228b22;">Perhaps</span><span style="color: #0000ff;">:</span>
+  <span style="color: #a020f0;">if</span> (sellIn <span style="color: #a0522d;">&lt;</span> 6) <span style="color: #a0522d;">&amp;&amp;</span> (quality <span style="color: #a0522d;">&lt;</span> 48) <span style="color: #a020f0;">then</span> 1 <span style="color: #a020f0;">else</span> 0
 </pre>
 </div>
 
