@@ -19,7 +19,7 @@
         noteTrainerActive (if (eq page 5) "active" "")
         )
 
-  (format "<a target=\"_self\" class=\"navbar-brand\" href=\"./index.html\">
+  (format "<a target=\"_self\" class=\"navbar-brand\" href=\"/index.html\">
     <img class=\"img-circle rounded-circle\" src=\"https://www.gravatar.com/avatar/aa7f68a32b011ac94698a7a1cb16ffc8?s=200\" width=\"50px\"/>
   </a>
   <button class=\"navbar-toggler\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">
