@@ -1,7 +1,6 @@
 #+OPTIONS: num:nil toc:nil
 #+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:nil
 #+TITLE: Albums
-
 #+DESCRIPTION: Albums
 #+KEYWORDS: Albums
 #+HTML_HEAD_EXTRA: <base target="_blank">
@@ -25,7 +24,6 @@
 :END:
 
 #+CALL: templates.org:navbar(4)
-
 
 * Albums
 :PROPERTIES:

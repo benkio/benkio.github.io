@@ -218,20 +218,20 @@ Given a CVS file path:
     (setq
      buttonLabel (contentTypeToButtonLabel content type)
      buttonStyleClass (contentStatusToButtonStyleClass content type)
-     buttonSubtitle (if (string-equal "" (nth (getTypeSubtitleIndex type) content)) "" (concat "<br>" (nth (getTypeSubtitleIndex type) content)))
+     buttonSubtitle (if (string-equal "" (nth (getTypeSubtitleIndex type) content)) "" (concat "<br><span><small>" (nth (getTypeSubtitleIndex type) content) "</span></small>"))
      buttonExtra (if (string-equal "wantedAlbum" type) (concat "<br>" (nth 2 content)) "") ;; wantedAlbum price
      )
     (concat
-     "<button type=\"button\" class=\"btn "
+     "<button type=\"button\" class=\"m-2 btn "
      type
      " "
      buttonStyleClass
-     "\" style=\"margin: 5px;\" onclick=\"window.open('"
+     "\" style=\"max-width: 20%;\" onclick=\"window.open('"
      (nth (getTypeLinkIndex type) content) ;; link
      "','_blank');\" >"
      (nth (getTypeTitleIndex type) content) ;; title
      " "
-     buttonLabel
+     "<span class=\"badge text-bg-light\">"buttonLabel "</span>"
      buttonSubtitle
      buttonExtra
      "</button>"
