@@ -4,6 +4,7 @@
 
 /* hinding headers */
 #Articles { display: none; }
+#text-Articles a { text-decoration: none; }
 #Books { display: none; }
 #Albums { display: none; }
 #elementSearch {
