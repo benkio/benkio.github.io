@@ -70,7 +70,7 @@ $(function() {
 
 /* Attributes and classes that I can't add by plain org */
 
-document.getElementById("content").classList.add("container-fluid");
+document.getElementById("content").classList.add("container-fluid","p-0");
 document.getElementById("text-navbar").classList.add("container-fluid");
 document.getElementById("outline-container-navbar").setAttribute("data-bs-theme", "dark");
 
