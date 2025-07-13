@@ -1,4 +1,30 @@
 group,groupIndex,title,subtitle,type,link
+Century Trilogy,1,Fall of Giants,,Audiobook Ita,https://t.me/c/1383142505/1331
+Century Trilogy,2,Winter of the World,,Audiobook Ita,https://t.me/c/1383142505/1335
+Century Trilogy,3,Edge of Eternity,,Audiobook Ita,https://t.me/c/1383142505/1347
+Foundation,,The End of Eternity,,Audiobook Ita,https://www.youtube.com/watch?v=0VHNQjOvHnA
+Foundation,1,Foundation,,Audiobook Ita,https://youtu.be/77bkeNuYLFs
+Foundation,2,Foundation & Empire,,Audiobook Ita,https://youtu.be/0bddR1EIenE
+Foundation,3,Second Foundation,,Audiobook Ita,https://www.youtube.com/watch?v=KofSMmhWr74
+Foundation,4,Foundation's Edge,Pt 1,Audiobook Ita,https://youtu.be/SA8zWPY5Yqc
+Foundation,5,Foundation's Edge,Pt 2,Audiobook Ita,https://youtu.be/o1V8x9FeH_M
+Foundation,6,Foundation & Earth,Pt 1,Audiobook Ita,https://youtu.be/lDipzjHt0Ds
+Foundation,7,Foundation & Earth,Pt 2,Audiobook Ita,https://youtu.be/oQKV2-t0CLM
+Kingsbridge series,1,The Pillars of the Earth,,,https://en.wikipedia.org/wiki/The_Pillars_of_the_Earth
+Kingsbridge series,2,World Without End,,,https://en.wikipedia.org/wiki/World_Without_End_
+Kingsbridge series,3,A Column of Fire,,,https://en.wikipedia.org/wiki/A_Column_of_Fire
+Kingsbridge series,4,The Evening and the Morning,,,https://en.wikipedia.org/wiki/The_Evening_and_the_Morning
+Robot series,1,The Complete Robot,Pt 1,Audiobook Ita,https://youtu.be/CT0PS9hAeso
+Robot series,2,The Complete Robot,Pt 2,Audiobook Ita,https://youtu.be/WHMMqUBcXs0
+Robot series,3,The Caves of Steel,,Audiobook Ita,https://youtu.be/fgcY19Rkt5s
+Robot series,4,The Naked Sun,,Audiobook Ita,https://www.youtube.com/watch?v=nIB-kYEvmG0
+Robot series,5,The Robots of Dawn,Pt 1,Audiobook Ita,https://youtu.be/y6hcgIw8zEM
+Robot series,6,The Robots of Dawn,Pt 2,Audiobook Ita,https://youtu.be/-kpk1zqH0-k
+The Hitchhiker's Guide to the Galaxy,1,The Hitchhiker's Guide to the Galaxy,,Audiobook Eng,https://www.youtube.com/watch?v=0ssU79thtoA
+The Hitchhiker's Guide to the Galaxy,2,The Restaurant at the End of the Universe,,Audiobook Eng,https://youtube.com/playlist?list=PLzkVXRJZIjCDO3d7kgZnJHbzBD0lCCx9Q
+The Hitchhiker's Guide to the Galaxy,3,"Life, the Universe and Everything",,Audiobook Eng,https://youtube.com/playlist?list=PLSoD2CcPrumF2kCC4jhiUcnWiYkypgv8Y
+The Hitchhiker's Guide to the Galaxy,4,So Long and Thanks for All the Fish,,Audiobook Eng,https://youtube.com/playlist?list=PLSoD2CcPrumEwDGKG3MzBwS95BZjqM9bo
+The Hitchhiker's Guide to the Galaxy,5,Mostly Harmless,,Audiobook Eng,https://youtube.com/playlist?list=PLSoD2CcPrumFXN4hnD1jPLZXYsAWK2O9V
 ,,"Il vulcano, Schana Wana e altri mondi musicali",Domenico Bini intervistato da Stefano Orlando Puracchio,,https://www.amazon.it/vulcano-musicali-Domenico-intervistato-Puracchio/dp/8899813302
 ,,"Io, trafficante di virus",Una storia di scienza e di amara giustizia,Audiobook Ita,https://www.amazon.co.uk/Io-trafficante-virus-scienza-giustizia/dp/B09XBRXYG6
 ,,1984,,Audiobook Ita,https://www.youtube.com/watch?v=LeZC-nKwKvo
@@ -50,29 +76,3 @@ group,groupIndex,title,subtitle,type,link
 ,,The Storyteller,Tales of Life and Music,,https://www.amazon.co.uk/Storyteller-Tales-Life-Music/dp/1398503703
 ,,Venezia Metal,,,https://www.amazon.co.uk/Venezia-Metal-Italian-Marco-Crescizz-ebook/dp/B09MS9PCYK
 ,,What I Wish I Knew When Learning Haskell,,,https://smunix.github.io/dev.stephendiehl.com/hask/tutorial.pdf
-Century Trilogy,1,Fall of Giants,,Audiobook Ita,https://t.me/c/1383142505/1331
-Century Trilogy,2,Winter of the World,,Audiobook Ita,https://t.me/c/1383142505/1335
-Century Trilogy,3,Edge of Eternity,,Audiobook Ita,https://t.me/c/1383142505/1347
-Foundation,,The End of Eternity,,Audiobook Ita,https://www.youtube.com/watch?v=0VHNQjOvHnA
-Foundation,1,Foundation,,Audiobook Ita,https://youtu.be/77bkeNuYLFs
-Foundation,2,Foundation & Empire,,Audiobook Ita,https://youtu.be/0bddR1EIenE
-Foundation,3,Second Foundation,,Audiobook Ita,https://www.youtube.com/watch?v=KofSMmhWr74
-Foundation,4,Foundation's Edge,Pt 1,Audiobook Ita,https://youtu.be/SA8zWPY5Yqc
-Foundation,5,Foundation's Edge,Pt 2,Audiobook Ita,https://youtu.be/o1V8x9FeH_M
-Foundation,6,Foundation & Earth,Pt 1,Audiobook Ita,https://youtu.be/lDipzjHt0Ds
-Foundation,7,Foundation & Earth,Pt 2,Audiobook Ita,https://youtu.be/oQKV2-t0CLM
-Kingsbridge series,1,The Pillars of the Earth,,,https://en.wikipedia.org/wiki/The_Pillars_of_the_Earth
-Kingsbridge series,2,World Without End,,,https://en.wikipedia.org/wiki/World_Without_End_
-Kingsbridge series,3,A Column of Fire,,,https://en.wikipedia.org/wiki/A_Column_of_Fire
-Kingsbridge series,4,The Evening and the Morning,,,https://en.wikipedia.org/wiki/The_Evening_and_the_Morning
-Robot series,1,The Complete Robot,Pt 1,Audiobook Ita,https://youtu.be/CT0PS9hAeso
-Robot series,2,The Complete Robot,Pt 2,Audiobook Ita,https://youtu.be/WHMMqUBcXs0
-Robot series,3,The Caves of Steel,,Audiobook Ita,https://youtu.be/fgcY19Rkt5s
-Robot series,4,The Naked Sun,,Audiobook Ita,https://www.youtube.com/watch?v=nIB-kYEvmG0
-Robot series,5,The Robots of Dawn,Pt 1,Audiobook Ita,https://youtu.be/y6hcgIw8zEM
-Robot series,6,The Robots of Dawn,Pt 2,Audiobook Ita,https://youtu.be/-kpk1zqH0-k
-The Hitchhiker's Guide to the Galaxy,1,The Hitchhiker's Guide to the Galaxy,,Audiobook Eng,https://www.youtube.com/watch?v=0ssU79thtoA
-The Hitchhiker's Guide to the Galaxy,2,The Restaurant at the End of the Universe,,Audiobook Eng,https://youtube.com/playlist?list=PLzkVXRJZIjCDO3d7kgZnJHbzBD0lCCx9Q
-The Hitchhiker's Guide to the Galaxy,3,"Life, the Universe and Everything",,Audiobook Eng,https://youtube.com/playlist?list=PLSoD2CcPrumF2kCC4jhiUcnWiYkypgv8Y
-The Hitchhiker's Guide to the Galaxy,4,So Long and Thanks for All the Fish,,Audiobook Eng,https://youtube.com/playlist?list=PLSoD2CcPrumEwDGKG3MzBwS95BZjqM9bo
-The Hitchhiker's Guide to the Galaxy,5,Mostly Harmless,,Audiobook Eng,https://youtube.com/playlist?list=PLSoD2CcPrumFXN4hnD1jPLZXYsAWK2O9V
