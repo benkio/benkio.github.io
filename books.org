@@ -35,8 +35,8 @@
   [[https://www.goodreads.com/user/show/148546738-enrico-benini][Good Reads Account]]
 
   #+BEGIN_EXPORT HTML
-  <div class="col-10 m-auto">
-    <input type="text" class="form-control" id="elementSearch" onkeyup="elementSearch('books')" placeholder="Search for Book..." title="Type in a Book Title" style="height: 4em;">
+  <div class="col-md-10 m-auto">
+    <input type="text" class="form-control my-2" id="elementSearch" onkeyup="elementSearch('books')" placeholder="Search for Book..." title="Type in a Book Title" style="height: 4em;">
   </div>
   <p id="totalBookCount"></p>
   <hr>
@@ -47,12 +47,12 @@
 * Wanna Read
 :PROPERTIES:
 :CUSTOM_ID: WannaBooks
-:HTML_CONTAINER_CLASS: row
-:HTML_HEADLINE_CLASS: mx-auto my-3 col-10 text-center
+:HTML_CONTAINER_CLASS: row row-cols-auto
+:HTML_HEADLINE_CLASS: mx-auto my-3 col-md-10 text-center
 :END:
 
   #+BEGIN_EXPORT HTML
-  <div class="row">
+  <div class="row row-cols-auto">
     <div class="col text-center"> <button type="button" class="btn btn-lg btn-danger wantedBook"  >Available Online <br> Don't Buy</button></div>
     <div class="col text-center"> <button type="button" class="btn btn-lg btn-success wantedBook" >Readable Online <br> Don't Buy</button></div>
     <div class="col text-center"> <button type="button" class="btn btn-lg btn-primary wantedBook" >Purchased <br> Don't Buy</button>      </div>
@@ -74,7 +74,7 @@ document.getElementById("content").classList.add("container-fluid","p-0");
 document.getElementById("text-navbar").classList.add("container-fluid");
 document.getElementById("outline-container-navbar").setAttribute("data-bs-theme", "dark");
 
-document.getElementById("text-Books").classList.add("m-auto", "col-10");
-document.getElementById("text-WannaBooks").classList.add("m-auto","col-10");
+document.getElementById("text-Books").classList.add("m-auto", "col-md-10");
+document.getElementById("text-WannaBooks").classList.add("m-auto","col-md-10");
 </script>
 #+end_export

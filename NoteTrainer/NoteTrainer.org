@@ -28,7 +28,7 @@
 * Note Trainer
 :PROPERTIES:
 :CUSTOM_ID: NoteTrainer
-:HTML_HEADLINE_CLASS: m-auto col-10 text-centery
+:HTML_HEADLINE_CLASS: m-auto col-md-10 text-centery
 :END:
 
 #+BEGIN_EXPORT HTML

@@ -99,7 +99,7 @@ for (var i = 0; i < (htmlArticles.length/perPage); i++) {
   document.getElementById("content").classList.add("container-fluid","p-0");
   document.getElementById("text-navbar").classList.add("container-fluid");
   document.getElementById("outline-container-navbar").setAttribute("data-bs-theme", "dark");
-  document.getElementById("text-Articles").classList.add("m-auto", "col-10");
+  document.getElementById("text-Articles").classList.add("m-auto", "col-md-10");
 #+end_src
 #+call: templates.org:inline-js(blk="blog_populateArticles")
 #+call: templates.org:compileOrgFiles()

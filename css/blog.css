@@ -7,10 +7,6 @@
 #text-Articles a { text-decoration: none; }
 #Books { display: none; }
 #Albums { display: none; }
-#elementSearch {
-    color: var(--background-color);
-    margin: 1em;
-}
 .list-group-item{
     background-color: var(--text-color);
 }

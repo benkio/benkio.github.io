@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>NixOs Checkout</title>
-<!-- 2025-07-12 Sat 19:25 -->
+<!-- 2025-07-13 Sun 13:50 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -182,25 +182,25 @@ difficult to do, you need to:
 
 <div class="org-src-container">
 
-<pre class="src src-shell"><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">for Legacy boot, see manual for uefi</span>
+<pre class="src src-shell"><span style="color: #b22222;"># </span><span style="color: #b22222;">for Legacy boot, see manual for uefi</span>
 sudo parted /dev/sda -- mklabel msdos
- <span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Create primary partition, but 8gb for the swap</span>
+ <span style="color: #b22222;"># </span><span style="color: #b22222;">Create primary partition, but 8gb for the swap</span>
 sudo parted /dev/sda -- mkpart primary 1MiB -8GiB
-<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Create the Swap partition</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Create the Swap partition</span>
 sudo parted /dev/sda -- mkpart primary linux-swap -8GiB 100%
-<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Format primary partition</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Format primary partition</span>
 sudo mkfs.ext4 -L nixos /dev/sda1
-<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Format Swap</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Format Swap</span>
 sudo mkswap -L swap /dev/sda2
-<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Mount the primary partition into mnt</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Mount the primary partition into mnt</span>
 sudo mount /dev/disk/by-label/nixos /mnt
-<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Enable the swap</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Enable the swap</span>
 sudo swapon /dev/sda2
-<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Generate the configuration</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Generate the configuration</span>
 sudo nixos-generate-config --root /mnt
-<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Edit configurations</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Edit configurations</span>
 sudo nano /mnt/etc/nixos/configuration.nix
-<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Install the system</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Install the system</span>
 sudo nixos-install
 </pre>
 </div>
@@ -344,7 +344,7 @@ have any software available from the ones I specified into my
 
 <div class="org-src-container">
 
-<pre class="src src-shell">error: attribute <span style="color: #ffa07a;">'anything'</span> missing, at /mix/var/nix/profiles/pre-user/root/channels/home-manager/modules/programs/matplotlib.nix
+<pre class="src src-shell">error: attribute <span style="color: #8b2252;">'anything'</span> missing, at /mix/var/nix/profiles/pre-user/root/channels/home-manager/modules/programs/matplotlib.nix
 </pre>
 </div>
 
@@ -542,8 +542,8 @@ $(function() {
   document.getElementById("text-navbar").classList.add("container-fluid");
   document.getElementById("outline-container-navbar").setAttribute("data-bs-theme", "dark");
   document.getElementById("text-Article").classList.add("text-center");
-  $('.outline-3').addClass("m-auto").addClass("col-10");
-  document.getElementById("text-ShareButtons").classList.add("m-auto", "col-10");
+  $('.outline-3').addClass("m-auto").addClass("col-md-10");
+  document.getElementById("text-ShareButtons").classList.add("m-auto", "col-md-10");
 </script>
 <div id="disqus_thread"></div>
 <script>

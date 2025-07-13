@@ -122,8 +122,8 @@ Given a CVS file path:
 
   (defun getTypeIndex (type)
     "Given the input type (book, wantedBook, albums...) it returns the index of the csv type column
-    Audiobook Eng/Ita, Manga
-    "
+        Audiobook Eng/Ita, Manga
+        "
     (cond
      ((string-equal type "book") 4)
      ((string-equal type "wantedBook") 3)
@@ -155,8 +155,8 @@ Given a CVS file path:
 
   (defun getTypeStatusIndex (type)
     "Given the input type (book, wantedBook, albums...) it returns the index of the csv status column
-     Digital Only, Available/Readable Online, Purchased
-    "
+         Digital Only, Available/Readable Online, Purchased
+        "
     (cond
      ((string-equal type "wantedBook") 4)
      ((string-equal type "wantedAlbum") 3)
@@ -166,7 +166,7 @@ Given a CVS file path:
 
   (defun getTypeSubtitleIndex (type)
     "Given the input type (book, wantedBook, albums...) it returns the index of the csv status column
-    "
+        "
     (cond
      ((string-equal type "book") 3)
      ((string-equal type "wantedBook") 2)
@@ -181,11 +181,11 @@ Given a CVS file path:
     (setq
      contentStatus (nth (getTypeIndex type) content)
      buttonLabel (cond
-                   ((string-equal contentStatus "Audiobook Ita") "<span class=\"label label-primary\">Audiobook Ita</span>")
-                   ((string-equal contentStatus "Audiobook Eng") "<span class=\"label label-success\">Audiobook Eng</span>")
-                   ((string-equal contentStatus "Manga") "<span class=\"label label-warning\">Manga</span>")
-                   (t "")
-                   ))
+                  ((string-equal contentStatus "Audiobook Ita") "<span class=\"label label-primary\">Audiobook Ita</span>")
+                  ((string-equal contentStatus "Audiobook Eng") "<span class=\"label label-success\">Audiobook Eng</span>")
+                  ((string-equal contentStatus "Manga") "<span class=\"label label-warning\">Manga</span>")
+                  (t "")
+                  ))
     buttonLabel
     )
 
@@ -194,12 +194,12 @@ Given a CVS file path:
     (setq
      contentStatus (nth (getTypeStatusIndex type) content)
      buttonStyle (cond
-                   ((string-equal contentStatus "Available Online") "btn-danger")
-                   ((string-equal contentStatus "Digital Only") "btn-danger")
-                   ((string-equal contentStatus "Readable Online") "btn-success")
-                   ((string-equal contentStatus "Purchased") "btn-primary")
-                   (t "btn-dark")
-                   ))
+                  ((string-equal contentStatus "Available Online") "btn-danger")
+                  ((string-equal contentStatus "Digital Only") "btn-danger")
+                  ((string-equal contentStatus "Readable Online") "btn-success")
+                  ((string-equal contentStatus "Purchased") "btn-primary")
+                  (t "btn-dark")
+                  ))
     buttonStyle
     )
 
@@ -210,28 +210,34 @@ Given a CVS file path:
      buttonStyleClass (contentStatusToButtonStyleClass content type)
      buttonSubtitle (if (string-equal "" (nth (getTypeSubtitleIndex type) content)) "" (concat "<br><span><small>" (nth (getTypeSubtitleIndex type) content) "</span></small>"))
      buttonExtra (if (string-equal "wantedAlbum" type) (concat "<br>" (nth 2 content)) "") ;; wantedAlbum price
+     buttonsHtml (concat
+                  "<div class=\"col my-1\">"
+                  "<button type=\"button\" class=\"w-100 btn "
+                  type
+                  " "
+                  buttonStyleClass
+                  "\" onclick=\"window.open('"
+                  (nth (getTypeLinkIndex type) content) ;; link
+                  "','_blank');\" >"
+                  (nth (getTypeTitleIndex type) content) ;; title
+                  " "
+                  "<span class=\"badge text-bg-light\">"buttonLabel "</span>"
+                  buttonSubtitle
+                  buttonExtra
+                  "</button></div>"
+                  )
      )
-    (concat
-     "<button type=\"button\" class=\"m-2 btn "
-     type
-     " "
-     buttonStyleClass
-     "\" style=\"max-width: 20%;\" onclick=\"window.open('"
-     (nth (getTypeLinkIndex type) content) ;; link
-     "','_blank');\" >"
-     (nth (getTypeTitleIndex type) content) ;; title
-     " "
-     "<span class=\"badge text-bg-light\">"buttonLabel "</span>"
-     buttonSubtitle
-     buttonExtra
-     "</button>"
-     )
+    buttonsHtml
     )
 
   (setq csvFileContentLines (cdr (pcsv-parse-file csvFilePath))
         csvFileButtons (mapcar (lambda (csvLine) (csvListToButton csvLine type)) csvFileContentLines)
         )
 
-  (mapconcat 'identity csvFileButtons "\n")
+  (concat
+   "<div class=\"container text-center\"> <div class=\"row row-cols-1 row-cols-sm-2 row-cols-xl-4 align-items-center\">"
+   (mapconcat 'identity csvFileButtons "\n")
+   "</div></div>"
+   )
 #+end_src
 
