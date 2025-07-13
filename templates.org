@@ -243,7 +243,7 @@ Given a CVS file path:
   (defun csvToHtml (type group_Html csvLine)
     "Fold function to return html bootstrap list:
       - Current group Empty     / Previous Group Empty -> button
-      - Current group Empty / Previous Group non-Empty -> close dropdown
+      - Current group Empty     / Previous Group non-Empty -> close dropdown
       - Current group non-Empty / Previous Group Empty -> dropdown button with 1 link
       - Current group non-Empty == Previous Group non-Empty -> 1 link
       - Current group non-Empty != Previous Group non-Empty -> close dropdown + dropdown button with 1 link"
@@ -256,7 +256,9 @@ Given a CVS file path:
      elemTitle     (getTypeTitle type csvLine)
      elemSubtitle  (if (string-equal "" (getTypeSubtitle type csvLine)) "" (concat "<br><span><small>" (getTypeSubtitle type csvLine) "</span></small>"))
      elemExtra     (if (string-equal "wantedAlbum" type) (concat "<br>" (nth 2 csvLine)) "") ;; wantedAlbum price
-     dropdownLink (concat  "<li><a class=\"dropdown-item\" href=\""
+     dropdownLink (concat  "<li><a class=\"dropdown-item "
+                           type
+                           "\" href=\""
                            elemLink
                            "\">"
                            elemTitle
