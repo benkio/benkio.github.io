@@ -212,7 +212,7 @@ Given a CVS file path:
      buttonExtra (if (string-equal "wantedAlbum" type) (concat "<br>" (nth 2 content)) "") ;; wantedAlbum price
      buttonsHtml (concat
                   "<div class=\"col my-1\">"
-                  "<button type=\"button\" class=\"w-100 btn "
+                  "<button type=\"button\" class=\"w-100 btn text-wrap "
                   type
                   " "
                   buttonStyleClass
