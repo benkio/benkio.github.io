@@ -1,17 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<!doctype html>
+<html lang="en">
 <head>
-<!-- 2025-07-13 Sun 13:44 -->
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Albums</title>
-<meta name="author" content="Enrico Benini" />
-<meta name="description" content="Albums" />
-<meta name="keywords" content="Albums" />
-<meta name="generator" content="Org Mode" />
-<base target="_blank">
+<!-- 2025-07-13 Sun 13:57 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="Org-mode">
+<meta name="author" content="Enrico Benini">
+
+<link  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<style>body { margin-bottom: 0px; }</style><script>
+$(function() {
+    'use strict';
+
+    $('.bs-docs-sidebar li').first().addClass('active');
+
+    $(document.body).scrollspy({target: '.bs-docs-sidebar'});
+
+    $('.bs-docs-sidebar').affix();
+});
+</script><base target="_blank">
 <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
@@ -23,32 +33,12 @@
 <script src="js/elementSearch.js"></script>
 <link rel="stylesheet" href="css/main.css">
 <link rel="stylesheet" href="css/blog.css">
-<script>
-// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
-     function CodeHighlightOn(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.add("code-highlighted");
-         target.classList.add("code-highlighted");
-       }
-     }
-     function CodeHighlightOff(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.remove("code-highlighted");
-         target.classList.remove("code-highlighted");
-       }
-     }
-// @license-end
-</script>
 </head>
 <body>
-<div id="content" class="content">
-<h1 class="title">Albums</h1>
+<div id="content" class="container">
+<div class="row"><div class="col-md-12"><h1 class="title">Albums</h1>
 <nav id="outline-container-navbar" class="outline-2 navbar bg-dark border-bottom border-body navbar-fixed-top navbar-expand-lg bg-body-tertiary">
-<h2 id="navbar">Albums</h2>
+<h2 id="navbar"><a id="sec-" name="sec-"></a>Albums</h2>
 <div class="outline-text-2" id="text-navbar">
 <a target="_self" class="navbar-brand" href="/index.html">
   <img class="img-circle rounded-circle" src="https://www.gravatar.com/avatar/aa7f68a32b011ac94698a7a1cb16ffc8?s=200" width="50px"/>
@@ -68,7 +58,7 @@
 </div>
 </nav>
 <div id="outline-container-Albums" class="outline-2 row">
-<h2 id="Albums">Albums</h2>
+<h2 id="Albums"><a id="sec-" name="sec-"></a>Albums</h2>
 <div class="outline-text-2" id="text-Albums">
 <p>
 <b><b>Created:</b></b> <span class="timestamp-wrapper"><span class="timestamp">&lt;2020-06-21 Sun&gt;</span></span>
@@ -96,7 +86,7 @@
 
 <br/>
 <div class="col-10 text-center">
-  <input type="text" class="form-control my-2" id="elementSearch" onkeyup="elementSearch('album')" placeholder="Search for album..." title="Type in an album Title" style="text-align: center; width: 80%;margin-left: auto;margin-right: auto; display: block;">
+  <input type="text" class="form-control my-2" id="elementSearch" onkeyup="elementSearch('album')" placeholder="Search for album..." title="Type in an album Title" style="height: 4em;">
   <p id="totalAlbumCount"></p>
 </div>
 
@@ -210,7 +200,7 @@
 </div>
 </div>
 <div id="outline-container-WannaAlbums" class="outline-2 row">
-<h2 id="WannaAlbums" class="m-auto col-10 text-center">Wanna Albums</h2>
+<h2 id="WannaAlbums"><a id="sec-" name="sec-"></a>Wanna Albums</h2>
 <div class="outline-text-2" id="text-WannaAlbums">
 <p>
 Legend:
@@ -298,6 +288,6 @@ document.getElementById("text-WannaAlbums").classList.add("m-auto","col-md-10");
 </script>
 </div>
 </div>
-</div>
+</div></div></div>
 </body>
 </html>
