@@ -1,27 +1,17 @@
-<!doctype html>
-<html lang="en">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
+<!-- 2025-08-09 Sat 13:49 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Extract Data From Youtube with `yt-dlp` And `jq`</title>
-<!-- 2025-07-13 Sun 13:50 -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="generator" content="Org-mode">
-<meta name="author" content="Enrico Benini">
-
-<link  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<style>body { margin-bottom: 0px; }</style><script>
-$(function() {
-    'use strict';
-
-    $('.bs-docs-sidebar li').first().addClass('active');
-
-    $(document.body).scrollspy({target: '.bs-docs-sidebar'});
-
-    $('.bs-docs-sidebar').affix();
-});
-</script><link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+<meta name="author" content="benkio" />
+<meta name="description" content="Extract Data From Youtube with `yt-dlp` And `jq`" />
+<meta name="keywords" content="Extract Data From Youtube with `yt-dlp` And `jq`" />
+<meta name="generator" content="Org Mode" />
+<link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
 <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
@@ -32,12 +22,32 @@ $(function() {
 <link rel="stylesheet" href="../css/main.css">
 <link rel="stylesheet" href="../css/blog.css">
 <link rel="stylesheet" href="../css/article.css">
+<script>
+// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+// @license-end
+</script>
 </head>
 <body>
-<div id="content" class="container">
-<div class="row"><div class="col-md-12"><h1 class="title">Extract Data From Youtube with `yt-dlp` And `jq`</h1>
+<div id="content" class="content">
+<h1 class="title">Extract Data From Youtube with `yt-dlp` And `jq`</h1>
 <nav id="outline-container-navbar" class="outline-2 navbar bg-dark border-bottom border-body navbar-fixed-top navbar-expand-lg bg-body-tertiary">
-<h2 id="navbar"><a id="sec-" name="sec-"></a>Blog</h2>
+<h2 id="navbar">Blog</h2>
 <div class="outline-text-2" id="text-navbar">
 <a target="_self" class="navbar-brand" href="/index.html">
   <img class="img-circle rounded-circle" src="https://www.gravatar.com/avatar/aa7f68a32b011ac94698a7a1cb16ffc8?s=200" width="50px"/>
@@ -57,14 +67,14 @@ $(function() {
 </div>
 </nav>
 <div id="outline-container-Article" class="outline-2 row">
-<h2 id="Article"><a id="sec-" name="sec-"></a>Extract Data From Youtube with `yt-dlp` And `jq`</h2>
+<h2 id="Article">Extract Data From Youtube with `yt-dlp` And `jq`</h2>
 <div class="outline-text-2" id="text-Article">
 <p>
 <b>Created: <span class="timestamp-wrapper"><span class="timestamp">&lt;2024-08-24 Sat&gt;</span></span></b>
 </p>
 </div>
 <div id="outline-container-ArticleAbstract" class="outline-3">
-<h3 id="ArticleAbstract"><a id="sec-" name="sec-"></a>Abstract</h3>
+<h3 id="ArticleAbstract">Abstract</h3>
 <div class="outline-text-3" id="text-ArticleAbstract">
 <p>
 In this article, I summarise the steps you need to take to extract
@@ -84,12 +94,12 @@ we are interested in.
 </div>
 </div>
 <div id="outline-container-ArticleContent" class="outline-3">
-<h3 id="ArticleContent"><a id="sec-" name="sec-"></a>Content</h3>
+<h3 id="ArticleContent">Content</h3>
 <div class="outline-text-3" id="text-ArticleContent">
 </div>
-<div id="outline-container-sec-" class="outline-4">
-<h4 id="sec-">Motivation</h4>
-<div class="outline-text-4" id="text-">
+<div id="outline-container-org241f069" class="outline-4">
+<h4 id="org241f069">Motivation</h4>
+<div class="outline-text-4" id="text-org241f069">
 <p>
 It All started with the need to automatically fill the <a href="https://github.com/benkio/sBots">sBots</a> database
 with any new content coming out from YouTube. For details check <a href="https://github.com/benkio/sBots/issues/461">this issue</a>.
@@ -102,9 +112,9 @@ complicated JSON. Fortunately <a href="https://github.com/yt-dlp/yt-dlp">yt-dlp<
 </p>
 </div>
 </div>
-<div id="outline-container-sec-" class="outline-4">
-<h4 id="sec-">Get Data from YouTube</h4>
-<div class="outline-text-4" id="text-">
+<div id="outline-container-orge1e6d07" class="outline-4">
+<h4 id="orge1e6d07">Get Data from YouTube</h4>
+<div class="outline-text-4" id="text-orge1e6d07">
 <p>
 After a brief investigation, we can just run the following command:
 </p>
@@ -117,12 +127,9 @@ After a brief investigation, we can just run the following command:
 This works with YouTube:
 </p>
 <ul class="org-ul">
-<li>video (<a href="2024-09-24-YTDLPJQYoutubeExtraction/video.json">JSON</a>)
-</li>
-<li>playlist (<a href="2024-09-24-YTDLPJQYoutubeExtraction/barbero.json">JSON</a>)
-</li>
-<li>channel (<a href="2024-09-24-YTDLPJQYoutubeExtraction/youtubo.json">JSON</a>)
-</li>
+<li>video (<a href="2024-09-24-YTDLPJQYoutubeExtraction/video.json">JSON</a>)</li>
+<li>playlist (<a href="2024-09-24-YTDLPJQYoutubeExtraction/barbero.json">JSON</a>)</li>
+<li>channel (<a href="2024-09-24-YTDLPJQYoutubeExtraction/youtubo.json">JSON</a>)</li>
 </ul>
 
 <p>
@@ -138,10 +145,8 @@ The size of such JSON could be quite big depending on how big the
 target playlist//channel. In my use cases, I saw a size of:
 </p>
 <ul class="org-ul">
-<li>38MB for a playlist of 71 videos
-</li>
-<li>80MB for a channel of 182 videos
-</li>
+<li>38MB for a playlist of 71 videos</li>
+<li>80MB for a channel of 182 videos</li>
 </ul>
 
 <p>
@@ -153,9 +158,9 @@ re-download them only when they become obsolete, eg 1 month old.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-" class="outline-4">
-<h4 id="sec-">Get Automatic Caption Data</h4>
-<div class="outline-text-4" id="text-">
+<div id="outline-container-orgb89862f" class="outline-4">
+<h4 id="orgb89862f">Get Automatic Caption Data</h4>
+<div class="outline-text-4" id="text-orgb89862f">
 <p>
 Each <a href="2024-09-24-YTDLPJQYoutubeExtraction/video.json">YouTube video JSON</a> also contains a field related to the
 automatic captions where several URLs can be found. Between the
@@ -166,9 +171,9 @@ extension is TXT 🤷
 </p>
 </div>
 </div>
-<div id="outline-container-sec-" class="outline-4">
-<h4 id="sec-">Extract Data from the JSON</h4>
-<div class="outline-text-4" id="text-">
+<div id="outline-container-org6ffc78b" class="outline-4">
+<h4 id="org6ffc78b">Extract Data from the JSON</h4>
+<div class="outline-text-4" id="text-org6ffc78b">
 <p>
 In this section, I'm not gonna dive into the details on how to use
 the <a href="https://jqlang.github.io/jq/">jq</a> command and do another tutorial, but rather I'll explain what
@@ -177,9 +182,9 @@ some specific bits will be explained because particularly
 interesting.
 </p>
 </div>
-<div id="outline-container-sec-" class="outline-5">
-<h5 id="sec-">YouTube Playlist</h5>
-<div class="outline-text-5" id="text-">
+<div id="outline-container-org444f36d" class="outline-5">
+<h5 id="org444f36d">YouTube Playlist</h5>
+<div class="outline-text-5" id="text-org444f36d">
 <p>
 In this case, we have to expand the previous command by generating a
 JSON array this time by traversing the playlist. This can be done
@@ -187,7 +192,6 @@ with the following command:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-bash">cat barbero.json | jq <span style="color: #8b2252;">'del(..|nulls) | [.entries[] | {show_url: .webpage_url, show_title: .title, show_upload_date: .upload_date, show_duration: .duration, show_description: .description, show_is_live: .is_live, show_origin_automatic_caption: .automatic_captions | with_entries(if (.key|test(".*orig")) then ( {key: .key, value: .value } ) else empty end)[][] | select(.ext|contains("json")) | .url }]'</span>
 </pre>
 </div>
@@ -198,41 +202,33 @@ The highlights here are:
 <ul class="org-ul">
 <li><code>del(..|nulls)</code>: that eliminates all the <code>null</code> values in the
 JSON. Necessary as we will get an error if we are gonna try to
-extract data from a <code>null</code> value.
-</li>
+extract data from a <code>null</code> value.</li>
 <li>The outer square parenthesis. If omitted we will get a series of
-JSON objects one after the other, but not a valid JSON.
-</li>
+JSON objects one after the other, but not a valid JSON.</li>
 <li>The traverse of an array value (eg. <code>.entries[]</code>). With the <code>[]</code>
-at the end it means: compute all the entries from now on.
-</li>
+at the end it means: compute all the entries from now on.</li>
 <li><code>with_entries(if (.key|test(".*orig")) then ( {key: .key, value:
     .value } ) else empty end)</code> it's quite complicated, but basically,
 it's a way to filter the fields by matching a regexp. Only the
 field ending with <code>orig</code> will be considered. We are interested in the
-automatic caption of the original language only.
-</li>
+automatic caption of the original language only.</li>
 <li><code>select(.ext|contains("json"))</code> filter the entries whose <code>.ext</code>
 field value contains the word <code>json</code>. We are not interested in
-other formats, only on JSON.
-</li>
+other formats, only on JSON.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-sec-" class="outline-5">
-<h5 id="sec-">YouTube Channel</h5>
-<div class="outline-text-5" id="text-">
+<div id="outline-container-orgb29d194" class="outline-5">
+<h5 id="orgb29d194">YouTube Channel</h5>
+<div class="outline-text-5" id="text-orgb29d194">
 <p>
 A <a href="2024-09-24-YTDLPJQYoutubeExtraction/youtubo.json">YouTube Channel's JSON</a> adds one more layer to the previous case
 because we might have multiple "playlists", one for:
 </p>
 <ul class="org-ul">
-<li>Videos
-</li>
-<li>Shorts
-</li>
-<li>Live
-</li>
+<li>Videos</li>
+<li>Shorts</li>
+<li>Live</li>
 </ul>
 
 <p>
@@ -242,7 +238,6 @@ is:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-bash">cat youtubo.json | jq <span style="color: #8b2252;">'del(..|nulls) | .entries[] | select(.title|contains("Videos")) | [.entries[] | {show_url: .webpage_url, show_title: .title, show_upload_date: .upload_date, show_duration: .duration, show_description: .description, show_is_live: .is_live, show_origin_automatic_caption: .automatic_captions | with_entries(if (.key|test(".*orig")) then ( {key: .key, value: .value } ) else empty end)[][] | select(.ext|contains("json")) | .url }]'</span>
 </pre>
 </div>
@@ -256,9 +251,9 @@ we just have to filter by a different category.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-" class="outline-5">
-<h5 id="sec-">Automatic Captions</h5>
-<div class="outline-text-5" id="text-">
+<div id="outline-container-org81cf705" class="outline-5">
+<h5 id="org81cf705">Automatic Captions</h5>
+<div class="outline-text-5" id="text-org81cf705">
 <p>
 Once we can get the URL for the <code>automatic captions</code> and
 retrieve the JSON, we need to extract the text from it. Here is an
@@ -283,7 +278,7 @@ in that field ignoring the rest.
 </div>
 </div>
 <div id="outline-container-ArticleConclusions" class="outline-3">
-<h3 id="ArticleConclusions"><a id="sec-" name="sec-"></a>Conclusions</h3>
+<h3 id="ArticleConclusions">Conclusions</h3>
 <div class="outline-text-3" id="text-ArticleConclusions">
 <p>
 I hope you learned how to extract data from YouTube and that could
@@ -295,20 +290,18 @@ you want.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-" class="outline-3">
-<h3 id="sec-">References</h3>
-<div class="outline-text-3" id="text-">
+<div id="outline-container-orgee8b1c1" class="outline-3">
+<h3 id="orgee8b1c1">References</h3>
+<div class="outline-text-3" id="text-orgee8b1c1">
 <ul class="org-ul">
-<li><a href="https://github.com/yt-dlp/yt-dlp">yt-dlp repository</a>
-</li>
-<li><a href="https://jqlang.github.io/jq/">jq site</a>
-</li>
+<li><a href="https://github.com/yt-dlp/yt-dlp">yt-dlp repository</a></li>
+<li><a href="https://jqlang.github.io/jq/">jq site</a></li>
 </ul>
 </div>
 </div>
 </div>
 <div id="outline-container-ShareButtons" class="outline-2 row">
-<h2 id="ShareButtons"><a id="sec-" name="sec-"></a>Share Buttons</h2>
+<h2 id="ShareButtons">Share Buttons</h2>
 <div class="outline-text-2" id="text-ShareButtons">
 <!-- AddToAny BEGIN -->
 <hr>
@@ -339,6 +332,6 @@ $(function() {
 </script>
 </div>
 </div>
-</div></div></div>
+</div>
 </body>
 </html>
