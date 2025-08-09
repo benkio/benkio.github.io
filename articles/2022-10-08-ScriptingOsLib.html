@@ -1,27 +1,17 @@
-<!doctype html>
-<html lang="en">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
+<!-- 2025-08-09 Sat 13:49 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Scripting with Scala CLI &amp; Os-lib</title>
-<!-- 2025-07-13 Sun 13:50 -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="generator" content="Org-mode">
-<meta name="author" content="Enrico Benini">
-
-<link  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<style>body { margin-bottom: 0px; }</style><script>
-$(function() {
-    'use strict';
-
-    $('.bs-docs-sidebar li').first().addClass('active');
-
-    $(document.body).scrollspy({target: '.bs-docs-sidebar'});
-
-    $('.bs-docs-sidebar').affix();
-});
-</script><link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+<meta name="author" content="benkio" />
+<meta name="description" content="Scripting with Scala CLI &amp; Os-lib" />
+<meta name="keywords" content="Scripting with Scala CLI &amp; Os-lib" />
+<meta name="generator" content="Org Mode" />
+<link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
 <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
@@ -32,12 +22,32 @@ $(function() {
 <link rel="stylesheet" href="../css/main.css">
 <link rel="stylesheet" href="../css/blog.css">
 <link rel="stylesheet" href="../css/article.css">
+<script>
+// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+// @license-end
+</script>
 </head>
 <body>
-<div id="content" class="container">
-<div class="row"><div class="col-md-12"><h1 class="title">Scripting with Scala CLI &amp; Os-lib</h1>
+<div id="content" class="content">
+<h1 class="title">Scripting with Scala CLI &amp; Os-lib</h1>
 <nav id="outline-container-navbar" class="outline-2 navbar bg-dark border-bottom border-body navbar-fixed-top navbar-expand-lg bg-body-tertiary">
-<h2 id="navbar"><a id="sec-" name="sec-"></a>Blog</h2>
+<h2 id="navbar">Blog</h2>
 <div class="outline-text-2" id="text-navbar">
 <a target="_self" class="navbar-brand" href="/index.html">
   <img class="img-circle rounded-circle" src="https://www.gravatar.com/avatar/aa7f68a32b011ac94698a7a1cb16ffc8?s=200" width="50px"/>
@@ -57,14 +67,14 @@ $(function() {
 </div>
 </nav>
 <div id="outline-container-Article" class="outline-2 row">
-<h2 id="Article"><a id="sec-" name="sec-"></a>Scripting with Scala CLI &amp; Os-lib</h2>
+<h2 id="Article">Scripting with Scala CLI &amp; Os-lib</h2>
 <div class="outline-text-2" id="text-Article">
 <p>
 <b>Created: <span class="timestamp-wrapper"><span class="timestamp">&lt;2022-10-08 Sat&gt;</span></span></b>
 </p>
 </div>
 <div id="outline-container-ArticleAbstract" class="outline-3">
-<h3 id="ArticleAbstract"><a id="sec-" name="sec-"></a>Abstract</h3>
+<h3 id="ArticleAbstract">Abstract</h3>
 <div class="outline-text-3" id="text-ArticleAbstract">
 <p>
 In this article, I will show how I refactored some existing scripts
@@ -73,7 +83,7 @@ written in <a href="https://scala-cli.virtuslab.org/">scala-cli</a> using the <a
 </div>
 </div>
 <div id="outline-container-ArticleContent" class="outline-3">
-<h3 id="ArticleContent"><a id="sec-" name="sec-"></a>Use Cases &amp; Motivations</h3>
+<h3 id="ArticleContent">Use Cases &amp; Motivations</h3>
 <div class="outline-text-3" id="text-ArticleContent">
 <p>
 Everyone has his own scripts for various tasks and I'm no exception.
@@ -83,11 +93,9 @@ At the time of writing I have 2:
 <li>One for converting movies to a format compatible with my mom's
 TV. Movies need to be in Xvid, 720p, with a specific bit rate, mp3
 audio track, and be not bigger than 1GB (if so it must be
-split). I discovered this by trial and error.
-</li>
+split). I discovered this by trial and error.</li>
 <li>One for generating GIFs (muted video chunks with subtitles, to be
-precise) starting from YouTube links.
-</li>
+precise) starting from YouTube links.</li>
 </ul>
 
 <p>
@@ -118,9 +126,9 @@ when he is looking for examples.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-" class="outline-3">
-<h3 id="sec-">Insert Script Dependency</h3>
-<div class="outline-text-3" id="text-">
+<div id="outline-container-org1a132fc" class="outline-3">
+<h3 id="org1a132fc">Insert Script Dependency</h3>
+<div class="outline-text-3" id="text-org1a132fc">
 <p>
 The first thing you want to do is to add the <a href="https://github.com/com-lihaoyi/os-lib">os-lib</a> to your
 <a href="https://scala-cli.virtuslab.org/">  scala-cli</a>. At the moment of writing the latest version is <code>0.8.1</code>.
@@ -128,19 +136,19 @@ Just add this snippet at the very top of your script
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-scala"><span style="color: #b22222;">#!/usr/bin/env scala-cli</span>
 <span style="color: #a0522d;">using</span> <span style="color: #a0522d;">lib</span> <span style="color: #8b2252;">"com.lihaoyi::os-lib:0.8.1"</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-sec-" class="outline-3">
-<h3 id="sec-">Movie Conversion Script</h3>
-<div class="outline-text-3" id="text-">
-</div><div id="outline-container-sec-" class="outline-4">
-<h4 id="sec-">File Paths</h4>
-<div class="outline-text-4" id="text-">
+<div id="outline-container-orgd48fad1" class="outline-3">
+<h3 id="orgd48fad1">Movie Conversion Script</h3>
+<div class="outline-text-3" id="text-orgd48fad1">
+</div>
+<div id="outline-container-org9a50615" class="outline-4">
+<h4 id="org9a50615">File Paths</h4>
+<div class="outline-text-4" id="text-org9a50615">
 <p>
 Let's convert simple file path strings to the types used by the
 library. Note how I had to specify a temporary existing directory
@@ -156,7 +164,6 @@ Macbook one to a Linux one, without having to update the paths.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-scala"><span style="color: #b22222;">// Before</span>
 <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">tempPath</span> = <span style="color: #8b2252;">"/Users/benkio/temp"</span>
 <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">startingPath</span> = <span style="color: #8b2252;">"/Users/benkio/temp/test"</span>
@@ -175,7 +182,7 @@ create a path using just the <code>'</code> prefix. However, if you try you
 might get this error:
 </p>
 
-<pre class="example">
+<pre class="example" id="org74cffb9">
 [error] ./convertFilms.sc:18:31: symbol literal 'temp is no longer supported,
 [error] use a string literal "temp" or an application Symbol("temp") instead,
 [error] or enclose in braces '{temp} if you want a quoted expression.
@@ -189,9 +196,9 @@ That's why I ended up using simple strings.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-" class="outline-4">
-<h4 id="sec-">Script Entry Point</h4>
-<div class="outline-text-4" id="text-">
+<div id="outline-container-org5f9e144" class="outline-4">
+<h4 id="org5f9e144">Script Entry Point</h4>
+<div class="outline-text-4" id="text-org5f9e144">
 <p>
 In order to understand what this script is supposed to do, we need
 to have a look at its entry point. This will be affected by the
@@ -200,7 +207,6 @@ provide more context to understand each step.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-scala"><span style="color: #a020f0;">val</span> <span style="color: #a0522d;">inputFiles</span>: <span style="color: #228b22;">List</span>[(<span style="color: #228b22;">String</span>, <span style="color: #228b22;">String</span>)] = <span style="color: #0000ff;">List</span>(
   (<span style="color: #8b2252;">"movie.avi"</span>, <span style="color: #8b2252;">"movie"</span>),
   (<span style="color: #8b2252;">"film.mkv"</span>, <span style="color: #8b2252;">"film"</span>)
@@ -226,25 +232,20 @@ actual file to be converted and the second one is the output
 filename without extension. We could think about extracting the
 output file name straight from the first value, but often the
 input values have non-consistent names, so it's better to give
-the user a way to specify the output name. For each pair this will:
-</li>
+the user a way to specify the output name. For each pair this will:</li>
 <li>Run the <code>ffmpeg</code> command with the specific input to produce a video
 compatible with the target TV: right bitrate, resolution, codec,
-container, audio codec&#x2026; This will output a full converted movie.
-</li>
-<li>Split the result of the previous step in chunks of max 1GB.
-</li>
+container, audio codec&#x2026; This will output a full converted movie.</li>
+<li>Split the result of the previous step in chunks of max 1GB.</li>
 <li>Remove the output of step 2. We are only interested in the chunks
-from step 3.
-</li>
-<li>Move the chunks for step 3 to the destination path.
-</li>
+from step 3.</li>
+<li>Move the chunks for step 3 to the destination path.</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-sec-" class="outline-4">
-<h4 id="sec-">FFMPEG Command</h4>
-<div class="outline-text-4" id="text-">
+<div id="outline-container-orgbebbf3d" class="outline-4">
+<h4 id="orgbebbf3d">FFMPEG Command</h4>
+<div class="outline-text-4" id="text-orgbebbf3d">
 <p>
 Previously we just craft the command as a simple string with
 interpolated input and "run &amp; forget" it with the <code>!</code>
@@ -253,7 +254,6 @@ command <a href="https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/Shell
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-scala"><span style="color: #b22222;">// Before</span>
 <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">ffmpegCommand</span>(<span style="color: #a0522d;">inputFile</span>: <span style="color: #228b22;">String</span>, <span style="color: #a0522d;">outputFilename</span>: <span style="color: #228b22;">String</span>): <span style="color: #228b22;">Unit</span> = {
   <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">ffmpegCmd</span> =
@@ -289,7 +289,7 @@ the <code>exitcode</code> of the <code>ffmpeg</code> process.
 </p>
 
 <p>
-<a id="spawn" name="spawn"></a>One could wonder why I didn't go for <a href="https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html">os.spawn</a> instead of <a href="https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html">os.call</a> in
+<a id="org0dfc00d"></a>One could wonder why I didn't go for <a href="https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html">os.spawn</a> instead of <a href="https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html">os.call</a> in
 order to take advantage of sub-processing and parallelize the whole
 script. The issue here is that we don't know in advance how many
 files we will have to convert. In the scenario where there are
@@ -298,9 +298,9 @@ long-live <code>ffmpeg</code> sub-processes that will hang the whole system.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-" class="outline-4">
-<h4 id="sec-">Split Command</h4>
-<div class="outline-text-4" id="text-">
+<div id="outline-container-org0165166" class="outline-4">
+<h4 id="org0165166">Split Command</h4>
+<div class="outline-text-4" id="text-org0165166">
 <p>
 The Split command still uses <code>ffmpeg</code> since we want these files to
 be playable and <code>ffmpeg</code> guarantees to produce a video file. We
@@ -319,7 +319,6 @@ parameters.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-scala"> <span style="color: #b22222;">// Before</span>
  <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">splitCommand</span>(<span style="color: #a0522d;">inputFilename</span>: <span style="color: #228b22;">String</span>): <span style="color: #228b22;">Unit</span> = {
   <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">splitCmd</span> =
@@ -371,16 +370,15 @@ parameters.
 </div>
 </div>
 </div>
-<div id="outline-container-sec-" class="outline-4">
-<h4 id="sec-">Remove Command</h4>
-<div class="outline-text-4" id="text-">
+<div id="outline-container-org2944a0e" class="outline-4">
+<h4 id="org2944a0e">Remove Command</h4>
+<div class="outline-text-4" id="text-org2944a0e">
 <p>
 The remove command is straightforward to translate to the new
 library since it exposes <a href="https://github.com/com-lihaoyi/os-lib#osremove">os.remove</a> that removes a file if exists.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-scala"><span style="color: #b22222;">// Before</span>
 <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">removeCommand</span>(<span style="color: #a0522d;">inputFilename</span>: <span style="color: #228b22;">String</span>): <span style="color: #228b22;">Unit</span> = {
   <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">removeCmd</span> = <span style="color: #0000ff;">s</span><span style="color: #8b2252;">"""rm "</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">tempPath</span><span style="color: #8b2252;">/</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">inputFilename</span><span style="color: #8b2252;">.avi""""</span>
@@ -394,15 +392,14 @@ library since it exposes <a href="https://github.com/com-lihaoyi/os-lib#osremove
 </div>
 </div>
 </div>
-<div id="outline-container-sec-" class="outline-4">
-<h4 id="sec-">List Files</h4>
-<div class="outline-text-4" id="text-">
+<div id="outline-container-org0282cd8" class="outline-4">
+<h4 id="org0282cd8">List Files</h4>
+<div class="outline-text-4" id="text-org0282cd8">
 <p>
 Right now, there is this function in the script:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-scala"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">getListOfFiles</span>(<span style="color: #a0522d;">dir</span>: <span style="color: #228b22;">File</span>, <span style="color: #a0522d;">prefix</span>: <span style="color: #228b22;">String</span>): <span style="color: #228b22;">List</span>[<span style="color: #228b22;">File</span>] = {
 <span style="color: #a0522d;">dir</span>.<span style="color: #a0522d;">listFiles</span>.<span style="color: #0000ff;">filter</span>(<span style="color: #483d8b;">_</span>.<span style="color: #a0522d;">isFile</span>).<span style="color: #a0522d;">toList</span>.<span style="color: #0000ff;">filter</span> { <span style="color: #a0522d;">file</span> =&gt;
     <span style="color: #a0522d;">file</span>.<span style="color: #a0522d;">getName</span>.<span style="color: #0000ff;">startsWith</span>(<span style="color: #a0522d;">prefix</span>)
@@ -423,7 +420,6 @@ results with the same <code>filter</code> used above.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-scala"><span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">list</span>(<span style="color: #0000ff;">path</span>()).<span style="color: #0000ff;">filter</span>(<span style="color: #a0522d;">f</span> =&gt; <span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">isFile</span>(<span style="color: #a0522d;">f</span>) &amp;&amp; <span style="color: #8b2252;">"gif[0-9]+.mp4"</span>.<span style="color: #a0522d;">r</span>.<span style="color: #0000ff;">matches</span>(<span style="color: #a0522d;">f</span>.<span style="color: #a0522d;">last</span>))
 </pre>
 </div>
@@ -431,14 +427,14 @@ results with the same <code>filter</code> used above.
 I want to underline this error message I got, really really nice!
 </p>
 
-<pre class="example">
+<pre class="example" id="org6f868e8">
 value IsFile is not a member of os - did you mean os.isFile?
 </pre>
 </div>
 </div>
-<div id="outline-container-sec-" class="outline-4">
-<h4 id="sec-">Move Files</h4>
-<div class="outline-text-4" id="text-">
+<div id="outline-container-org4d6b25b" class="outline-4">
+<h4 id="org4d6b25b">Move Files</h4>
+<div class="outline-text-4" id="text-org4d6b25b">
 <p>
 We can then move the files listed and filtered in the previous
 section with just a simple <code>foreach</code> and the help of the
@@ -457,7 +453,6 @@ The result becomes:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-scala"><span style="color: #b22222;">// Before</span>
 <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">moveCommand</span>(<span style="color: #a0522d;">inputFilename</span>: <span style="color: #228b22;">String</span>):<span style="color: #228b22;">Unit</span> = {
   <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">filesToMove</span> = <span style="color: #0000ff;">getListOfFiles</span>(<span style="color: #a020f0;">new</span> <span style="color: #228b22;">File</span>(<span style="color: #a0522d;">tempPath</span>), <span style="color: #a0522d;">inputFilename</span>)
@@ -476,15 +471,14 @@ The result becomes:
 </div>
 </div>
 </div>
-<div id="outline-container-sec-" class="outline-4">
-<h4 id="sec-">Final Cleanup</h4>
-<div class="outline-text-4" id="text-">
+<div id="outline-container-org7911109" class="outline-4">
+<h4 id="org7911109">Final Cleanup</h4>
+<div class="outline-text-4" id="text-org7911109">
 <p>
 Now we can finally remove the useless imports! We can get rid of:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-scala"><span style="color: #a020f0;">import</span> <span style="color: #a0522d;">sys</span>.<span style="color: #a0522d;">process</span>._
 <span style="color: #a020f0;">import</span> <span style="color: #a0522d;">scala</span>.<span style="color: #a0522d;">language</span>.<span style="color: #a0522d;">postfixOps</span>
 <span style="color: #a020f0;">import</span> <span style="color: #a0522d;">java</span>.<span style="color: #a0522d;">io</span>.<span style="color: #a0522d;">File</span>
@@ -492,11 +486,11 @@ Now we can finally remove the useless imports! We can get rid of:
 </div>
 </div>
 </div>
-<div id="outline-container-sec-" class="outline-4">
-<h4 id="sec-">Parallel Collection</h4>
-<div class="outline-text-4" id="text-">
+<div id="outline-container-org76434a1" class="outline-4">
+<h4 id="org76434a1">Parallel Collection</h4>
+<div class="outline-text-4" id="text-org76434a1">
 <p>
-We introduced the idea of parallelising the computation in <a href="#spawn">the ffmpeg
+We introduced the idea of parallelising the computation in <a href="#org0dfc00d">the ffmpeg
 subsection</a> when we talked about <a href="https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html">os.spawn</a>, saying it's not convenient
 at that point. However, we can do something using <a href="https://github.com/scala/scala-parallel-collections">parallel collections</a>.
 </p>
@@ -520,7 +514,6 @@ The final entry point looks like this:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-scala"><span style="color: #a020f0;">val</span> <span style="color: #a0522d;">inputFiles</span>: <span style="color: #228b22;">ParSeq</span>[(<span style="color: #228b22;">String</span>, <span style="color: #228b22;">String</span>)] = <span style="color: #0000ff;">List</span>(
   (<span style="color: #8b2252;">"movie.avi"</span>, <span style="color: #8b2252;">"movie"</span>),
   (<span style="color: #8b2252;">"film.avi"</span>, <span style="color: #8b2252;">"film"</span>)
@@ -545,9 +538,9 @@ The final entry point looks like this:
 </div>
 </div>
 </div>
-<div id="outline-container-sec-" class="outline-4">
-<h4 id="sec-">Testing</h4>
-<div class="outline-text-4" id="text-">
+<div id="outline-container-org1ef8e3b" class="outline-4">
+<h4 id="org1ef8e3b">Testing</h4>
+<div class="outline-text-4" id="text-org1ef8e3b">
 <p>
 I just tried the script after the above changes and I discovered
 that it just hang 😯 🤕
@@ -573,7 +566,6 @@ The final change is:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-scala"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">tempPath</span>(<span style="color: #a0522d;">inputFile</span>:<span style="color: #228b22;">String</span>) =
   <span style="color: #a020f0;">if</span> (<span style="color: #a0522d;">inputFile</span>.<span style="color: #a0522d;">isEmpty</span>) <span style="color: #a0522d;">os</span>.<span style="color: #a0522d;">home</span>/<span style="color: #8b2252;">"temp"</span> <span style="color: #a020f0;">else</span> <span style="color: #a0522d;">os</span>.<span style="color: #a0522d;">home</span>/<span style="color: #8b2252;">"temp"</span>/<span style="color: #a0522d;">inputFile</span>
 <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">startingPath</span>(<span style="color: #a0522d;">inputFile</span>:<span style="color: #228b22;">String</span>): <span style="color: #a0522d;">os</span>.<span style="color: #228b22;">Path</span> =
@@ -587,7 +579,6 @@ function (probably a def would work as well), in this way:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-scala"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">moveCommand</span>(<span style="color: #a0522d;">inputFilename</span>: <span style="color: #228b22;">String</span>): <span style="color: #228b22;">Unit</span> =
   <span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">list</span>(<span style="color: #0000ff;">tempPath</span>(<span style="color: #8b2252;">""</span>))
     .<span style="color: #0000ff;">filter</span>(<span style="color: #a0522d;">p</span> =&gt; <span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">isFile</span>(<span style="color: #a0522d;">p</span>) &amp;&amp; <span style="color: #a0522d;">p</span>.<span style="color: #a0522d;">last</span>.<span style="color: #0000ff;">startsWith</span>(<span style="color: #a0522d;">inputFilename</span>))
@@ -600,7 +591,7 @@ I tried to use <code>lazy val</code>, but it didn't help as well.
 Maybe I did some errors along the way? missing some import? I don't
 know really. If you have more experience with the library and you
 know where the problem is please let me know. You can
-find the final code in the <a href="#sec-">References</a> section.
+find the final code in the <a href="#org33fb030">References</a> section.
 </p>
 
 <p>
@@ -616,28 +607,27 @@ processes' outputs as you might expect in a multi-thread program.
 </div>
 </div>
 </div>
-<div id="outline-container-sec-" class="outline-3">
-<h3 id="sec-">Youtube to GIF Script</h3>
-<div class="outline-text-3" id="text-">
+<div id="outline-container-orgae812a2" class="outline-3">
+<h3 id="orgae812a2">Youtube to GIF Script</h3>
+<div class="outline-text-3" id="text-orgae812a2">
 <p>
 This script also includes some additional code for converting time
 measures, modeling the input of subtitles, subtitle position,
 fonts, cutting of the video, spacing between subtitles,
 and so on. In order to focus only on the library and keep this
 article short, I'll just skip all of that. Please follow the link in
-the <a href="#sec-">References</a> section if you are interested.
+the <a href="#org33fb030">References</a> section if you are interested.
 </p>
 </div>
-<div id="outline-container-sec-" class="outline-4">
-<h4 id="sec-">File Paths</h4>
-<div class="outline-text-4" id="text-">
+<div id="outline-container-orgc317169" class="outline-4">
+<h4 id="orgc317169">File Paths</h4>
+<div class="outline-text-4" id="text-orgc317169">
 <p>
-We have already talked about <a href="#sec-">File Paths</a> in the previous
+We have already talked about <a href="#orgc317169">File Paths</a> in the previous
 section. Here I just share the changes in this specific case.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-scala"><span style="color: #b22222;">// Before</span>
 <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">path</span> = <span style="color: #8b2252;">"/Users/benkio/temp"</span>
 <span style="color: #b22222;">// After</span>
@@ -647,9 +637,9 @@ section. Here I just share the changes in this specific case.
 </div>
 </div>
 </div>
-<div id="outline-container-sec-" class="outline-4">
-<h4 id="sec-">File System Functions</h4>
-<div class="outline-text-4" id="text-">
+<div id="outline-container-org6ef08fe" class="outline-4">
+<h4 id="org6ef08fe">File System Functions</h4>
+<div class="outline-text-4" id="text-org6ef08fe">
 <p>
 The <i>Youtube to Gif</i> script takes advantage of more file system
 functions compared to the previous script and here is actually where
@@ -666,7 +656,6 @@ the process and save an additional step.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-scala"><span style="color: #b22222;">// Before</span>
 <span style="color: #b22222;">// File System Functions</span>
 
@@ -728,9 +717,9 @@ the process and save an additional step.
 </div>
 </div>
 </div>
-<div id="outline-container-sec-" class="outline-4">
-<h4 id="sec-">Piping Commands</h4>
-<div class="outline-text-4" id="text-">
+<div id="outline-container-orga2f6306" class="outline-4">
+<h4 id="orga2f6306">Piping Commands</h4>
+<div class="outline-text-4" id="text-orga2f6306">
 <p>
 In order to download just a specific chunk of the youtube video you need
 to get the direct stream URL, inject it into a non-trivial <code>ffmpeg</code>
@@ -744,7 +733,6 @@ Before it was done this way:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-scala"><span style="color: #b22222;">// Before</span>
 <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">downloadFileToDir</span>(<span style="color: #a0522d;">youtubeVideo</span>: <span style="color: #228b22;">YoutubeVideo</span>, <span style="color: #a0522d;">outputFilename</span>: <span style="color: #228b22;">String</span>): <span style="color: #228b22;">Unit</span> = {
   <span style="color: #a0522d;">moveToTemp</span>
@@ -796,9 +784,9 @@ give it a try.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-" class="outline-4">
-<h4 id="sec-">Testing</h4>
-<div class="outline-text-4" id="text-">
+<div id="outline-container-org792c54b" class="outline-4">
+<h4 id="org792c54b">Testing</h4>
+<div class="outline-text-4" id="text-org792c54b">
 <p>
 This time the testing phase didn't bring any unexpected surprises. I
 just had to fix a couple of imprecisions in the way the commands
@@ -809,7 +797,7 @@ expected.
 </div>
 </div>
 <div id="outline-container-ArticleConclusions" class="outline-3">
-<h3 id="ArticleConclusions"><a id="sec-" name="sec-"></a>Conclusions</h3>
+<h3 id="ArticleConclusions">Conclusions</h3>
 <div class="outline-text-3" id="text-ArticleConclusions">
 <p>
 As you can see by yourself, the <a href="https://github.com/com-lihaoyi/os-lib">os-lib</a> works and improves the
@@ -833,20 +821,18 @@ have that exposed by the library. A Minor thing by the way.
 <img src="https://www.dropbox.com/s/und6zl8mlvyk9i0/ytai_Buonanotte.mp4?dl=1" alt="Buonanotte by Youtubo">
 </div>
 </div>
-<div id="outline-container-sec-" class="outline-3">
-<h3 id="sec-">References</h3>
-<div class="outline-text-3" id="text-">
+<div id="outline-container-org33fb030" class="outline-3">
+<h3 id="org33fb030">References</h3>
+<div class="outline-text-3" id="text-org33fb030">
 <ul class="org-ul">
-<li><a href="https://gist.github.com/benkio/6fac65fdaec44842712be716f46169e1">convertFilms.sc script</a>
-</li>
-<li><a href="https://gist.github.com/benkio/103960b7b5a5781c222df1c4e31544a2">youtubeToGif.sc script</a>
-</li>
+<li><a href="https://gist.github.com/benkio/6fac65fdaec44842712be716f46169e1">convertFilms.sc script</a></li>
+<li><a href="https://gist.github.com/benkio/103960b7b5a5781c222df1c4e31544a2">youtubeToGif.sc script</a></li>
 </ul>
 </div>
 </div>
 </div>
 <div id="outline-container-ShareButtons" class="outline-2 row">
-<h2 id="ShareButtons"><a id="sec-" name="sec-"></a>Share Buttons</h2>
+<h2 id="ShareButtons">Share Buttons</h2>
 <div class="outline-text-2" id="text-ShareButtons">
 <!-- AddToAny BEGIN -->
 <hr>
@@ -896,6 +882,6 @@ $(function() {
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
 </div>
-</div></div></div>
+</div>
 </body>
 </html>

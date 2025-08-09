@@ -1,27 +1,17 @@
-<!doctype html>
-<html lang="en">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
+<!-- 2025-08-09 Sat 13:49 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Emacs IDE - Build your own Metals</title>
-<!-- 2025-07-13 Sun 13:50 -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="generator" content="Org-mode">
-<meta name="author" content="Enrico Benini">
-
-<link  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<style>body { margin-bottom: 0px; }</style><script>
-$(function() {
-    'use strict';
-
-    $('.bs-docs-sidebar li').first().addClass('active');
-
-    $(document.body).scrollspy({target: '.bs-docs-sidebar'});
-
-    $('.bs-docs-sidebar').affix();
-});
-</script><link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+<meta name="author" content="benkio" />
+<meta name="description" content="Emacs IDE - Build your own Metals" />
+<meta name="keywords" content="Emacs IDE - Build your own Metals" />
+<meta name="generator" content="Org Mode" />
+<link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
 <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
@@ -31,12 +21,32 @@ $(function() {
 <link rel="stylesheet" href="../css/main.css">
 <link rel="stylesheet" href="../css/blog.css">
 <link rel="stylesheet" href="../css/article.css">
+<script>
+// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+// @license-end
+</script>
 </head>
 <body>
-<div id="content" class="container">
-<div class="row"><div class="col-md-12"><h1 class="title">Emacs IDE - Build your own Metals</h1>
+<div id="content" class="content">
+<h1 class="title">Emacs IDE - Build your own Metals</h1>
 <nav id="outline-container-navbar" class="outline-2 navbar bg-dark border-bottom border-body navbar-fixed-top navbar-expand-lg bg-body-tertiary">
-<h2 id="navbar"><a id="sec-" name="sec-"></a>Blog</h2>
+<h2 id="navbar">Blog</h2>
 <div class="outline-text-2" id="text-navbar">
 <a target="_self" class="navbar-brand" href="/index.html">
   <img class="img-circle rounded-circle" src="https://www.gravatar.com/avatar/aa7f68a32b011ac94698a7a1cb16ffc8?s=200" width="50px"/>
@@ -56,14 +66,14 @@ $(function() {
 </div>
 </nav>
 <div id="outline-container-Article" class="outline-2 row">
-<h2 id="Article"><a id="sec-" name="sec-"></a>You Don't Need Metals When You Can Build Your Own (Heavy) Metal</h2>
+<h2 id="Article">You Don't Need Metals When You Can Build Your Own (Heavy) Metal</h2>
 <div class="outline-text-2" id="text-Article">
 <p>
 <b>Created: <span class="timestamp-wrapper"><span class="timestamp">&lt;2020-08-29 Sat&gt;</span></span></b>
 </p>
 </div>
 <div id="outline-container-ArticleAbstract" class="outline-3">
-<h3 id="ArticleAbstract"><a id="sec-" name="sec-"></a>Abstract</h3>
+<h3 id="ArticleAbstract">Abstract</h3>
 <div class="outline-text-3" id="text-ArticleAbstract">
 <p>
 Plain emacs is pretty basic, but we all know you can extend it, with
@@ -83,7 +93,7 @@ Enjoy 😺
 </div>
 </div>
 <div id="outline-container-ArticleContent" class="outline-3">
-<h3 id="ArticleContent"><a id="sec-" name="sec-"></a>Content</h3>
+<h3 id="ArticleContent">Content</h3>
 <div class="outline-text-3" id="text-ArticleContent">
 <p>
 I am one of those nerds who uses Emacs for pretty much
@@ -108,10 +118,8 @@ the ass:
 
 <ul class="org-ul">
 <li>Having a hard time setting up Doom + Scala (Metals) + Gradle +
-monorepo - <code>https://www.reddit.com/r/emacs/comments/idsyxi/having_a_hard_time_setting_up_doom_scala_metals/</code>
-</li>
-<li><a href="https://twitter.com/NicolasRinaudo/status/1204143009807425536">Metals in VSCode vs Metals in Emacs</a>
-</li>
+monorepo - <code>https://www.reddit.com/r/emacs/comments/idsyxi/having_a_hard_time_setting_up_doom_scala_metals/</code></li>
+<li><a href="https://twitter.com/NicolasRinaudo/status/1204143009807425536">Metals in VSCode vs Metals in Emacs</a></li>
 </ul>
 
 
@@ -127,14 +135,14 @@ And here we are.
 </div>
 </div>
 <div id="outline-container-ArticleContentFeatures" class="outline-3">
-<h3 id="ArticleContentFeatures"><a id="sec-" name="sec-"></a>Features</h3>
+<h3 id="ArticleContentFeatures">Features</h3>
 <div class="outline-text-3" id="text-ArticleContentFeatures">
 <p>
 The features I selected for my work-flow are the following:
 </p>
 
 <dl class="org-dl">
-<dt> <code>shell-clean-old-output</code> </dt><dd>During development I usually start
+<dt><code>shell-clean-old-output</code></dt><dd>During development I usually start
 continuous compilation, so I have a background shell printing
 out the compiler output at every change of code (file
 saving). It can be the compiler, the linter or a checker, in
@@ -143,39 +151,34 @@ are ready to deal with errors, you just switch to the shell and
 you see them. However, when you switch to the shell after a
 while, buffer carry the old output results, with errors that
 aren't there anymore. Therefore, I need a command to cleanup
-the shell and leave just the last output, the meaningful one.
-</dd>
-<dt> <code>goto-next-warn-error</code> </dt><dd>Once you have the current errors you
+the shell and leave just the last output, the meaningful one.</dd>
+<dt><code>goto-next-warn-error</code></dt><dd>Once you have the current errors you
 wish to jump to them. Fortunately, pretty much every tool
 provides, as error/warning output: file path, line &amp; column
 number. So, with this command, I put the cursor at the
 beginning of the shell output and it moves the cursor to the
 next location of the error/warnings it encounter, parsing the
-output.
-</dd>
-<dt> <code>remove-unused-import</code> </dt><dd>Dependency management is a very useful
+output.</dd>
+<dt><code>remove-unused-import</code></dt><dd>Dependency management is a very useful
 feature of any IDE. When happens to have an import that's not
 used you really wish to get rid of it. This command is built on
 the previous one and it goes and remove it for you. I must say
 it's not always super precise (depends on how you instruct it)
 and it might leave empty lines, but nothing a code formatter,
-like <a href="https://scalameta.org/scalafmt/">scalafmt</a> or <a href="https://github.com/mihaimaruseac/hindent">hindent</a>, can't deal with.
-</dd>
-<dt> <code>import-type-at-point</code> </dt><dd>The other way around can happen. When
+like <a href="https://scalameta.org/scalafmt/">scalafmt</a> or <a href="https://github.com/mihaimaruseac/hindent">hindent</a>, can't deal with.</dd>
+<dt><code>import-type-at-point</code></dt><dd>The other way around can happen. When
 you have something in your code that's not in scope, so you
 need the right import. This command goes in search of an
 existing import for such object and, if none is found, it goes
 for its definition and build it by itself. Then, the import is
-added to your current file automatically.
-</dd>
-<dt> <code>extract-code-line-or-region</code> </dt><dd>A key feature for every
+added to your current file automatically.</dd>
+<dt><code>extract-code-line-or-region</code></dt><dd>A key feature for every
 refactoring maniac, the ability to extract pieces of code to a
 new value or method. it just put the result to the first empty
 line it finds backwards, so you can then move it wherever you
 want, and substitute the code you selected with the name of
 that method/value. It might not be super precise as well, but
-it's a start.
-</dd>
+it's a start.</dd>
 </dl>
 
 <p>
@@ -191,7 +194,7 @@ At the time of writing, I've implemented them for: Haskell, Scala and Typescript
 </div>
 </div>
 <div id="outline-container-ArticleContentAbstactPattern" class="outline-3">
-<h3 id="ArticleContentAbstactPattern"><a id="sec-" name="sec-"></a>Abstract the Pattern</h3>
+<h3 id="ArticleContentAbstactPattern">Abstract the Pattern</h3>
 <div class="outline-text-3" id="text-ArticleContentAbstactPattern">
 <p>
 The previous section is my <i>Letter of Intent</i> about what I need and
@@ -224,7 +227,7 @@ the language-specific functions and apply them accordingly.
 </p>
 </div>
 <div id="outline-container-ArticleContentAbstactPatternExample" class="outline-4">
-<h4 id="ArticleContentAbstactPatternExample"><a id="sec-" name="sec-"></a>Example</h4>
+<h4 id="ArticleContentAbstactPatternExample">Example</h4>
 <div class="outline-text-4" id="text-ArticleContentAbstactPatternExample">
 <p>
 I will show you how the higher-order function behind
@@ -232,33 +235,32 @@ the feature <code>extract-code-line-or-region</code> is built.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-emacs-lisp">(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">extract-code-line-or-region-template</span> (value function postDefinitionSyntaxValue postDefinitionSyntaxFunc EndSyntaxValue EndSyntaxFunc name parameters from to)
-  <span style="color: #8b2252;">"Template for extracting code to value or function:</span>
-<span style="color: #8b2252;">   Based on the input it this extract the selected code to the closest empty line above.</span>
-<span style="color: #8b2252;">   - Value: syntax for values in target laguage</span>
-<span style="color: #8b2252;">   - function: syntax for function in target laguage</span>
-<span style="color: #8b2252;">   - postDefinitionSyntax: what you put between the name + parameters and the body of the function/value. eg (= in scala)</span>
-<span style="color: #8b2252;">   - EndSyntax: what to put at the end of the definition of value/function body. Eg in js it's ';' for value but '</span><span style="color: #008b8b;">}</span><span style="color: #8b2252;">' for functionsxs</span>
-<span style="color: #8b2252;">   - name: name of the extracted value/function</span>
-<span style="color: #8b2252;">   - from: start of the region</span>
-<span style="color: #8b2252;">   - to: end of the region</span>
-<span style="color: #8b2252;">  "</span>
-  <span style="color: #b22222;">;; </span><span style="color: #b22222;">extract code, cut if region or cut from point to end of the line</span>
-  (<span style="color: #a020f0;">setq</span> code (buffer-substring from to))
+  <span style="color: #8b2252;">"Template for extracting code to value or function:
+   Based on the input it this extract the selected code to the closest empty line above.
+   - Value: syntax for values in target laguage
+   - function: syntax for function in target laguage
+   - postDefinitionSyntax: what you put between the name + parameters and the body of the function/value. eg (= in scala)
+   - EndSyntax: what to put at the end of the definition of value/function body. Eg in js it's ';' for value but '</span><span style="color: #008b8b;">}</span><span style="color: #8b2252;">' for functionsxs
+   - name: name of the extracted value/function
+   - from: start of the region
+   - to: end of the region
+  "</span>
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">extract code, cut if region or cut from point to end of the line
+</span>  (<span style="color: #a020f0;">setq</span> code (buffer-substring from to))
   (delete-region from to)
 
-  <span style="color: #b22222;">;; </span><span style="color: #b22222;">Generate code</span>
-  (<span style="color: #a020f0;">setq</span> resultDefinition (<span style="color: #a020f0;">if</span> (string-blank-p parameters)
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">Generate code
+</span>  (<span style="color: #a020f0;">setq</span> resultDefinition (<span style="color: #a020f0;">if</span> (string-blank-p parameters)
                              (concat value name postDefinitionSyntaxValue code EndSyntaxValue)
                            (concat function name parameters postDefinitionSyntaxFunc code EndSyntaxFunc)))
   (<span style="color: #a020f0;">setq</span> resultReference (<span style="color: #a020f0;">if</span> (string-blank-p parameters)
                             name
                           (concat name parameters)))
-  <span style="color: #b22222;">;; </span><span style="color: #b22222;">Put the resultReference at point</span>
-  (insert resultReference)
-  <span style="color: #b22222;">;; </span><span style="color: #b22222;">Move to the closest ^$ line and insert the resultDefinition</span>
-  (re-search-backward <span style="color: #8b2252;">"^$"</span>)
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">Put the resultReference at point
+</span>  (insert resultReference)
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">Move to the closest ^$ line and insert the resultDefinition
+</span>  (re-search-backward <span style="color: #8b2252;">"^$"</span>)
   (insert resultDefinition)
   )
 </pre>
@@ -275,18 +277,13 @@ change its behavior based on the values it gets.
 These are the operations performed:
 </p>
 <ul class="org-ul">
-<li>Grabs the code to extract and delete the region selected.
-</li>
+<li>Grabs the code to extract and delete the region selected.</li>
 <li>Compose the input values to create the extracted code and the
 related reference. It choose if it will be a value of a method
-based on the presence of parameters.
-</li>
-<li>Insert the reference where there was the code.
-</li>
-<li>Search back for the first empty line.
-</li>
-<li>Insert the computed value, method.
-</li>
+based on the presence of parameters.</li>
+<li>Insert the reference where there was the code.</li>
+<li>Search back for the first empty line.</li>
+<li>Insert the computed value, method.</li>
 </ul>
 
 
@@ -298,7 +295,7 @@ into this function.
 </div>
 </div>
 <div id="outline-container-ArticleContentLanguageSpecific" class="outline-3">
-<h3 id="ArticleContentLanguageSpecific"><a id="sec-" name="sec-"></a>Language Specific</h3>
+<h3 id="ArticleContentLanguageSpecific">Language Specific</h3>
 <div class="outline-text-3" id="text-ArticleContentLanguageSpecific">
 <p>
 Now that we have templates to use, we can focus on crafting the
@@ -311,7 +308,7 @@ because the target language is quite <i>special</i>.
 </p>
 </div>
 <div id="outline-container-ArticleContentLanguageSpecificExample" class="outline-4">
-<h4 id="ArticleContentLanguageSpecificExample"><a id="sec-" name="sec-"></a>Example</h4>
+<h4 id="ArticleContentLanguageSpecificExample">Example</h4>
 <div class="outline-text-4" id="text-ArticleContentLanguageSpecificExample">
 <p>
 Still using the <code>extract-code-line-or-region-template</code> but the
@@ -319,16 +316,15 @@ Haskell version
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-emacs-lisp">(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">hs-extract-code-line-or-region</span> (name <span style="color: #228b22;">&amp;optional</span> parameters from to)
-  <span style="color: #8b2252;">"Extract the code to val or def:</span>
-<span style="color: #8b2252;">   Require:</span>
-<span style="color: #8b2252;">     - Name of the val/def</span>
-<span style="color: #8b2252;">     - Optional list of parameters (if empty it will be a val)</span>
+  <span style="color: #8b2252;">"Extract the code to val or def:
+   Require:
+     - Name of the val/def
+     - Optional list of parameters (if empty it will be a val)
 
-<span style="color: #8b2252;">   if no code region is selected then it extracts the rest of the line from current position</span>
-<span style="color: #8b2252;">   Return type not specified.</span>
-<span style="color: #8b2252;">  "</span>
+   if no code region is selected then it extracts the rest of the line from current position
+   Return type not specified.
+  "</span>
   (<span style="color: #a020f0;">interactive</span> (list
                 (read-string <span style="color: #8b2252;">"value/function name: "</span> )
                 (<span style="color: #a020f0;">progn</span>
@@ -355,14 +351,11 @@ Here, the most part of the function is about fetching the input. In
 particular:
 </p>
 <ul class="org-ul">
-<li>The name of the outcome value/method.
-</li>
+<li>The name of the outcome value/method.</li>
 <li>The list of parameters. See how it loops until the user inserts the
-empty string.
-</li>
+empty string.</li>
 <li>The region, if present, Otherwise a new region is taken, starting
-from the current position to the end of the line.
-</li>
+from the current position to the end of the line.</li>
 </ul>
 
 
@@ -378,7 +371,7 @@ languages like Scala or Typescript.
 </div>
 </div>
 <div id="outline-container-ArticleConclusions" class="outline-3">
-<h3 id="ArticleConclusions"><a id="sec-" name="sec-"></a>Conclusions</h3>
+<h3 id="ArticleConclusions">Conclusions</h3>
 <div class="outline-text-3" id="text-ArticleConclusions">
 <p>
 Usually, you write the conclusions at the end of the article, but in
@@ -410,27 +403,22 @@ PS: basically, every conclusion I make at the end of my articles is
 something like. Don't do what you just read!. 😄
 </p>
 </div>
-<div id="outline-container-sec-" class="outline-4">
-<h4 id="sec-">References</h4>
-<div class="outline-text-4" id="text-">
+<div id="outline-container-org36bd7fc" class="outline-4">
+<h4 id="org36bd7fc">References</h4>
+<div class="outline-text-4" id="text-org36bd7fc">
 <ul class="org-ul">
-<li><a href="https://github.com/benkio/emacs-config/blob/master/config.org">Emacs configuration</a>
-</li>
-<li><a href="https://github.com/benkio/emacs-config/blob/master/config.org?plain=1#L2099">Template Functions</a>
-</li>
-<li><a href="https://github.com/benkio/emacs-config/blob/master/config.org?plain=1#L2324">Scala Functions</a>
-</li>
-<li><a href="https://github.com/benkio/emacs-config/blob/master/config.org?plain=1#L2519">Haskell Functions</a>
-</li>
-<li><a href="https://github.com/benkio/emacs-config/blob/master/config.org?plain=1#L2735">Typescript Functions</a>
-</li>
+<li><a href="https://github.com/benkio/emacs-config/blob/master/config.org">Emacs configuration</a></li>
+<li><a href="https://github.com/benkio/emacs-config/blob/master/config.org?plain=1#L2099">Template Functions</a></li>
+<li><a href="https://github.com/benkio/emacs-config/blob/master/config.org?plain=1#L2324">Scala Functions</a></li>
+<li><a href="https://github.com/benkio/emacs-config/blob/master/config.org?plain=1#L2519">Haskell Functions</a></li>
+<li><a href="https://github.com/benkio/emacs-config/blob/master/config.org?plain=1#L2735">Typescript Functions</a></li>
 </ul>
 </div>
 </div>
 </div>
 </div>
 <div id="outline-container-ShareButtons" class="outline-2 row">
-<h2 id="ShareButtons"><a id="sec-" name="sec-"></a>Share Buttons</h2>
+<h2 id="ShareButtons">Share Buttons</h2>
 <div class="outline-text-2" id="text-ShareButtons">
 <!-- AddToAny BEGIN -->
 <hr>
@@ -480,6 +468,6 @@ $(function() {
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
 </div>
-</div></div></div>
+</div>
 </body>
 </html>

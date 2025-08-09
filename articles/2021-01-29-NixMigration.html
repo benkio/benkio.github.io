@@ -1,27 +1,17 @@
-<!doctype html>
-<html lang="en">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
+<!-- 2025-08-09 Sat 13:49 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Time to Try Nix - A Weekend Experiment</title>
-<!-- 2025-07-13 Sun 13:50 -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="generator" content="Org-mode">
-<meta name="author" content="Enrico Benini">
-
-<link  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<style>body { margin-bottom: 0px; }</style><script>
-$(function() {
-    'use strict';
-
-    $('.bs-docs-sidebar li').first().addClass('active');
-
-    $(document.body).scrollspy({target: '.bs-docs-sidebar'});
-
-    $('.bs-docs-sidebar').affix();
-});
-</script><link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+<meta name="author" content="benkio" />
+<meta name="description" content="Time to Try Nix - A Weekend Experiment" />
+<meta name="keywords" content="Time to Try Nix - A Weekend Experiment" />
+<meta name="generator" content="Org Mode" />
+<link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
 <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
@@ -32,12 +22,32 @@ $(function() {
 <link rel="stylesheet" href="../css/main.css">
 <link rel="stylesheet" href="../css/blog.css">
 <link rel="stylesheet" href="../css/article.css">
+<script>
+// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+// @license-end
+</script>
 </head>
 <body>
-<div id="content" class="container">
-<div class="row"><div class="col-md-12"><h1 class="title">Time to Try Nix - A Weekend Experiment</h1>
+<div id="content" class="content">
+<h1 class="title">Time to Try Nix - A Weekend Experiment</h1>
 <nav id="outline-container-navbar" class="outline-2 navbar bg-dark border-bottom border-body navbar-fixed-top navbar-expand-lg bg-body-tertiary">
-<h2 id="navbar"><a id="sec-" name="sec-"></a>Blog</h2>
+<h2 id="navbar">Blog</h2>
 <div class="outline-text-2" id="text-navbar">
 <a target="_self" class="navbar-brand" href="/index.html">
   <img class="img-circle rounded-circle" src="https://www.gravatar.com/avatar/aa7f68a32b011ac94698a7a1cb16ffc8?s=200" width="50px"/>
@@ -57,14 +67,14 @@ $(function() {
 </div>
 </nav>
 <div id="outline-container-Article" class="outline-2 row">
-<h2 id="Article"><a id="sec-" name="sec-"></a>Time to Try Nix - A Weekend Experiment</h2>
+<h2 id="Article">Time to Try Nix - A Weekend Experiment</h2>
 <div class="outline-text-2" id="text-Article">
 <p>
 <b>Created: <span class="timestamp-wrapper"><span class="timestamp">&lt;2021-01-29 Fri&gt;</span></span></b>
 </p>
 </div>
 <div id="outline-container-ArticleAbstract" class="outline-3">
-<h3 id="ArticleAbstract"><a id="sec-" name="sec-"></a>Abstract</h3>
+<h3 id="ArticleAbstract">Abstract</h3>
 <div class="outline-text-3" id="text-ArticleAbstract">
 <p>
 Since some time now I hear about the <a href="https://nixos.wiki/wiki/Main_Page">Nix package manager</a>: how it is
@@ -88,21 +98,21 @@ think this could help someone else. So, let's get ready to rumble!!!
 </div>
 </div>
 <div id="outline-container-ArticleContent" class="outline-3">
-<h3 id="ArticleContent"><a id="sec-" name="sec-"></a>Content</h3>
+<h3 id="ArticleContent">Content</h3>
 <div class="outline-text-3" id="text-ArticleContent">
 </div>
-<div id="outline-container-sec-" class="outline-4">
-<h4 id="sec-">The Plan</h4>
-<div class="outline-text-4" id="text-">
+<div id="outline-container-orgb83a971" class="outline-4">
+<h4 id="orgb83a971">The Plan</h4>
+<div class="outline-text-4" id="text-orgb83a971">
 <p>
 As a real professional, I must start with a tweet 😉
 </p>
 
-<figure>
-<p><img src="./2021-01-29-NixMigration/The_Plan_Tweet.png" class="img-responsive" alt="The_Plan_Tweet.png">
+<div id="org5bce0d2" class="figure">
+<p><img src="./2021-01-29-NixMigration/The_Plan_Tweet.png" alt="The_Plan_Tweet.png" />
 </p>
-<figcaption><span class="figure-number">Figure 1:</span> The Plan Tweet</figcaption>
-</figure>
+<p><span class="figure-number">Figure 1: </span>The Plan Tweet</p>
+</div>
 
 <p>
 I skip the <code>Virtual Box</code> &amp; <code>Ubuntu Minimal</code> installation. I choose
@@ -119,9 +129,9 @@ virtual machine rather then one with <code>NixOs</code>.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-" class="outline-4">
-<h4 id="sec-">First Impact</h4>
-<div class="outline-text-4" id="text-">
+<div id="outline-container-orgbeea45e" class="outline-4">
+<h4 id="orgbeea45e">First Impact</h4>
+<div class="outline-text-4" id="text-orgbeea45e">
 <p>
 The only word I can think of is: <b>overwhelming</b>, but not in a good
 way. It has so much stuff that you, newcomer, will feel confused
@@ -147,9 +157,9 @@ that. I must say the majority of the guides are about <code>NixOs</code>
 instead of just <code>Nix</code> on a non-NixOs distribution, like I'm trying to do.
 </p>
 </div>
-<div id="outline-container-sec-" class="outline-5">
-<h5 id="sec-">NixOs and Home Manager</h5>
-<div class="outline-text-5" id="text-">
+<div id="outline-container-org3f95b5c" class="outline-5">
+<h5 id="org3f95b5c">NixOs and Home Manager</h5>
+<div class="outline-text-5" id="text-org3f95b5c">
 <p>
 In the end, I discovered that, with <code>Nix</code> only, you can't
 actually manage the whole system(or it's not straightforward at
@@ -181,9 +191,9 @@ reference script, you can find it <a href="https://gist.github.com/benkio/2d4346
 </div>
 </div>
 </div>
-<div id="outline-container-sec-" class="outline-4">
-<h4 id="sec-">Setup From existing Github Configuration</h4>
-<div class="outline-text-4" id="text-">
+<div id="outline-container-org233ec6e" class="outline-4">
+<h4 id="org233ec6e">Setup From existing Github Configuration</h4>
+<div class="outline-text-4" id="text-org233ec6e">
 <p>
 As every Emacs user, I already have my Emacs configuration
 jealously crafted and polished. Now, I don't want to restart from
@@ -199,16 +209,13 @@ So, the idea here is to:
 <ul class="org-ul">
 <li>Download your configuration from Github: provide the owner, repository,
 reference to the specific commit or tag and hash SHA256 of the
-resulting directory
-</li>
+resulting directory</li>
 <li>Tell <code>Nix</code> to copy it into the <code>$HOME/.emacs.d/</code> directory. I
 can't move it since <code>Nix</code> stores immutable directories in his
 store. Therefore, you must just make a copy to the desired
 location. Fortunately the Emacs configuration, without compilation
-packages is not that big.
-</li>
-<li>Setup the Emacs server hook. (Optional, advanced topic)
-</li>
+packages is not that big.</li>
+<li>Setup the Emacs server hook. (Optional, advanced topic)</li>
 </ul>
 
 <p>
@@ -246,12 +253,9 @@ that the resulting <code>git</code> repository is set on a new branch called
 </p>
 <ul class="org-ul">
 <li>Setup the remote: <code>git add remote origin
-      https://github.com/....</code>
-</li>
-<li>Create &amp; checkout a new branch from <code>master</code>.
-</li>
-<li>Delete the <code>fetchgit</code>.
-</li>
+      https://github.com/....</code></li>
+<li>Create &amp; checkout a new branch from <code>master</code>.</li>
+<li>Delete the <code>fetchgit</code>.</li>
 </ul>
 
 <p>
@@ -264,9 +268,9 @@ reproducible? Future myself will tell.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-" class="outline-4">
-<h4 id="sec-">Provided Packages</h4>
-<div class="outline-text-4" id="text-">
+<div id="outline-container-org149693d" class="outline-4">
+<h4 id="org149693d">Provided Packages</h4>
+<div class="outline-text-4" id="text-org149693d">
 <p>
 I must say the amount of available packages is huge: I found
 (almost) all I needed straight out of the main channels. I had
@@ -281,9 +285,9 @@ expected.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-" class="outline-4">
-<h4 id="sec-">The Unexpected</h4>
-<div class="outline-text-4" id="text-">
+<div id="outline-container-orge708d2a" class="outline-4">
+<h4 id="orge708d2a">The Unexpected</h4>
+<div class="outline-text-4" id="text-orge708d2a">
 <p>
 I added more packages, I added the keyboard configuration and so
 on, then I looked into how to setup <code>I3</code> and <code>X11</code>. Well, as a result
@@ -341,9 +345,9 @@ I might ask for help in the future into some IRC channel or wherever.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-" class="outline-4">
-<h4 id="sec-">Developer Environment</h4>
-<div class="outline-text-4" id="text-">
+<div id="outline-container-org94a37ba" class="outline-4">
+<h4 id="org94a37ba">Developer Environment</h4>
+<div class="outline-text-4" id="text-org94a37ba">
 <p>
 After the failure of the previous section I decided that I can
 live without setting my window manager for now (<a href="http://read.gov/aesop/005.html">The Fox &amp; The
@@ -353,15 +357,15 @@ compile them in the virtual machine.
 </p>
 
 <dl class="org-dl">
-<dt> Sbt </dt><dd></dd>
+<dt>Sbt</dt><dd></dd>
 </dl>
-<pre class="example">
-MissingRequirementError: Object java.lang.object
+<div class="org-src-container">
+<pre class="src src-nil">MissingRequirementError: Object java.lang.object
 in compiler mirror not found
 </pre>
+</div>
 <dl class="org-dl">
-<dt> Stack </dt><dd><code>libgmp.10.so: cannot open shared open file</code>
-</dd>
+<dt>Stack</dt><dd><code>libgmp.10.so: cannot open shared open file</code></dd>
 </dl>
 
 <p>
@@ -377,14 +381,14 @@ install the <code>haskell-plaftorm</code> with a one-liner command.
 </div>
 </div>
 <div id="outline-container-ArticleConclusions" class="outline-3">
-<h3 id="ArticleConclusions"><a id="sec-" name="sec-"></a>Conclusions</h3>
+<h3 id="ArticleConclusions">Conclusions</h3>
 <div class="outline-text-3" id="text-ArticleConclusions">
 
-<figure>
-<p><img src="./2021-01-29-NixMigration/weekendResult.png" class="img-responsive" alt="weekendResult.png">
+<div id="org886c330" class="figure">
+<p><img src="./2021-01-29-NixMigration/weekendResult.png" alt="weekendResult.png" />
 </p>
-<figcaption><span class="figure-number">Figure 2:</span> Weekend Recap</figcaption>
-</figure>
+<p><span class="figure-number">Figure 2: </span>Weekend Recap</p>
+</div>
 
 <p>
 Well, this is the final result. Not that great. What I could try to
@@ -399,8 +403,7 @@ I know you want me to answer the questions:
 <li>Is it hard? Yes, as every time you need to work with a new
 technology I guess. You need to learn a new language, a new way of
 dealing with software and basically google for everything hoping
-it's not a pain in the nuts&#x2026;being often disappointed&#x2026;
-</li>
+it's not a pain in the nuts&#x2026;being often disappointed&#x2026;</li>
 <li>Do you recommend it? Mmm hard to say, I did it since I'm a nerd
 and I like to try stuff out when I hear/read good things about them,
 but it's really worth it? Isn't just better to create your docker
@@ -409,41 +412,34 @@ script? Very hard to say, but I mean: I use Emacs, I have a blog
 in org-mode. It's obvious that there is already something wrong
 here. Probably, you should consider how important is for you to
 have a really stable environment (more than bash script) and how
-frequently you have to setup a new machine as well!
-</li>
+frequently you have to setup a new machine as well!</li>
 <li>When this could be convenient? I think, using <code>Nix</code> +
 <code>home-manager</code> without <code>NixOs</code>, could be convenient when you don't
 care/want/can manage the operating system settings, eg. some
-developers set up their MacOs using <code>Nix</code> instead of <code>Homebrew</code>.
-</li>
+developers set up their MacOs using <code>Nix</code> instead of <code>Homebrew</code>.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-sec-" class="outline-3">
-<h3 id="sec-">References</h3>
-<div class="outline-text-3" id="text-">
+<div id="outline-container-orgf39e857" class="outline-3">
+<h3 id="orgf39e857">References</h3>
+<div class="outline-text-3" id="text-orgf39e857">
 <dl class="org-dl">
-<dt> <a href="https://nixos.org/">NixOs Website</a> </dt><dd>Where you can find all the official instructions
-about <code>Nix</code> and the related distribution.
-</dd>
-<dt> <a href="https://github.com/jeaye/nixos-in-place">Nix In Place</a> </dt><dd>You can install <code>NixOs</code> wherever you want (Linux or
-Mac) more or less.
-</dd>
-<dt> <a href="https://github.com/nix-community/home-manager">Home Manager</a> </dt><dd><code>Nix</code> package that allows you to access quite some
+<dt><a href="https://nixos.org/">NixOs Website</a></dt><dd>Where you can find all the official instructions
+about <code>Nix</code> and the related distribution.</dd>
+<dt><a href="https://github.com/jeaye/nixos-in-place">Nix In Place</a></dt><dd>You can install <code>NixOs</code> wherever you want (Linux or
+Mac) more or less.</dd>
+<dt><a href="https://github.com/nix-community/home-manager">Home Manager</a></dt><dd><code>Nix</code> package that allows you to access quite some
 configuration options of your home directory as well as manage
-your software.
-</dd>
-<dt> <a href="https://github.com/benkio/nix-config.git">My Nix Configuration</a> </dt><dd>Here is where I try to build my nix
-configuration.
-</dd>
-<dt> <a href="https://gist.github.com/benkio/2d4346e5e02b85556b0e">Reference Script</a> </dt><dd>Script I used until now to setup a new machine
-</dd>
+your software.</dd>
+<dt><a href="https://github.com/benkio/nix-config.git">My Nix Configuration</a></dt><dd>Here is where I try to build my nix
+configuration.</dd>
+<dt><a href="https://gist.github.com/benkio/2d4346e5e02b85556b0e">Reference Script</a></dt><dd>Script I used until now to setup a new machine</dd>
 </dl>
 </div>
 </div>
 </div>
 <div id="outline-container-ShareButtons" class="outline-2 row">
-<h2 id="ShareButtons"><a id="sec-" name="sec-"></a>Share Buttons</h2>
+<h2 id="ShareButtons">Share Buttons</h2>
 <div class="outline-text-2" id="text-ShareButtons">
 <!-- AddToAny BEGIN -->
 <hr>
@@ -493,6 +489,6 @@ $(function() {
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
 </div>
-</div></div></div>
+</div>
 </body>
 </html>

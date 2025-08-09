@@ -50,7 +50,7 @@ Look at the org files modified within 4 months and compile them using ~org-twbs-
                  (when (time-less-p (time-add (current-time) (- 0 timeToArchiveInMonthSeconds )) (nth 5 (file-attributes f)))
                    (message "compile org file %s" f)
                    (find-file f)
-                   (org-twbs-export-to-html)
+                   (org-html-export-to-html)
                    (kill-buffer)
                    )))
    (directory-files path t "\.org$"))

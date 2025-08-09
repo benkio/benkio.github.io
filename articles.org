@@ -34,7 +34,7 @@
 
 #+BEGIN_EXPORT HTML
 <div class="col-10 m-auto text-center">
-  <input type="text" class="form-control my-2" id="elementSearch" onkeyup="elementSearch('Articles')" placeholder="Search for Article..." title="Type in a Book Title" style="height: 4em;">
+  <input type="text" class="form-control my-2" id="elementSearch" onkeyup="elementSearch('article', false)" placeholder="Search for Article..." title="Type in a Book Title" style="height: 4em;">
   <ul id="ArticleList" class="list-group">
     <!-- <a href="#" class="list-group-item list-group-item-action">Article 1</a> -->
   </ul>
@@ -57,7 +57,7 @@
     const htmlArticlesTitle = articlesZip.map(function(tuple) {
         const [articleContent, articlePath] = tuple;
         const articleTitle = $($.parseHTML(articleContent)).find("#Article").text();
-        return $('<a href="' + articlePath + '" class="w-100 w-md-75 m-auto list-group-item list-group-item-action">' + articleTitle + '</a>');
+        return $('<a href="' + articlePath + '" class="w-100 w-md-75 m-auto list-group-item list-group-item-action article">' + articleTitle + '</a>');
     });
 
 

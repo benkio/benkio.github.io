@@ -1,27 +1,17 @@
-<!doctype html>
-<html lang="en">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
+<!-- 2025-08-09 Sat 13:49 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Project Euler 11-20</title>
-<!-- 2025-07-13 Sun 13:50 -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="generator" content="Org-mode">
-<meta name="author" content="Enrico Benini">
-
-<link  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<style>body { margin-bottom: 0px; }</style><script>
-$(function() {
-    'use strict';
-
-    $('.bs-docs-sidebar li').first().addClass('active');
-
-    $(document.body).scrollspy({target: '.bs-docs-sidebar'});
-
-    $('.bs-docs-sidebar').affix();
-});
-</script><link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+<meta name="author" content="benkio" />
+<meta name="description" content="Project Euler 11-20" />
+<meta name="keywords" content="Project Euler 11-20" />
+<meta name="generator" content="Org Mode" />
+<link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
 <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
@@ -31,12 +21,32 @@ $(function() {
 <link rel="stylesheet" href="../css/main.css">
 <link rel="stylesheet" href="../css/blog.css">
 <link rel="stylesheet" href="../css/article.css">
+<script>
+// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+// @license-end
+</script>
 </head>
 <body>
-<div id="content" class="container">
-<div class="row"><div class="col-md-12"><h1 class="title">Project Euler 11-20</h1>
+<div id="content" class="content">
+<h1 class="title">Project Euler 11-20</h1>
 <nav id="outline-container-navbar" class="outline-2 navbar bg-dark border-bottom border-body navbar-fixed-top navbar-expand-lg bg-body-tertiary">
-<h2 id="navbar"><a id="sec-" name="sec-"></a>Blog</h2>
+<h2 id="navbar">Blog</h2>
 <div class="outline-text-2" id="text-navbar">
 <a target="_self" class="navbar-brand" href="/index.html">
   <img class="img-circle rounded-circle" src="https://www.gravatar.com/avatar/aa7f68a32b011ac94698a7a1cb16ffc8?s=200" width="50px"/>
@@ -56,14 +66,14 @@ $(function() {
 </div>
 </nav>
 <div id="outline-container-Article" class="outline-2 row">
-<h2 id="Article"><a id="sec-" name="sec-"></a>Project Euler 11-20</h2>
+<h2 id="Article">Project Euler 11-20</h2>
 <div class="outline-text-2" id="text-Article">
 <p>
 <b>Created: <span class="timestamp-wrapper"><span class="timestamp">&lt;2020-08-11 Tue&gt;</span></span></b>
 </p>
 </div>
 <div id="outline-container-ArticleAbstract" class="outline-3">
-<h3 id="ArticleAbstract"><a id="sec-" name="sec-"></a>Abstract</h3>
+<h3 id="ArticleAbstract">Abstract</h3>
 <div class="outline-text-3" id="text-ArticleAbstract">
 <p>
 <a href="https://projecteuler.net/">Project Euler</a> is a collection of math based problems you can try to
@@ -80,11 +90,11 @@ Follow-up, from problem 11 to 20.
 </div>
 </div>
 <div id="outline-container-ArticleContent" class="outline-3">
-<h3 id="ArticleContent"><a id="sec-" name="sec-"></a>Content</h3>
+<h3 id="ArticleContent">Content</h3>
 <div class="outline-text-3" id="text-ArticleContent">
 </div>
 <div id="outline-container-ArticleContentEx11" class="outline-4">
-<h4 id="ArticleContentEx11"><a id="sec-" name="sec-"></a>Largest Product in a Grid</h4>
+<h4 id="ArticleContentEx11">Largest Product in a Grid</h4>
 <div class="outline-text-4" id="text-ArticleContentEx11">
 <p>
 Problem:  <a href="https://projecteuler.net/problem=11">Largest Product in a Grid</a>
@@ -102,7 +112,7 @@ Solution Scala:
 </div>
 </div>
 <div id="outline-container-ArticleContentEx12" class="outline-4">
-<h4 id="ArticleContentEx12"><a id="sec-" name="sec-"></a>Highly Divisible Triangular Number</h4>
+<h4 id="ArticleContentEx12">Highly Divisible Triangular Number</h4>
 <div class="outline-text-4" id="text-ArticleContentEx12">
 <p>
 Problem:  <a href="https://projecteuler.net/problem=12">Highly Divisible Triangular Number</a>
@@ -125,7 +135,6 @@ Something like
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-haskell">fromJust <span style="color: #0000ff;">$</span> find ((<span style="color: #a0522d;">==</span>500) <span style="color: #a0522d;">.</span> length <span style="color: #a0522d;">.</span> findDivisors) triangleNumbers
 </pre>
 </div>
@@ -136,7 +145,7 @@ and you will see it hangs, never returning
 </div>
 </div>
 <div id="outline-container-ArticleContentEx13" class="outline-4">
-<h4 id="ArticleContentEx13"><a id="sec-" name="sec-"></a>Large Sum</h4>
+<h4 id="ArticleContentEx13">Large Sum</h4>
 <div class="outline-text-4" id="text-ArticleContentEx13">
 <p>
 Problem:  <a href="https://projecteuler.net/problem=13">Large Sum</a>
@@ -154,7 +163,7 @@ Solution Scala:
 </div>
 </div>
 <div id="outline-container-ArticleContentEx14" class="outline-4">
-<h4 id="ArticleContentEx14"><a id="sec-" name="sec-"></a>Largest Collatz Sequesnce</h4>
+<h4 id="ArticleContentEx14">Largest Collatz Sequesnce</h4>
 <div class="outline-text-4" id="text-ArticleContentEx14">
 <p>
 Problem:  <a href="https://projecteuler.net/problem=14">Largest Collatz Sequnece</a>
@@ -172,7 +181,7 @@ Solution Scala:
 </div>
 </div>
 <div id="outline-container-ArticleContentEx15" class="outline-4">
-<h4 id="ArticleContentEx15"><a id="sec-" name="sec-"></a>Lattice Path</h4>
+<h4 id="ArticleContentEx15">Lattice Path</h4>
 <div class="outline-text-4" id="text-ArticleContentEx15">
 <p>
 Problem:  <a href="https://projecteuler.net/problem=15">Lattice Path</a>
@@ -190,7 +199,7 @@ Solution Scala:
 </div>
 </div>
 <div id="outline-container-ArticleContentEx16" class="outline-4">
-<h4 id="ArticleContentEx16"><a id="sec-" name="sec-"></a>Power Digit Sum</h4>
+<h4 id="ArticleContentEx16">Power Digit Sum</h4>
 <div class="outline-text-4" id="text-ArticleContentEx16">
 <p>
 Problem:  <a href="https://projecteuler.net/problem=16">Power Digit Sum</a>
@@ -208,7 +217,7 @@ Solution Scala:
 </div>
 </div>
 <div id="outline-container-ArticleContentEx17" class="outline-4">
-<h4 id="ArticleContentEx17"><a id="sec-" name="sec-"></a>Number Letter Count</h4>
+<h4 id="ArticleContentEx17">Number Letter Count</h4>
 <div class="outline-text-4" id="text-ArticleContentEx17">
 <p>
 Problem:  <a href="https://projecteuler.net/problem=17">Number Letter Count</a>
@@ -226,7 +235,7 @@ Solution Scala:
 </div>
 </div>
 <div id="outline-container-ArticleContentEx18" class="outline-4">
-<h4 id="ArticleContentEx18"><a id="sec-" name="sec-"></a>Maximum Path Sum I</h4>
+<h4 id="ArticleContentEx18">Maximum Path Sum I</h4>
 <div class="outline-text-4" id="text-ArticleContentEx18">
 <p>
 Problem:  <a href="https://projecteuler.net/problem=18">Maximum Path Sum I</a>
@@ -244,7 +253,7 @@ Solution Scala:
 </div>
 </div>
 <div id="outline-container-ArticleContentEx19" class="outline-4">
-<h4 id="ArticleContentEx19"><a id="sec-" name="sec-"></a>Counting Sundays</h4>
+<h4 id="ArticleContentEx19">Counting Sundays</h4>
 <div class="outline-text-4" id="text-ArticleContentEx19">
 <p>
 Problem:  <a href="https://projecteuler.net/problem=19">Counting Sundays</a>
@@ -262,7 +271,7 @@ Solution Scala:
 </div>
 </div>
 <div id="outline-container-ArticleContentEx20" class="outline-4">
-<h4 id="ArticleContentEx20"><a id="sec-" name="sec-"></a>Factorial Digit Sum</h4>
+<h4 id="ArticleContentEx20">Factorial Digit Sum</h4>
 <div class="outline-text-4" id="text-ArticleContentEx20">
 <p>
 Problem:  <a href="https://projecteuler.net/problem=20">Factorial Digit Sum</a>
@@ -281,7 +290,7 @@ Solution Scala:
 </div>
 </div>
 <div id="outline-container-ArticleConclusions" class="outline-3">
-<h3 id="ArticleConclusions"><a id="sec-" name="sec-"></a>Conclusions</h3>
+<h3 id="ArticleConclusions">Conclusions</h3>
 <div class="outline-text-3" id="text-ArticleConclusions">
 <p>
 learning never ends 😃
@@ -290,7 +299,7 @@ learning never ends 😃
 </div>
 </div>
 <div id="outline-container-ShareButtons" class="outline-2 row">
-<h2 id="ShareButtons"><a id="sec-" name="sec-"></a>Share Buttons</h2>
+<h2 id="ShareButtons">Share Buttons</h2>
 <div class="outline-text-2" id="text-ShareButtons">
 <!-- AddToAny BEGIN -->
 <hr>
@@ -340,6 +349,6 @@ document.getElementById("text-ShareButtons").classList.add("m-auto", "col-md-10"
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
 </div>
-</div></div></div>
+</div>
 </body>
 </html>

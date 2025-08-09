@@ -56,7 +56,7 @@
 
   <br/>
   <div class="row text-center">
-    <input type="text" class="form-control my-2" id="elementSearch" onkeyup="elementSearch('album')" placeholder="Search for album..." title="Type in an album Title" style="height: 4em;">
+    <input type="text" class="form-control my-2" id="elementSearch" onkeyup="elementSearch('album', false)" placeholder="Search for album..." title="Type in an album Title" style="height: 4em;">
     <p id="totalAlbumCount"></p>
   </div>
   #+END_EXPORT

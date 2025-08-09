@@ -1,27 +1,17 @@
-<!doctype html>
-<html lang="en">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
+<!-- 2025-08-09 Sat 13:49 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Scala Example: TestContainers and MUnit</title>
-<!-- 2025-07-13 Sun 13:50 -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="generator" content="Org-mode">
-<meta name="author" content="Enrico Benini">
-
-<link  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<style>body { margin-bottom: 0px; }</style><script>
-$(function() {
-    'use strict';
-
-    $('.bs-docs-sidebar li').first().addClass('active');
-
-    $(document.body).scrollspy({target: '.bs-docs-sidebar'});
-
-    $('.bs-docs-sidebar').affix();
-});
-</script><link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+<meta name="author" content="benkio" />
+<meta name="description" content="Scala Example: TestContainers and MUnit" />
+<meta name="keywords" content="Scala TestContainers DockerComposeContainer MUnit" />
+<meta name="generator" content="Org Mode" />
+<link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
 <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
@@ -32,12 +22,32 @@ $(function() {
 <link rel="stylesheet" href="../css/main.css">
 <link rel="stylesheet" href="../css/blog.css">
 <link rel="stylesheet" href="../css/article.css">
+<script>
+// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+// @license-end
+</script>
 </head>
 <body>
-<div id="content" class="container">
-<div class="row"><div class="col-md-12"><h1 class="title">Scala Example: TestContainers and MUnit</h1>
+<div id="content" class="content">
+<h1 class="title">Scala Example: TestContainers and MUnit</h1>
 <nav id="outline-container-navbar" class="outline-2 navbar bg-dark border-bottom border-body navbar-fixed-top navbar-expand-lg bg-body-tertiary">
-<h2 id="navbar"><a id="sec-" name="sec-"></a>Blog</h2>
+<h2 id="navbar">Blog</h2>
 <div class="outline-text-2" id="text-navbar">
 <a target="_self" class="navbar-brand" href="/index.html">
   <img class="img-circle rounded-circle" src="https://www.gravatar.com/avatar/aa7f68a32b011ac94698a7a1cb16ffc8?s=200" width="50px"/>
@@ -57,26 +67,23 @@ $(function() {
 </div>
 </nav>
 <div id="outline-container-Article" class="outline-2 row">
-<h2 id="Article"><a id="sec-" name="sec-"></a>Scala Example: TestContainers and MUnit</h2>
+<h2 id="Article">Scala Example: TestContainers and MUnit</h2>
 <div class="outline-text-2" id="text-Article">
 <p>
 <b>Created: <span class="timestamp-wrapper"><span class="timestamp">&lt;2022-07-16 Sat&gt;</span></span></b>
 </p>
 </div>
 <div id="outline-container-ArticleAbstract" class="outline-3">
-<h3 id="ArticleAbstract"><a id="sec-" name="sec-"></a>Abstract</h3>
+<h3 id="ArticleAbstract">Abstract</h3>
 <div class="outline-text-3" id="text-ArticleAbstract">
 <p>
 Simple example of an Integration test using:
 </p>
 
 <ul class="org-ul">
-<li><a href="https://github.com/testcontainers/testcontainers-scala">testcontainers-scala</a>
-</li>
-<li><code>docker-compose</code> with database and flyway
-</li>
-<li><a href="https://github.com/scalameta/munit">MUnit</a> testing framework
-</li>
+<li><a href="https://github.com/testcontainers/testcontainers-scala">testcontainers-scala</a></li>
+<li><code>docker-compose</code> with database and flyway</li>
+<li><a href="https://github.com/scalameta/munit">MUnit</a> testing framework</li>
 </ul>
 
 <p>
@@ -85,36 +92,38 @@ Beware the fact that with <a href="https://github.com/scalameta/munit">MUnit</a>
 </div>
 </div>
 <div id="outline-container-ArticleContent" class="outline-3">
-<h3 id="ArticleContent"><a id="sec-" name="sec-"></a>Content</h3>
+<h3 id="ArticleContent">Content</h3>
 <div class="outline-text-3" id="text-ArticleContent">
 </div>
-<div id="outline-container-sec-" class="outline-4">
-<h4 id="sec-">Dependencies</h4>
-<div class="outline-text-4" id="text-">
+<div id="outline-container-org84372fa" class="outline-4">
+<h4 id="org84372fa">Dependencies</h4>
+<div class="outline-text-4" id="text-org84372fa">
 <ul class="org-ul">
-<li>Add dependencies to the project and submodules
-</li>
-<li>Add the <code>it</code> scope to the libraries
+<li>Add dependencies to the project and submodules</li>
+<li><p>
+Add the <code>it</code> scope to the libraries
+</p>
 
 <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FmyTelegramBot%2Fblob%2Fb2fb9d26cb9b9dbc9660374ed90a805e02f5df3e%2Fproject%2FDependencies.scala%23L19&style=github&showBorder=on"></script>
-<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FmyTelegramBot%2Fblob%2Fb2fb9d26cb9b9dbc9660374ed90a805e02f5df3e%2Fproject%2FDependencies.scala%23L35&style=github&showBorder=on&showCopy=on="></script>
-</li>
+<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FmyTelegramBot%2Fblob%2Fb2fb9d26cb9b9dbc9660374ed90a805e02f5df3e%2Fproject%2FDependencies.scala%23L35&style=github&showBorder=on&showCopy=on="></script></li>
 
-<li>Add <code>IntegrationTest</code> configuration extending <code>Test</code> configuration
+<li><p>
+Add <code>IntegrationTest</code> configuration extending <code>Test</code> configuration
+</p>
 
-<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FmyTelegramBot%2Fblob%2Fb2fb9d26cb9b9dbc9660374ed90a805e02f5df3e%2Fbuild.sbt%23L24&style=github&showBorder=on&showCopy=on"></script>
-</li>
+<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FmyTelegramBot%2Fblob%2Fb2fb9d26cb9b9dbc9660374ed90a805e02f5df3e%2Fbuild.sbt%23L24&style=github&showBorder=on&showCopy=on"></script></li>
 
-<li>Add <code>Default.itSettings</code> to your project and submodules settings
+<li><p>
+Add <code>Default.itSettings</code> to your project and submodules settings
+</p>
 
-<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FmyTelegramBot%2Fblob%2Fb2fb9d26cb9b9dbc9660374ed90a805e02f5df3e%2Fproject%2FSettings.scala%23L75&style=github&showBorder=on&showCopy=on"></script>
-</li>
+<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FmyTelegramBot%2Fblob%2Fb2fb9d26cb9b9dbc9660374ed90a805e02f5df3e%2Fproject%2FSettings.scala%23L75&style=github&showBorder=on&showCopy=on"></script></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-sec-" class="outline-4">
-<h4 id="sec-">Case 1: Single Test Container</h4>
-<div class="outline-text-4" id="text-">
+<div id="outline-container-org5eb6885" class="outline-4">
+<h4 id="org5eb6885">Case 1: Single Test Container</h4>
+<div class="outline-text-4" id="text-org5eb6885">
 <p>
 Most simple case, where you declare a single container in your test
 to use. In the following example a <code>PostgreSQLContainer</code> is shown.
@@ -123,32 +132,37 @@ to use. In the following example a <code>PostgreSQLContainer</code> is shown.
 <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FmyTelegramBot%2Fblob%2F7d13e9470231d27027efc3183cb89e563fe5ccd5%2FbotDB%2Fsrc%2Fit%2Fscala%2Fcom%2Fbenkio%2FbotDB%2FITSpec.scala&style=github&showBorder=on&showCopy=on"></script>
 </div>
 </div>
-<div id="outline-container-sec-" class="outline-4">
-<h4 id="sec-">Case 2: Docker-Compose</h4>
-<div class="outline-text-4" id="text-">
+<div id="outline-container-org3fee368" class="outline-4">
+<h4 id="org3fee368">Case 2: Docker-Compose</h4>
+<div class="outline-text-4" id="text-org3fee368">
 <p>
 Here there's <code>flyway</code> as well to run the migrations. Not necessary for this example.
 </p>
 
 <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FmyTelegramBot%2Fblob%2Fb2fb9d26cb9b9dbc9660374ed90a805e02f5df3e%2FbotDB%2Fdocker-compose.yml&style=github&showBorder=on&showCopy=on"></script>
 </div>
-<div id="outline-container-sec-" class="outline-5">
-<h5 id="sec-">Scala Code</h5>
-<div class="outline-text-5" id="text-">
-</div><ul class="org-ul"><li><a id="sec-" name="sec-"></a>DockerComposeContainer Definition<br ><div class="outline-text-6" id="text-">
+<div id="outline-container-orgf5b21e0" class="outline-5">
+<h5 id="orgf5b21e0">Scala Code</h5>
+<div class="outline-text-5" id="text-orgf5b21e0">
+</div>
+<ul class="org-ul">
+<li><a id="orgd68debf"></a>DockerComposeContainer Definition<br />
+<div class="outline-text-6" id="text-orgd68debf">
 <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FmyTelegramBot%2Fblob%2F5177bf67616c1d68ac4c9cddd151e5e28461c205%2FbotDB%2Fsrc%2Fit%2Fscala%2Fcom%2Fbenkio%2FbotDB%2FContainerSuite.scala&style=github&showBorder=on&showCopy=on"></script>
 </div>
 </li>
-<li><a id="sec-" name="sec-"></a>Simple MUnit Spec file<br ><div class="outline-text-6" id="text-">
+<li><a id="org9201aa2"></a>Simple MUnit Spec file<br />
+<div class="outline-text-6" id="text-org9201aa2">
 <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FmyTelegramBot%2Fblob%2Fb2fb9d26cb9b9dbc9660374ed90a805e02f5df3e%2FbotDB%2Fsrc%2Fit%2Fscala%2Fcom%2Fbenkio%2FbotDB%2FComposeSpec.scala&style=github&showBorder=on&showCopy=on"></script>
 </div>
-</li></ul>
+</li>
+</ul>
 </div>
 </div>
 </div>
 </div>
 <div id="outline-container-ShareButtons" class="outline-2 row">
-<h2 id="ShareButtons"><a id="sec-" name="sec-"></a>Share Buttons</h2>
+<h2 id="ShareButtons">Share Buttons</h2>
 <div class="outline-text-2" id="text-ShareButtons">
 <!-- AddToAny BEGIN -->
 <hr>
@@ -198,6 +212,6 @@ $(function() {
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
 </div>
-</div></div></div>
+</div>
 </body>
 </html>
