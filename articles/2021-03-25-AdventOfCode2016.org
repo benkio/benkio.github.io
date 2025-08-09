@@ -18,7 +18,7 @@
 * Blog
   :PROPERTIES:
   :HTML_CONTAINER: nav
-:HTML_CONTAINER_CLASS: navbar bg-dark border-bottom border-body navbar-fixed-top navbar-expand-lg bg-body-tertiary
+  :HTML_CONTAINER_CLASS: navbar bg-dark border-bottom border-body navbar-fixed-top navbar-expand-lg bg-body-tertiary
   :CUSTOM_ID: navbar
   :END:
 #+CALL: ../templates.org:navbar(1)

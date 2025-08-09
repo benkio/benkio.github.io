@@ -36,7 +36,7 @@
 
   #+BEGIN_EXPORT HTML
   <div class="col-md-10 m-auto">
-    <input type="text" class="form-control my-2" id="elementSearch" onkeyup="elementSearch('book')" placeholder="Search for Book..." title="Type in a Book Title" style="height: 4em;">
+    <input type="text" class="form-control my-2" id="elementSearch" onkeyup="elementSearch('book', true)" placeholder="Search for Book..." title="Type in a Book Title" style="height: 4em;">
   </div>
   <p id="totalBookCount"></p>
   <hr>
