@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-08-09 Sat 13:49 -->
+<!-- 2025-09-01 Mon 16:23 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Gilded Rose Kata</title>
@@ -303,11 +303,11 @@ if-else-statement:
 } <span style="color: #a020f0;">else</span> <span style="color: #b22222;">// Stuff</span>
 
 <span style="color: #b22222;">// After</span>
-<span style="color: #a0522d;">def</span> <span style="color: #a0522d;">f1</span>(<span style="color: #a0522d;">params</span>): <span style="color: #228b22;">StuffType</span> = <span style="color: #a020f0;">if</span> (condition1) { <span style="color: #0000ff;">f2</span>(<span style="color: #a0522d;">params</span>) } <span style="color: #228b22;">else</span> <span style="color: #b22222;">// Previous state (identity)</span>
-<span style="color: #a020f0;">def</span> <span style="color: #a0522d;">f2</span>(<span style="color: #a0522d;">params</span>): <span style="color: #228b22;">StuffType</span> = <span style="color: #a020f0;">if</span> (<span style="color: #a0522d;">condition2</span>) {<span style="color: #b22222;">/* Stuff */</span> } <span style="color: #a020f0;">else</span> <span style="color: #b22222;">// Stuff</span>
-<span style="color: #a0522d;">def</span> <span style="color: #a0522d;">f3</span>(<span style="color: #a0522d;">params</span>): <span style="color: #228b22;">StuffType</span> = <span style="color: #a020f0;">if</span> (<span style="color: #a0522d;">condition3</span>) {<span style="color: #b22222;">/* Stuff */</span> } <span style="color: #a020f0;">else</span> <span style="color: #b22222;">// Stuff</span>
-<span style="color: #a0522d;">val</span> r1 = <span style="color: #0000ff;">f1</span>(<span style="color: #a0522d;">args</span>)
-<span style="color: #a0522d;">val</span> <span style="color: #a0522d;">r2</span> = <span style="color: #0000ff;">f3</span>(<span style="color: #a0522d;">args</span>) <span style="color: #b22222;">// This might probably require r1 as input</span>
+<span style="color: #a0522d;">def</span> <span style="color: #a0522d;">f1</span>(<span style="color: #a0522d;">params</span>): <span style="color: #228b22;">StuffType</span> = <span style="color: #a020f0;">if</span> (<span style="color: #a0522d;">condition1</span>) { <span style="color: #0000ff;">f2</span>(<span style="color: #a0522d;">params</span>) } <span style="color: #a0522d;">else</span> <span style="color: #b22222;">// Previous state (identity)</span>
+<span style="color: #228b22;">def</span> <span style="color: #a0522d;">f2</span>(<span style="color: #228b22;">params</span>): StuffType = <span style="color: #a020f0;">if</span> (<span style="color: #228b22;">condition2</span>) {<span style="color: #b22222;">/* Stuff */</span> } <span style="color: #a0522d;">else</span> <span style="color: #b22222;">// Stuff</span>
+<span style="color: #228b22;">def</span> <span style="color: #a0522d;">f3</span>(<span style="color: #228b22;">params</span>): StuffType = <span style="color: #a020f0;">if</span> (<span style="color: #228b22;">condition3</span>) {<span style="color: #b22222;">/* Stuff */</span> } <span style="color: #a0522d;">else</span> <span style="color: #b22222;">// Stuff</span>
+<span style="color: #228b22;">val</span> <span style="color: #a0522d;">r1</span> = <span style="color: #228b22;">f1</span>(<span style="color: #a0522d;">args</span>)
+<span style="color: #a020f0;">val</span> <span style="color: #a0522d;">r2</span> = <span style="color: #0000ff;">f3</span>(<span style="color: #a0522d;">args</span>) <span style="color: #b22222;">// This might probably require r1 as input</span>
 <span style="color: #a0522d;">r2</span>
 </pre>
 </div>
