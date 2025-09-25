@@ -70,15 +70,14 @@
 :HTML_HEADLINE_CLASS: m-auto col-10 text-center
 :END:
 
-Legend:
 #+BEGIN_EXPORT HTML
-<ul>
-  <li><span style="background-color:red;">Red:</span> means it's digital only, do not purchase if not strictly necessary.</li>
-  <li><span style="background-color:blue;">Blue:</span> means the album is already purchased, but it didn't arrive or wasn't archivied yet. Don't buy.</li>
-</ul>
+<div class="row row-cols-3 my-2 w-100">
+  <div class="col text-center"> <button type="button" class="btn btn-lg btn-danger wantedBook"  >Digital Only<br> Don't Buy</button></div>
+  <div class="col text-center"> <button type="button" class="btn btn-lg btn-primary wantedBook" >Purchased <br> Don't Buy</button></div>
+  <div class="col text-center"> <button type="button" class="btn btn-lg btn-dark wantedBook" >You Can Buy/Gift This😛</button></div>
+</div>
+<p class="text-center">Price source: Bandcamp, Amazon, and Discgos. Price reference with shipment to UK.</p>
 #+END_EXPORT
-
-Price source: Bandcamp, Amazon, and Discgos. Price reference with shipment to UK.
 
 #+CALL: templates.org:csvToButtonsLinks("./data/wantedAlbums.csv","wantedAlbum")
 

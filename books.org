@@ -52,10 +52,11 @@
 :END:
 
   #+BEGIN_EXPORT HTML
-  <div class="row row-cols-3">
+  <div class="row row-cols-4 my-2 w-100">
     <div class="col text-center"> <button type="button" class="btn btn-lg btn-danger wantedBook"  >Available Online <br> Don't Buy</button></div>
     <div class="col text-center"> <button type="button" class="btn btn-lg btn-success wantedBook" >Readable Online <br> Don't Buy</button></div>
-    <div class="col text-center"> <button type="button" class="btn btn-lg btn-primary wantedBook" >Purchased <br> Don't Buy</button>      </div>
+    <div class="col text-center"> <button type="button" class="btn btn-lg btn-primary wantedBook" >Purchased <br> Don't Buy</button></div>
+    <div class="col text-center"> <button type="button" class="btn btn-lg btn-dark wantedBook" >You Can Buy/Gift This😛</button></div>
   </div>
   <hr>
   #+END_EXPORT
