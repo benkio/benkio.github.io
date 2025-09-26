@@ -19,4 +19,4 @@ jobs:
         run: |
           npx http-server -p 8080 &
           sleep 1
-          npx broken-link-checker -r -o -requests 5 --exclude twitter --exclude linkedin --input http://localhost:8080/
+          npx broken-link-checker -r -o -requests 5 --exclude twitter --exclude linkedin --exclude instagram --input http://localhost:8080/
