@@ -1,0 +1,380 @@
+#+OPTIONS: num:nil toc:nil H:4
+#+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:nil
+#+TITLE: ~act~ with ~nix-shell~ and ~podman~
+#+DESCRIPTION: ~act~ with ~nix-shell~ and ~podman~
+#+KEYWORDS: ~act~ with ~nix-shell~ and ~podman~
+#+CREATOR: Enrico Benini
+#+HTML_HEAD_EXTRA: <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA: <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+#+HTML_HEAD_EXTRA: <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+#+HTML_HEAD_EXTRA: <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/main.css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/blog.css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/article.css">
+
+* Blog
+  :PROPERTIES:
+  :HTML_CONTAINER: nav
+:HTML_CONTAINER_CLASS: navbar bg-dark border-bottom border-body navbar-fixed-top navbar-expand-lg bg-body-tertiary
+  :CUSTOM_ID: navbar
+  :END:
+#+CALL: ../templates.org:navbar(1)
+
+* ~act~ with ~nix-shell~ and ~podman~
+  :PROPERTIES:
+  :CUSTOM_ID: Article
+    :HTML_CONTAINER_CLASS: row
+  :END:
+  *Created: <2025-09-26 Fri>*
+** Abstract
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleAbstract
+  :END:
+
+  I want to test this site CI with ~act~.
+
+
+  I don't have ~docker~ installed in this machine and I don't want to install it.
+
+
+  I have ~nix-shell~ at my disposal
+
+
+  Here I show how I did it.
+
+** Content
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleContent
+  :END:
+
+*** Tried with Docker
+
+  My ideas was to use just ~docker~ with ~nix-shell~ and call ~act~. Everything should work and I go living my life, but of course the life is the enemy and nothing works.
+
+  #+begin_src sh
+    $ nix-shell -p docker
+    $ act
+    WARN[0000] Couldn't get a valid docker connection: no DOCKER_HOST and an invalid container socket ''
+    [Github Page CI/check_urls] ⭐ Run Set up job
+    [Github Page CI/check_urls] 🚀  Start image=node:16-buster-slim
+    [Github Page CI/check_urls]   🐳  docker pull image=node:16-buster-slim platform= username= forcePull=true
+    [Github Page CI/check_urls] Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?
+    [Github Page CI/check_urls]   ❌  Failure - Set up job
+    [Github Page CI/check_urls] 🏁  Job failed
+    Error: Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?
+  #+end_src
+
+  Even if you set the docker host environment variable you will not succeed:
+
+  #+begin_src sh
+$ export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
+$ act
+Error: Cannot connect to the Docker daemon at unix:///run/user/1000/docker.sock. Is the docker daemon running?
+  #+end_src
+
+**** Docker Rootless
+
+  You can't run ~dockerd~ rootless right away. I searched on stackoverflow and I found [[https://discourse.nixos.org/t/is-there-a-way-to-run-docker-inside-a-nix-shell/46824][this article]]
+
+  I tried:
+
+  #+begin_src sh
+$ nix-shell -p rootlesskit docker
+...
+failed: : exec: "newuidmap": executable file not found in $PATH
+  #+end_src
+
+  In [[https://search.nixos.org/packages][search.nixos.org]] it says you need packages ~su~ installed, but of course it doesn't save you from fixing it.
+
+  I give up with docker on the fly. Switch to ~podman~
+
+*** Try with Podman
+
+  The package is there and it seems promising from [[https://nektosact.com/usage/custom_engine.html][the act documentation]], but it doesn't come with a daemon right away, so setting the socket is useless as in the guide.
+
+  After a bit of searching I found [[https://docs.podman.io/en/latest/markdown/podman-system-service.1.html#examples][this podman examples]] on how to have it running:
+
+  #+begin_src sh
+    $ nix-shell -p podman
+    $ podman system service --time 0 unix:///var/run/mypodman.sock
+    Error: command required for rootless mode with multiple IDs: exec: "newuidmap": executable file not found in $PATH
+  #+end_src
+
+  Same problem of docker. Idea: go to the host machine (out of ~nix-shell~) and ask for the ~newuidmap~ path, then add it to PATH somehow inside ~nix-shell~.
+
+  I found that you need a package I didn't know about in order to see those programs called: ~shadow~:
+
+#+begin_src sh
+$ nix-shell -p podman shadow
+$ which newuidmap
+/nix/store/3lj2vmycjz1ywzr04287va8awss3flsz-shadow-4.17.4/bin/newuidmap
+$ podman system service --time 0 unix:///var/run/mypodman.sock
+ERRO[0000] running `/nix/store/3lj2vmycjz1ywzr04287va8awss3flsz-shadow-4.17.4/bin/newuidmap 307185 0 1000 1 1 100000 65536`: newuidmap: write to uid_map failed: Operation not permitted
+Error: cannot set up namespace using "/nix/store/3lj2vmycjz1ywzr04287va8awss3flsz-shadow-4.17.4/bin/newuidmap": should have setuid or have filecaps setuid: exit status 1
+#+end_src
+
+  NEW ERROR!! Yeeee
+
+  For reference I get the same error with ~dockerd-rootless~:
+
+  #+begin_src sh
+$ $ [rootlesskit:parent] error: failed to setup UID/GID map: newuidmap 307541 [0 1000 1 1 100000 65536] failed: newuidmap: write to uid_map failed: Operation not permitted
+: exit status 1
+  #+end_src
+
+*** Grok AI (last resort)
+  Prompt:
+  /I want to run act on my project with docker or podman, but I don't want to install them, I want to use nix-shell instead to have them available temporarely. How can I do it?/
+
+  Of course it gives an easy solution: create a ~shell.nix~ and that's it. Let's try.
+
+  I get the same error as before
+
+  #+ATTR_HTML: :class img-fluid
+  [[https://m.media-amazon.com/images/I/61rEuZFB01L._AC_SX679_.jpg]]
+
+  it suggested a simple ~sudo dockerd &~ or use the docker daemon ~sudo systemctl start docker~
+
+#+begin_src sh
+$ sudo dockerd
+[sudo] password di benkio:
+sudo: dockerd: comando non trovato
+
+$ sudo systemctl start docker
+Failed to start docker.service: Unit docker.service not found.
+#+end_src
+
+  After another iteration it gave us a useful trick! Use the nix store absolute path.
+  For some reason it works!!
+
+#+begin_src sh
+$ nix-shell -p rootlesskit docker shadow
+$ which dockerd
+/nix/store/r81s03afqkm0wfys32xw0x90ygw2mh12-docker-28.3.2/bin/dockerd
+$ sudo /nix/store/r81s03afqkm0wfys32xw0x90ygw2mh12-docker-28.3.2/bin/dockerd &
+[1] 311637
+
+$ INFO[2025-09-26T12:21:44.147882603+01:00] Starting up
+WARN[2025-09-26T12:21:44.150980298+01:00] could not change group /var/run/docker.sock to docker: group docker not found
+INFO[2025-09-26T12:21:44.151110470+01:00] containerd not running, starting managed containerd
+...
+#+end_src
+
+  The shell.nix is not necessary tho
+*** Try to run Act finally
+
+  So far so good, but running act gives me permission problems, still ask the AI and it gives me some options such as create a user group etc.
+
+  I prefer the bazooka tool, ~chmod~ on the socket directly.
+
+  #+begin_src sh
+$ ls -l /var/run/docker.sock
+srw-rw---- - root 26 Sep 12:21 /var/run/docker.sock
+
+$ sudo chmod 666 /var/run/docker.sock
+
+$ ls -l /var/run/docker.sock
+srw-rw-rw- - root 26 Sep 12:21 /var/run/docker.sock
+
+$ act
+INFO[0000] Using docker host 'unix:///var/run/docker.sock', and daemon socket 'unix:///var/run/docker.sock'
+...
+  #+end_src
+
+  All works!!! Now I have to fix the CI.
+
+** Conclusions
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleConclusions
+  :END:
+
+  First thing's first, the full code:
+
+#+begin_src sh
+benkio@benkio-ASUS-TUF-Gaming-A15-FA507XI-FA507XI:~/playground/benkio.github.io/$ nix-shell -p rootlesskit docker shadow
+bash: have: comando non trovato
+
+$ which dockerd
+/nix/store/r81s03afqkm0wfys32xw0x90ygw2mh12-docker-28.3.2/bin/dockerd
+
+$ sudo /nix/store/r81s03afqkm0wfys32xw0x90ygw2mh12-docker-28.3.2/bin/dockerd &
+[1] 314751
+INFO[2025-09-26T12:32:09.259534588+01:00] Starting up
+
+$ WARN[2025-09-26T12:32:09.262293396+01:00] could not change group /var/run/docker.sock to docker: group docker not found
+INFO[2025-09-26T12:32:09.262368227+01:00] containerd not running, starting managed containerd
+INFO[2025-09-26T12:32:09.262807946+01:00] started new containerd process                address=/var/run/docker/containerd/containerd.sock module=libcontainerd pid=314796
+INFO[2025-09-26T12:32:09.276475307+01:00] starting containerd                           revision=refs/tags/v2.1.3 version=v2.1.3
+INFO[2025-09-26T12:32:09.284140549+01:00] loading plugin "io.containerd.snapshotter.v1.aufs"...  type=io.containerd.snapshotter.v1
+INFO[2025-09-26T12:32:09.286214647+01:00] skip loading plugin "io.containerd.snapshotter.v1.aufs"...  error="aufs is not supported (modprobe aufs failed: exit status 1 \"modprobe: FATAL: Module aufs not found in directory /lib/modules/6.8.0-83-generic\\n\"): skip plugin" type=io.containerd.snapshotter.v1
+INFO[2025-09-26T12:32:09.286228072+01:00] loading plugin "io.containerd.event.v1.exchange"...  type=io.containerd.event.v1
+INFO[2025-09-26T12:32:09.286236137+01:00] loading plugin "io.containerd.internal.v1.opt"...  type=io.containerd.internal.v1
+INFO[2025-09-26T12:32:09.286258279+01:00] loading plugin "io.containerd.warning.v1.deprecations"...  type=io.containerd.warning.v1
+INFO[2025-09-26T12:32:09.286265743+01:00] loading plugin "io.containerd.snapshotter.v1.blockfile"...  type=io.containerd.snapshotter.v1
+INFO[2025-09-26T12:32:09.286282064+01:00] skip loading plugin "io.containerd.snapshotter.v1.blockfile"...  error="no scratch file generator: skip plugin" type=io.containerd.snapshotter.v1
+INFO[2025-09-26T12:32:09.286293856+01:00] loading plugin "io.containerd.snapshotter.v1.btrfs"...  type=io.containerd.snapshotter.v1
+INFO[2025-09-26T12:32:09.286451202+01:00] skip loading plugin "io.containerd.snapshotter.v1.btrfs"...  error="path /var/lib/docker/containerd/daemon/io.containerd.snapshotter.v1.btrfs (ext4) must be a btrfs filesystem to be used with the btrfs snapshotter: skip plugin" type=io.containerd.snapshotter.v1
+INFO[2025-09-26T12:32:09.286458426+01:00] loading plugin "io.containerd.snapshotter.v1.devmapper"...  type=io.containerd.snapshotter.v1
+INFO[2025-09-26T12:32:09.286464698+01:00] skip loading plugin "io.containerd.snapshotter.v1.devmapper"...  error="devmapper not configured: skip plugin" type=io.containerd.snapshotter.v1
+INFO[2025-09-26T12:32:09.286469717+01:00] loading plugin "io.containerd.snapshotter.v1.native"...  type=io.containerd.snapshotter.v1
+INFO[2025-09-26T12:32:09.286487511+01:00] loading plugin "io.containerd.snapshotter.v1.overlayfs"...  type=io.containerd.snapshotter.v1
+INFO[2025-09-26T12:32:09.286592368+01:00] loading plugin "io.containerd.snapshotter.v1.zfs"...  type=io.containerd.snapshotter.v1
+INFO[2025-09-26T12:32:09.286815349+01:00] skip loading plugin "io.containerd.snapshotter.v1.zfs"...  error="path /var/lib/docker/containerd/daemon/io.containerd.snapshotter.v1.zfs must be a zfs filesystem to be used with the zfs snapshotter: skip plugin" type=io.containerd.snapshotter.v1
+INFO[2025-09-26T12:32:09.286830116+01:00] loading plugin "io.containerd.content.v1.content"...  type=io.containerd.content.v1
+INFO[2025-09-26T12:32:09.286843852+01:00] loading plugin "io.containerd.metadata.v1.bolt"...  type=io.containerd.metadata.v1
+INFO[2025-09-26T12:32:09.286861495+01:00] metadata content store policy set             policy=shared
+INFO[2025-09-26T12:32:09.287101488+01:00] loading plugin "io.containerd.gc.v1.scheduler"...  type=io.containerd.gc.v1
+INFO[2025-09-26T12:32:09.287128288+01:00] loading plugin "io.containerd.differ.v1.walking"...  type=io.containerd.differ.v1
+INFO[2025-09-26T12:32:09.287140631+01:00] loading plugin "io.containerd.lease.v1.manager"...  type=io.containerd.lease.v1
+INFO[2025-09-26T12:32:09.287156201+01:00] loading plugin "io.containerd.streaming.v1.manager"...  type=io.containerd.streaming.v1
+INFO[2025-09-26T12:32:09.287165318+01:00] loading plugin "io.containerd.runtime.v1.linux"...  type=io.containerd.runtime.v1
+INFO[2025-09-26T12:32:09.287399239+01:00] loading plugin "io.containerd.monitor.v1.cgroups"...  type=io.containerd.monitor.v1
+INFO[2025-09-26T12:32:09.287646234+01:00] loading plugin "io.containerd.runtime.v2.task"...  type=io.containerd.runtime.v2
+INFO[2025-09-26T12:32:09.287721576+01:00] loading plugin "io.containerd.runtime.v2.shim"...  type=io.containerd.runtime.v2
+INFO[2025-09-26T12:32:09.287729751+01:00] loading plugin "io.containerd.sandbox.store.v1.local"...  type=io.containerd.sandbox.store.v1
+INFO[2025-09-26T12:32:09.287740101+01:00] loading plugin "io.containerd.sandbox.controller.v1.local"...  type=io.containerd.sandbox.controller.v1
+INFO[2025-09-26T12:32:09.287752094+01:00] loading plugin "io.containerd.service.v1.containers-service"...  type=io.containerd.service.v1
+INFO[2025-09-26T12:32:09.287763134+01:00] loading plugin "io.containerd.service.v1.content-service"...  type=io.containerd.service.v1
+INFO[2025-09-26T12:32:09.287772973+01:00] loading plugin "io.containerd.service.v1.diff-service"...  type=io.containerd.service.v1
+INFO[2025-09-26T12:32:09.287783302+01:00] loading plugin "io.containerd.service.v1.images-service"...  type=io.containerd.service.v1
+INFO[2025-09-26T12:32:09.287793401+01:00] loading plugin "io.containerd.service.v1.introspection-service"...  type=io.containerd.service.v1
+INFO[2025-09-26T12:32:09.287802639+01:00] loading plugin "io.containerd.service.v1.namespaces-service"...  type=io.containerd.service.v1
+INFO[2025-09-26T12:32:09.287811075+01:00] loading plugin "io.containerd.service.v1.snapshots-service"...  type=io.containerd.service.v1
+INFO[2025-09-26T12:32:09.287819901+01:00] loading plugin "io.containerd.service.v1.tasks-service"...  type=io.containerd.service.v1
+INFO[2025-09-26T12:32:09.287835541+01:00] loading plugin "io.containerd.grpc.v1.containers"...  type=io.containerd.grpc.v1
+INFO[2025-09-26T12:32:09.287844968+01:00] loading plugin "io.containerd.grpc.v1.content"...  type=io.containerd.grpc.v1
+INFO[2025-09-26T12:32:09.287853745+01:00] loading plugin "io.containerd.grpc.v1.diff"...  type=io.containerd.grpc.v1
+INFO[2025-09-26T12:32:09.287862461+01:00] loading plugin "io.containerd.grpc.v1.events"...  type=io.containerd.grpc.v1
+INFO[2025-09-26T12:32:09.287871959+01:00] loading plugin "io.containerd.grpc.v1.images"...  type=io.containerd.grpc.v1
+INFO[2025-09-26T12:32:09.287881187+01:00] loading plugin "io.containerd.grpc.v1.introspection"...  type=io.containerd.grpc.v1
+INFO[2025-09-26T12:32:09.287896836+01:00] loading plugin "io.containerd.grpc.v1.leases"...  type=io.containerd.grpc.v1
+INFO[2025-09-26T12:32:09.287905833+01:00] loading plugin "io.containerd.grpc.v1.namespaces"...  type=io.containerd.grpc.v1
+INFO[2025-09-26T12:32:09.287914760+01:00] loading plugin "io.containerd.grpc.v1.sandbox-controllers"...  type=io.containerd.grpc.v1
+INFO[2025-09-26T12:32:09.287928987+01:00] loading plugin "io.containerd.grpc.v1.sandboxes"...  type=io.containerd.grpc.v1
+INFO[2025-09-26T12:32:09.287938214+01:00] loading plugin "io.containerd.grpc.v1.snapshots"...  type=io.containerd.grpc.v1
+INFO[2025-09-26T12:32:09.287946590+01:00] loading plugin "io.containerd.grpc.v1.streaming"...  type=io.containerd.grpc.v1
+INFO[2025-09-26T12:32:09.287955897+01:00] loading plugin "io.containerd.grpc.v1.tasks"...  type=io.containerd.grpc.v1
+INFO[2025-09-26T12:32:09.287967339+01:00] loading plugin "io.containerd.transfer.v1.local"...  type=io.containerd.transfer.v1
+INFO[2025-09-26T12:32:09.287983720+01:00] loading plugin "io.containerd.grpc.v1.transfer"...  type=io.containerd.grpc.v1
+INFO[2025-09-26T12:32:09.287994230+01:00] loading plugin "io.containerd.grpc.v1.version"...  type=io.containerd.grpc.v1
+INFO[2025-09-26T12:32:09.288003878+01:00] loading plugin "io.containerd.internal.v1.restart"...  type=io.containerd.internal.v1
+INFO[2025-09-26T12:32:09.288048001+01:00] loading plugin "io.containerd.tracing.processor.v1.otlp"...  type=io.containerd.tracing.processor.v1
+INFO[2025-09-26T12:32:09.288058571+01:00] skip loading plugin "io.containerd.tracing.processor.v1.otlp"...  error="skip plugin: tracing endpoint not configured" type=io.containerd.tracing.processor.v1
+INFO[2025-09-26T12:32:09.288066616+01:00] loading plugin "io.containerd.internal.v1.tracing"...  type=io.containerd.internal.v1
+INFO[2025-09-26T12:32:09.288075633+01:00] skip loading plugin "io.containerd.internal.v1.tracing"...  error="skip plugin: tracing endpoint not configured" type=io.containerd.internal.v1
+INFO[2025-09-26T12:32:09.288082837+01:00] loading plugin "io.containerd.grpc.v1.healthcheck"...  type=io.containerd.grpc.v1
+INFO[2025-09-26T12:32:09.288092084+01:00] loading plugin "io.containerd.nri.v1.nri"...  type=io.containerd.nri.v1
+INFO[2025-09-26T12:32:09.288099558+01:00] NRI interface is disabled by configuration.
+INFO[2025-09-26T12:32:09.288212431+01:00] serving...                                    address=/var/run/docker/containerd/containerd-debug.sock
+INFO[2025-09-26T12:32:09.288245493+01:00] serving...                                    address=/var/run/docker/containerd/containerd.sock.ttrpc
+INFO[2025-09-26T12:32:09.288272334+01:00] serving...                                    address=/var/run/docker/containerd/containerd.sock
+INFO[2025-09-26T12:32:09.288282633+01:00] containerd successfully booted in 0.012693s
+INFO[2025-09-26T12:32:09.295608286+01:00] OTEL tracing is not configured, using no-op tracer provider
+INFO[2025-09-26T12:32:09.295691973+01:00] CDI directory does not exist, skipping: failed to monitor for changes: no such file or directory  dir=/etc/cdi
+INFO[2025-09-26T12:32:09.295701141+01:00] CDI directory does not exist, skipping: failed to monitor for changes: no such file or directory  dir=/var/run/cdi
+INFO[2025-09-26T12:32:09.295766975+01:00] detected 127.0.0.53 nameserver, assuming systemd-resolved, so using resolv.conf: /run/systemd/resolve/resolv.conf
+INFO[2025-09-26T12:32:09.307838388+01:00] Creating a containerd client                  address=/var/run/docker/containerd/containerd.sock timeout=1m0s
+INFO[2025-09-26T12:32:09.320551722+01:00] [graphdriver] using prior storage driver: overlay2
+INFO[2025-09-26T12:32:09.322394453+01:00] Loading containers: start.
+WARN[2025-09-26T12:32:10.199461781+01:00] Error (Unable to complete atomic operation, key modified) deleting object [endpoint_count f76d5d6ccdbd3b6cfbd8325247336b116a89991ce7b57ad4180483a8a4f6dee0], retrying....
+INFO[2025-09-26T12:32:10.258411607+01:00] Loading containers: done.
+INFO[2025-09-26T12:32:10.288330817+01:00] Docker daemon                                 commit=v28.3.2 containerd-snapshotter=false storage-driver=overlay2 version=28.3.2
+INFO[2025-09-26T12:32:10.288393856+01:00] Initializing buildkit
+INFO[2025-09-26T12:32:10.308204581+01:00] Completed buildkit initialization
+INFO[2025-09-26T12:32:10.311609416+01:00] Daemon has completed initialization
+INFO[2025-09-26T12:32:10.311648038+01:00] API listen on /var/run/docker.sock
+
+
+$ ls -l /var/run/docker.sock
+srw-rw---- - root 26 Sep 12:32 /var/run/docker.sock
+
+$ sudo chmod 666 /var/run/docker.sock
+
+$ ls -l /var/run/docker.sock
+srw-rw-rw- - root 26 Sep 12:32 /var/run/docker.sock
+
+$ act
+INFO[0000] Using docker host 'unix:///var/run/docker.sock', and daemon socket 'unix:///var/run/docker.sock'
+[Github Page CI/check_urls] ⭐ Run Set up job
+[Github Page CI/check_urls] 🚀  Start image=node:16-buster-slim
+[Github Page CI/check_urls]   🐳  docker pull image=node:16-buster-slim platform= username= forcePull=true
+[Github Page CI/check_urls]   🐳  docker create image=node:16-buster-slim platform= entrypoint=["tail" "-f" "/dev/null"] cmd=[] network="host"
+[Github Page CI/check_urls]   🐳  docker run image=node:16-buster-slim platform= entrypoint=["tail" "-f" "/dev/null"] cmd=[] network="host"
+[Github Page CI/check_urls]   🐳  docker exec cmd=[node --no-warnings -e console.log(process.execPath)] user= workdir=
+[Github Page CI/check_urls]   ✅  Success - Set up job
+[Github Page CI/check_urls]   ☁  git clone 'https://github.com/lycheeverse/lychee-action' # ref=v2.0.2
+[Github Page CI/check_urls] ⭐ Run Pre Link Checker
+[Github Page CI/check_urls]   ✅  Success - Pre Link Checker [25.916068ms]
+[Github Page CI/check_urls] ⭐ Run Main Checkout repository
+[Github Page CI/check_urls]   🐳  docker cp src=/home/benkio/playground/benkio.github.io/. dst=/home/benkio/playground/benkio.github.io
+[Github Page CI/check_urls]   ✅  Success - Main Checkout repository [564.903268ms]
+[Github Page CI/check_urls] ⭐ Run Main Link Checker
+[Github Page CI/check_urls]   🐳  docker cp src=/home/benkio/.cache/act/lycheeverse-lychee-action@v2.0.2/ dst=/var/run/act/actions/lycheeverse-lychee-action@v2.0.2/
+[Github Page CI/check_urls] ⭐ Run Main Set up environment
+[Github Page CI/check_urls]   🐳  docker exec cmd=[bash --noprofile --norc -e -o pipefail /var/run/act/workflow/1-composite-0.sh] user= workdir=
+[Github Page CI/check_urls]   ✅  Success - Main Set up environment [73.417103ms]
+[Github Page CI/check_urls]   ⚙  ::add-path:: /root/.local/bin
+[Github Page CI/check_urls] ⭐ Run Main Clean up existing lychee files
+[Github Page CI/check_urls]   🐳  docker exec cmd=[bash --noprofile --norc -e -o pipefail /var/run/act/workflow/1-composite-1.sh] user= workdir=
+[Github Page CI/check_urls]   ✅  Success - Main Clean up existing lychee files [82.972599ms]
+[Github Page CI/check_urls] ⭐ Run Main Download and extract lychee
+[Github Page CI/check_urls]   🐳  docker exec cmd=[bash --noprofile --norc -e -o pipefail /var/run/act/workflow/1-composite-lychee-setup.sh] user= workdir=
+| Downloading from: https://github.com/lycheeverse/lychee/releases/download/lychee-v0.16.1/lychee-x86_64-unknown-linux-gnu.tar.gz
+| /var/run/act/workflow/1-composite-lychee-setup.sh: line 18: curl: command not found
+[Github Page CI/check_urls]   ❌  Failure - Main Download and extract lychee [68.983494ms]
+[Github Page CI/check_urls] exitcode '127': command not found, please refer to https://github.com/nektos/act/issues/107 for more information
+[Github Page CI/check_urls]   ⚙  ::set-output:: exit_code=
+[Github Page CI/check_urls]   ❌  Failure - Main Link Checker [450.344274ms]
+[Github Page CI/check_urls] exitcode '127': command not found, please refer to https://github.com/nektos/act/issues/107 for more information
+[Github Page CI/check_urls] ⭐ Run Post Link Checker
+[Github Page CI/check_urls]   🐳  docker cp src=/home/benkio/.cache/act/lycheeverse-lychee-action@v2.0.2/ dst=/var/run/act/actions/lycheeverse-lychee-action@v2.0.2/
+[Github Page CI/check_urls]   ✅  Success - Post Link Checker [23.755036ms]
+[Github Page CI/check_urls] ⭐ Run Complete job
+[Github Page CI/check_urls]   ✅  Success - Complete job
+[Github Page CI/check_urls] 🏁  Job failed
+Error: Job 'check_urls' failed
+#+end_src
+
+  This is a classic example on how, a simple thing that should work straight away, doesn't.
+  Especially if you are adding technology on top of other technology. That's why today software development is hard.
+
+* Share Buttons
+  :PROPERTIES:
+  :CUSTOM_ID: ShareButtons
+  :HTML_CONTAINER_CLASS: row
+  :END:
+#+BEGIN_EXPORT html
+<!-- AddToAny BEGIN -->
+<hr>
+<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+<a class="a2a_button_facebook"></a>
+<a class="a2a_button_twitter"></a>
+<a class="a2a_button_whatsapp"></a>
+<a class="a2a_button_telegram"></a>
+<a class="a2a_button_linkedin"></a>
+<a class="a2a_button_email"></a>
+</div>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+<!-- AddToAny END -->
+#+END_EXPORT
+
+#+begin_export html
+<script type="text/javascript">
+$(function() {
+  $('#text-table-of-contents > ul li').first().css("display", "none");
+  $('#text-table-of-contents > ul li').last().css("display", "none");
+  $('#table-of-contents').addClass("visible-lg")
+});
+  document.getElementById("content").classList.add("container-fluid","p-0");
+  document.getElementById("text-navbar").classList.add("container-fluid");
+  document.getElementById("outline-container-navbar").setAttribute("data-bs-theme", "dark");
+  document.getElementById("text-Article").classList.add("text-center");
+  $('.outline-3').addClass("m-auto").addClass("col-10");
+  document.getElementById("text-ShareButtons").classList.add("m-auto", "col-10");
+</script>
+#+end_export
