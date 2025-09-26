@@ -10,9 +10,19 @@ Enrico Benini's Personal Site (AKA Benkio)
 
 - Copy ~articleTemplate.org.orig~
 - Change the title and fill in the contents. Abstract section is mandatory
-- run ~org-twbs-export-to-html~
+- run ~org-html-export-to-html~
 - Go to ~articles.org~
-- run ~org-twbs-export-to-html~
+- run ~org-html-export-to-html~
 - Go to ~blog.org~
-- run ~org-twbs-export-to-html~
-- Commit the new files, ~blog.html~ & ~articles.html~
+- run ~org-html-export-to-html~
+- Commit the changes to all files
+
+* How to Add a Book and Album
+
+Add data is collected in the ~data~ folder:
+- (books|albums).csv :: Are the ones I own
+- wanted(Books|Albums).csv :: Are the ones I want
+
+They have similar but different columns (eg. the one I wanted have a price indication).
+To add them just insert the row of the data you want to add and then run
+~org-html-export-to-html~ in: ~books.org~ or ~albums.org~
