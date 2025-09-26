@@ -342,6 +342,8 @@ Error: Job 'check_urls' failed
   This is a classic example on how, a simple thing that should work straight away, doesn't.
   Especially if you are adding technology on top of other technology. That's why today software development is hard.
 
+  **Edit:** now act run as expected by selecting a proper docker image with ~act -P ubuntu-latest=catthehacker/ubuntu:act-latest~
+  
 * Share Buttons
   :PROPERTIES:
   :CUSTOM_ID: ShareButtons

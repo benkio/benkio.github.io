@@ -12,13 +12,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Install Act dependencies
-        if: ${{ env.ACT }}
-        run: |
-          apt-get update && apt-get install sudo -y
       - name: Install dependencies
         run: |
-          sudo apt-get update && sudo apt-get install curl build-essential -y
+          sudo apt update && sudo apt install curl build-essential -y
       - name: Link Checker
         uses: lycheeverse/lychee-action@v2.0.2
         with:
