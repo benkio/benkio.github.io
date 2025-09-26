@@ -212,7 +212,7 @@ Given a CVS file path:
     )
 
   (defun csvListToButton (content type)
-    "Given a csv list, generate a bootstra button string"
+    "Given a csv list, generate a bootstrap button string"
     (setq
      buttonLabel (concat "<span class=\"badge text-bg-light\">" (contentTypeToButtonLabel content type) "</span>")
      buttonStyleClass (contentStatusToButtonStyleClass content type)
@@ -222,19 +222,19 @@ Given a CVS file path:
      buttonTitle (getTypeTitle type content) ;; title
      buttonsHtml (concat
                   "<div class=\"col my-1\">"
-                  "<button type=\"button\" class=\"w-100 btn text-wrap "
+                  "<a role=\"button\" class=\"w-100 btn text-wrap "
                   type
                   " "
                   buttonStyleClass
-                  "\" onclick=\"window.open('"
+                  "\" href=\""
                   buttonLink
-                  "','_blank');\" >"
+                  "\" >"
                   buttonTitle
                   " "
                   buttonLabel
                   buttonSubtitle
                   buttonExtra
-                  "</button></div>"
+                  "</a></div>"
                   )
      )
     buttonsHtml

@@ -16,10 +16,7 @@ jobs:
         run: |
           sudo apt update && sudo apt install curl build-essential -y
       - name: Link Checker
-        uses: lycheeverse/lychee-action@v2.0.2
-        with:
-          # Twitter, Linkedin and mailto doesn't seems to be reachable even if they work 🤔
-          args: --base . --exclude "(https.*twitter\.com.*|https.*linkedin\.com.*|.*benkio89\@gmail\.com.*)"  --accept 200,429 --no-progress './**/*.html'
-          fail: true
-          format: json
-          
+        run: |
+          npx http-server -p 8080 &
+          sleep 1
+          npx broken-link-checker -r -o -requests 5 --exclude twitter --exclude linkedin --input http://localhost:8080/
