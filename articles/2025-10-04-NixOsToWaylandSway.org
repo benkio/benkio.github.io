@@ -100,7 +100,7 @@
   something with wayland. Keep trying ⌛
 
   Finally the ~sway~ option appeared in the ~defaultSession~ and now I
-  can update and reboot 🤞
+  can update and reboot 🤞 Still it didn't download anything 🤷 
 
 ** Conclusions
   :PROPERTIES:
