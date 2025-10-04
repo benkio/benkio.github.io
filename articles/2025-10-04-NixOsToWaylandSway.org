@@ -89,7 +89,19 @@
 
   it says: ~5.95 MiB download, 9.40 MiB unpacked~
   That's worrying.
-  
+
+  As expected I reebooted into gnome! At least it's not totally broken.
+  I should have known as it asked for that as ~DefaultSession~.
+  Let see how to apply sway. First thing first let's actually comment
+  the ~xserver~.
+
+  In compiles as nothing changed, but apparetly the trick is in
+  enabling grome when I did not and set the default sessions with
+  something with wayland. Keep trying ⌛
+
+  Finally the ~sway~ option appeared in the ~defaultSession~ and now I
+  can update and reboot 🤞
+
 ** Conclusions
   :PROPERTIES:
   :CUSTOM_ID: ArticleConclusions
