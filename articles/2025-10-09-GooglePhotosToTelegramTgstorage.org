@@ -1,0 +1,253 @@
+#+OPTIONS: num:nil toc:nil H:4
+#+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:nil
+#+TITLE: Google Photos to Telegram (Tgstorage)
+#+DESCRIPTION: Google Photos to Telegram (Tgstorage)
+#+KEYWORDS: Google Photos to Telegram (Tgstorage)
+#+CREATOR: Enrico Benini
+#+HTML_HEAD_EXTRA: <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA: <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+#+HTML_HEAD_EXTRA: <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+#+HTML_HEAD_EXTRA: <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/main.css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/blog.css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/article.css">
+
+* Blog
+  :PROPERTIES:
+  :HTML_CONTAINER: nav
+:HTML_CONTAINER_CLASS: navbar bg-dark border-bottom border-body navbar-fixed-top navbar-expand-lg bg-body-tertiary
+  :CUSTOM_ID: navbar
+  :END:
+#+CALL: ../templates.org:navbar(1)
+
+* Google Photos to Telegram (Tgstorage)
+  :PROPERTIES:
+  :CUSTOM_ID: Article
+    :HTML_CONTAINER_CLASS: row
+  :END:
+  *Created: <2025-10-09 Thu>*
+** Abstract
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleAbstract
+  :END:
+
+  I also have a problem with cloud storage: where to store all the
+  photos and videos.  In this article I'll tell you the story of how I
+  tackle it and the recent changes I have to face to solve it (I hope
+  once and for all)
+
+** Content
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleContent
+  :END:
+
+*** Easy Solution For Videos
+
+  Let's get this out of the way immediately. If you want to store your
+  videos you can always create a [[https://www.youtube.com][YouTube channel]] where you upload
+  there everything. Then organize it in playlists and be sure you set
+  the privacy to ~unlisted~, so you can still share stuff around, but
+  not be visible from the outside.
+
+  Regardless of the amount of videos you have, you can't upload more
+  then [[https://www.youtube.com/channel/UCzKdPZiAcbhvFC2hCo-8GfA][Domenico Bini]]. You should be safe.
+
+  Problem Solved! I wish it was the same with photos, but no. That's
+  more complicated.
+
+*** Once Upon a time there was Flickr
+
+  Once upon a time (~2018) There was [[https://www.flickr.com/][Flickr]]. A service by Yahoo,
+  specialized in photos that provided an immense amount of free
+  storage space: 1TB. The service was mainly targeted by professional
+  photographers, but anyone could open an account and start putting
+  there all the family holiday photos and such. That's what I
+  did.
+
+  Everything was working fine, everyone was happy, apart from the
+  upload phase, but that's a problem we still have today in bigger
+  platforms like YouTube ([[https://benkio.github.io/articles/2025-08-09-YoutubeBulkUploadGuide.html][reference]]). Until one day
+  (around 2020 I think, I don't have a reference of that
+  unfortunately), they changed their mind, limiting the amount of
+  storage to something ridiculous (again I don't remember precisely,
+  but now for instance you can have 1000 photos at max).
+
+  Well, I'm the tech guy of the family and, on top of my vacations, I
+  need to take care and store all the photos from the 80s
+  on. Fortunately, I don't have to handle the ones from my brother's
+  family, but I wouldn't be surprised if I'll be asked to
+  someday. Therefore, I have a lot of photos and I couldn't stay on
+  [[https://www.flickr.com/][Flickr]] anymore, but where to go?
+
+*** Google Photos Unlimited 😱
+
+  I started my research on the matter in 2019-20 and quickly found
+  that Google Photos provided Unlimited photos storage if you allow
+  them to compress them.
+
+  As you might imagine, the photos from the 80s where not that big or
+  in high resolution, plus my photos aren't professional, but taken
+  from a cheap phone 90% of the time. So no problem from me on that:
+  be my guest, compress, but keep them in the cloud, so when my
+  external HD will stop working I'm not fucked!
+
+  Note: if you are a professional programmer or a photo geek I guess
+  you don't have a way out other then pay for the service or handle
+  the photos locally in a NAS 🤷
+
+  So far so good, I started the migration and eventually, over weeks
+  and with the help of a fast internet connection from my workplace, I completed it
+  moving my 44k photos, roughly the amount I had at the time, around.
+
+*** 2021 The Free Lunch Is Over
+
+  I guess I was not the only one going for that strategy and probably
+  Google used it as a way to get users in and then, once they are
+  bonded to the service irreversibly, just drop the bomb:
+
+  /Hey, you know, now everything you upload will could in your free tier cloud storage space. But hey, you can always pay us, get more space and keep living your life/
+
+  Smart motherfuckers move this one, and I totally miss this change! I
+  kept using the service as it was unlimited.
+
+  As you can imagine, at some point I got an email from Google saying:
+
+  /Hey, you have reached 95% of your storage. If you reach 100% you are screwed. Nothing will work. Pay or Stale!/
+
+#+ATTR_HTML: :class rounded mx-auto d-block :style max-width:500px;
+#+caption: Google Storage Almost Full Mail
+[[file:2025-10-09-GooglePhotosToTelegramTgstorage/googleEmail.png]]
+
+*** 2025 Pay Or Get Lost, Maybe
+
+  What now? It seems the only way out is to pay, but I'm not a guy who
+  give up such easily. You won't have my money!  So I when to...Google
+  or ChatGPT in search of an answer.
+
+  What I found was that they _SHOULD_ start counting for space from
+  the date they stopped the free unlimited service (Jun 2021). Therefore, one
+  should just:
+  1. Go out and search for another free unlimited available
+  service
+  2. Export/download the data of the last years
+  3. Upload the data
+  4. Delete the data
+
+  A very classical, old fashion migration. Nothing strange. Let's
+  tackle each point.
+
+**** Google Photos Alternative
+
+  We want this to have/be:
+  - Unlimited space
+  - Free
+  - Manageable (or it's useless if we can't share/search stuff)
+
+  Guess what, it's basically impossible to find someone who gives you
+  that. Every other provider have space limits especially (and that's
+  why I said "Pay or get lost")
+
+  /Then Benkio I read all of this shit for just having that as a response? You are an idiot!/
+
+  I agree with that sentence regardless of the context, but this time
+  I found a trick that I hope it will last: /Telegram/
+
+  Yes, I know, Telegram is a chat, not a cloud storage, but I
+  remembered to have read somewhere that there was a way to use
+  archived private channels as personal folders where you can place your stuff
+  there and basically let it be your storage.
+
+  After a bit of search I've found [[https://tgstorage.com/][Tgstorage.com]]. An open source
+  project that does exactly that: you give him permissions and it
+  creates those channels for you. Because they are archived, they
+  won't appear in your telegram main view and they are out of the way.
+  Then, you can still search in the app for the titles of the folders
+  or the groupings and you should be able to find what you need.
+
+  I can see how this is a hack, it's maintained by some folk who might
+  stop doing it tomorrow or Telegram might die and you are dead with
+  him. However, at the moment, it's our best free, unlimited bet. I
+  use it since some time and it works for now. I hope it does forever.
+
+**** Export Data From Google
+
+  This is easy. Google provides a service for it, called [[https://takeout.google.com/][Google
+  Takeout]]. It allows to select the service you want and, inside the
+  Google Photos, you can select the individual albums or even by year.
+  Then you get out multiple Zip files with everything you requested
+  and more (json metadata)
+
+**** Upload Data
+
+  There are the steps I will do:
+  - Extraction of the Takeout Data :: Just put everything in a folder
+    and cut-paste everything in a single place
+  - Delete the Metadata :: You can do it using ~find~/~fd~ with a
+    command like: ~fd . -e json -x rm ./~ Be careful to check the data
+    without the ~rm~ first. I used it and I still have my photos.
+  - Select a Photo Album as a Target :: Next steps has to be repeted
+    for all the albums.
+  - Create a Folder Tgstorage :: Be sure to specify a folder and then
+    groups inside folders. For the photos I use Memories>{year}. So,
+    you won't have a flat structure and not get lost in tons of
+    folder.
+  - Open Telegram (Web or App) Search the New Folder and Upload ::
+
+**** Delete Data
+
+  Not much to say here. Just go to Google Photo, delete your shit and
+  check at each step that you get your free space back. We don't want
+  to do work for no reason.
+
+** Conclusions
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleConclusions
+  :END:
+
+  Unfortunately, this is a burden we all have to do in a way or
+  another if you care about your memories and pushing your stuff to
+  the cloud is a must if you don't want to lose data. As time passes,
+  the free alternatives are less and less and I really hope next time
+  I have to go though it I'll be able to find something that
+  works. Till then, we can enjoy your free lunch 😉
+
+* Share Buttons
+  :PROPERTIES:
+  :CUSTOM_ID: ShareButtons
+  :HTML_CONTAINER_CLASS: row
+  :END:
+#+BEGIN_EXPORT html
+<!-- AddToAny BEGIN -->
+<hr>
+<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+<a class="a2a_button_facebook"></a>
+<a class="a2a_button_twitter"></a>
+<a class="a2a_button_whatsapp"></a>
+<a class="a2a_button_telegram"></a>
+<a class="a2a_button_linkedin"></a>
+<a class="a2a_button_email"></a>
+</div>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+<!-- AddToAny END -->
+#+END_EXPORT
+
+#+begin_export html
+<script type="text/javascript">
+$(function() {
+  $('#text-table-of-contents > ul li').first().css("display", "none");
+  $('#text-table-of-contents > ul li').last().css("display", "none");
+  $('#table-of-contents').addClass("visible-lg")
+});
+  document.getElementById("content").classList.add("container-fluid","p-0");
+  document.getElementById("text-navbar").classList.add("container-fluid");
+  document.getElementById("outline-container-navbar").setAttribute("data-bs-theme", "dark");
+  document.getElementById("text-Article").classList.add("text-center");
+  $('.outline-3').addClass("m-auto").addClass("col-10");
+  document.getElementById("text-ShareButtons").classList.add("m-auto", "col-10");
+</script>
+#+end_export

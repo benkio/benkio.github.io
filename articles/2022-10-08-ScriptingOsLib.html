@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-10-05 Sun 12:39 -->
+<!-- 2025-10-09 Thu 17:46 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Scripting with Scala CLI &amp; Os-lib</title>
@@ -125,9 +125,9 @@ when he is looking for examples.
 </p>
 </div>
 </div>
-<div id="outline-container-orge0d4f9e" class="outline-3">
-<h3 id="orge0d4f9e">Insert Script Dependency</h3>
-<div class="outline-text-3" id="text-orge0d4f9e">
+<div id="outline-container-org0a49a99" class="outline-3">
+<h3 id="org0a49a99">Insert Script Dependency</h3>
+<div class="outline-text-3" id="text-org0a49a99">
 <p>
 The first thing you want to do is to add the <a href="https://github.com/com-lihaoyi/os-lib">os-lib</a> to your
 <a href="https://scala-cli.virtuslab.org/">  scala-cli</a>. At the moment of writing the latest version is <code>0.8.1</code>.
@@ -135,19 +135,19 @@ Just add this snippet at the very top of your script
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala"><span style="color: #b22222;">#!/usr/bin/env scala-cli</span>
-<span style="color: #a0522d;">using</span> <span style="color: #a0522d;">lib</span> <span style="color: #8b2252;">"com.lihaoyi::os-lib:0.8.1"</span>
+<pre class="src src-scala"><span style="color: #ff7f24;">#!/usr/bin/env scala-cli</span>
+<span style="color: #eedd82;">using</span> <span style="color: #eedd82;">lib</span> <span style="color: #ffa07a;">"com.lihaoyi::os-lib:0.8.1"</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgb083b4b" class="outline-3">
-<h3 id="orgb083b4b">Movie Conversion Script</h3>
-<div class="outline-text-3" id="text-orgb083b4b">
+<div id="outline-container-org14831cb" class="outline-3">
+<h3 id="org14831cb">Movie Conversion Script</h3>
+<div class="outline-text-3" id="text-org14831cb">
 </div>
-<div id="outline-container-org4939a7c" class="outline-4">
-<h4 id="org4939a7c">File Paths</h4>
-<div class="outline-text-4" id="text-org4939a7c">
+<div id="outline-container-orgac855c9" class="outline-4">
+<h4 id="orgac855c9">File Paths</h4>
+<div class="outline-text-4" id="text-orgac855c9">
 <p>
 Let's convert simple file path strings to the types used by the
 library. Note how I had to specify a temporary existing directory
@@ -163,15 +163,15 @@ Macbook one to a Linux one, without having to update the paths.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala"><span style="color: #b22222;">// Before</span>
-<span style="color: #a020f0;">val</span> <span style="color: #a0522d;">tempPath</span> = <span style="color: #8b2252;">"/Users/benkio/temp"</span>
-<span style="color: #a020f0;">val</span> <span style="color: #a0522d;">startingPath</span> = <span style="color: #8b2252;">"/Users/benkio/temp/test"</span>
-<span style="color: #a020f0;">val</span> <span style="color: #a0522d;">destinationPath</span> = <span style="color: #8b2252;">"/Users/benkio/temp/convertedFilms"</span>
+<pre class="src src-scala"><span style="color: #ff7f24;">// Before</span>
+<span style="color: #00ffff;">val</span> <span style="color: #eedd82;">tempPath</span> = <span style="color: #ffa07a;">"/Users/benkio/temp"</span>
+<span style="color: #00ffff;">val</span> <span style="color: #eedd82;">startingPath</span> = <span style="color: #ffa07a;">"/Users/benkio/temp/test"</span>
+<span style="color: #00ffff;">val</span> <span style="color: #eedd82;">destinationPath</span> = <span style="color: #ffa07a;">"/Users/benkio/temp/convertedFilms"</span>
 
-<span style="color: #b22222;">// After</span>
-<span style="color: #a020f0;">val</span> <span style="color: #a0522d;">tempPath</span> = <span style="color: #a0522d;">os</span>.<span style="color: #a0522d;">temp</span>.<span style="color: #0000ff;">dir</span>()
-<span style="color: #a020f0;">val</span> <span style="color: #a0522d;">startingPath</span> = <span style="color: #a0522d;">os</span>.<span style="color: #a0522d;">home</span>/<span style="color: #8b2252;">"temp"</span>/<span style="color: #8b2252;">"test"</span>
-<span style="color: #a020f0;">val</span> <span style="color: #a0522d;">destinationPath</span> = <span style="color: #a0522d;">os</span>.<span style="color: #a0522d;">home</span>/<span style="color: #8b2252;">"temp"</span>/<span style="color: #8b2252;">"convertedFilms"</span>
+<span style="color: #ff7f24;">// After</span>
+<span style="color: #00ffff;">val</span> <span style="color: #eedd82;">tempPath</span> = <span style="color: #eedd82;">os</span>.<span style="color: #eedd82;">temp</span>.<span style="color: #87cefa;">dir</span>()
+<span style="color: #00ffff;">val</span> <span style="color: #eedd82;">startingPath</span> = <span style="color: #eedd82;">os</span>.<span style="color: #eedd82;">home</span>/<span style="color: #ffa07a;">"temp"</span>/<span style="color: #ffa07a;">"test"</span>
+<span style="color: #00ffff;">val</span> <span style="color: #eedd82;">destinationPath</span> = <span style="color: #eedd82;">os</span>.<span style="color: #eedd82;">home</span>/<span style="color: #ffa07a;">"temp"</span>/<span style="color: #ffa07a;">"convertedFilms"</span>
 </pre>
 </div>
 
@@ -181,7 +181,7 @@ create a path using just the <code>'</code> prefix. However, if you try you
 might get this error:
 </p>
 
-<pre class="example" id="orgb72e23a">
+<pre class="example" id="org81955ab">
 [error] ./convertFilms.sc:18:31: symbol literal 'temp is no longer supported,
 [error] use a string literal "temp" or an application Symbol("temp") instead,
 [error] or enclose in braces '{temp} if you want a quoted expression.
@@ -195,9 +195,9 @@ That's why I ended up using simple strings.
 </p>
 </div>
 </div>
-<div id="outline-container-orgef9c8d6" class="outline-4">
-<h4 id="orgef9c8d6">Script Entry Point</h4>
-<div class="outline-text-4" id="text-orgef9c8d6">
+<div id="outline-container-orgf879cae" class="outline-4">
+<h4 id="orgf879cae">Script Entry Point</h4>
+<div class="outline-text-4" id="text-orgf879cae">
 <p>
 In order to understand what this script is supposed to do, we need
 to have a look at its entry point. This will be affected by the
@@ -206,17 +206,17 @@ provide more context to understand each step.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala"><span style="color: #a020f0;">val</span> <span style="color: #a0522d;">inputFiles</span>: <span style="color: #228b22;">List</span>[(<span style="color: #228b22;">String</span>, <span style="color: #228b22;">String</span>)] = <span style="color: #0000ff;">List</span>(
-  (<span style="color: #8b2252;">"movie.avi"</span>, <span style="color: #8b2252;">"movie"</span>),
-  (<span style="color: #8b2252;">"film.mkv"</span>, <span style="color: #8b2252;">"film"</span>)
+<pre class="src src-scala"><span style="color: #00ffff;">val</span> <span style="color: #eedd82;">inputFiles</span>: <span style="color: #98fb98;">List</span>[(<span style="color: #98fb98;">String</span>, <span style="color: #98fb98;">String</span>)] = <span style="color: #87cefa;">List</span>(
+  (<span style="color: #ffa07a;">"movie.avi"</span>, <span style="color: #ffa07a;">"movie"</span>),
+  (<span style="color: #ffa07a;">"film.mkv"</span>, <span style="color: #ffa07a;">"film"</span>)
 )
 
-<span style="color: #a0522d;">inputFiles</span>.<span style="color: #0000ff;">foreach</span> { <span style="color: #b22222;">//1</span>
-  <span style="color: #a020f0;">case</span> (<span style="color: #a0522d;">inputFile</span>, <span style="color: #a0522d;">filename</span>) =&gt; {
-    <span style="color: #0000ff;">ffmpegCommand</span>(<span style="color: #a0522d;">inputFile</span>, <span style="color: #a0522d;">filename</span>) <span style="color: #b22222;">//2</span>
-    <span style="color: #0000ff;">splitCommand</span>(<span style="color: #a0522d;">filename</span>)             <span style="color: #b22222;">//3</span>
-    <span style="color: #0000ff;">removeCommand</span>(<span style="color: #a0522d;">filename</span>)            <span style="color: #b22222;">//4</span>
-    <span style="color: #0000ff;">moveCommand</span>(<span style="color: #a0522d;">filename</span>)              <span style="color: #b22222;">//5</span>
+<span style="color: #eedd82;">inputFiles</span>.<span style="color: #87cefa;">foreach</span> { <span style="color: #ff7f24;">//1</span>
+  <span style="color: #00ffff;">case</span> (<span style="color: #eedd82;">inputFile</span>, <span style="color: #eedd82;">filename</span>) =&gt; {
+    <span style="color: #87cefa;">ffmpegCommand</span>(<span style="color: #eedd82;">inputFile</span>, <span style="color: #eedd82;">filename</span>) <span style="color: #ff7f24;">//2</span>
+    <span style="color: #87cefa;">splitCommand</span>(<span style="color: #eedd82;">filename</span>)             <span style="color: #ff7f24;">//3</span>
+    <span style="color: #87cefa;">removeCommand</span>(<span style="color: #eedd82;">filename</span>)            <span style="color: #ff7f24;">//4</span>
+    <span style="color: #87cefa;">moveCommand</span>(<span style="color: #eedd82;">filename</span>)              <span style="color: #ff7f24;">//5</span>
   }
 }
 </pre>
@@ -242,9 +242,9 @@ from step 3.</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-org53ba3f3" class="outline-4">
-<h4 id="org53ba3f3">FFMPEG Command</h4>
-<div class="outline-text-4" id="text-org53ba3f3">
+<div id="outline-container-orgcb3a3e4" class="outline-4">
+<h4 id="orgcb3a3e4">FFMPEG Command</h4>
+<div class="outline-text-4" id="text-orgcb3a3e4">
 <p>
 Previously we just craft the command as a simple string with
 interpolated input and "run &amp; forget" it with the <code>!</code>
@@ -253,31 +253,31 @@ command <a href="https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/Shell
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala"><span style="color: #b22222;">// Before</span>
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">ffmpegCommand</span>(<span style="color: #a0522d;">inputFile</span>: <span style="color: #228b22;">String</span>, <span style="color: #a0522d;">outputFilename</span>: <span style="color: #228b22;">String</span>): <span style="color: #228b22;">Unit</span> = {
-  <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">ffmpegCmd</span> =
-    <span style="color: #0000ff;">s</span><span style="color: #8b2252;">"""ffmpeg -i "</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">startingPath</span><span style="color: #8b2252;">/</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">inputFile</span><span style="color: #8b2252;">" -c:v libxvid -b:v 1500k -c:a libmp3lame -qscale:a 4 -vf scale=720:-1 "</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">tempPath</span><span style="color: #8b2252;">/</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">outputFilename</span><span style="color: #8b2252;">.avi""""</span>
-  <span style="color: #a0522d;">ffmpegCmd</span> !
+<pre class="src src-scala"><span style="color: #ff7f24;">// Before</span>
+<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">ffmpegCommand</span>(<span style="color: #eedd82;">inputFile</span>: <span style="color: #98fb98;">String</span>, <span style="color: #eedd82;">outputFilename</span>: <span style="color: #98fb98;">String</span>): <span style="color: #98fb98;">Unit</span> = {
+  <span style="color: #00ffff;">val</span> <span style="color: #eedd82;">ffmpegCmd</span> =
+    <span style="color: #87cefa;">s</span><span style="color: #ffa07a;">"""ffmpeg -i "</span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">startingPath</span><span style="color: #ffa07a;">/</span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">inputFile</span><span style="color: #ffa07a;">" -c:v libxvid -b:v 1500k -c:a libmp3lame -qscale:a 4 -vf scale=720:-1 "</span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">tempPath</span><span style="color: #ffa07a;">/</span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">outputFilename</span><span style="color: #ffa07a;">.avi""""</span>
+  <span style="color: #eedd82;">ffmpegCmd</span> !
 }
 
-<span style="color: #b22222;">// After</span>
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">ffmpegCommand</span>(<span style="color: #a0522d;">inputFile</span>: <span style="color: #228b22;">String</span>, <span style="color: #a0522d;">outputFilename</span>: <span style="color: #228b22;">String</span>): <span style="color: #a0522d;">os</span>.<span style="color: #228b22;">CommandResult</span> =
-  <span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">proc</span>(
-    <span style="color: #8b2252;">"ffmpeg"</span>,
-    <span style="color: #8b2252;">"-i"</span>,
-    <span style="color: #a0522d;">startingPath</span> / <span style="color: #a0522d;">inputFile</span>,
-    <span style="color: #8b2252;">"-c:v"</span>,
-    <span style="color: #8b2252;">"libxvid"</span>,
-    <span style="color: #8b2252;">"-b:v"</span>,
-    <span style="color: #8b2252;">"1500k"</span>,
-    <span style="color: #8b2252;">"-c:a"</span>,
-    <span style="color: #8b2252;">"libmp3lame"</span>,
-    <span style="color: #8b2252;">"-qscale:a"</span>,
-    <span style="color: #8b2252;">"4"</span>,
-    <span style="color: #8b2252;">"-vf"</span>,
-    <span style="color: #8b2252;">"scale=720:-1"</span>,
-    <span style="color: #a0522d;">tempPath</span> / <span style="color: #0000ff;">s</span><span style="color: #8b2252;">"</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">outputFilename</span><span style="color: #8b2252;">.avi"</span>
-  ).<span style="color: #0000ff;">call</span>()
+<span style="color: #ff7f24;">// After</span>
+<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">ffmpegCommand</span>(<span style="color: #eedd82;">inputFile</span>: <span style="color: #98fb98;">String</span>, <span style="color: #eedd82;">outputFilename</span>: <span style="color: #98fb98;">String</span>): <span style="color: #eedd82;">os</span>.<span style="color: #98fb98;">CommandResult</span> =
+  <span style="color: #eedd82;">os</span>.<span style="color: #87cefa;">proc</span>(
+    <span style="color: #ffa07a;">"ffmpeg"</span>,
+    <span style="color: #ffa07a;">"-i"</span>,
+    <span style="color: #eedd82;">startingPath</span> / <span style="color: #eedd82;">inputFile</span>,
+    <span style="color: #ffa07a;">"-c:v"</span>,
+    <span style="color: #ffa07a;">"libxvid"</span>,
+    <span style="color: #ffa07a;">"-b:v"</span>,
+    <span style="color: #ffa07a;">"1500k"</span>,
+    <span style="color: #ffa07a;">"-c:a"</span>,
+    <span style="color: #ffa07a;">"libmp3lame"</span>,
+    <span style="color: #ffa07a;">"-qscale:a"</span>,
+    <span style="color: #ffa07a;">"4"</span>,
+    <span style="color: #ffa07a;">"-vf"</span>,
+    <span style="color: #ffa07a;">"scale=720:-1"</span>,
+    <span style="color: #eedd82;">tempPath</span> / <span style="color: #87cefa;">s</span><span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">outputFilename</span><span style="color: #ffa07a;">.avi"</span>
+  ).<span style="color: #87cefa;">call</span>()
 </pre>
 </div>
 
@@ -288,7 +288,7 @@ the <code>exitcode</code> of the <code>ffmpeg</code> process.
 </p>
 
 <p>
-<a id="org8ff13dc"></a>One could wonder why I didn't go for <a href="https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html">os.spawn</a> instead of <a href="https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html">os.call</a> in
+<a id="orge0553bb"></a>One could wonder why I didn't go for <a href="https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html">os.spawn</a> instead of <a href="https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html">os.call</a> in
 order to take advantage of sub-processing and parallelize the whole
 script. The issue here is that we don't know in advance how many
 files we will have to convert. In the scenario where there are
@@ -297,9 +297,9 @@ long-live <code>ffmpeg</code> sub-processes that will hang the whole system.
 </p>
 </div>
 </div>
-<div id="outline-container-org4069185" class="outline-4">
-<h4 id="org4069185">Split Command</h4>
-<div class="outline-text-4" id="text-org4069185">
+<div id="outline-container-orgaf30570" class="outline-4">
+<h4 id="orgaf30570">Split Command</h4>
+<div class="outline-text-4" id="text-orgaf30570">
 <p>
 The Split command still uses <code>ffmpeg</code> since we want these files to
 be playable and <code>ffmpeg</code> guarantees to produce a video file. We
@@ -318,90 +318,90 @@ parameters.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala"> <span style="color: #b22222;">// Before</span>
- <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">splitCommand</span>(<span style="color: #a0522d;">inputFilename</span>: <span style="color: #228b22;">String</span>): <span style="color: #228b22;">Unit</span> = {
-  <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">splitCmd</span> =
-    <span style="color: #0000ff;">s</span><span style="color: #8b2252;">"""ffmpeg -v quiet -y -i "</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">tempPath</span><span style="color: #8b2252;">/</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">inputFilename</span><span style="color: #8b2252;">.avi" -vcodec copy -acodec copy -ss 00:00:00 -t 01:00:00 -sn "</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">tempPath</span><span style="color: #8b2252;">/</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">{</span><span style="color: #a0522d;">inputFilename</span><span style="color: #a0522d;">}</span><span style="color: #8b2252;">_1.avi" -vcodec copy -acodec copy -ss 01:00:00 -t 01:00:00 -sn "</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">tempPath</span><span style="color: #8b2252;">/</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">{</span><span style="color: #a0522d;">inputFilename</span><span style="color: #a0522d;">}</span><span style="color: #8b2252;">_2.avi" -vcodec copy -acodec copy -ss 02:00:00 -t 01:00:00 -sn "</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">tempPath</span><span style="color: #8b2252;">/</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">{</span><span style="color: #a0522d;">inputFilename</span><span style="color: #a0522d;">}</span><span style="color: #8b2252;">_3.avi""""</span>
-  <span style="color: #a0522d;">splitCmd</span> !
+<pre class="src src-scala"> <span style="color: #ff7f24;">// Before</span>
+ <span style="color: #00ffff;">def</span> <span style="color: #87cefa;">splitCommand</span>(<span style="color: #eedd82;">inputFilename</span>: <span style="color: #98fb98;">String</span>): <span style="color: #98fb98;">Unit</span> = {
+  <span style="color: #00ffff;">val</span> <span style="color: #eedd82;">splitCmd</span> =
+    <span style="color: #87cefa;">s</span><span style="color: #ffa07a;">"""ffmpeg -v quiet -y -i "</span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">tempPath</span><span style="color: #ffa07a;">/</span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">inputFilename</span><span style="color: #ffa07a;">.avi" -vcodec copy -acodec copy -ss 00:00:00 -t 01:00:00 -sn "</span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">tempPath</span><span style="color: #ffa07a;">/</span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">{</span><span style="color: #eedd82;">inputFilename</span><span style="color: #eedd82;">}</span><span style="color: #ffa07a;">_1.avi" -vcodec copy -acodec copy -ss 01:00:00 -t 01:00:00 -sn "</span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">tempPath</span><span style="color: #ffa07a;">/</span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">{</span><span style="color: #eedd82;">inputFilename</span><span style="color: #eedd82;">}</span><span style="color: #ffa07a;">_2.avi" -vcodec copy -acodec copy -ss 02:00:00 -t 01:00:00 -sn "</span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">tempPath</span><span style="color: #ffa07a;">/</span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">{</span><span style="color: #eedd82;">inputFilename</span><span style="color: #eedd82;">}</span><span style="color: #ffa07a;">_3.avi""""</span>
+  <span style="color: #eedd82;">splitCmd</span> !
 }
 
-<span style="color: #b22222;">// After</span>
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">splitCommand</span>(<span style="color: #a0522d;">inputFilename</span>: <span style="color: #228b22;">String</span>): <span style="color: #a0522d;">os</span>.<span style="color: #228b22;">CommandResult</span> =
-  <span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">proc</span>(
-    <span style="color: #8b2252;">"ffmpeg"</span>,
-    <span style="color: #8b2252;">"-v"</span>,
-    <span style="color: #8b2252;">"quiet"</span>,
-    <span style="color: #8b2252;">"-y"</span>,
-    <span style="color: #8b2252;">"-i"</span>,
-    <span style="color: #a0522d;">tempPath</span> / <span style="color: #8b2252;">"$inputFilename.avi"</span>,
-    <span style="color: #8b2252;">"-vcodec"</span>,
-    <span style="color: #8b2252;">"copy"</span>,
-    <span style="color: #8b2252;">"-acodec"</span>,
-    <span style="color: #8b2252;">"copy"</span>,
-    <span style="color: #8b2252;">"-ss"</span>,
-    <span style="color: #8b2252;">"00:00:00"</span>,
-    <span style="color: #8b2252;">"-t"</span>,
-    <span style="color: #8b2252;">"01:00:00"</span>,
-    <span style="color: #8b2252;">"-sn"</span>,
-    <span style="color: #a0522d;">tempPath</span> / <span style="color: #8b2252;">"${inputFilename}_1.avi"</span>,
-    <span style="color: #8b2252;">"-vcodec"</span>,
-    <span style="color: #8b2252;">"copy"</span>,
-    <span style="color: #8b2252;">"-acodec"</span>,
-    <span style="color: #8b2252;">"copy"</span>,
-    <span style="color: #8b2252;">"-ss"</span>,
-    <span style="color: #8b2252;">"01:00:00"</span>,
-    <span style="color: #8b2252;">"-t"</span>,
-    <span style="color: #8b2252;">"01:00:00"</span>,
-    <span style="color: #8b2252;">"-sn"</span>,
-    <span style="color: #a0522d;">tempPath</span> / <span style="color: #8b2252;">"${inputFilename}_2.avi"</span>,
-    <span style="color: #8b2252;">"-vcodec"</span>,
-    <span style="color: #8b2252;">"copy"</span>,
-    <span style="color: #8b2252;">"-acodec"</span>,
-    <span style="color: #8b2252;">"copy"</span>,
-    <span style="color: #8b2252;">"-ss"</span>,
-    <span style="color: #8b2252;">"02:00:00"</span>,
-    <span style="color: #8b2252;">"-t"</span>,
-    <span style="color: #8b2252;">"01:00:00"</span>,
-    <span style="color: #8b2252;">"-sn"</span>,
-    <span style="color: #a0522d;">tempPath</span> / <span style="color: #8b2252;">"${inputFilename}_3.avi"</span>
-  ).<span style="color: #0000ff;">call</span>()
+<span style="color: #ff7f24;">// After</span>
+<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">splitCommand</span>(<span style="color: #eedd82;">inputFilename</span>: <span style="color: #98fb98;">String</span>): <span style="color: #eedd82;">os</span>.<span style="color: #98fb98;">CommandResult</span> =
+  <span style="color: #eedd82;">os</span>.<span style="color: #87cefa;">proc</span>(
+    <span style="color: #ffa07a;">"ffmpeg"</span>,
+    <span style="color: #ffa07a;">"-v"</span>,
+    <span style="color: #ffa07a;">"quiet"</span>,
+    <span style="color: #ffa07a;">"-y"</span>,
+    <span style="color: #ffa07a;">"-i"</span>,
+    <span style="color: #eedd82;">tempPath</span> / <span style="color: #ffa07a;">"$inputFilename.avi"</span>,
+    <span style="color: #ffa07a;">"-vcodec"</span>,
+    <span style="color: #ffa07a;">"copy"</span>,
+    <span style="color: #ffa07a;">"-acodec"</span>,
+    <span style="color: #ffa07a;">"copy"</span>,
+    <span style="color: #ffa07a;">"-ss"</span>,
+    <span style="color: #ffa07a;">"00:00:00"</span>,
+    <span style="color: #ffa07a;">"-t"</span>,
+    <span style="color: #ffa07a;">"01:00:00"</span>,
+    <span style="color: #ffa07a;">"-sn"</span>,
+    <span style="color: #eedd82;">tempPath</span> / <span style="color: #ffa07a;">"${inputFilename}_1.avi"</span>,
+    <span style="color: #ffa07a;">"-vcodec"</span>,
+    <span style="color: #ffa07a;">"copy"</span>,
+    <span style="color: #ffa07a;">"-acodec"</span>,
+    <span style="color: #ffa07a;">"copy"</span>,
+    <span style="color: #ffa07a;">"-ss"</span>,
+    <span style="color: #ffa07a;">"01:00:00"</span>,
+    <span style="color: #ffa07a;">"-t"</span>,
+    <span style="color: #ffa07a;">"01:00:00"</span>,
+    <span style="color: #ffa07a;">"-sn"</span>,
+    <span style="color: #eedd82;">tempPath</span> / <span style="color: #ffa07a;">"${inputFilename}_2.avi"</span>,
+    <span style="color: #ffa07a;">"-vcodec"</span>,
+    <span style="color: #ffa07a;">"copy"</span>,
+    <span style="color: #ffa07a;">"-acodec"</span>,
+    <span style="color: #ffa07a;">"copy"</span>,
+    <span style="color: #ffa07a;">"-ss"</span>,
+    <span style="color: #ffa07a;">"02:00:00"</span>,
+    <span style="color: #ffa07a;">"-t"</span>,
+    <span style="color: #ffa07a;">"01:00:00"</span>,
+    <span style="color: #ffa07a;">"-sn"</span>,
+    <span style="color: #eedd82;">tempPath</span> / <span style="color: #ffa07a;">"${inputFilename}_3.avi"</span>
+  ).<span style="color: #87cefa;">call</span>()
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orge3ec497" class="outline-4">
-<h4 id="orge3ec497">Remove Command</h4>
-<div class="outline-text-4" id="text-orge3ec497">
+<div id="outline-container-orge460f94" class="outline-4">
+<h4 id="orge460f94">Remove Command</h4>
+<div class="outline-text-4" id="text-orge460f94">
 <p>
 The remove command is straightforward to translate to the new
 library since it exposes <a href="https://github.com/com-lihaoyi/os-lib#osremove">os.remove</a> that removes a file if exists.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala"><span style="color: #b22222;">// Before</span>
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">removeCommand</span>(<span style="color: #a0522d;">inputFilename</span>: <span style="color: #228b22;">String</span>): <span style="color: #228b22;">Unit</span> = {
-  <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">removeCmd</span> = <span style="color: #0000ff;">s</span><span style="color: #8b2252;">"""rm "</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">tempPath</span><span style="color: #8b2252;">/</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">inputFilename</span><span style="color: #8b2252;">.avi""""</span>
-  <span style="color: #a0522d;">removeCmd</span> !
+<pre class="src src-scala"><span style="color: #ff7f24;">// Before</span>
+<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">removeCommand</span>(<span style="color: #eedd82;">inputFilename</span>: <span style="color: #98fb98;">String</span>): <span style="color: #98fb98;">Unit</span> = {
+  <span style="color: #00ffff;">val</span> <span style="color: #eedd82;">removeCmd</span> = <span style="color: #87cefa;">s</span><span style="color: #ffa07a;">"""rm "</span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">tempPath</span><span style="color: #ffa07a;">/</span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">inputFilename</span><span style="color: #ffa07a;">.avi""""</span>
+  <span style="color: #eedd82;">removeCmd</span> !
 }
 
-<span style="color: #b22222;">// After</span>
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">removeCommand</span>(<span style="color: #a0522d;">inputFilename</span>: <span style="color: #228b22;">String</span>): <span style="color: #228b22;">Unit</span> =
-  <span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">remove</span>(<span style="color: #a0522d;">tempPath</span>/<span style="color: #0000ff;">s</span><span style="color: #8b2252;">"</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">inputFilename</span><span style="color: #8b2252;">.avi"</span>)
+<span style="color: #ff7f24;">// After</span>
+<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">removeCommand</span>(<span style="color: #eedd82;">inputFilename</span>: <span style="color: #98fb98;">String</span>): <span style="color: #98fb98;">Unit</span> =
+  <span style="color: #eedd82;">os</span>.<span style="color: #87cefa;">remove</span>(<span style="color: #eedd82;">tempPath</span>/<span style="color: #87cefa;">s</span><span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">inputFilename</span><span style="color: #ffa07a;">.avi"</span>)
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org03c9e6d" class="outline-4">
-<h4 id="org03c9e6d">List Files</h4>
-<div class="outline-text-4" id="text-org03c9e6d">
+<div id="outline-container-org9ab1917" class="outline-4">
+<h4 id="org9ab1917">List Files</h4>
+<div class="outline-text-4" id="text-org9ab1917">
 <p>
 Right now, there is this function in the script:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">getListOfFiles</span>(<span style="color: #a0522d;">dir</span>: <span style="color: #228b22;">File</span>, <span style="color: #a0522d;">prefix</span>: <span style="color: #228b22;">String</span>): <span style="color: #228b22;">List</span>[<span style="color: #228b22;">File</span>] = {
-<span style="color: #a0522d;">dir</span>.<span style="color: #a0522d;">listFiles</span>.<span style="color: #0000ff;">filter</span>(<span style="color: #483d8b;">_</span>.<span style="color: #a0522d;">isFile</span>).<span style="color: #a0522d;">toList</span>.<span style="color: #0000ff;">filter</span> { <span style="color: #a0522d;">file</span> =&gt;
-    <span style="color: #a0522d;">file</span>.<span style="color: #a0522d;">getName</span>.<span style="color: #0000ff;">startsWith</span>(<span style="color: #a0522d;">prefix</span>)
+<pre class="src src-scala"><span style="color: #00ffff;">def</span> <span style="color: #87cefa;">getListOfFiles</span>(<span style="color: #eedd82;">dir</span>: <span style="color: #98fb98;">File</span>, <span style="color: #eedd82;">prefix</span>: <span style="color: #98fb98;">String</span>): <span style="color: #98fb98;">List</span>[<span style="color: #98fb98;">File</span>] = {
+<span style="color: #eedd82;">dir</span>.<span style="color: #eedd82;">listFiles</span>.<span style="color: #87cefa;">filter</span>(<span style="color: #b0c4de;">_</span>.<span style="color: #eedd82;">isFile</span>).<span style="color: #eedd82;">toList</span>.<span style="color: #87cefa;">filter</span> { <span style="color: #eedd82;">file</span> =&gt;
+    <span style="color: #eedd82;">file</span>.<span style="color: #eedd82;">getName</span>.<span style="color: #87cefa;">startsWith</span>(<span style="color: #eedd82;">prefix</span>)
   }
 }
 </pre>
@@ -419,21 +419,21 @@ results with the same <code>filter</code> used above.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala"><span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">list</span>(<span style="color: #0000ff;">path</span>()).<span style="color: #0000ff;">filter</span>(<span style="color: #a0522d;">f</span> =&gt; <span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">isFile</span>(<span style="color: #a0522d;">f</span>) &amp;&amp; <span style="color: #8b2252;">"gif[0-9]+.mp4"</span>.<span style="color: #a0522d;">r</span>.<span style="color: #0000ff;">matches</span>(<span style="color: #a0522d;">f</span>.<span style="color: #a0522d;">last</span>))
+<pre class="src src-scala"><span style="color: #eedd82;">os</span>.<span style="color: #87cefa;">list</span>(<span style="color: #87cefa;">path</span>()).<span style="color: #87cefa;">filter</span>(<span style="color: #eedd82;">f</span> =&gt; <span style="color: #eedd82;">os</span>.<span style="color: #87cefa;">isFile</span>(<span style="color: #eedd82;">f</span>) &amp;&amp; <span style="color: #ffa07a;">"gif[0-9]+.mp4"</span>.<span style="color: #eedd82;">r</span>.<span style="color: #87cefa;">matches</span>(<span style="color: #eedd82;">f</span>.<span style="color: #eedd82;">last</span>))
 </pre>
 </div>
 <p>
 I want to underline this error message I got, really really nice!
 </p>
 
-<pre class="example" id="orgda8d1e9">
+<pre class="example" id="org971f5ac">
 value IsFile is not a member of os - did you mean os.isFile?
 </pre>
 </div>
 </div>
-<div id="outline-container-orgd677a21" class="outline-4">
-<h4 id="orgd677a21">Move Files</h4>
-<div class="outline-text-4" id="text-orgd677a21">
+<div id="outline-container-orgc174266" class="outline-4">
+<h4 id="orgc174266">Move Files</h4>
+<div class="outline-text-4" id="text-orgc174266">
 <p>
 We can then move the files listed and filtered in the previous
 section with just a simple <code>foreach</code> and the help of the
@@ -452,44 +452,44 @@ The result becomes:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala"><span style="color: #b22222;">// Before</span>
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">moveCommand</span>(<span style="color: #a0522d;">inputFilename</span>: <span style="color: #228b22;">String</span>):<span style="color: #228b22;">Unit</span> = {
-  <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">filesToMove</span> = <span style="color: #0000ff;">getListOfFiles</span>(<span style="color: #a020f0;">new</span> <span style="color: #228b22;">File</span>(<span style="color: #a0522d;">tempPath</span>), <span style="color: #a0522d;">inputFilename</span>)
-  <span style="color: #a0522d;">filesToMove</span>.<span style="color: #0000ff;">foreach</span> { <span style="color: #a0522d;">file</span> =&gt;
-    <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">moveCmd</span> = <span style="color: #0000ff;">s</span><span style="color: #8b2252;">"""mv </span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">tempPath</span><span style="color: #8b2252;">/</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">{</span><span style="color: #a0522d;">file</span><span style="color: #a0522d;">.</span><span style="color: #a0522d;">getName</span><span style="color: #a0522d;">}</span><span style="color: #8b2252;"> "</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">destinationPath</span><span style="color: #8b2252;">/""""</span>
-    <span style="color: #a0522d;">moveCmd</span> !
+<pre class="src src-scala"><span style="color: #ff7f24;">// Before</span>
+<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">moveCommand</span>(<span style="color: #eedd82;">inputFilename</span>: <span style="color: #98fb98;">String</span>):<span style="color: #98fb98;">Unit</span> = {
+  <span style="color: #00ffff;">val</span> <span style="color: #eedd82;">filesToMove</span> = <span style="color: #87cefa;">getListOfFiles</span>(<span style="color: #00ffff;">new</span> <span style="color: #98fb98;">File</span>(<span style="color: #eedd82;">tempPath</span>), <span style="color: #eedd82;">inputFilename</span>)
+  <span style="color: #eedd82;">filesToMove</span>.<span style="color: #87cefa;">foreach</span> { <span style="color: #eedd82;">file</span> =&gt;
+    <span style="color: #00ffff;">val</span> <span style="color: #eedd82;">moveCmd</span> = <span style="color: #87cefa;">s</span><span style="color: #ffa07a;">"""mv </span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">tempPath</span><span style="color: #ffa07a;">/</span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">{</span><span style="color: #eedd82;">file</span><span style="color: #eedd82;">.</span><span style="color: #eedd82;">getName</span><span style="color: #eedd82;">}</span><span style="color: #ffa07a;"> "</span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">destinationPath</span><span style="color: #ffa07a;">/""""</span>
+    <span style="color: #eedd82;">moveCmd</span> !
   }
 }
 
-<span style="color: #b22222;">// After</span>
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">moveCommand</span>(<span style="color: #a0522d;">inputFilename</span>: <span style="color: #228b22;">String</span>): <span style="color: #228b22;">Unit</span> =
-  <span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">list</span>(<span style="color: #a0522d;">tempPath</span>)
-    .<span style="color: #0000ff;">filter</span>(<span style="color: #a0522d;">p</span> =&gt; <span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">isFile</span>(<span style="color: #a0522d;">p</span>) &amp;&amp; <span style="color: #a0522d;">p</span>.<span style="color: #a0522d;">last</span>.<span style="color: #0000ff;">startsWith</span>(<span style="color: #a0522d;">inputFilename</span>))
-    .<span style="color: #0000ff;">foreach</span>(<span style="color: #a0522d;">f</span> =&gt; <span style="color: #a0522d;">os</span>.<span style="color: #a0522d;">move</span>.<span style="color: #0000ff;">into</span>(<span style="color: #a0522d;">f</span>, <span style="color: #a0522d;">destinationPath</span>))
+<span style="color: #ff7f24;">// After</span>
+<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">moveCommand</span>(<span style="color: #eedd82;">inputFilename</span>: <span style="color: #98fb98;">String</span>): <span style="color: #98fb98;">Unit</span> =
+  <span style="color: #eedd82;">os</span>.<span style="color: #87cefa;">list</span>(<span style="color: #eedd82;">tempPath</span>)
+    .<span style="color: #87cefa;">filter</span>(<span style="color: #eedd82;">p</span> =&gt; <span style="color: #eedd82;">os</span>.<span style="color: #87cefa;">isFile</span>(<span style="color: #eedd82;">p</span>) &amp;&amp; <span style="color: #eedd82;">p</span>.<span style="color: #eedd82;">last</span>.<span style="color: #87cefa;">startsWith</span>(<span style="color: #eedd82;">inputFilename</span>))
+    .<span style="color: #87cefa;">foreach</span>(<span style="color: #eedd82;">f</span> =&gt; <span style="color: #eedd82;">os</span>.<span style="color: #eedd82;">move</span>.<span style="color: #87cefa;">into</span>(<span style="color: #eedd82;">f</span>, <span style="color: #eedd82;">destinationPath</span>))
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orge98bc42" class="outline-4">
-<h4 id="orge98bc42">Final Cleanup</h4>
-<div class="outline-text-4" id="text-orge98bc42">
+<div id="outline-container-org30a3989" class="outline-4">
+<h4 id="org30a3989">Final Cleanup</h4>
+<div class="outline-text-4" id="text-org30a3989">
 <p>
 Now we can finally remove the useless imports! We can get rid of:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala"><span style="color: #a020f0;">import</span> <span style="color: #a0522d;">sys</span>.<span style="color: #a0522d;">process</span>._
-<span style="color: #a020f0;">import</span> <span style="color: #a0522d;">scala</span>.<span style="color: #a0522d;">language</span>.<span style="color: #a0522d;">postfixOps</span>
-<span style="color: #a020f0;">import</span> <span style="color: #a0522d;">java</span>.<span style="color: #a0522d;">io</span>.<span style="color: #a0522d;">File</span>
+<pre class="src src-scala"><span style="color: #00ffff;">import</span> <span style="color: #eedd82;">sys</span>.<span style="color: #eedd82;">process</span>._
+<span style="color: #00ffff;">import</span> <span style="color: #eedd82;">scala</span>.<span style="color: #eedd82;">language</span>.<span style="color: #eedd82;">postfixOps</span>
+<span style="color: #00ffff;">import</span> <span style="color: #eedd82;">java</span>.<span style="color: #eedd82;">io</span>.<span style="color: #eedd82;">File</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org4dd2c02" class="outline-4">
-<h4 id="org4dd2c02">Parallel Collection</h4>
-<div class="outline-text-4" id="text-org4dd2c02">
+<div id="outline-container-org454e1dc" class="outline-4">
+<h4 id="org454e1dc">Parallel Collection</h4>
+<div class="outline-text-4" id="text-org454e1dc">
 <p>
-We introduced the idea of parallelising the computation in <a href="#org8ff13dc">the ffmpeg
+We introduced the idea of parallelising the computation in <a href="#orge0553bb">the ffmpeg
 subsection</a> when we talked about <a href="https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html">os.spawn</a>, saying it's not convenient
 at that point. However, we can do something using <a href="https://github.com/scala/scala-parallel-collections">parallel collections</a>.
 </p>
@@ -513,33 +513,33 @@ The final entry point looks like this:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala"><span style="color: #a020f0;">val</span> <span style="color: #a0522d;">inputFiles</span>: <span style="color: #228b22;">ParSeq</span>[(<span style="color: #228b22;">String</span>, <span style="color: #228b22;">String</span>)] = <span style="color: #0000ff;">List</span>(
-  (<span style="color: #8b2252;">"movie.avi"</span>, <span style="color: #8b2252;">"movie"</span>),
-  (<span style="color: #8b2252;">"film.avi"</span>, <span style="color: #8b2252;">"film"</span>)
-).<span style="color: #a0522d;">par</span>
+<pre class="src src-scala"><span style="color: #00ffff;">val</span> <span style="color: #eedd82;">inputFiles</span>: <span style="color: #98fb98;">ParSeq</span>[(<span style="color: #98fb98;">String</span>, <span style="color: #98fb98;">String</span>)] = <span style="color: #87cefa;">List</span>(
+  (<span style="color: #ffa07a;">"movie.avi"</span>, <span style="color: #ffa07a;">"movie"</span>),
+  (<span style="color: #ffa07a;">"film.avi"</span>, <span style="color: #ffa07a;">"film"</span>)
+).<span style="color: #eedd82;">par</span>
 
-<span style="color: #a020f0;">val</span> <span style="color: #a0522d;">forkJoinPool</span> = <span style="color: #a020f0;">new</span> <span style="color: #a0522d;">java</span>.<span style="color: #a0522d;">util</span>.<span style="color: #a0522d;">concurrent</span>.<span style="color: #228b22;">ForkJoinPool</span>(2)
-<span style="color: #a0522d;">inputFiles</span>.<span style="color: #a0522d;">tasksupport</span> = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">ForkJoinTaskSupport</span>(<span style="color: #a0522d;">forkJoinPool</span>)
+<span style="color: #00ffff;">val</span> <span style="color: #eedd82;">forkJoinPool</span> = <span style="color: #00ffff;">new</span> <span style="color: #eedd82;">java</span>.<span style="color: #eedd82;">util</span>.<span style="color: #eedd82;">concurrent</span>.<span style="color: #98fb98;">ForkJoinPool</span>(2)
+<span style="color: #eedd82;">inputFiles</span>.<span style="color: #eedd82;">tasksupport</span> = <span style="color: #00ffff;">new</span> <span style="color: #98fb98;">ForkJoinTaskSupport</span>(<span style="color: #eedd82;">forkJoinPool</span>)
 
-<span style="color: #a0522d;">inputFiles</span>.<span style="color: #0000ff;">foreach</span> {
-  <span style="color: #a020f0;">case</span> (<span style="color: #a0522d;">inputFile</span>, <span style="color: #a0522d;">filename</span>) =&gt; {
-    <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">ffmpegEC</span> = <span style="color: #0000ff;">ffmpegCommand</span>(<span style="color: #a0522d;">inputFile</span>, <span style="color: #a0522d;">filename</span>).<span style="color: #a0522d;">exitCode</span>
-    <span style="color: #a020f0;">if</span> (<span style="color: #a0522d;">ffmpegEC</span> == 0) {
-      <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">splitEC</span> = <span style="color: #0000ff;">splitCommand</span>(<span style="color: #a0522d;">filename</span>).<span style="color: #a0522d;">exitCode</span>
-      <span style="color: #a020f0;">if</span> (<span style="color: #a0522d;">splitEC</span> == 0)
-        <span style="color: #0000ff;">removeCommand</span>(<span style="color: #a0522d;">filename</span>)
-        <span style="color: #0000ff;">moveCommand</span>(<span style="color: #a0522d;">filename</span>)
-      <span style="color: #a020f0;">else</span> <span style="color: #0000ff;">println</span>(<span style="color: #0000ff;">s</span><span style="color: #8b2252;">"split failed for </span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">filename</span><span style="color: #8b2252;">"</span>)
-    } <span style="color: #a020f0;">else</span> <span style="color: #0000ff;">println</span>(<span style="color: #0000ff;">s</span><span style="color: #8b2252;">"ffmpeg command failed for </span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">inputFile</span><span style="color: #8b2252;">"</span>)
+<span style="color: #eedd82;">inputFiles</span>.<span style="color: #87cefa;">foreach</span> {
+  <span style="color: #00ffff;">case</span> (<span style="color: #eedd82;">inputFile</span>, <span style="color: #eedd82;">filename</span>) =&gt; {
+    <span style="color: #00ffff;">val</span> <span style="color: #eedd82;">ffmpegEC</span> = <span style="color: #87cefa;">ffmpegCommand</span>(<span style="color: #eedd82;">inputFile</span>, <span style="color: #eedd82;">filename</span>).<span style="color: #eedd82;">exitCode</span>
+    <span style="color: #00ffff;">if</span> (<span style="color: #eedd82;">ffmpegEC</span> == 0) {
+      <span style="color: #00ffff;">val</span> <span style="color: #eedd82;">splitEC</span> = <span style="color: #87cefa;">splitCommand</span>(<span style="color: #eedd82;">filename</span>).<span style="color: #eedd82;">exitCode</span>
+      <span style="color: #00ffff;">if</span> (<span style="color: #eedd82;">splitEC</span> == 0)
+        <span style="color: #87cefa;">removeCommand</span>(<span style="color: #eedd82;">filename</span>)
+        <span style="color: #87cefa;">moveCommand</span>(<span style="color: #eedd82;">filename</span>)
+      <span style="color: #00ffff;">else</span> <span style="color: #87cefa;">println</span>(<span style="color: #87cefa;">s</span><span style="color: #ffa07a;">"split failed for </span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">filename</span><span style="color: #ffa07a;">"</span>)
+    } <span style="color: #00ffff;">else</span> <span style="color: #87cefa;">println</span>(<span style="color: #87cefa;">s</span><span style="color: #ffa07a;">"ffmpeg command failed for </span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">inputFile</span><span style="color: #ffa07a;">"</span>)
   }
 }
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org632c8d0" class="outline-4">
-<h4 id="org632c8d0">Testing</h4>
-<div class="outline-text-4" id="text-org632c8d0">
+<div id="outline-container-org149dbdc" class="outline-4">
+<h4 id="org149dbdc">Testing</h4>
+<div class="outline-text-4" id="text-org149dbdc">
 <p>
 I just tried the script after the above changes and I discovered
 that it just hang 😯 🤕
@@ -565,10 +565,10 @@ The final change is:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">tempPath</span>(<span style="color: #a0522d;">inputFile</span>:<span style="color: #228b22;">String</span>) =
-  <span style="color: #a020f0;">if</span> (<span style="color: #a0522d;">inputFile</span>.<span style="color: #a0522d;">isEmpty</span>) <span style="color: #a0522d;">os</span>.<span style="color: #a0522d;">home</span>/<span style="color: #8b2252;">"temp"</span> <span style="color: #a020f0;">else</span> <span style="color: #a0522d;">os</span>.<span style="color: #a0522d;">home</span>/<span style="color: #8b2252;">"temp"</span>/<span style="color: #a0522d;">inputFile</span>
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">startingPath</span>(<span style="color: #a0522d;">inputFile</span>:<span style="color: #228b22;">String</span>): <span style="color: #a0522d;">os</span>.<span style="color: #228b22;">Path</span> =
-  <span style="color: #a020f0;">if</span> (<span style="color: #a0522d;">inputFile</span>.<span style="color: #a0522d;">isEmpty</span>) <span style="color: #a0522d;">os</span>.<span style="color: #a0522d;">home</span>/<span style="color: #8b2252;">"temp"</span>/<span style="color: #8b2252;">"test"</span> <span style="color: #a020f0;">else</span> <span style="color: #a0522d;">os</span>.<span style="color: #a0522d;">home</span>/<span style="color: #8b2252;">"temp"</span>/<span style="color: #8b2252;">"test"</span>/<span style="color: #a0522d;">inputFile</span>
+<pre class="src src-scala"><span style="color: #00ffff;">def</span> <span style="color: #87cefa;">tempPath</span>(<span style="color: #eedd82;">inputFile</span>:<span style="color: #98fb98;">String</span>) =
+  <span style="color: #00ffff;">if</span> (<span style="color: #eedd82;">inputFile</span>.<span style="color: #eedd82;">isEmpty</span>) <span style="color: #eedd82;">os</span>.<span style="color: #eedd82;">home</span>/<span style="color: #ffa07a;">"temp"</span> <span style="color: #00ffff;">else</span> <span style="color: #eedd82;">os</span>.<span style="color: #eedd82;">home</span>/<span style="color: #ffa07a;">"temp"</span>/<span style="color: #eedd82;">inputFile</span>
+<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">startingPath</span>(<span style="color: #eedd82;">inputFile</span>:<span style="color: #98fb98;">String</span>): <span style="color: #eedd82;">os</span>.<span style="color: #98fb98;">Path</span> =
+  <span style="color: #00ffff;">if</span> (<span style="color: #eedd82;">inputFile</span>.<span style="color: #eedd82;">isEmpty</span>) <span style="color: #eedd82;">os</span>.<span style="color: #eedd82;">home</span>/<span style="color: #ffa07a;">"temp"</span>/<span style="color: #ffa07a;">"test"</span> <span style="color: #00ffff;">else</span> <span style="color: #eedd82;">os</span>.<span style="color: #eedd82;">home</span>/<span style="color: #ffa07a;">"temp"</span>/<span style="color: #ffa07a;">"test"</span>/<span style="color: #eedd82;">inputFile</span>
 </pre>
 </div>
 
@@ -578,10 +578,10 @@ function (probably a def would work as well), in this way:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">moveCommand</span>(<span style="color: #a0522d;">inputFilename</span>: <span style="color: #228b22;">String</span>): <span style="color: #228b22;">Unit</span> =
-  <span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">list</span>(<span style="color: #0000ff;">tempPath</span>(<span style="color: #8b2252;">""</span>))
-    .<span style="color: #0000ff;">filter</span>(<span style="color: #a0522d;">p</span> =&gt; <span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">isFile</span>(<span style="color: #a0522d;">p</span>) &amp;&amp; <span style="color: #a0522d;">p</span>.<span style="color: #a0522d;">last</span>.<span style="color: #0000ff;">startsWith</span>(<span style="color: #a0522d;">inputFilename</span>))
-    .<span style="color: #0000ff;">foreach</span>(<span style="color: #a0522d;">os</span>.<span style="color: #a0522d;">move</span>.<span style="color: #0000ff;">into</span>(<span style="color: #483d8b;">_</span>, <span style="color: #a0522d;">os</span>.<span style="color: #a0522d;">home</span>/<span style="color: #8b2252;">"temp"</span>/<span style="color: #8b2252;">"convertedFilms"</span>))
+<pre class="src src-scala"><span style="color: #00ffff;">def</span> <span style="color: #87cefa;">moveCommand</span>(<span style="color: #eedd82;">inputFilename</span>: <span style="color: #98fb98;">String</span>): <span style="color: #98fb98;">Unit</span> =
+  <span style="color: #eedd82;">os</span>.<span style="color: #87cefa;">list</span>(<span style="color: #87cefa;">tempPath</span>(<span style="color: #ffa07a;">""</span>))
+    .<span style="color: #87cefa;">filter</span>(<span style="color: #eedd82;">p</span> =&gt; <span style="color: #eedd82;">os</span>.<span style="color: #87cefa;">isFile</span>(<span style="color: #eedd82;">p</span>) &amp;&amp; <span style="color: #eedd82;">p</span>.<span style="color: #eedd82;">last</span>.<span style="color: #87cefa;">startsWith</span>(<span style="color: #eedd82;">inputFilename</span>))
+    .<span style="color: #87cefa;">foreach</span>(<span style="color: #eedd82;">os</span>.<span style="color: #eedd82;">move</span>.<span style="color: #87cefa;">into</span>(<span style="color: #b0c4de;">_</span>, <span style="color: #eedd82;">os</span>.<span style="color: #eedd82;">home</span>/<span style="color: #ffa07a;">"temp"</span>/<span style="color: #ffa07a;">"convertedFilms"</span>))
 </pre>
 </div>
 
@@ -590,7 +590,7 @@ I tried to use <code>lazy val</code>, but it didn't help as well.
 Maybe I did some errors along the way? missing some import? I don't
 know really. If you have more experience with the library and you
 know where the problem is please let me know. You can
-find the final code in the <a href="#org23c4ff4">References</a> section.
+find the final code in the <a href="#orgdc73693">References</a> section.
 </p>
 
 <p>
@@ -606,39 +606,39 @@ processes' outputs as you might expect in a multi-thread program.
 </div>
 </div>
 </div>
-<div id="outline-container-orgb7de467" class="outline-3">
-<h3 id="orgb7de467">Youtube to GIF Script</h3>
-<div class="outline-text-3" id="text-orgb7de467">
+<div id="outline-container-org8ab6e49" class="outline-3">
+<h3 id="org8ab6e49">Youtube to GIF Script</h3>
+<div class="outline-text-3" id="text-org8ab6e49">
 <p>
 This script also includes some additional code for converting time
 measures, modeling the input of subtitles, subtitle position,
 fonts, cutting of the video, spacing between subtitles,
 and so on. In order to focus only on the library and keep this
 article short, I'll just skip all of that. Please follow the link in
-the <a href="#org23c4ff4">References</a> section if you are interested.
+the <a href="#orgdc73693">References</a> section if you are interested.
 </p>
 </div>
-<div id="outline-container-orgaa6c4b0" class="outline-4">
-<h4 id="orgaa6c4b0">File Paths</h4>
-<div class="outline-text-4" id="text-orgaa6c4b0">
+<div id="outline-container-org1fdaa7d" class="outline-4">
+<h4 id="org1fdaa7d">File Paths</h4>
+<div class="outline-text-4" id="text-org1fdaa7d">
 <p>
-We have already talked about <a href="#orgaa6c4b0">File Paths</a> in the previous
+We have already talked about <a href="#org1fdaa7d">File Paths</a> in the previous
 section. Here I just share the changes in this specific case.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala"><span style="color: #b22222;">// Before</span>
-<span style="color: #a020f0;">val</span> <span style="color: #a0522d;">path</span> = <span style="color: #8b2252;">"/Users/benkio/temp"</span>
-<span style="color: #b22222;">// After</span>
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">path</span>(<span style="color: #a0522d;">file</span>: <span style="color: #228b22;">String</span> = <span style="color: #8b2252;">""</span>): <span style="color: #a0522d;">os</span>.<span style="color: #228b22;">Path</span> =
-  <span style="color: #a020f0;">if</span> (<span style="color: #a0522d;">file</span>.<span style="color: #a0522d;">isEmpty</span>) <span style="color: #a0522d;">os</span>.<span style="color: #a0522d;">home</span>/<span style="color: #8b2252;">"temp"</span> <span style="color: #a020f0;">else</span> <span style="color: #a0522d;">os</span>.<span style="color: #a0522d;">home</span>/<span style="color: #8b2252;">"temp"</span>/<span style="color: #a0522d;">file</span>
+<pre class="src src-scala"><span style="color: #ff7f24;">// Before</span>
+<span style="color: #00ffff;">val</span> <span style="color: #eedd82;">path</span> = <span style="color: #ffa07a;">"/Users/benkio/temp"</span>
+<span style="color: #ff7f24;">// After</span>
+<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">path</span>(<span style="color: #eedd82;">file</span>: <span style="color: #98fb98;">String</span> = <span style="color: #ffa07a;">""</span>): <span style="color: #eedd82;">os</span>.<span style="color: #98fb98;">Path</span> =
+  <span style="color: #00ffff;">if</span> (<span style="color: #eedd82;">file</span>.<span style="color: #eedd82;">isEmpty</span>) <span style="color: #eedd82;">os</span>.<span style="color: #eedd82;">home</span>/<span style="color: #ffa07a;">"temp"</span> <span style="color: #00ffff;">else</span> <span style="color: #eedd82;">os</span>.<span style="color: #eedd82;">home</span>/<span style="color: #ffa07a;">"temp"</span>/<span style="color: #eedd82;">file</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orge10b913" class="outline-4">
-<h4 id="orge10b913">File System Functions</h4>
-<div class="outline-text-4" id="text-orge10b913">
+<div id="outline-container-org2fb0d8b" class="outline-4">
+<h4 id="org2fb0d8b">File System Functions</h4>
+<div class="outline-text-4" id="text-org2fb0d8b">
 <p>
 The <i>Youtube to Gif</i> script takes advantage of more file system
 functions compared to the previous script and here is actually where
@@ -655,70 +655,70 @@ the process and save an additional step.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala"><span style="color: #b22222;">// Before</span>
-<span style="color: #b22222;">// File System Functions</span>
+<pre class="src src-scala"><span style="color: #ff7f24;">// Before</span>
+<span style="color: #ff7f24;">// File System Functions</span>
 
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">changeDirectory</span>(<span style="color: #a0522d;">dir</span>: <span style="color: #228b22;">String</span>): <span style="color: #228b22;">Unit</span> = <span style="color: #a0522d;">System</span>.<span style="color: #0000ff;">setProperty</span>(<span style="color: #8b2252;">"user.dir"</span>, <span style="color: #a0522d;">dir</span>)
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">moveToTemp</span> = <span style="color: #0000ff;">changeDirectory</span>(<span style="color: #a0522d;">path</span>)
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">writeSubtitles</span>(<span style="color: #a0522d;">content</span>: <span style="color: #228b22;">String</span>, <span style="color: #a0522d;">outputFilename</span>: <span style="color: #228b22;">String</span>): <span style="color: #228b22;">Unit</span> = {
-  <span style="color: #0000ff;">println</span>(<span style="color: #8b2252;">"srt content: "</span> + <span style="color: #a0522d;">content</span>)
-  <span style="color: #a0522d;">Files</span>.<span style="color: #0000ff;">write</span>(<span style="color: #a0522d;">Paths</span>.<span style="color: #0000ff;">get</span>(<span style="color: #a0522d;">outputFilename</span>), <span style="color: #a0522d;">content</span>.<span style="color: #0000ff;">getBytes</span>(<span style="color: #a0522d;">StandardCharsets</span>.<span style="color: #a0522d;">UTF_8</span>))
+<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">changeDirectory</span>(<span style="color: #eedd82;">dir</span>: <span style="color: #98fb98;">String</span>): <span style="color: #98fb98;">Unit</span> = <span style="color: #eedd82;">System</span>.<span style="color: #87cefa;">setProperty</span>(<span style="color: #ffa07a;">"user.dir"</span>, <span style="color: #eedd82;">dir</span>)
+<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">moveToTemp</span> = <span style="color: #87cefa;">changeDirectory</span>(<span style="color: #eedd82;">path</span>)
+<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">writeSubtitles</span>(<span style="color: #eedd82;">content</span>: <span style="color: #98fb98;">String</span>, <span style="color: #eedd82;">outputFilename</span>: <span style="color: #98fb98;">String</span>): <span style="color: #98fb98;">Unit</span> = {
+  <span style="color: #87cefa;">println</span>(<span style="color: #ffa07a;">"srt content: "</span> + <span style="color: #eedd82;">content</span>)
+  <span style="color: #eedd82;">Files</span>.<span style="color: #87cefa;">write</span>(<span style="color: #eedd82;">Paths</span>.<span style="color: #87cefa;">get</span>(<span style="color: #eedd82;">outputFilename</span>), <span style="color: #eedd82;">content</span>.<span style="color: #87cefa;">getBytes</span>(<span style="color: #eedd82;">StandardCharsets</span>.<span style="color: #eedd82;">UTF_8</span>))
 }
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">removeCommand</span>(<span style="color: #a0522d;">inputFilename</span>:<span style="color: #228b22;">String</span>): <span style="color: #228b22;">Unit</span> = {
-  <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">removeCmd</span> = <span style="color: #0000ff;">s</span><span style="color: #8b2252;">"""rm "</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">path</span><span style="color: #8b2252;">/</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">inputFilename</span><span style="color: #8b2252;">""""</span>
-  <span style="color: #0000ff;">println</span>(<span style="color: #8b2252;">"removeCmd: "</span> + <span style="color: #a0522d;">removeCmd</span>)
-  <span style="color: #8b2252;">"sleep 1"</span> #&amp;&amp; <span style="color: #a0522d;">removeCmd</span> !
-}
-
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">getListOfOutputFiles</span>():<span style="color: #228b22;">List</span>[<span style="color: #228b22;">File</span>] = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">File</span>(<span style="color: #a0522d;">path</span>).<span style="color: #a0522d;">listFiles</span>.<span style="color: #0000ff;">filter</span>(<span style="color: #a0522d;">f</span> =&gt; <span style="color: #a0522d;">f</span>.<span style="color: #a0522d;">isFile</span> &amp;&amp; <span style="color: #a0522d;">f</span>.<span style="color: #a0522d;">getName</span>.<span style="color: #0000ff;">startsWith</span>(<span style="color: #8b2252;">"gif"</span>)).<span style="color: #a0522d;">toList</span>
-
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">renameFile</span>(<span style="color: #a0522d;">inputFilename</span>: <span style="color: #228b22;">String</span>, <span style="color: #a0522d;">outputFilename</span>: <span style="color: #228b22;">String</span>): <span style="color: #228b22;">Unit</span> = {
-  <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">renameCmd</span> = <span style="color: #0000ff;">s</span><span style="color: #8b2252;">"""mv "</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">path</span><span style="color: #8b2252;">/</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">inputFilename</span><span style="color: #8b2252;">" "</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">path</span><span style="color: #8b2252;">/</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">outputFilename</span><span style="color: #8b2252;">" """</span>
-  <span style="color: #0000ff;">println</span>(<span style="color: #8b2252;">"rename: "</span> + <span style="color: #a0522d;">renameCmd</span>)
-  <span style="color: #a0522d;">renameCmd</span> !
+<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">removeCommand</span>(<span style="color: #eedd82;">inputFilename</span>:<span style="color: #98fb98;">String</span>): <span style="color: #98fb98;">Unit</span> = {
+  <span style="color: #00ffff;">val</span> <span style="color: #eedd82;">removeCmd</span> = <span style="color: #87cefa;">s</span><span style="color: #ffa07a;">"""rm "</span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">path</span><span style="color: #ffa07a;">/</span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">inputFilename</span><span style="color: #ffa07a;">""""</span>
+  <span style="color: #87cefa;">println</span>(<span style="color: #ffa07a;">"removeCmd: "</span> + <span style="color: #eedd82;">removeCmd</span>)
+  <span style="color: #ffa07a;">"sleep 1"</span> #&amp;&amp; <span style="color: #eedd82;">removeCmd</span> !
 }
 
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">burnSubtitlesInVideo</span>(<span style="color: #a0522d;">inputFilename</span>: <span style="color: #228b22;">String</span>, <span style="color: #a0522d;">subtitleFilename</span>:<span style="color: #228b22;">String</span>,  <span style="color: #a0522d;">outputFilename</span>: <span style="color: #228b22;">String</span>): <span style="color: #228b22;">Unit</span> = {
-  <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">ffmpegBurnSubtitlesInVideo</span> = <span style="color: #0000ff;">s</span><span style="color: #8b2252;">"""ffmpeg -i </span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">inputFilename</span><span style="color: #8b2252;"> -vf "subtitles=</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">subtitleFilename</span><span style="color: #8b2252;">" </span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">outputFilename</span><span style="color: #8b2252;">"""</span>
-  <span style="color: #0000ff;">println</span>(<span style="color: #8b2252;">"ffmpegBurnSubtitlesInVideo: "</span> + <span style="color: #a0522d;">ffmpegBurnSubtitlesInVideo</span>)
-  <span style="color: #a0522d;">ffmpegBurnSubtitlesInVideo</span> !
+<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">getListOfOutputFiles</span>():<span style="color: #98fb98;">List</span>[<span style="color: #98fb98;">File</span>] = <span style="color: #00ffff;">new</span> <span style="color: #98fb98;">File</span>(<span style="color: #eedd82;">path</span>).<span style="color: #eedd82;">listFiles</span>.<span style="color: #87cefa;">filter</span>(<span style="color: #eedd82;">f</span> =&gt; <span style="color: #eedd82;">f</span>.<span style="color: #eedd82;">isFile</span> &amp;&amp; <span style="color: #eedd82;">f</span>.<span style="color: #eedd82;">getName</span>.<span style="color: #87cefa;">startsWith</span>(<span style="color: #ffa07a;">"gif"</span>)).<span style="color: #eedd82;">toList</span>
+
+<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">renameFile</span>(<span style="color: #eedd82;">inputFilename</span>: <span style="color: #98fb98;">String</span>, <span style="color: #eedd82;">outputFilename</span>: <span style="color: #98fb98;">String</span>): <span style="color: #98fb98;">Unit</span> = {
+  <span style="color: #00ffff;">val</span> <span style="color: #eedd82;">renameCmd</span> = <span style="color: #87cefa;">s</span><span style="color: #ffa07a;">"""mv "</span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">path</span><span style="color: #ffa07a;">/</span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">inputFilename</span><span style="color: #ffa07a;">" "</span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">path</span><span style="color: #ffa07a;">/</span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">outputFilename</span><span style="color: #ffa07a;">" """</span>
+  <span style="color: #87cefa;">println</span>(<span style="color: #ffa07a;">"rename: "</span> + <span style="color: #eedd82;">renameCmd</span>)
+  <span style="color: #eedd82;">renameCmd</span> !
 }
 
-<span style="color: #b22222;">// After</span>
-<span style="color: #b22222;">// File System Functions</span>
+<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">burnSubtitlesInVideo</span>(<span style="color: #eedd82;">inputFilename</span>: <span style="color: #98fb98;">String</span>, <span style="color: #eedd82;">subtitleFilename</span>:<span style="color: #98fb98;">String</span>,  <span style="color: #eedd82;">outputFilename</span>: <span style="color: #98fb98;">String</span>): <span style="color: #98fb98;">Unit</span> = {
+  <span style="color: #00ffff;">val</span> <span style="color: #eedd82;">ffmpegBurnSubtitlesInVideo</span> = <span style="color: #87cefa;">s</span><span style="color: #ffa07a;">"""ffmpeg -i </span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">inputFilename</span><span style="color: #ffa07a;"> -vf "subtitles=</span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">subtitleFilename</span><span style="color: #ffa07a;">" </span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">outputFilename</span><span style="color: #ffa07a;">"""</span>
+  <span style="color: #87cefa;">println</span>(<span style="color: #ffa07a;">"ffmpegBurnSubtitlesInVideo: "</span> + <span style="color: #eedd82;">ffmpegBurnSubtitlesInVideo</span>)
+  <span style="color: #eedd82;">ffmpegBurnSubtitlesInVideo</span> !
+}
 
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">writeSubtitles</span>(<span style="color: #a0522d;">content</span>: <span style="color: #228b22;">String</span>, <span style="color: #a0522d;">outputFile</span>: <span style="color: #a0522d;">os</span>.<span style="color: #228b22;">Path</span>): <span style="color: #228b22;">Unit</span> =
-  <span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">write</span>(<span style="color: #a0522d;">outputFile</span>, <span style="color: #a0522d;">content</span>.<span style="color: #0000ff;">getBytes</span>(<span style="color: #a0522d;">StandardCharsets</span>.<span style="color: #a0522d;">UTF_8</span>))
+<span style="color: #ff7f24;">// After</span>
+<span style="color: #ff7f24;">// File System Functions</span>
 
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">removeCommand</span>(<span style="color: #a0522d;">inputFilename</span>: <span style="color: #228b22;">String</span>): <span style="color: #228b22;">Unit</span> =
-  <span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">remove</span>(<span style="color: #0000ff;">path</span>(<span style="color: #a0522d;">inputFilename</span>))
+<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">writeSubtitles</span>(<span style="color: #eedd82;">content</span>: <span style="color: #98fb98;">String</span>, <span style="color: #eedd82;">outputFile</span>: <span style="color: #eedd82;">os</span>.<span style="color: #98fb98;">Path</span>): <span style="color: #98fb98;">Unit</span> =
+  <span style="color: #eedd82;">os</span>.<span style="color: #87cefa;">write</span>(<span style="color: #eedd82;">outputFile</span>, <span style="color: #eedd82;">content</span>.<span style="color: #87cefa;">getBytes</span>(<span style="color: #eedd82;">StandardCharsets</span>.<span style="color: #eedd82;">UTF_8</span>))
 
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">getListOfOutputFiles</span>(): <span style="color: #228b22;">IndexedSeq</span>[<span style="color: #a0522d;">os</span>.<span style="color: #228b22;">Path</span>] =
-  <span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">list</span>(<span style="color: #0000ff;">path</span>()).<span style="color: #0000ff;">filter</span>(<span style="color: #a0522d;">f</span> =&gt; <span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">isFile</span>(<span style="color: #a0522d;">f</span>) &amp;&amp; <span style="color: #8b2252;">"gif[0-9]+.mp4"</span>.<span style="color: #a0522d;">r</span>.<span style="color: #0000ff;">matches</span>(<span style="color: #a0522d;">f</span>.<span style="color: #a0522d;">last</span>))
+<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">removeCommand</span>(<span style="color: #eedd82;">inputFilename</span>: <span style="color: #98fb98;">String</span>): <span style="color: #98fb98;">Unit</span> =
+  <span style="color: #eedd82;">os</span>.<span style="color: #87cefa;">remove</span>(<span style="color: #87cefa;">path</span>(<span style="color: #eedd82;">inputFilename</span>))
 
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">renameFile</span>(<span style="color: #a0522d;">inputFilename</span>: <span style="color: #228b22;">String</span>, <span style="color: #a0522d;">outputFilename</span>: <span style="color: #228b22;">String</span>): <span style="color: #228b22;">Unit</span> =
-  <span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">move</span>(<span style="color: #0000ff;">path</span>(<span style="color: #a0522d;">inputFilename</span>), <span style="color: #0000ff;">path</span>(<span style="color: #a0522d;">outputFilename</span>))
+<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">getListOfOutputFiles</span>(): <span style="color: #98fb98;">IndexedSeq</span>[<span style="color: #eedd82;">os</span>.<span style="color: #98fb98;">Path</span>] =
+  <span style="color: #eedd82;">os</span>.<span style="color: #87cefa;">list</span>(<span style="color: #87cefa;">path</span>()).<span style="color: #87cefa;">filter</span>(<span style="color: #eedd82;">f</span> =&gt; <span style="color: #eedd82;">os</span>.<span style="color: #87cefa;">isFile</span>(<span style="color: #eedd82;">f</span>) &amp;&amp; <span style="color: #ffa07a;">"gif[0-9]+.mp4"</span>.<span style="color: #eedd82;">r</span>.<span style="color: #87cefa;">matches</span>(<span style="color: #eedd82;">f</span>.<span style="color: #eedd82;">last</span>))
 
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">burnSubtitlesInVideo</span>(
-  <span style="color: #a0522d;">inputFilename</span>: <span style="color: #228b22;">String</span>,
-  <span style="color: #a0522d;">subtitleFilename</span>: <span style="color: #228b22;">String</span>,
-  <span style="color: #a0522d;">outputFilename</span>: <span style="color: #228b22;">String</span>
-): <span style="color: #228b22;">Unit</span> =
-  <span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">proc</span>(
-    <span style="color: #8b2252;">"ffmpeg"</span>,
-    <span style="color: #8b2252;">"-i"</span>,
-    <span style="color: #0000ff;">path</span>(<span style="color: #a0522d;">inputFilename</span>),
-    <span style="color: #8b2252;">"-vf"</span>,
-    <span style="color: #0000ff;">s</span><span style="color: #8b2252;">"subtitles=</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">subtitleFilename</span><span style="color: #8b2252;">"</span>,
-    <span style="color: #0000ff;">path</span>(<span style="color: #a0522d;">outputFilename</span>)
-  ).<span style="color: #0000ff;">call</span>()
+<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">renameFile</span>(<span style="color: #eedd82;">inputFilename</span>: <span style="color: #98fb98;">String</span>, <span style="color: #eedd82;">outputFilename</span>: <span style="color: #98fb98;">String</span>): <span style="color: #98fb98;">Unit</span> =
+  <span style="color: #eedd82;">os</span>.<span style="color: #87cefa;">move</span>(<span style="color: #87cefa;">path</span>(<span style="color: #eedd82;">inputFilename</span>), <span style="color: #87cefa;">path</span>(<span style="color: #eedd82;">outputFilename</span>))
+
+<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">burnSubtitlesInVideo</span>(
+  <span style="color: #eedd82;">inputFilename</span>: <span style="color: #98fb98;">String</span>,
+  <span style="color: #eedd82;">subtitleFilename</span>: <span style="color: #98fb98;">String</span>,
+  <span style="color: #eedd82;">outputFilename</span>: <span style="color: #98fb98;">String</span>
+): <span style="color: #98fb98;">Unit</span> =
+  <span style="color: #eedd82;">os</span>.<span style="color: #87cefa;">proc</span>(
+    <span style="color: #ffa07a;">"ffmpeg"</span>,
+    <span style="color: #ffa07a;">"-i"</span>,
+    <span style="color: #87cefa;">path</span>(<span style="color: #eedd82;">inputFilename</span>),
+    <span style="color: #ffa07a;">"-vf"</span>,
+    <span style="color: #87cefa;">s</span><span style="color: #ffa07a;">"subtitles=</span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">subtitleFilename</span><span style="color: #ffa07a;">"</span>,
+    <span style="color: #87cefa;">path</span>(<span style="color: #eedd82;">outputFilename</span>)
+  ).<span style="color: #87cefa;">call</span>()
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgdcb7740" class="outline-4">
-<h4 id="orgdcb7740">Piping Commands</h4>
-<div class="outline-text-4" id="text-orgdcb7740">
+<div id="outline-container-org1b4d67b" class="outline-4">
+<h4 id="org1b4d67b">Piping Commands</h4>
+<div class="outline-text-4" id="text-org1b4d67b">
 <p>
 In order to download just a specific chunk of the youtube video you need
 to get the direct stream URL, inject it into a non-trivial <code>ffmpeg</code>
@@ -732,43 +732,43 @@ Before it was done this way:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala"><span style="color: #b22222;">// Before</span>
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">downloadFileToDir</span>(<span style="color: #a0522d;">youtubeVideo</span>: <span style="color: #228b22;">YoutubeVideo</span>, <span style="color: #a0522d;">outputFilename</span>: <span style="color: #228b22;">String</span>): <span style="color: #228b22;">Unit</span> = {
-  <span style="color: #a0522d;">moveToTemp</span>
-  <span style="color: #a020f0;">if</span> (!<span style="color: #0000ff;">File</span>(<span style="color: #0000ff;">s</span><span style="color: #8b2252;">"</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">path</span><span style="color: #8b2252;">/</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">outputFilename</span><span style="color: #8b2252;">"</span>).<span style="color: #a0522d;">exists</span>) {
-    <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">ytDlpCommand</span> = <span style="color: #0000ff;">s</span><span style="color: #8b2252;">"""yt-dlp -f "best[ext=mp4]" -g </span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">{</span><span style="color: #a0522d;">youtubeVideo</span><span style="color: #a0522d;">.</span><span style="color: #a0522d;">url</span><span style="color: #a0522d;">}</span><span style="color: #8b2252;">"""</span>
-    <span style="color: #0000ff;">println</span>(<span style="color: #0000ff;">s</span><span style="color: #8b2252;">"ytDlpCommand: </span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">ytDlpCommand</span><span style="color: #8b2252;">"</span>)
-    <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">ytDlpCommandOutputUrl</span> = (<span style="color: #a0522d;">ytDlpCommand</span> !!).<span style="color: #a0522d;">lines</span>.<span style="color: #0000ff;">findFirst</span>().<span style="color: #a0522d;">get</span>
-    <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">ffmpegCommand</span> = <span style="color: #0000ff;">s</span><span style="color: #8b2252;">"""ffmpeg -i "</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">ytDlpCommandOutputUrl</span><span style="color: #8b2252;">" -ss </span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">{</span><span style="color: #a0522d;">secondsToString</span><span style="color: #a0522d;">(</span><span style="color: #a0522d;">youtubeVideo</span><span style="color: #a0522d;">.</span><span style="color: #a0522d;">from</span><span style="color: #a0522d;">.</span><span style="color: #a0522d;">toMillis</span><span style="color: #a0522d;"> </span><span style="color: #a0522d;">/</span><span style="color: #a0522d;"> </span><span style="color: #a0522d;">1000</span><span style="color: #a0522d;">)</span><span style="color: #a0522d;">}</span><span style="color: #8b2252;"> -to </span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">{</span><span style="color: #a0522d;">secondsToString</span><span style="color: #a0522d;">(</span><span style="color: #a0522d;">youtubeVideo</span><span style="color: #a0522d;">.</span><span style="color: #a0522d;">to</span><span style="color: #a0522d;">.</span><span style="color: #a0522d;">toMillis</span><span style="color: #a0522d;"> </span><span style="color: #a0522d;">/</span><span style="color: #a0522d;"> </span><span style="color: #a0522d;">1000</span><span style="color: #a0522d;">)</span><span style="color: #a0522d;">}</span><span style="color: #8b2252;"> -an "</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">outputFilename</span><span style="color: #8b2252;">.mp4""""</span>
-    <span style="color: #0000ff;">println</span>(<span style="color: #8b2252;">"ffmpegCommand: "</span> + <span style="color: #a0522d;">ffmpegCommand</span>)
-    <span style="color: #a0522d;">ffmpegCommand</span> !
+<pre class="src src-scala"><span style="color: #ff7f24;">// Before</span>
+<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">downloadFileToDir</span>(<span style="color: #eedd82;">youtubeVideo</span>: <span style="color: #98fb98;">YoutubeVideo</span>, <span style="color: #eedd82;">outputFilename</span>: <span style="color: #98fb98;">String</span>): <span style="color: #98fb98;">Unit</span> = {
+  <span style="color: #eedd82;">moveToTemp</span>
+  <span style="color: #00ffff;">if</span> (!<span style="color: #87cefa;">File</span>(<span style="color: #87cefa;">s</span><span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">path</span><span style="color: #ffa07a;">/</span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">outputFilename</span><span style="color: #ffa07a;">"</span>).<span style="color: #eedd82;">exists</span>) {
+    <span style="color: #00ffff;">val</span> <span style="color: #eedd82;">ytDlpCommand</span> = <span style="color: #87cefa;">s</span><span style="color: #ffa07a;">"""yt-dlp -f "best[ext=mp4]" -g </span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">{</span><span style="color: #eedd82;">youtubeVideo</span><span style="color: #eedd82;">.</span><span style="color: #eedd82;">url</span><span style="color: #eedd82;">}</span><span style="color: #ffa07a;">"""</span>
+    <span style="color: #87cefa;">println</span>(<span style="color: #87cefa;">s</span><span style="color: #ffa07a;">"ytDlpCommand: </span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">ytDlpCommand</span><span style="color: #ffa07a;">"</span>)
+    <span style="color: #00ffff;">val</span> <span style="color: #eedd82;">ytDlpCommandOutputUrl</span> = (<span style="color: #eedd82;">ytDlpCommand</span> !!).<span style="color: #eedd82;">lines</span>.<span style="color: #87cefa;">findFirst</span>().<span style="color: #eedd82;">get</span>
+    <span style="color: #00ffff;">val</span> <span style="color: #eedd82;">ffmpegCommand</span> = <span style="color: #87cefa;">s</span><span style="color: #ffa07a;">"""ffmpeg -i "</span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">ytDlpCommandOutputUrl</span><span style="color: #ffa07a;">" -ss </span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">{</span><span style="color: #eedd82;">secondsToString</span><span style="color: #eedd82;">(</span><span style="color: #eedd82;">youtubeVideo</span><span style="color: #eedd82;">.</span><span style="color: #eedd82;">from</span><span style="color: #eedd82;">.</span><span style="color: #eedd82;">toMillis</span><span style="color: #eedd82;"> </span><span style="color: #eedd82;">/</span><span style="color: #eedd82;"> </span><span style="color: #eedd82;">1000</span><span style="color: #eedd82;">)</span><span style="color: #eedd82;">}</span><span style="color: #ffa07a;"> -to </span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">{</span><span style="color: #eedd82;">secondsToString</span><span style="color: #eedd82;">(</span><span style="color: #eedd82;">youtubeVideo</span><span style="color: #eedd82;">.</span><span style="color: #eedd82;">to</span><span style="color: #eedd82;">.</span><span style="color: #eedd82;">toMillis</span><span style="color: #eedd82;"> </span><span style="color: #eedd82;">/</span><span style="color: #eedd82;"> </span><span style="color: #eedd82;">1000</span><span style="color: #eedd82;">)</span><span style="color: #eedd82;">}</span><span style="color: #ffa07a;"> -an "</span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">outputFilename</span><span style="color: #ffa07a;">.mp4""""</span>
+    <span style="color: #87cefa;">println</span>(<span style="color: #ffa07a;">"ffmpegCommand: "</span> + <span style="color: #eedd82;">ffmpegCommand</span>)
+    <span style="color: #eedd82;">ffmpegCommand</span> !
   }
 }
-<span style="color: #b22222;">// After</span>
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">downloadFileToDir</span>(
-  <span style="color: #a0522d;">youtubeVideo</span>: <span style="color: #228b22;">YoutubeVideo</span>,
-  <span style="color: #a0522d;">outputFilename</span>: <span style="color: #228b22;">String</span>
-): <span style="color: #228b22;">Unit</span> =
-  <span style="color: #a020f0;">if</span> (!<span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">exists</span>(<span style="color: #0000ff;">path</span>(<span style="color: #a0522d;">outputFilename</span>)))
-    <span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">proc</span>(<span style="color: #8b2252;">"yt-dlp"</span>, <span style="color: #8b2252;">"-f"</span>, <span style="color: #8b2252;">"best[ext=mp4]"</span>, <span style="color: #8b2252;">"-g"</span>, <span style="color: #a0522d;">youtubeVideo</span>.<span style="color: #a0522d;">url</span>)
-      .<span style="color: #0000ff;">call</span>(<span style="color: #a0522d;">cwd</span> = <span style="color: #0000ff;">path</span>())
-      .<span style="color: #a0522d;">out</span>
-      .<span style="color: #0000ff;">lines</span>()
-      .<span style="color: #a0522d;">headOption</span>
-      .<span style="color: #0000ff;">map</span>(<span style="color: #a0522d;">ytDlpCommandOutputUrl</span> =&gt;
-        <span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">proc</span>(
-          <span style="color: #8b2252;">"ffmpeg"</span>,
-          <span style="color: #8b2252;">"-i"</span>,
-          <span style="color: #0000ff;">s</span><span style="color: #8b2252;">"</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">ytDlpCommandOutputUrl</span><span style="color: #8b2252;">"</span>,
-          <span style="color: #8b2252;">"-ss"</span>,
-          <span style="color: #0000ff;">secondsToString</span>(<span style="color: #a0522d;">youtubeVideo</span>.<span style="color: #a0522d;">from</span>.<span style="color: #a0522d;">toMillis</span> / 1000),
-          <span style="color: #8b2252;">"-to"</span>,
-          <span style="color: #0000ff;">secondsToString</span>(<span style="color: #a0522d;">youtubeVideo</span>.<span style="color: #a0522d;">to</span>.<span style="color: #a0522d;">toMillis</span> / 1000),
-          <span style="color: #8b2252;">"-an"</span>,
-          <span style="color: #0000ff;">path</span>(<span style="color: #0000ff;">s</span><span style="color: #8b2252;">"</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">outputFilename</span><span style="color: #8b2252;">.mp4"</span>)
-        ).<span style="color: #0000ff;">call</span>(<span style="color: #a0522d;">cwd</span> = <span style="color: #0000ff;">path</span>())
+<span style="color: #ff7f24;">// After</span>
+<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">downloadFileToDir</span>(
+  <span style="color: #eedd82;">youtubeVideo</span>: <span style="color: #98fb98;">YoutubeVideo</span>,
+  <span style="color: #eedd82;">outputFilename</span>: <span style="color: #98fb98;">String</span>
+): <span style="color: #98fb98;">Unit</span> =
+  <span style="color: #00ffff;">if</span> (!<span style="color: #eedd82;">os</span>.<span style="color: #87cefa;">exists</span>(<span style="color: #87cefa;">path</span>(<span style="color: #eedd82;">outputFilename</span>)))
+    <span style="color: #eedd82;">os</span>.<span style="color: #87cefa;">proc</span>(<span style="color: #ffa07a;">"yt-dlp"</span>, <span style="color: #ffa07a;">"-f"</span>, <span style="color: #ffa07a;">"best[ext=mp4]"</span>, <span style="color: #ffa07a;">"-g"</span>, <span style="color: #eedd82;">youtubeVideo</span>.<span style="color: #eedd82;">url</span>)
+      .<span style="color: #87cefa;">call</span>(<span style="color: #eedd82;">cwd</span> = <span style="color: #87cefa;">path</span>())
+      .<span style="color: #eedd82;">out</span>
+      .<span style="color: #87cefa;">lines</span>()
+      .<span style="color: #eedd82;">headOption</span>
+      .<span style="color: #87cefa;">map</span>(<span style="color: #eedd82;">ytDlpCommandOutputUrl</span> =&gt;
+        <span style="color: #eedd82;">os</span>.<span style="color: #87cefa;">proc</span>(
+          <span style="color: #ffa07a;">"ffmpeg"</span>,
+          <span style="color: #ffa07a;">"-i"</span>,
+          <span style="color: #87cefa;">s</span><span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">ytDlpCommandOutputUrl</span><span style="color: #ffa07a;">"</span>,
+          <span style="color: #ffa07a;">"-ss"</span>,
+          <span style="color: #87cefa;">secondsToString</span>(<span style="color: #eedd82;">youtubeVideo</span>.<span style="color: #eedd82;">from</span>.<span style="color: #eedd82;">toMillis</span> / 1000),
+          <span style="color: #ffa07a;">"-to"</span>,
+          <span style="color: #87cefa;">secondsToString</span>(<span style="color: #eedd82;">youtubeVideo</span>.<span style="color: #eedd82;">to</span>.<span style="color: #eedd82;">toMillis</span> / 1000),
+          <span style="color: #ffa07a;">"-an"</span>,
+          <span style="color: #87cefa;">path</span>(<span style="color: #87cefa;">s</span><span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">outputFilename</span><span style="color: #ffa07a;">.mp4"</span>)
+        ).<span style="color: #87cefa;">call</span>(<span style="color: #eedd82;">cwd</span> = <span style="color: #87cefa;">path</span>())
       )
-      .<span style="color: #0000ff;">getOrElse</span>(())
+      .<span style="color: #87cefa;">getOrElse</span>(())
 </pre>
 </div>
 
@@ -783,9 +783,9 @@ give it a try.
 </p>
 </div>
 </div>
-<div id="outline-container-org030ca97" class="outline-4">
-<h4 id="org030ca97">Testing</h4>
-<div class="outline-text-4" id="text-org030ca97">
+<div id="outline-container-org1765d80" class="outline-4">
+<h4 id="org1765d80">Testing</h4>
+<div class="outline-text-4" id="text-org1765d80">
 <p>
 This time the testing phase didn't bring any unexpected surprises. I
 just had to fix a couple of imprecisions in the way the commands
@@ -820,9 +820,9 @@ have that exposed by the library. A Minor thing by the way.
 <img src="https://www.dropbox.com/s/und6zl8mlvyk9i0/ytai_Buonanotte.mp4?dl=1" alt="Buonanotte by Youtubo">
 </div>
 </div>
-<div id="outline-container-org23c4ff4" class="outline-3">
-<h3 id="org23c4ff4">References</h3>
-<div class="outline-text-3" id="text-org23c4ff4">
+<div id="outline-container-orgdc73693" class="outline-3">
+<h3 id="orgdc73693">References</h3>
+<div class="outline-text-3" id="text-orgdc73693">
 <ul class="org-ul">
 <li><a href="https://gist.github.com/benkio/6fac65fdaec44842712be716f46169e1">convertFilms.sc script</a></li>
 <li><a href="https://gist.github.com/benkio/103960b7b5a5781c222df1c4e31544a2">youtubeToGif.sc script</a></li>
