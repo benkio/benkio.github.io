@@ -233,7 +233,9 @@ Appartently all seems to work fine: the space is freed
   an uploader to do that. Probably [[https://github.com/Nekmo/telegram-upload][this one]]. I'll give it a try later
   and see if it solves the problem.
 
-*** COMMENT Uploader
+*** Uploader
+
+  TL;DR: Failed Attempt
 
   I played with the [[https://github.com/Nekmo/telegram-upload][telegram-upload]] and in particular with the [[https://hub.docker.com/r/nekmo/telegram-upload][Docker
   image of it]] because I don't want to handle python installation in my
@@ -320,8 +322,13 @@ Appartently all seems to work fine: the space is freed
 
   If it increases exponetially I think we might wait forever
   here. Apparently [[https://github.com/Nekmo/telegram-upload/issues/111][the wait is unskippable]]. I'll see if it get's worse
-  and then fallback to manual at this point. If that's the point, it's a shame.
-  
+  and then fallback to manual at this point. If that's the point, it's
+  a shame 😢 Plus you can't even run them in parallel because there's
+  a conflict.
+
+  In the end I just go manual, because with these waits I uploaded
+  only ~50 photos in 30 min. not worth it.
+
 ** Conclusions
   :PROPERTIES:
   :CUSTOM_ID: ArticleConclusions
