@@ -315,6 +315,13 @@ Appartently all seems to work fine: the space is freed
   I guess we might have to wait a lot to go through this. Probably you
   are better off with the client after all.
 
+  Monitoring it I saw that, after a couple of batches I got:
+  ~A wait of 1000 seconds is required (caused by CheckChatInviteRequest). Waiting for 1000 seconds.~
+
+  If it increases exponetially I think we might wait forever
+  here. Apparently [[https://github.com/Nekmo/telegram-upload/issues/111][the wait is unskippable]]. I'll see if it get's worse
+  and then fallback to manual at this point. If that's the point, it's a shame.
+  
 ** Conclusions
   :PROPERTIES:
   :CUSTOM_ID: ArticleConclusions
