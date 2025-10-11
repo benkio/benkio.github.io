@@ -261,12 +261,28 @@ Appartently all seems to work fine: the space is freed
   As you noticed I had to remove the caption explicitly otherwise it
   will be added with the name of the file. Now I want to go crazy and
   move all my photos in bulk. I'm talking about 2000+ photos after
-  ~cp~ them to the input folder. Pray for me.
+  ~cp~ them to the input folder. Pray for me 
 
 #+begin_src sh
-  
+    $ sudo cp ~/temp/GooglePhotosToTelegram/2023\ -\ Giappone/* ~/temp/test/
+    $ ll ~/temp/test/ | wc
+     2661   18627  160133
+    $ docker run -v $PWD/temp/test/:/files/ -v $PWD/config:/config/ -it nekmo/telegram-upload:latest upload --to https://t.me/+kdJIVKek5Ew2ZGNk --caption "" --directories recursive
+    [Error] telegram-upload Exception:
+    MissingFileError: Files do not exist.
 #+end_src
 
+  Unfortunately I wasn't able to find a way to specify to get all the
+  files. Even with a ~*~ doesn't seems to work. At this point I thing
+  I'll use the power of emacs to the rescue:
+  - Go into the directory
+  - List all the files
+  - Copy the names in a buffer and make a single list
+  - Be sure there's no spaces in there
+  - Append them to the command
+  - Prey 🙏
+
+  It ends up being 53656 characters long 😅
   
 ** Conclusions
   :PROPERTIES:
