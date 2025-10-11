@@ -233,9 +233,9 @@ Appartently all seems to work fine: the space is freed
   an uploader to do that. Probably [[https://github.com/Nekmo/telegram-upload][this one]]. I'll give it a try later
   and see if it solves the problem.
 
-*** Uploader
+*** COMMENT Uploader
 
-  I played with the [[https://github.com/Nekmo/telegram-upload][telegram-upload]] and in particular with the [[https://hub.docker.com/r/nekmo/telegram-upload][docker
+  I played with the [[https://github.com/Nekmo/telegram-upload][telegram-upload]] and in particular with the [[https://hub.docker.com/r/nekmo/telegram-upload][Docker
   image of it]] because I don't want to handle python installation in my
   nixos laptop.
 
@@ -261,7 +261,7 @@ Appartently all seems to work fine: the space is freed
   As you noticed I had to remove the caption explicitly otherwise it
   will be added with the name of the file. Now I want to go crazy and
   move all my photos in bulk. I'm talking about 2000+ photos after
-  ~cp~ them to the input folder. Pray for me 
+  ~cp~ them to the input folder. Pray for me
 
 #+begin_src sh
     $ sudo cp ~/temp/GooglePhotosToTelegram/2023\ -\ Giappone/* ~/temp/test/
@@ -278,12 +278,43 @@ Appartently all seems to work fine: the space is freed
   - Go into the directory
   - List all the files
   - Copy the names in a buffer and make a single list
-  - Be sure there's no spaces in there
+  - Be sure there's no spaces or strange characters in there (or wrap everything in quotes)
   - Append them to the command
   - Prey 🙏
 
   It ends up being 53656 characters long 😅
-  
+
+  What you get is: ~OSError: [Errno 24] Too many open files: '20230525_133922.jpg'~
+  Python gives up. Let's see what I can do, maybe it's a Linux problem. It is!
+
+  As stated here, you just have to increase the limit for open
+  files. You can do it temporarely for the shell with:
+
+  #+begin_src sh
+    $ ulimit -n
+    1024
+    $ ulimit -n 4096
+    $ ulimit -n
+    4096
+  #+end_src
+
+  Now, if I retry the monster command, you get the same because you
+  need to run it in the container kinda, but first I have a bad news:
+  everytime you run the command above it starts a container, so you
+  want to cleanup a bit here with ~docker rm $(docker ps -a -q)~ to
+  delete everything.
+
+  I guess we are screwed ad we need to go for 1000 files at a time
+  (that's still a big improvement from the ~200 of before). Probably
+  if you go without Docker in between you should be fine with one
+  single big command. In my case, I prepared 3 big commands.
+
+  It seems to work, but after 20 uploads I got this:
+  ~A wait of 276 seconds is required (caused by CheckChatInviteRequest). Waiting for 276 seconds.~
+
+  I guess we might have to wait a lot to go through this. Probably you
+  are better off with the client after all.
+
 ** Conclusions
   :PROPERTIES:
   :CUSTOM_ID: ArticleConclusions
