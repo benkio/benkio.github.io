@@ -235,7 +235,9 @@ Appartently all seems to work fine: the space is freed
 
 *** Uploader
 
-  TL;DR: Failed Attempt
+  TL;DR: Failed Attempt. Fallback to upload from the official client
+  in batches of 50. At least they got uploaded in order, so it's easy
+  to follow and safe from disconnections
 
   I played with the [[https://github.com/Nekmo/telegram-upload][telegram-upload]] and in particular with the [[https://hub.docker.com/r/nekmo/telegram-upload][Docker
   image of it]] because I don't want to handle python installation in my
