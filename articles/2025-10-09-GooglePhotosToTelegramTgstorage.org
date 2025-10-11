@@ -203,6 +203,36 @@
   check at each step that you get your free space back. We don't want
   to do work for no reason.
 
+*** Victory!
+
+Appartently all seems to work fine: the space is freed
+#+ATTR_HTML: :class rounded mx-auto d-block :style max-width:500px;
+#+caption: Google Storage Freed
+[[file:2025-10-09-GooglePhotosToTelegramTgstorage/googleStorageFree.jpg]]
+*** Downsides
+
+  Of course we wanted to have everything in one place, all tided up,
+  easy to search, easy to share, etc. This solution is not the case:
+  some memories stays in google, some in Telegram, the archivied chats
+  are not easy to navigate even if the search function works great and
+  the Tgstorage interface is properly organized.
+
+  What if I want to backup or move away from Telegram for instance? I
+  don't know at the moment. First, I hope I don't need to do that.
+  Second, I hope to find a downloader of some sort to do that.
+
+  Sharing is also a bit shitty unless the other person has Telegram, a
+  thing we can't take from granted as a Google account, but let's be
+  honest, you barely go back looking at your photos, imagine someone
+  else looking at yours! Even if they were involved.
+
+  Last but not least, bulk uploading is not amazing through the
+  client: you can upload up to ~200 files and then it might crash with
+  an error. That's ok if your albums are not too big, max 500
+  images, but I have a big album to upload and I'm looking for
+  an uploader to do that. Probably [[https://github.com/Nekmo/telegram-upload][this one]]. I'll give it a try later
+  and see if it solves the problem.
+
 ** Conclusions
   :PROPERTIES:
   :CUSTOM_ID: ArticleConclusions
