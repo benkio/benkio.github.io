@@ -53,6 +53,13 @@
 
   I don't want to waste you much time, just wake you up and let you think about it.
 
+*** Update <2025-10-13 Mon>
+
+  I'm subscribed to a scala group on [[https://www.meetup.com][meetup.com]] and I just received an email. I report it here as a testimony of what I meant and the fact that this is not just a feeling of mine, but a mere fact
+
+  #+caption: Email from Scala Group
+  [[file:2025-09-01-ScalaSituation/meetupMail.jpg]]
+  
 ** Conclusions
   :PROPERTIES:
   :CUSTOM_ID: ArticleConclusions
