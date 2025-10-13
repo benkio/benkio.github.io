@@ -103,7 +103,7 @@
   and with the help of a fast internet connection from my workplace, I completed it
   moving my 44k photos, roughly the amount I had at the time, around.
 
-*** 2021 The Free Lunch Is Over
+*** COMMENT 2021 The Free Lunch Is Over
 
   I guess I was not the only one going for that strategy and probably
   Google used it as a way to get users in and then, once they are
@@ -118,7 +118,7 @@
 
   /Hey, you have reached 95% of your storage. If you reach 100% you are screwed. Nothing will work. Pay or Stale!/
 
-#+ATTR_HTML: :class rounded mx-auto d-block :style max-width:500px;
+#+ATTR_HTML: :class rounded mx-auto d-block img-fluid
 #+caption: Google Storage Almost Full Mail
 [[file:2025-10-09-GooglePhotosToTelegramTgstorage/googleEmail.png]]
 
@@ -206,7 +206,7 @@
 *** Victory!
 
 Appartently all seems to work fine: the space is freed
-#+ATTR_HTML: :class rounded mx-auto d-block :style max-width:500px;
+#+ATTR_HTML: :class rounded mx-auto d-block img-fluid
 #+caption: Google Storage Freed
 [[file:2025-10-09-GooglePhotosToTelegramTgstorage/googleStorageFree.jpg]]
 *** Downsides
