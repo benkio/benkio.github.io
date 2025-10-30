@@ -1,0 +1,233 @@
+#+OPTIONS: num:nil toc:nil H:4
+#+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:nil
+#+TITLE: Minimal Regex Length
+#+DESCRIPTION: Minimal Regex Length
+#+KEYWORDS: Minimal Regex Length
+#+CREATOR: Enrico Benini
+#+HTML_HEAD_EXTRA: <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA: <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+#+HTML_HEAD_EXTRA: <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+#+HTML_HEAD_EXTRA: <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/main.css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/blog.css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/article.css">
+
+* Blog
+  :PROPERTIES:
+  :HTML_CONTAINER: nav
+:HTML_CONTAINER_CLASS: navbar bg-dark border-bottom border-body navbar-fixed-top navbar-expand-lg bg-body-tertiary
+  :CUSTOM_ID: navbar
+  :END:
+#+CALL: ../templates.org:navbar(1)
+
+* Minimal Regex Length
+  :PROPERTIES:
+  :CUSTOM_ID: Article
+    :HTML_CONTAINER_CLASS: row
+  :END:
+  *Created: <2025-10-30 Thu>*
+** Abstract
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleAbstract
+  :END:
+
+  In one of my project I need to get the minimal possible regex length
+  in order to sort them out from smaller to larger. So, I had to find
+  a way to get such value. Less trivial then expected
+
+** Content
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleContent
+  :END:
+
+  There are different approaches to this:
+  - Add Length Manually 🐵 :: What I did till now because I couldn't
+    figure it out and I'm lazy
+  - Find a Library That Does It :: I couldn't find one. Quite
+    surprising!! Maybe I'm getting old and I can't find stuff online
+    anymore. Plus, if I was a good developer/engineer, I would have
+    started my own library to solve the problem once and for all, but
+    as I said, I'm lazy. If you know about any library that does it
+    out of the box, text me, send an email or whatever.
+  - Brute Force It (probabilistic to be Fancy) :: It might get the job
+    done if you find a way to create attempts that matches the given
+    regexp. Not ideal at all, but an improvement compared to the
+    manual way.
+
+  You can imagine I'm not here to tell you to add them manually 😅
+
+  I recently got back to this and found [[https://github.com/wolfendale/scalacheck-gen-regexp][this scalacheck regex lib]] that
+  allows you to generate strings based on a regex, so I had a
+  revelation: /What if I could use this to solve my problem?/
+
+  What I did at this point was to:
+  - [[https://github.com/benkio/sBots/issues/853][Add an Issue to my project]], so I remember that this problem needs
+    to be solved or improved.
+  - [[https://github.com/wolfendale/scalacheck-gen-regexp/issues/14][Add an issue to the scalacheck regex library]], to ask if they know
+    how to do it based on their internal.
+
+  However, I couldn't shake it off my mind, I had to experiment. Try
+  what I could do with what I have! And I'm here to show you. Sorry in
+  advance for the bad code, it's not meant to be beautiful, but to
+  test it's possible and who it run.
+
+#+begin_src scala
+    #!/usr/bin/env scala-cli
+  //> using dep io.github.wolfendale::scalacheck-gen-regexp:1.1.0
+  //> using dep org.scalacheck::scalacheck:1.19.0
+
+  import wolfendale.scalacheck.regexp.RegexpGen
+  import org.scalacheck.Gen
+  import scala.util.matching.Regex
+  import org.scalacheck.rng.Seed
+  import java.time.Instant
+  import java.time.Duration
+
+
+  // Initial (bad) idea:
+  //   gonna generate 100 samples from a regex and then see if I hit the minimal
+
+  // Generate 100 sample for the regex.
+  def generate100(regex: Regex): Gen[List[String]] =
+    Gen.listOfN(100, RegexpGen.from(regex.toString))
+
+  // Given a regex, I generate 100 samples and get the minimum length
+  // If I can't I explode
+  def minimumRegexLength(regex: Regex): Int =
+    generate100(regex).sample.get.minBy(_.length).length
+
+  val inputExpected: Map[Regex, Int] = Map(
+    "(posto|carico) i video".r -> 13,
+    "(restiamo|teniamo) in contatto".r -> 19,
+    "(attraverso i|nei) commenti".r -> 12,
+    "cocod[eè]".r -> 6,
+    "\\bmisc\\b".r -> 4,
+    "\\bm[i]+[a]+[o]+\\b".r -> 4,
+    "\\bsgrida[tr]".r -> 7,
+    "\\brimprover".r -> 9,
+    "(baci )?perugina".r -> 8,
+    "velit[aà]".r -> 6,
+    "ho perso (di nuovo )?qualcosa".r -> 17,
+    "tutti (quanti )?mi criticheranno".r -> 22,
+    "ti voglio (tanto )?bene".r -> 14,
+    "vi voglio (tanto )*bene".r -> 14,
+    "pu[oò] capitare".r -> 12,
+    "dopo (che ho )?mangiato".r -> 13,
+    "\\bops\\b".r -> 3,
+    "mi sto sentendo (bene|in compagnia)".r -> 20,
+    "(25|venticinque) (milioni|mila euro)".r -> 10
+  )
+
+  inputExpected.forall { case (input, expected) =>
+    val result = minimumRegexLength(input)
+    if (result != expected) {
+      println(
+        s"[RegexMinimumLength] Failed test for $input, expected $expected, got $result"
+      )
+      false
+    } else true
+  }
+
+  // FAILED as expected. Output
+  // Got [RegexMinimumLength] Failed test for \bm[i]+[a]+[o]+\b, expected 4, got 46
+
+  // Gonna ask AI what are his suggestions.
+  // Together we come out with an idea:
+
+  // - Start small in size
+  // - Try to generate the output
+  // - If fail, increase the size and retry
+  // - Exit when you got something
+
+  def canGenerateSize(
+    regex: Regex,
+    targetSize: Int,
+    trials: Int = 100
+  ): Boolean = {
+    val params = Gen.Parameters.default.withSize(targetSize)
+    (1 to trials).exists { _ =>
+      RegexpGen.from(regex.toString).apply(params, Seed.random())
+        .exists(v => if (v.length == targetSize) {
+          //println(s"[RegexMinimumLength] find a match for $regex: $v")
+          true
+        } else false
+        )
+    }
+  }
+
+  def minimalSize[T](
+    regex: Regex,
+    maxProbe: Int = 50
+  ): Option[Int] = {
+    val start: Instant = Instant.now()
+    val result = (0 to maxProbe).find { size =>
+      canGenerateSize(regex, size)
+    }
+    println(s"[RegexMinimumLength] generation took: ${Duration.between(start, Instant.now).toMillis}")
+    result
+  }
+
+  inputExpected.forall { case (input, expected) =>
+    val result = minimalSize(input)
+    if (result != Some(expected)) {
+      println(
+        s"[RegexMinimumLength] Failed test for $input, expected $expected, got $result"
+      )
+      false
+    } else true
+  }
+
+  // THIS WORKS!!! And generally returns pretty fast ~ 25 milliseconds
+  // It's probabilistic tho so it might be wrong, especially if the number
+  // of attempt are low or the regexp is particularly complex
+#+end_src
+
+** Conclusions
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleConclusions
+  :END:
+
+  I hope this could be useful to someone out there. At least this
+  should be a better start then when I did approach the problem the
+  first time. (and decided to give up)
+
+* Share Buttons
+  :PROPERTIES:
+  :CUSTOM_ID: ShareButtons
+  :HTML_CONTAINER_CLASS: row
+  :END:
+#+BEGIN_EXPORT html
+<!-- AddToAny BEGIN -->
+<hr>
+<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+<a class="a2a_button_facebook"></a>
+<a class="a2a_button_twitter"></a>
+<a class="a2a_button_whatsapp"></a>
+<a class="a2a_button_telegram"></a>
+<a class="a2a_button_linkedin"></a>
+<a class="a2a_button_email"></a>
+</div>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+<!-- AddToAny END -->
+#+END_EXPORT
+
+#+begin_export html
+<script type="text/javascript">
+$(function() {
+  $('#text-table-of-contents > ul li').first().css("display", "none");
+  $('#text-table-of-contents > ul li').last().css("display", "none");
+  $('#table-of-contents').addClass("visible-lg")
+});
+  document.getElementById("content").classList.add("container-fluid","p-0");
+  document.getElementById("text-navbar").classList.add("container-fluid");
+  document.getElementById("outline-container-navbar").setAttribute("data-bs-theme", "dark");
+  document.getElementById("text-Article").classList.add("text-center");
+  $('.outline-3').addClass("m-auto").addClass("col-10");
+  document.getElementById("text-ShareButtons").classList.add("m-auto", "col-10");
+</script>
+#+end_export
