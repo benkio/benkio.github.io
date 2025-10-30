@@ -46,6 +46,7 @@ b, dt, h5 {
 .src {
     background-color: var(--background-code-color);
     color: var(--code-color);
+    padding: .5rem!important
 }
 .btn-dark {
   background-color: var(--background-gray-color);
