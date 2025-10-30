@@ -3,10 +3,11 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-10-09 Thu 17:46 -->
+<!-- 2025-10-30 Thu 12:34 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>NixOs Checkout</title>
+<meta name="author" content="Enrico Benini" />
 <meta name="description" content="NixOs Checkout" />
 <meta name="keywords" content="NixOs Checkout" />
 <meta name="generator" content="Org Mode" />
@@ -88,9 +89,9 @@ cheat. 😉
 <h3 id="ArticleContent">Content</h3>
 <div class="outline-text-3" id="text-ArticleContent">
 </div>
-<div id="outline-container-org04b60bb" class="outline-4">
-<h4 id="org04b60bb">Intro</h4>
-<div class="outline-text-4" id="text-org04b60bb">
+<div id="outline-container-orgf19434e" class="outline-4">
+<h4 id="orgf19434e">Intro</h4>
+<div class="outline-text-4" id="text-orgf19434e">
 <p>
 We learned from the previous experience that, setting up a full
 system out of only <code>Nix</code> package manager, is a tough
@@ -129,9 +130,9 @@ by doing a quick merge from his repository. 😎
 </p>
 </div>
 </div>
-<div id="outline-container-org5637de7" class="outline-4">
-<h4 id="org5637de7">First Step - NixOs Virtual Machine</h4>
-<div class="outline-text-4" id="text-org5637de7">
+<div id="outline-container-orged6081a" class="outline-4">
+<h4 id="orged6081a">First Step - NixOs Virtual Machine</h4>
+<div class="outline-text-4" id="text-orged6081a">
 <p>
 let's install minimal <code>NixOs</code> on a <code>VirtualBox</code>. You can find the
 ISO <a href="https://nixos.org/download.html#nixos-iso">here</a>. I just noticed how you can directly download a
@@ -161,7 +162,7 @@ to different sections
 </p>
 
 
-<div id="org9e92d7e" class="figure">
+<div id="orgf73e149" class="figure">
 <p><img src="./2021-02-04-NixOs/Nixos-help.png" alt="Nixos-help.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>NixOs Manual from First Installation</p>
@@ -181,25 +182,25 @@ difficult to do, you need to:
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-shell"><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">for Legacy boot, see manual for uefi
+<pre class="src src-shell"><span style="color: #b22222;"># </span><span style="color: #b22222;">for Legacy boot, see manual for uefi
 </span>sudo parted /dev/sda -- mklabel msdos
- <span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Create primary partition, but 8gb for the swap
+ <span style="color: #b22222;"># </span><span style="color: #b22222;">Create primary partition, but 8gb for the swap
 </span>sudo parted /dev/sda -- mkpart primary 1MiB -8GiB
-<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Create the Swap partition
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Create the Swap partition
 </span>sudo parted /dev/sda -- mkpart primary linux-swap -8GiB 100%
-<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Format primary partition
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Format primary partition
 </span>sudo mkfs.ext4 -L nixos /dev/sda1
-<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Format Swap
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Format Swap
 </span>sudo mkswap -L swap /dev/sda2
-<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Mount the primary partition into mnt
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Mount the primary partition into mnt
 </span>sudo mount /dev/disk/by-label/nixos /mnt
-<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Enable the swap
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Enable the swap
 </span>sudo swapon /dev/sda2
-<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Generate the configuration
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Generate the configuration
 </span>sudo nixos-generate-config --root /mnt
-<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Edit configurations
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Edit configurations
 </span>sudo nano /mnt/etc/nixos/configuration.nix
-<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Install the system
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Install the system
 </span>sudo nixos-install
 </pre>
 </div>
@@ -248,9 +249,9 @@ So you can skip all the commands about the file system.
 </p>
 </div>
 </div>
-<div id="outline-container-orgb8f68b7" class="outline-4">
-<h4 id="orgb8f68b7">Working on configuration</h4>
-<div class="outline-text-4" id="text-orgb8f68b7">
+<div id="outline-container-orge720a0c" class="outline-4">
+<h4 id="orge720a0c">Working on configuration</h4>
+<div class="outline-text-4" id="text-orge720a0c">
 <p>
 Well, I worked on the configuration, but I did a great mistake: I started
 to change it without regarding if it worked or not. Guess what,
@@ -305,9 +306,9 @@ grub and commit my changes.
 </p>
 </div>
 </div>
-<div id="outline-container-org4d8b28b" class="outline-4">
-<h4 id="org4d8b28b">Change of Plan</h4>
-<div class="outline-text-4" id="text-org4d8b28b">
+<div id="outline-container-org2c8549b" class="outline-4">
+<h4 id="org2c8549b">Change of Plan</h4>
+<div class="outline-text-4" id="text-org2c8549b">
 <p>
 Let's take a different approach, I will:
 </p>
@@ -333,7 +334,7 @@ have any software available from the ones I specified into my
 </p>
 
 <div class="org-src-container">
-<pre class="src src-shell">error: attribute <span style="color: #ffa07a;">'anything'</span> missing, at /mix/var/nix/profiles/pre-user/root/channels/home-manager/modules/programs/matplotlib.nix
+<pre class="src src-shell">error: attribute <span style="color: #8b2252;">'anything'</span> missing, at /mix/var/nix/profiles/pre-user/root/channels/home-manager/modules/programs/matplotlib.nix
 </pre>
 </div>
 
@@ -346,9 +347,9 @@ does)
 </p>
 </div>
 </div>
-<div id="outline-container-orgd969b4b" class="outline-4">
-<h4 id="orgd969b4b">Don't Give Up</h4>
-<div class="outline-text-4" id="text-orgd969b4b">
+<div id="outline-container-org87d85fd" class="outline-4">
+<h4 id="org87d85fd">Don't Give Up</h4>
+<div class="outline-text-4" id="text-org87d85fd">
 <p>
 I'm not that kind of person who stops at first issue, so let's keep
 trying and trying again.
@@ -376,9 +377,9 @@ use the <code>Nix</code> configuration to apply all the changes.
 </p>
 </div>
 </div>
-<div id="outline-container-org2187697" class="outline-4">
-<h4 id="org2187697">Up to Speed</h4>
-<div class="outline-text-4" id="text-org2187697">
+<div id="outline-container-orge2f51d8" class="outline-4">
+<h4 id="orge2f51d8">Up to Speed</h4>
+<div class="outline-text-4" id="text-orge2f51d8">
 <p>
 Now that I'm able to comfortably configure the system, I must say
 it's pretty fast doing so:
@@ -428,9 +429,9 @@ package Override and it was not so easy to figure it out.
 </p>
 </div>
 </div>
-<div id="outline-container-org5ffe80f" class="outline-4">
-<h4 id="org5ffe80f">Follow Up</h4>
-<div class="outline-text-4" id="text-org5ffe80f">
+<div id="outline-container-org519786e" class="outline-4">
+<h4 id="org519786e">Follow Up</h4>
+<div class="outline-text-4" id="text-org519786e">
 <p>
 I think I reached quite a fine initial configuration by now: I
 just have all the software I need (Emacs and Firefox basically 😃)
@@ -478,13 +479,13 @@ different user configurations and steal from one or another.
 <p>
 I hope this article could was useful to you and if you are
 interested in looking at <code>Nix~/~NixOs</code> then feel free to checkout my
-configuration. You will find the link in the <a href="#org4ed9539">References Section</a>.
+configuration. You will find the link in the <a href="#org0a50398">References Section</a>.
 </p>
 </div>
 </div>
-<div id="outline-container-org4ed9539" class="outline-3">
-<h3 id="org4ed9539">References</h3>
-<div class="outline-text-3" id="text-org4ed9539">
+<div id="outline-container-org0a50398" class="outline-3">
+<h3 id="org0a50398">References</h3>
+<div class="outline-text-3" id="text-org0a50398">
 <ul class="org-ul">
 <li><a href="https://gvolpe.com/blog/xmonad-polybar-nixos/">Gabriel Volpe's <code>NixOs</code> Configuration w/ Xmonad</a></li>
 <li><a href="https://xmonad.org/">XMonad Homepage</a></li>

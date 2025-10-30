@@ -3,10 +3,11 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-10-09 Thu 17:46 -->
+<!-- 2025-10-30 Thu 12:34 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Time to Try Nix - A Weekend Experiment</title>
+<meta name="author" content="Enrico Benini" />
 <meta name="description" content="Time to Try Nix - A Weekend Experiment" />
 <meta name="keywords" content="Time to Try Nix - A Weekend Experiment" />
 <meta name="generator" content="Org Mode" />
@@ -100,14 +101,14 @@ think this could help someone else. So, let's get ready to rumble!!!
 <h3 id="ArticleContent">Content</h3>
 <div class="outline-text-3" id="text-ArticleContent">
 </div>
-<div id="outline-container-org6c33590" class="outline-4">
-<h4 id="org6c33590">The Plan</h4>
-<div class="outline-text-4" id="text-org6c33590">
+<div id="outline-container-org962b6ce" class="outline-4">
+<h4 id="org962b6ce">The Plan</h4>
+<div class="outline-text-4" id="text-org962b6ce">
 <p>
 As a real professional, I must start with a tweet 😉
 </p>
 
-<div id="org1a7566d" class="figure">
+<div id="org593646d" class="figure">
 <p><img src="./2021-01-29-NixMigration/The_Plan_Tweet.png" alt="The_Plan_Tweet.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>The Plan Tweet</p>
@@ -128,9 +129,9 @@ virtual machine rather then one with <code>NixOs</code>.
 </p>
 </div>
 </div>
-<div id="outline-container-orgf5dcc11" class="outline-4">
-<h4 id="orgf5dcc11">First Impact</h4>
-<div class="outline-text-4" id="text-orgf5dcc11">
+<div id="outline-container-org2460379" class="outline-4">
+<h4 id="org2460379">First Impact</h4>
+<div class="outline-text-4" id="text-org2460379">
 <p>
 The only word I can think of is: <b>overwhelming</b>, but not in a good
 way. It has so much stuff that you, newcomer, will feel confused
@@ -156,9 +157,9 @@ that. I must say the majority of the guides are about <code>NixOs</code>
 instead of just <code>Nix</code> on a non-NixOs distribution, like I'm trying to do.
 </p>
 </div>
-<div id="outline-container-orgf4086be" class="outline-5">
-<h5 id="orgf4086be">NixOs and Home Manager</h5>
-<div class="outline-text-5" id="text-orgf4086be">
+<div id="outline-container-orgebd88de" class="outline-5">
+<h5 id="orgebd88de">NixOs and Home Manager</h5>
+<div class="outline-text-5" id="text-orgebd88de">
 <p>
 In the end, I discovered that, with <code>Nix</code> only, you can't
 actually manage the whole system(or it's not straightforward at
@@ -190,9 +191,9 @@ reference script, you can find it <a href="https://gist.github.com/benkio/2d4346
 </div>
 </div>
 </div>
-<div id="outline-container-org2ef8c10" class="outline-4">
-<h4 id="org2ef8c10">Setup From existing Github Configuration</h4>
-<div class="outline-text-4" id="text-org2ef8c10">
+<div id="outline-container-org06c2d5c" class="outline-4">
+<h4 id="org06c2d5c">Setup From existing Github Configuration</h4>
+<div class="outline-text-4" id="text-org06c2d5c">
 <p>
 As every Emacs user, I already have my Emacs configuration
 jealously crafted and polished. Now, I don't want to restart from
@@ -267,9 +268,9 @@ reproducible? Future myself will tell.
 </p>
 </div>
 </div>
-<div id="outline-container-org9aab52e" class="outline-4">
-<h4 id="org9aab52e">Provided Packages</h4>
-<div class="outline-text-4" id="text-org9aab52e">
+<div id="outline-container-orgb2d6204" class="outline-4">
+<h4 id="orgb2d6204">Provided Packages</h4>
+<div class="outline-text-4" id="text-orgb2d6204">
 <p>
 I must say the amount of available packages is huge: I found
 (almost) all I needed straight out of the main channels. I had
@@ -284,9 +285,9 @@ expected.
 </p>
 </div>
 </div>
-<div id="outline-container-orgef5dea3" class="outline-4">
-<h4 id="orgef5dea3">The Unexpected</h4>
-<div class="outline-text-4" id="text-orgef5dea3">
+<div id="outline-container-org53eded8" class="outline-4">
+<h4 id="org53eded8">The Unexpected</h4>
+<div class="outline-text-4" id="text-org53eded8">
 <p>
 I added more packages, I added the keyboard configuration and so
 on, then I looked into how to setup <code>I3</code> and <code>X11</code>. Well, as a result
@@ -344,9 +345,9 @@ I might ask for help in the future into some IRC channel or wherever.
 </p>
 </div>
 </div>
-<div id="outline-container-orga241a3d" class="outline-4">
-<h4 id="orga241a3d">Developer Environment</h4>
-<div class="outline-text-4" id="text-orga241a3d">
+<div id="outline-container-orgc692c43" class="outline-4">
+<h4 id="orgc692c43">Developer Environment</h4>
+<div class="outline-text-4" id="text-orgc692c43">
 <p>
 After the failure of the previous section I decided that I can
 live without setting my window manager for now (<a href="http://read.gov/aesop/005.html">The Fox &amp; The
@@ -383,7 +384,7 @@ install the <code>haskell-plaftorm</code> with a one-liner command.
 <h3 id="ArticleConclusions">Conclusions</h3>
 <div class="outline-text-3" id="text-ArticleConclusions">
 
-<div id="org0c4d318" class="figure">
+<div id="orgb525ce7" class="figure">
 <p><img src="./2021-01-29-NixMigration/weekendResult.png" alt="weekendResult.png" />
 </p>
 <p><span class="figure-number">Figure 2: </span>Weekend Recap</p>
@@ -419,9 +420,9 @@ developers set up their MacOs using <code>Nix</code> instead of <code>Homebrew</
 </ul>
 </div>
 </div>
-<div id="outline-container-orgf7e338d" class="outline-3">
-<h3 id="orgf7e338d">References</h3>
-<div class="outline-text-3" id="text-orgf7e338d">
+<div id="outline-container-orgc64b867" class="outline-3">
+<h3 id="orgc64b867">References</h3>
+<div class="outline-text-3" id="text-orgc64b867">
 <dl class="org-dl">
 <dt><a href="https://nixos.org/">NixOs Website</a></dt><dd>Where you can find all the official instructions
 about <code>Nix</code> and the related distribution.</dd>

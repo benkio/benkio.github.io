@@ -3,10 +3,11 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-10-09 Thu 17:46 -->
+<!-- 2025-10-30 Thu 12:34 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Extract Data From Youtube with `yt-dlp` And `jq`</title>
+<meta name="author" content="Enrico Benini" />
 <meta name="description" content="Extract Data From Youtube with `yt-dlp` And `jq`" />
 <meta name="keywords" content="Extract Data From Youtube with `yt-dlp` And `jq`" />
 <meta name="generator" content="Org Mode" />
@@ -96,9 +97,9 @@ we are interested in.
 <h3 id="ArticleContent">Content</h3>
 <div class="outline-text-3" id="text-ArticleContent">
 </div>
-<div id="outline-container-orgfc10558" class="outline-4">
-<h4 id="orgfc10558">Motivation</h4>
-<div class="outline-text-4" id="text-orgfc10558">
+<div id="outline-container-org6d264e1" class="outline-4">
+<h4 id="org6d264e1">Motivation</h4>
+<div class="outline-text-4" id="text-org6d264e1">
 <p>
 It All started with the need to automatically fill the <a href="https://github.com/benkio/sBots">sBots</a> database
 with any new content coming out from YouTube. For details check <a href="https://github.com/benkio/sBots/issues/461">this issue</a>.
@@ -111,9 +112,9 @@ complicated JSON. Fortunately <a href="https://github.com/yt-dlp/yt-dlp">yt-dlp<
 </p>
 </div>
 </div>
-<div id="outline-container-org6ce230b" class="outline-4">
-<h4 id="org6ce230b">Get Data from YouTube</h4>
-<div class="outline-text-4" id="text-org6ce230b">
+<div id="outline-container-orgf237c16" class="outline-4">
+<h4 id="orgf237c16">Get Data from YouTube</h4>
+<div class="outline-text-4" id="text-orgf237c16">
 <p>
 After a brief investigation, we can just run the following command:
 </p>
@@ -157,9 +158,9 @@ re-download them only when they become obsolete, eg 1 month old.
 </p>
 </div>
 </div>
-<div id="outline-container-org7d6d418" class="outline-4">
-<h4 id="org7d6d418">Get Automatic Caption Data</h4>
-<div class="outline-text-4" id="text-org7d6d418">
+<div id="outline-container-orgd0f883d" class="outline-4">
+<h4 id="orgd0f883d">Get Automatic Caption Data</h4>
+<div class="outline-text-4" id="text-orgd0f883d">
 <p>
 Each <a href="2024-09-24-YTDLPJQYoutubeExtraction/video.json">YouTube video JSON</a> also contains a field related to the
 automatic captions where several URLs can be found. Between the
@@ -170,9 +171,9 @@ extension is TXT 🤷
 </p>
 </div>
 </div>
-<div id="outline-container-org82ba2cc" class="outline-4">
-<h4 id="org82ba2cc">Extract Data from the JSON</h4>
-<div class="outline-text-4" id="text-org82ba2cc">
+<div id="outline-container-org17eba0c" class="outline-4">
+<h4 id="org17eba0c">Extract Data from the JSON</h4>
+<div class="outline-text-4" id="text-org17eba0c">
 <p>
 In this section, I'm not gonna dive into the details on how to use
 the <a href="https://jqlang.github.io/jq/">jq</a> command and do another tutorial, but rather I'll explain what
@@ -181,9 +182,9 @@ some specific bits will be explained because particularly
 interesting.
 </p>
 </div>
-<div id="outline-container-org892b1b4" class="outline-5">
-<h5 id="org892b1b4">YouTube Playlist</h5>
-<div class="outline-text-5" id="text-org892b1b4">
+<div id="outline-container-org9081cfa" class="outline-5">
+<h5 id="org9081cfa">YouTube Playlist</h5>
+<div class="outline-text-5" id="text-org9081cfa">
 <p>
 In this case, we have to expand the previous command by generating a
 JSON array this time by traversing the playlist. This can be done
@@ -191,7 +192,7 @@ with the following command:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-bash">cat barbero.json | jq <span style="color: #ffa07a;">'del(..|nulls) | [.entries[] | {show_url: .webpage_url, show_title: .title, show_upload_date: .upload_date, show_duration: .duration, show_description: .description, show_is_live: .is_live, show_origin_automatic_caption: .automatic_captions | with_entries(if (.key|test(".*orig")) then ( {key: .key, value: .value } ) else empty end)[][] | select(.ext|contains("json")) | .url }]'</span>
+<pre class="src src-bash">cat barbero.json | jq <span style="color: #8b2252;">'del(..|nulls) | [.entries[] | {show_url: .webpage_url, show_title: .title, show_upload_date: .upload_date, show_duration: .duration, show_description: .description, show_is_live: .is_live, show_origin_automatic_caption: .automatic_captions | with_entries(if (.key|test(".*orig")) then ( {key: .key, value: .value } ) else empty end)[][] | select(.ext|contains("json")) | .url }]'</span>
 </pre>
 </div>
 
@@ -217,9 +218,9 @@ other formats, only on JSON.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgecf3160" class="outline-5">
-<h5 id="orgecf3160">YouTube Channel</h5>
-<div class="outline-text-5" id="text-orgecf3160">
+<div id="outline-container-orgcdb85ff" class="outline-5">
+<h5 id="orgcdb85ff">YouTube Channel</h5>
+<div class="outline-text-5" id="text-orgcdb85ff">
 <p>
 A <a href="2024-09-24-YTDLPJQYoutubeExtraction/youtubo.json">YouTube Channel's JSON</a> adds one more layer to the previous case
 because we might have multiple "playlists", one for:
@@ -237,7 +238,7 @@ is:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-bash">cat youtubo.json | jq <span style="color: #ffa07a;">'del(..|nulls) | .entries[] | select(.title|contains("Videos")) | [.entries[] | {show_url: .webpage_url, show_title: .title, show_upload_date: .upload_date, show_duration: .duration, show_description: .description, show_is_live: .is_live, show_origin_automatic_caption: .automatic_captions | with_entries(if (.key|test(".*orig")) then ( {key: .key, value: .value } ) else empty end)[][] | select(.ext|contains("json")) | .url }]'</span>
+<pre class="src src-bash">cat youtubo.json | jq <span style="color: #8b2252;">'del(..|nulls) | .entries[] | select(.title|contains("Videos")) | [.entries[] | {show_url: .webpage_url, show_title: .title, show_upload_date: .upload_date, show_duration: .duration, show_description: .description, show_is_live: .is_live, show_origin_automatic_caption: .automatic_captions | with_entries(if (.key|test(".*orig")) then ( {key: .key, value: .value } ) else empty end)[][] | select(.ext|contains("json")) | .url }]'</span>
 </pre>
 </div>
 
@@ -250,9 +251,9 @@ we just have to filter by a different category.
 </p>
 </div>
 </div>
-<div id="outline-container-org25d34b0" class="outline-5">
-<h5 id="org25d34b0">Automatic Captions</h5>
-<div class="outline-text-5" id="text-org25d34b0">
+<div id="outline-container-org14ebee1" class="outline-5">
+<h5 id="org14ebee1">Automatic Captions</h5>
+<div class="outline-text-5" id="text-org14ebee1">
 <p>
 Once we can get the URL for the <code>automatic captions</code> and
 retrieve the JSON, we need to extract the text from it. Here is an
@@ -289,9 +290,9 @@ you want.
 </p>
 </div>
 </div>
-<div id="outline-container-org33504a0" class="outline-3">
-<h3 id="org33504a0">References</h3>
-<div class="outline-text-3" id="text-org33504a0">
+<div id="outline-container-org44179da" class="outline-3">
+<h3 id="org44179da">References</h3>
+<div class="outline-text-3" id="text-org44179da">
 <ul class="org-ul">
 <li><a href="https://github.com/yt-dlp/yt-dlp">yt-dlp repository</a></li>
 <li><a href="https://jqlang.github.io/jq/">jq site</a></li>
