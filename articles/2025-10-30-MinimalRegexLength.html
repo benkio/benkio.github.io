@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-10-30 Thu 12:45 -->
+<!-- 2025-10-31 Fri 20:00 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Minimal Regex Length</title>
@@ -132,114 +132,114 @@ test it's possible and who it run.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala">  <span style="color: #b22222;">#!/usr/bin/env scala-cli</span>
-//&gt; <span style="color: #a020f0;">using</span> dep io.github.wolfendale::scalacheck-gen-regexp:1.1.0
-//&gt; <span style="color: #a020f0;">using</span> dep org.scalacheck::scalacheck:1.19.0
+<pre class="src src-scala">  <span style="color: #ff7f24;">#!/usr/bin/env scala-cli</span>
+//&gt; <span style="color: #00ffff;">using</span> dep io.github.wolfendale::scalacheck-gen-regexp:1.1.0
+//&gt; <span style="color: #00ffff;">using</span> dep org.scalacheck::scalacheck:1.19.0
 
-<span style="color: #a020f0;">import</span> <span style="color: #a0522d;">wolfendale</span>.<span style="color: #a0522d;">scalacheck</span>.<span style="color: #a0522d;">regexp</span>.<span style="color: #a0522d;">RegexpGen</span>
-<span style="color: #a020f0;">import</span> <span style="color: #a0522d;">org</span>.<span style="color: #a0522d;">scalacheck</span>.<span style="color: #a0522d;">Gen</span>
-<span style="color: #a020f0;">import</span> <span style="color: #a0522d;">scala</span>.<span style="color: #a0522d;">util</span>.<span style="color: #a0522d;">matching</span>.<span style="color: #a0522d;">Regex</span>
-<span style="color: #a020f0;">import</span> <span style="color: #a0522d;">org</span>.<span style="color: #a0522d;">scalacheck</span>.<span style="color: #a0522d;">rng</span>.<span style="color: #a0522d;">Seed</span>
-<span style="color: #a020f0;">import</span> <span style="color: #a0522d;">java</span>.<span style="color: #a0522d;">time</span>.<span style="color: #a0522d;">Instant</span>
-<span style="color: #a020f0;">import</span> <span style="color: #a0522d;">java</span>.<span style="color: #a0522d;">time</span>.<span style="color: #a0522d;">Duration</span>
+<span style="color: #00ffff;">import</span> <span style="color: #eedd82;">wolfendale</span>.<span style="color: #eedd82;">scalacheck</span>.<span style="color: #eedd82;">regexp</span>.<span style="color: #eedd82;">RegexpGen</span>
+<span style="color: #00ffff;">import</span> <span style="color: #eedd82;">org</span>.<span style="color: #eedd82;">scalacheck</span>.<span style="color: #eedd82;">Gen</span>
+<span style="color: #00ffff;">import</span> <span style="color: #eedd82;">scala</span>.<span style="color: #eedd82;">util</span>.<span style="color: #eedd82;">matching</span>.<span style="color: #eedd82;">Regex</span>
+<span style="color: #00ffff;">import</span> <span style="color: #eedd82;">org</span>.<span style="color: #eedd82;">scalacheck</span>.<span style="color: #eedd82;">rng</span>.<span style="color: #eedd82;">Seed</span>
+<span style="color: #00ffff;">import</span> <span style="color: #eedd82;">java</span>.<span style="color: #eedd82;">time</span>.<span style="color: #eedd82;">Instant</span>
+<span style="color: #00ffff;">import</span> <span style="color: #eedd82;">java</span>.<span style="color: #eedd82;">time</span>.<span style="color: #eedd82;">Duration</span>
 
 
-<span style="color: #b22222;">// Initial (bad) idea:</span>
-<span style="color: #b22222;">//   gonna generate 100 samples from a regex and then see if I hit the minimal</span>
+<span style="color: #ff7f24;">// Initial (bad) idea:</span>
+<span style="color: #ff7f24;">//   gonna generate 100 samples from a regex and then see if I hit the minimal</span>
 
-<span style="color: #b22222;">// Generate 100 sample for the regex.</span>
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">generate100</span>(<span style="color: #a0522d;">regex</span>: <span style="color: #228b22;">Regex</span>): <span style="color: #228b22;">Gen</span>[<span style="color: #228b22;">List</span>[<span style="color: #228b22;">String</span>]] =
-  <span style="color: #a0522d;">Gen</span>.<span style="color: #0000ff;">listOfN</span>(100, <span style="color: #a0522d;">RegexpGen</span>.<span style="color: #0000ff;">from</span>(<span style="color: #a0522d;">regex</span>.<span style="color: #a0522d;">toString</span>))
+<span style="color: #ff7f24;">// Generate 100 sample for the regex.</span>
+<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">generate100</span>(<span style="color: #eedd82;">regex</span>: <span style="color: #98fb98;">Regex</span>): <span style="color: #98fb98;">Gen</span>[<span style="color: #98fb98;">List</span>[<span style="color: #98fb98;">String</span>]] =
+  <span style="color: #eedd82;">Gen</span>.<span style="color: #87cefa;">listOfN</span>(100, <span style="color: #eedd82;">RegexpGen</span>.<span style="color: #87cefa;">from</span>(<span style="color: #eedd82;">regex</span>.<span style="color: #eedd82;">toString</span>))
 
-<span style="color: #b22222;">// Given a regex, I generate 100 samples and get the minimum length</span>
-<span style="color: #b22222;">// If I can't I explode</span>
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">minimumRegexLength</span>(<span style="color: #a0522d;">regex</span>: <span style="color: #228b22;">Regex</span>): <span style="color: #228b22;">Int</span> =
-  <span style="color: #0000ff;">generate100</span>(<span style="color: #a0522d;">regex</span>).<span style="color: #a0522d;">sample</span>.<span style="color: #a0522d;">get</span>.<span style="color: #0000ff;">minBy</span>(<span style="color: #483d8b;">_</span>.<span style="color: #a0522d;">length</span>).<span style="color: #a0522d;">length</span>
+<span style="color: #ff7f24;">// Given a regex, I generate 100 samples and get the minimum length</span>
+<span style="color: #ff7f24;">// If I can't I explode</span>
+<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">minimumRegexLength</span>(<span style="color: #eedd82;">regex</span>: <span style="color: #98fb98;">Regex</span>): <span style="color: #98fb98;">Int</span> =
+  <span style="color: #87cefa;">generate100</span>(<span style="color: #eedd82;">regex</span>).<span style="color: #eedd82;">sample</span>.<span style="color: #eedd82;">get</span>.<span style="color: #87cefa;">minBy</span>(<span style="color: #b0c4de;">_</span>.<span style="color: #eedd82;">length</span>).<span style="color: #eedd82;">length</span>
 
-<span style="color: #a020f0;">val</span> <span style="color: #a0522d;">inputExpected</span>: <span style="color: #228b22;">Map</span>[<span style="color: #228b22;">Regex</span>, <span style="color: #228b22;">Int</span>] = <span style="color: #0000ff;">Map</span>(
-  <span style="color: #8b2252;">"(posto|carico) i video"</span>.<span style="color: #a0522d;">r</span> -&gt; 13,
-  <span style="color: #8b2252;">"(restiamo|teniamo) in contatto"</span>.<span style="color: #a0522d;">r</span> -&gt; 19,
-  <span style="color: #8b2252;">"(attraverso i|nei) commenti"</span>.<span style="color: #a0522d;">r</span> -&gt; 12,
-  <span style="color: #8b2252;">"cocod[e&#232;]"</span>.<span style="color: #a0522d;">r</span> -&gt; 6,
-  <span style="color: #8b2252;">"\\bmisc\\b"</span>.<span style="color: #a0522d;">r</span> -&gt; 4,
-  <span style="color: #8b2252;">"\\bm[i]+[a]+[o]+\\b"</span>.<span style="color: #a0522d;">r</span> -&gt; 4,
-  <span style="color: #8b2252;">"\\bsgrida[tr]"</span>.<span style="color: #a0522d;">r</span> -&gt; 7,
-  <span style="color: #8b2252;">"\\brimprover"</span>.<span style="color: #a0522d;">r</span> -&gt; 9,
-  <span style="color: #8b2252;">"(baci )?perugina"</span>.<span style="color: #a0522d;">r</span> -&gt; 8,
-  <span style="color: #8b2252;">"velit[a&#224;]"</span>.<span style="color: #a0522d;">r</span> -&gt; 6,
-  <span style="color: #8b2252;">"ho perso (di nuovo )?qualcosa"</span>.<span style="color: #a0522d;">r</span> -&gt; 17,
-  <span style="color: #8b2252;">"tutti (quanti )?mi criticheranno"</span>.<span style="color: #a0522d;">r</span> -&gt; 22,
-  <span style="color: #8b2252;">"ti voglio (tanto )?bene"</span>.<span style="color: #a0522d;">r</span> -&gt; 14,
-  <span style="color: #8b2252;">"vi voglio (tanto )*bene"</span>.<span style="color: #a0522d;">r</span> -&gt; 14,
-  <span style="color: #8b2252;">"pu[o&#242;] capitare"</span>.<span style="color: #a0522d;">r</span> -&gt; 12,
-  <span style="color: #8b2252;">"dopo (che ho )?mangiato"</span>.<span style="color: #a0522d;">r</span> -&gt; 13,
-  <span style="color: #8b2252;">"\\bops\\b"</span>.<span style="color: #a0522d;">r</span> -&gt; 3,
-  <span style="color: #8b2252;">"mi sto sentendo (bene|in compagnia)"</span>.<span style="color: #a0522d;">r</span> -&gt; 20,
-  <span style="color: #8b2252;">"(25|venticinque) (milioni|mila euro)"</span>.<span style="color: #a0522d;">r</span> -&gt; 10
+<span style="color: #00ffff;">val</span> <span style="color: #eedd82;">inputExpected</span>: <span style="color: #98fb98;">Map</span>[<span style="color: #98fb98;">Regex</span>, <span style="color: #98fb98;">Int</span>] = <span style="color: #87cefa;">Map</span>(
+  <span style="color: #ffa07a;">"(posto|carico) i video"</span>.<span style="color: #eedd82;">r</span> -&gt; 13,
+  <span style="color: #ffa07a;">"(restiamo|teniamo) in contatto"</span>.<span style="color: #eedd82;">r</span> -&gt; 19,
+  <span style="color: #ffa07a;">"(attraverso i|nei) commenti"</span>.<span style="color: #eedd82;">r</span> -&gt; 12,
+  <span style="color: #ffa07a;">"cocod[e&#232;]"</span>.<span style="color: #eedd82;">r</span> -&gt; 6,
+  <span style="color: #ffa07a;">"\\bmisc\\b"</span>.<span style="color: #eedd82;">r</span> -&gt; 4,
+  <span style="color: #ffa07a;">"\\bm[i]+[a]+[o]+\\b"</span>.<span style="color: #eedd82;">r</span> -&gt; 4,
+  <span style="color: #ffa07a;">"\\bsgrida[tr]"</span>.<span style="color: #eedd82;">r</span> -&gt; 7,
+  <span style="color: #ffa07a;">"\\brimprover"</span>.<span style="color: #eedd82;">r</span> -&gt; 9,
+  <span style="color: #ffa07a;">"(baci )?perugina"</span>.<span style="color: #eedd82;">r</span> -&gt; 8,
+  <span style="color: #ffa07a;">"velit[a&#224;]"</span>.<span style="color: #eedd82;">r</span> -&gt; 6,
+  <span style="color: #ffa07a;">"ho perso (di nuovo )?qualcosa"</span>.<span style="color: #eedd82;">r</span> -&gt; 17,
+  <span style="color: #ffa07a;">"tutti (quanti )?mi criticheranno"</span>.<span style="color: #eedd82;">r</span> -&gt; 22,
+  <span style="color: #ffa07a;">"ti voglio (tanto )?bene"</span>.<span style="color: #eedd82;">r</span> -&gt; 14,
+  <span style="color: #ffa07a;">"vi voglio (tanto )*bene"</span>.<span style="color: #eedd82;">r</span> -&gt; 14,
+  <span style="color: #ffa07a;">"pu[o&#242;] capitare"</span>.<span style="color: #eedd82;">r</span> -&gt; 12,
+  <span style="color: #ffa07a;">"dopo (che ho )?mangiato"</span>.<span style="color: #eedd82;">r</span> -&gt; 13,
+  <span style="color: #ffa07a;">"\\bops\\b"</span>.<span style="color: #eedd82;">r</span> -&gt; 3,
+  <span style="color: #ffa07a;">"mi sto sentendo (bene|in compagnia)"</span>.<span style="color: #eedd82;">r</span> -&gt; 20,
+  <span style="color: #ffa07a;">"(25|venticinque) (milioni|mila euro)"</span>.<span style="color: #eedd82;">r</span> -&gt; 10
 )
 
-<span style="color: #a0522d;">inputExpected</span>.<span style="color: #0000ff;">forall</span> { <span style="color: #a020f0;">case</span> (<span style="color: #a0522d;">input</span>, <span style="color: #a0522d;">expected</span>) =&gt;
-  <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">result</span> = <span style="color: #0000ff;">minimumRegexLength</span>(<span style="color: #a0522d;">input</span>)
-  <span style="color: #a020f0;">if</span> (<span style="color: #a0522d;">result</span> != <span style="color: #a0522d;">expected</span>) {
-    <span style="color: #0000ff;">println</span>(
-      <span style="color: #0000ff;">s</span><span style="color: #8b2252;">"[RegexMinimumLength] Failed test for </span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">input</span><span style="color: #8b2252;">, expected </span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">expected</span><span style="color: #8b2252;">, got </span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">result</span><span style="color: #8b2252;">"</span>
+<span style="color: #eedd82;">inputExpected</span>.<span style="color: #87cefa;">forall</span> { <span style="color: #00ffff;">case</span> (<span style="color: #eedd82;">input</span>, <span style="color: #eedd82;">expected</span>) =&gt;
+  <span style="color: #00ffff;">val</span> <span style="color: #eedd82;">result</span> = <span style="color: #87cefa;">minimumRegexLength</span>(<span style="color: #eedd82;">input</span>)
+  <span style="color: #00ffff;">if</span> (<span style="color: #eedd82;">result</span> != <span style="color: #eedd82;">expected</span>) {
+    <span style="color: #87cefa;">println</span>(
+      <span style="color: #87cefa;">s</span><span style="color: #ffa07a;">"[RegexMinimumLength] Failed test for </span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">input</span><span style="color: #ffa07a;">, expected </span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">expected</span><span style="color: #ffa07a;">, got </span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">result</span><span style="color: #ffa07a;">"</span>
     )
-    <span style="color: #008b8b;">false</span>
-  } <span style="color: #a020f0;">else</span> <span style="color: #008b8b;">true</span>
+    <span style="color: #7fffd4;">false</span>
+  } <span style="color: #00ffff;">else</span> <span style="color: #7fffd4;">true</span>
 }
 
-<span style="color: #b22222;">// FAILED as expected. Output</span>
-<span style="color: #b22222;">// Got [RegexMinimumLength] Failed test for \bm[i]+[a]+[o]+\b, expected 4, got 46</span>
+<span style="color: #ff7f24;">// FAILED as expected. Output</span>
+<span style="color: #ff7f24;">// Got [RegexMinimumLength] Failed test for \bm[i]+[a]+[o]+\b, expected 4, got 46</span>
 
-<span style="color: #b22222;">// Gonna ask AI what are his suggestions.</span>
-<span style="color: #b22222;">// Together we come out with an idea:</span>
+<span style="color: #ff7f24;">// Gonna ask AI what are his suggestions.</span>
+<span style="color: #ff7f24;">// Together we come out with an idea:</span>
 
-<span style="color: #b22222;">// - Start small in size</span>
-<span style="color: #b22222;">// - Try to generate the output</span>
-<span style="color: #b22222;">// - If fail, increase the size and retry</span>
-<span style="color: #b22222;">// - Exit when you got something</span>
+<span style="color: #ff7f24;">// - Start small in size</span>
+<span style="color: #ff7f24;">// - Try to generate the output</span>
+<span style="color: #ff7f24;">// - If fail, increase the size and retry</span>
+<span style="color: #ff7f24;">// - Exit when you got something</span>
 
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">canGenerateSize</span>(
-  <span style="color: #a0522d;">regex</span>: <span style="color: #228b22;">Regex</span>,
-  <span style="color: #a0522d;">targetSize</span>: <span style="color: #228b22;">Int</span>,
-  <span style="color: #a0522d;">trials</span>: <span style="color: #228b22;">Int</span> = 100
-): <span style="color: #228b22;">Boolean</span> = {
-  <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">params</span> = <span style="color: #a0522d;">Gen</span>.<span style="color: #a0522d;">Parameters</span>.<span style="color: #a0522d;">default</span>.<span style="color: #0000ff;">withSize</span>(<span style="color: #a0522d;">targetSize</span>)
-  (1 <span style="color: #a0522d;">to</span> <span style="color: #a0522d;">trials</span>).<span style="color: #0000ff;">exists</span> { <span style="color: #483d8b;">_</span> =&gt;
-    <span style="color: #a0522d;">RegexpGen</span>.<span style="color: #0000ff;">from</span>(<span style="color: #a0522d;">regex</span>.<span style="color: #a0522d;">toString</span>).<span style="color: #0000ff;">apply</span>(<span style="color: #a0522d;">params</span>, <span style="color: #a0522d;">Seed</span>.<span style="color: #0000ff;">random</span>())
-      .<span style="color: #0000ff;">exists</span>(<span style="color: #a0522d;">v</span> =&gt; <span style="color: #a020f0;">if</span> (<span style="color: #a0522d;">v</span>.<span style="color: #a0522d;">length</span> == <span style="color: #a0522d;">targetSize</span>) {
-        <span style="color: #b22222;">//println(s"[RegexMinimumLength] find a match for $regex: $v")</span>
-        <span style="color: #008b8b;">true</span>
-      } <span style="color: #a020f0;">else</span> <span style="color: #008b8b;">false</span>
+<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">canGenerateSize</span>(
+  <span style="color: #eedd82;">regex</span>: <span style="color: #98fb98;">Regex</span>,
+  <span style="color: #eedd82;">targetSize</span>: <span style="color: #98fb98;">Int</span>,
+  <span style="color: #eedd82;">trials</span>: <span style="color: #98fb98;">Int</span> = 100
+): <span style="color: #98fb98;">Boolean</span> = {
+  <span style="color: #00ffff;">val</span> <span style="color: #eedd82;">params</span> = <span style="color: #eedd82;">Gen</span>.<span style="color: #eedd82;">Parameters</span>.<span style="color: #eedd82;">default</span>.<span style="color: #87cefa;">withSize</span>(<span style="color: #eedd82;">targetSize</span>)
+  (1 <span style="color: #eedd82;">to</span> <span style="color: #eedd82;">trials</span>).<span style="color: #87cefa;">exists</span> { <span style="color: #b0c4de;">_</span> =&gt;
+    <span style="color: #eedd82;">RegexpGen</span>.<span style="color: #87cefa;">from</span>(<span style="color: #eedd82;">regex</span>.<span style="color: #eedd82;">toString</span>).<span style="color: #87cefa;">apply</span>(<span style="color: #eedd82;">params</span>, <span style="color: #eedd82;">Seed</span>.<span style="color: #87cefa;">random</span>())
+      .<span style="color: #87cefa;">exists</span>(<span style="color: #eedd82;">v</span> =&gt; <span style="color: #00ffff;">if</span> (<span style="color: #eedd82;">v</span>.<span style="color: #eedd82;">length</span> == <span style="color: #eedd82;">targetSize</span>) {
+        <span style="color: #ff7f24;">//println(s"[RegexMinimumLength] find a match for $regex: $v")</span>
+        <span style="color: #7fffd4;">true</span>
+      } <span style="color: #00ffff;">else</span> <span style="color: #7fffd4;">false</span>
       )
   }
 }
 
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">minimalSize</span>[<span style="color: #a0522d;">T</span>](
-  <span style="color: #a0522d;">regex</span>: <span style="color: #228b22;">Regex</span>,
-  <span style="color: #a0522d;">maxProbe</span>: <span style="color: #228b22;">Int</span> = 50
-): <span style="color: #228b22;">Option</span>[<span style="color: #228b22;">Int</span>] = {
-  <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">start</span>: <span style="color: #228b22;">Instant</span> = <span style="color: #a0522d;">Instant</span>.<span style="color: #0000ff;">now</span>()
-  <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">result</span> = (0 <span style="color: #a0522d;">to</span> <span style="color: #a0522d;">maxProbe</span>).<span style="color: #0000ff;">find</span> { <span style="color: #a0522d;">size</span> =&gt;
-    <span style="color: #0000ff;">canGenerateSize</span>(<span style="color: #a0522d;">regex</span>, <span style="color: #a0522d;">size</span>)
+<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">minimalSize</span>[<span style="color: #eedd82;">T</span>](
+  <span style="color: #eedd82;">regex</span>: <span style="color: #98fb98;">Regex</span>,
+  <span style="color: #eedd82;">maxProbe</span>: <span style="color: #98fb98;">Int</span> = 50
+): <span style="color: #98fb98;">Option</span>[<span style="color: #98fb98;">Int</span>] = {
+  <span style="color: #00ffff;">val</span> <span style="color: #eedd82;">start</span>: <span style="color: #98fb98;">Instant</span> = <span style="color: #eedd82;">Instant</span>.<span style="color: #87cefa;">now</span>()
+  <span style="color: #00ffff;">val</span> <span style="color: #eedd82;">result</span> = (0 <span style="color: #eedd82;">to</span> <span style="color: #eedd82;">maxProbe</span>).<span style="color: #87cefa;">find</span> { <span style="color: #eedd82;">size</span> =&gt;
+    <span style="color: #87cefa;">canGenerateSize</span>(<span style="color: #eedd82;">regex</span>, <span style="color: #eedd82;">size</span>)
   }
-  <span style="color: #0000ff;">println</span>(<span style="color: #0000ff;">s</span><span style="color: #8b2252;">"[RegexMinimumLength] generation took: </span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">{</span><span style="color: #a0522d;">Duration</span><span style="color: #a0522d;">.</span><span style="color: #a0522d;">between</span><span style="color: #a0522d;">(</span><span style="color: #a0522d;">start</span><span style="color: #a0522d;">,</span><span style="color: #a0522d;"> </span><span style="color: #a0522d;">Instant</span><span style="color: #a0522d;">.</span><span style="color: #a0522d;">now</span><span style="color: #a0522d;">)</span><span style="color: #a0522d;">.</span><span style="color: #a0522d;">toMillis</span><span style="color: #a0522d;">}</span><span style="color: #8b2252;">"</span>)
-  <span style="color: #a0522d;">result</span>
+  <span style="color: #87cefa;">println</span>(<span style="color: #87cefa;">s</span><span style="color: #ffa07a;">"[RegexMinimumLength] generation took: </span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">{</span><span style="color: #eedd82;">Duration</span><span style="color: #eedd82;">.</span><span style="color: #eedd82;">between</span><span style="color: #eedd82;">(</span><span style="color: #eedd82;">start</span><span style="color: #eedd82;">,</span><span style="color: #eedd82;"> </span><span style="color: #eedd82;">Instant</span><span style="color: #eedd82;">.</span><span style="color: #eedd82;">now</span><span style="color: #eedd82;">)</span><span style="color: #eedd82;">.</span><span style="color: #eedd82;">toMillis</span><span style="color: #eedd82;">}</span><span style="color: #ffa07a;">"</span>)
+  <span style="color: #eedd82;">result</span>
 }
 
-<span style="color: #a0522d;">inputExpected</span>.<span style="color: #0000ff;">forall</span> { <span style="color: #a020f0;">case</span> (<span style="color: #a0522d;">input</span>, <span style="color: #a0522d;">expected</span>) =&gt;
-  <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">result</span> = <span style="color: #0000ff;">minimalSize</span>(<span style="color: #a0522d;">input</span>)
-  <span style="color: #a020f0;">if</span> (<span style="color: #a0522d;">result</span> != <span style="color: #0000ff;">Some</span>(<span style="color: #a0522d;">expected</span>)) {
-    <span style="color: #0000ff;">println</span>(
-      <span style="color: #0000ff;">s</span><span style="color: #8b2252;">"[RegexMinimumLength] Failed test for </span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">input</span><span style="color: #8b2252;">, expected </span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">expected</span><span style="color: #8b2252;">, got </span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">result</span><span style="color: #8b2252;">"</span>
+<span style="color: #eedd82;">inputExpected</span>.<span style="color: #87cefa;">forall</span> { <span style="color: #00ffff;">case</span> (<span style="color: #eedd82;">input</span>, <span style="color: #eedd82;">expected</span>) =&gt;
+  <span style="color: #00ffff;">val</span> <span style="color: #eedd82;">result</span> = <span style="color: #87cefa;">minimalSize</span>(<span style="color: #eedd82;">input</span>)
+  <span style="color: #00ffff;">if</span> (<span style="color: #eedd82;">result</span> != <span style="color: #87cefa;">Some</span>(<span style="color: #eedd82;">expected</span>)) {
+    <span style="color: #87cefa;">println</span>(
+      <span style="color: #87cefa;">s</span><span style="color: #ffa07a;">"[RegexMinimumLength] Failed test for </span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">input</span><span style="color: #ffa07a;">, expected </span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">expected</span><span style="color: #ffa07a;">, got </span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">result</span><span style="color: #ffa07a;">"</span>
     )
-    <span style="color: #008b8b;">false</span>
-  } <span style="color: #a020f0;">else</span> <span style="color: #008b8b;">true</span>
+    <span style="color: #7fffd4;">false</span>
+  } <span style="color: #00ffff;">else</span> <span style="color: #7fffd4;">true</span>
 }
 
-<span style="color: #b22222;">// THIS WORKS!!! And generally returns pretty fast ~ 25 milliseconds</span>
-<span style="color: #b22222;">// It's probabilistic tho so it might be wrong, especially if the number</span>
-<span style="color: #b22222;">// of attempt are low or the regexp is particularly complex</span>
+<span style="color: #ff7f24;">// THIS WORKS!!! And generally returns pretty fast ~ 25 milliseconds</span>
+<span style="color: #ff7f24;">// It's probabilistic tho so it might be wrong, especially if the number</span>
+<span style="color: #ff7f24;">// of attempt are low or the regexp is particularly complex</span>
 </pre>
 </div>
 </div>
@@ -251,6 +251,14 @@ test it's possible and who it run.
 I hope this could be useful to someone out there. At least this
 should be a better start then when I did approach the problem the
 first time. (and decided to give up)
+</p>
+
+<p>
+EDIT: The solution works fine for simple regexp. Long/complex regexp
+will take more time. So for those you might be better off counting
+the length manually till someone delivers a lib that exposes this
+functionality. I learned this by seeing a degrade in my project
+performance 😅
 </p>
 </div>
 </div>

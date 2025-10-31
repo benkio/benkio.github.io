@@ -195,6 +195,12 @@
   should be a better start then when I did approach the problem the
   first time. (and decided to give up)
 
+  EDIT: The solution works fine for simple regexp. Long/complex regexp
+  will take more time. So for those you might be better off counting
+  the length manually till someone delivers a lib that exposes this
+  functionality. I learned this by seeing a degrade in my project
+  performance 😅
+
 * Share Buttons
   :PROPERTIES:
   :CUSTOM_ID: ShareButtons
