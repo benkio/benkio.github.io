@@ -1,8 +1,8 @@
 #+OPTIONS: num:nil toc:nil H:4
 #+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:nil
-#+TITLE: Minimal Regex Length
-#+DESCRIPTION: Minimal Regex Length
-#+KEYWORDS: Minimal Regex Length
+#+TITLE: Shortest String Length Matching a Regexp
+#+DESCRIPTION: Shortest String Length Matching a Regexp
+#+KEYWORDS: Shortest String Length Matching a Regexp
 #+CREATOR: Enrico Benini
 #+HTML_HEAD_EXTRA: <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
 #+HTML_HEAD_EXTRA: <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
@@ -24,7 +24,7 @@
   :END:
 #+CALL: ../templates.org:navbar(1)
 
-* Minimal Regex Length
+* Shortest String Length Matching a Regexp
   :PROPERTIES:
   :CUSTOM_ID: Article
   :HTML_CONTAINER_CLASS: row container p-4
