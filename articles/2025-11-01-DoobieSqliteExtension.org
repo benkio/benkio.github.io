@@ -1,0 +1,361 @@
+#+OPTIONS: num:nil toc:nil H:4
+#+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:nil
+#+TITLE: How to Load Sqlite Extension in Scala and Doobie
+#+DESCRIPTION: How to Load Sqlite Extension in Scala and Doobie
+#+KEYWORDS: How to Load Sqlite Extension in Scala and Doobie
+#+CREATOR: Enrico Benini
+#+HTML_HEAD_EXTRA: <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA: <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+#+HTML_HEAD_EXTRA: <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+#+HTML_HEAD_EXTRA: <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/main.css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/blog.css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/article.css">
+
+* Blog
+  :PROPERTIES:
+  :HTML_CONTAINER: nav
+:HTML_CONTAINER_CLASS: navbar bg-dark border-bottom border-body navbar-fixed-top navbar-expand-lg bg-body-tertiary
+  :CUSTOM_ID: navbar
+  :END:
+#+CALL: ../templates.org:navbar(1)
+
+* How to Load Sqlite Extension in Scala and Doobie
+  :PROPERTIES:
+  :CUSTOM_ID: Article
+    :HTML_CONTAINER_CLASS: row container p-4
+  :END:
+  *Created: <2025-11-01 Sat>*
+** Abstract
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleAbstract
+  :END:
+
+  In this article I show how you can load a [[https://sqlite.org/][Sqlite]] extension in Scala using [[https://github.com/typelevel/doobie][Doobie]].
+
+** Content
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleContent
+  :END:
+*** Motivation
+
+  [[https://github.com/benkio/sbots][In my project]], when a message input come, I have to match that
+  againg a list of regexp and then select the related response. In the
+  beginning the amount of regexp were not that much, so I thought I
+  can just hardcode the relationship in code and have everything
+  loaded on memory.
+
+  It works great and probably it will keep working ok for quite some
+  time, but it's definitely not the way you want to handle data. It's
+  true that makes it: easier to change, test and you can use the
+  compiler to check stuff for you. However, you can't really extract
+  such relationship outside of the project and I start gaving 6k+ line
+  of code files, plus the compiler told me I reached the limit of list length.
+
+  As a result, I created [[https://github.com/benkio/sBots/issues/785][this issue]], with a detailed plan in how to
+  move stuff in the database. It has all the necessary logic I needed
+  to order entries and so on, but what I was missing was a way to
+  check if a random string matches one of my regexp. Sure I could just
+  query all the regexps and tests in my code, but it wouldn't be very
+  performant and I would be close to what I have now. I needed a Proof
+  of concept that it could be done by a SQL query. That's what
+  [[https://scala-cli.virtuslab.org/][scala-cli]] is for.
+
+  I'm quite sure commercial DB comes with that built in, but I wasn't
+  sure about [[https://sqlite.org/][Sqlite]]. After a bit of research I saw it was doable,
+  but you need an external extension. So the question shifted to:
+
+  /is it possible to load an extension in Doobie with Sqlite?/
+
+  Here starts the journey. I will put references in the code, so you
+  will have a /clean/ code, but you can jump to the commentary to see
+  what's going on here.
+
+*** Commentary
+
+**** [0] Setup
+  - Dependencies
+  - Imports
+  - Database Name & String Connection
+  - Create a transactor and an ~AppIO~
+  - Create a Table
+  - Put in it some regexp
+
+  All quite some standard stuff you can copy-paste from documentation
+  of [[https://github.com/typelevel/doobie][Doobie]] or my project as well. Just be sure to put a ~.scala~
+  extension to your file or you won't be able to have a normal Main.
+
+**** [1] Built-In Regex
+
+I try the built-in regex from [[https://stackoverflow.com/a/5071683][this stackoverflow post]] and I got:
+
+#+begin_src scala
+
+  result <- buildInRegex
+  _ <- IO.println(s"[doobieSqlLiteRegex] result: ${result}")  
+  // org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (no such function: regexp)
+#+end_src
+
+That's because *it is not included in Sqlite* 😠
+You have to add it yourself!!!
+
+Searching online I saw [[https://github.com/sqlite/sqlite/blob/master/ext/misc/regexp.c][this official regexp extension]].
+I download and see if I can add it to the database
+
+First you have to compile it from C!! After a little search I got to
+this command:
+
+~gcc -lm -fPIC -shared regexp.c -o regexp.so~
+
+Of course, it fails because of architecture (macos). Fortunately, I
+have access to a Linux machine. I will use that for compiling it.
+
+I suggest to look in [[https://sqlite.org/loadext.html][the sqlite documentation to see how to compile
+and load it]]
+
+**** [2] Change of Direction
+
+I have never been a fun of C, and compiling gave me errors I couldn't,
+and didn't want, to understand. Therefore, I redirect myself toward
+the web
+
+Fortunately, I found [[https://github.com/nalgeon/sqlean][a repo]] where you can get precompiled [[https://sqlite.org/loadext.html][Sqlite]]
+extension libraries per architecture. It will be a lot of fun to load
+the library, at runtime, *per architecture*, in a realworld production
+code. Living on the Edge here.
+
+In case you need to know how to get your architecture and os name,
+here is the code:
+
+#+begin_src scala
+  _ <- IO.println(s"Architecture: " + System.getProperty("os.arch")) // aarch64
+  _ <- IO.println(s"Os Name: " + System.getProperty("os.name"))      // Mac OS X
+#+end_src
+
+Once downloaded, you will have in your filesystem the following folders
+ - sqlean-macos-x64   -> regexp.dylib
+ - sqlean-macos-arm64 -> regexp.dylib
+ - sqlean-linux-x64   -> regexp.so
+ - sqlean-linux-arm64 -> regexp.so
+
+A cool discovery from the Sqlite documentation is:
+
+/If you want to make your code portable, you can omit the suffix from the shared library filename and the appropriate suffix will be added automatically by the sqlite3_load_extension() interface./
+
+So I guess you can put them all in a folder and it will load the right
+one? I don't know about it.
+
+Unfortunately, I've done another discovery:
+
+/you have to enable extensions in Sqlite/
+
+**** [3] Enable Extensions Config
+
+After getting crazy reading [[https://github.com/typelevel/doobie][Doobie]] documentation and more, I realize
+ my best bet was to:
+ - Go down to at ~JDBC~ level.
+ - Get a connection
+ - Add the configuration
+ - Create a transactor from that connection
+
+[[https://github.com/xerial/sqlite-jdbc/blob/master/USAGE.md][The JDBC documentation page]] is really helpful here.
+
+That works...almost 😒 I got this error:
+
+~library load disallowed by system policy~
+
+I had to run this command:
+
+~xattr -dr com.apple.quarantine regexp.dylib~
+
+**** [4] Load Extension
+
+Pretty straight forward:
+
+Run the proper SELECT with the extension path
+
+Just beware of how to call Doobie or it will complain about the fact
+that the query returns results, so you can't use ~update.run~ as
+normal DDL in this case.
+
+Finally It seems the extension is properly loaded!!
+
+**** [5] Run Regexp Matching Queries
+
+Time to try it!
+Here I needed a ~WHERE EXISTS~ inner query as the regexp are stored
+into the DB itself.
+
+Then the real query will be way more complicated as a many-to-many
+relationship will be involved. So, inner joins etc.
+
+Will it actually be performant? I hope so.
+
+**** [6] Results
+
+#+begin_src scala
+  // [doobieSqlLiteRegex] result: List(List(), List((baci )?perugina), List(\bm[i]+[a]+[o]+\b), List(\bm[i]+[a]+[o]+\b), List((restiamo|teniamo) in contatto))
+#+end_src
+
+Exactly as expected!! 🎉 🎉 
+
+*** Code
+
+#+begin_src scala
+    #!/usr/bin/env scala-cli
+  //> using dep org.tpolecat::doobie-core:1.0.0-RC10
+  //> using toolkit typelevel:default
+  //> using dep org.xerial:sqlite-jdbc:3.50.3.0
+
+  import doobie.Transactor
+  import cats.effect.IO
+  import cats.effect.IOApp
+  import cats.effect.ExitCode
+  import doobie.Transactor
+  import doobie.implicits.*
+  import cats.implicits.*
+  import cats.effect.implicits.*
+  import doobie.util.fragment.Fragment
+  import org.sqlite.SQLiteConnection
+  import org.sqlite.SQLiteConfig
+  import java.sql.Connection
+  import java.sql.DriverManager
+
+  object Main extends IOApp {
+
+    // Setting up the database connection.
+    // Be sure to have in the same folder a test.sqlite3 DB
+    // To create just call `sqlite test.sqlite3`
+
+    val dbName: String = "test.sqlite3"
+    val dbUrl: String = s"jdbc:sqlite:./$dbName";
+
+    // [3]
+    val config: SQLiteConfig = {
+      val c = SQLiteConfig()
+      c.enableLoadExtension(true);
+      c
+    }
+
+    val connection: Connection = DriverManager.getConnection(dbUrl, config.toProperties())
+
+    val transactor: Transactor[IO] =
+      Transactor.fromConnection[IO](connection, None)
+
+    val drop =
+      sql"""
+      DROP TABLE IF EXISTS test
+      """.update.run
+
+    val create =
+      sql"""
+      CREATE TABLE test (
+      regexp   Text PRIMARY KEY
+      )
+      """.update.run
+
+    val inserts = List(
+      """INSERT INTO main.test VALUES('\bm[i]+[a]+[o]+\b')""",
+      """INSERT INTO main.test VALUES('(restiamo|teniamo) in contatto')""",
+      """INSERT INTO main.test VALUES('(baci )?perugina')"""
+    ).map(Fragment.const(_).update.run)
+
+    val inputs: List[String] = List(
+      "something who doesn't match",
+      "let's see if a text with a match in between because I add the word: perugina matches?",
+      "Another match with: miaaaaoooo",
+      "miao miaooooo",
+      "ci teniamo in contatto"
+    )
+
+    // [5]
+    val buildInRegex: IO[List[List[String]]] =
+      inputs.traverse(t => {
+        val result: IO[List[String]] =
+          sql"""SELECT regexp FROM test t WHERE EXISTS (SELECT 1 WHERE $t regexp t.regexp)"""
+            .query[String]
+            .to[List]
+            .transact(transactor)
+        result
+      })
+
+    def run(args: List[String]): IO[ExitCode] =
+      // [0]: Setup a test table with a couple of regexp as values
+      for {
+        _ <- drop.transact(transactor)
+        _ <- create.transact(transactor)
+        _ <- inserts.traverse_(_.transact(transactor))
+        // [1]
+        // [2]
+        // [4]
+
+        loadExtension =
+          sql"""SELECT load_extension('./sqlean-macos-arm64/regexp')"""
+            .query[Option[String]]
+            .option.void
+            .transact(transactor)
+        _ <- loadExtension
+
+        // [5]
+        result <- buildInRegex
+        // [6]
+        _ <- IO.println(s"[doobieSqlLiteRegex] result: ${result}")
+      } yield ExitCode.Success
+  }
+
+#+end_src
+
+** Conclusions
+  :PROPERTIES:
+  :CUSTOM_ID: ArticleConclusions
+  :END:
+
+  It is possible! A bit cumbersome, error prone, javish, but possible.
+  I still don't know:
+  - If it will make everything better code wise
+  - If it's easier to maintain and change
+  - If it's easier to test
+  - If the performance are on point
+
+  But at least we know how to do it now. That's progress.
+
+* Share Buttons
+  :PROPERTIES:
+  :CUSTOM_ID: ShareButtons
+  :HTML_CONTAINER_CLASS: row container p-4
+  :END:
+#+BEGIN_EXPORT html
+<!-- AddToAny BEGIN -->
+<hr>
+<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+<a class="a2a_button_facebook"></a>
+<a class="a2a_button_twitter"></a>
+<a class="a2a_button_whatsapp"></a>
+<a class="a2a_button_telegram"></a>
+<a class="a2a_button_linkedin"></a>
+<a class="a2a_button_email"></a>
+</div>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+<!-- AddToAny END -->
+#+END_EXPORT
+
+#+begin_export html
+<script type="text/javascript">
+$(function() {
+  $('#text-table-of-contents > ul li').first().css("display", "none");
+  $('#text-table-of-contents > ul li').last().css("display", "none");
+  $('#table-of-contents').addClass("visible-lg")
+});
+  document.getElementById("content").classList.add("container-fluid","p-0");
+  document.getElementById("text-navbar").classList.add("container-fluid");
+  document.getElementById("outline-container-navbar").setAttribute("data-bs-theme", "dark");
+  document.getElementById("text-Article").classList.add("text-center");
+  $('.outline-3').addClass("m-auto").addClass("col-10");
+  document.getElementById("text-ShareButtons").classList.add("m-auto", "col-10");
+</script>
+#+end_export
