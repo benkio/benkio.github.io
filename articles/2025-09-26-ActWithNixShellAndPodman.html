@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-10-30 Thu 12:34 -->
+<!-- 2025-11-01 Sat 10:41 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>~act~ with ~nix-shell~ and ~podman~</title>
@@ -56,17 +56,17 @@
   <span class="navbar-toggler-icon"></span>
 </button>
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-    <li class="nav-item"> <a class="nav-link fs-4 active"        aria-current="page" target="_self" href="/blog.html">Blog</a> </li>
-    <li class="nav-item"> <a class="nav-link fs-4 "        aria-current="page" target="_self" href="/articles.html">Articles</a> </li>
-    <li class="nav-item"> <a class="nav-link fs-4 "        aria-current="page" target="_self" href="/books.html">Books</a> </li>
-    <li class="nav-item"> <a class="nav-link fs-4 " aria-current="page" target="_self" href="/albums.html">Albums</a> </li>
-    <li class="nav-item"> <a class="nav-link fs-4 "        aria-current="page" target="_self" href="/NoteTrainer/NoteTrainer.html">Note Trainer</a> </li>
+  <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-2">
+    <li class="nav-item mx-2"> <a class="nav-link fs-4 active"        aria-current="page" target="_self" href="/blog.html">Blog</a> </li>
+    <li class="nav-item mx-2"> <a class="nav-link fs-4 "        aria-current="page" target="_self" href="/articles.html">Articles</a> </li>
+    <li class="nav-item mx-2"> <a class="nav-link fs-4 "        aria-current="page" target="_self" href="/books.html">Books</a> </li>
+    <li class="nav-item mx-2"> <a class="nav-link fs-4 " aria-current="page" target="_self" href="/albums.html">Albums</a> </li>
+    <li class="nav-item mx-2"> <a class="nav-link fs-4 "        aria-current="page" target="_self" href="/NoteTrainer/NoteTrainer.html">Note Trainer</a> </li>
   </ul>
 </div>
 </div>
 </nav>
-<div id="outline-container-Article" class="outline-2 row">
+<div id="outline-container-Article" class="outline-2 row container p-4">
 <h2 id="Article"><code>act</code> with <code>nix-shell</code> and <code>podman</code></h2>
 <div class="outline-text-2" id="text-Article">
 <p>
@@ -100,9 +100,9 @@ Here I show how I did it.
 <h3 id="ArticleContent">Content</h3>
 <div class="outline-text-3" id="text-ArticleContent">
 </div>
-<div id="outline-container-org06171a0" class="outline-4">
-<h4 id="org06171a0">Tried with Docker</h4>
-<div class="outline-text-4" id="text-org06171a0">
+<div id="outline-container-org0f46902" class="outline-4">
+<h4 id="org0f46902">Tried with Docker</h4>
+<div class="outline-text-4" id="text-org0f46902">
 <p>
 My ideas was to use just <code>docker</code> with <code>nix-shell</code> and call <code>act</code>. Everything should work and I go living my life, but of course the life is the enemy and nothing works.
 </p>
@@ -110,7 +110,7 @@ My ideas was to use just <code>docker</code> with <code>nix-shell</code> and cal
 <div class="org-src-container">
 <pre class="src src-sh">$ nix-shell -p docker
 $ act
-WARN[0000] Couldn<span style="color: #8b2252;">'t get a valid docker connection: no DOCKER_HOST and an invalid container socket ''
+WARN[0000] Couldn<span class="org-string">'t get a valid docker connection: no DOCKER_HOST and an invalid container socket ''
 [Github Page CI/check_urls] &#11088; Run Set up job
 [Github Page CI/check_urls] &#128640;  Start image=node:16-buster-slim
 [Github Page CI/check_urls]   &#128051;  docker pull image=node:16-buster-slim platform= username= forcePull=true
@@ -126,15 +126,15 @@ Even if you set the docker host environment variable you will not succeed:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh">$ export <span style="color: #a0522d;">DOCKER_HOST</span>=unix://$<span style="color: #a0522d;">XDG_RUNTIME_DIR</span>/docker.sock
+<pre class="src src-sh">$ export <span class="org-variable-name">DOCKER_HOST</span>=unix://$<span class="org-variable-name">XDG_RUNTIME_DIR</span>/docker.sock
 $ act
 Error: Cannot connect to the Docker daemon at unix:///run/user/1000/docker.sock. Is the docker daemon running?
 </pre>
 </div>
 </div>
-<div id="outline-container-org0310674" class="outline-5">
-<h5 id="org0310674">Docker Rootless</h5>
-<div class="outline-text-5" id="text-org0310674">
+<div id="outline-container-org60afa27" class="outline-5">
+<h5 id="org60afa27">Docker Rootless</h5>
+<div class="outline-text-5" id="text-org60afa27">
 <p>
 You can't run <code>dockerd</code> rootless right away. I searched on stackoverflow and I found <a href="https://discourse.nixos.org/t/is-there-a-way-to-run-docker-inside-a-nix-shell/46824">this article</a>
 </p>
@@ -146,7 +146,7 @@ I tried:
 <div class="org-src-container">
 <pre class="src src-sh">$ nix-shell -p rootlesskit docker
 ...
-failed: : exec: <span style="color: #8b2252;">"newuidmap"</span>: executable file not found<span style="color: #a020f0;"> in</span> $<span style="color: #a0522d;">PATH</span>
+failed: : exec: <span class="org-string">"newuidmap"</span>: executable file not found<span class="org-keyword"> in</span> $<span class="org-variable-name">PATH</span>
 </pre>
 </div>
 
@@ -160,9 +160,9 @@ I give up with docker on the fly. Switch to <code>podman</code>
 </div>
 </div>
 </div>
-<div id="outline-container-org53d4061" class="outline-4">
-<h4 id="org53d4061">Try with Podman</h4>
-<div class="outline-text-4" id="text-org53d4061">
+<div id="outline-container-orge699d7d" class="outline-4">
+<h4 id="orge699d7d">Try with Podman</h4>
+<div class="outline-text-4" id="text-orge699d7d">
 <p>
 The package is there and it seems promising from <a href="https://nektosact.com/usage/custom_engine.html">the act documentation</a>, but it doesn't come with a daemon right away, so setting the socket is useless as in the guide.
 </p>
@@ -174,7 +174,7 @@ After a bit of searching I found <a href="https://docs.podman.io/en/latest/markd
 <div class="org-src-container">
 <pre class="src src-sh">$ nix-shell -p podman
 $ podman system service --time 0 unix:///var/run/mypodman.sock
-Error: command required for rootless mode with multiple IDs: exec: <span style="color: #8b2252;">"newuidmap"</span>: executable file not found<span style="color: #a020f0;"> in</span> $<span style="color: #a0522d;">PATH</span>
+Error: command required for rootless mode with multiple IDs: exec: <span class="org-string">"newuidmap"</span>: executable file not found<span class="org-keyword"> in</span> $<span class="org-variable-name">PATH</span>
 </pre>
 </div>
 
@@ -191,8 +191,8 @@ I found that you need a package I didn't know about in order to see those progra
 $ which newuidmap
 /nix/store/3lj2vmycjz1ywzr04287va8awss3flsz-shadow-4.17.4/bin/newuidmap
 $ podman system service --time 0 unix:///var/run/mypodman.sock
-ERRO[0000] running <span style="color: #ff00ff;">`/nix/store/3lj2vmycjz1ywzr04287va8awss3flsz-shadow-4.17.4/bin/newuidmap 307185 0 1000 1 1 100000 65536`</span>: newuidmap: write to uid_map failed: Operation not permitted
-Error: cannot set up namespace using <span style="color: #8b2252;">"/nix/store/3lj2vmycjz1ywzr04287va8awss3flsz-shadow-4.17.4/bin/newuidmap"</span>: should have setuid or have filecaps setuid: exit status 1
+ERRO[0000] running <span class="org-sh-quoted-exec">`/nix/store/3lj2vmycjz1ywzr04287va8awss3flsz-shadow-4.17.4/bin/newuidmap 307185 0 1000 1 1 100000 65536`</span>: newuidmap: write to uid_map failed: Operation not permitted
+Error: cannot set up namespace using <span class="org-string">"/nix/store/3lj2vmycjz1ywzr04287va8awss3flsz-shadow-4.17.4/bin/newuidmap"</span>: should have setuid or have filecaps setuid: exit status 1
 </pre>
 </div>
 
@@ -211,9 +211,9 @@ For reference I get the same error with <code>dockerd-rootless</code>:
 </div>
 </div>
 </div>
-<div id="outline-container-orga82a710" class="outline-4">
-<h4 id="orga82a710">Grok AI (last resort)</h4>
-<div class="outline-text-4" id="text-orga82a710">
+<div id="outline-container-org656fe5e" class="outline-4">
+<h4 id="org656fe5e">Grok AI (last resort)</h4>
+<div class="outline-text-4" id="text-org656fe5e">
 <p>
 Prompt:
 <i>I want to run act on my project with docker or podman, but I don't want to install them, I want to use nix-shell instead to have them available temporarely. How can I do it?</i>
@@ -228,7 +228,7 @@ I get the same error as before
 </p>
 
 
-<div id="orga97d6ad" class="figure">
+<div id="org4536bad" class="figure">
 <p><img src="https://m.media-amazon.com/images/I/61rEuZFB01L._AC_SX679_.jpg" alt="61rEuZFB01L._AC_SX679_.jpg" class="img-fluid" />
 </p>
 </div>
@@ -271,9 +271,9 @@ The shell.nix is not necessary tho
 </p>
 </div>
 </div>
-<div id="outline-container-org3a36c95" class="outline-4">
-<h4 id="org3a36c95">Try to run Act finally</h4>
-<div class="outline-text-4" id="text-org3a36c95">
+<div id="outline-container-org3b65e6f" class="outline-4">
+<h4 id="org3b65e6f">Try to run Act finally</h4>
+<div class="outline-text-4" id="text-org3b65e6f">
 <p>
 So far so good, but running act gives me permission problems, still ask the AI and it gives me some options such as create a user group etc.
 </p>
@@ -292,7 +292,7 @@ $ ls -l /var/run/docker.sock
 srw-rw-rw- - root 26 Sep 12:21 /var/run/docker.sock
 
 $ act
-INFO[0000] Using docker host <span style="color: #8b2252;">'unix:///var/run/docker.sock'</span>, and daemon socket <span style="color: #8b2252;">'unix:///var/run/docker.sock'</span>
+INFO[0000] Using docker host <span class="org-string">'unix:///var/run/docker.sock'</span>, and daemon socket <span class="org-string">'unix:///var/run/docker.sock'</span>
 ...
 </pre>
 </div>
@@ -323,82 +323,82 @@ INFO[2025-09-26T12:32:09.259534588+01:00] Starting up
 
 $ WARN[2025-09-26T12:32:09.262293396+01:00] could not change group /var/run/docker.sock to docker: group docker not found
 INFO[2025-09-26T12:32:09.262368227+01:00] containerd not running, starting managed containerd
-INFO[2025-09-26T12:32:09.262807946+01:00] started new containerd process                <span style="color: #a0522d;">address</span>=/var/run/docker/containerd/containerd.sock <span style="color: #a0522d;">module</span>=libcontainerd <span style="color: #a0522d;">pid</span>=314796
-INFO[2025-09-26T12:32:09.276475307+01:00] starting containerd                           <span style="color: #a0522d;">revision</span>=refs/tags/v2.1.3 <span style="color: #a0522d;">version</span>=v2.1.3
-INFO[2025-09-26T12:32:09.284140549+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.snapshotter.v1.aufs"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.snapshotter.v1
-INFO[2025-09-26T12:32:09.286214647+01:00] skip loading plugin <span style="color: #8b2252;">"io.containerd.snapshotter.v1.aufs"</span>...  <span style="color: #a0522d;">error</span>=<span style="color: #8b2252;">"aufs is not supported (modprobe aufs failed: exit status 1 skip plugin"</span> <span style="color: #a0522d;">type</span>=io.containerd.snapshotter.v1
-INFO[2025-09-26T12:32:09.286228072+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.event.v1.exchange"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.event.v1
-INFO[2025-09-26T12:32:09.286236137+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.internal.v1.opt"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.internal.v1
-INFO[2025-09-26T12:32:09.286258279+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.warning.v1.deprecations"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.warning.v1
-INFO[2025-09-26T12:32:09.286265743+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.snapshotter.v1.blockfile"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.snapshotter.v1
-INFO[2025-09-26T12:32:09.286282064+01:00] skip loading plugin <span style="color: #8b2252;">"io.containerd.snapshotter.v1.blockfile"</span>...  <span style="color: #a0522d;">error</span>=<span style="color: #8b2252;">"no scratch file generator: skip plugin"</span> <span style="color: #a0522d;">type</span>=io.containerd.snapshotter.v1
-INFO[2025-09-26T12:32:09.286293856+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.snapshotter.v1.btrfs"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.snapshotter.v1
-INFO[2025-09-26T12:32:09.286451202+01:00] skip loading plugin <span style="color: #8b2252;">"io.containerd.snapshotter.v1.btrfs"</span>...  <span style="color: #a0522d;">error</span>=<span style="color: #8b2252;">"path /var/lib/docker/containerd/daemon/io.containerd.snapshotter.v1.btrfs (ext4) must be a btrfs filesystem to be used with the btrfs snapshotter: skip plugin"</span> <span style="color: #a0522d;">type</span>=io.containerd.snapshotter.v1
-INFO[2025-09-26T12:32:09.286458426+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.snapshotter.v1.devmapper"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.snapshotter.v1
-INFO[2025-09-26T12:32:09.286464698+01:00] skip loading plugin <span style="color: #8b2252;">"io.containerd.snapshotter.v1.devmapper"</span>...  <span style="color: #a0522d;">error</span>=<span style="color: #8b2252;">"devmapper not configured: skip plugin"</span> <span style="color: #a0522d;">type</span>=io.containerd.snapshotter.v1
-INFO[2025-09-26T12:32:09.286469717+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.snapshotter.v1.native"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.snapshotter.v1
-INFO[2025-09-26T12:32:09.286487511+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.snapshotter.v1.overlayfs"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.snapshotter.v1
-INFO[2025-09-26T12:32:09.286592368+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.snapshotter.v1.zfs"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.snapshotter.v1
-INFO[2025-09-26T12:32:09.286815349+01:00] skip loading plugin <span style="color: #8b2252;">"io.containerd.snapshotter.v1.zfs"</span>...  <span style="color: #a0522d;">error</span>=<span style="color: #8b2252;">"path /var/lib/docker/containerd/daemon/io.containerd.snapshotter.v1.zfs must be a zfs filesystem to be used with the zfs snapshotter: skip plugin"</span> <span style="color: #a0522d;">type</span>=io.containerd.snapshotter.v1
-INFO[2025-09-26T12:32:09.286830116+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.content.v1.content"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.content.v1
-INFO[2025-09-26T12:32:09.286843852+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.metadata.v1.bolt"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.metadata.v1
-INFO[2025-09-26T12:32:09.286861495+01:00] metadata content store policy set             <span style="color: #a0522d;">policy</span>=shared
-INFO[2025-09-26T12:32:09.287101488+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.gc.v1.scheduler"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.gc.v1
-INFO[2025-09-26T12:32:09.287128288+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.differ.v1.walking"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.differ.v1
-INFO[2025-09-26T12:32:09.287140631+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.lease.v1.manager"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.lease.v1
-INFO[2025-09-26T12:32:09.287156201+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.streaming.v1.manager"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.streaming.v1
-INFO[2025-09-26T12:32:09.287165318+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.runtime.v1.linux"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.runtime.v1
-INFO[2025-09-26T12:32:09.287399239+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.monitor.v1.cgroups"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.monitor.v1
-INFO[2025-09-26T12:32:09.287646234+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.runtime.v2.task"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.runtime.v2
-INFO[2025-09-26T12:32:09.287721576+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.runtime.v2.shim"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.runtime.v2
-INFO[2025-09-26T12:32:09.287729751+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.sandbox.store.v1.local"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.sandbox.store.v1
-INFO[2025-09-26T12:32:09.287740101+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.sandbox.controller.v1.local"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.sandbox.controller.v1
-INFO[2025-09-26T12:32:09.287752094+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.service.v1.containers-service"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.service.v1
-INFO[2025-09-26T12:32:09.287763134+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.service.v1.content-service"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.service.v1
-INFO[2025-09-26T12:32:09.287772973+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.service.v1.diff-service"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.service.v1
-INFO[2025-09-26T12:32:09.287783302+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.service.v1.images-service"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.service.v1
-INFO[2025-09-26T12:32:09.287793401+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.service.v1.introspection-service"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.service.v1
-INFO[2025-09-26T12:32:09.287802639+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.service.v1.namespaces-service"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.service.v1
-INFO[2025-09-26T12:32:09.287811075+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.service.v1.snapshots-service"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.service.v1
-INFO[2025-09-26T12:32:09.287819901+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.service.v1.tasks-service"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.service.v1
-INFO[2025-09-26T12:32:09.287835541+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.grpc.v1.containers"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.grpc.v1
-INFO[2025-09-26T12:32:09.287844968+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.grpc.v1.content"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.grpc.v1
-INFO[2025-09-26T12:32:09.287853745+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.grpc.v1.diff"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.grpc.v1
-INFO[2025-09-26T12:32:09.287862461+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.grpc.v1.events"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.grpc.v1
-INFO[2025-09-26T12:32:09.287871959+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.grpc.v1.images"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.grpc.v1
-INFO[2025-09-26T12:32:09.287881187+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.grpc.v1.introspection"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.grpc.v1
-INFO[2025-09-26T12:32:09.287896836+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.grpc.v1.leases"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.grpc.v1
-INFO[2025-09-26T12:32:09.287905833+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.grpc.v1.namespaces"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.grpc.v1
-INFO[2025-09-26T12:32:09.287914760+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.grpc.v1.sandbox-controllers"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.grpc.v1
-INFO[2025-09-26T12:32:09.287928987+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.grpc.v1.sandboxes"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.grpc.v1
-INFO[2025-09-26T12:32:09.287938214+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.grpc.v1.snapshots"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.grpc.v1
-INFO[2025-09-26T12:32:09.287946590+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.grpc.v1.streaming"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.grpc.v1
-INFO[2025-09-26T12:32:09.287955897+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.grpc.v1.tasks"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.grpc.v1
-INFO[2025-09-26T12:32:09.287967339+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.transfer.v1.local"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.transfer.v1
-INFO[2025-09-26T12:32:09.287983720+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.grpc.v1.transfer"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.grpc.v1
-INFO[2025-09-26T12:32:09.287994230+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.grpc.v1.version"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.grpc.v1
-INFO[2025-09-26T12:32:09.288003878+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.internal.v1.restart"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.internal.v1
-INFO[2025-09-26T12:32:09.288048001+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.tracing.processor.v1.otlp"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.tracing.processor.v1
-INFO[2025-09-26T12:32:09.288058571+01:00] skip loading plugin <span style="color: #8b2252;">"io.containerd.tracing.processor.v1.otlp"</span>...  <span style="color: #a0522d;">error</span>=<span style="color: #8b2252;">"skip plugin: tracing endpoint not configured"</span> <span style="color: #a0522d;">type</span>=io.containerd.tracing.processor.v1
-INFO[2025-09-26T12:32:09.288066616+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.internal.v1.tracing"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.internal.v1
-INFO[2025-09-26T12:32:09.288075633+01:00] skip loading plugin <span style="color: #8b2252;">"io.containerd.internal.v1.tracing"</span>...  <span style="color: #a0522d;">error</span>=<span style="color: #8b2252;">"skip plugin: tracing endpoint not configured"</span> <span style="color: #a0522d;">type</span>=io.containerd.internal.v1
-INFO[2025-09-26T12:32:09.288082837+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.grpc.v1.healthcheck"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.grpc.v1
-INFO[2025-09-26T12:32:09.288092084+01:00] loading plugin <span style="color: #8b2252;">"io.containerd.nri.v1.nri"</span>...  <span style="color: #a0522d;">type</span>=io.containerd.nri.v1
+INFO[2025-09-26T12:32:09.262807946+01:00] started new containerd process                <span class="org-variable-name">address</span>=/var/run/docker/containerd/containerd.sock <span class="org-variable-name">module</span>=libcontainerd <span class="org-variable-name">pid</span>=314796
+INFO[2025-09-26T12:32:09.276475307+01:00] starting containerd                           <span class="org-variable-name">revision</span>=refs/tags/v2.1.3 <span class="org-variable-name">version</span>=v2.1.3
+INFO[2025-09-26T12:32:09.284140549+01:00] loading plugin <span class="org-string">"io.containerd.snapshotter.v1.aufs"</span>...  <span class="org-variable-name">type</span>=io.containerd.snapshotter.v1
+INFO[2025-09-26T12:32:09.286214647+01:00] skip loading plugin <span class="org-string">"io.containerd.snapshotter.v1.aufs"</span>...  <span class="org-variable-name">error</span>=<span class="org-string">"aufs is not supported (modprobe aufs failed: exit status 1 skip plugin"</span> <span class="org-variable-name">type</span>=io.containerd.snapshotter.v1
+INFO[2025-09-26T12:32:09.286228072+01:00] loading plugin <span class="org-string">"io.containerd.event.v1.exchange"</span>...  <span class="org-variable-name">type</span>=io.containerd.event.v1
+INFO[2025-09-26T12:32:09.286236137+01:00] loading plugin <span class="org-string">"io.containerd.internal.v1.opt"</span>...  <span class="org-variable-name">type</span>=io.containerd.internal.v1
+INFO[2025-09-26T12:32:09.286258279+01:00] loading plugin <span class="org-string">"io.containerd.warning.v1.deprecations"</span>...  <span class="org-variable-name">type</span>=io.containerd.warning.v1
+INFO[2025-09-26T12:32:09.286265743+01:00] loading plugin <span class="org-string">"io.containerd.snapshotter.v1.blockfile"</span>...  <span class="org-variable-name">type</span>=io.containerd.snapshotter.v1
+INFO[2025-09-26T12:32:09.286282064+01:00] skip loading plugin <span class="org-string">"io.containerd.snapshotter.v1.blockfile"</span>...  <span class="org-variable-name">error</span>=<span class="org-string">"no scratch file generator: skip plugin"</span> <span class="org-variable-name">type</span>=io.containerd.snapshotter.v1
+INFO[2025-09-26T12:32:09.286293856+01:00] loading plugin <span class="org-string">"io.containerd.snapshotter.v1.btrfs"</span>...  <span class="org-variable-name">type</span>=io.containerd.snapshotter.v1
+INFO[2025-09-26T12:32:09.286451202+01:00] skip loading plugin <span class="org-string">"io.containerd.snapshotter.v1.btrfs"</span>...  <span class="org-variable-name">error</span>=<span class="org-string">"path /var/lib/docker/containerd/daemon/io.containerd.snapshotter.v1.btrfs (ext4) must be a btrfs filesystem to be used with the btrfs snapshotter: skip plugin"</span> <span class="org-variable-name">type</span>=io.containerd.snapshotter.v1
+INFO[2025-09-26T12:32:09.286458426+01:00] loading plugin <span class="org-string">"io.containerd.snapshotter.v1.devmapper"</span>...  <span class="org-variable-name">type</span>=io.containerd.snapshotter.v1
+INFO[2025-09-26T12:32:09.286464698+01:00] skip loading plugin <span class="org-string">"io.containerd.snapshotter.v1.devmapper"</span>...  <span class="org-variable-name">error</span>=<span class="org-string">"devmapper not configured: skip plugin"</span> <span class="org-variable-name">type</span>=io.containerd.snapshotter.v1
+INFO[2025-09-26T12:32:09.286469717+01:00] loading plugin <span class="org-string">"io.containerd.snapshotter.v1.native"</span>...  <span class="org-variable-name">type</span>=io.containerd.snapshotter.v1
+INFO[2025-09-26T12:32:09.286487511+01:00] loading plugin <span class="org-string">"io.containerd.snapshotter.v1.overlayfs"</span>...  <span class="org-variable-name">type</span>=io.containerd.snapshotter.v1
+INFO[2025-09-26T12:32:09.286592368+01:00] loading plugin <span class="org-string">"io.containerd.snapshotter.v1.zfs"</span>...  <span class="org-variable-name">type</span>=io.containerd.snapshotter.v1
+INFO[2025-09-26T12:32:09.286815349+01:00] skip loading plugin <span class="org-string">"io.containerd.snapshotter.v1.zfs"</span>...  <span class="org-variable-name">error</span>=<span class="org-string">"path /var/lib/docker/containerd/daemon/io.containerd.snapshotter.v1.zfs must be a zfs filesystem to be used with the zfs snapshotter: skip plugin"</span> <span class="org-variable-name">type</span>=io.containerd.snapshotter.v1
+INFO[2025-09-26T12:32:09.286830116+01:00] loading plugin <span class="org-string">"io.containerd.content.v1.content"</span>...  <span class="org-variable-name">type</span>=io.containerd.content.v1
+INFO[2025-09-26T12:32:09.286843852+01:00] loading plugin <span class="org-string">"io.containerd.metadata.v1.bolt"</span>...  <span class="org-variable-name">type</span>=io.containerd.metadata.v1
+INFO[2025-09-26T12:32:09.286861495+01:00] metadata content store policy set             <span class="org-variable-name">policy</span>=shared
+INFO[2025-09-26T12:32:09.287101488+01:00] loading plugin <span class="org-string">"io.containerd.gc.v1.scheduler"</span>...  <span class="org-variable-name">type</span>=io.containerd.gc.v1
+INFO[2025-09-26T12:32:09.287128288+01:00] loading plugin <span class="org-string">"io.containerd.differ.v1.walking"</span>...  <span class="org-variable-name">type</span>=io.containerd.differ.v1
+INFO[2025-09-26T12:32:09.287140631+01:00] loading plugin <span class="org-string">"io.containerd.lease.v1.manager"</span>...  <span class="org-variable-name">type</span>=io.containerd.lease.v1
+INFO[2025-09-26T12:32:09.287156201+01:00] loading plugin <span class="org-string">"io.containerd.streaming.v1.manager"</span>...  <span class="org-variable-name">type</span>=io.containerd.streaming.v1
+INFO[2025-09-26T12:32:09.287165318+01:00] loading plugin <span class="org-string">"io.containerd.runtime.v1.linux"</span>...  <span class="org-variable-name">type</span>=io.containerd.runtime.v1
+INFO[2025-09-26T12:32:09.287399239+01:00] loading plugin <span class="org-string">"io.containerd.monitor.v1.cgroups"</span>...  <span class="org-variable-name">type</span>=io.containerd.monitor.v1
+INFO[2025-09-26T12:32:09.287646234+01:00] loading plugin <span class="org-string">"io.containerd.runtime.v2.task"</span>...  <span class="org-variable-name">type</span>=io.containerd.runtime.v2
+INFO[2025-09-26T12:32:09.287721576+01:00] loading plugin <span class="org-string">"io.containerd.runtime.v2.shim"</span>...  <span class="org-variable-name">type</span>=io.containerd.runtime.v2
+INFO[2025-09-26T12:32:09.287729751+01:00] loading plugin <span class="org-string">"io.containerd.sandbox.store.v1.local"</span>...  <span class="org-variable-name">type</span>=io.containerd.sandbox.store.v1
+INFO[2025-09-26T12:32:09.287740101+01:00] loading plugin <span class="org-string">"io.containerd.sandbox.controller.v1.local"</span>...  <span class="org-variable-name">type</span>=io.containerd.sandbox.controller.v1
+INFO[2025-09-26T12:32:09.287752094+01:00] loading plugin <span class="org-string">"io.containerd.service.v1.containers-service"</span>...  <span class="org-variable-name">type</span>=io.containerd.service.v1
+INFO[2025-09-26T12:32:09.287763134+01:00] loading plugin <span class="org-string">"io.containerd.service.v1.content-service"</span>...  <span class="org-variable-name">type</span>=io.containerd.service.v1
+INFO[2025-09-26T12:32:09.287772973+01:00] loading plugin <span class="org-string">"io.containerd.service.v1.diff-service"</span>...  <span class="org-variable-name">type</span>=io.containerd.service.v1
+INFO[2025-09-26T12:32:09.287783302+01:00] loading plugin <span class="org-string">"io.containerd.service.v1.images-service"</span>...  <span class="org-variable-name">type</span>=io.containerd.service.v1
+INFO[2025-09-26T12:32:09.287793401+01:00] loading plugin <span class="org-string">"io.containerd.service.v1.introspection-service"</span>...  <span class="org-variable-name">type</span>=io.containerd.service.v1
+INFO[2025-09-26T12:32:09.287802639+01:00] loading plugin <span class="org-string">"io.containerd.service.v1.namespaces-service"</span>...  <span class="org-variable-name">type</span>=io.containerd.service.v1
+INFO[2025-09-26T12:32:09.287811075+01:00] loading plugin <span class="org-string">"io.containerd.service.v1.snapshots-service"</span>...  <span class="org-variable-name">type</span>=io.containerd.service.v1
+INFO[2025-09-26T12:32:09.287819901+01:00] loading plugin <span class="org-string">"io.containerd.service.v1.tasks-service"</span>...  <span class="org-variable-name">type</span>=io.containerd.service.v1
+INFO[2025-09-26T12:32:09.287835541+01:00] loading plugin <span class="org-string">"io.containerd.grpc.v1.containers"</span>...  <span class="org-variable-name">type</span>=io.containerd.grpc.v1
+INFO[2025-09-26T12:32:09.287844968+01:00] loading plugin <span class="org-string">"io.containerd.grpc.v1.content"</span>...  <span class="org-variable-name">type</span>=io.containerd.grpc.v1
+INFO[2025-09-26T12:32:09.287853745+01:00] loading plugin <span class="org-string">"io.containerd.grpc.v1.diff"</span>...  <span class="org-variable-name">type</span>=io.containerd.grpc.v1
+INFO[2025-09-26T12:32:09.287862461+01:00] loading plugin <span class="org-string">"io.containerd.grpc.v1.events"</span>...  <span class="org-variable-name">type</span>=io.containerd.grpc.v1
+INFO[2025-09-26T12:32:09.287871959+01:00] loading plugin <span class="org-string">"io.containerd.grpc.v1.images"</span>...  <span class="org-variable-name">type</span>=io.containerd.grpc.v1
+INFO[2025-09-26T12:32:09.287881187+01:00] loading plugin <span class="org-string">"io.containerd.grpc.v1.introspection"</span>...  <span class="org-variable-name">type</span>=io.containerd.grpc.v1
+INFO[2025-09-26T12:32:09.287896836+01:00] loading plugin <span class="org-string">"io.containerd.grpc.v1.leases"</span>...  <span class="org-variable-name">type</span>=io.containerd.grpc.v1
+INFO[2025-09-26T12:32:09.287905833+01:00] loading plugin <span class="org-string">"io.containerd.grpc.v1.namespaces"</span>...  <span class="org-variable-name">type</span>=io.containerd.grpc.v1
+INFO[2025-09-26T12:32:09.287914760+01:00] loading plugin <span class="org-string">"io.containerd.grpc.v1.sandbox-controllers"</span>...  <span class="org-variable-name">type</span>=io.containerd.grpc.v1
+INFO[2025-09-26T12:32:09.287928987+01:00] loading plugin <span class="org-string">"io.containerd.grpc.v1.sandboxes"</span>...  <span class="org-variable-name">type</span>=io.containerd.grpc.v1
+INFO[2025-09-26T12:32:09.287938214+01:00] loading plugin <span class="org-string">"io.containerd.grpc.v1.snapshots"</span>...  <span class="org-variable-name">type</span>=io.containerd.grpc.v1
+INFO[2025-09-26T12:32:09.287946590+01:00] loading plugin <span class="org-string">"io.containerd.grpc.v1.streaming"</span>...  <span class="org-variable-name">type</span>=io.containerd.grpc.v1
+INFO[2025-09-26T12:32:09.287955897+01:00] loading plugin <span class="org-string">"io.containerd.grpc.v1.tasks"</span>...  <span class="org-variable-name">type</span>=io.containerd.grpc.v1
+INFO[2025-09-26T12:32:09.287967339+01:00] loading plugin <span class="org-string">"io.containerd.transfer.v1.local"</span>...  <span class="org-variable-name">type</span>=io.containerd.transfer.v1
+INFO[2025-09-26T12:32:09.287983720+01:00] loading plugin <span class="org-string">"io.containerd.grpc.v1.transfer"</span>...  <span class="org-variable-name">type</span>=io.containerd.grpc.v1
+INFO[2025-09-26T12:32:09.287994230+01:00] loading plugin <span class="org-string">"io.containerd.grpc.v1.version"</span>...  <span class="org-variable-name">type</span>=io.containerd.grpc.v1
+INFO[2025-09-26T12:32:09.288003878+01:00] loading plugin <span class="org-string">"io.containerd.internal.v1.restart"</span>...  <span class="org-variable-name">type</span>=io.containerd.internal.v1
+INFO[2025-09-26T12:32:09.288048001+01:00] loading plugin <span class="org-string">"io.containerd.tracing.processor.v1.otlp"</span>...  <span class="org-variable-name">type</span>=io.containerd.tracing.processor.v1
+INFO[2025-09-26T12:32:09.288058571+01:00] skip loading plugin <span class="org-string">"io.containerd.tracing.processor.v1.otlp"</span>...  <span class="org-variable-name">error</span>=<span class="org-string">"skip plugin: tracing endpoint not configured"</span> <span class="org-variable-name">type</span>=io.containerd.tracing.processor.v1
+INFO[2025-09-26T12:32:09.288066616+01:00] loading plugin <span class="org-string">"io.containerd.internal.v1.tracing"</span>...  <span class="org-variable-name">type</span>=io.containerd.internal.v1
+INFO[2025-09-26T12:32:09.288075633+01:00] skip loading plugin <span class="org-string">"io.containerd.internal.v1.tracing"</span>...  <span class="org-variable-name">error</span>=<span class="org-string">"skip plugin: tracing endpoint not configured"</span> <span class="org-variable-name">type</span>=io.containerd.internal.v1
+INFO[2025-09-26T12:32:09.288082837+01:00] loading plugin <span class="org-string">"io.containerd.grpc.v1.healthcheck"</span>...  <span class="org-variable-name">type</span>=io.containerd.grpc.v1
+INFO[2025-09-26T12:32:09.288092084+01:00] loading plugin <span class="org-string">"io.containerd.nri.v1.nri"</span>...  <span class="org-variable-name">type</span>=io.containerd.nri.v1
 INFO[2025-09-26T12:32:09.288099558+01:00] NRI interface is disabled by configuration.
-INFO[2025-09-26T12:32:09.288212431+01:00] serving...                                    <span style="color: #a0522d;">address</span>=/var/run/docker/containerd/containerd-debug.sock
-INFO[2025-09-26T12:32:09.288245493+01:00] serving...                                    <span style="color: #a0522d;">address</span>=/var/run/docker/containerd/containerd.sock.ttrpc
-INFO[2025-09-26T12:32:09.288272334+01:00] serving...                                    <span style="color: #a0522d;">address</span>=/var/run/docker/containerd/containerd.sock
-INFO[2025-09-26T12:32:09.288282633+01:00] containerd successfully booted<span style="color: #a020f0;"> in</span> 0.012693s
+INFO[2025-09-26T12:32:09.288212431+01:00] serving...                                    <span class="org-variable-name">address</span>=/var/run/docker/containerd/containerd-debug.sock
+INFO[2025-09-26T12:32:09.288245493+01:00] serving...                                    <span class="org-variable-name">address</span>=/var/run/docker/containerd/containerd.sock.ttrpc
+INFO[2025-09-26T12:32:09.288272334+01:00] serving...                                    <span class="org-variable-name">address</span>=/var/run/docker/containerd/containerd.sock
+INFO[2025-09-26T12:32:09.288282633+01:00] containerd successfully booted<span class="org-keyword"> in</span> 0.012693s
 INFO[2025-09-26T12:32:09.295608286+01:00] OTEL tracing is not configured, using no-op tracer provider
-INFO[2025-09-26T12:32:09.295691973+01:00] CDI directory does not exist, skipping: failed to monitor for changes: no such file or directory  <span style="color: #a0522d;">dir</span>=/etc/cdi
-INFO[2025-09-26T12:32:09.295701141+01:00] CDI directory does not exist, skipping: failed to monitor for changes: no such file or directory  <span style="color: #a0522d;">dir</span>=/var/run/cdi
+INFO[2025-09-26T12:32:09.295691973+01:00] CDI directory does not exist, skipping: failed to monitor for changes: no such file or directory  <span class="org-variable-name">dir</span>=/etc/cdi
+INFO[2025-09-26T12:32:09.295701141+01:00] CDI directory does not exist, skipping: failed to monitor for changes: no such file or directory  <span class="org-variable-name">dir</span>=/var/run/cdi
 INFO[2025-09-26T12:32:09.295766975+01:00] detected 127.0.0.53 nameserver, assuming systemd-resolved, so using resolv.conf: /run/systemd/resolve/resolv.conf
-INFO[2025-09-26T12:32:09.307838388+01:00] Creating a containerd client                  <span style="color: #a0522d;">address</span>=/var/run/docker/containerd/containerd.sock <span style="color: #a0522d;">timeout</span>=1m0s
+INFO[2025-09-26T12:32:09.307838388+01:00] Creating a containerd client                  <span class="org-variable-name">address</span>=/var/run/docker/containerd/containerd.sock <span class="org-variable-name">timeout</span>=1m0s
 INFO[2025-09-26T12:32:09.320551722+01:00] [graphdriver] using prior storage driver: overlay2
 INFO[2025-09-26T12:32:09.322394453+01:00] Loading containers: start.
 WARN[2025-09-26T12:32:10.199461781+01:00] Error (Unable to complete atomic operation, key modified) deleting object [endpoint_count f76d5d6ccdbd3b6cfbd8325247336b116a89991ce7b57ad4180483a8a4f6dee0], retrying....
 INFO[2025-09-26T12:32:10.258411607+01:00] Loading containers: done.
-INFO[2025-09-26T12:32:10.288330817+01:00] Docker daemon                                 <span style="color: #a0522d;">commit</span>=v28.3.2 containerd-snapshotter=false storage-driver=overlay2 <span style="color: #a0522d;">version</span>=28.3.2
+INFO[2025-09-26T12:32:10.288330817+01:00] Docker daemon                                 <span class="org-variable-name">commit</span>=v28.3.2 containerd-snapshotter=false storage-driver=overlay2 <span class="org-variable-name">version</span>=28.3.2
 INFO[2025-09-26T12:32:10.288393856+01:00] Initializing buildkit
 INFO[2025-09-26T12:32:10.308204581+01:00] Completed buildkit initialization
 INFO[2025-09-26T12:32:10.311609416+01:00] Daemon has completed initialization
@@ -414,45 +414,45 @@ $ ls -l /var/run/docker.sock
 srw-rw-rw- - root 26 Sep 12:32 /var/run/docker.sock
 
 $ act
-INFO[0000] Using docker host <span style="color: #8b2252;">'unix:///var/run/docker.sock'</span>, and daemon socket <span style="color: #8b2252;">'unix:///var/run/docker.sock'</span>
+INFO[0000] Using docker host <span class="org-string">'unix:///var/run/docker.sock'</span>, and daemon socket <span class="org-string">'unix:///var/run/docker.sock'</span>
 [Github Page CI/check_urls] &#11088; Run Set up job
-[Github Page CI/check_urls] &#128640;  Start <span style="color: #a0522d;">image</span>=node:16-buster-slim
-[Github Page CI/check_urls]   &#128051;  docker pull <span style="color: #a0522d;">image</span>=node:16-buster-slim <span style="color: #a0522d;">platform</span>= <span style="color: #a0522d;">username</span>= <span style="color: #a0522d;">forcePull</span>=true
-[Github Page CI/check_urls]   &#128051;  docker create <span style="color: #a0522d;">image</span>=node:16-buster-slim <span style="color: #a0522d;">platform</span>= <span style="color: #a0522d;">entrypoint</span>=[<span style="color: #8b2252;">"tail"</span> <span style="color: #8b2252;">"-f"</span> <span style="color: #8b2252;">"/dev/null"</span>] <span style="color: #a0522d;">cmd</span>=[] <span style="color: #a0522d;">network</span>=<span style="color: #8b2252;">"host"</span>
-[Github Page CI/check_urls]   &#128051;  docker run <span style="color: #a0522d;">image</span>=node:16-buster-slim <span style="color: #a0522d;">platform</span>= <span style="color: #a0522d;">entrypoint</span>=[<span style="color: #8b2252;">"tail"</span> <span style="color: #8b2252;">"-f"</span> <span style="color: #8b2252;">"/dev/null"</span>] <span style="color: #a0522d;">cmd</span>=[] <span style="color: #a0522d;">network</span>=<span style="color: #8b2252;">"host"</span>
-[Github Page CI/check_urls]   &#128051;  docker exec <span style="color: #a0522d;">cmd</span>=[node --no-warnings -e console.log(process.execPath)] <span style="color: #a0522d;">user</span>= <span style="color: #a0522d;">workdir</span>=
+[Github Page CI/check_urls] &#128640;  Start <span class="org-variable-name">image</span>=node:16-buster-slim
+[Github Page CI/check_urls]   &#128051;  docker pull <span class="org-variable-name">image</span>=node:16-buster-slim <span class="org-variable-name">platform</span>= <span class="org-variable-name">username</span>= <span class="org-variable-name">forcePull</span>=true
+[Github Page CI/check_urls]   &#128051;  docker create <span class="org-variable-name">image</span>=node:16-buster-slim <span class="org-variable-name">platform</span>= <span class="org-variable-name">entrypoint</span>=[<span class="org-string">"tail"</span> <span class="org-string">"-f"</span> <span class="org-string">"/dev/null"</span>] <span class="org-variable-name">cmd</span>=[] <span class="org-variable-name">network</span>=<span class="org-string">"host"</span>
+[Github Page CI/check_urls]   &#128051;  docker run <span class="org-variable-name">image</span>=node:16-buster-slim <span class="org-variable-name">platform</span>= <span class="org-variable-name">entrypoint</span>=[<span class="org-string">"tail"</span> <span class="org-string">"-f"</span> <span class="org-string">"/dev/null"</span>] <span class="org-variable-name">cmd</span>=[] <span class="org-variable-name">network</span>=<span class="org-string">"host"</span>
+[Github Page CI/check_urls]   &#128051;  docker exec <span class="org-variable-name">cmd</span>=[node --no-warnings -e console.log(process.execPath)] <span class="org-variable-name">user</span>= <span class="org-variable-name">workdir</span>=
 [Github Page CI/check_urls]   &#9989;  Success - Set up job
-[Github Page CI/check_urls]   &#9729;  git clone <span style="color: #8b2252;">'https://github.com/lycheeverse/lychee-action'</span> <span style="color: #b22222;"># </span><span style="color: #b22222;">ref=v2.0.2
+[Github Page CI/check_urls]   &#9729;  git clone <span class="org-string">'https://github.com/lycheeverse/lychee-action'</span> <span class="org-comment-delimiter"># </span><span class="org-comment">ref=v2.0.2
 </span>[Github Page CI/check_urls] &#11088; Run Pre Link Checker
 [Github Page CI/check_urls]   &#9989;  Success - Pre Link Checker [25.916068ms]
 [Github Page CI/check_urls] &#11088; Run Main Checkout repository
-[Github Page CI/check_urls]   &#128051;  docker cp <span style="color: #a0522d;">src</span>=/home/benkio/playground/benkio.github.io/. <span style="color: #a0522d;">dst</span>=/home/benkio/playground/benkio.github.io
+[Github Page CI/check_urls]   &#128051;  docker cp <span class="org-variable-name">src</span>=/home/benkio/playground/benkio.github.io/. <span class="org-variable-name">dst</span>=/home/benkio/playground/benkio.github.io
 [Github Page CI/check_urls]   &#9989;  Success - Main Checkout repository [564.903268ms]
 [Github Page CI/check_urls] &#11088; Run Main Link Checker
-[Github Page CI/check_urls]   &#128051;  docker cp <span style="color: #a0522d;">src</span>=/home/benkio/.cache/act/lycheeverse-lychee-action@v2.0.2/ <span style="color: #a0522d;">dst</span>=/var/run/act/actions/lycheeverse-lychee-action@v2.0.2/
+[Github Page CI/check_urls]   &#128051;  docker cp <span class="org-variable-name">src</span>=/home/benkio/.cache/act/lycheeverse-lychee-action@v2.0.2/ <span class="org-variable-name">dst</span>=/var/run/act/actions/lycheeverse-lychee-action@v2.0.2/
 [Github Page CI/check_urls] &#11088; Run Main Set up environment
-[Github Page CI/check_urls]   &#128051;  docker exec <span style="color: #a0522d;">cmd</span>=[bash --noprofile --norc -e -o pipefail /var/run/act/workflow/1-composite-0.sh] <span style="color: #a0522d;">user</span>= <span style="color: #a0522d;">workdir</span>=
+[Github Page CI/check_urls]   &#128051;  docker exec <span class="org-variable-name">cmd</span>=[bash --noprofile --norc -e -o pipefail /var/run/act/workflow/1-composite-0.sh] <span class="org-variable-name">user</span>= <span class="org-variable-name">workdir</span>=
 [Github Page CI/check_urls]   &#9989;  Success - Main Set up environment [73.417103ms]
 [Github Page CI/check_urls]   &#9881;  ::add-path:: /root/.local/bin
 [Github Page CI/check_urls] &#11088; Run Main Clean up existing lychee files
-[Github Page CI/check_urls]   &#128051;  docker exec <span style="color: #a0522d;">cmd</span>=[bash --noprofile --norc -e -o pipefail /var/run/act/workflow/1-composite-1.sh] <span style="color: #a0522d;">user</span>= <span style="color: #a0522d;">workdir</span>=
+[Github Page CI/check_urls]   &#128051;  docker exec <span class="org-variable-name">cmd</span>=[bash --noprofile --norc -e -o pipefail /var/run/act/workflow/1-composite-1.sh] <span class="org-variable-name">user</span>= <span class="org-variable-name">workdir</span>=
 [Github Page CI/check_urls]   &#9989;  Success - Main Clean up existing lychee files [82.972599ms]
 [Github Page CI/check_urls] &#11088; Run Main Download and extract lychee
-[Github Page CI/check_urls]   &#128051;  docker exec <span style="color: #a0522d;">cmd</span>=[bash --noprofile --norc -e -o pipefail /var/run/act/workflow/1-composite-lychee-setup.sh] <span style="color: #a0522d;">user</span>= <span style="color: #a0522d;">workdir</span>=
+[Github Page CI/check_urls]   &#128051;  docker exec <span class="org-variable-name">cmd</span>=[bash --noprofile --norc -e -o pipefail /var/run/act/workflow/1-composite-lychee-setup.sh] <span class="org-variable-name">user</span>= <span class="org-variable-name">workdir</span>=
 | Downloading from: https://github.com/lycheeverse/lychee/releases/download/lychee-v0.16.1/lychee-x86_64-unknown-linux-gnu.tar.gz
 | /var/run/act/workflow/1-composite-lychee-setup.sh: line 18: curl: command not found
 [Github Page CI/check_urls]   &#10060;  Failure - Main Download and extract lychee [68.983494ms]
-[Github Page CI/check_urls] exitcode <span style="color: #8b2252;">'127'</span>: command not found, please refer to https://github.com/nektos/act/issues/107 for more information
-[Github Page CI/check_urls]   &#9881;  ::set-output:: <span style="color: #a0522d;">exit_code</span>=
+[Github Page CI/check_urls] exitcode <span class="org-string">'127'</span>: command not found, please refer to https://github.com/nektos/act/issues/107 for more information
+[Github Page CI/check_urls]   &#9881;  ::set-output:: <span class="org-variable-name">exit_code</span>=
 [Github Page CI/check_urls]   &#10060;  Failure - Main Link Checker [450.344274ms]
-[Github Page CI/check_urls] exitcode <span style="color: #8b2252;">'127'</span>: command not found, please refer to https://github.com/nektos/act/issues/107 for more information
+[Github Page CI/check_urls] exitcode <span class="org-string">'127'</span>: command not found, please refer to https://github.com/nektos/act/issues/107 for more information
 [Github Page CI/check_urls] &#11088; Run Post Link Checker
-[Github Page CI/check_urls]   &#128051;  docker cp <span style="color: #a0522d;">src</span>=/home/benkio/.cache/act/lycheeverse-lychee-action@v2.0.2/ <span style="color: #a0522d;">dst</span>=/var/run/act/actions/lycheeverse-lychee-action@v2.0.2/
+[Github Page CI/check_urls]   &#128051;  docker cp <span class="org-variable-name">src</span>=/home/benkio/.cache/act/lycheeverse-lychee-action@v2.0.2/ <span class="org-variable-name">dst</span>=/var/run/act/actions/lycheeverse-lychee-action@v2.0.2/
 [Github Page CI/check_urls]   &#9989;  Success - Post Link Checker [23.755036ms]
 [Github Page CI/check_urls] &#11088; Run Complete job
 [Github Page CI/check_urls]   &#9989;  Success - Complete job
 [Github Page CI/check_urls] &#127937;  Job failed
-Error: Job <span style="color: #8b2252;">'check_urls'</span> failed
+Error: Job <span class="org-string">'check_urls'</span> failed
 </pre>
 </div>
 
@@ -467,7 +467,7 @@ Especially if you are adding technology on top of other technology. That's why t
 </div>
 </div>
 </div>
-<div id="outline-container-ShareButtons" class="outline-2 row">
+<div id="outline-container-ShareButtons" class="outline-2 row container p-4">
 <h2 id="ShareButtons">Share Buttons</h2>
 <div class="outline-text-2" id="text-ShareButtons">
 <!-- AddToAny BEGIN -->

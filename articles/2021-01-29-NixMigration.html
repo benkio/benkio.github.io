@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-10-30 Thu 12:34 -->
+<!-- 2025-11-01 Sat 10:41 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Time to Try Nix - A Weekend Experiment</title>
@@ -56,17 +56,17 @@
   <span class="navbar-toggler-icon"></span>
 </button>
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-    <li class="nav-item"> <a class="nav-link fs-4 active"        aria-current="page" target="_self" href="/blog.html">Blog</a> </li>
-    <li class="nav-item"> <a class="nav-link fs-4 "        aria-current="page" target="_self" href="/articles.html">Articles</a> </li>
-    <li class="nav-item"> <a class="nav-link fs-4 "        aria-current="page" target="_self" href="/books.html">Books</a> </li>
-    <li class="nav-item"> <a class="nav-link fs-4 " aria-current="page" target="_self" href="/albums.html">Albums</a> </li>
-    <li class="nav-item"> <a class="nav-link fs-4 "        aria-current="page" target="_self" href="/NoteTrainer/NoteTrainer.html">Note Trainer</a> </li>
+  <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-2">
+    <li class="nav-item mx-2"> <a class="nav-link fs-4 active"        aria-current="page" target="_self" href="/blog.html">Blog</a> </li>
+    <li class="nav-item mx-2"> <a class="nav-link fs-4 "        aria-current="page" target="_self" href="/articles.html">Articles</a> </li>
+    <li class="nav-item mx-2"> <a class="nav-link fs-4 "        aria-current="page" target="_self" href="/books.html">Books</a> </li>
+    <li class="nav-item mx-2"> <a class="nav-link fs-4 " aria-current="page" target="_self" href="/albums.html">Albums</a> </li>
+    <li class="nav-item mx-2"> <a class="nav-link fs-4 "        aria-current="page" target="_self" href="/NoteTrainer/NoteTrainer.html">Note Trainer</a> </li>
   </ul>
 </div>
 </div>
 </nav>
-<div id="outline-container-Article" class="outline-2 row">
+<div id="outline-container-Article" class="outline-2 row container p-4">
 <h2 id="Article">Time to Try Nix - A Weekend Experiment</h2>
 <div class="outline-text-2" id="text-Article">
 <p>
@@ -101,14 +101,14 @@ think this could help someone else. So, let's get ready to rumble!!!
 <h3 id="ArticleContent">Content</h3>
 <div class="outline-text-3" id="text-ArticleContent">
 </div>
-<div id="outline-container-org962b6ce" class="outline-4">
-<h4 id="org962b6ce">The Plan</h4>
-<div class="outline-text-4" id="text-org962b6ce">
+<div id="outline-container-orge27b86d" class="outline-4">
+<h4 id="orge27b86d">The Plan</h4>
+<div class="outline-text-4" id="text-orge27b86d">
 <p>
 As a real professional, I must start with a tweet 😉
 </p>
 
-<div id="org593646d" class="figure">
+<div id="org5d862b9" class="figure">
 <p><img src="./2021-01-29-NixMigration/The_Plan_Tweet.png" alt="The_Plan_Tweet.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>The Plan Tweet</p>
@@ -129,9 +129,9 @@ virtual machine rather then one with <code>NixOs</code>.
 </p>
 </div>
 </div>
-<div id="outline-container-org2460379" class="outline-4">
-<h4 id="org2460379">First Impact</h4>
-<div class="outline-text-4" id="text-org2460379">
+<div id="outline-container-org6db0de4" class="outline-4">
+<h4 id="org6db0de4">First Impact</h4>
+<div class="outline-text-4" id="text-org6db0de4">
 <p>
 The only word I can think of is: <b>overwhelming</b>, but not in a good
 way. It has so much stuff that you, newcomer, will feel confused
@@ -157,9 +157,9 @@ that. I must say the majority of the guides are about <code>NixOs</code>
 instead of just <code>Nix</code> on a non-NixOs distribution, like I'm trying to do.
 </p>
 </div>
-<div id="outline-container-orgebd88de" class="outline-5">
-<h5 id="orgebd88de">NixOs and Home Manager</h5>
-<div class="outline-text-5" id="text-orgebd88de">
+<div id="outline-container-orga905b64" class="outline-5">
+<h5 id="orga905b64">NixOs and Home Manager</h5>
+<div class="outline-text-5" id="text-orga905b64">
 <p>
 In the end, I discovered that, with <code>Nix</code> only, you can't
 actually manage the whole system(or it's not straightforward at
@@ -191,9 +191,9 @@ reference script, you can find it <a href="https://gist.github.com/benkio/2d4346
 </div>
 </div>
 </div>
-<div id="outline-container-org06c2d5c" class="outline-4">
-<h4 id="org06c2d5c">Setup From existing Github Configuration</h4>
-<div class="outline-text-4" id="text-org06c2d5c">
+<div id="outline-container-org361fef4" class="outline-4">
+<h4 id="org361fef4">Setup From existing Github Configuration</h4>
+<div class="outline-text-4" id="text-org361fef4">
 <p>
 As every Emacs user, I already have my Emacs configuration
 jealously crafted and polished. Now, I don't want to restart from
@@ -268,9 +268,9 @@ reproducible? Future myself will tell.
 </p>
 </div>
 </div>
-<div id="outline-container-orgb2d6204" class="outline-4">
-<h4 id="orgb2d6204">Provided Packages</h4>
-<div class="outline-text-4" id="text-orgb2d6204">
+<div id="outline-container-org6b5f7b3" class="outline-4">
+<h4 id="org6b5f7b3">Provided Packages</h4>
+<div class="outline-text-4" id="text-org6b5f7b3">
 <p>
 I must say the amount of available packages is huge: I found
 (almost) all I needed straight out of the main channels. I had
@@ -285,9 +285,9 @@ expected.
 </p>
 </div>
 </div>
-<div id="outline-container-org53eded8" class="outline-4">
-<h4 id="org53eded8">The Unexpected</h4>
-<div class="outline-text-4" id="text-org53eded8">
+<div id="outline-container-org0261072" class="outline-4">
+<h4 id="org0261072">The Unexpected</h4>
+<div class="outline-text-4" id="text-org0261072">
 <p>
 I added more packages, I added the keyboard configuration and so
 on, then I looked into how to setup <code>I3</code> and <code>X11</code>. Well, as a result
@@ -345,9 +345,9 @@ I might ask for help in the future into some IRC channel or wherever.
 </p>
 </div>
 </div>
-<div id="outline-container-orgc692c43" class="outline-4">
-<h4 id="orgc692c43">Developer Environment</h4>
-<div class="outline-text-4" id="text-orgc692c43">
+<div id="outline-container-org5a65221" class="outline-4">
+<h4 id="org5a65221">Developer Environment</h4>
+<div class="outline-text-4" id="text-org5a65221">
 <p>
 After the failure of the previous section I decided that I can
 live without setting my window manager for now (<a href="http://read.gov/aesop/005.html">The Fox &amp; The
@@ -384,7 +384,7 @@ install the <code>haskell-plaftorm</code> with a one-liner command.
 <h3 id="ArticleConclusions">Conclusions</h3>
 <div class="outline-text-3" id="text-ArticleConclusions">
 
-<div id="orgb525ce7" class="figure">
+<div id="orgbcab0af" class="figure">
 <p><img src="./2021-01-29-NixMigration/weekendResult.png" alt="weekendResult.png" />
 </p>
 <p><span class="figure-number">Figure 2: </span>Weekend Recap</p>
@@ -420,9 +420,9 @@ developers set up their MacOs using <code>Nix</code> instead of <code>Homebrew</
 </ul>
 </div>
 </div>
-<div id="outline-container-orgc64b867" class="outline-3">
-<h3 id="orgc64b867">References</h3>
-<div class="outline-text-3" id="text-orgc64b867">
+<div id="outline-container-org23c2c96" class="outline-3">
+<h3 id="org23c2c96">References</h3>
+<div class="outline-text-3" id="text-org23c2c96">
 <dl class="org-dl">
 <dt><a href="https://nixos.org/">NixOs Website</a></dt><dd>Where you can find all the official instructions
 about <code>Nix</code> and the related distribution.</dd>
@@ -438,7 +438,7 @@ configuration.</dd>
 </div>
 </div>
 </div>
-<div id="outline-container-ShareButtons" class="outline-2 row">
+<div id="outline-container-ShareButtons" class="outline-2 row container p-4">
 <h2 id="ShareButtons">Share Buttons</h2>
 <div class="outline-text-2" id="text-ShareButtons">
 <!-- AddToAny BEGIN -->

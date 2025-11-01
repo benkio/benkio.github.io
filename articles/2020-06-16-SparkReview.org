@@ -27,7 +27,7 @@
 * Spark Amp Review
   :PROPERTIES:
   :CUSTOM_ID: Article
-  :HTML_CONTAINER_CLASS: row
+  :HTML_CONTAINER_CLASS: row container p-4
   :END:
   *Created: <2020-06-16 Tue>*
 ** Abstract
@@ -822,7 +822,7 @@ Your browser does not support the audio element.
 * Share Buttons
   :PROPERTIES:
   :CUSTOM_ID: ShareButtons
-  :HTML_CONTAINER_CLASS: row
+  :HTML_CONTAINER_CLASS: row container p-4
   :END:
 
 #+BEGIN_EXPORT html

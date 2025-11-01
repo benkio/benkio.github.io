@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-10-31 Fri 20:00 -->
+<!-- 2025-11-01 Sat 10:41 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Minimal Regex Length</title>
@@ -56,17 +56,17 @@
   <span class="navbar-toggler-icon"></span>
 </button>
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-    <li class="nav-item"> <a class="nav-link fs-4 active"        aria-current="page" target="_self" href="/blog.html">Blog</a> </li>
-    <li class="nav-item"> <a class="nav-link fs-4 "        aria-current="page" target="_self" href="/articles.html">Articles</a> </li>
-    <li class="nav-item"> <a class="nav-link fs-4 "        aria-current="page" target="_self" href="/books.html">Books</a> </li>
-    <li class="nav-item"> <a class="nav-link fs-4 " aria-current="page" target="_self" href="/albums.html">Albums</a> </li>
-    <li class="nav-item"> <a class="nav-link fs-4 "        aria-current="page" target="_self" href="/NoteTrainer/NoteTrainer.html">Note Trainer</a> </li>
+  <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-2">
+    <li class="nav-item mx-2"> <a class="nav-link fs-4 active"        aria-current="page" target="_self" href="/blog.html">Blog</a> </li>
+    <li class="nav-item mx-2"> <a class="nav-link fs-4 "        aria-current="page" target="_self" href="/articles.html">Articles</a> </li>
+    <li class="nav-item mx-2"> <a class="nav-link fs-4 "        aria-current="page" target="_self" href="/books.html">Books</a> </li>
+    <li class="nav-item mx-2"> <a class="nav-link fs-4 " aria-current="page" target="_self" href="/albums.html">Albums</a> </li>
+    <li class="nav-item mx-2"> <a class="nav-link fs-4 "        aria-current="page" target="_self" href="/NoteTrainer/NoteTrainer.html">Note Trainer</a> </li>
   </ul>
 </div>
 </div>
 </nav>
-<div id="outline-container-Article" class="outline-2 row">
+<div id="outline-container-Article" class="outline-2 row container p-4 container p-5">
 <h2 id="Article">Minimal Regex Length</h2>
 <div class="outline-text-2" id="text-Article">
 <p>
@@ -132,114 +132,114 @@ test it's possible and who it run.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala">  <span style="color: #ff7f24;">#!/usr/bin/env scala-cli</span>
-//&gt; <span style="color: #00ffff;">using</span> dep io.github.wolfendale::scalacheck-gen-regexp:1.1.0
-//&gt; <span style="color: #00ffff;">using</span> dep org.scalacheck::scalacheck:1.19.0
+<pre class="src src-scala">  <span class="org-comment">#!/usr/bin/env scala-cli</span>
+//&gt; <span class="org-keyword">using</span> dep io.github.wolfendale::scalacheck-gen-regexp:1.1.0
+//&gt; <span class="org-keyword">using</span> dep org.scalacheck::scalacheck:1.19.0
 
-<span style="color: #00ffff;">import</span> <span style="color: #eedd82;">wolfendale</span>.<span style="color: #eedd82;">scalacheck</span>.<span style="color: #eedd82;">regexp</span>.<span style="color: #eedd82;">RegexpGen</span>
-<span style="color: #00ffff;">import</span> <span style="color: #eedd82;">org</span>.<span style="color: #eedd82;">scalacheck</span>.<span style="color: #eedd82;">Gen</span>
-<span style="color: #00ffff;">import</span> <span style="color: #eedd82;">scala</span>.<span style="color: #eedd82;">util</span>.<span style="color: #eedd82;">matching</span>.<span style="color: #eedd82;">Regex</span>
-<span style="color: #00ffff;">import</span> <span style="color: #eedd82;">org</span>.<span style="color: #eedd82;">scalacheck</span>.<span style="color: #eedd82;">rng</span>.<span style="color: #eedd82;">Seed</span>
-<span style="color: #00ffff;">import</span> <span style="color: #eedd82;">java</span>.<span style="color: #eedd82;">time</span>.<span style="color: #eedd82;">Instant</span>
-<span style="color: #00ffff;">import</span> <span style="color: #eedd82;">java</span>.<span style="color: #eedd82;">time</span>.<span style="color: #eedd82;">Duration</span>
+<span class="org-keyword">import</span> <span class="org-variable-use">wolfendale</span><span class="org-delimiter">.</span><span class="org-variable-use">scalacheck</span><span class="org-delimiter">.</span><span class="org-variable-use">regexp</span><span class="org-delimiter">.</span><span class="org-variable-use">RegexpGen</span>
+<span class="org-keyword">import</span> <span class="org-variable-use">org</span><span class="org-delimiter">.</span><span class="org-variable-use">scalacheck</span><span class="org-delimiter">.</span><span class="org-variable-use">Gen</span>
+<span class="org-keyword">import</span> <span class="org-variable-use">scala</span><span class="org-delimiter">.</span><span class="org-variable-use">util</span><span class="org-delimiter">.</span><span class="org-variable-use">matching</span><span class="org-delimiter">.</span><span class="org-variable-use">Regex</span>
+<span class="org-keyword">import</span> <span class="org-variable-use">org</span><span class="org-delimiter">.</span><span class="org-variable-use">scalacheck</span><span class="org-delimiter">.</span><span class="org-variable-use">rng</span><span class="org-delimiter">.</span><span class="org-variable-use">Seed</span>
+<span class="org-keyword">import</span> <span class="org-variable-use">java</span><span class="org-delimiter">.</span><span class="org-variable-use">time</span><span class="org-delimiter">.</span><span class="org-variable-use">Instant</span>
+<span class="org-keyword">import</span> <span class="org-variable-use">java</span><span class="org-delimiter">.</span><span class="org-variable-use">time</span><span class="org-delimiter">.</span><span class="org-variable-use">Duration</span>
 
 
-<span style="color: #ff7f24;">// Initial (bad) idea:</span>
-<span style="color: #ff7f24;">//   gonna generate 100 samples from a regex and then see if I hit the minimal</span>
+<span class="org-comment">// Initial (bad) idea:</span>
+<span class="org-comment">//   gonna generate 100 samples from a regex and then see if I hit the minimal</span>
 
-<span style="color: #ff7f24;">// Generate 100 sample for the regex.</span>
-<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">generate100</span>(<span style="color: #eedd82;">regex</span>: <span style="color: #98fb98;">Regex</span>): <span style="color: #98fb98;">Gen</span>[<span style="color: #98fb98;">List</span>[<span style="color: #98fb98;">String</span>]] =
-  <span style="color: #eedd82;">Gen</span>.<span style="color: #87cefa;">listOfN</span>(100, <span style="color: #eedd82;">RegexpGen</span>.<span style="color: #87cefa;">from</span>(<span style="color: #eedd82;">regex</span>.<span style="color: #eedd82;">toString</span>))
+<span class="org-comment">// Generate 100 sample for the regex.</span>
+<span class="org-keyword">def</span> <span class="org-function-name">generate100</span><span class="org-bracket">(</span><span class="org-variable-name">regex</span>: <span class="org-type">Regex</span><span class="org-bracket">)</span>: <span class="org-type">Gen</span><span class="org-bracket">[</span><span class="org-type">List</span><span class="org-bracket">[</span><span class="org-type">String</span><span class="org-bracket">]]</span> =
+  <span class="org-variable-use">Gen</span><span class="org-delimiter">.</span><span class="org-function-call">listOfN</span><span class="org-bracket">(</span><span class="org-number">100</span><span class="org-delimiter">,</span> <span class="org-variable-use">RegexpGen</span><span class="org-delimiter">.</span><span class="org-function-call">from</span><span class="org-bracket">(</span><span class="org-variable-use">regex</span><span class="org-delimiter">.</span><span class="org-property-use">toString</span><span class="org-bracket">))</span>
 
-<span style="color: #ff7f24;">// Given a regex, I generate 100 samples and get the minimum length</span>
-<span style="color: #ff7f24;">// If I can't I explode</span>
-<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">minimumRegexLength</span>(<span style="color: #eedd82;">regex</span>: <span style="color: #98fb98;">Regex</span>): <span style="color: #98fb98;">Int</span> =
-  <span style="color: #87cefa;">generate100</span>(<span style="color: #eedd82;">regex</span>).<span style="color: #eedd82;">sample</span>.<span style="color: #eedd82;">get</span>.<span style="color: #87cefa;">minBy</span>(<span style="color: #b0c4de;">_</span>.<span style="color: #eedd82;">length</span>).<span style="color: #eedd82;">length</span>
+<span class="org-comment">// Given a regex, I generate 100 samples and get the minimum length</span>
+<span class="org-comment">// If I can't I explode</span>
+<span class="org-keyword">def</span> <span class="org-function-name">minimumRegexLength</span><span class="org-bracket">(</span><span class="org-variable-name">regex</span>: <span class="org-type">Regex</span><span class="org-bracket">)</span>: <span class="org-type">Int</span> =
+  <span class="org-function-call">generate100</span><span class="org-bracket">(</span><span class="org-variable-use">regex</span><span class="org-bracket">)</span><span class="org-delimiter">.</span><span class="org-property-use">sample</span><span class="org-delimiter">.</span><span class="org-property-use">get</span><span class="org-delimiter">.</span><span class="org-function-call">minBy</span><span class="org-bracket">(</span><span class="org-builtin">_</span><span class="org-delimiter">.</span><span class="org-property-use">length</span><span class="org-bracket">)</span><span class="org-delimiter">.</span><span class="org-property-use">length</span>
 
-<span style="color: #00ffff;">val</span> <span style="color: #eedd82;">inputExpected</span>: <span style="color: #98fb98;">Map</span>[<span style="color: #98fb98;">Regex</span>, <span style="color: #98fb98;">Int</span>] = <span style="color: #87cefa;">Map</span>(
-  <span style="color: #ffa07a;">"(posto|carico) i video"</span>.<span style="color: #eedd82;">r</span> -&gt; 13,
-  <span style="color: #ffa07a;">"(restiamo|teniamo) in contatto"</span>.<span style="color: #eedd82;">r</span> -&gt; 19,
-  <span style="color: #ffa07a;">"(attraverso i|nei) commenti"</span>.<span style="color: #eedd82;">r</span> -&gt; 12,
-  <span style="color: #ffa07a;">"cocod[e&#232;]"</span>.<span style="color: #eedd82;">r</span> -&gt; 6,
-  <span style="color: #ffa07a;">"\\bmisc\\b"</span>.<span style="color: #eedd82;">r</span> -&gt; 4,
-  <span style="color: #ffa07a;">"\\bm[i]+[a]+[o]+\\b"</span>.<span style="color: #eedd82;">r</span> -&gt; 4,
-  <span style="color: #ffa07a;">"\\bsgrida[tr]"</span>.<span style="color: #eedd82;">r</span> -&gt; 7,
-  <span style="color: #ffa07a;">"\\brimprover"</span>.<span style="color: #eedd82;">r</span> -&gt; 9,
-  <span style="color: #ffa07a;">"(baci )?perugina"</span>.<span style="color: #eedd82;">r</span> -&gt; 8,
-  <span style="color: #ffa07a;">"velit[a&#224;]"</span>.<span style="color: #eedd82;">r</span> -&gt; 6,
-  <span style="color: #ffa07a;">"ho perso (di nuovo )?qualcosa"</span>.<span style="color: #eedd82;">r</span> -&gt; 17,
-  <span style="color: #ffa07a;">"tutti (quanti )?mi criticheranno"</span>.<span style="color: #eedd82;">r</span> -&gt; 22,
-  <span style="color: #ffa07a;">"ti voglio (tanto )?bene"</span>.<span style="color: #eedd82;">r</span> -&gt; 14,
-  <span style="color: #ffa07a;">"vi voglio (tanto )*bene"</span>.<span style="color: #eedd82;">r</span> -&gt; 14,
-  <span style="color: #ffa07a;">"pu[o&#242;] capitare"</span>.<span style="color: #eedd82;">r</span> -&gt; 12,
-  <span style="color: #ffa07a;">"dopo (che ho )?mangiato"</span>.<span style="color: #eedd82;">r</span> -&gt; 13,
-  <span style="color: #ffa07a;">"\\bops\\b"</span>.<span style="color: #eedd82;">r</span> -&gt; 3,
-  <span style="color: #ffa07a;">"mi sto sentendo (bene|in compagnia)"</span>.<span style="color: #eedd82;">r</span> -&gt; 20,
-  <span style="color: #ffa07a;">"(25|venticinque) (milioni|mila euro)"</span>.<span style="color: #eedd82;">r</span> -&gt; 10
-)
+<span class="org-keyword">val</span> <span class="org-variable-name">inputExpected</span>: <span class="org-type">Map</span><span class="org-bracket">[</span><span class="org-type">Regex</span><span class="org-delimiter">,</span> <span class="org-type">Int</span><span class="org-bracket">]</span> = <span class="org-function-call">Map</span><span class="org-bracket">(</span>
+  <span class="org-string">"(posto|carico) i video"</span><span class="org-delimiter">.</span><span class="org-property-use">r</span> <span class="org-operator">-&gt;</span> <span class="org-number">13</span><span class="org-delimiter">,</span>
+  <span class="org-string">"(restiamo|teniamo) in contatto"</span><span class="org-delimiter">.</span><span class="org-property-use">r</span> <span class="org-operator">-&gt;</span> <span class="org-number">19</span><span class="org-delimiter">,</span>
+  <span class="org-string">"(attraverso i|nei) commenti"</span><span class="org-delimiter">.</span><span class="org-property-use">r</span> <span class="org-operator">-&gt;</span> <span class="org-number">12</span><span class="org-delimiter">,</span>
+  <span class="org-string">"cocod[e&#232;]"</span><span class="org-delimiter">.</span><span class="org-property-use">r</span> <span class="org-operator">-&gt;</span> <span class="org-number">6</span><span class="org-delimiter">,</span>
+  <span class="org-string">"\\bmisc\\b"</span><span class="org-delimiter">.</span><span class="org-property-use">r</span> <span class="org-operator">-&gt;</span> <span class="org-number">4</span><span class="org-delimiter">,</span>
+  <span class="org-string">"\\bm[i]+[a]+[o]+\\b"</span><span class="org-delimiter">.</span><span class="org-property-use">r</span> <span class="org-operator">-&gt;</span> <span class="org-number">4</span><span class="org-delimiter">,</span>
+  <span class="org-string">"\\bsgrida[tr]"</span><span class="org-delimiter">.</span><span class="org-property-use">r</span> <span class="org-operator">-&gt;</span> <span class="org-number">7</span><span class="org-delimiter">,</span>
+  <span class="org-string">"\\brimprover"</span><span class="org-delimiter">.</span><span class="org-property-use">r</span> <span class="org-operator">-&gt;</span> <span class="org-number">9</span><span class="org-delimiter">,</span>
+  <span class="org-string">"(baci )?perugina"</span><span class="org-delimiter">.</span><span class="org-property-use">r</span> <span class="org-operator">-&gt;</span> <span class="org-number">8</span><span class="org-delimiter">,</span>
+  <span class="org-string">"velit[a&#224;]"</span><span class="org-delimiter">.</span><span class="org-property-use">r</span> <span class="org-operator">-&gt;</span> <span class="org-number">6</span><span class="org-delimiter">,</span>
+  <span class="org-string">"ho perso (di nuovo )?qualcosa"</span><span class="org-delimiter">.</span><span class="org-property-use">r</span> <span class="org-operator">-&gt;</span> <span class="org-number">17</span><span class="org-delimiter">,</span>
+  <span class="org-string">"tutti (quanti )?mi criticheranno"</span><span class="org-delimiter">.</span><span class="org-property-use">r</span> <span class="org-operator">-&gt;</span> <span class="org-number">22</span><span class="org-delimiter">,</span>
+  <span class="org-string">"ti voglio (tanto )?bene"</span><span class="org-delimiter">.</span><span class="org-property-use">r</span> <span class="org-operator">-&gt;</span> <span class="org-number">14</span><span class="org-delimiter">,</span>
+  <span class="org-string">"vi voglio (tanto )*bene"</span><span class="org-delimiter">.</span><span class="org-property-use">r</span> <span class="org-operator">-&gt;</span> <span class="org-number">14</span><span class="org-delimiter">,</span>
+  <span class="org-string">"pu[o&#242;] capitare"</span><span class="org-delimiter">.</span><span class="org-property-use">r</span> <span class="org-operator">-&gt;</span> <span class="org-number">12</span><span class="org-delimiter">,</span>
+  <span class="org-string">"dopo (che ho )?mangiato"</span><span class="org-delimiter">.</span><span class="org-property-use">r</span> <span class="org-operator">-&gt;</span> <span class="org-number">13</span><span class="org-delimiter">,</span>
+  <span class="org-string">"\\bops\\b"</span><span class="org-delimiter">.</span><span class="org-property-use">r</span> <span class="org-operator">-&gt;</span> <span class="org-number">3</span><span class="org-delimiter">,</span>
+  <span class="org-string">"mi sto sentendo (bene|in compagnia)"</span><span class="org-delimiter">.</span><span class="org-property-use">r</span> <span class="org-operator">-&gt;</span> <span class="org-number">20</span><span class="org-delimiter">,</span>
+  <span class="org-string">"(25|venticinque) (milioni|mila euro)"</span><span class="org-delimiter">.</span><span class="org-property-use">r</span> <span class="org-operator">-&gt;</span> <span class="org-number">10</span>
+<span class="org-bracket">)</span>
 
-<span style="color: #eedd82;">inputExpected</span>.<span style="color: #87cefa;">forall</span> { <span style="color: #00ffff;">case</span> (<span style="color: #eedd82;">input</span>, <span style="color: #eedd82;">expected</span>) =&gt;
-  <span style="color: #00ffff;">val</span> <span style="color: #eedd82;">result</span> = <span style="color: #87cefa;">minimumRegexLength</span>(<span style="color: #eedd82;">input</span>)
-  <span style="color: #00ffff;">if</span> (<span style="color: #eedd82;">result</span> != <span style="color: #eedd82;">expected</span>) {
-    <span style="color: #87cefa;">println</span>(
-      <span style="color: #87cefa;">s</span><span style="color: #ffa07a;">"[RegexMinimumLength] Failed test for </span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">input</span><span style="color: #ffa07a;">, expected </span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">expected</span><span style="color: #ffa07a;">, got </span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">result</span><span style="color: #ffa07a;">"</span>
-    )
-    <span style="color: #7fffd4;">false</span>
-  } <span style="color: #00ffff;">else</span> <span style="color: #7fffd4;">true</span>
-}
+<span class="org-variable-use">inputExpected</span><span class="org-delimiter">.</span><span class="org-function-call">forall</span> <span class="org-bracket">{</span> <span class="org-keyword">case</span> <span class="org-bracket">(</span><span class="org-variable-use">input</span><span class="org-delimiter">,</span> <span class="org-variable-use">expected</span><span class="org-bracket">)</span> <span class="org-operator">=&gt;</span>
+  <span class="org-keyword">val</span> <span class="org-variable-name">result</span> = <span class="org-function-call">minimumRegexLength</span><span class="org-bracket">(</span><span class="org-variable-use">input</span><span class="org-bracket">)</span>
+  <span class="org-keyword">if</span> <span class="org-bracket">(</span><span class="org-variable-use">result</span> <span class="org-operator">!=</span> <span class="org-variable-use">expected</span><span class="org-bracket">)</span> <span class="org-bracket">{</span>
+    <span class="org-function-call">println</span><span class="org-bracket">(</span>
+      <span class="org-variable-use"><span class="org-function-call">s</span></span><span class="org-string">"[RegexMinimumLength] Failed test for </span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">input</span></span></span><span class="org-string">, expected </span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">expected</span></span></span><span class="org-string">, got </span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">result</span></span></span><span class="org-string">"</span>
+    <span class="org-bracket">)</span>
+    <span class="org-constant">false</span>
+  <span class="org-bracket">}</span> <span class="org-keyword">else</span> <span class="org-constant">true</span>
+<span class="org-bracket">}</span>
 
-<span style="color: #ff7f24;">// FAILED as expected. Output</span>
-<span style="color: #ff7f24;">// Got [RegexMinimumLength] Failed test for \bm[i]+[a]+[o]+\b, expected 4, got 46</span>
+<span class="org-comment">// FAILED as expected. Output</span>
+<span class="org-comment">// Got [RegexMinimumLength] Failed test for \bm[i]+[a]+[o]+\b, expected 4, got 46</span>
 
-<span style="color: #ff7f24;">// Gonna ask AI what are his suggestions.</span>
-<span style="color: #ff7f24;">// Together we come out with an idea:</span>
+<span class="org-comment">// Gonna ask AI what are his suggestions.</span>
+<span class="org-comment">// Together we come out with an idea:</span>
 
-<span style="color: #ff7f24;">// - Start small in size</span>
-<span style="color: #ff7f24;">// - Try to generate the output</span>
-<span style="color: #ff7f24;">// - If fail, increase the size and retry</span>
-<span style="color: #ff7f24;">// - Exit when you got something</span>
+<span class="org-comment">// - Start small in size</span>
+<span class="org-comment">// - Try to generate the output</span>
+<span class="org-comment">// - If fail, increase the size and retry</span>
+<span class="org-comment">// - Exit when you got something</span>
 
-<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">canGenerateSize</span>(
-  <span style="color: #eedd82;">regex</span>: <span style="color: #98fb98;">Regex</span>,
-  <span style="color: #eedd82;">targetSize</span>: <span style="color: #98fb98;">Int</span>,
-  <span style="color: #eedd82;">trials</span>: <span style="color: #98fb98;">Int</span> = 100
-): <span style="color: #98fb98;">Boolean</span> = {
-  <span style="color: #00ffff;">val</span> <span style="color: #eedd82;">params</span> = <span style="color: #eedd82;">Gen</span>.<span style="color: #eedd82;">Parameters</span>.<span style="color: #eedd82;">default</span>.<span style="color: #87cefa;">withSize</span>(<span style="color: #eedd82;">targetSize</span>)
-  (1 <span style="color: #eedd82;">to</span> <span style="color: #eedd82;">trials</span>).<span style="color: #87cefa;">exists</span> { <span style="color: #b0c4de;">_</span> =&gt;
-    <span style="color: #eedd82;">RegexpGen</span>.<span style="color: #87cefa;">from</span>(<span style="color: #eedd82;">regex</span>.<span style="color: #eedd82;">toString</span>).<span style="color: #87cefa;">apply</span>(<span style="color: #eedd82;">params</span>, <span style="color: #eedd82;">Seed</span>.<span style="color: #87cefa;">random</span>())
-      .<span style="color: #87cefa;">exists</span>(<span style="color: #eedd82;">v</span> =&gt; <span style="color: #00ffff;">if</span> (<span style="color: #eedd82;">v</span>.<span style="color: #eedd82;">length</span> == <span style="color: #eedd82;">targetSize</span>) {
-        <span style="color: #ff7f24;">//println(s"[RegexMinimumLength] find a match for $regex: $v")</span>
-        <span style="color: #7fffd4;">true</span>
-      } <span style="color: #00ffff;">else</span> <span style="color: #7fffd4;">false</span>
-      )
-  }
-}
+<span class="org-keyword">def</span> <span class="org-function-name">canGenerateSize</span><span class="org-bracket">(</span>
+  <span class="org-variable-name">regex</span>: <span class="org-type">Regex</span><span class="org-delimiter">,</span>
+  <span class="org-variable-name">targetSize</span>: <span class="org-type">Int</span><span class="org-delimiter">,</span>
+  <span class="org-variable-name">trials</span>: <span class="org-type">Int</span> = <span class="org-number">100</span>
+<span class="org-bracket">)</span>: <span class="org-type">Boolean</span> = <span class="org-bracket">{</span>
+  <span class="org-keyword">val</span> <span class="org-variable-name">params</span> = <span class="org-variable-use">Gen</span><span class="org-delimiter">.</span><span class="org-property-use">Parameters</span><span class="org-delimiter">.</span><span class="org-property-use">default</span><span class="org-delimiter">.</span><span class="org-function-call">withSize</span><span class="org-bracket">(</span><span class="org-variable-use">targetSize</span><span class="org-bracket">)</span>
+  <span class="org-bracket">(</span><span class="org-number">1</span> <span class="org-variable-use">to</span> <span class="org-variable-use">trials</span><span class="org-bracket">)</span><span class="org-delimiter">.</span><span class="org-function-call">exists</span> <span class="org-bracket">{</span> <span class="org-builtin">_</span> <span class="org-operator">=&gt;</span>
+    <span class="org-variable-use">RegexpGen</span><span class="org-delimiter">.</span><span class="org-function-call">from</span><span class="org-bracket">(</span><span class="org-variable-use">regex</span><span class="org-delimiter">.</span><span class="org-property-use">toString</span><span class="org-bracket">)</span><span class="org-delimiter">.</span><span class="org-function-call">apply</span><span class="org-bracket">(</span><span class="org-variable-use">params</span><span class="org-delimiter">,</span> <span class="org-variable-use">Seed</span><span class="org-delimiter">.</span><span class="org-function-call">random</span><span class="org-bracket">())</span>
+      <span class="org-delimiter">.</span><span class="org-function-call">exists</span><span class="org-bracket">(</span><span class="org-variable-use">v</span> <span class="org-operator">=&gt;</span> <span class="org-keyword">if</span> <span class="org-bracket">(</span><span class="org-variable-use">v</span><span class="org-delimiter">.</span><span class="org-property-use">length</span> <span class="org-operator">==</span> <span class="org-variable-use">targetSize</span><span class="org-bracket">)</span> <span class="org-bracket">{</span>
+        <span class="org-comment">//println(s"[RegexMinimumLength] find a match for $regex: $v")</span>
+        <span class="org-constant">true</span>
+      <span class="org-bracket">}</span> <span class="org-keyword">else</span> <span class="org-constant">false</span>
+      <span class="org-bracket">)</span>
+  <span class="org-bracket">}</span>
+<span class="org-bracket">}</span>
 
-<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">minimalSize</span>[<span style="color: #eedd82;">T</span>](
-  <span style="color: #eedd82;">regex</span>: <span style="color: #98fb98;">Regex</span>,
-  <span style="color: #eedd82;">maxProbe</span>: <span style="color: #98fb98;">Int</span> = 50
-): <span style="color: #98fb98;">Option</span>[<span style="color: #98fb98;">Int</span>] = {
-  <span style="color: #00ffff;">val</span> <span style="color: #eedd82;">start</span>: <span style="color: #98fb98;">Instant</span> = <span style="color: #eedd82;">Instant</span>.<span style="color: #87cefa;">now</span>()
-  <span style="color: #00ffff;">val</span> <span style="color: #eedd82;">result</span> = (0 <span style="color: #eedd82;">to</span> <span style="color: #eedd82;">maxProbe</span>).<span style="color: #87cefa;">find</span> { <span style="color: #eedd82;">size</span> =&gt;
-    <span style="color: #87cefa;">canGenerateSize</span>(<span style="color: #eedd82;">regex</span>, <span style="color: #eedd82;">size</span>)
-  }
-  <span style="color: #87cefa;">println</span>(<span style="color: #87cefa;">s</span><span style="color: #ffa07a;">"[RegexMinimumLength] generation took: </span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">{</span><span style="color: #eedd82;">Duration</span><span style="color: #eedd82;">.</span><span style="color: #eedd82;">between</span><span style="color: #eedd82;">(</span><span style="color: #eedd82;">start</span><span style="color: #eedd82;">,</span><span style="color: #eedd82;"> </span><span style="color: #eedd82;">Instant</span><span style="color: #eedd82;">.</span><span style="color: #eedd82;">now</span><span style="color: #eedd82;">)</span><span style="color: #eedd82;">.</span><span style="color: #eedd82;">toMillis</span><span style="color: #eedd82;">}</span><span style="color: #ffa07a;">"</span>)
-  <span style="color: #eedd82;">result</span>
-}
+<span class="org-keyword">def</span> <span class="org-function-name">minimalSize</span><span class="org-bracket">[</span><span class="org-variable-use">T</span><span class="org-bracket">](</span>
+  <span class="org-variable-name">regex</span>: <span class="org-type">Regex</span><span class="org-delimiter">,</span>
+  <span class="org-variable-name">maxProbe</span>: <span class="org-type">Int</span> = <span class="org-number">50</span>
+<span class="org-bracket">)</span>: <span class="org-type">Option</span><span class="org-bracket">[</span><span class="org-type">Int</span><span class="org-bracket">]</span> = <span class="org-bracket">{</span>
+  <span class="org-keyword">val</span> <span class="org-variable-name">start</span>: <span class="org-type">Instant</span> = <span class="org-variable-use">Instant</span><span class="org-delimiter">.</span><span class="org-function-call">now</span><span class="org-bracket">()</span>
+  <span class="org-keyword">val</span> <span class="org-variable-name">result</span> = <span class="org-bracket">(</span><span class="org-number">0</span> <span class="org-variable-use">to</span> <span class="org-variable-use">maxProbe</span><span class="org-bracket">)</span><span class="org-delimiter">.</span><span class="org-function-call">find</span> <span class="org-bracket">{</span> <span class="org-variable-use">size</span> <span class="org-operator">=&gt;</span>
+    <span class="org-function-call">canGenerateSize</span><span class="org-bracket">(</span><span class="org-variable-use">regex</span><span class="org-delimiter">,</span> <span class="org-variable-use">size</span><span class="org-bracket">)</span>
+  <span class="org-bracket">}</span>
+  <span class="org-function-call">println</span><span class="org-bracket">(</span><span class="org-variable-use"><span class="org-function-call">s</span></span><span class="org-string">"[RegexMinimumLength] generation took: </span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-bracket"><span class="org-string"><span class="org-variable-use"><span class="org-bracket">{</span></span></span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">Duration</span></span></span><span class="org-delimiter"><span class="org-string"><span class="org-variable-use">.</span></span></span><span class="org-function-call"><span class="org-string"><span class="org-variable-use">between</span></span></span><span class="org-bracket"><span class="org-string"><span class="org-variable-use">(</span></span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">start</span></span></span><span class="org-delimiter"><span class="org-string"><span class="org-variable-use">,</span></span></span><span class="org-string"><span class="org-variable-use"> </span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">Instant</span></span></span><span class="org-delimiter"><span class="org-string"><span class="org-variable-use">.</span></span></span><span class="org-property-use"><span class="org-string"><span class="org-variable-use">now</span></span></span><span class="org-bracket"><span class="org-string"><span class="org-variable-use">)</span></span></span><span class="org-delimiter"><span class="org-string"><span class="org-variable-use">.</span></span></span><span class="org-property-use"><span class="org-string"><span class="org-variable-use">toMillis</span></span></span><span class="org-bracket"><span class="org-string"><span class="org-variable-use"><span class="org-bracket">}</span></span></span></span><span class="org-string">"</span><span class="org-bracket">)</span>
+  <span class="org-variable-use">result</span>
+<span class="org-bracket">}</span>
 
-<span style="color: #eedd82;">inputExpected</span>.<span style="color: #87cefa;">forall</span> { <span style="color: #00ffff;">case</span> (<span style="color: #eedd82;">input</span>, <span style="color: #eedd82;">expected</span>) =&gt;
-  <span style="color: #00ffff;">val</span> <span style="color: #eedd82;">result</span> = <span style="color: #87cefa;">minimalSize</span>(<span style="color: #eedd82;">input</span>)
-  <span style="color: #00ffff;">if</span> (<span style="color: #eedd82;">result</span> != <span style="color: #87cefa;">Some</span>(<span style="color: #eedd82;">expected</span>)) {
-    <span style="color: #87cefa;">println</span>(
-      <span style="color: #87cefa;">s</span><span style="color: #ffa07a;">"[RegexMinimumLength] Failed test for </span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">input</span><span style="color: #ffa07a;">, expected </span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">expected</span><span style="color: #ffa07a;">, got </span><span style="color: #ffa07a;">$</span><span style="color: #eedd82;">result</span><span style="color: #ffa07a;">"</span>
-    )
-    <span style="color: #7fffd4;">false</span>
-  } <span style="color: #00ffff;">else</span> <span style="color: #7fffd4;">true</span>
-}
+<span class="org-variable-use">inputExpected</span><span class="org-delimiter">.</span><span class="org-function-call">forall</span> <span class="org-bracket">{</span> <span class="org-keyword">case</span> <span class="org-bracket">(</span><span class="org-variable-use">input</span><span class="org-delimiter">,</span> <span class="org-variable-use">expected</span><span class="org-bracket">)</span> <span class="org-operator">=&gt;</span>
+  <span class="org-keyword">val</span> <span class="org-variable-name">result</span> = <span class="org-function-call">minimalSize</span><span class="org-bracket">(</span><span class="org-variable-use">input</span><span class="org-bracket">)</span>
+  <span class="org-keyword">if</span> <span class="org-bracket">(</span><span class="org-variable-use">result</span> <span class="org-operator">!=</span> <span class="org-function-call">Some</span><span class="org-bracket">(</span><span class="org-variable-use">expected</span><span class="org-bracket">))</span> <span class="org-bracket">{</span>
+    <span class="org-function-call">println</span><span class="org-bracket">(</span>
+      <span class="org-variable-use"><span class="org-function-call">s</span></span><span class="org-string">"[RegexMinimumLength] Failed test for </span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">input</span></span></span><span class="org-string">, expected </span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">expected</span></span></span><span class="org-string">, got </span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">result</span></span></span><span class="org-string">"</span>
+    <span class="org-bracket">)</span>
+    <span class="org-constant">false</span>
+  <span class="org-bracket">}</span> <span class="org-keyword">else</span> <span class="org-constant">true</span>
+<span class="org-bracket">}</span>
 
-<span style="color: #ff7f24;">// THIS WORKS!!! And generally returns pretty fast ~ 25 milliseconds</span>
-<span style="color: #ff7f24;">// It's probabilistic tho so it might be wrong, especially if the number</span>
-<span style="color: #ff7f24;">// of attempt are low or the regexp is particularly complex</span>
+<span class="org-comment">// THIS WORKS!!! And generally returns pretty fast ~ 25 milliseconds</span>
+<span class="org-comment">// It's probabilistic tho so it might be wrong, especially if the number</span>
+<span class="org-comment">// of attempt are low or the regexp is particularly complex</span>
 </pre>
 </div>
 </div>
@@ -263,7 +263,7 @@ performance 😅
 </div>
 </div>
 </div>
-<div id="outline-container-ShareButtons" class="outline-2 row">
+<div id="outline-container-ShareButtons" class="outline-2 row container p-4">
 <h2 id="ShareButtons">Share Buttons</h2>
 <div class="outline-text-2" id="text-ShareButtons">
 <!-- AddToAny BEGIN -->

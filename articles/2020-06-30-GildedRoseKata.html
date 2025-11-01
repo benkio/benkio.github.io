@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-10-30 Thu 12:34 -->
+<!-- 2025-11-01 Sat 10:41 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Gilded Rose Kata</title>
@@ -56,17 +56,17 @@
   <span class="navbar-toggler-icon"></span>
 </button>
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-    <li class="nav-item"> <a class="nav-link fs-4 active"        aria-current="page" target="_self" href="/blog.html">Blog</a> </li>
-    <li class="nav-item"> <a class="nav-link fs-4 "        aria-current="page" target="_self" href="/articles.html">Articles</a> </li>
-    <li class="nav-item"> <a class="nav-link fs-4 "        aria-current="page" target="_self" href="/books.html">Books</a> </li>
-    <li class="nav-item"> <a class="nav-link fs-4 " aria-current="page" target="_self" href="/albums.html">Albums</a> </li>
-    <li class="nav-item"> <a class="nav-link fs-4 "        aria-current="page" target="_self" href="/NoteTrainer/NoteTrainer.html">Note Trainer</a> </li>
+  <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-2">
+    <li class="nav-item mx-2"> <a class="nav-link fs-4 active"        aria-current="page" target="_self" href="/blog.html">Blog</a> </li>
+    <li class="nav-item mx-2"> <a class="nav-link fs-4 "        aria-current="page" target="_self" href="/articles.html">Articles</a> </li>
+    <li class="nav-item mx-2"> <a class="nav-link fs-4 "        aria-current="page" target="_self" href="/books.html">Books</a> </li>
+    <li class="nav-item mx-2"> <a class="nav-link fs-4 " aria-current="page" target="_self" href="/albums.html">Albums</a> </li>
+    <li class="nav-item mx-2"> <a class="nav-link fs-4 "        aria-current="page" target="_self" href="/NoteTrainer/NoteTrainer.html">Note Trainer</a> </li>
   </ul>
 </div>
 </div>
 </nav>
-<div id="outline-container-Article" class="outline-2 row">
+<div id="outline-container-Article" class="outline-2 row container p-4">
 <h2 id="Article">Gilded Rose Kata</h2>
 <div class="outline-text-2" id="text-Article">
 <p>
@@ -292,23 +292,23 @@ if-else-statement:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala"><span style="color: #b22222;">// Before</span>
-<span style="color: #a020f0;">if</span> (<span style="color: #a0522d;">condition1</span>) {
-  <span style="color: #a020f0;">if</span> (<span style="color: #a0522d;">condition2</span>) {
-   <span style="color: #b22222;">// Stuff</span>
-  } <span style="color: #a020f0;">else</span> <span style="color: #b22222;">// Stuff</span>
-}
-<span style="color: #a020f0;">if</span> (<span style="color: #a0522d;">condition3</span>) {
-<span style="color: #b22222;">// Stuff</span>
-} <span style="color: #a020f0;">else</span> <span style="color: #b22222;">// Stuff</span>
+<pre class="src src-scala"><span class="org-comment">// Before</span>
+<span class="org-keyword">if</span> <span class="org-bracket">(</span><span class="org-variable-use">condition1</span><span class="org-bracket">)</span> <span class="org-bracket">{</span>
+  <span class="org-keyword">if</span> <span class="org-bracket">(</span><span class="org-variable-use">condition2</span><span class="org-bracket">)</span> <span class="org-bracket">{</span>
+   <span class="org-comment">// Stuff</span>
+  <span class="org-bracket">}</span> <span class="org-keyword">else</span> <span class="org-comment">// Stuff</span>
+<span class="org-bracket">}</span>
+<span class="org-keyword">if</span> <span class="org-bracket">(</span><span class="org-variable-use">condition3</span><span class="org-bracket">)</span> <span class="org-bracket">{</span>
+<span class="org-comment">// Stuff</span>
+<span class="org-bracket">}</span> <span class="org-keyword">else</span> <span class="org-comment">// Stuff</span>
 
-<span style="color: #b22222;">// After</span>
-<span style="color: #a0522d;">def</span> <span style="color: #a0522d;">f1</span>(<span style="color: #a0522d;">params</span>): <span style="color: #228b22;">StuffType</span> = <span style="color: #a020f0;">if</span> (<span style="color: #a0522d;">condition1</span>) { <span style="color: #0000ff;">f2</span>(<span style="color: #a0522d;">params</span>) } <span style="color: #a0522d;">else</span> <span style="color: #b22222;">// Previous state (identity)</span>
-<span style="color: #228b22;">def</span> <span style="color: #a0522d;">f2</span>(<span style="color: #228b22;">params</span>): StuffType = <span style="color: #a020f0;">if</span> (<span style="color: #228b22;">condition2</span>) {<span style="color: #b22222;">/* Stuff */</span> } <span style="color: #a0522d;">else</span> <span style="color: #b22222;">// Stuff</span>
-<span style="color: #228b22;">def</span> <span style="color: #a0522d;">f3</span>(<span style="color: #228b22;">params</span>): StuffType = <span style="color: #a020f0;">if</span> (<span style="color: #228b22;">condition3</span>) {<span style="color: #b22222;">/* Stuff */</span> } <span style="color: #a0522d;">else</span> <span style="color: #b22222;">// Stuff</span>
-<span style="color: #228b22;">val</span> <span style="color: #a0522d;">r1</span> = <span style="color: #228b22;">f1</span>(<span style="color: #a0522d;">args</span>)
-<span style="color: #a020f0;">val</span> <span style="color: #a0522d;">r2</span> = <span style="color: #0000ff;">f3</span>(<span style="color: #a0522d;">args</span>) <span style="color: #b22222;">// This might probably require r1 as input</span>
-<span style="color: #a0522d;">r2</span>
+<span class="org-comment">// After</span>
+<span class="org-variable-use">def</span> <span class="org-variable-use">f1</span><span class="org-bracket">(</span><span class="org-variable-use">params</span><span class="org-bracket">)</span>: <span class="org-type">StuffType</span> = <span class="org-keyword">if</span> <span class="org-bracket">(</span><span class="org-variable-use">condition1</span><span class="org-bracket">)</span> <span class="org-bracket">{</span> <span class="org-function-call">f2</span><span class="org-bracket">(</span><span class="org-variable-use">params</span><span class="org-bracket">)</span> <span class="org-bracket">}</span> <span class="org-variable-use">else</span> <span class="org-comment">// Previous state (identity)</span>
+<span class="org-type">def</span> <span class="org-variable-use">f2</span><span class="org-bracket">(</span><span class="org-type">params</span><span class="org-bracket">)</span>: StuffType = <span class="org-keyword">if</span> <span class="org-bracket">(</span><span class="org-type">condition2</span><span class="org-bracket">)</span> <span class="org-bracket">{</span><span class="org-comment">/* Stuff */</span> <span class="org-bracket">}</span> <span class="org-variable-use">else</span> <span class="org-comment">// Stuff</span>
+<span class="org-type">def</span> <span class="org-variable-use">f3</span><span class="org-bracket">(</span><span class="org-type">params</span><span class="org-bracket">)</span>: StuffType = <span class="org-keyword">if</span> <span class="org-bracket">(</span><span class="org-type">condition3</span><span class="org-bracket">)</span> <span class="org-bracket">{</span><span class="org-comment">/* Stuff */</span> <span class="org-bracket">}</span> <span class="org-variable-use">else</span> <span class="org-comment">// Stuff</span>
+<span class="org-type">val</span> <span class="org-variable-use">r1</span> = <span class="org-type">f1</span><span class="org-bracket">(</span><span class="org-variable-use">args</span><span class="org-bracket">)</span>
+<span class="org-keyword">val</span> <span class="org-variable-name">r2</span> = <span class="org-function-call">f3</span><span class="org-bracket">(</span><span class="org-variable-use">args</span><span class="org-bracket">)</span> <span class="org-comment">// This might probably require r1 as input</span>
+<span class="org-variable-use">r2</span>
 </pre>
 </div>
 
@@ -665,11 +665,11 @@ let me open a small parenthesis in here
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell">    src<span style="color: #a0522d;">/</span>GildedRose.hs<span style="color: #228b22;">:</span>53<span style="color: #228b22;">:</span>29<span style="color: #228b22;">:</span> <span style="color: #228b22;">Warning:</span> <span style="color: #228b22;">Redundant</span> <span style="color: #a020f0;">if</span>
-<span style="color: #228b22;">Found</span><span style="color: #0000ff;">:</span>
-  <span style="color: #a020f0;">if</span> sellIn <span style="color: #a0522d;">&lt;</span> 6 <span style="color: #a020f0;">then</span> <span style="color: #a020f0;">if</span> quality <span style="color: #a0522d;">&lt;</span> 48 <span style="color: #a020f0;">then</span> 1 <span style="color: #a020f0;">else</span> 0 <span style="color: #a020f0;">else</span> 0
-<span style="color: #228b22;">Perhaps</span><span style="color: #0000ff;">:</span>
-  <span style="color: #a020f0;">if</span> (sellIn <span style="color: #a0522d;">&lt;</span> 6) <span style="color: #a0522d;">&amp;&amp;</span> (quality <span style="color: #a0522d;">&lt;</span> 48) <span style="color: #a020f0;">then</span> 1 <span style="color: #a020f0;">else</span> 0
+<pre class="src src-haskell">    src<span class="org-haskell-operator">/</span>GildedRose.hs<span class="org-haskell-constructor">:</span>53<span class="org-haskell-constructor">:</span>29<span class="org-haskell-constructor">:</span> <span class="org-haskell-constructor">Warning:</span> <span class="org-haskell-constructor">Redundant</span> <span class="org-haskell-keyword">if</span>
+<span class="org-haskell-constructor">Found</span><span class="org-haskell-definition">:</span>
+  <span class="org-haskell-keyword">if</span> sellIn <span class="org-haskell-operator">&lt;</span> 6 <span class="org-haskell-keyword">then</span> <span class="org-haskell-keyword">if</span> quality <span class="org-haskell-operator">&lt;</span> 48 <span class="org-haskell-keyword">then</span> 1 <span class="org-haskell-keyword">else</span> 0 <span class="org-haskell-keyword">else</span> 0
+<span class="org-haskell-constructor">Perhaps</span><span class="org-haskell-definition">:</span>
+  <span class="org-haskell-keyword">if</span> (sellIn <span class="org-haskell-operator">&lt;</span> 6) <span class="org-haskell-operator">&amp;&amp;</span> (quality <span class="org-haskell-operator">&lt;</span> 48) <span class="org-haskell-keyword">then</span> 1 <span class="org-haskell-keyword">else</span> 0
 </pre>
 </div>
 
@@ -731,7 +731,7 @@ May the force be with you
 </div>
 </div>
 </div>
-<div id="outline-container-ShareButtons" class="outline-2 row">
+<div id="outline-container-ShareButtons" class="outline-2 row container p-4">
 <h2 id="ShareButtons">Share Buttons</h2>
 <div class="outline-text-2" id="text-ShareButtons">
 <!-- AddToAny BEGIN -->

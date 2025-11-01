@@ -28,7 +28,7 @@
 * [ITA] - Music Talk Show 1
   :PROPERTIES:
   :CUSTOM_ID: Article
-    :HTML_CONTAINER_CLASS: row
+    :HTML_CONTAINER_CLASS: row container p-4
   :END:
   *Created: <2021-05-13 Thu>*
 ** Abstract
@@ -127,7 +127,7 @@ Music Talk Show #1
 * Share Buttons
   :PROPERTIES:
   :CUSTOM_ID: ShareButtons
-    :HTML_CONTAINER_CLASS: row
+    :HTML_CONTAINER_CLASS: row container p-4
   :END:
   #+BEGIN_EXPORT html
   <!-- AddToAny BEGIN -->

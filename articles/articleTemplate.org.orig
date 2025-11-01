@@ -27,7 +27,7 @@
 * Title
   :PROPERTIES:
   :CUSTOM_ID: Article
-    :HTML_CONTAINER_CLASS: row
+    :HTML_CONTAINER_CLASS: row container p-4
   :END:
   *Created: *
 ** Abstract
@@ -48,7 +48,7 @@
 * Share Buttons
   :PROPERTIES:
   :CUSTOM_ID: ShareButtons
-  :HTML_CONTAINER_CLASS: row
+  :HTML_CONTAINER_CLASS: row container p-4
   :END:
 #+BEGIN_EXPORT html
 <!-- AddToAny BEGIN -->

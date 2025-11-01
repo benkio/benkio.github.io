@@ -26,7 +26,7 @@
 * Advent Of Code 2021
   :PROPERTIES:
   :CUSTOM_ID: Article
-    :HTML_CONTAINER_CLASS: row
+    :HTML_CONTAINER_CLASS: row container p-4
   :END:
   *Created: <2022-01-12 Wed>*
 ** Abstract
@@ -52,7 +52,7 @@
 * Share Buttons
   :PROPERTIES:
   :CUSTOM_ID: ShareButtons
-    :HTML_CONTAINER_CLASS: row
+    :HTML_CONTAINER_CLASS: row container p-4
   :END:
 #+BEGIN_EXPORT html
 <!-- AddToAny BEGIN -->

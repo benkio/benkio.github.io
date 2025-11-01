@@ -10,6 +10,18 @@
     --header-2-color: #FC5185;
     --enhance-text-color: #F79B72;
     --text-color: #F5F5F5;
+
+    /* Dracula Theme Palette */
+    --dracula-bg:         #282a36;  /* Background */
+    --dracula-fg:         #f8f8f2;  /* Foreground (default text) */
+    --dracula-comment:    #6272a4;  /* Comment */
+    --dracula-cyan:       #8be9fd;  /* Cyan */
+    --dracula-green:      #50fa7b;  /* Green */
+    --dracula-orange:     #ffb86c;  /* Orange */
+    --dracula-pink:       #ff79c6;  /* Pink */
+    --dracula-purple:     #bd93f9;  /* Purple */
+    --dracula-red:        #ff5555;  /* Red */
+    --dracula-yellow:     #f1fa8c;  /* Yellow */
 }
 
 html, body {
@@ -20,12 +32,7 @@ html, body {
 }
 .title { display: none; }
 .underline { text-decoration: underline; }
-code {
-    background-color: #272822;
-    color: #f8f8f2;
-    border-radius: 0.3em;
-    padding: 4px 5px 6px;
-}
+
 .outline-2 #sec- {
     font-size: 1.4em;
 }
@@ -42,10 +49,6 @@ h3, h4 {
 b, dt, h5 {
     color: var(--enhance-text-color);
 }
-.src {
-    background-color: var(--background-code-color);
-    padding: .5rem!important
-}
 .btn-dark {
   background-color: var(--background-gray-color);
   border-color: var(--header-1-color);
@@ -54,3 +57,37 @@ b, dt, h5 {
   color: var(--enhance-text-color);
   text-decoration: none;
 }
+
+/* CODE */
+.src {
+    background-color: var(--background-code-color);
+    padding: .5rem!important;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    text-align: justify;
+}
+
+code {
+    background-color: var(--background-code-color);
+    color: var(--text-color);
+    border-radius: 0.3em;
+    padding: 4px 5px 6px;
+}
+
+/* Code syntax highlighting */
+.org-delimiter      { color: var(--dracula-fg); }
+.org-bracket        { color: var(--dracula-fg); }
+.org-variable-name  { color: var(--dracula-purple); }
+.org-type           { color: var(--dracula-cyan); }
+.org-function-call  { color: var(--dracula-green); }
+.org-number         { color: var(--dracula-orange); }
+.org-property-use   { color: var(--dracula-yellow); }
+.org-builtin        { color: var(--dracula-pink); }
+.org-string         { color: var(--dracula-yellow); }
+.org-operator       { color: var(--dracula-pink); }
+.org-punctuation    { color: var(--dracula-fg); }
+.org-constant       { color: var(--dracula-orange); }
+.org-function-name  { color: var(--dracula-green); }
+.org-variable-use   { color: var(--dracula-purple); }
+.org-keyword        { color: var(--dracula-pink); }
+.org-comment        { color: var(--dracula-comment); }

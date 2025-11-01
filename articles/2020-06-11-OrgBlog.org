@@ -27,7 +27,7 @@
 * Static Personal Website with Org Mode
   :PROPERTIES:
   :CUSTOM_ID: Article
-  :HTML_CONTAINER_CLASS: row
+  :HTML_CONTAINER_CLASS: row container p-4 container p-5
   :END:
   *Created: <2020-06-11 Thu>*
 ** Abstract
@@ -192,7 +192,7 @@ also gain these benefits:
 * Share Buttons
   :PROPERTIES:
   :CUSTOM_ID: ShareButtons
-  :HTML_CONTAINER_CLASS: row
+  :HTML_CONTAINER_CLASS: row container p-4
   :END:
 #+BEGIN_EXPORT html
 <!-- AddToAny BEGIN -->

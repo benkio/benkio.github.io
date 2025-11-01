@@ -27,7 +27,7 @@
 * ~act~ with ~nix-shell~ and ~podman~
   :PROPERTIES:
   :CUSTOM_ID: Article
-    :HTML_CONTAINER_CLASS: row
+    :HTML_CONTAINER_CLASS: row container p-4
   :END:
   *Created: <2025-09-26 Fri>*
 ** Abstract
@@ -347,7 +347,7 @@ Error: Job 'check_urls' failed
 * Share Buttons
   :PROPERTIES:
   :CUSTOM_ID: ShareButtons
-  :HTML_CONTAINER_CLASS: row
+  :HTML_CONTAINER_CLASS: row container p-4
   :END:
 #+BEGIN_EXPORT html
 <!-- AddToAny BEGIN -->

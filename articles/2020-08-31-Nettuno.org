@@ -27,7 +27,7 @@
 * Rondò Veneziano - Nettuno - Tab + Score + Midi
   :PROPERTIES:
   :CUSTOM_ID: Article
-    :HTML_CONTAINER_CLASS: row
+    :HTML_CONTAINER_CLASS: row container p-4
   :END:
   *Created: <2020-08-31 Mon>*
 ** Abstract
@@ -98,7 +98,7 @@ Rondò Veneziano - Nettuno
 * Share Buttons
   :PROPERTIES:
   :CUSTOM_ID: ShareButtons
-    :HTML_CONTAINER_CLASS: row
+    :HTML_CONTAINER_CLASS: row container p-4
   :END:
 #+BEGIN_EXPORT html
 <!-- AddToAny BEGIN -->

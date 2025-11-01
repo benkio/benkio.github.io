@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-10-30 Thu 12:34 -->
+<!-- 2025-11-01 Sat 10:41 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Scripting with Scala CLI &amp; Os-lib</title>
@@ -56,17 +56,17 @@
   <span class="navbar-toggler-icon"></span>
 </button>
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-    <li class="nav-item"> <a class="nav-link fs-4 active"        aria-current="page" target="_self" href="/blog.html">Blog</a> </li>
-    <li class="nav-item"> <a class="nav-link fs-4 "        aria-current="page" target="_self" href="/articles.html">Articles</a> </li>
-    <li class="nav-item"> <a class="nav-link fs-4 "        aria-current="page" target="_self" href="/books.html">Books</a> </li>
-    <li class="nav-item"> <a class="nav-link fs-4 " aria-current="page" target="_self" href="/albums.html">Albums</a> </li>
-    <li class="nav-item"> <a class="nav-link fs-4 "        aria-current="page" target="_self" href="/NoteTrainer/NoteTrainer.html">Note Trainer</a> </li>
+  <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-2">
+    <li class="nav-item mx-2"> <a class="nav-link fs-4 active"        aria-current="page" target="_self" href="/blog.html">Blog</a> </li>
+    <li class="nav-item mx-2"> <a class="nav-link fs-4 "        aria-current="page" target="_self" href="/articles.html">Articles</a> </li>
+    <li class="nav-item mx-2"> <a class="nav-link fs-4 "        aria-current="page" target="_self" href="/books.html">Books</a> </li>
+    <li class="nav-item mx-2"> <a class="nav-link fs-4 " aria-current="page" target="_self" href="/albums.html">Albums</a> </li>
+    <li class="nav-item mx-2"> <a class="nav-link fs-4 "        aria-current="page" target="_self" href="/NoteTrainer/NoteTrainer.html">Note Trainer</a> </li>
   </ul>
 </div>
 </div>
 </nav>
-<div id="outline-container-Article" class="outline-2 row">
+<div id="outline-container-Article" class="outline-2 row container p-4">
 <h2 id="Article">Scripting with Scala CLI &amp; Os-lib</h2>
 <div class="outline-text-2" id="text-Article">
 <p>
@@ -126,9 +126,9 @@ when he is looking for examples.
 </p>
 </div>
 </div>
-<div id="outline-container-orgc43e34d" class="outline-3">
-<h3 id="orgc43e34d">Insert Script Dependency</h3>
-<div class="outline-text-3" id="text-orgc43e34d">
+<div id="outline-container-org9d4433e" class="outline-3">
+<h3 id="org9d4433e">Insert Script Dependency</h3>
+<div class="outline-text-3" id="text-org9d4433e">
 <p>
 The first thing you want to do is to add the <a href="https://github.com/com-lihaoyi/os-lib">os-lib</a> to your
 <a href="https://scala-cli.virtuslab.org/">  scala-cli</a>. At the moment of writing the latest version is <code>0.8.1</code>.
@@ -136,19 +136,19 @@ Just add this snippet at the very top of your script
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala"><span style="color: #b22222;">#!/usr/bin/env scala-cli</span>
-<span style="color: #a0522d;">using</span> <span style="color: #a0522d;">lib</span> <span style="color: #8b2252;">"com.lihaoyi::os-lib:0.8.1"</span>
+<pre class="src src-scala"><span class="org-comment">#!/usr/bin/env scala-cli</span>
+<span class="org-variable-use">using</span> <span class="org-variable-use">lib</span> <span class="org-string">"com.lihaoyi::os-lib:0.8.1"</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org26e8318" class="outline-3">
-<h3 id="org26e8318">Movie Conversion Script</h3>
-<div class="outline-text-3" id="text-org26e8318">
+<div id="outline-container-orgcd0dd04" class="outline-3">
+<h3 id="orgcd0dd04">Movie Conversion Script</h3>
+<div class="outline-text-3" id="text-orgcd0dd04">
 </div>
-<div id="outline-container-org936d19b" class="outline-4">
-<h4 id="org936d19b">File Paths</h4>
-<div class="outline-text-4" id="text-org936d19b">
+<div id="outline-container-org8d081cd" class="outline-4">
+<h4 id="org8d081cd">File Paths</h4>
+<div class="outline-text-4" id="text-org8d081cd">
 <p>
 Let's convert simple file path strings to the types used by the
 library. Note how I had to specify a temporary existing directory
@@ -164,15 +164,15 @@ Macbook one to a Linux one, without having to update the paths.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala"><span style="color: #b22222;">// Before</span>
-<span style="color: #a020f0;">val</span> <span style="color: #a0522d;">tempPath</span> = <span style="color: #8b2252;">"/Users/benkio/temp"</span>
-<span style="color: #a020f0;">val</span> <span style="color: #a0522d;">startingPath</span> = <span style="color: #8b2252;">"/Users/benkio/temp/test"</span>
-<span style="color: #a020f0;">val</span> <span style="color: #a0522d;">destinationPath</span> = <span style="color: #8b2252;">"/Users/benkio/temp/convertedFilms"</span>
+<pre class="src src-scala"><span class="org-comment">// Before</span>
+<span class="org-keyword">val</span> <span class="org-variable-name">tempPath</span> = <span class="org-string">"/Users/benkio/temp"</span>
+<span class="org-keyword">val</span> <span class="org-variable-name">startingPath</span> = <span class="org-string">"/Users/benkio/temp/test"</span>
+<span class="org-keyword">val</span> <span class="org-variable-name">destinationPath</span> = <span class="org-string">"/Users/benkio/temp/convertedFilms"</span>
 
-<span style="color: #b22222;">// After</span>
-<span style="color: #a020f0;">val</span> <span style="color: #a0522d;">tempPath</span> = <span style="color: #a0522d;">os</span>.<span style="color: #a0522d;">temp</span>.<span style="color: #0000ff;">dir</span>()
-<span style="color: #a020f0;">val</span> <span style="color: #a0522d;">startingPath</span> = <span style="color: #a0522d;">os</span>.<span style="color: #a0522d;">home</span>/<span style="color: #8b2252;">"temp"</span>/<span style="color: #8b2252;">"test"</span>
-<span style="color: #a020f0;">val</span> <span style="color: #a0522d;">destinationPath</span> = <span style="color: #a0522d;">os</span>.<span style="color: #a0522d;">home</span>/<span style="color: #8b2252;">"temp"</span>/<span style="color: #8b2252;">"convertedFilms"</span>
+<span class="org-comment">// After</span>
+<span class="org-keyword">val</span> <span class="org-variable-name">tempPath</span> = <span class="org-variable-use">os</span><span class="org-delimiter">.</span><span class="org-property-use">temp</span><span class="org-delimiter">.</span><span class="org-function-call">dir</span><span class="org-bracket">()</span>
+<span class="org-keyword">val</span> <span class="org-variable-name">startingPath</span> = <span class="org-variable-use">os</span><span class="org-delimiter">.</span><span class="org-property-use">home</span><span class="org-operator">/</span><span class="org-string">"temp"</span><span class="org-operator">/</span><span class="org-string">"test"</span>
+<span class="org-keyword">val</span> <span class="org-variable-name">destinationPath</span> = <span class="org-variable-use">os</span><span class="org-delimiter">.</span><span class="org-property-use">home</span><span class="org-operator">/</span><span class="org-string">"temp"</span><span class="org-operator">/</span><span class="org-string">"convertedFilms"</span>
 </pre>
 </div>
 
@@ -182,7 +182,7 @@ create a path using just the <code>'</code> prefix. However, if you try you
 might get this error:
 </p>
 
-<pre class="example" id="orgf8ca669">
+<pre class="example" id="org75fd6a7">
 [error] ./convertFilms.sc:18:31: symbol literal 'temp is no longer supported,
 [error] use a string literal "temp" or an application Symbol("temp") instead,
 [error] or enclose in braces '{temp} if you want a quoted expression.
@@ -196,9 +196,9 @@ That's why I ended up using simple strings.
 </p>
 </div>
 </div>
-<div id="outline-container-org9e13f4d" class="outline-4">
-<h4 id="org9e13f4d">Script Entry Point</h4>
-<div class="outline-text-4" id="text-org9e13f4d">
+<div id="outline-container-org1a6a478" class="outline-4">
+<h4 id="org1a6a478">Script Entry Point</h4>
+<div class="outline-text-4" id="text-org1a6a478">
 <p>
 In order to understand what this script is supposed to do, we need
 to have a look at its entry point. This will be affected by the
@@ -207,19 +207,19 @@ provide more context to understand each step.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala"><span style="color: #a020f0;">val</span> <span style="color: #a0522d;">inputFiles</span>: <span style="color: #228b22;">List</span>[(<span style="color: #228b22;">String</span>, <span style="color: #228b22;">String</span>)] = <span style="color: #0000ff;">List</span>(
-  (<span style="color: #8b2252;">"movie.avi"</span>, <span style="color: #8b2252;">"movie"</span>),
-  (<span style="color: #8b2252;">"film.mkv"</span>, <span style="color: #8b2252;">"film"</span>)
-)
+<pre class="src src-scala"><span class="org-keyword">val</span> <span class="org-variable-name">inputFiles</span>: <span class="org-type">List</span><span class="org-bracket">[(</span><span class="org-type">String</span><span class="org-delimiter">,</span> <span class="org-type">String</span><span class="org-bracket">)]</span> = <span class="org-function-call">List</span><span class="org-bracket">(</span>
+  <span class="org-bracket">(</span><span class="org-string">"movie.avi"</span><span class="org-delimiter">,</span> <span class="org-string">"movie"</span><span class="org-bracket">)</span><span class="org-delimiter">,</span>
+  <span class="org-bracket">(</span><span class="org-string">"film.mkv"</span><span class="org-delimiter">,</span> <span class="org-string">"film"</span><span class="org-bracket">)</span>
+<span class="org-bracket">)</span>
 
-<span style="color: #a0522d;">inputFiles</span>.<span style="color: #0000ff;">foreach</span> { <span style="color: #b22222;">//1</span>
-  <span style="color: #a020f0;">case</span> (<span style="color: #a0522d;">inputFile</span>, <span style="color: #a0522d;">filename</span>) =&gt; {
-    <span style="color: #0000ff;">ffmpegCommand</span>(<span style="color: #a0522d;">inputFile</span>, <span style="color: #a0522d;">filename</span>) <span style="color: #b22222;">//2</span>
-    <span style="color: #0000ff;">splitCommand</span>(<span style="color: #a0522d;">filename</span>)             <span style="color: #b22222;">//3</span>
-    <span style="color: #0000ff;">removeCommand</span>(<span style="color: #a0522d;">filename</span>)            <span style="color: #b22222;">//4</span>
-    <span style="color: #0000ff;">moveCommand</span>(<span style="color: #a0522d;">filename</span>)              <span style="color: #b22222;">//5</span>
-  }
-}
+<span class="org-variable-use">inputFiles</span><span class="org-delimiter">.</span><span class="org-function-call">foreach</span> <span class="org-bracket">{</span> <span class="org-comment">//1</span>
+  <span class="org-keyword">case</span> <span class="org-bracket">(</span><span class="org-variable-use">inputFile</span><span class="org-delimiter">,</span> <span class="org-variable-use">filename</span><span class="org-bracket">)</span> <span class="org-operator">=&gt;</span> <span class="org-bracket">{</span>
+    <span class="org-function-call">ffmpegCommand</span><span class="org-bracket">(</span><span class="org-variable-use">inputFile</span><span class="org-delimiter">,</span> <span class="org-variable-use">filename</span><span class="org-bracket">)</span> <span class="org-comment">//2</span>
+    <span class="org-function-call">splitCommand</span><span class="org-bracket">(</span><span class="org-variable-use">filename</span><span class="org-bracket">)</span>             <span class="org-comment">//3</span>
+    <span class="org-function-call">removeCommand</span><span class="org-bracket">(</span><span class="org-variable-use">filename</span><span class="org-bracket">)</span>            <span class="org-comment">//4</span>
+    <span class="org-function-call">moveCommand</span><span class="org-bracket">(</span><span class="org-variable-use">filename</span><span class="org-bracket">)</span>              <span class="org-comment">//5</span>
+  <span class="org-bracket">}</span>
+<span class="org-bracket">}</span>
 </pre>
 </div>
 
@@ -243,9 +243,9 @@ from step 3.</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-orgfcfb356" class="outline-4">
-<h4 id="orgfcfb356">FFMPEG Command</h4>
-<div class="outline-text-4" id="text-orgfcfb356">
+<div id="outline-container-orgadde2dd" class="outline-4">
+<h4 id="orgadde2dd">FFMPEG Command</h4>
+<div class="outline-text-4" id="text-orgadde2dd">
 <p>
 Previously we just craft the command as a simple string with
 interpolated input and "run &amp; forget" it with the <code>!</code>
@@ -254,31 +254,31 @@ command <a href="https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/Shell
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala"><span style="color: #b22222;">// Before</span>
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">ffmpegCommand</span>(<span style="color: #a0522d;">inputFile</span>: <span style="color: #228b22;">String</span>, <span style="color: #a0522d;">outputFilename</span>: <span style="color: #228b22;">String</span>): <span style="color: #228b22;">Unit</span> = {
-  <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">ffmpegCmd</span> =
-    <span style="color: #0000ff;">s</span><span style="color: #8b2252;">"""ffmpeg -i "</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">startingPath</span><span style="color: #8b2252;">/</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">inputFile</span><span style="color: #8b2252;">" -c:v libxvid -b:v 1500k -c:a libmp3lame -qscale:a 4 -vf scale=720:-1 "</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">tempPath</span><span style="color: #8b2252;">/</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">outputFilename</span><span style="color: #8b2252;">.avi""""</span>
-  <span style="color: #a0522d;">ffmpegCmd</span> !
-}
+<pre class="src src-scala"><span class="org-comment">// Before</span>
+<span class="org-keyword">def</span> <span class="org-function-name">ffmpegCommand</span><span class="org-bracket">(</span><span class="org-variable-name">inputFile</span>: <span class="org-type">String</span><span class="org-delimiter">,</span> <span class="org-variable-name">outputFilename</span>: <span class="org-type">String</span><span class="org-bracket">)</span>: <span class="org-type">Unit</span> = <span class="org-bracket">{</span>
+  <span class="org-keyword">val</span> <span class="org-variable-name">ffmpegCmd</span> =
+    <span class="org-variable-use"><span class="org-function-call">s</span></span><span class="org-string">"""ffmpeg -i "</span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">startingPath</span></span></span><span class="org-string">/</span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">inputFile</span></span></span><span class="org-string">" -c:v libxvid -b:v 1500k -c:a libmp3lame -qscale:a 4 -vf scale=720:-1 "</span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">tempPath</span></span></span><span class="org-string">/</span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">outputFilename</span></span></span><span class="org-string">.avi""""</span>
+  <span class="org-variable-use">ffmpegCmd</span> <span class="org-operator">!</span>
+<span class="org-bracket">}</span>
 
-<span style="color: #b22222;">// After</span>
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">ffmpegCommand</span>(<span style="color: #a0522d;">inputFile</span>: <span style="color: #228b22;">String</span>, <span style="color: #a0522d;">outputFilename</span>: <span style="color: #228b22;">String</span>): <span style="color: #a0522d;">os</span>.<span style="color: #228b22;">CommandResult</span> =
-  <span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">proc</span>(
-    <span style="color: #8b2252;">"ffmpeg"</span>,
-    <span style="color: #8b2252;">"-i"</span>,
-    <span style="color: #a0522d;">startingPath</span> / <span style="color: #a0522d;">inputFile</span>,
-    <span style="color: #8b2252;">"-c:v"</span>,
-    <span style="color: #8b2252;">"libxvid"</span>,
-    <span style="color: #8b2252;">"-b:v"</span>,
-    <span style="color: #8b2252;">"1500k"</span>,
-    <span style="color: #8b2252;">"-c:a"</span>,
-    <span style="color: #8b2252;">"libmp3lame"</span>,
-    <span style="color: #8b2252;">"-qscale:a"</span>,
-    <span style="color: #8b2252;">"4"</span>,
-    <span style="color: #8b2252;">"-vf"</span>,
-    <span style="color: #8b2252;">"scale=720:-1"</span>,
-    <span style="color: #a0522d;">tempPath</span> / <span style="color: #0000ff;">s</span><span style="color: #8b2252;">"</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">outputFilename</span><span style="color: #8b2252;">.avi"</span>
-  ).<span style="color: #0000ff;">call</span>()
+<span class="org-comment">// After</span>
+<span class="org-keyword">def</span> <span class="org-function-name">ffmpegCommand</span><span class="org-bracket">(</span><span class="org-variable-name">inputFile</span>: <span class="org-type">String</span><span class="org-delimiter">,</span> <span class="org-variable-name">outputFilename</span>: <span class="org-type">String</span><span class="org-bracket">)</span>: <span class="org-variable-use">os</span><span class="org-delimiter">.</span><span class="org-type">CommandResult</span> =
+  <span class="org-variable-use">os</span><span class="org-delimiter">.</span><span class="org-function-call">proc</span><span class="org-bracket">(</span>
+    <span class="org-string">"ffmpeg"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"-i"</span><span class="org-delimiter">,</span>
+    <span class="org-variable-use">startingPath</span> <span class="org-operator">/</span> <span class="org-variable-use">inputFile</span><span class="org-delimiter">,</span>
+    <span class="org-string">"-c:v"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"libxvid"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"-b:v"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"1500k"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"-c:a"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"libmp3lame"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"-qscale:a"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"4"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"-vf"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"scale=720:-1"</span><span class="org-delimiter">,</span>
+    <span class="org-variable-use">tempPath</span> <span class="org-operator">/</span> <span class="org-variable-use"><span class="org-function-call">s</span></span><span class="org-string">"</span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">outputFilename</span></span></span><span class="org-string">.avi"</span>
+  <span class="org-bracket">)</span><span class="org-delimiter">.</span><span class="org-function-call">call</span><span class="org-bracket">()</span>
 </pre>
 </div>
 
@@ -289,7 +289,7 @@ the <code>exitcode</code> of the <code>ffmpeg</code> process.
 </p>
 
 <p>
-<a id="org71fd4d7"></a>One could wonder why I didn't go for <a href="https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html">os.spawn</a> instead of <a href="https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html">os.call</a> in
+<a id="org19d4860"></a>One could wonder why I didn't go for <a href="https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html">os.spawn</a> instead of <a href="https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html">os.call</a> in
 order to take advantage of sub-processing and parallelize the whole
 script. The issue here is that we don't know in advance how many
 files we will have to convert. In the scenario where there are
@@ -298,9 +298,9 @@ long-live <code>ffmpeg</code> sub-processes that will hang the whole system.
 </p>
 </div>
 </div>
-<div id="outline-container-org1e77faf" class="outline-4">
-<h4 id="org1e77faf">Split Command</h4>
-<div class="outline-text-4" id="text-org1e77faf">
+<div id="outline-container-org3ecaa75" class="outline-4">
+<h4 id="org3ecaa75">Split Command</h4>
+<div class="outline-text-4" id="text-org3ecaa75">
 <p>
 The Split command still uses <code>ffmpeg</code> since we want these files to
 be playable and <code>ffmpeg</code> guarantees to produce a video file. We
@@ -319,92 +319,92 @@ parameters.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala"> <span style="color: #b22222;">// Before</span>
- <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">splitCommand</span>(<span style="color: #a0522d;">inputFilename</span>: <span style="color: #228b22;">String</span>): <span style="color: #228b22;">Unit</span> = {
-  <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">splitCmd</span> =
-    <span style="color: #0000ff;">s</span><span style="color: #8b2252;">"""ffmpeg -v quiet -y -i "</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">tempPath</span><span style="color: #8b2252;">/</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">inputFilename</span><span style="color: #8b2252;">.avi" -vcodec copy -acodec copy -ss 00:00:00 -t 01:00:00 -sn "</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">tempPath</span><span style="color: #8b2252;">/</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">{</span><span style="color: #a0522d;">inputFilename</span><span style="color: #a0522d;">}</span><span style="color: #8b2252;">_1.avi" -vcodec copy -acodec copy -ss 01:00:00 -t 01:00:00 -sn "</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">tempPath</span><span style="color: #8b2252;">/</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">{</span><span style="color: #a0522d;">inputFilename</span><span style="color: #a0522d;">}</span><span style="color: #8b2252;">_2.avi" -vcodec copy -acodec copy -ss 02:00:00 -t 01:00:00 -sn "</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">tempPath</span><span style="color: #8b2252;">/</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">{</span><span style="color: #a0522d;">inputFilename</span><span style="color: #a0522d;">}</span><span style="color: #8b2252;">_3.avi""""</span>
-  <span style="color: #a0522d;">splitCmd</span> !
-}
+<pre class="src src-scala"> <span class="org-comment">// Before</span>
+ <span class="org-keyword">def</span> <span class="org-function-name">splitCommand</span><span class="org-bracket">(</span><span class="org-variable-name">inputFilename</span>: <span class="org-type">String</span><span class="org-bracket">)</span>: <span class="org-type">Unit</span> = <span class="org-bracket">{</span>
+  <span class="org-keyword">val</span> <span class="org-variable-name">splitCmd</span> =
+    <span class="org-variable-use"><span class="org-function-call">s</span></span><span class="org-string">"""ffmpeg -v quiet -y -i "</span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">tempPath</span></span></span><span class="org-string">/</span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">inputFilename</span></span></span><span class="org-string">.avi" -vcodec copy -acodec copy -ss 00:00:00 -t 01:00:00 -sn "</span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">tempPath</span></span></span><span class="org-string">/</span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-bracket"><span class="org-string"><span class="org-variable-use"><span class="org-bracket">{</span></span></span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">inputFilename</span></span></span><span class="org-bracket"><span class="org-string"><span class="org-variable-use"><span class="org-bracket">}</span></span></span></span><span class="org-string">_1.avi" -vcodec copy -acodec copy -ss 01:00:00 -t 01:00:00 -sn "</span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">tempPath</span></span></span><span class="org-string">/</span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-bracket"><span class="org-string"><span class="org-variable-use"><span class="org-bracket">{</span></span></span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">inputFilename</span></span></span><span class="org-bracket"><span class="org-string"><span class="org-variable-use"><span class="org-bracket">}</span></span></span></span><span class="org-string">_2.avi" -vcodec copy -acodec copy -ss 02:00:00 -t 01:00:00 -sn "</span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">tempPath</span></span></span><span class="org-string">/</span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-bracket"><span class="org-string"><span class="org-variable-use"><span class="org-bracket">{</span></span></span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">inputFilename</span></span></span><span class="org-bracket"><span class="org-string"><span class="org-variable-use"><span class="org-bracket">}</span></span></span></span><span class="org-string">_3.avi""""</span>
+  <span class="org-variable-use">splitCmd</span> <span class="org-operator">!</span>
+<span class="org-bracket">}</span>
 
-<span style="color: #b22222;">// After</span>
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">splitCommand</span>(<span style="color: #a0522d;">inputFilename</span>: <span style="color: #228b22;">String</span>): <span style="color: #a0522d;">os</span>.<span style="color: #228b22;">CommandResult</span> =
-  <span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">proc</span>(
-    <span style="color: #8b2252;">"ffmpeg"</span>,
-    <span style="color: #8b2252;">"-v"</span>,
-    <span style="color: #8b2252;">"quiet"</span>,
-    <span style="color: #8b2252;">"-y"</span>,
-    <span style="color: #8b2252;">"-i"</span>,
-    <span style="color: #a0522d;">tempPath</span> / <span style="color: #8b2252;">"$inputFilename.avi"</span>,
-    <span style="color: #8b2252;">"-vcodec"</span>,
-    <span style="color: #8b2252;">"copy"</span>,
-    <span style="color: #8b2252;">"-acodec"</span>,
-    <span style="color: #8b2252;">"copy"</span>,
-    <span style="color: #8b2252;">"-ss"</span>,
-    <span style="color: #8b2252;">"00:00:00"</span>,
-    <span style="color: #8b2252;">"-t"</span>,
-    <span style="color: #8b2252;">"01:00:00"</span>,
-    <span style="color: #8b2252;">"-sn"</span>,
-    <span style="color: #a0522d;">tempPath</span> / <span style="color: #8b2252;">"${inputFilename}_1.avi"</span>,
-    <span style="color: #8b2252;">"-vcodec"</span>,
-    <span style="color: #8b2252;">"copy"</span>,
-    <span style="color: #8b2252;">"-acodec"</span>,
-    <span style="color: #8b2252;">"copy"</span>,
-    <span style="color: #8b2252;">"-ss"</span>,
-    <span style="color: #8b2252;">"01:00:00"</span>,
-    <span style="color: #8b2252;">"-t"</span>,
-    <span style="color: #8b2252;">"01:00:00"</span>,
-    <span style="color: #8b2252;">"-sn"</span>,
-    <span style="color: #a0522d;">tempPath</span> / <span style="color: #8b2252;">"${inputFilename}_2.avi"</span>,
-    <span style="color: #8b2252;">"-vcodec"</span>,
-    <span style="color: #8b2252;">"copy"</span>,
-    <span style="color: #8b2252;">"-acodec"</span>,
-    <span style="color: #8b2252;">"copy"</span>,
-    <span style="color: #8b2252;">"-ss"</span>,
-    <span style="color: #8b2252;">"02:00:00"</span>,
-    <span style="color: #8b2252;">"-t"</span>,
-    <span style="color: #8b2252;">"01:00:00"</span>,
-    <span style="color: #8b2252;">"-sn"</span>,
-    <span style="color: #a0522d;">tempPath</span> / <span style="color: #8b2252;">"${inputFilename}_3.avi"</span>
-  ).<span style="color: #0000ff;">call</span>()
+<span class="org-comment">// After</span>
+<span class="org-keyword">def</span> <span class="org-function-name">splitCommand</span><span class="org-bracket">(</span><span class="org-variable-name">inputFilename</span>: <span class="org-type">String</span><span class="org-bracket">)</span>: <span class="org-variable-use">os</span><span class="org-delimiter">.</span><span class="org-type">CommandResult</span> =
+  <span class="org-variable-use">os</span><span class="org-delimiter">.</span><span class="org-function-call">proc</span><span class="org-bracket">(</span>
+    <span class="org-string">"ffmpeg"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"-v"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"quiet"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"-y"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"-i"</span><span class="org-delimiter">,</span>
+    <span class="org-variable-use">tempPath</span> <span class="org-operator">/</span> <span class="org-string">"$inputFilename.avi"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"-vcodec"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"copy"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"-acodec"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"copy"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"-ss"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"00:00:00"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"-t"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"01:00:00"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"-sn"</span><span class="org-delimiter">,</span>
+    <span class="org-variable-use">tempPath</span> <span class="org-operator">/</span> <span class="org-string">"${inputFilename}_1.avi"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"-vcodec"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"copy"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"-acodec"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"copy"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"-ss"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"01:00:00"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"-t"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"01:00:00"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"-sn"</span><span class="org-delimiter">,</span>
+    <span class="org-variable-use">tempPath</span> <span class="org-operator">/</span> <span class="org-string">"${inputFilename}_2.avi"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"-vcodec"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"copy"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"-acodec"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"copy"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"-ss"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"02:00:00"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"-t"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"01:00:00"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"-sn"</span><span class="org-delimiter">,</span>
+    <span class="org-variable-use">tempPath</span> <span class="org-operator">/</span> <span class="org-string">"${inputFilename}_3.avi"</span>
+  <span class="org-bracket">)</span><span class="org-delimiter">.</span><span class="org-function-call">call</span><span class="org-bracket">()</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgd888f28" class="outline-4">
-<h4 id="orgd888f28">Remove Command</h4>
-<div class="outline-text-4" id="text-orgd888f28">
+<div id="outline-container-orgbd6fb5d" class="outline-4">
+<h4 id="orgbd6fb5d">Remove Command</h4>
+<div class="outline-text-4" id="text-orgbd6fb5d">
 <p>
 The remove command is straightforward to translate to the new
 library since it exposes <a href="https://github.com/com-lihaoyi/os-lib#osremove">os.remove</a> that removes a file if exists.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala"><span style="color: #b22222;">// Before</span>
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">removeCommand</span>(<span style="color: #a0522d;">inputFilename</span>: <span style="color: #228b22;">String</span>): <span style="color: #228b22;">Unit</span> = {
-  <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">removeCmd</span> = <span style="color: #0000ff;">s</span><span style="color: #8b2252;">"""rm "</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">tempPath</span><span style="color: #8b2252;">/</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">inputFilename</span><span style="color: #8b2252;">.avi""""</span>
-  <span style="color: #a0522d;">removeCmd</span> !
-}
+<pre class="src src-scala"><span class="org-comment">// Before</span>
+<span class="org-keyword">def</span> <span class="org-function-name">removeCommand</span><span class="org-bracket">(</span><span class="org-variable-name">inputFilename</span>: <span class="org-type">String</span><span class="org-bracket">)</span>: <span class="org-type">Unit</span> = <span class="org-bracket">{</span>
+  <span class="org-keyword">val</span> <span class="org-variable-name">removeCmd</span> = <span class="org-variable-use"><span class="org-function-call">s</span></span><span class="org-string">"""rm "</span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">tempPath</span></span></span><span class="org-string">/</span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">inputFilename</span></span></span><span class="org-string">.avi""""</span>
+  <span class="org-variable-use">removeCmd</span> <span class="org-operator">!</span>
+<span class="org-bracket">}</span>
 
-<span style="color: #b22222;">// After</span>
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">removeCommand</span>(<span style="color: #a0522d;">inputFilename</span>: <span style="color: #228b22;">String</span>): <span style="color: #228b22;">Unit</span> =
-  <span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">remove</span>(<span style="color: #a0522d;">tempPath</span>/<span style="color: #0000ff;">s</span><span style="color: #8b2252;">"</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">inputFilename</span><span style="color: #8b2252;">.avi"</span>)
+<span class="org-comment">// After</span>
+<span class="org-keyword">def</span> <span class="org-function-name">removeCommand</span><span class="org-bracket">(</span><span class="org-variable-name">inputFilename</span>: <span class="org-type">String</span><span class="org-bracket">)</span>: <span class="org-type">Unit</span> =
+  <span class="org-variable-use">os</span><span class="org-delimiter">.</span><span class="org-function-call">remove</span><span class="org-bracket">(</span><span class="org-variable-use">tempPath</span><span class="org-operator">/</span><span class="org-variable-use"><span class="org-function-call">s</span></span><span class="org-string">"</span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">inputFilename</span></span></span><span class="org-string">.avi"</span><span class="org-bracket">)</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org3f912a0" class="outline-4">
-<h4 id="org3f912a0">List Files</h4>
-<div class="outline-text-4" id="text-org3f912a0">
+<div id="outline-container-org9a54d46" class="outline-4">
+<h4 id="org9a54d46">List Files</h4>
+<div class="outline-text-4" id="text-org9a54d46">
 <p>
 Right now, there is this function in the script:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">getListOfFiles</span>(<span style="color: #a0522d;">dir</span>: <span style="color: #228b22;">File</span>, <span style="color: #a0522d;">prefix</span>: <span style="color: #228b22;">String</span>): <span style="color: #228b22;">List</span>[<span style="color: #228b22;">File</span>] = {
-<span style="color: #a0522d;">dir</span>.<span style="color: #a0522d;">listFiles</span>.<span style="color: #0000ff;">filter</span>(<span style="color: #483d8b;">_</span>.<span style="color: #a0522d;">isFile</span>).<span style="color: #a0522d;">toList</span>.<span style="color: #0000ff;">filter</span> { <span style="color: #a0522d;">file</span> =&gt;
-    <span style="color: #a0522d;">file</span>.<span style="color: #a0522d;">getName</span>.<span style="color: #0000ff;">startsWith</span>(<span style="color: #a0522d;">prefix</span>)
-  }
-}
+<pre class="src src-scala"><span class="org-keyword">def</span> <span class="org-function-name">getListOfFiles</span><span class="org-bracket">(</span><span class="org-variable-name">dir</span>: <span class="org-type">File</span><span class="org-delimiter">,</span> <span class="org-variable-name">prefix</span>: <span class="org-type">String</span><span class="org-bracket">)</span>: <span class="org-type">List</span><span class="org-bracket">[</span><span class="org-type">File</span><span class="org-bracket">]</span> = <span class="org-bracket">{</span>
+<span class="org-variable-use">dir</span><span class="org-delimiter">.</span><span class="org-property-use">listFiles</span><span class="org-delimiter">.</span><span class="org-function-call">filter</span><span class="org-bracket">(</span><span class="org-builtin">_</span><span class="org-delimiter">.</span><span class="org-property-use">isFile</span><span class="org-bracket">)</span><span class="org-delimiter">.</span><span class="org-property-use">toList</span><span class="org-delimiter">.</span><span class="org-function-call">filter</span> <span class="org-bracket">{</span> <span class="org-variable-use">file</span> <span class="org-operator">=&gt;</span>
+    <span class="org-variable-use">file</span><span class="org-delimiter">.</span><span class="org-property-use">getName</span><span class="org-delimiter">.</span><span class="org-function-call">startsWith</span><span class="org-bracket">(</span><span class="org-variable-use">prefix</span><span class="org-bracket">)</span>
+  <span class="org-bracket">}</span>
+<span class="org-bracket">}</span>
 </pre>
 </div>
 
@@ -420,21 +420,21 @@ results with the same <code>filter</code> used above.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala"><span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">list</span>(<span style="color: #0000ff;">path</span>()).<span style="color: #0000ff;">filter</span>(<span style="color: #a0522d;">f</span> =&gt; <span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">isFile</span>(<span style="color: #a0522d;">f</span>) &amp;&amp; <span style="color: #8b2252;">"gif[0-9]+.mp4"</span>.<span style="color: #a0522d;">r</span>.<span style="color: #0000ff;">matches</span>(<span style="color: #a0522d;">f</span>.<span style="color: #a0522d;">last</span>))
+<pre class="src src-scala"><span class="org-variable-use">os</span><span class="org-delimiter">.</span><span class="org-function-call">list</span><span class="org-bracket">(</span><span class="org-function-call">path</span><span class="org-bracket">())</span><span class="org-delimiter">.</span><span class="org-function-call">filter</span><span class="org-bracket">(</span><span class="org-variable-use">f</span> <span class="org-operator">=&gt;</span> <span class="org-variable-use">os</span><span class="org-delimiter">.</span><span class="org-function-call">isFile</span><span class="org-bracket">(</span><span class="org-variable-use">f</span><span class="org-bracket">)</span> <span class="org-operator">&amp;&amp;</span> <span class="org-string">"gif[0-9]+.mp4"</span><span class="org-delimiter">.</span><span class="org-property-use">r</span><span class="org-delimiter">.</span><span class="org-function-call">matches</span><span class="org-bracket">(</span><span class="org-variable-use">f</span><span class="org-delimiter">.</span><span class="org-property-use">last</span><span class="org-bracket">))</span>
 </pre>
 </div>
 <p>
 I want to underline this error message I got, really really nice!
 </p>
 
-<pre class="example" id="orgedc0265">
+<pre class="example" id="org18d3645">
 value IsFile is not a member of os - did you mean os.isFile?
 </pre>
 </div>
 </div>
-<div id="outline-container-orgbadeee3" class="outline-4">
-<h4 id="orgbadeee3">Move Files</h4>
-<div class="outline-text-4" id="text-orgbadeee3">
+<div id="outline-container-orgd248b10" class="outline-4">
+<h4 id="orgd248b10">Move Files</h4>
+<div class="outline-text-4" id="text-orgd248b10">
 <p>
 We can then move the files listed and filtered in the previous
 section with just a simple <code>foreach</code> and the help of the
@@ -453,44 +453,44 @@ The result becomes:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala"><span style="color: #b22222;">// Before</span>
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">moveCommand</span>(<span style="color: #a0522d;">inputFilename</span>: <span style="color: #228b22;">String</span>):<span style="color: #228b22;">Unit</span> = {
-  <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">filesToMove</span> = <span style="color: #0000ff;">getListOfFiles</span>(<span style="color: #a020f0;">new</span> <span style="color: #228b22;">File</span>(<span style="color: #a0522d;">tempPath</span>), <span style="color: #a0522d;">inputFilename</span>)
-  <span style="color: #a0522d;">filesToMove</span>.<span style="color: #0000ff;">foreach</span> { <span style="color: #a0522d;">file</span> =&gt;
-    <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">moveCmd</span> = <span style="color: #0000ff;">s</span><span style="color: #8b2252;">"""mv </span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">tempPath</span><span style="color: #8b2252;">/</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">{</span><span style="color: #a0522d;">file</span><span style="color: #a0522d;">.</span><span style="color: #a0522d;">getName</span><span style="color: #a0522d;">}</span><span style="color: #8b2252;"> "</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">destinationPath</span><span style="color: #8b2252;">/""""</span>
-    <span style="color: #a0522d;">moveCmd</span> !
-  }
-}
+<pre class="src src-scala"><span class="org-comment">// Before</span>
+<span class="org-keyword">def</span> <span class="org-function-name">moveCommand</span><span class="org-bracket">(</span><span class="org-variable-name">inputFilename</span>: <span class="org-type">String</span><span class="org-bracket">)</span>:<span class="org-type">Unit</span> = <span class="org-bracket">{</span>
+  <span class="org-keyword">val</span> <span class="org-variable-name">filesToMove</span> = <span class="org-function-call">getListOfFiles</span><span class="org-bracket">(</span><span class="org-keyword">new</span> <span class="org-type">File</span><span class="org-bracket">(</span><span class="org-variable-use">tempPath</span><span class="org-bracket">)</span><span class="org-delimiter">,</span> <span class="org-variable-use">inputFilename</span><span class="org-bracket">)</span>
+  <span class="org-variable-use">filesToMove</span><span class="org-delimiter">.</span><span class="org-function-call">foreach</span> <span class="org-bracket">{</span> <span class="org-variable-use">file</span> <span class="org-operator">=&gt;</span>
+    <span class="org-keyword">val</span> <span class="org-variable-name">moveCmd</span> = <span class="org-variable-use"><span class="org-function-call">s</span></span><span class="org-string">"""mv </span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">tempPath</span></span></span><span class="org-string">/</span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-bracket"><span class="org-string"><span class="org-variable-use"><span class="org-bracket">{</span></span></span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">file</span></span></span><span class="org-delimiter"><span class="org-string"><span class="org-variable-use">.</span></span></span><span class="org-property-use"><span class="org-string"><span class="org-variable-use">getName</span></span></span><span class="org-bracket"><span class="org-string"><span class="org-variable-use"><span class="org-bracket">}</span></span></span></span><span class="org-string"> "</span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">destinationPath</span></span></span><span class="org-string">/""""</span>
+    <span class="org-variable-use">moveCmd</span> <span class="org-operator">!</span>
+  <span class="org-bracket">}</span>
+<span class="org-bracket">}</span>
 
-<span style="color: #b22222;">// After</span>
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">moveCommand</span>(<span style="color: #a0522d;">inputFilename</span>: <span style="color: #228b22;">String</span>): <span style="color: #228b22;">Unit</span> =
-  <span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">list</span>(<span style="color: #a0522d;">tempPath</span>)
-    .<span style="color: #0000ff;">filter</span>(<span style="color: #a0522d;">p</span> =&gt; <span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">isFile</span>(<span style="color: #a0522d;">p</span>) &amp;&amp; <span style="color: #a0522d;">p</span>.<span style="color: #a0522d;">last</span>.<span style="color: #0000ff;">startsWith</span>(<span style="color: #a0522d;">inputFilename</span>))
-    .<span style="color: #0000ff;">foreach</span>(<span style="color: #a0522d;">f</span> =&gt; <span style="color: #a0522d;">os</span>.<span style="color: #a0522d;">move</span>.<span style="color: #0000ff;">into</span>(<span style="color: #a0522d;">f</span>, <span style="color: #a0522d;">destinationPath</span>))
+<span class="org-comment">// After</span>
+<span class="org-keyword">def</span> <span class="org-function-name">moveCommand</span><span class="org-bracket">(</span><span class="org-variable-name">inputFilename</span>: <span class="org-type">String</span><span class="org-bracket">)</span>: <span class="org-type">Unit</span> =
+  <span class="org-variable-use">os</span><span class="org-delimiter">.</span><span class="org-function-call">list</span><span class="org-bracket">(</span><span class="org-variable-use">tempPath</span><span class="org-bracket">)</span>
+    <span class="org-delimiter">.</span><span class="org-function-call">filter</span><span class="org-bracket">(</span><span class="org-variable-use">p</span> <span class="org-operator">=&gt;</span> <span class="org-variable-use">os</span><span class="org-delimiter">.</span><span class="org-function-call">isFile</span><span class="org-bracket">(</span><span class="org-variable-use">p</span><span class="org-bracket">)</span> <span class="org-operator">&amp;&amp;</span> <span class="org-variable-use">p</span><span class="org-delimiter">.</span><span class="org-property-use">last</span><span class="org-delimiter">.</span><span class="org-function-call">startsWith</span><span class="org-bracket">(</span><span class="org-variable-use">inputFilename</span><span class="org-bracket">))</span>
+    <span class="org-delimiter">.</span><span class="org-function-call">foreach</span><span class="org-bracket">(</span><span class="org-variable-use">f</span> <span class="org-operator">=&gt;</span> <span class="org-variable-use">os</span><span class="org-delimiter">.</span><span class="org-property-use">move</span><span class="org-delimiter">.</span><span class="org-function-call">into</span><span class="org-bracket">(</span><span class="org-variable-use">f</span><span class="org-delimiter">,</span> <span class="org-variable-use">destinationPath</span><span class="org-bracket">))</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org775dbdf" class="outline-4">
-<h4 id="org775dbdf">Final Cleanup</h4>
-<div class="outline-text-4" id="text-org775dbdf">
+<div id="outline-container-org56e308e" class="outline-4">
+<h4 id="org56e308e">Final Cleanup</h4>
+<div class="outline-text-4" id="text-org56e308e">
 <p>
 Now we can finally remove the useless imports! We can get rid of:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala"><span style="color: #a020f0;">import</span> <span style="color: #a0522d;">sys</span>.<span style="color: #a0522d;">process</span>._
-<span style="color: #a020f0;">import</span> <span style="color: #a0522d;">scala</span>.<span style="color: #a0522d;">language</span>.<span style="color: #a0522d;">postfixOps</span>
-<span style="color: #a020f0;">import</span> <span style="color: #a0522d;">java</span>.<span style="color: #a0522d;">io</span>.<span style="color: #a0522d;">File</span>
+<pre class="src src-scala"><span class="org-keyword">import</span> <span class="org-variable-use">sys</span><span class="org-delimiter">.</span><span class="org-variable-use">process</span><span class="org-delimiter">.</span>_
+<span class="org-keyword">import</span> <span class="org-variable-use">scala</span><span class="org-delimiter">.</span><span class="org-variable-use">language</span><span class="org-delimiter">.</span><span class="org-variable-use">postfixOps</span>
+<span class="org-keyword">import</span> <span class="org-variable-use">java</span><span class="org-delimiter">.</span><span class="org-variable-use">io</span><span class="org-delimiter">.</span><span class="org-variable-use">File</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgf9df636" class="outline-4">
-<h4 id="orgf9df636">Parallel Collection</h4>
-<div class="outline-text-4" id="text-orgf9df636">
+<div id="outline-container-org11cf7f6" class="outline-4">
+<h4 id="org11cf7f6">Parallel Collection</h4>
+<div class="outline-text-4" id="text-org11cf7f6">
 <p>
-We introduced the idea of parallelising the computation in <a href="#org71fd4d7">the ffmpeg
+We introduced the idea of parallelising the computation in <a href="#org19d4860">the ffmpeg
 subsection</a> when we talked about <a href="https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html">os.spawn</a>, saying it's not convenient
 at that point. However, we can do something using <a href="https://github.com/scala/scala-parallel-collections">parallel collections</a>.
 </p>
@@ -514,33 +514,33 @@ The final entry point looks like this:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala"><span style="color: #a020f0;">val</span> <span style="color: #a0522d;">inputFiles</span>: <span style="color: #228b22;">ParSeq</span>[(<span style="color: #228b22;">String</span>, <span style="color: #228b22;">String</span>)] = <span style="color: #0000ff;">List</span>(
-  (<span style="color: #8b2252;">"movie.avi"</span>, <span style="color: #8b2252;">"movie"</span>),
-  (<span style="color: #8b2252;">"film.avi"</span>, <span style="color: #8b2252;">"film"</span>)
-).<span style="color: #a0522d;">par</span>
+<pre class="src src-scala"><span class="org-keyword">val</span> <span class="org-variable-name">inputFiles</span>: <span class="org-type">ParSeq</span><span class="org-bracket">[(</span><span class="org-type">String</span><span class="org-delimiter">,</span> <span class="org-type">String</span><span class="org-bracket">)]</span> = <span class="org-function-call">List</span><span class="org-bracket">(</span>
+  <span class="org-bracket">(</span><span class="org-string">"movie.avi"</span><span class="org-delimiter">,</span> <span class="org-string">"movie"</span><span class="org-bracket">)</span><span class="org-delimiter">,</span>
+  <span class="org-bracket">(</span><span class="org-string">"film.avi"</span><span class="org-delimiter">,</span> <span class="org-string">"film"</span><span class="org-bracket">)</span>
+<span class="org-bracket">)</span><span class="org-delimiter">.</span><span class="org-property-use">par</span>
 
-<span style="color: #a020f0;">val</span> <span style="color: #a0522d;">forkJoinPool</span> = <span style="color: #a020f0;">new</span> <span style="color: #a0522d;">java</span>.<span style="color: #a0522d;">util</span>.<span style="color: #a0522d;">concurrent</span>.<span style="color: #228b22;">ForkJoinPool</span>(2)
-<span style="color: #a0522d;">inputFiles</span>.<span style="color: #a0522d;">tasksupport</span> = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">ForkJoinTaskSupport</span>(<span style="color: #a0522d;">forkJoinPool</span>)
+<span class="org-keyword">val</span> <span class="org-variable-name">forkJoinPool</span> = <span class="org-keyword">new</span> <span class="org-variable-use">java</span><span class="org-delimiter">.</span><span class="org-variable-use">util</span><span class="org-delimiter">.</span><span class="org-variable-use">concurrent</span><span class="org-delimiter">.</span><span class="org-type">ForkJoinPool</span><span class="org-bracket">(</span><span class="org-number">2</span><span class="org-bracket">)</span>
+<span class="org-variable-use">inputFiles</span><span class="org-delimiter">.</span><span class="org-property-use">tasksupport</span> = <span class="org-keyword">new</span> <span class="org-type">ForkJoinTaskSupport</span><span class="org-bracket">(</span><span class="org-variable-use">forkJoinPool</span><span class="org-bracket">)</span>
 
-<span style="color: #a0522d;">inputFiles</span>.<span style="color: #0000ff;">foreach</span> {
-  <span style="color: #a020f0;">case</span> (<span style="color: #a0522d;">inputFile</span>, <span style="color: #a0522d;">filename</span>) =&gt; {
-    <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">ffmpegEC</span> = <span style="color: #0000ff;">ffmpegCommand</span>(<span style="color: #a0522d;">inputFile</span>, <span style="color: #a0522d;">filename</span>).<span style="color: #a0522d;">exitCode</span>
-    <span style="color: #a020f0;">if</span> (<span style="color: #a0522d;">ffmpegEC</span> == 0) {
-      <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">splitEC</span> = <span style="color: #0000ff;">splitCommand</span>(<span style="color: #a0522d;">filename</span>).<span style="color: #a0522d;">exitCode</span>
-      <span style="color: #a020f0;">if</span> (<span style="color: #a0522d;">splitEC</span> == 0)
-        <span style="color: #0000ff;">removeCommand</span>(<span style="color: #a0522d;">filename</span>)
-        <span style="color: #0000ff;">moveCommand</span>(<span style="color: #a0522d;">filename</span>)
-      <span style="color: #a020f0;">else</span> <span style="color: #0000ff;">println</span>(<span style="color: #0000ff;">s</span><span style="color: #8b2252;">"split failed for </span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">filename</span><span style="color: #8b2252;">"</span>)
-    } <span style="color: #a020f0;">else</span> <span style="color: #0000ff;">println</span>(<span style="color: #0000ff;">s</span><span style="color: #8b2252;">"ffmpeg command failed for </span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">inputFile</span><span style="color: #8b2252;">"</span>)
-  }
-}
+<span class="org-variable-use">inputFiles</span><span class="org-delimiter">.</span><span class="org-function-call">foreach</span> <span class="org-bracket">{</span>
+  <span class="org-keyword">case</span> <span class="org-bracket">(</span><span class="org-variable-use">inputFile</span><span class="org-delimiter">,</span> <span class="org-variable-use">filename</span><span class="org-bracket">)</span> <span class="org-operator">=&gt;</span> <span class="org-bracket">{</span>
+    <span class="org-keyword">val</span> <span class="org-variable-name">ffmpegEC</span> = <span class="org-function-call">ffmpegCommand</span><span class="org-bracket">(</span><span class="org-variable-use">inputFile</span><span class="org-delimiter">,</span> <span class="org-variable-use">filename</span><span class="org-bracket">)</span><span class="org-delimiter">.</span><span class="org-property-use">exitCode</span>
+    <span class="org-keyword">if</span> <span class="org-bracket">(</span><span class="org-variable-use">ffmpegEC</span> <span class="org-operator">==</span> <span class="org-number">0</span><span class="org-bracket">)</span> <span class="org-bracket">{</span>
+      <span class="org-keyword">val</span> <span class="org-variable-name">splitEC</span> = <span class="org-function-call">splitCommand</span><span class="org-bracket">(</span><span class="org-variable-use">filename</span><span class="org-bracket">)</span><span class="org-delimiter">.</span><span class="org-property-use">exitCode</span>
+      <span class="org-keyword">if</span> <span class="org-bracket">(</span><span class="org-variable-use">splitEC</span> <span class="org-operator">==</span> <span class="org-number">0</span><span class="org-bracket">)</span>
+        <span class="org-function-call">removeCommand</span><span class="org-bracket">(</span><span class="org-variable-use">filename</span><span class="org-bracket">)</span>
+        <span class="org-function-call">moveCommand</span><span class="org-bracket">(</span><span class="org-variable-use">filename</span><span class="org-bracket">)</span>
+      <span class="org-keyword">else</span> <span class="org-function-call">println</span><span class="org-bracket">(</span><span class="org-variable-use"><span class="org-function-call">s</span></span><span class="org-string">"split failed for </span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">filename</span></span></span><span class="org-string">"</span><span class="org-bracket">)</span>
+    <span class="org-bracket">}</span> <span class="org-keyword">else</span> <span class="org-function-call">println</span><span class="org-bracket">(</span><span class="org-variable-use"><span class="org-function-call">s</span></span><span class="org-string">"ffmpeg command failed for </span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">inputFile</span></span></span><span class="org-string">"</span><span class="org-bracket">)</span>
+  <span class="org-bracket">}</span>
+<span class="org-bracket">}</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgb94efae" class="outline-4">
-<h4 id="orgb94efae">Testing</h4>
-<div class="outline-text-4" id="text-orgb94efae">
+<div id="outline-container-org0351c48" class="outline-4">
+<h4 id="org0351c48">Testing</h4>
+<div class="outline-text-4" id="text-org0351c48">
 <p>
 I just tried the script after the above changes and I discovered
 that it just hang 😯 🤕
@@ -566,10 +566,10 @@ The final change is:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">tempPath</span>(<span style="color: #a0522d;">inputFile</span>:<span style="color: #228b22;">String</span>) =
-  <span style="color: #a020f0;">if</span> (<span style="color: #a0522d;">inputFile</span>.<span style="color: #a0522d;">isEmpty</span>) <span style="color: #a0522d;">os</span>.<span style="color: #a0522d;">home</span>/<span style="color: #8b2252;">"temp"</span> <span style="color: #a020f0;">else</span> <span style="color: #a0522d;">os</span>.<span style="color: #a0522d;">home</span>/<span style="color: #8b2252;">"temp"</span>/<span style="color: #a0522d;">inputFile</span>
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">startingPath</span>(<span style="color: #a0522d;">inputFile</span>:<span style="color: #228b22;">String</span>): <span style="color: #a0522d;">os</span>.<span style="color: #228b22;">Path</span> =
-  <span style="color: #a020f0;">if</span> (<span style="color: #a0522d;">inputFile</span>.<span style="color: #a0522d;">isEmpty</span>) <span style="color: #a0522d;">os</span>.<span style="color: #a0522d;">home</span>/<span style="color: #8b2252;">"temp"</span>/<span style="color: #8b2252;">"test"</span> <span style="color: #a020f0;">else</span> <span style="color: #a0522d;">os</span>.<span style="color: #a0522d;">home</span>/<span style="color: #8b2252;">"temp"</span>/<span style="color: #8b2252;">"test"</span>/<span style="color: #a0522d;">inputFile</span>
+<pre class="src src-scala"><span class="org-keyword">def</span> <span class="org-function-name">tempPath</span><span class="org-bracket">(</span><span class="org-variable-name">inputFile</span>:<span class="org-type">String</span><span class="org-bracket">)</span> =
+  <span class="org-keyword">if</span> <span class="org-bracket">(</span><span class="org-variable-use">inputFile</span><span class="org-delimiter">.</span><span class="org-property-use">isEmpty</span><span class="org-bracket">)</span> <span class="org-variable-use">os</span><span class="org-delimiter">.</span><span class="org-property-use">home</span><span class="org-operator">/</span><span class="org-string">"temp"</span> <span class="org-keyword">else</span> <span class="org-variable-use">os</span><span class="org-delimiter">.</span><span class="org-property-use">home</span><span class="org-operator">/</span><span class="org-string">"temp"</span><span class="org-operator">/</span><span class="org-variable-use">inputFile</span>
+<span class="org-keyword">def</span> <span class="org-function-name">startingPath</span><span class="org-bracket">(</span><span class="org-variable-name">inputFile</span>:<span class="org-type">String</span><span class="org-bracket">)</span>: <span class="org-variable-use">os</span><span class="org-delimiter">.</span><span class="org-type">Path</span> =
+  <span class="org-keyword">if</span> <span class="org-bracket">(</span><span class="org-variable-use">inputFile</span><span class="org-delimiter">.</span><span class="org-property-use">isEmpty</span><span class="org-bracket">)</span> <span class="org-variable-use">os</span><span class="org-delimiter">.</span><span class="org-property-use">home</span><span class="org-operator">/</span><span class="org-string">"temp"</span><span class="org-operator">/</span><span class="org-string">"test"</span> <span class="org-keyword">else</span> <span class="org-variable-use">os</span><span class="org-delimiter">.</span><span class="org-property-use">home</span><span class="org-operator">/</span><span class="org-string">"temp"</span><span class="org-operator">/</span><span class="org-string">"test"</span><span class="org-operator">/</span><span class="org-variable-use">inputFile</span>
 </pre>
 </div>
 
@@ -579,10 +579,10 @@ function (probably a def would work as well), in this way:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">moveCommand</span>(<span style="color: #a0522d;">inputFilename</span>: <span style="color: #228b22;">String</span>): <span style="color: #228b22;">Unit</span> =
-  <span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">list</span>(<span style="color: #0000ff;">tempPath</span>(<span style="color: #8b2252;">""</span>))
-    .<span style="color: #0000ff;">filter</span>(<span style="color: #a0522d;">p</span> =&gt; <span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">isFile</span>(<span style="color: #a0522d;">p</span>) &amp;&amp; <span style="color: #a0522d;">p</span>.<span style="color: #a0522d;">last</span>.<span style="color: #0000ff;">startsWith</span>(<span style="color: #a0522d;">inputFilename</span>))
-    .<span style="color: #0000ff;">foreach</span>(<span style="color: #a0522d;">os</span>.<span style="color: #a0522d;">move</span>.<span style="color: #0000ff;">into</span>(<span style="color: #483d8b;">_</span>, <span style="color: #a0522d;">os</span>.<span style="color: #a0522d;">home</span>/<span style="color: #8b2252;">"temp"</span>/<span style="color: #8b2252;">"convertedFilms"</span>))
+<pre class="src src-scala"><span class="org-keyword">def</span> <span class="org-function-name">moveCommand</span><span class="org-bracket">(</span><span class="org-variable-name">inputFilename</span>: <span class="org-type">String</span><span class="org-bracket">)</span>: <span class="org-type">Unit</span> =
+  <span class="org-variable-use">os</span><span class="org-delimiter">.</span><span class="org-function-call">list</span><span class="org-bracket">(</span><span class="org-function-call">tempPath</span><span class="org-bracket">(</span><span class="org-string">""</span><span class="org-bracket">))</span>
+    <span class="org-delimiter">.</span><span class="org-function-call">filter</span><span class="org-bracket">(</span><span class="org-variable-use">p</span> <span class="org-operator">=&gt;</span> <span class="org-variable-use">os</span><span class="org-delimiter">.</span><span class="org-function-call">isFile</span><span class="org-bracket">(</span><span class="org-variable-use">p</span><span class="org-bracket">)</span> <span class="org-operator">&amp;&amp;</span> <span class="org-variable-use">p</span><span class="org-delimiter">.</span><span class="org-property-use">last</span><span class="org-delimiter">.</span><span class="org-function-call">startsWith</span><span class="org-bracket">(</span><span class="org-variable-use">inputFilename</span><span class="org-bracket">))</span>
+    <span class="org-delimiter">.</span><span class="org-function-call">foreach</span><span class="org-bracket">(</span><span class="org-variable-use">os</span><span class="org-delimiter">.</span><span class="org-property-use">move</span><span class="org-delimiter">.</span><span class="org-function-call">into</span><span class="org-bracket">(</span><span class="org-builtin">_</span><span class="org-delimiter">,</span> <span class="org-variable-use">os</span><span class="org-delimiter">.</span><span class="org-property-use">home</span><span class="org-operator">/</span><span class="org-string">"temp"</span><span class="org-operator">/</span><span class="org-string">"convertedFilms"</span><span class="org-bracket">))</span>
 </pre>
 </div>
 
@@ -591,7 +591,7 @@ I tried to use <code>lazy val</code>, but it didn't help as well.
 Maybe I did some errors along the way? missing some import? I don't
 know really. If you have more experience with the library and you
 know where the problem is please let me know. You can
-find the final code in the <a href="#org5eb73a8">References</a> section.
+find the final code in the <a href="#orgabb1989">References</a> section.
 </p>
 
 <p>
@@ -607,39 +607,39 @@ processes' outputs as you might expect in a multi-thread program.
 </div>
 </div>
 </div>
-<div id="outline-container-orgedb8ab9" class="outline-3">
-<h3 id="orgedb8ab9">Youtube to GIF Script</h3>
-<div class="outline-text-3" id="text-orgedb8ab9">
+<div id="outline-container-org0b0ec5a" class="outline-3">
+<h3 id="org0b0ec5a">Youtube to GIF Script</h3>
+<div class="outline-text-3" id="text-org0b0ec5a">
 <p>
 This script also includes some additional code for converting time
 measures, modeling the input of subtitles, subtitle position,
 fonts, cutting of the video, spacing between subtitles,
 and so on. In order to focus only on the library and keep this
 article short, I'll just skip all of that. Please follow the link in
-the <a href="#org5eb73a8">References</a> section if you are interested.
+the <a href="#orgabb1989">References</a> section if you are interested.
 </p>
 </div>
-<div id="outline-container-org1747a26" class="outline-4">
-<h4 id="org1747a26">File Paths</h4>
-<div class="outline-text-4" id="text-org1747a26">
+<div id="outline-container-org1bc774b" class="outline-4">
+<h4 id="org1bc774b">File Paths</h4>
+<div class="outline-text-4" id="text-org1bc774b">
 <p>
-We have already talked about <a href="#org1747a26">File Paths</a> in the previous
+We have already talked about <a href="#org1bc774b">File Paths</a> in the previous
 section. Here I just share the changes in this specific case.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala"><span style="color: #b22222;">// Before</span>
-<span style="color: #a020f0;">val</span> <span style="color: #a0522d;">path</span> = <span style="color: #8b2252;">"/Users/benkio/temp"</span>
-<span style="color: #b22222;">// After</span>
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">path</span>(<span style="color: #a0522d;">file</span>: <span style="color: #228b22;">String</span> = <span style="color: #8b2252;">""</span>): <span style="color: #a0522d;">os</span>.<span style="color: #228b22;">Path</span> =
-  <span style="color: #a020f0;">if</span> (<span style="color: #a0522d;">file</span>.<span style="color: #a0522d;">isEmpty</span>) <span style="color: #a0522d;">os</span>.<span style="color: #a0522d;">home</span>/<span style="color: #8b2252;">"temp"</span> <span style="color: #a020f0;">else</span> <span style="color: #a0522d;">os</span>.<span style="color: #a0522d;">home</span>/<span style="color: #8b2252;">"temp"</span>/<span style="color: #a0522d;">file</span>
+<pre class="src src-scala"><span class="org-comment">// Before</span>
+<span class="org-keyword">val</span> <span class="org-variable-name">path</span> = <span class="org-string">"/Users/benkio/temp"</span>
+<span class="org-comment">// After</span>
+<span class="org-keyword">def</span> <span class="org-function-name">path</span><span class="org-bracket">(</span><span class="org-variable-name">file</span>: <span class="org-type">String</span> = <span class="org-string">""</span><span class="org-bracket">)</span>: <span class="org-variable-use">os</span><span class="org-delimiter">.</span><span class="org-type">Path</span> =
+  <span class="org-keyword">if</span> <span class="org-bracket">(</span><span class="org-variable-use">file</span><span class="org-delimiter">.</span><span class="org-property-use">isEmpty</span><span class="org-bracket">)</span> <span class="org-variable-use">os</span><span class="org-delimiter">.</span><span class="org-property-use">home</span><span class="org-operator">/</span><span class="org-string">"temp"</span> <span class="org-keyword">else</span> <span class="org-variable-use">os</span><span class="org-delimiter">.</span><span class="org-property-use">home</span><span class="org-operator">/</span><span class="org-string">"temp"</span><span class="org-operator">/</span><span class="org-variable-use">file</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org8c9b21b" class="outline-4">
-<h4 id="org8c9b21b">File System Functions</h4>
-<div class="outline-text-4" id="text-org8c9b21b">
+<div id="outline-container-org4838c61" class="outline-4">
+<h4 id="org4838c61">File System Functions</h4>
+<div class="outline-text-4" id="text-org4838c61">
 <p>
 The <i>Youtube to Gif</i> script takes advantage of more file system
 functions compared to the previous script and here is actually where
@@ -656,70 +656,70 @@ the process and save an additional step.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala"><span style="color: #b22222;">// Before</span>
-<span style="color: #b22222;">// File System Functions</span>
+<pre class="src src-scala"><span class="org-comment">// Before</span>
+<span class="org-comment">// File System Functions</span>
 
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">changeDirectory</span>(<span style="color: #a0522d;">dir</span>: <span style="color: #228b22;">String</span>): <span style="color: #228b22;">Unit</span> = <span style="color: #a0522d;">System</span>.<span style="color: #0000ff;">setProperty</span>(<span style="color: #8b2252;">"user.dir"</span>, <span style="color: #a0522d;">dir</span>)
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">moveToTemp</span> = <span style="color: #0000ff;">changeDirectory</span>(<span style="color: #a0522d;">path</span>)
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">writeSubtitles</span>(<span style="color: #a0522d;">content</span>: <span style="color: #228b22;">String</span>, <span style="color: #a0522d;">outputFilename</span>: <span style="color: #228b22;">String</span>): <span style="color: #228b22;">Unit</span> = {
-  <span style="color: #0000ff;">println</span>(<span style="color: #8b2252;">"srt content: "</span> + <span style="color: #a0522d;">content</span>)
-  <span style="color: #a0522d;">Files</span>.<span style="color: #0000ff;">write</span>(<span style="color: #a0522d;">Paths</span>.<span style="color: #0000ff;">get</span>(<span style="color: #a0522d;">outputFilename</span>), <span style="color: #a0522d;">content</span>.<span style="color: #0000ff;">getBytes</span>(<span style="color: #a0522d;">StandardCharsets</span>.<span style="color: #a0522d;">UTF_8</span>))
-}
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">removeCommand</span>(<span style="color: #a0522d;">inputFilename</span>:<span style="color: #228b22;">String</span>): <span style="color: #228b22;">Unit</span> = {
-  <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">removeCmd</span> = <span style="color: #0000ff;">s</span><span style="color: #8b2252;">"""rm "</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">path</span><span style="color: #8b2252;">/</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">inputFilename</span><span style="color: #8b2252;">""""</span>
-  <span style="color: #0000ff;">println</span>(<span style="color: #8b2252;">"removeCmd: "</span> + <span style="color: #a0522d;">removeCmd</span>)
-  <span style="color: #8b2252;">"sleep 1"</span> #&amp;&amp; <span style="color: #a0522d;">removeCmd</span> !
-}
+<span class="org-keyword">def</span> <span class="org-function-name">changeDirectory</span><span class="org-bracket">(</span><span class="org-variable-name">dir</span>: <span class="org-type">String</span><span class="org-bracket">)</span>: <span class="org-type">Unit</span> = <span class="org-variable-use">System</span><span class="org-delimiter">.</span><span class="org-function-call">setProperty</span><span class="org-bracket">(</span><span class="org-string">"user.dir"</span><span class="org-delimiter">,</span> <span class="org-variable-use">dir</span><span class="org-bracket">)</span>
+<span class="org-keyword">def</span> <span class="org-function-name">moveToTemp</span> = <span class="org-function-call">changeDirectory</span><span class="org-bracket">(</span><span class="org-variable-use">path</span><span class="org-bracket">)</span>
+<span class="org-keyword">def</span> <span class="org-function-name">writeSubtitles</span><span class="org-bracket">(</span><span class="org-variable-name">content</span>: <span class="org-type">String</span><span class="org-delimiter">,</span> <span class="org-variable-name">outputFilename</span>: <span class="org-type">String</span><span class="org-bracket">)</span>: <span class="org-type">Unit</span> = <span class="org-bracket">{</span>
+  <span class="org-function-call">println</span><span class="org-bracket">(</span><span class="org-string">"srt content: "</span> <span class="org-operator">+</span> <span class="org-variable-use">content</span><span class="org-bracket">)</span>
+  <span class="org-variable-use">Files</span><span class="org-delimiter">.</span><span class="org-function-call">write</span><span class="org-bracket">(</span><span class="org-variable-use">Paths</span><span class="org-delimiter">.</span><span class="org-function-call">get</span><span class="org-bracket">(</span><span class="org-variable-use">outputFilename</span><span class="org-bracket">)</span><span class="org-delimiter">,</span> <span class="org-variable-use">content</span><span class="org-delimiter">.</span><span class="org-function-call">getBytes</span><span class="org-bracket">(</span><span class="org-variable-use">StandardCharsets</span><span class="org-delimiter">.</span><span class="org-property-use">UTF_8</span><span class="org-bracket">))</span>
+<span class="org-bracket">}</span>
+<span class="org-keyword">def</span> <span class="org-function-name">removeCommand</span><span class="org-bracket">(</span><span class="org-variable-name">inputFilename</span>:<span class="org-type">String</span><span class="org-bracket">)</span>: <span class="org-type">Unit</span> = <span class="org-bracket">{</span>
+  <span class="org-keyword">val</span> <span class="org-variable-name">removeCmd</span> = <span class="org-variable-use"><span class="org-function-call">s</span></span><span class="org-string">"""rm "</span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">path</span></span></span><span class="org-string">/</span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">inputFilename</span></span></span><span class="org-string">""""</span>
+  <span class="org-function-call">println</span><span class="org-bracket">(</span><span class="org-string">"removeCmd: "</span> <span class="org-operator">+</span> <span class="org-variable-use">removeCmd</span><span class="org-bracket">)</span>
+  <span class="org-string">"sleep 1"</span> <span class="org-operator">#&amp;&amp;</span> <span class="org-variable-use">removeCmd</span> <span class="org-operator">!</span>
+<span class="org-bracket">}</span>
 
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">getListOfOutputFiles</span>():<span style="color: #228b22;">List</span>[<span style="color: #228b22;">File</span>] = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">File</span>(<span style="color: #a0522d;">path</span>).<span style="color: #a0522d;">listFiles</span>.<span style="color: #0000ff;">filter</span>(<span style="color: #a0522d;">f</span> =&gt; <span style="color: #a0522d;">f</span>.<span style="color: #a0522d;">isFile</span> &amp;&amp; <span style="color: #a0522d;">f</span>.<span style="color: #a0522d;">getName</span>.<span style="color: #0000ff;">startsWith</span>(<span style="color: #8b2252;">"gif"</span>)).<span style="color: #a0522d;">toList</span>
+<span class="org-keyword">def</span> <span class="org-function-name">getListOfOutputFiles</span><span class="org-bracket">()</span>:<span class="org-type">List</span><span class="org-bracket">[</span><span class="org-type">File</span><span class="org-bracket">]</span> = <span class="org-keyword">new</span> <span class="org-type">File</span><span class="org-bracket">(</span><span class="org-variable-use">path</span><span class="org-bracket">)</span><span class="org-delimiter">.</span><span class="org-property-use">listFiles</span><span class="org-delimiter">.</span><span class="org-function-call">filter</span><span class="org-bracket">(</span><span class="org-variable-use">f</span> <span class="org-operator">=&gt;</span> <span class="org-variable-use">f</span><span class="org-delimiter">.</span><span class="org-property-use">isFile</span> <span class="org-operator">&amp;&amp;</span> <span class="org-variable-use">f</span><span class="org-delimiter">.</span><span class="org-property-use">getName</span><span class="org-delimiter">.</span><span class="org-function-call">startsWith</span><span class="org-bracket">(</span><span class="org-string">"gif"</span><span class="org-bracket">))</span><span class="org-delimiter">.</span><span class="org-property-use">toList</span>
 
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">renameFile</span>(<span style="color: #a0522d;">inputFilename</span>: <span style="color: #228b22;">String</span>, <span style="color: #a0522d;">outputFilename</span>: <span style="color: #228b22;">String</span>): <span style="color: #228b22;">Unit</span> = {
-  <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">renameCmd</span> = <span style="color: #0000ff;">s</span><span style="color: #8b2252;">"""mv "</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">path</span><span style="color: #8b2252;">/</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">inputFilename</span><span style="color: #8b2252;">" "</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">path</span><span style="color: #8b2252;">/</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">outputFilename</span><span style="color: #8b2252;">" """</span>
-  <span style="color: #0000ff;">println</span>(<span style="color: #8b2252;">"rename: "</span> + <span style="color: #a0522d;">renameCmd</span>)
-  <span style="color: #a0522d;">renameCmd</span> !
-}
+<span class="org-keyword">def</span> <span class="org-function-name">renameFile</span><span class="org-bracket">(</span><span class="org-variable-name">inputFilename</span>: <span class="org-type">String</span><span class="org-delimiter">,</span> <span class="org-variable-name">outputFilename</span>: <span class="org-type">String</span><span class="org-bracket">)</span>: <span class="org-type">Unit</span> = <span class="org-bracket">{</span>
+  <span class="org-keyword">val</span> <span class="org-variable-name">renameCmd</span> = <span class="org-variable-use"><span class="org-function-call">s</span></span><span class="org-string">"""mv "</span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">path</span></span></span><span class="org-string">/</span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">inputFilename</span></span></span><span class="org-string">" "</span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">path</span></span></span><span class="org-string">/</span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">outputFilename</span></span></span><span class="org-string">" """</span>
+  <span class="org-function-call">println</span><span class="org-bracket">(</span><span class="org-string">"rename: "</span> <span class="org-operator">+</span> <span class="org-variable-use">renameCmd</span><span class="org-bracket">)</span>
+  <span class="org-variable-use">renameCmd</span> <span class="org-operator">!</span>
+<span class="org-bracket">}</span>
 
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">burnSubtitlesInVideo</span>(<span style="color: #a0522d;">inputFilename</span>: <span style="color: #228b22;">String</span>, <span style="color: #a0522d;">subtitleFilename</span>:<span style="color: #228b22;">String</span>,  <span style="color: #a0522d;">outputFilename</span>: <span style="color: #228b22;">String</span>): <span style="color: #228b22;">Unit</span> = {
-  <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">ffmpegBurnSubtitlesInVideo</span> = <span style="color: #0000ff;">s</span><span style="color: #8b2252;">"""ffmpeg -i </span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">inputFilename</span><span style="color: #8b2252;"> -vf "subtitles=</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">subtitleFilename</span><span style="color: #8b2252;">" </span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">outputFilename</span><span style="color: #8b2252;">"""</span>
-  <span style="color: #0000ff;">println</span>(<span style="color: #8b2252;">"ffmpegBurnSubtitlesInVideo: "</span> + <span style="color: #a0522d;">ffmpegBurnSubtitlesInVideo</span>)
-  <span style="color: #a0522d;">ffmpegBurnSubtitlesInVideo</span> !
-}
+<span class="org-keyword">def</span> <span class="org-function-name">burnSubtitlesInVideo</span><span class="org-bracket">(</span><span class="org-variable-name">inputFilename</span>: <span class="org-type">String</span><span class="org-delimiter">,</span> <span class="org-variable-name">subtitleFilename</span>:<span class="org-type">String</span><span class="org-delimiter">,</span>  <span class="org-variable-name">outputFilename</span>: <span class="org-type">String</span><span class="org-bracket">)</span>: <span class="org-type">Unit</span> = <span class="org-bracket">{</span>
+  <span class="org-keyword">val</span> <span class="org-variable-name">ffmpegBurnSubtitlesInVideo</span> = <span class="org-variable-use"><span class="org-function-call">s</span></span><span class="org-string">"""ffmpeg -i </span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">inputFilename</span></span></span><span class="org-string"> -vf "subtitles=</span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">subtitleFilename</span></span></span><span class="org-string">" </span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">outputFilename</span></span></span><span class="org-string">"""</span>
+  <span class="org-function-call">println</span><span class="org-bracket">(</span><span class="org-string">"ffmpegBurnSubtitlesInVideo: "</span> <span class="org-operator">+</span> <span class="org-variable-use">ffmpegBurnSubtitlesInVideo</span><span class="org-bracket">)</span>
+  <span class="org-variable-use">ffmpegBurnSubtitlesInVideo</span> <span class="org-operator">!</span>
+<span class="org-bracket">}</span>
 
-<span style="color: #b22222;">// After</span>
-<span style="color: #b22222;">// File System Functions</span>
+<span class="org-comment">// After</span>
+<span class="org-comment">// File System Functions</span>
 
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">writeSubtitles</span>(<span style="color: #a0522d;">content</span>: <span style="color: #228b22;">String</span>, <span style="color: #a0522d;">outputFile</span>: <span style="color: #a0522d;">os</span>.<span style="color: #228b22;">Path</span>): <span style="color: #228b22;">Unit</span> =
-  <span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">write</span>(<span style="color: #a0522d;">outputFile</span>, <span style="color: #a0522d;">content</span>.<span style="color: #0000ff;">getBytes</span>(<span style="color: #a0522d;">StandardCharsets</span>.<span style="color: #a0522d;">UTF_8</span>))
+<span class="org-keyword">def</span> <span class="org-function-name">writeSubtitles</span><span class="org-bracket">(</span><span class="org-variable-name">content</span>: <span class="org-type">String</span><span class="org-delimiter">,</span> <span class="org-variable-name">outputFile</span>: <span class="org-variable-use">os</span><span class="org-delimiter">.</span><span class="org-type">Path</span><span class="org-bracket">)</span>: <span class="org-type">Unit</span> =
+  <span class="org-variable-use">os</span><span class="org-delimiter">.</span><span class="org-function-call">write</span><span class="org-bracket">(</span><span class="org-variable-use">outputFile</span><span class="org-delimiter">,</span> <span class="org-variable-use">content</span><span class="org-delimiter">.</span><span class="org-function-call">getBytes</span><span class="org-bracket">(</span><span class="org-variable-use">StandardCharsets</span><span class="org-delimiter">.</span><span class="org-property-use">UTF_8</span><span class="org-bracket">))</span>
 
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">removeCommand</span>(<span style="color: #a0522d;">inputFilename</span>: <span style="color: #228b22;">String</span>): <span style="color: #228b22;">Unit</span> =
-  <span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">remove</span>(<span style="color: #0000ff;">path</span>(<span style="color: #a0522d;">inputFilename</span>))
+<span class="org-keyword">def</span> <span class="org-function-name">removeCommand</span><span class="org-bracket">(</span><span class="org-variable-name">inputFilename</span>: <span class="org-type">String</span><span class="org-bracket">)</span>: <span class="org-type">Unit</span> =
+  <span class="org-variable-use">os</span><span class="org-delimiter">.</span><span class="org-function-call">remove</span><span class="org-bracket">(</span><span class="org-function-call">path</span><span class="org-bracket">(</span><span class="org-variable-use">inputFilename</span><span class="org-bracket">))</span>
 
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">getListOfOutputFiles</span>(): <span style="color: #228b22;">IndexedSeq</span>[<span style="color: #a0522d;">os</span>.<span style="color: #228b22;">Path</span>] =
-  <span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">list</span>(<span style="color: #0000ff;">path</span>()).<span style="color: #0000ff;">filter</span>(<span style="color: #a0522d;">f</span> =&gt; <span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">isFile</span>(<span style="color: #a0522d;">f</span>) &amp;&amp; <span style="color: #8b2252;">"gif[0-9]+.mp4"</span>.<span style="color: #a0522d;">r</span>.<span style="color: #0000ff;">matches</span>(<span style="color: #a0522d;">f</span>.<span style="color: #a0522d;">last</span>))
+<span class="org-keyword">def</span> <span class="org-function-name">getListOfOutputFiles</span><span class="org-bracket">()</span>: <span class="org-type">IndexedSeq</span><span class="org-bracket">[</span><span class="org-variable-use">os</span><span class="org-delimiter">.</span><span class="org-type">Path</span><span class="org-bracket">]</span> =
+  <span class="org-variable-use">os</span><span class="org-delimiter">.</span><span class="org-function-call">list</span><span class="org-bracket">(</span><span class="org-function-call">path</span><span class="org-bracket">())</span><span class="org-delimiter">.</span><span class="org-function-call">filter</span><span class="org-bracket">(</span><span class="org-variable-use">f</span> <span class="org-operator">=&gt;</span> <span class="org-variable-use">os</span><span class="org-delimiter">.</span><span class="org-function-call">isFile</span><span class="org-bracket">(</span><span class="org-variable-use">f</span><span class="org-bracket">)</span> <span class="org-operator">&amp;&amp;</span> <span class="org-string">"gif[0-9]+.mp4"</span><span class="org-delimiter">.</span><span class="org-property-use">r</span><span class="org-delimiter">.</span><span class="org-function-call">matches</span><span class="org-bracket">(</span><span class="org-variable-use">f</span><span class="org-delimiter">.</span><span class="org-property-use">last</span><span class="org-bracket">))</span>
 
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">renameFile</span>(<span style="color: #a0522d;">inputFilename</span>: <span style="color: #228b22;">String</span>, <span style="color: #a0522d;">outputFilename</span>: <span style="color: #228b22;">String</span>): <span style="color: #228b22;">Unit</span> =
-  <span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">move</span>(<span style="color: #0000ff;">path</span>(<span style="color: #a0522d;">inputFilename</span>), <span style="color: #0000ff;">path</span>(<span style="color: #a0522d;">outputFilename</span>))
+<span class="org-keyword">def</span> <span class="org-function-name">renameFile</span><span class="org-bracket">(</span><span class="org-variable-name">inputFilename</span>: <span class="org-type">String</span><span class="org-delimiter">,</span> <span class="org-variable-name">outputFilename</span>: <span class="org-type">String</span><span class="org-bracket">)</span>: <span class="org-type">Unit</span> =
+  <span class="org-variable-use">os</span><span class="org-delimiter">.</span><span class="org-function-call">move</span><span class="org-bracket">(</span><span class="org-function-call">path</span><span class="org-bracket">(</span><span class="org-variable-use">inputFilename</span><span class="org-bracket">)</span><span class="org-delimiter">,</span> <span class="org-function-call">path</span><span class="org-bracket">(</span><span class="org-variable-use">outputFilename</span><span class="org-bracket">))</span>
 
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">burnSubtitlesInVideo</span>(
-  <span style="color: #a0522d;">inputFilename</span>: <span style="color: #228b22;">String</span>,
-  <span style="color: #a0522d;">subtitleFilename</span>: <span style="color: #228b22;">String</span>,
-  <span style="color: #a0522d;">outputFilename</span>: <span style="color: #228b22;">String</span>
-): <span style="color: #228b22;">Unit</span> =
-  <span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">proc</span>(
-    <span style="color: #8b2252;">"ffmpeg"</span>,
-    <span style="color: #8b2252;">"-i"</span>,
-    <span style="color: #0000ff;">path</span>(<span style="color: #a0522d;">inputFilename</span>),
-    <span style="color: #8b2252;">"-vf"</span>,
-    <span style="color: #0000ff;">s</span><span style="color: #8b2252;">"subtitles=</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">subtitleFilename</span><span style="color: #8b2252;">"</span>,
-    <span style="color: #0000ff;">path</span>(<span style="color: #a0522d;">outputFilename</span>)
-  ).<span style="color: #0000ff;">call</span>()
+<span class="org-keyword">def</span> <span class="org-function-name">burnSubtitlesInVideo</span><span class="org-bracket">(</span>
+  <span class="org-variable-name">inputFilename</span>: <span class="org-type">String</span><span class="org-delimiter">,</span>
+  <span class="org-variable-name">subtitleFilename</span>: <span class="org-type">String</span><span class="org-delimiter">,</span>
+  <span class="org-variable-name">outputFilename</span>: <span class="org-type">String</span>
+<span class="org-bracket">)</span>: <span class="org-type">Unit</span> =
+  <span class="org-variable-use">os</span><span class="org-delimiter">.</span><span class="org-function-call">proc</span><span class="org-bracket">(</span>
+    <span class="org-string">"ffmpeg"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"-i"</span><span class="org-delimiter">,</span>
+    <span class="org-function-call">path</span><span class="org-bracket">(</span><span class="org-variable-use">inputFilename</span><span class="org-bracket">)</span><span class="org-delimiter">,</span>
+    <span class="org-string">"-vf"</span><span class="org-delimiter">,</span>
+    <span class="org-variable-use"><span class="org-function-call">s</span></span><span class="org-string">"subtitles=</span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">subtitleFilename</span></span></span><span class="org-string">"</span><span class="org-delimiter">,</span>
+    <span class="org-function-call">path</span><span class="org-bracket">(</span><span class="org-variable-use">outputFilename</span><span class="org-bracket">)</span>
+  <span class="org-bracket">)</span><span class="org-delimiter">.</span><span class="org-function-call">call</span><span class="org-bracket">()</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org650eb72" class="outline-4">
-<h4 id="org650eb72">Piping Commands</h4>
-<div class="outline-text-4" id="text-org650eb72">
+<div id="outline-container-org4855845" class="outline-4">
+<h4 id="org4855845">Piping Commands</h4>
+<div class="outline-text-4" id="text-org4855845">
 <p>
 In order to download just a specific chunk of the youtube video you need
 to get the direct stream URL, inject it into a non-trivial <code>ffmpeg</code>
@@ -733,43 +733,43 @@ Before it was done this way:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala"><span style="color: #b22222;">// Before</span>
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">downloadFileToDir</span>(<span style="color: #a0522d;">youtubeVideo</span>: <span style="color: #228b22;">YoutubeVideo</span>, <span style="color: #a0522d;">outputFilename</span>: <span style="color: #228b22;">String</span>): <span style="color: #228b22;">Unit</span> = {
-  <span style="color: #a0522d;">moveToTemp</span>
-  <span style="color: #a020f0;">if</span> (!<span style="color: #0000ff;">File</span>(<span style="color: #0000ff;">s</span><span style="color: #8b2252;">"</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">path</span><span style="color: #8b2252;">/</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">outputFilename</span><span style="color: #8b2252;">"</span>).<span style="color: #a0522d;">exists</span>) {
-    <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">ytDlpCommand</span> = <span style="color: #0000ff;">s</span><span style="color: #8b2252;">"""yt-dlp -f "best[ext=mp4]" -g </span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">{</span><span style="color: #a0522d;">youtubeVideo</span><span style="color: #a0522d;">.</span><span style="color: #a0522d;">url</span><span style="color: #a0522d;">}</span><span style="color: #8b2252;">"""</span>
-    <span style="color: #0000ff;">println</span>(<span style="color: #0000ff;">s</span><span style="color: #8b2252;">"ytDlpCommand: </span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">ytDlpCommand</span><span style="color: #8b2252;">"</span>)
-    <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">ytDlpCommandOutputUrl</span> = (<span style="color: #a0522d;">ytDlpCommand</span> !!).<span style="color: #a0522d;">lines</span>.<span style="color: #0000ff;">findFirst</span>().<span style="color: #a0522d;">get</span>
-    <span style="color: #a020f0;">val</span> <span style="color: #a0522d;">ffmpegCommand</span> = <span style="color: #0000ff;">s</span><span style="color: #8b2252;">"""ffmpeg -i "</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">ytDlpCommandOutputUrl</span><span style="color: #8b2252;">" -ss </span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">{</span><span style="color: #a0522d;">secondsToString</span><span style="color: #a0522d;">(</span><span style="color: #a0522d;">youtubeVideo</span><span style="color: #a0522d;">.</span><span style="color: #a0522d;">from</span><span style="color: #a0522d;">.</span><span style="color: #a0522d;">toMillis</span><span style="color: #a0522d;"> </span><span style="color: #a0522d;">/</span><span style="color: #a0522d;"> </span><span style="color: #a0522d;">1000</span><span style="color: #a0522d;">)</span><span style="color: #a0522d;">}</span><span style="color: #8b2252;"> -to </span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">{</span><span style="color: #a0522d;">secondsToString</span><span style="color: #a0522d;">(</span><span style="color: #a0522d;">youtubeVideo</span><span style="color: #a0522d;">.</span><span style="color: #a0522d;">to</span><span style="color: #a0522d;">.</span><span style="color: #a0522d;">toMillis</span><span style="color: #a0522d;"> </span><span style="color: #a0522d;">/</span><span style="color: #a0522d;"> </span><span style="color: #a0522d;">1000</span><span style="color: #a0522d;">)</span><span style="color: #a0522d;">}</span><span style="color: #8b2252;"> -an "</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">outputFilename</span><span style="color: #8b2252;">.mp4""""</span>
-    <span style="color: #0000ff;">println</span>(<span style="color: #8b2252;">"ffmpegCommand: "</span> + <span style="color: #a0522d;">ffmpegCommand</span>)
-    <span style="color: #a0522d;">ffmpegCommand</span> !
-  }
-}
-<span style="color: #b22222;">// After</span>
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">downloadFileToDir</span>(
-  <span style="color: #a0522d;">youtubeVideo</span>: <span style="color: #228b22;">YoutubeVideo</span>,
-  <span style="color: #a0522d;">outputFilename</span>: <span style="color: #228b22;">String</span>
-): <span style="color: #228b22;">Unit</span> =
-  <span style="color: #a020f0;">if</span> (!<span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">exists</span>(<span style="color: #0000ff;">path</span>(<span style="color: #a0522d;">outputFilename</span>)))
-    <span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">proc</span>(<span style="color: #8b2252;">"yt-dlp"</span>, <span style="color: #8b2252;">"-f"</span>, <span style="color: #8b2252;">"best[ext=mp4]"</span>, <span style="color: #8b2252;">"-g"</span>, <span style="color: #a0522d;">youtubeVideo</span>.<span style="color: #a0522d;">url</span>)
-      .<span style="color: #0000ff;">call</span>(<span style="color: #a0522d;">cwd</span> = <span style="color: #0000ff;">path</span>())
-      .<span style="color: #a0522d;">out</span>
-      .<span style="color: #0000ff;">lines</span>()
-      .<span style="color: #a0522d;">headOption</span>
-      .<span style="color: #0000ff;">map</span>(<span style="color: #a0522d;">ytDlpCommandOutputUrl</span> =&gt;
-        <span style="color: #a0522d;">os</span>.<span style="color: #0000ff;">proc</span>(
-          <span style="color: #8b2252;">"ffmpeg"</span>,
-          <span style="color: #8b2252;">"-i"</span>,
-          <span style="color: #0000ff;">s</span><span style="color: #8b2252;">"</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">ytDlpCommandOutputUrl</span><span style="color: #8b2252;">"</span>,
-          <span style="color: #8b2252;">"-ss"</span>,
-          <span style="color: #0000ff;">secondsToString</span>(<span style="color: #a0522d;">youtubeVideo</span>.<span style="color: #a0522d;">from</span>.<span style="color: #a0522d;">toMillis</span> / 1000),
-          <span style="color: #8b2252;">"-to"</span>,
-          <span style="color: #0000ff;">secondsToString</span>(<span style="color: #a0522d;">youtubeVideo</span>.<span style="color: #a0522d;">to</span>.<span style="color: #a0522d;">toMillis</span> / 1000),
-          <span style="color: #8b2252;">"-an"</span>,
-          <span style="color: #0000ff;">path</span>(<span style="color: #0000ff;">s</span><span style="color: #8b2252;">"</span><span style="color: #8b2252;">$</span><span style="color: #a0522d;">outputFilename</span><span style="color: #8b2252;">.mp4"</span>)
-        ).<span style="color: #0000ff;">call</span>(<span style="color: #a0522d;">cwd</span> = <span style="color: #0000ff;">path</span>())
-      )
-      .<span style="color: #0000ff;">getOrElse</span>(())
+<pre class="src src-scala"><span class="org-comment">// Before</span>
+<span class="org-keyword">def</span> <span class="org-function-name">downloadFileToDir</span><span class="org-bracket">(</span><span class="org-variable-name">youtubeVideo</span>: <span class="org-type">YoutubeVideo</span><span class="org-delimiter">,</span> <span class="org-variable-name">outputFilename</span>: <span class="org-type">String</span><span class="org-bracket">)</span>: <span class="org-type">Unit</span> = <span class="org-bracket">{</span>
+  <span class="org-variable-use">moveToTemp</span>
+  <span class="org-keyword">if</span> <span class="org-bracket">(</span>!<span class="org-function-call">File</span><span class="org-bracket">(</span><span class="org-variable-use"><span class="org-function-call">s</span></span><span class="org-string">"</span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">path</span></span></span><span class="org-string">/</span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">outputFilename</span></span></span><span class="org-string">"</span><span class="org-bracket">)</span><span class="org-delimiter">.</span><span class="org-property-use">exists</span><span class="org-bracket">)</span> <span class="org-bracket">{</span>
+    <span class="org-keyword">val</span> <span class="org-variable-name">ytDlpCommand</span> = <span class="org-variable-use"><span class="org-function-call">s</span></span><span class="org-string">"""yt-dlp -f "best[ext=mp4]" -g </span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-bracket"><span class="org-string"><span class="org-variable-use"><span class="org-bracket">{</span></span></span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">youtubeVideo</span></span></span><span class="org-delimiter"><span class="org-string"><span class="org-variable-use">.</span></span></span><span class="org-property-use"><span class="org-string"><span class="org-variable-use">url</span></span></span><span class="org-bracket"><span class="org-string"><span class="org-variable-use"><span class="org-bracket">}</span></span></span></span><span class="org-string">"""</span>
+    <span class="org-function-call">println</span><span class="org-bracket">(</span><span class="org-variable-use"><span class="org-function-call">s</span></span><span class="org-string">"ytDlpCommand: </span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">ytDlpCommand</span></span></span><span class="org-string">"</span><span class="org-bracket">)</span>
+    <span class="org-keyword">val</span> <span class="org-variable-name">ytDlpCommandOutputUrl</span> = <span class="org-bracket">(</span><span class="org-variable-use">ytDlpCommand</span> <span class="org-operator">!!</span><span class="org-bracket">)</span><span class="org-delimiter">.</span><span class="org-property-use">lines</span><span class="org-delimiter">.</span><span class="org-function-call">findFirst</span><span class="org-bracket">()</span><span class="org-delimiter">.</span><span class="org-property-use">get</span>
+    <span class="org-keyword">val</span> <span class="org-variable-name">ffmpegCommand</span> = <span class="org-variable-use"><span class="org-function-call">s</span></span><span class="org-string">"""ffmpeg -i "</span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">ytDlpCommandOutputUrl</span></span></span><span class="org-string">" -ss </span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-bracket"><span class="org-string"><span class="org-variable-use"><span class="org-bracket">{</span></span></span></span><span class="org-function-call"><span class="org-string"><span class="org-variable-use">secondsToString</span></span></span><span class="org-bracket"><span class="org-string"><span class="org-variable-use">(</span></span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">youtubeVideo</span></span></span><span class="org-delimiter"><span class="org-string"><span class="org-variable-use">.</span></span></span><span class="org-property-use"><span class="org-string"><span class="org-variable-use">from</span></span></span><span class="org-delimiter"><span class="org-string"><span class="org-variable-use">.</span></span></span><span class="org-property-use"><span class="org-string"><span class="org-variable-use">toMillis</span></span></span><span class="org-string"><span class="org-variable-use"> </span></span><span class="org-operator"><span class="org-string"><span class="org-variable-use">/</span></span></span><span class="org-string"><span class="org-variable-use"> </span></span><span class="org-number"><span class="org-string"><span class="org-variable-use">1000</span></span></span><span class="org-bracket"><span class="org-string"><span class="org-variable-use">)</span></span></span><span class="org-bracket"><span class="org-string"><span class="org-variable-use"><span class="org-bracket">}</span></span></span></span><span class="org-string"> -to </span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-bracket"><span class="org-string"><span class="org-variable-use"><span class="org-bracket">{</span></span></span></span><span class="org-function-call"><span class="org-string"><span class="org-variable-use">secondsToString</span></span></span><span class="org-bracket"><span class="org-string"><span class="org-variable-use">(</span></span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">youtubeVideo</span></span></span><span class="org-delimiter"><span class="org-string"><span class="org-variable-use">.</span></span></span><span class="org-property-use"><span class="org-string"><span class="org-variable-use">to</span></span></span><span class="org-delimiter"><span class="org-string"><span class="org-variable-use">.</span></span></span><span class="org-property-use"><span class="org-string"><span class="org-variable-use">toMillis</span></span></span><span class="org-string"><span class="org-variable-use"> </span></span><span class="org-operator"><span class="org-string"><span class="org-variable-use">/</span></span></span><span class="org-string"><span class="org-variable-use"> </span></span><span class="org-number"><span class="org-string"><span class="org-variable-use">1000</span></span></span><span class="org-bracket"><span class="org-string"><span class="org-variable-use">)</span></span></span><span class="org-bracket"><span class="org-string"><span class="org-variable-use"><span class="org-bracket">}</span></span></span></span><span class="org-string"> -an "</span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">outputFilename</span></span></span><span class="org-string">.mp4""""</span>
+    <span class="org-function-call">println</span><span class="org-bracket">(</span><span class="org-string">"ffmpegCommand: "</span> <span class="org-operator">+</span> <span class="org-variable-use">ffmpegCommand</span><span class="org-bracket">)</span>
+    <span class="org-variable-use">ffmpegCommand</span> <span class="org-operator">!</span>
+  <span class="org-bracket">}</span>
+<span class="org-bracket">}</span>
+<span class="org-comment">// After</span>
+<span class="org-keyword">def</span> <span class="org-function-name">downloadFileToDir</span><span class="org-bracket">(</span>
+  <span class="org-variable-name">youtubeVideo</span>: <span class="org-type">YoutubeVideo</span><span class="org-delimiter">,</span>
+  <span class="org-variable-name">outputFilename</span>: <span class="org-type">String</span>
+<span class="org-bracket">)</span>: <span class="org-type">Unit</span> =
+  <span class="org-keyword">if</span> <span class="org-bracket">(</span>!<span class="org-variable-use">os</span><span class="org-delimiter">.</span><span class="org-function-call">exists</span><span class="org-bracket">(</span><span class="org-function-call">path</span><span class="org-bracket">(</span><span class="org-variable-use">outputFilename</span><span class="org-bracket">)))</span>
+    <span class="org-variable-use">os</span><span class="org-delimiter">.</span><span class="org-function-call">proc</span><span class="org-bracket">(</span><span class="org-string">"yt-dlp"</span><span class="org-delimiter">,</span> <span class="org-string">"-f"</span><span class="org-delimiter">,</span> <span class="org-string">"best[ext=mp4]"</span><span class="org-delimiter">,</span> <span class="org-string">"-g"</span><span class="org-delimiter">,</span> <span class="org-variable-use">youtubeVideo</span><span class="org-delimiter">.</span><span class="org-property-use">url</span><span class="org-bracket">)</span>
+      <span class="org-delimiter">.</span><span class="org-function-call">call</span><span class="org-bracket">(</span><span class="org-variable-use">cwd</span> = <span class="org-function-call">path</span><span class="org-bracket">())</span>
+      <span class="org-delimiter">.</span><span class="org-property-use">out</span>
+      <span class="org-delimiter">.</span><span class="org-function-call">lines</span><span class="org-bracket">()</span>
+      <span class="org-delimiter">.</span><span class="org-property-use">headOption</span>
+      <span class="org-delimiter">.</span><span class="org-function-call">map</span><span class="org-bracket">(</span><span class="org-variable-use">ytDlpCommandOutputUrl</span> <span class="org-operator">=&gt;</span>
+        <span class="org-variable-use">os</span><span class="org-delimiter">.</span><span class="org-function-call">proc</span><span class="org-bracket">(</span>
+          <span class="org-string">"ffmpeg"</span><span class="org-delimiter">,</span>
+          <span class="org-string">"-i"</span><span class="org-delimiter">,</span>
+          <span class="org-variable-use"><span class="org-function-call">s</span></span><span class="org-string">"</span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">ytDlpCommandOutputUrl</span></span></span><span class="org-string">"</span><span class="org-delimiter">,</span>
+          <span class="org-string">"-ss"</span><span class="org-delimiter">,</span>
+          <span class="org-function-call">secondsToString</span><span class="org-bracket">(</span><span class="org-variable-use">youtubeVideo</span><span class="org-delimiter">.</span><span class="org-property-use">from</span><span class="org-delimiter">.</span><span class="org-property-use">toMillis</span> <span class="org-operator">/</span> <span class="org-number">1000</span><span class="org-bracket">)</span><span class="org-delimiter">,</span>
+          <span class="org-string">"-to"</span><span class="org-delimiter">,</span>
+          <span class="org-function-call">secondsToString</span><span class="org-bracket">(</span><span class="org-variable-use">youtubeVideo</span><span class="org-delimiter">.</span><span class="org-property-use">to</span><span class="org-delimiter">.</span><span class="org-property-use">toMillis</span> <span class="org-operator">/</span> <span class="org-number">1000</span><span class="org-bracket">)</span><span class="org-delimiter">,</span>
+          <span class="org-string">"-an"</span><span class="org-delimiter">,</span>
+          <span class="org-function-call">path</span><span class="org-bracket">(</span><span class="org-variable-use"><span class="org-function-call">s</span></span><span class="org-string">"</span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">outputFilename</span></span></span><span class="org-string">.mp4"</span><span class="org-bracket">)</span>
+        <span class="org-bracket">)</span><span class="org-delimiter">.</span><span class="org-function-call">call</span><span class="org-bracket">(</span><span class="org-variable-use">cwd</span> = <span class="org-function-call">path</span><span class="org-bracket">())</span>
+      <span class="org-bracket">)</span>
+      <span class="org-delimiter">.</span><span class="org-function-call">getOrElse</span><span class="org-bracket">(())</span>
 </pre>
 </div>
 
@@ -784,9 +784,9 @@ give it a try.
 </p>
 </div>
 </div>
-<div id="outline-container-org1f47ef1" class="outline-4">
-<h4 id="org1f47ef1">Testing</h4>
-<div class="outline-text-4" id="text-org1f47ef1">
+<div id="outline-container-org46acadf" class="outline-4">
+<h4 id="org46acadf">Testing</h4>
+<div class="outline-text-4" id="text-org46acadf">
 <p>
 This time the testing phase didn't bring any unexpected surprises. I
 just had to fix a couple of imprecisions in the way the commands
@@ -821,9 +821,9 @@ have that exposed by the library. A Minor thing by the way.
 <img src="https://www.dropbox.com/s/und6zl8mlvyk9i0/ytai_Buonanotte.mp4?dl=1" alt="Buonanotte by Youtubo">
 </div>
 </div>
-<div id="outline-container-org5eb73a8" class="outline-3">
-<h3 id="org5eb73a8">References</h3>
-<div class="outline-text-3" id="text-org5eb73a8">
+<div id="outline-container-orgabb1989" class="outline-3">
+<h3 id="orgabb1989">References</h3>
+<div class="outline-text-3" id="text-orgabb1989">
 <ul class="org-ul">
 <li><a href="https://gist.github.com/benkio/6fac65fdaec44842712be716f46169e1">convertFilms.sc script</a></li>
 <li><a href="https://gist.github.com/benkio/103960b7b5a5781c222df1c4e31544a2">youtubeToGif.sc script</a></li>
@@ -831,7 +831,7 @@ have that exposed by the library. A Minor thing by the way.
 </div>
 </div>
 </div>
-<div id="outline-container-ShareButtons" class="outline-2 row">
+<div id="outline-container-ShareButtons" class="outline-2 row container p-4">
 <h2 id="ShareButtons">Share Buttons</h2>
 <div class="outline-text-2" id="text-ShareButtons">
 <!-- AddToAny BEGIN -->
