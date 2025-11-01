@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2025-11-01 Sat 12:04 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>How to Load Sqlite Extension in Scala and Doobie</title>
+<meta name="author" content="Enrico Benini" />
+<meta name="description" content="How to Load Sqlite Extension in Scala and Doobie" />
+<meta name="keywords" content="How to Load Sqlite Extension in Scala and Doobie" />
+<meta name="generator" content="Org Mode" />
+<link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+<link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/blog.css">
+<link rel="stylesheet" href="../css/article.css">
+<script>
+// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+// @license-end
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">How to Load Sqlite Extension in Scala and Doobie</h1>
+<nav id="outline-container-navbar" class="outline-2 navbar bg-dark border-bottom border-body navbar-fixed-top navbar-expand-lg bg-body-tertiary">
+<h2 id="navbar">Blog</h2>
+<div class="outline-text-2" id="text-navbar">
+<a target="_self" class="navbar-brand" href="/index.html">
+  <img class="img-circle rounded-circle" src="https://www.gravatar.com/avatar/aa7f68a32b011ac94698a7a1cb16ffc8?s=200" width="50px"/>
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-2">
+    <li class="nav-item mx-2"> <a class="nav-link fs-4 active"        aria-current="page" target="_self" href="/blog.html">Blog</a> </li>
+    <li class="nav-item mx-2"> <a class="nav-link fs-4 "        aria-current="page" target="_self" href="/articles.html">Articles</a> </li>
+    <li class="nav-item mx-2"> <a class="nav-link fs-4 "        aria-current="page" target="_self" href="/books.html">Books</a> </li>
+    <li class="nav-item mx-2"> <a class="nav-link fs-4 " aria-current="page" target="_self" href="/albums.html">Albums</a> </li>
+    <li class="nav-item mx-2"> <a class="nav-link fs-4 "        aria-current="page" target="_self" href="/NoteTrainer/NoteTrainer.html">Note Trainer</a> </li>
+  </ul>
+</div>
+</div>
+</nav>
+<div id="outline-container-Article" class="outline-2 row container p-4">
+<h2 id="Article">How to Load Sqlite Extension in Scala and Doobie</h2>
+<div class="outline-text-2" id="text-Article">
+<p>
+<b>Created: <span class="timestamp-wrapper"><span class="timestamp">&lt;2025-11-01 Sat&gt;</span></span></b>
+</p>
+</div>
+<div id="outline-container-ArticleAbstract" class="outline-3">
+<h3 id="ArticleAbstract">Abstract</h3>
+<div class="outline-text-3" id="text-ArticleAbstract">
+<p>
+In this article I show how you can load a <a href="https://sqlite.org/">Sqlite</a> extension in Scala using <a href="https://github.com/typelevel/doobie">Doobie</a>.
+</p>
+</div>
+</div>
+<div id="outline-container-ArticleContent" class="outline-3">
+<h3 id="ArticleContent">Content</h3>
+<div class="outline-text-3" id="text-ArticleContent">
+</div>
+<div id="outline-container-orgd5bd03e" class="outline-4">
+<h4 id="orgd5bd03e">Motivation</h4>
+<div class="outline-text-4" id="text-orgd5bd03e">
+<p>
+<a href="https://github.com/benkio/sbots">In my project</a>, when a message input come, I have to match that
+againg a list of regexp and then select the related response. In the
+beginning the amount of regexp were not that much, so I thought I
+can just hardcode the relationship in code and have everything
+loaded on memory.
+</p>
+
+<p>
+It works great and probably it will keep working ok for quite some
+time, but it's definitely not the way you want to handle data. It's
+true that makes it: easier to change, test and you can use the
+compiler to check stuff for you. However, you can't really extract
+such relationship outside of the project and I start gaving 6k+ line
+of code files, plus the compiler told me I reached the limit of list length.
+</p>
+
+<p>
+As a result, I created <a href="https://github.com/benkio/sBots/issues/785">this issue</a>, with a detailed plan in how to
+move stuff in the database. It has all the necessary logic I needed
+to order entries and so on, but what I was missing was a way to
+check if a random string matches one of my regexp. Sure I could just
+query all the regexps and tests in my code, but it wouldn't be very
+performant and I would be close to what I have now. I needed a Proof
+of concept that it could be done by a SQL query. That's what
+<a href="https://scala-cli.virtuslab.org/">scala-cli</a> is for.
+</p>
+
+<p>
+I'm quite sure commercial DB comes with that built in, but I wasn't
+sure about <a href="https://sqlite.org/">Sqlite</a>. After a bit of research I saw it was doable,
+but you need an external extension. So the question shifted to:
+</p>
+
+<p>
+<i>is it possible to load an extension in Doobie with Sqlite?</i>
+</p>
+
+<p>
+Here starts the journey. I will put references in the code, so you
+will have a <i>clean</i> code, but you can jump to the commentary to see
+what's going on here.
+</p>
+</div>
+</div>
+<div id="outline-container-orgc5aef2c" class="outline-4">
+<h4 id="orgc5aef2c">Commentary</h4>
+<div class="outline-text-4" id="text-orgc5aef2c">
+</div>
+<div id="outline-container-org7eba183" class="outline-5">
+<h5 id="org7eba183">[0] Setup</h5>
+<div class="outline-text-5" id="text-org7eba183">
+<ul class="org-ul">
+<li>Dependencies</li>
+<li>Imports</li>
+<li>Database Name &amp; String Connection</li>
+<li>Create a transactor and an <code>AppIO</code></li>
+<li>Create a Table</li>
+<li>Put in it some regexp</li>
+</ul>
+
+<p>
+All quite some standard stuff you can copy-paste from documentation
+of <a href="https://github.com/typelevel/doobie">Doobie</a> or my project as well. Just be sure to put a <code>.scala</code>
+extension to your file or you won't be able to have a normal Main.
+</p>
+</div>
+</div>
+<div id="outline-container-org8d376d4" class="outline-5">
+<h5 id="org8d376d4">[1] Built-In Regex</h5>
+<div class="outline-text-5" id="text-org8d376d4">
+<p>
+I try the built-in regex from <a href="https://stackoverflow.com/a/5071683">this stackoverflow post</a> and I got:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scala">
+<span class="org-variable-use">result</span> <span class="org-operator">&lt;-</span> <span class="org-variable-use">buildInRegex</span>
+<span class="org-builtin">_</span> <span class="org-operator">&lt;-</span> <span class="org-variable-use">IO</span><span class="org-delimiter">.</span><span class="org-function-call">println</span><span class="org-bracket">(</span><span class="org-variable-use"><span class="org-function-call">s</span></span><span class="org-string">"[doobieSqlLiteRegex] result: </span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-bracket"><span class="org-string"><span class="org-variable-use"><span class="org-bracket">{</span></span></span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">result</span></span></span><span class="org-bracket"><span class="org-string"><span class="org-variable-use"><span class="org-bracket">}</span></span></span></span><span class="org-string">"</span><span class="org-bracket">)</span><span class="org-whitespace-trailing">  </span>
+<span class="org-comment">// org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (no such function: regexp)</span>
+</pre>
+</div>
+
+<p>
+That's because <b>it is not included in Sqlite</b> 😠
+You have to add it yourself!!!
+</p>
+
+<p>
+Searching online I saw <a href="https://github.com/sqlite/sqlite/blob/master/ext/misc/regexp.c">this official regexp extension</a>.
+I download and see if I can add it to the database
+</p>
+
+<p>
+First you have to compile it from C!! After a little search I got to
+this command:
+</p>
+
+<p>
+<code>gcc -lm -fPIC -shared regexp.c -o regexp.so</code>
+</p>
+
+<p>
+Of course, it fails because of architecture (macos). Fortunately, I
+have access to a Linux machine. I will use that for compiling it.
+</p>
+
+<p>
+I suggest to look in <a href="https://sqlite.org/loadext.html">the sqlite documentation to see how to compile
+and load it</a>
+</p>
+</div>
+</div>
+<div id="outline-container-org278ec9d" class="outline-5">
+<h5 id="org278ec9d">[2] Change of Direction</h5>
+<div class="outline-text-5" id="text-org278ec9d">
+<p>
+I have never been a fun of C, and compiling gave me errors I couldn't,
+and didn't want, to understand. Therefore, I redirect myself toward
+the web
+</p>
+
+<p>
+Fortunately, I found <a href="https://github.com/nalgeon/sqlean">a repo</a> where you can get precompiled <a href="https://sqlite.org/loadext.html">Sqlite</a>
+extension libraries per architecture. It will be a lot of fun to load
+the library, at runtime, <b>per architecture</b>, in a realworld production
+code. Living on the Edge here.
+</p>
+
+<p>
+In case you need to know how to get your architecture and os name,
+here is the code:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scala"><span class="org-builtin">_</span> <span class="org-operator">&lt;-</span> <span class="org-variable-use">IO</span><span class="org-delimiter">.</span><span class="org-function-call">println</span><span class="org-bracket">(</span><span class="org-variable-use"><span class="org-function-call">s</span></span><span class="org-string">"Architecture: "</span> <span class="org-operator">+</span> <span class="org-variable-use">System</span><span class="org-delimiter">.</span><span class="org-function-call">getProperty</span><span class="org-bracket">(</span><span class="org-string">"os.arch"</span><span class="org-bracket">))</span> <span class="org-comment">// aarch64</span>
+<span class="org-builtin">_</span> <span class="org-operator">&lt;-</span> <span class="org-variable-use">IO</span><span class="org-delimiter">.</span><span class="org-function-call">println</span><span class="org-bracket">(</span><span class="org-variable-use"><span class="org-function-call">s</span></span><span class="org-string">"Os Name: "</span> <span class="org-operator">+</span> <span class="org-variable-use">System</span><span class="org-delimiter">.</span><span class="org-function-call">getProperty</span><span class="org-bracket">(</span><span class="org-string">"os.name"</span><span class="org-bracket">))</span>      <span class="org-comment">// Mac OS X</span>
+</pre>
+</div>
+
+<p>
+Once downloaded, you will have in your filesystem the following folders
+</p>
+<ul class="org-ul">
+<li>sqlean-macos-x64   -&gt; regexp.dylib</li>
+<li>sqlean-macos-arm64 -&gt; regexp.dylib</li>
+<li>sqlean-linux-x64   -&gt; regexp.so</li>
+<li>sqlean-linux-arm64 -&gt; regexp.so</li>
+</ul>
+
+<p>
+A cool discovery from the Sqlite documentation is:
+</p>
+
+<p>
+<i>If you want to make your code portable, you can omit the suffix from the shared library filename and the appropriate suffix will be added automatically by the sqlite3<sub>load</sub><sub>extension</sub>() interface.</i>
+</p>
+
+<p>
+So I guess you can put them all in a folder and it will load the right
+one? I don't know about it.
+</p>
+
+<p>
+Unfortunately, I've done another discovery:
+</p>
+
+<p>
+<i>you have to enable extensions in Sqlite</i>
+</p>
+</div>
+</div>
+<div id="outline-container-org1a0cb8a" class="outline-5">
+<h5 id="org1a0cb8a">[3] Enable Extensions Config</h5>
+<div class="outline-text-5" id="text-org1a0cb8a">
+<p>
+After getting crazy reading <a href="https://github.com/typelevel/doobie">Doobie</a> documentation and more, I realize
+ my best bet was to:
+</p>
+<ul class="org-ul">
+<li>Go down to at <code>JDBC</code> level.</li>
+<li>Get a connection</li>
+<li>Add the configuration</li>
+<li>Create a transactor from that connection</li>
+</ul>
+
+<p>
+<a href="https://github.com/xerial/sqlite-jdbc/blob/master/USAGE.md">The JDBC documentation page</a> is really helpful here.
+</p>
+
+<p>
+That works&#x2026;almost 😒 I got this error:
+</p>
+
+<p>
+<code>library load disallowed by system policy</code>
+</p>
+
+<p>
+I had to run this command:
+</p>
+
+<p>
+<code>xattr -dr com.apple.quarantine regexp.dylib</code>
+</p>
+</div>
+</div>
+<div id="outline-container-org6f42019" class="outline-5">
+<h5 id="org6f42019">[4] Load Extension</h5>
+<div class="outline-text-5" id="text-org6f42019">
+<p>
+Pretty straight forward:
+</p>
+
+<p>
+Run the proper SELECT with the extension path
+</p>
+
+<p>
+Just beware of how to call Doobie or it will complain about the fact
+that the query returns results, so you can't use <code>update.run</code> as
+normal DDL in this case.
+</p>
+
+<p>
+Finally It seems the extension is properly loaded!!
+</p>
+</div>
+</div>
+<div id="outline-container-org93dfc9a" class="outline-5">
+<h5 id="org93dfc9a">[5] Run Regexp Matching Queries</h5>
+<div class="outline-text-5" id="text-org93dfc9a">
+<p>
+Time to try it!
+Here I needed a <code>WHERE EXISTS</code> inner query as the regexp are stored
+into the DB itself.
+</p>
+
+<p>
+Then the real query will be way more complicated as a many-to-many
+relationship will be involved. So, inner joins etc.
+</p>
+
+<p>
+Will it actually be performant? I hope so.
+</p>
+</div>
+</div>
+<div id="outline-container-orgba9d18a" class="outline-5">
+<h5 id="orgba9d18a">[6] Results</h5>
+<div class="outline-text-5" id="text-orgba9d18a">
+<div class="org-src-container">
+<pre class="src src-scala"><span class="org-comment">// [doobieSqlLiteRegex] result: List(List(), List((baci )?perugina), List(\bm[i]+[a]+[o]+\b), List(\bm[i]+[a]+[o]+\b), List((restiamo|teniamo) in contatto))</span>
+</pre>
+</div>
+
+<p>
+Exactly as expected!! 🎉 🎉 
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc213184" class="outline-4">
+<h4 id="orgc213184">Code</h4>
+<div class="outline-text-4" id="text-orgc213184">
+<div class="org-src-container">
+<pre class="src src-scala">  <span class="org-comment">#!/usr/bin/env scala-cli</span>
+//&gt; <span class="org-keyword">using</span> dep org.tpolecat::doobie-core:1.0.0-RC10
+//&gt; <span class="org-keyword">using</span> toolkit typelevel:default
+//&gt; <span class="org-keyword">using</span> dep org.xerial:sqlite-jdbc:3.50.3.0
+
+<span class="org-keyword">import</span> <span class="org-variable-use">doobie</span><span class="org-delimiter">.</span><span class="org-variable-use">Transactor</span>
+<span class="org-keyword">import</span> <span class="org-variable-use">cats</span><span class="org-delimiter">.</span><span class="org-variable-use">effect</span><span class="org-delimiter">.</span><span class="org-variable-use">IO</span>
+<span class="org-keyword">import</span> <span class="org-variable-use">cats</span><span class="org-delimiter">.</span><span class="org-variable-use">effect</span><span class="org-delimiter">.</span><span class="org-variable-use">IOApp</span>
+<span class="org-keyword">import</span> <span class="org-variable-use">cats</span><span class="org-delimiter">.</span><span class="org-variable-use">effect</span><span class="org-delimiter">.</span><span class="org-variable-use">ExitCode</span>
+<span class="org-keyword">import</span> <span class="org-variable-use">doobie</span><span class="org-delimiter">.</span><span class="org-variable-use">Transactor</span>
+<span class="org-keyword">import</span> <span class="org-variable-use">doobie</span><span class="org-delimiter">.</span><span class="org-variable-use">implicits</span><span class="org-delimiter">.</span>*
+<span class="org-keyword">import</span> <span class="org-variable-use">cats</span><span class="org-delimiter">.</span><span class="org-variable-use">implicits</span><span class="org-delimiter">.</span>*
+<span class="org-keyword">import</span> <span class="org-variable-use">cats</span><span class="org-delimiter">.</span><span class="org-variable-use">effect</span><span class="org-delimiter">.</span><span class="org-variable-use">implicits</span><span class="org-delimiter">.</span>*
+<span class="org-keyword">import</span> <span class="org-variable-use">doobie</span><span class="org-delimiter">.</span><span class="org-variable-use">util</span><span class="org-delimiter">.</span><span class="org-variable-use">fragment</span><span class="org-delimiter">.</span><span class="org-variable-use">Fragment</span>
+<span class="org-keyword">import</span> <span class="org-variable-use">org</span><span class="org-delimiter">.</span><span class="org-variable-use">sqlite</span><span class="org-delimiter">.</span><span class="org-variable-use">SQLiteConnection</span>
+<span class="org-keyword">import</span> <span class="org-variable-use">org</span><span class="org-delimiter">.</span><span class="org-variable-use">sqlite</span><span class="org-delimiter">.</span><span class="org-variable-use">SQLiteConfig</span>
+<span class="org-keyword">import</span> <span class="org-variable-use">java</span><span class="org-delimiter">.</span><span class="org-variable-use">sql</span><span class="org-delimiter">.</span><span class="org-variable-use">Connection</span>
+<span class="org-keyword">import</span> <span class="org-variable-use">java</span><span class="org-delimiter">.</span><span class="org-variable-use">sql</span><span class="org-delimiter">.</span><span class="org-variable-use">DriverManager</span>
+
+<span class="org-keyword">object</span> <span class="org-type">Main</span> <span class="org-keyword">extends</span> <span class="org-type">IOApp</span> <span class="org-bracket">{</span>
+
+  <span class="org-comment">// Setting up the database connection.</span>
+  <span class="org-comment">// Be sure to have in the same folder a test.sqlite3 DB</span>
+  <span class="org-comment">// To create just call `sqlite test.sqlite3`</span>
+
+  <span class="org-keyword">val</span> <span class="org-variable-name">dbName</span>: <span class="org-type">String</span> = <span class="org-string">"test.sqlite3"</span>
+  <span class="org-keyword">val</span> <span class="org-variable-name">dbUrl</span>: <span class="org-type">String</span> = <span class="org-variable-use"><span class="org-function-call">s</span></span><span class="org-string">"jdbc:sqlite:./</span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">dbName</span></span></span><span class="org-string">"</span><span class="org-delimiter">;</span>
+
+  <span class="org-comment">// [3]</span>
+  <span class="org-keyword">val</span> <span class="org-variable-name">config</span>: <span class="org-type">SQLiteConfig</span> = <span class="org-bracket">{</span>
+    <span class="org-keyword">val</span> <span class="org-variable-name">c</span> = <span class="org-function-call">SQLiteConfig</span><span class="org-bracket">()</span>
+    <span class="org-variable-use">c</span><span class="org-delimiter">.</span><span class="org-function-call">enableLoadExtension</span><span class="org-bracket">(</span><span class="org-constant">true</span><span class="org-bracket">)</span><span class="org-delimiter">;</span>
+    <span class="org-variable-use">c</span>
+  <span class="org-bracket">}</span>
+
+  <span class="org-keyword">val</span> <span class="org-variable-name">connection</span>: <span class="org-type">Connection</span> = <span class="org-variable-use">DriverManager</span><span class="org-delimiter">.</span><span class="org-function-call">getConnection</span><span class="org-bracket">(</span><span class="org-variable-use">dbUrl</span><span class="org-delimiter">,</span> <span class="org-variable-use">config</span><span class="org-delimiter">.</span><span class="org-function-call">toProperties</span><span class="org-bracket">())</span>
+
+  <span class="org-keyword">val</span> <span class="org-variable-name">transactor</span>: <span class="org-type">Transactor</span><span class="org-bracket">[</span><span class="org-type">IO</span><span class="org-bracket">]</span> =
+    <span class="org-variable-use">Transactor</span><span class="org-delimiter">.</span><span class="org-property-use">fromConnection</span><span class="org-bracket">[</span><span class="org-type">IO</span><span class="org-bracket">](</span><span class="org-variable-use">connection</span><span class="org-delimiter">,</span> <span class="org-variable-use">None</span><span class="org-bracket">)</span>
+
+  <span class="org-keyword">val</span> <span class="org-variable-name">drop</span> =
+    <span class="org-variable-use"><span class="org-function-call">sql</span></span><span class="org-string">"""
+    DROP TABLE IF EXISTS test
+    """</span><span class="org-delimiter">.</span><span class="org-property-use">update</span><span class="org-delimiter">.</span><span class="org-property-use">run</span>
+
+  <span class="org-keyword">val</span> <span class="org-variable-name">create</span> =
+    <span class="org-variable-use"><span class="org-function-call">sql</span></span><span class="org-string">"""
+    CREATE TABLE test (
+    regexp   Text PRIMARY KEY
+    )
+    """</span><span class="org-delimiter">.</span><span class="org-property-use">update</span><span class="org-delimiter">.</span><span class="org-property-use">run</span>
+
+  <span class="org-keyword">val</span> <span class="org-variable-name">inserts</span> = <span class="org-function-call">List</span><span class="org-bracket">(</span>
+    <span class="org-string">"""INSERT INTO main.test VALUES('\bm[i]+[a]+[o]+\b')"""</span><span class="org-delimiter">,</span>
+    <span class="org-string">"""INSERT INTO main.test VALUES('(restiamo|teniamo) in contatto')"""</span><span class="org-delimiter">,</span>
+    <span class="org-string">"""INSERT INTO main.test VALUES('(baci )?perugina')"""</span>
+  <span class="org-bracket">)</span><span class="org-delimiter">.</span><span class="org-function-call">map</span><span class="org-bracket">(</span><span class="org-variable-use">Fragment</span><span class="org-delimiter">.</span><span class="org-function-call">const</span><span class="org-bracket">(</span><span class="org-builtin">_</span><span class="org-bracket">)</span><span class="org-delimiter">.</span><span class="org-property-use">update</span><span class="org-delimiter">.</span><span class="org-property-use">run</span><span class="org-bracket">)</span>
+
+  <span class="org-keyword">val</span> <span class="org-variable-name">inputs</span>: <span class="org-type">List</span><span class="org-bracket">[</span><span class="org-type">String</span><span class="org-bracket">]</span> = <span class="org-function-call">List</span><span class="org-bracket">(</span>
+    <span class="org-string">"something who doesn't match"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"let's see if a text with a match in between because I add the word: perugina matches?"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"Another match with: miaaaaoooo"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"miao miaooooo"</span><span class="org-delimiter">,</span>
+    <span class="org-string">"ci teniamo in contatto"</span>
+  <span class="org-bracket">)</span>
+
+  <span class="org-comment">// [5]</span>
+  <span class="org-keyword">val</span> <span class="org-variable-name">buildInRegex</span>: <span class="org-type">IO</span><span class="org-bracket">[</span><span class="org-type">List</span><span class="org-bracket">[</span><span class="org-type">List</span><span class="org-bracket">[</span><span class="org-type">String</span><span class="org-bracket">]]]</span> =
+    <span class="org-variable-use">inputs</span><span class="org-delimiter">.</span><span class="org-function-call">traverse</span><span class="org-bracket">(</span><span class="org-variable-use">t</span> <span class="org-operator">=&gt;</span> <span class="org-bracket">{</span>
+      <span class="org-keyword">val</span> <span class="org-variable-name">result</span>: <span class="org-type">IO</span><span class="org-bracket">[</span><span class="org-type">List</span><span class="org-bracket">[</span><span class="org-type">String</span><span class="org-bracket">]]</span> =
+        <span class="org-variable-use"><span class="org-function-call">sql</span></span><span class="org-string">"""SELECT regexp FROM test t WHERE EXISTS (SELECT 1 WHERE </span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">t</span></span></span><span class="org-string"> regexp t.regexp)"""</span>
+          <span class="org-delimiter">.</span><span class="org-property-use">query</span><span class="org-bracket">[</span><span class="org-type">String</span><span class="org-bracket">]</span>
+          <span class="org-delimiter">.</span><span class="org-property-use">to</span><span class="org-bracket">[</span><span class="org-type">List</span><span class="org-bracket">]</span>
+          <span class="org-delimiter">.</span><span class="org-function-call">transact</span><span class="org-bracket">(</span><span class="org-variable-use">transactor</span><span class="org-bracket">)</span>
+      <span class="org-variable-use">result</span>
+    <span class="org-bracket">})</span>
+
+  <span class="org-keyword">def</span> <span class="org-function-name">run</span><span class="org-bracket">(</span><span class="org-variable-name">args</span>: <span class="org-type">List</span><span class="org-bracket">[</span><span class="org-type">String</span><span class="org-bracket">])</span>: <span class="org-type">IO</span><span class="org-bracket">[</span><span class="org-type">ExitCode</span><span class="org-bracket">]</span> =
+    <span class="org-comment">// [0]: Setup a test table with a couple of regexp as values</span>
+    <span class="org-keyword">for</span> <span class="org-bracket">{</span>
+      <span class="org-builtin">_</span> <span class="org-operator">&lt;-</span> <span class="org-variable-use">drop</span><span class="org-delimiter">.</span><span class="org-function-call">transact</span><span class="org-bracket">(</span><span class="org-variable-use">transactor</span><span class="org-bracket">)</span>
+      <span class="org-builtin">_</span> <span class="org-operator">&lt;-</span> <span class="org-variable-use">create</span><span class="org-delimiter">.</span><span class="org-function-call">transact</span><span class="org-bracket">(</span><span class="org-variable-use">transactor</span><span class="org-bracket">)</span>
+      <span class="org-builtin">_</span> <span class="org-operator">&lt;-</span> <span class="org-variable-use">inserts</span><span class="org-delimiter">.</span><span class="org-function-call">traverse_</span><span class="org-bracket">(</span><span class="org-builtin">_</span><span class="org-delimiter">.</span><span class="org-function-call">transact</span><span class="org-bracket">(</span><span class="org-variable-use">transactor</span><span class="org-bracket">))</span>
+      <span class="org-comment">// [1]</span>
+      <span class="org-comment">// [2]</span>
+      <span class="org-comment">// [4]</span>
+
+      <span class="org-variable-use">loadExtension</span> =
+        <span class="org-variable-use"><span class="org-function-call">sql</span></span><span class="org-string">"""SELECT load_extension('./sqlean-macos-arm64/regexp')"""</span>
+          <span class="org-delimiter">.</span><span class="org-property-use">query</span><span class="org-bracket">[</span><span class="org-type">Option</span><span class="org-bracket">[</span><span class="org-type">String</span><span class="org-bracket">]]</span>
+          <span class="org-delimiter">.</span><span class="org-property-use">option</span><span class="org-delimiter">.</span><span class="org-property-use">void</span>
+          <span class="org-delimiter">.</span><span class="org-function-call">transact</span><span class="org-bracket">(</span><span class="org-variable-use">transactor</span><span class="org-bracket">)</span>
+      <span class="org-builtin">_</span> <span class="org-operator">&lt;-</span> <span class="org-variable-use">loadExtension</span>
+
+      <span class="org-comment">// [5]</span>
+      <span class="org-variable-use">result</span> <span class="org-operator">&lt;-</span> <span class="org-variable-use">buildInRegex</span>
+      <span class="org-comment">// [6]</span>
+      <span class="org-builtin">_</span> <span class="org-operator">&lt;-</span> <span class="org-variable-use">IO</span><span class="org-delimiter">.</span><span class="org-function-call">println</span><span class="org-bracket">(</span><span class="org-variable-use"><span class="org-function-call">s</span></span><span class="org-string">"[doobieSqlLiteRegex] result: </span><span class="org-string"><span class="org-punctuation">$</span></span><span class="org-bracket"><span class="org-string"><span class="org-variable-use"><span class="org-bracket">{</span></span></span></span><span class="org-variable-use"><span class="org-string"><span class="org-variable-use">result</span></span></span><span class="org-bracket"><span class="org-string"><span class="org-variable-use"><span class="org-bracket">}</span></span></span></span><span class="org-string">"</span><span class="org-bracket">)</span>
+    <span class="org-bracket">}</span> <span class="org-keyword">yield</span> <span class="org-variable-use">ExitCode</span><span class="org-delimiter">.</span><span class="org-property-use">Success</span>
+<span class="org-bracket">}</span>
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-ArticleConclusions" class="outline-3">
+<h3 id="ArticleConclusions">Conclusions</h3>
+<div class="outline-text-3" id="text-ArticleConclusions">
+<p>
+It is possible! A bit cumbersome, error prone, javish, but possible.
+I still don't know:
+</p>
+<ul class="org-ul">
+<li>If it will make everything better code wise</li>
+<li>If it's easier to maintain and change</li>
+<li>If it's easier to test</li>
+<li>If the performance are on point</li>
+</ul>
+
+<p>
+But at least we know how to do it now. That's progress.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-ShareButtons" class="outline-2 row container p-4">
+<h2 id="ShareButtons">Share Buttons</h2>
+<div class="outline-text-2" id="text-ShareButtons">
+<!-- AddToAny BEGIN -->
+<hr>
+<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+<a class="a2a_button_facebook"></a>
+<a class="a2a_button_twitter"></a>
+<a class="a2a_button_whatsapp"></a>
+<a class="a2a_button_telegram"></a>
+<a class="a2a_button_linkedin"></a>
+<a class="a2a_button_email"></a>
+</div>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+<!-- AddToAny END -->
+
+<script type="text/javascript">
+$(function() {
+  $('#text-table-of-contents > ul li').first().css("display", "none");
+  $('#text-table-of-contents > ul li').last().css("display", "none");
+  $('#table-of-contents').addClass("visible-lg")
+});
+  document.getElementById("content").classList.add("container-fluid","p-0");
+  document.getElementById("text-navbar").classList.add("container-fluid");
+  document.getElementById("outline-container-navbar").setAttribute("data-bs-theme", "dark");
+  document.getElementById("text-Article").classList.add("text-center");
+  $('.outline-3').addClass("m-auto").addClass("col-10");
+  document.getElementById("text-ShareButtons").classList.add("m-auto", "col-10");
+</script>
+</div>
+</div>
+</div>
+</body>
+</html>
