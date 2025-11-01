@@ -28,7 +28,7 @@
 * Books
   :PROPERTIES:
   :CUSTOM_ID: Books
-  :HTML_CONTAINER_CLASS: row text-center
+  :HTML_CONTAINER_CLASS: row container p-4 text-center
   :END:
 
   **Created:** <2020-06-21 Sun>
@@ -47,7 +47,7 @@
 * Wanna Read
 :PROPERTIES:
 :CUSTOM_ID: WannaBooks
-:HTML_CONTAINER_CLASS: row
+:HTML_CONTAINER_CLASS: row container p-4
 :HTML_HEADLINE_CLASS: mx-auto my-3 col-md-10 text-center
 :END:
 

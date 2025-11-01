@@ -28,7 +28,7 @@
 * Articles
 :PROPERTIES:
 :CUSTOM_ID: Articles
-:HTML_CONTAINER_CLASS: row text-center
+:HTML_CONTAINER_CLASS: row container p-4 text-center
 :END:
 
 

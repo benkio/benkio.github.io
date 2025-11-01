@@ -346,7 +346,7 @@ Appartently all seems to work fine: the space is freed
 * Share Buttons
   :PROPERTIES:
   :CUSTOM_ID: ShareButtons
-  :HTML_CONTAINER_CLASS: row container p-4
+  :HTML_CONTAINER_CLASS: row
   :END:
 #+BEGIN_EXPORT html
 <!-- AddToAny BEGIN -->

@@ -27,7 +27,7 @@
 * Articles
 :PROPERTIES:
 :CUSTOM_ID: Articles
-:HTML_CONTAINER_CLASS: row
+:HTML_CONTAINER_CLASS: row container p-4
 :END:
 #+html: <div id='wrap1' data-include="article1"></div>
 #+html: <div id='wrap2' data-include="article2"></div>

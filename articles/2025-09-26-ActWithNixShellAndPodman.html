@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-11-01 Sat 10:41 -->
+<!-- 2025-11-01 Sat 10:52 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>~act~ with ~nix-shell~ and ~podman~</title>
@@ -100,9 +100,9 @@ Here I show how I did it.
 <h3 id="ArticleContent">Content</h3>
 <div class="outline-text-3" id="text-ArticleContent">
 </div>
-<div id="outline-container-org0f46902" class="outline-4">
-<h4 id="org0f46902">Tried with Docker</h4>
-<div class="outline-text-4" id="text-org0f46902">
+<div id="outline-container-orgfa3bcc1" class="outline-4">
+<h4 id="orgfa3bcc1">Tried with Docker</h4>
+<div class="outline-text-4" id="text-orgfa3bcc1">
 <p>
 My ideas was to use just <code>docker</code> with <code>nix-shell</code> and call <code>act</code>. Everything should work and I go living my life, but of course the life is the enemy and nothing works.
 </p>
@@ -132,9 +132,9 @@ Error: Cannot connect to the Docker daemon at unix:///run/user/1000/docker.sock.
 </pre>
 </div>
 </div>
-<div id="outline-container-org60afa27" class="outline-5">
-<h5 id="org60afa27">Docker Rootless</h5>
-<div class="outline-text-5" id="text-org60afa27">
+<div id="outline-container-org9cab9aa" class="outline-5">
+<h5 id="org9cab9aa">Docker Rootless</h5>
+<div class="outline-text-5" id="text-org9cab9aa">
 <p>
 You can't run <code>dockerd</code> rootless right away. I searched on stackoverflow and I found <a href="https://discourse.nixos.org/t/is-there-a-way-to-run-docker-inside-a-nix-shell/46824">this article</a>
 </p>
@@ -160,9 +160,9 @@ I give up with docker on the fly. Switch to <code>podman</code>
 </div>
 </div>
 </div>
-<div id="outline-container-orge699d7d" class="outline-4">
-<h4 id="orge699d7d">Try with Podman</h4>
-<div class="outline-text-4" id="text-orge699d7d">
+<div id="outline-container-org45478c7" class="outline-4">
+<h4 id="org45478c7">Try with Podman</h4>
+<div class="outline-text-4" id="text-org45478c7">
 <p>
 The package is there and it seems promising from <a href="https://nektosact.com/usage/custom_engine.html">the act documentation</a>, but it doesn't come with a daemon right away, so setting the socket is useless as in the guide.
 </p>
@@ -211,9 +211,9 @@ For reference I get the same error with <code>dockerd-rootless</code>:
 </div>
 </div>
 </div>
-<div id="outline-container-org656fe5e" class="outline-4">
-<h4 id="org656fe5e">Grok AI (last resort)</h4>
-<div class="outline-text-4" id="text-org656fe5e">
+<div id="outline-container-orge2a2d6d" class="outline-4">
+<h4 id="orge2a2d6d">Grok AI (last resort)</h4>
+<div class="outline-text-4" id="text-orge2a2d6d">
 <p>
 Prompt:
 <i>I want to run act on my project with docker or podman, but I don't want to install them, I want to use nix-shell instead to have them available temporarely. How can I do it?</i>
@@ -228,7 +228,7 @@ I get the same error as before
 </p>
 
 
-<div id="org4536bad" class="figure">
+<div id="org78d95b4" class="figure">
 <p><img src="https://m.media-amazon.com/images/I/61rEuZFB01L._AC_SX679_.jpg" alt="61rEuZFB01L._AC_SX679_.jpg" class="img-fluid" />
 </p>
 </div>
@@ -271,9 +271,9 @@ The shell.nix is not necessary tho
 </p>
 </div>
 </div>
-<div id="outline-container-org3b65e6f" class="outline-4">
-<h4 id="org3b65e6f">Try to run Act finally</h4>
-<div class="outline-text-4" id="text-org3b65e6f">
+<div id="outline-container-org28e53fc" class="outline-4">
+<h4 id="org28e53fc">Try to run Act finally</h4>
+<div class="outline-text-4" id="text-org28e53fc">
 <p>
 So far so good, but running act gives me permission problems, still ask the AI and it gives me some options such as create a user group etc.
 </p>
@@ -467,7 +467,7 @@ Especially if you are adding technology on top of other technology. That's why t
 </div>
 </div>
 </div>
-<div id="outline-container-ShareButtons" class="outline-2 row container p-4">
+<div id="outline-container-ShareButtons" class="outline-2 row">
 <h2 id="ShareButtons">Share Buttons</h2>
 <div class="outline-text-2" id="text-ShareButtons">
 <!-- AddToAny BEGIN -->
