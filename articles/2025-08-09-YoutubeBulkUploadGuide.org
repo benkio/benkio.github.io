@@ -27,7 +27,7 @@
 * YouTube Android Bulk Upload Guide
   :PROPERTIES:
   :CUSTOM_ID: Article
-    :HTML_CONTAINER_CLASS: row container p-4
+    :HTML_CONTAINER_CLASS: row container-md py-4 m-auto
   :END:
   *Created: <2025-08-09 Sat>*
 ** Abstract

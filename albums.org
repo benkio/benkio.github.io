@@ -28,7 +28,7 @@
 * Albums
 :PROPERTIES:
 :CUSTOM_ID: Albums
-:HTML_CONTAINER_CLASS: row container p-4
+:HTML_CONTAINER_CLASS: row container-md py-4 m-auto
 :END:
 
 **Created:** <2020-06-21 Sun>
@@ -66,7 +66,7 @@
 * Wanna Albums
 :PROPERTIES:
 :CUSTOM_ID: WannaAlbums
-:HTML_CONTAINER_CLASS: row container p-4
+:HTML_CONTAINER_CLASS: row container-md py-4 m-auto
 :HTML_HEADLINE_CLASS: m-auto col-10 text-center
 :END:
 

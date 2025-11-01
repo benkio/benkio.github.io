@@ -27,7 +27,7 @@
 * How to Load Sqlite Extension in Scala and Doobie
   :PROPERTIES:
   :CUSTOM_ID: Article
-    :HTML_CONTAINER_CLASS: row container p-4
+    :HTML_CONTAINER_CLASS: row container-md py-4 m-auto
   :END:
   *Created: <2025-11-01 Sat>*
 ** Abstract
@@ -326,7 +326,7 @@ Exactly as expected!! 🎉 🎉
 * Share Buttons
   :PROPERTIES:
   :CUSTOM_ID: ShareButtons
-  :HTML_CONTAINER_CLASS: row container p-4
+  :HTML_CONTAINER_CLASS: row container-md py-4 m-auto
   :END:
 #+BEGIN_EXPORT html
 <!-- AddToAny BEGIN -->

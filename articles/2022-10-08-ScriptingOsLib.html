@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-11-01 Sat 12:02 -->
+<!-- 2025-11-01 Sat 12:27 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Scripting with Scala CLI &amp; Os-lib</title>
@@ -66,7 +66,7 @@
 </div>
 </div>
 </nav>
-<div id="outline-container-Article" class="outline-2 row container p-4">
+<div id="outline-container-Article" class="outline-2 row container-md py-4 m-auto">
 <h2 id="Article">Scripting with Scala CLI &amp; Os-lib</h2>
 <div class="outline-text-2" id="text-Article">
 <p>
@@ -126,9 +126,9 @@ when he is looking for examples.
 </p>
 </div>
 </div>
-<div id="outline-container-org52157d8" class="outline-3">
-<h3 id="org52157d8">Insert Script Dependency</h3>
-<div class="outline-text-3" id="text-org52157d8">
+<div id="outline-container-org4e17501" class="outline-3">
+<h3 id="org4e17501">Insert Script Dependency</h3>
+<div class="outline-text-3" id="text-org4e17501">
 <p>
 The first thing you want to do is to add the <a href="https://github.com/com-lihaoyi/os-lib">os-lib</a> to your
 <a href="https://scala-cli.virtuslab.org/">  scala-cli</a>. At the moment of writing the latest version is <code>0.8.1</code>.
@@ -142,13 +142,13 @@ Just add this snippet at the very top of your script
 </div>
 </div>
 </div>
-<div id="outline-container-orgc737651" class="outline-3">
-<h3 id="orgc737651">Movie Conversion Script</h3>
-<div class="outline-text-3" id="text-orgc737651">
+<div id="outline-container-org1af7f5e" class="outline-3">
+<h3 id="org1af7f5e">Movie Conversion Script</h3>
+<div class="outline-text-3" id="text-org1af7f5e">
 </div>
-<div id="outline-container-org0a4d59c" class="outline-4">
-<h4 id="org0a4d59c">File Paths</h4>
-<div class="outline-text-4" id="text-org0a4d59c">
+<div id="outline-container-orgcda6034" class="outline-4">
+<h4 id="orgcda6034">File Paths</h4>
+<div class="outline-text-4" id="text-orgcda6034">
 <p>
 Let's convert simple file path strings to the types used by the
 library. Note how I had to specify a temporary existing directory
@@ -182,7 +182,7 @@ create a path using just the <code>'</code> prefix. However, if you try you
 might get this error:
 </p>
 
-<pre class="example" id="orgb142de3">
+<pre class="example" id="org769ef88">
 [error] ./convertFilms.sc:18:31: symbol literal 'temp is no longer supported,
 [error] use a string literal "temp" or an application Symbol("temp") instead,
 [error] or enclose in braces '{temp} if you want a quoted expression.
@@ -196,9 +196,9 @@ That's why I ended up using simple strings.
 </p>
 </div>
 </div>
-<div id="outline-container-org24f45db" class="outline-4">
-<h4 id="org24f45db">Script Entry Point</h4>
-<div class="outline-text-4" id="text-org24f45db">
+<div id="outline-container-org9463397" class="outline-4">
+<h4 id="org9463397">Script Entry Point</h4>
+<div class="outline-text-4" id="text-org9463397">
 <p>
 In order to understand what this script is supposed to do, we need
 to have a look at its entry point. This will be affected by the
@@ -243,9 +243,9 @@ from step 3.</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-org0f5981b" class="outline-4">
-<h4 id="org0f5981b">FFMPEG Command</h4>
-<div class="outline-text-4" id="text-org0f5981b">
+<div id="outline-container-org32a7125" class="outline-4">
+<h4 id="org32a7125">FFMPEG Command</h4>
+<div class="outline-text-4" id="text-org32a7125">
 <p>
 Previously we just craft the command as a simple string with
 interpolated input and "run &amp; forget" it with the <code>!</code>
@@ -289,7 +289,7 @@ the <code>exitcode</code> of the <code>ffmpeg</code> process.
 </p>
 
 <p>
-<a id="org4f770ee"></a>One could wonder why I didn't go for <a href="https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html">os.spawn</a> instead of <a href="https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html">os.call</a> in
+<a id="org3315278"></a>One could wonder why I didn't go for <a href="https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html">os.spawn</a> instead of <a href="https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html">os.call</a> in
 order to take advantage of sub-processing and parallelize the whole
 script. The issue here is that we don't know in advance how many
 files we will have to convert. In the scenario where there are
@@ -298,9 +298,9 @@ long-live <code>ffmpeg</code> sub-processes that will hang the whole system.
 </p>
 </div>
 </div>
-<div id="outline-container-org5800a6e" class="outline-4">
-<h4 id="org5800a6e">Split Command</h4>
-<div class="outline-text-4" id="text-org5800a6e">
+<div id="outline-container-org5b3947d" class="outline-4">
+<h4 id="org5b3947d">Split Command</h4>
+<div class="outline-text-4" id="text-org5b3947d">
 <p>
 The Split command still uses <code>ffmpeg</code> since we want these files to
 be playable and <code>ffmpeg</code> guarantees to produce a video file. We
@@ -370,9 +370,9 @@ parameters.
 </div>
 </div>
 </div>
-<div id="outline-container-org3035e23" class="outline-4">
-<h4 id="org3035e23">Remove Command</h4>
-<div class="outline-text-4" id="text-org3035e23">
+<div id="outline-container-orgeac2ae0" class="outline-4">
+<h4 id="orgeac2ae0">Remove Command</h4>
+<div class="outline-text-4" id="text-orgeac2ae0">
 <p>
 The remove command is straightforward to translate to the new
 library since it exposes <a href="https://github.com/com-lihaoyi/os-lib#osremove">os.remove</a> that removes a file if exists.
@@ -392,9 +392,9 @@ library since it exposes <a href="https://github.com/com-lihaoyi/os-lib#osremove
 </div>
 </div>
 </div>
-<div id="outline-container-org599ed7e" class="outline-4">
-<h4 id="org599ed7e">List Files</h4>
-<div class="outline-text-4" id="text-org599ed7e">
+<div id="outline-container-org2ea681b" class="outline-4">
+<h4 id="org2ea681b">List Files</h4>
+<div class="outline-text-4" id="text-org2ea681b">
 <p>
 Right now, there is this function in the script:
 </p>
@@ -427,14 +427,14 @@ results with the same <code>filter</code> used above.
 I want to underline this error message I got, really really nice!
 </p>
 
-<pre class="example" id="org27bd505">
+<pre class="example" id="org57baccb">
 value IsFile is not a member of os - did you mean os.isFile?
 </pre>
 </div>
 </div>
-<div id="outline-container-org0b285a6" class="outline-4">
-<h4 id="org0b285a6">Move Files</h4>
-<div class="outline-text-4" id="text-org0b285a6">
+<div id="outline-container-org87d4117" class="outline-4">
+<h4 id="org87d4117">Move Files</h4>
+<div class="outline-text-4" id="text-org87d4117">
 <p>
 We can then move the files listed and filtered in the previous
 section with just a simple <code>foreach</code> and the help of the
@@ -471,9 +471,9 @@ The result becomes:
 </div>
 </div>
 </div>
-<div id="outline-container-org4e3e828" class="outline-4">
-<h4 id="org4e3e828">Final Cleanup</h4>
-<div class="outline-text-4" id="text-org4e3e828">
+<div id="outline-container-org484372a" class="outline-4">
+<h4 id="org484372a">Final Cleanup</h4>
+<div class="outline-text-4" id="text-org484372a">
 <p>
 Now we can finally remove the useless imports! We can get rid of:
 </p>
@@ -486,11 +486,11 @@ Now we can finally remove the useless imports! We can get rid of:
 </div>
 </div>
 </div>
-<div id="outline-container-org0d8ebf2" class="outline-4">
-<h4 id="org0d8ebf2">Parallel Collection</h4>
-<div class="outline-text-4" id="text-org0d8ebf2">
+<div id="outline-container-org978b1b7" class="outline-4">
+<h4 id="org978b1b7">Parallel Collection</h4>
+<div class="outline-text-4" id="text-org978b1b7">
 <p>
-We introduced the idea of parallelising the computation in <a href="#org4f770ee">the ffmpeg
+We introduced the idea of parallelising the computation in <a href="#org3315278">the ffmpeg
 subsection</a> when we talked about <a href="https://javadoc.io/doc/com.lihaoyi/os-lib_3/latest/api/os/proc.html">os.spawn</a>, saying it's not convenient
 at that point. However, we can do something using <a href="https://github.com/scala/scala-parallel-collections">parallel collections</a>.
 </p>
@@ -538,9 +538,9 @@ The final entry point looks like this:
 </div>
 </div>
 </div>
-<div id="outline-container-org7a6af9b" class="outline-4">
-<h4 id="org7a6af9b">Testing</h4>
-<div class="outline-text-4" id="text-org7a6af9b">
+<div id="outline-container-orgce3c779" class="outline-4">
+<h4 id="orgce3c779">Testing</h4>
+<div class="outline-text-4" id="text-orgce3c779">
 <p>
 I just tried the script after the above changes and I discovered
 that it just hang 😯 🤕
@@ -591,7 +591,7 @@ I tried to use <code>lazy val</code>, but it didn't help as well.
 Maybe I did some errors along the way? missing some import? I don't
 know really. If you have more experience with the library and you
 know where the problem is please let me know. You can
-find the final code in the <a href="#orgfa40d5b">References</a> section.
+find the final code in the <a href="#orge23f669">References</a> section.
 </p>
 
 <p>
@@ -607,23 +607,23 @@ processes' outputs as you might expect in a multi-thread program.
 </div>
 </div>
 </div>
-<div id="outline-container-orgd34d77f" class="outline-3">
-<h3 id="orgd34d77f">Youtube to GIF Script</h3>
-<div class="outline-text-3" id="text-orgd34d77f">
+<div id="outline-container-org6cb7c8d" class="outline-3">
+<h3 id="org6cb7c8d">Youtube to GIF Script</h3>
+<div class="outline-text-3" id="text-org6cb7c8d">
 <p>
 This script also includes some additional code for converting time
 measures, modeling the input of subtitles, subtitle position,
 fonts, cutting of the video, spacing between subtitles,
 and so on. In order to focus only on the library and keep this
 article short, I'll just skip all of that. Please follow the link in
-the <a href="#orgfa40d5b">References</a> section if you are interested.
+the <a href="#orge23f669">References</a> section if you are interested.
 </p>
 </div>
-<div id="outline-container-org1b40987" class="outline-4">
-<h4 id="org1b40987">File Paths</h4>
-<div class="outline-text-4" id="text-org1b40987">
+<div id="outline-container-orgb133f6d" class="outline-4">
+<h4 id="orgb133f6d">File Paths</h4>
+<div class="outline-text-4" id="text-orgb133f6d">
 <p>
-We have already talked about <a href="#org1b40987">File Paths</a> in the previous
+We have already talked about <a href="#orgb133f6d">File Paths</a> in the previous
 section. Here I just share the changes in this specific case.
 </p>
 
@@ -637,9 +637,9 @@ section. Here I just share the changes in this specific case.
 </div>
 </div>
 </div>
-<div id="outline-container-org2f521e0" class="outline-4">
-<h4 id="org2f521e0">File System Functions</h4>
-<div class="outline-text-4" id="text-org2f521e0">
+<div id="outline-container-org1374745" class="outline-4">
+<h4 id="org1374745">File System Functions</h4>
+<div class="outline-text-4" id="text-org1374745">
 <p>
 The <i>Youtube to Gif</i> script takes advantage of more file system
 functions compared to the previous script and here is actually where
@@ -717,9 +717,9 @@ the process and save an additional step.
 </div>
 </div>
 </div>
-<div id="outline-container-org8d21bbe" class="outline-4">
-<h4 id="org8d21bbe">Piping Commands</h4>
-<div class="outline-text-4" id="text-org8d21bbe">
+<div id="outline-container-org836105a" class="outline-4">
+<h4 id="org836105a">Piping Commands</h4>
+<div class="outline-text-4" id="text-org836105a">
 <p>
 In order to download just a specific chunk of the youtube video you need
 to get the direct stream URL, inject it into a non-trivial <code>ffmpeg</code>
@@ -784,9 +784,9 @@ give it a try.
 </p>
 </div>
 </div>
-<div id="outline-container-orga563b29" class="outline-4">
-<h4 id="orga563b29">Testing</h4>
-<div class="outline-text-4" id="text-orga563b29">
+<div id="outline-container-org34a8a67" class="outline-4">
+<h4 id="org34a8a67">Testing</h4>
+<div class="outline-text-4" id="text-org34a8a67">
 <p>
 This time the testing phase didn't bring any unexpected surprises. I
 just had to fix a couple of imprecisions in the way the commands
@@ -821,9 +821,9 @@ have that exposed by the library. A Minor thing by the way.
 <img src="https://www.dropbox.com/s/und6zl8mlvyk9i0/ytai_Buonanotte.mp4?dl=1" alt="Buonanotte by Youtubo">
 </div>
 </div>
-<div id="outline-container-orgfa40d5b" class="outline-3">
-<h3 id="orgfa40d5b">References</h3>
-<div class="outline-text-3" id="text-orgfa40d5b">
+<div id="outline-container-orge23f669" class="outline-3">
+<h3 id="orge23f669">References</h3>
+<div class="outline-text-3" id="text-orge23f669">
 <ul class="org-ul">
 <li><a href="https://gist.github.com/benkio/6fac65fdaec44842712be716f46169e1">convertFilms.sc script</a></li>
 <li><a href="https://gist.github.com/benkio/103960b7b5a5781c222df1c4e31544a2">youtubeToGif.sc script</a></li>

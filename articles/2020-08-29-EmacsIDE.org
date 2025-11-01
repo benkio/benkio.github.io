@@ -26,7 +26,7 @@
 * You Don't Need Metals When You Can Build Your Own (Heavy) Metal
   :PROPERTIES:
   :CUSTOM_ID: Article
-    :HTML_CONTAINER_CLASS: row container p-4
+    :HTML_CONTAINER_CLASS: row container-md py-4 m-auto
   :END:
   *Created: <2020-08-29 Sat>*
 ** Abstract

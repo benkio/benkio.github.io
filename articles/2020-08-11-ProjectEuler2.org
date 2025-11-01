@@ -26,7 +26,7 @@
 * Project Euler 11-20
   :PROPERTIES:
   :CUSTOM_ID: Article
-    :HTML_CONTAINER_CLASS: row container p-4
+    :HTML_CONTAINER_CLASS: row container-md py-4 m-auto
   :END:
   *Created: <2020-08-11 Tue>*
 ** Abstract

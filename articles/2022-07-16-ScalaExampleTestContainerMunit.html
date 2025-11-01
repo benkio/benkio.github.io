@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-11-01 Sat 12:02 -->
+<!-- 2025-11-01 Sat 12:27 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Scala Example: TestContainers and MUnit</title>
@@ -66,7 +66,7 @@
 </div>
 </div>
 </nav>
-<div id="outline-container-Article" class="outline-2 row container p-4">
+<div id="outline-container-Article" class="outline-2 row container-md py-4 m-auto">
 <h2 id="Article">Scala Example: TestContainers and MUnit</h2>
 <div class="outline-text-2" id="text-Article">
 <p>
@@ -95,9 +95,9 @@ Beware the fact that with <a href="https://github.com/scalameta/munit">MUnit</a>
 <h3 id="ArticleContent">Content</h3>
 <div class="outline-text-3" id="text-ArticleContent">
 </div>
-<div id="outline-container-org093a793" class="outline-4">
-<h4 id="org093a793">Dependencies</h4>
-<div class="outline-text-4" id="text-org093a793">
+<div id="outline-container-orgef4dfb4" class="outline-4">
+<h4 id="orgef4dfb4">Dependencies</h4>
+<div class="outline-text-4" id="text-orgef4dfb4">
 <ul class="org-ul">
 <li>Add dependencies to the project and submodules</li>
 <li><p>
@@ -121,9 +121,9 @@ Add <code>Default.itSettings</code> to your project and submodules settings
 </ul>
 </div>
 </div>
-<div id="outline-container-org89288bf" class="outline-4">
-<h4 id="org89288bf">Case 1: Single Test Container</h4>
-<div class="outline-text-4" id="text-org89288bf">
+<div id="outline-container-orgbf1e786" class="outline-4">
+<h4 id="orgbf1e786">Case 1: Single Test Container</h4>
+<div class="outline-text-4" id="text-orgbf1e786">
 <p>
 Most simple case, where you declare a single container in your test
 to use. In the following example a <code>PostgreSQLContainer</code> is shown.
@@ -132,27 +132,27 @@ to use. In the following example a <code>PostgreSQLContainer</code> is shown.
 <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FmyTelegramBot%2Fblob%2F7d13e9470231d27027efc3183cb89e563fe5ccd5%2FbotDB%2Fsrc%2Fit%2Fscala%2Fcom%2Fbenkio%2FbotDB%2FITSpec.scala&style=github&showBorder=on&showCopy=on"></script>
 </div>
 </div>
-<div id="outline-container-orgb34c3b7" class="outline-4">
-<h4 id="orgb34c3b7">Case 2: Docker-Compose</h4>
-<div class="outline-text-4" id="text-orgb34c3b7">
+<div id="outline-container-orgbf647cc" class="outline-4">
+<h4 id="orgbf647cc">Case 2: Docker-Compose</h4>
+<div class="outline-text-4" id="text-orgbf647cc">
 <p>
 Here there's <code>flyway</code> as well to run the migrations. Not necessary for this example.
 </p>
 
 <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FmyTelegramBot%2Fblob%2Fb2fb9d26cb9b9dbc9660374ed90a805e02f5df3e%2FbotDB%2Fdocker-compose.yml&style=github&showBorder=on&showCopy=on"></script>
 </div>
-<div id="outline-container-orgbd4b523" class="outline-5">
-<h5 id="orgbd4b523">Scala Code</h5>
-<div class="outline-text-5" id="text-orgbd4b523">
+<div id="outline-container-org3eef970" class="outline-5">
+<h5 id="org3eef970">Scala Code</h5>
+<div class="outline-text-5" id="text-org3eef970">
 </div>
 <ul class="org-ul">
-<li><a id="org966a5ea"></a>DockerComposeContainer Definition<br />
-<div class="outline-text-6" id="text-org966a5ea">
+<li><a id="orgaff1137"></a>DockerComposeContainer Definition<br />
+<div class="outline-text-6" id="text-orgaff1137">
 <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FmyTelegramBot%2Fblob%2F5177bf67616c1d68ac4c9cddd151e5e28461c205%2FbotDB%2Fsrc%2Fit%2Fscala%2Fcom%2Fbenkio%2FbotDB%2FContainerSuite.scala&style=github&showBorder=on&showCopy=on"></script>
 </div>
 </li>
-<li><a id="org02fc257"></a>Simple MUnit Spec file<br />
-<div class="outline-text-6" id="text-org02fc257">
+<li><a id="org6b44c8a"></a>Simple MUnit Spec file<br />
+<div class="outline-text-6" id="text-org6b44c8a">
 <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FmyTelegramBot%2Fblob%2Fb2fb9d26cb9b9dbc9660374ed90a805e02f5df3e%2FbotDB%2Fsrc%2Fit%2Fscala%2Fcom%2Fbenkio%2FbotDB%2FComposeSpec.scala&style=github&showBorder=on&showCopy=on"></script>
 </div>
 </li>
