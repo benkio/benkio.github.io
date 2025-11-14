@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-11-01 Sat 12:27 -->
+<!-- 2025-11-14 Fri 14:54 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Extract Data From Youtube with `yt-dlp` And `jq`</title>
@@ -97,9 +97,9 @@ we are interested in.
 <h3 id="ArticleContent">Content</h3>
 <div class="outline-text-3" id="text-ArticleContent">
 </div>
-<div id="outline-container-org8648b58" class="outline-4">
-<h4 id="org8648b58">Motivation</h4>
-<div class="outline-text-4" id="text-org8648b58">
+<div id="outline-container-org5e8d648" class="outline-4">
+<h4 id="org5e8d648">Motivation</h4>
+<div class="outline-text-4" id="text-org5e8d648">
 <p>
 It All started with the need to automatically fill the <a href="https://github.com/benkio/sBots">sBots</a> database
 with any new content coming out from YouTube. For details check <a href="https://github.com/benkio/sBots/issues/461">this issue</a>.
@@ -112,9 +112,9 @@ complicated JSON. Fortunately <a href="https://github.com/yt-dlp/yt-dlp">yt-dlp<
 </p>
 </div>
 </div>
-<div id="outline-container-orgfa03a31" class="outline-4">
-<h4 id="orgfa03a31">Get Data from YouTube</h4>
-<div class="outline-text-4" id="text-orgfa03a31">
+<div id="outline-container-org4aea1fb" class="outline-4">
+<h4 id="org4aea1fb">Get Data from YouTube</h4>
+<div class="outline-text-4" id="text-org4aea1fb">
 <p>
 After a brief investigation, we can just run the following command:
 </p>
@@ -158,9 +158,9 @@ re-download them only when they become obsolete, eg 1 month old.
 </p>
 </div>
 </div>
-<div id="outline-container-org4c50306" class="outline-4">
-<h4 id="org4c50306">Get Automatic Caption Data</h4>
-<div class="outline-text-4" id="text-org4c50306">
+<div id="outline-container-org4b5f7d7" class="outline-4">
+<h4 id="org4b5f7d7">Get Automatic Caption Data</h4>
+<div class="outline-text-4" id="text-org4b5f7d7">
 <p>
 Each <a href="2024-09-24-YTDLPJQYoutubeExtraction/video.json">YouTube video JSON</a> also contains a field related to the
 automatic captions where several URLs can be found. Between the
@@ -171,9 +171,9 @@ extension is TXT 🤷
 </p>
 </div>
 </div>
-<div id="outline-container-orga2acfeb" class="outline-4">
-<h4 id="orga2acfeb">Extract Data from the JSON</h4>
-<div class="outline-text-4" id="text-orga2acfeb">
+<div id="outline-container-org211629f" class="outline-4">
+<h4 id="org211629f">Extract Data from the JSON</h4>
+<div class="outline-text-4" id="text-org211629f">
 <p>
 In this section, I'm not gonna dive into the details on how to use
 the <a href="https://jqlang.github.io/jq/">jq</a> command and do another tutorial, but rather I'll explain what
@@ -182,9 +182,9 @@ some specific bits will be explained because particularly
 interesting.
 </p>
 </div>
-<div id="outline-container-org730a13e" class="outline-5">
-<h5 id="org730a13e">YouTube Playlist</h5>
-<div class="outline-text-5" id="text-org730a13e">
+<div id="outline-container-orge7e29f2" class="outline-5">
+<h5 id="orge7e29f2">YouTube Playlist</h5>
+<div class="outline-text-5" id="text-orge7e29f2">
 <p>
 In this case, we have to expand the previous command by generating a
 JSON array this time by traversing the playlist. This can be done
@@ -218,9 +218,9 @@ other formats, only on JSON.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgcc63931" class="outline-5">
-<h5 id="orgcc63931">YouTube Channel</h5>
-<div class="outline-text-5" id="text-orgcc63931">
+<div id="outline-container-org649e44b" class="outline-5">
+<h5 id="org649e44b">YouTube Channel</h5>
+<div class="outline-text-5" id="text-org649e44b">
 <p>
 A <a href="2024-09-24-YTDLPJQYoutubeExtraction/youtubo.json">YouTube Channel's JSON</a> adds one more layer to the previous case
 because we might have multiple "playlists", one for:
@@ -251,9 +251,9 @@ we just have to filter by a different category.
 </p>
 </div>
 </div>
-<div id="outline-container-orgf01cd59" class="outline-5">
-<h5 id="orgf01cd59">Automatic Captions</h5>
-<div class="outline-text-5" id="text-orgf01cd59">
+<div id="outline-container-org7154b9a" class="outline-5">
+<h5 id="org7154b9a">Automatic Captions</h5>
+<div class="outline-text-5" id="text-org7154b9a">
 <p>
 Once we can get the URL for the <code>automatic captions</code> and
 retrieve the JSON, we need to extract the text from it. Here is an
@@ -290,9 +290,9 @@ you want.
 </p>
 </div>
 </div>
-<div id="outline-container-org0db65f4" class="outline-3">
-<h3 id="org0db65f4">References</h3>
-<div class="outline-text-3" id="text-org0db65f4">
+<div id="outline-container-orged36eab" class="outline-3">
+<h3 id="orged36eab">References</h3>
+<div class="outline-text-3" id="text-orged36eab">
 <ul class="org-ul">
 <li><a href="https://github.com/yt-dlp/yt-dlp">yt-dlp repository</a></li>
 <li><a href="https://jqlang.github.io/jq/">jq site</a></li>

@@ -6,16 +6,17 @@
 <!-- 2025-11-14 Fri 14:54 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Advent Of Code 2022</title>
+<title>scala-cli Script to Update All Git Repos</title>
 <meta name="author" content="Enrico Benini" />
-<meta name="description" content="Advent Of Code 2022" />
-<meta name="keywords" content="Advent Of Code 2022" />
+<meta name="description" content="scala-cli Script to Update All Git Repos" />
+<meta name="keywords" content="scala-cli Script to Update All Git Repos" />
 <meta name="generator" content="Org Mode" />
 <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
 <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="../css/main.css">
@@ -44,7 +45,7 @@
 </head>
 <body>
 <div id="content" class="content">
-<h1 class="title">Advent Of Code 2022</h1>
+<h1 class="title">scala-cli Script to Update All Git Repos</h1>
 <nav id="outline-container-navbar" class="outline-2 navbar bg-dark border-bottom border-body navbar-fixed-top navbar-expand-lg bg-body-tertiary">
 <h2 id="navbar">Blog</h2>
 <div class="outline-text-2" id="text-navbar">
@@ -65,47 +66,108 @@
 </div>
 </div>
 </nav>
-<div id="outline-container-Article" class="outline-2 row container-md py-4 m-auto">
-<h2 id="Article">Advent Of Code 2022</h2>
+<div id="outline-container-Article" class="outline-2 row container p-4">
+<h2 id="Article">scala-cli Script to Update All Git Repos</h2>
 <div class="outline-text-2" id="text-Article">
 <p>
-<b>Created: <span class="timestamp-wrapper"><span class="timestamp">&lt;2023-03-25 Sat&gt;</span></span></b>
+<b>Created: <span class="timestamp-wrapper"><span class="timestamp">&lt;2025-11-14 Fri&gt;</span></span></b>
 </p>
 </div>
 <div id="outline-container-ArticleAbstract" class="outline-3">
 <h3 id="ArticleAbstract">Abstract</h3>
 <div class="outline-text-3" id="text-ArticleAbstract">
 <p>
-If you already saw the other Advent of Code pages you know how it goes.
-This time I finished the 2022. Enjoy the screencast.
-</p>
-
-<p>
-You can find all the code in here: <a href="https://github.com/benkio/GeneralExercises/tree/master/AdventOfCode">Advent Of Code
-Repository</a>
+We all have multiple repos on our machine, either for fun or profit,
+and when we have to create a branch from <code>main</code> we often have to
+update it to latest version. Plus, there are orphan remote branch
+references we want to remove here and there. Sure we can do it
+manually, but how about an automated script?
 </p>
 </div>
 </div>
 <div id="outline-container-ArticleContent" class="outline-3">
 <h3 id="ArticleContent">Content</h3>
 <div class="outline-text-3" id="text-ArticleContent">
-<figure>
-  <img src="./2023-03-25-AdventOfCode2022/AdventOfCodeCompleted.png" alt="Completed Screen of Advent of Code" align="left" title="Advent Of Code Completed" class="img-fluid" style="width:100%;"/>
-  <figcaption>Advent of Code Final Screen</figcaption>
-</figure>
+</div>
+<div id="outline-container-org0d171b9" class="outline-4">
+<h4 id="org0d171b9">Manual</h4>
+<div class="outline-text-4" id="text-org0d171b9">
+<p>
+As per abstract, we can do it manually every time we branch by simply
+do:
+</p>
+<ul class="org-ul">
+<li><code>git pull origin main</code></li>
+<li><code>git fetch --prune</code></li>
+</ul>
 
-<br/>
+<p>
+And then branch from there. However, that's tedious and I tend to
+forget about it.
+</p>
 
-<div class="embed-responsive embed-responsive-16by9">
-  <video controls autoplay loop>
-    <source src="./2023-03-25-AdventOfCode2022/AdventOfCodeCalendar.mp4" type="video/mp4">
-  </video>
-</div>
-<p>The Advent of Code Calendar Animation</p>
-</div>
+<p>
+So I thought about a script to navigate my home directory
+recursively in search of git repos, and simply run those
+commands. Nothing more nothing less.
+</p>
 </div>
 </div>
-<div id="outline-container-ShareButtons" class="outline-2 row">
+<div id="outline-container-org83f2c18" class="outline-4">
+<h4 id="org83f2c18">The Script</h4>
+<div class="outline-text-4" id="text-org83f2c18">
+<p>
+With <a href="https://scala-cli.virtuslab.org/">scala-cli</a> we can finally use Scala as scripting language, far
+better then any bash, python or JavaScript in my opinion.
+</p>
+
+<p>
+In addition, with the <a href="https://github.com/com-lihaoyi">lihaoyi</a> libraries ecosystem, we get a convenient
+way to deal with common tasks, such as: SQL, OS IO, HTTP&#x2026;
+</p>
+
+<p>
+In this case, the script is super simple and just uses the <a href="https://github.com/com-lihaoyi/os-lib">os-lib</a>.
+</p>
+
+<script src="https://gist.github.com/benkio/dbb9523529c875b5472a89eb391df7b4.js"></script>
+</div>
+</div>
+<div id="outline-container-org8dc761a" class="outline-4">
+<h4 id="org8dc761a">Improvements</h4>
+<div class="outline-text-4" id="text-org8dc761a">
+<p>
+Sometimes it fails because some repos still use <code>master</code> as branch and
+maybe more git useful commands could be added to tidiness of your
+repos.
+</p>
+
+<p>
+Apart from that it works great to me and I recommend you to have it
+on your machine and run it once in a while. Maybe even with a cron job
+or similar.
+</p>
+
+<p>
+In my case, I added it to my <code>nix</code> configuration. That's a way to be
+sure that it will be there and probably shouldn't be too hard to
+schedule a run every week
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-ArticleConclusions" class="outline-3">
+<h3 id="ArticleConclusions">Conclusions</h3>
+<div class="outline-text-3" id="text-ArticleConclusions">
+<p>
+I hope this showed you how scripting with Scala can be done with a
+practical application. Now go and unleash your power, do your worst
+with scripting.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-ShareButtons" class="outline-2 row container p-4">
 <h2 id="ShareButtons">Share Buttons</h2>
 <div class="outline-text-2" id="text-ShareButtons">
 <!-- AddToAny BEGIN -->
@@ -132,28 +194,9 @@ $(function() {
   document.getElementById("text-navbar").classList.add("container-fluid");
   document.getElementById("outline-container-navbar").setAttribute("data-bs-theme", "dark");
   document.getElementById("text-Article").classList.add("text-center");
-  $('.outline-3').addClass("m-auto").addClass("col-md-10");
-  document.getElementById("text-ShareButtons").classList.add("m-auto", "col-md-10");
+  $('.outline-3').addClass("m-auto").addClass("col-10");
+  document.getElementById("text-ShareButtons").classList.add("m-auto", "col-10");
 </script>
-<div id="disqus_thread"></div>
-<script>
-    /**
-    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-    /*
-    var disqus_config = function () {
-    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-    };
-    */
-    (function() { // DON'T EDIT BELOW THIS LINE
-    var d = document, s = d.createElement('script');
-    s.src = 'https://benkio-github-io.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
 </div>
 </div>

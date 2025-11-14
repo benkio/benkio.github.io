@@ -1,0 +1,132 @@
+#+OPTIONS: num:nil toc:nil H:4
+#+OPTIONS: html-preamble:nil html-postamble:nil html-scripts:t html-style:nil
+#+TITLE: scala-cli Script to Update All Git Repos
+#+DESCRIPTION: scala-cli Script to Update All Git Repos
+#+KEYWORDS: scala-cli Script to Update All Git Repos
+#+CREATOR: Enrico Benini
+#+HTML_HEAD_EXTRA: <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA: <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+#+HTML_HEAD_EXTRA:  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+#+HTML_HEAD_EXTRA: <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+#+HTML_HEAD_EXTRA: <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/main.css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/blog.css">
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" href="../css/article.css">
+
+* Blog
+:PROPERTIES:
+:HTML_CONTAINER: nav
+:HTML_CONTAINER_CLASS: navbar bg-dark border-bottom border-body navbar-fixed-top navbar-expand-lg bg-body-tertiary
+:CUSTOM_ID: navbar
+:END:
+#+CALL: ../templates.org:navbar(1)
+
+* scala-cli Script to Update All Git Repos
+:PROPERTIES:
+:CUSTOM_ID: Article
+:HTML_CONTAINER_CLASS: row container p-4
+:END:
+*Created: <2025-11-14 Fri>*
+** Abstract
+:PROPERTIES:
+:CUSTOM_ID: ArticleAbstract
+:END:
+
+We all have multiple repos on our machine, either for fun or profit,
+and when we have to create a branch from ~main~ we often have to
+update it to latest version. Plus, there are orphan remote branch
+references we want to remove here and there. Sure we can do it
+manually, but how about an automated script?
+
+** Content
+:PROPERTIES:
+:CUSTOM_ID: ArticleContent
+:END:
+
+*** Manual
+As per abstract, we can do it manually every time we branch by simply
+do:
+- ~git pull origin main~
+- ~git fetch --prune~
+
+And then branch from there. However, that's tedious and I tend to
+forget about it.
+
+So I thought about a script to navigate my home directory
+recursively in search of git repos, and simply run those
+commands. Nothing more nothing less.
+
+*** The Script
+
+With [[https://scala-cli.virtuslab.org/][scala-cli]] we can finally use Scala as scripting language, far
+better then any bash, python or JavaScript in my opinion.
+
+In addition, with the [[https://github.com/com-lihaoyi][lihaoyi]] libraries ecosystem, we get a convenient
+way to deal with common tasks, such as: SQL, OS IO, HTTP...
+
+In this case, the script is super simple and just uses the [[https://github.com/com-lihaoyi/os-lib][os-lib]].
+
+#+html: <script src="https://gist.github.com/benkio/dbb9523529c875b5472a89eb391df7b4.js"></script>
+
+*** Improvements
+
+Sometimes it fails because some repos still use ~master~ as branch and
+maybe more git useful commands could be added to tidiness of your
+repos.
+
+Apart from that it works great to me and I recommend you to have it
+on your machine and run it once in a while. Maybe even with a cron job
+or similar.
+
+In my case, I added it to my ~nix~ configuration. That's a way to be
+sure that it will be there and probably shouldn't be too hard to
+schedule a run every week
+
+** Conclusions
+:PROPERTIES:
+:CUSTOM_ID: ArticleConclusions
+:END:
+
+I hope this showed you how scripting with Scala can be done with a
+practical application. Now go and unleash your power, do your worst
+with scripting.
+
+* Share Buttons
+:PROPERTIES:
+:CUSTOM_ID: ShareButtons
+:HTML_CONTAINER_CLASS: row container p-4
+:END:
+#+BEGIN_EXPORT html
+<!-- AddToAny BEGIN -->
+<hr>
+<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+<a class="a2a_button_facebook"></a>
+<a class="a2a_button_twitter"></a>
+<a class="a2a_button_whatsapp"></a>
+<a class="a2a_button_telegram"></a>
+<a class="a2a_button_linkedin"></a>
+<a class="a2a_button_email"></a>
+</div>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+<!-- AddToAny END -->
+#+END_EXPORT
+
+#+begin_export html
+<script type="text/javascript">
+$(function() {
+  $('#text-table-of-contents > ul li').first().css("display", "none");
+  $('#text-table-of-contents > ul li').last().css("display", "none");
+  $('#table-of-contents').addClass("visible-lg")
+});
+  document.getElementById("content").classList.add("container-fluid","p-0");
+  document.getElementById("text-navbar").classList.add("container-fluid");
+  document.getElementById("outline-container-navbar").setAttribute("data-bs-theme", "dark");
+  document.getElementById("text-Article").classList.add("text-center");
+  $('.outline-3').addClass("m-auto").addClass("col-10");
+  document.getElementById("text-ShareButtons").classList.add("m-auto", "col-10");
+</script>
+#+end_export
