@@ -79,24 +79,18 @@ In this case, the script is super simple and just uses the [[https://github.com/
 
   I could have used Typelevel, IO and so on, but I don't see this to evolve much further then that. So no need to add more dependencies in.
 
-*** Possible Improvements
-
-Sometimes it fails because some repos still use ~master~ as branch and
-maybe more git useful commands could be added to tidiness of your
-repos.
-
-Apart from that it works great to me and I recommend you to have it
-on your machine and run it once in a while. Maybe even with a cron job
-or similar.
-
-In my case, I added it to my ~nix~ configuration. That's a way to be
-sure that it will be there and probably shouldn't be too hard to
-schedule a run every week
-
 ** Conclusions
 :PROPERTIES:
 :CUSTOM_ID: ArticleConclusions
 :END:
+
+It works great to me and I recommend you to have it
+on your machine, and run it once in a while. Maybe even with a cron job
+or similar.
+
+In my case, I added it to [[https://github.com/benkio/nix-config/blob/78454ac059053844fceb2191cf4c0bc122cacc4e/homeCommon/gists.nix][my nix configuration]]. That's a way to be
+sure that it will be there and probably shouldn't be too hard to
+schedule a run every week
 
 I hope this showed you how scripting with Scala can be done with a
 practical application. Now go and unleash your power, do your worst

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-12-02 Tue 12:50 -->
+<!-- 2025-12-02 Tue 13:10 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>scala-cli Script to Update All Git Repos</title>
@@ -89,9 +89,9 @@ manually, but how about an automated script?
 <h3 id="ArticleContent">Content</h3>
 <div class="outline-text-3" id="text-ArticleContent">
 </div>
-<div id="outline-container-org902df85" class="outline-4">
-<h4 id="org902df85">Manual</h4>
-<div class="outline-text-4" id="text-org902df85">
+<div id="outline-container-orgbc1c670" class="outline-4">
+<h4 id="orgbc1c670">Manual</h4>
+<div class="outline-text-4" id="text-orgbc1c670">
 <p>
 As per abstract, we can do it manually every time we branch by simply
 do:
@@ -113,9 +113,9 @@ commands. Nothing more nothing less.
 </p>
 </div>
 </div>
-<div id="outline-container-orgba90f2a" class="outline-4">
-<h4 id="orgba90f2a">The Script</h4>
-<div class="outline-text-4" id="text-orgba90f2a">
+<div id="outline-container-org44cf72d" class="outline-4">
+<h4 id="org44cf72d">The Script</h4>
+<div class="outline-text-4" id="text-org44cf72d">
 <p>
 With <a href="https://scala-cli.virtuslab.org/">scala-cli</a> we can finally use Scala as scripting language, far
 better then any bash, python or JavaScript in my opinion.
@@ -133,9 +133,9 @@ In this case, the script is super simple and just uses the <a href="https://gith
 <script src="https://gist.github.com/benkio/dbb9523529c875b5472a89eb391df7b4.js"></script>
 </div>
 </div>
-<div id="outline-container-orgb1c43a8" class="outline-4">
-<h4 id="orgb1c43a8"><span class="timestamp-wrapper"><span class="timestamp">&lt;2025-12-02 Tue&gt; </span></span> - Edit</h4>
-<div class="outline-text-4" id="text-orgb1c43a8">
+<div id="outline-container-orgbb4b8ed" class="outline-4">
+<h4 id="orgbb4b8ed"><span class="timestamp-wrapper"><span class="timestamp">&lt;2025-12-02 Tue&gt; </span></span> - Edit</h4>
+<div class="outline-text-4" id="text-orgbb4b8ed">
 <p>
 As I added it into my <a href="https://github.com/benkio/nix-config/blob/a860ea55ee4fee0bad8b5c2c7b8baf8b074fa164/homeCommon/programs/bash.nix#L14-L24">update alias</a> and it runs every time I update all the system I want it to be more performant.
 </p>
@@ -149,32 +149,22 @@ I could have used Typelevel, IO and so on, but I don't see this to evolve much f
 </p>
 </div>
 </div>
-<div id="outline-container-org831c021" class="outline-4">
-<h4 id="org831c021">Possible Improvements</h4>
-<div class="outline-text-4" id="text-org831c021">
-<p>
-Sometimes it fails because some repos still use <code>master</code> as branch and
-maybe more git useful commands could be added to tidiness of your
-repos.
-</p>
-
-<p>
-Apart from that it works great to me and I recommend you to have it
-on your machine and run it once in a while. Maybe even with a cron job
-or similar.
-</p>
-
-<p>
-In my case, I added it to my <code>nix</code> configuration. That's a way to be
-sure that it will be there and probably shouldn't be too hard to
-schedule a run every week
-</p>
-</div>
-</div>
 </div>
 <div id="outline-container-ArticleConclusions" class="outline-3">
 <h3 id="ArticleConclusions">Conclusions</h3>
 <div class="outline-text-3" id="text-ArticleConclusions">
+<p>
+It works great to me and I recommend you to have it
+on your machine, and run it once in a while. Maybe even with a cron job
+or similar.
+</p>
+
+<p>
+In my case, I added it to <a href="https://github.com/benkio/nix-config/blob/78454ac059053844fceb2191cf4c0bc122cacc4e/homeCommon/gists.nix">my nix configuration</a>. That's a way to be
+sure that it will be there and probably shouldn't be too hard to
+schedule a run every week
+</p>
+
 <p>
 I hope this showed you how scripting with Scala can be done with a
 practical application. Now go and unleash your power, do your worst
