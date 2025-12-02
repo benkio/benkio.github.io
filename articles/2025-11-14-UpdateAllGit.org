@@ -71,7 +71,15 @@ In this case, the script is super simple and just uses the [[https://github.com/
 
 #+html: <script src="https://gist.github.com/benkio/dbb9523529c875b5472a89eb391df7b4.js"></script>
 
-*** Improvements
+*** <2025-12-02 Tue> - Edit
+
+  As I added it into my [[https://github.com/benkio/nix-config/blob/a860ea55ee4fee0bad8b5c2c7b8baf8b074fa164/homeCommon/programs/bash.nix#L14-L24][update alias]] and it runs every time I update all the system I want it to be more performant.
+
+  Therefore, I make the update paraller by using scala `Future`. Now the output it all mixed in, but at least it terminates in seconds (especially if you have quite some repos to update).
+
+  I could have used Typelevel, IO and so on, but I don't see this to evolve much further then that. So no need to add more dependencies in.
+
+*** Possible Improvements
 
 Sometimes it fails because some repos still use ~master~ as branch and
 maybe more git useful commands could be added to tidiness of your
