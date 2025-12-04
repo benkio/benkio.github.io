@@ -29,76 +29,112 @@
 :CUSTOM_ID: Articles
 :HTML_CONTAINER_CLASS: row container-md py-4 m-auto
 :END:
-#+html: <div id='wrap1' data-include="article1"></div>
-#+html: <div id='wrap2' data-include="article2"></div>
-#+html: <div id='wrap3' data-include="article3"></div>
-#+html: <div id='wrap4' data-include="article4"></div>
-#+html: <div id='wrap5' data-include="article5"></div>
-
-#+begin_export html
-<nav>
-  <ul id="pagination" class="pagination">
-  </ul>
-</nav>
-#+end_export
 
 #+CALL: templates.org:articlesRelativePaths()
 
 #+NAME: pagination
 #+BEGIN_SRC javascript :exports none
-const page = ((new URLSearchParams(window.location.search).get('page') || 1) - 1) * 5;
-const perPage = 5;
-for (var i = 0; i < (htmlArticles.length/perPage); i++) {
+  const perPage = 6;
+  const page =
+    ((new URLSearchParams(window.location.search).get("page") || 1) - 1);
+  const rowsPerPage = 2;
+  let articlePerRow = Math.floor(perPage / rowsPerPage);
+  let articlesPerPage = Math.round(htmlArticles.length / perPage);
+
+  for (j = 0; j < rowsPerPage; j++) {
+    $("#text-Articles").append(`<div class="row" id="articlesRow${j}"></div>`);
+  }
+  $("#text-Articles").append(`<nav> <ul id="pagination" class="pagination"> </ul> </nav>`)
+
+  for (var i = 0; i < articlesPerPage; i++) {
     var active = "";
-    if ((page/perPage) == i) {
-        active = "active\" aria-current=\"page";
+    if (page == i) {
+      active = 'active" aria-current="page';
     }
     $("#pagination").append(
-        '<li class="page item ' + active + '"><a class="page-link" href="' + window.location.href.split('?')[0] + '?page=' + (i+1) + '">' + (i+1) + '</a></li>'
+      '<li class="page item ' +
+        active +
+        '"><a class="page-link" href="' +
+        window.location.href.split("?")[0] +
+        "?page=" +
+        (i + 1) +
+        '">' +
+        (i + 1) +
+        "</a></li>",
     );
-}
+
+    let cardRow = Math.floor(i / (rowsPerPage + 1));
+    let cardWidth = 12 / articlePerRow;
+    let cardIndex = page * perPage + i;
+    if (cardIndex < htmlArticles.length) {
+      let card = $(`<div class="col-md-${cardWidth} p-2"></div>`).append(
+        $(
+          `<div id=wrap${i} class="card bg-dark text-white" data-include="article${cardIndex}"></div>`,
+        ).append(
+          `<div class="card-body">
+      <h5 class="card-title"></h5>
+      <p class="card-text"></p>
+      <a href="#" class="stretched-link"></a>
+    </div>`,
+        ),
+      );
+      $(`#articlesRow${cardRow}`).append(card);
+    }
+  }
 #+END_SRC
 #+CALL: templates.org:inline-js(blk="pagination")
 
 #+name: blog_populateArticles
 #+begin_src javascript :exports none
   // Pagination 0 based
-  const htmlArticlesPaginated = htmlArticles.slice(page, page + perPage);
-  const htmlArticlesPathsPaginated = htmlArticlesPaths.slice(page, page + perPage);
+  const htmlArticlesPaginated = htmlArticles.slice(
+    page * perPage,
+    (page * perPage) + perPage,
+  );
+  const htmlArticlesPathsPaginated = htmlArticlesPaths.slice(
+    page * perPage,
+    (page * perPage) + perPage,
+  );
 
-  var articleDivs = $("[data-include]").map(function() { return this.id; });
+  var articleHtmlElements = $("[data-include]").map(function (index, item) {
+    return [
+      [
+        $(item).find(".card-title")[0],
+        $(item).find(".card-text")[0],
+        $(item).find(".stretched-link")[0],
+      ],
+    ];
+  });
 
   var articlesZip = [];
-  var articlesElementsZip = [];
 
   for (var i = 0; i < htmlArticlesPaginated.length; i++) {
-      articlesZip.push([htmlArticlesPaginated[i], htmlArticlesPathsPaginated[i]]);
+    articlesZip.push([
+      articleHtmlElements[i][0],
+      articleHtmlElements[i][1],
+      articleHtmlElements[i][2],
+      $($.parseHTML(htmlArticlesPaginated[i])).find("#Article").text(),
+      $($.parseHTML(htmlArticlesPaginated[i])).find(
+        "#outline-container-ArticleAbstract",
+      ),
+      htmlArticlesPathsPaginated[i],
+    ]);
   }
 
-  var htmlArticlesTitle = articlesZip.map(function(tuple) {
-      const [articleContent, articlePath] = tuple;
-      return $($.parseHTML(articleContent)).find("#Article").wrap(function (){
-          return "<a href='" + articlePath + "'></a>"
-      }).parent();
-  });
-
-  var htmlArticlesAbstract = htmlArticlesPaginated.map(function(articleContent) {
-      return $($.parseHTML(articleContent)).find("#outline-container-ArticleAbstract");
-  });
-
-  for (var i = 0; i < htmlArticlesPaginated.length; i++) {
-      articlesElementsZip.push([articleDivs[i], htmlArticlesTitle[i], htmlArticlesAbstract[i]]);
-  }
-
-  articlesElementsZip.forEach(function(tuple) {
-      const [element, title, abstract] = tuple;
-      $("#" + element).html($('<div>').append(title).append(abstract));
+  articlesZip.forEach(function (tuple) {
+    const [cardTitle, cardText, stretchedLink, title, abstract, path] = tuple;
+      debugger;
+    $(cardTitle).html(title);
+    $(cardText).html(abstract);
+    $(stretchedLink).attr("href", path);
   });
   /* Attributes and classes that I can't add by plain org */
 
-  document.getElementById("content").classList.add("container-fluid","p-0");
+  document.getElementById("content").classList.add("container-fluid", "p-0");
   document.getElementById("text-navbar").classList.add("container-fluid");
-  document.getElementById("outline-container-navbar").setAttribute("data-bs-theme", "dark");
+  document
+    .getElementById("outline-container-navbar")
+    .setAttribute("data-bs-theme", "dark");
   document.getElementById("text-Articles").classList.add("m-auto", "col-md-10");
 #+end_src
 #+call: templates.org:inline-js(blk="blog_populateArticles")

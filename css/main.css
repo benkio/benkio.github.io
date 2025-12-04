@@ -1,93 +1,149 @@
 :root {
-    /*
+  /*
       Color Palette Reference:
       https://colorhunt.co/palette/364f6b3fc1c9f5f5f5fc5185
    */
-    --background-color: #1B262C;
-    --background-code-color: #404040;
-    --background-gray-color: #333;
-    --header-1-color: #3FC1C9;
-    --header-2-color: #FC5185;
-    --enhance-text-color: #F79B72;
-    --text-color: #F5F5F5;
+  --background-color: #1b262c;
+  --background-code-color: #404040;
+  --background-gray-color: #333;
+  --header-1-color: #3fc1c9;
+  --header-2-color: #fc5185;
+  --enhance-text-color: #f79b72;
+  --text-color: #f5f5f5;
 
-    /* Dracula Theme Palette */
-    --dracula-bg:         #282a36;  /* Background */
-    --dracula-fg:         #f8f8f2;  /* Foreground (default text) */
-    --dracula-comment:    #6272a4;  /* Comment */
-    --dracula-cyan:       #8be9fd;  /* Cyan */
-    --dracula-green:      #50fa7b;  /* Green */
-    --dracula-orange:     #ffb86c;  /* Orange */
-    --dracula-pink:       #ff79c6;  /* Pink */
-    --dracula-purple:     #bd93f9;  /* Purple */
-    --dracula-red:        #ff5555;  /* Red */
-    --dracula-yellow:     #f1fa8c;  /* Yellow */
+  /* Dracula Theme Palette */
+  --dracula-bg: #282a36; /* Background */
+  --dracula-fg: #f8f8f2; /* Foreground (default text) */
+  --dracula-comment: #6272a4; /* Comment */
+  --dracula-cyan: #8be9fd; /* Cyan */
+  --dracula-green: #50fa7b; /* Green */
+  --dracula-orange: #ffb86c; /* Orange */
+  --dracula-pink: #ff79c6; /* Pink */
+  --dracula-purple: #bd93f9; /* Purple */
+  --dracula-red: #ff5555; /* Red */
+  --dracula-yellow: #f1fa8c; /* Yellow */
 }
 
-html, body {
-    font: 400 18px Lato, sans-serif;
-    color: var(--text-color);
-    Background: var(--background-color);
-    height: 100%;
+html,
+body {
+  font:
+    400 18px Lato,
+    sans-serif;
+  color: var(--text-color);
+  background: var(--background-color);
+  height: 100%;
 }
-.title { display: none; }
-.underline { text-decoration: underline; }
+.title {
+  display: none;
+}
+.underline {
+  text-decoration: underline;
+}
 
 .outline-2 #sec- {
-    font-size: 1.4em;
+  font-size: 1.4em;
 }
 .outline-3 {
-    line-height: 1.3em;
+  line-height: 1.3em;
+}
+.card-title {
+  color: var(--header-1-color);
+}
+.card {
+  border: solid;
+  border-color: var(--enhance-text-color);
 }
 
-h1, h2 {
-    color: var(--header-1-color);
+h1,
+h2 {
+  color: var(--header-1-color) !;
 }
-h3, h4 {
-    color: var(--header-2-color);
+h3,
+h4 {
+  color: var(--header-2-color);
 }
-b, dt, h5 {
-    color: var(--enhance-text-color);
+b,
+dt,
+h5 {
+  color: var(--enhance-text-color);
 }
 .btn-dark {
   background-color: var(--background-gray-color);
   border-color: var(--header-1-color);
 }
-.btn.focus, .btn:focus, .btn:hover {
+.btn.focus,
+.btn:focus,
+.btn:hover {
   color: var(--enhance-text-color);
   text-decoration: none;
 }
 
 /* CODE */
 .src {
-    background-color: var(--background-code-color);
-    padding: .5rem!important;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    text-align: justify;
+  background-color: var(--background-code-color);
+  padding: 0.5rem !important;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  text-align: justify;
 }
 
 code {
-    background-color: var(--background-code-color);
-    color: var(--text-color);
-    border-radius: 0.3em;
-    padding: 4px 5px 6px;
+  background-color: var(--background-code-color);
+  color: var(--text-color);
+  border-radius: 0.3em;
+  padding: 4px 5px 6px;
 }
 
 /* Code syntax highlighting */
-.org-delimiter      { color: var(--dracula-fg); }
-.org-bracket        { color: var(--dracula-fg); }
-.org-variable-name  { color: var(--dracula-purple); }
-.org-type           { color: var(--dracula-cyan); }
-.org-function-call  { color: var(--dracula-green); }
-.org-number         { color: var(--dracula-orange); }
-.org-property-use   { color: var(--dracula-yellow); }
-.org-builtin        { color: var(--dracula-pink); }
-.org-string         { color: var(--dracula-yellow); }
-.org-operator       { color: var(--dracula-pink); }
-.org-punctuation    { color: var(--dracula-fg); }
-.org-constant       { color: var(--dracula-orange); }
-.org-function-name  { color: var(--dracula-green); }
-.org-variable-use   { color: var(--dracula-purple); }
-.org-keyword        { color: var(--dracula-pink); }
-.org-comment        { color: var(--dracula-comment); }
+.org-delimiter {
+  color: var(--dracula-fg);
+}
+.org-bracket {
+  color: var(--dracula-fg);
+}
+.org-variable-name {
+  color: var(--dracula-purple);
+}
+.org-type {
+  color: var(--dracula-cyan);
+}
+.org-function-call {
+  color: var(--dracula-green);
+}
+.org-number {
+  color: var(--dracula-orange);
+}
+.org-property-use {
+  color: var(--dracula-yellow);
+}
+.org-builtin {
+  color: var(--dracula-pink);
+}
+.org-string {
+  color: var(--dracula-yellow);
+}
+.org-operator {
+  color: var(--dracula-pink);
+}
+.org-punctuation {
+  color: var(--dracula-fg);
+}
+.org-constant {
+  color: var(--dracula-orange);
+}
+.org-function-name {
+  color: var(--dracula-green);
+}
+.org-variable-use {
+  color: var(--dracula-purple);
+}
+.org-keyword {
+  color: var(--dracula-pink);
+}
+.org-comment {
+  color: var(--dracula-comment);
+}
+
+.vh-50 {
+    height: 50vh!important
+}

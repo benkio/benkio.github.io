@@ -36,7 +36,7 @@
   #+BEGIN_EXPORT HTML
   <div class="row align-items-center">
     <div class="col-sm-4 mb-3 mb-sm-0">
-      <div class="card text-center">
+      <div class="card text-center bg-dark text-white">
         <div class="card-body">
           <div class="ratio ratio-4x3">
             <iframe src="https://www.youtube.com/embed/videoseries?si=7T2jEtIYNBoX3y5V&amp;list=PLO1i4nEhzCLaszits0vM6cJJoCIqzTwn7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -46,7 +46,7 @@
       </div>
     </div>
     <div class="col-sm-8">
-      <div class="card">
+      <div class="card bg-dark text-white">
         <div class="card-body">
           <div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://t.me/baldrecommendations" data-iframely-url="//iframely.net/URTbcao?theme=light"></a></div></div><script async src="//iframely.net/embed.js"></script>
         </div>

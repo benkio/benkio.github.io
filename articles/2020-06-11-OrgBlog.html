@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-11-14 Fri 14:54 -->
+<!-- 2025-12-04 Thu 14:27 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Static Personal Website with Org Mode</title>
@@ -211,9 +211,9 @@ page in this way:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-org"><span class="linenr">1: </span>const page = ((new URLSearchParams(window.location.search).get('page') || 1) - 1) * 5;<span class="org-keyword">
-<span class="linenr">2: </span></span>const perPage = 5;<span class="org-keyword">
-<span class="linenr">3: </span></span>for (var i = 0; i &lt; (htmlArticles.length/perPage); i++) {
+<pre class="src src-org"><span class="linenr">1: </span>for (var i = 0; i &lt; articlesPerPage; i++) {<span class="org-keyword">
+<span class="linenr">2: </span></span>  var active = "";<span class="org-keyword">
+<span class="linenr">3: </span></span>  if (page == i) {
 </pre>
 </div>
 
@@ -223,43 +223,45 @@ populate the empty article tags:
 </p>
 
 <p>
-<a id="orge9387e5"></a>
+<a id="orgf4278da"></a>
 </p>
 <div class="org-src-container">
-<pre class="src src-javascript"><span class="linenr"> 1: </span>  <span class="org-keyword">var</span> <span class="org-variable-name">articlesElementsZip</span> = [];
-<span class="linenr"> 2: </span>
-<span class="linenr"> 3: </span>  <span class="org-keyword">for</span> (<span class="org-keyword">var</span> <span class="org-variable-name">i</span> = 0; i &lt; htmlArticlesPaginated.length; i++) {
-<span class="linenr"> 4: </span>      articlesZip.push([htmlArticlesPaginated[i], htmlArticlesPathsPaginated[i]]);
-<span class="linenr"> 5: </span>  }
-<span class="linenr"> 6: </span>
-<span class="linenr"> 7: </span>  <span class="org-keyword">var</span> <span class="org-variable-name">htmlArticlesTitle</span> = articlesZip.map(<span class="org-keyword">function</span>(<span class="org-variable-name">tuple</span>) {
-<span class="linenr"> 8: </span>      <span class="org-keyword">const</span> [<span class="org-variable-name">articleContent</span>, <span class="org-variable-name">articlePath</span>] = tuple;
-<span class="linenr"> 9: </span>      <span class="org-keyword">return</span> $($.parseHTML(articleContent)).find(<span class="org-string">"#Article"</span>).wrap(<span class="org-keyword">function</span> (){
-<span class="linenr">10: </span>          <span class="org-keyword">return</span> <span class="org-string">"&lt;a href='"</span> + articlePath + <span class="org-string">"'&gt;&lt;/a&gt;"</span>
-<span class="linenr">11: </span>      }).parent();
-<span class="linenr">12: </span>  });
-<span class="linenr">13: </span>
-<span class="linenr">14: </span>  <span class="org-keyword">var</span> <span class="org-variable-name">htmlArticlesAbstract</span> = htmlArticlesPaginated.map(<span class="org-keyword">function</span>(<span class="org-variable-name">articleContent</span>) {
-<span class="linenr">15: </span>      <span class="org-keyword">return</span> $($.parseHTML(articleContent)).find(<span class="org-string">"#outline-container-ArticleAbstract"</span>);
-<span class="linenr">16: </span>  });
-<span class="linenr">17: </span>
-<span class="linenr">18: </span>  <span class="org-keyword">for</span> (<span class="org-keyword">var</span> <span class="org-variable-name">i</span> = 0; i &lt; htmlArticlesPaginated.length; i++) {
-<span class="linenr">19: </span>      articlesElementsZip.push([articleDivs[i], htmlArticlesTitle[i], htmlArticlesAbstract[i]]);
-<span class="linenr">20: </span>  }
-<span class="linenr">21: </span>
-<span class="linenr">22: </span>  articlesElementsZip.forEach(<span class="org-keyword">function</span>(<span class="org-variable-name">tuple</span>) {
-<span class="linenr">23: </span>      <span class="org-keyword">const</span> [<span class="org-variable-name">element</span>, <span class="org-variable-name">title</span>, <span class="org-keyword">abstract</span>] = tuple;
-<span class="linenr">24: </span>      $(<span class="org-string">"#"</span> + element).html($(<span class="org-string">'&lt;div&gt;'</span>).append(title).append(<span class="org-keyword">abstract</span>));
-<span class="linenr">25: </span>  });
-<span class="linenr">26: </span>  <span class="org-comment-delimiter">/* </span><span class="org-comment">Attributes and classes that I can't add by plain org</span><span class="org-comment-delimiter"> */</span>
+<pre class="src src-javascript"><span class="linenr"> 1: </span>          <span class="org-string">`&lt;div id=wrap${i} class="card bg-dark text-white" data-include="article${cardIndex}"&gt;&lt;/div&gt;`</span>,
+<span class="linenr"> 2: </span>        ).append(
+<span class="linenr"> 3: </span>          <span class="org-string">`&lt;div class="card-body"&gt;
+<span class="linenr"> 4: </span>      &lt;h5 class="card-title"&gt;&lt;/h5&gt;
+<span class="linenr"> 5: </span>      &lt;p class="card-text"&gt;&lt;/p&gt;
+<span class="linenr"> 6: </span>      &lt;a href="#" class="stretched-link"&gt;&lt;/a&gt;
+<span class="linenr"> 7: </span>    &lt;/div&gt;`</span>,
+<span class="linenr"> 8: </span>        ),
+<span class="linenr"> 9: </span>      );
+<span class="linenr">10: </span>      $(<span class="org-string">`#articlesRow${cardRow}`</span>).append(card);
+<span class="linenr">11: </span>    }
+<span class="linenr">12: </span>  }
+<span class="linenr">13: </span>#+END_SRC
+<span class="linenr">14: </span>#+CALL: templates.org:inline-js(blk=<span class="org-string">"pagination"</span>)
+<span class="linenr">15: </span>
+<span class="linenr">16: </span>#+name: blog_populateArticles
+<span class="linenr">17: </span>#+begin_src javascript :exports none
+<span class="linenr">18: </span>  <span class="org-comment-delimiter">// </span><span class="org-comment">Pagination 0 based
+<span class="linenr">19: </span></span>  <span class="org-keyword">const</span> <span class="org-variable-name">htmlArticlesPaginated</span> = htmlArticles.slice(
+<span class="linenr">20: </span>    page * perPage,
+<span class="linenr">21: </span>    (page * perPage) + perPage,
+<span class="linenr">22: </span>  );
+<span class="linenr">23: </span>  <span class="org-keyword">const</span> <span class="org-variable-name">htmlArticlesPathsPaginated</span> = htmlArticlesPaths.slice(
+<span class="linenr">24: </span>    page * perPage,
+<span class="linenr">25: </span>    (page * perPage) + perPage,
+<span class="linenr">26: </span>  );
 <span class="linenr">27: </span>
-<span class="linenr">28: </span>  document.getElementById(<span class="org-string">"content"</span>).classList.add(<span class="org-string">"container-fluid"</span>,<span class="org-string">"p-0"</span>);
-<span class="linenr">29: </span>  document.getElementById(<span class="org-string">"text-navbar"</span>).classList.add(<span class="org-string">"container-fluid"</span>);
-<span class="linenr">30: </span>  document.getElementById(<span class="org-string">"outline-container-navbar"</span>).setAttribute(<span class="org-string">"data-bs-theme"</span>, <span class="org-string">"dark"</span>);
-<span class="linenr">31: </span>  document.getElementById(<span class="org-string">"text-Articles"</span>).classList.add(<span class="org-string">"m-auto"</span>, <span class="org-string">"col-md-10"</span>);
-<span class="linenr">32: </span>#+end_src
-<span class="linenr">33: </span>#+call: templates.org:inline-js(blk=<span class="org-string">"blog_populateArticles"</span>)
-<span class="linenr">34: </span>#+call: templates.org:compileOrgFiles()
+<span class="linenr">28: </span>  <span class="org-keyword">var</span> <span class="org-variable-name">articleHtmlElements</span> = $(<span class="org-string">"[data-include]"</span>).map(<span class="org-keyword">function</span> (<span class="org-variable-name">index</span>, <span class="org-variable-name">item</span>) {
+<span class="linenr">29: </span>    <span class="org-keyword">return</span> [
+<span class="linenr">30: </span>      [
+<span class="linenr">31: </span>        $(item).find(<span class="org-string">".card-title"</span>)[0],
+<span class="linenr">32: </span>        $(item).find(<span class="org-string">".card-text"</span>)[0],
+<span class="linenr">33: </span>        $(item).find(<span class="org-string">".stretched-link"</span>)[0],
+<span class="linenr">34: </span>      ],
+<span class="linenr">35: </span>    ];
+<span class="linenr">36: </span>  });
 </pre>
 </div>
 
@@ -290,7 +292,7 @@ takes advantage of the same data.
 </p>
 
 <p>
-If you take a look closely at the previous <a href="#orge9387e5">snippet</a> you will see
+If you take a look closely at the previous <a href="#orgf4278da">snippet</a> you will see
 two additional variables, called <code>page</code> and <code>perPage</code>, used to
 slice the starting data arrays to the specific selected
 page. Both of those variables are defined in another snippet, in
@@ -303,20 +305,20 @@ Here you can see the complete js code snippet for the pagination:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-org"><span class="linenr"> 1: </span>    $("#pagination").append(<span class="org-keyword">
-<span class="linenr"> 2: </span></span>        '&lt;li class="page item ' + active + '"&gt;&lt;a class="page-link" href="' + window.location.href.split('?')[0] + '?page=' + (i+1) + '"&gt;' + (i+1) + '&lt;/a&gt;&lt;/li&gt;'<span class="org-keyword">
-<span class="linenr"> 3: </span></span>    );<span class="org-keyword">
-<span class="linenr"> 4: </span></span>}<span class="org-keyword">
-<span class="linenr"> 5: </span></span><span class="org-org-modern-block-name"><span class="org-org-meta-line">SRC</span></span><span class="org-keyword">
-<span class="linenr"> 6: </span></span><span class="org-org-meta-line">CALL: templates.org:inline-js(blk="pagination")</span><span class="org-keyword">
-<span class="linenr"> 7: </span>
-<span class="linenr"> 8: </span></span><span class="org-org-meta-line">name: blog_populateArticles</span><span class="org-keyword">
-<span class="linenr"> 9: </span></span><span class="org-org-modern-block-name">src</span> javascript :exports none<span class="org-keyword">
-<span class="linenr">10: </span></span>  // Pagination 0 based<span class="org-keyword">
-<span class="linenr">11: </span></span>  const htmlArticlesPaginated = htmlArticles.slice(page, page + perPage);<span class="org-keyword">
-<span class="linenr">12: </span></span>  const htmlArticlesPathsPaginated = htmlArticlesPaths.slice(page, page + perPage);<span class="org-keyword">
-<span class="linenr">13: </span>
-<span class="linenr">14: </span></span>  var articleDivs = $("[data-include]").map(function() { return this.id; });
+<pre class="src src-org"><span class="linenr"> 1: </span>    active +<span class="org-keyword">
+<span class="linenr"> 2: </span></span>    '"&gt;&lt;a class="page-link" href="' +<span class="org-keyword">
+<span class="linenr"> 3: </span></span>    window.location.href.split("?")[0] +<span class="org-keyword">
+<span class="linenr"> 4: </span></span>    "?page=" +<span class="org-keyword">
+<span class="linenr"> 5: </span></span>    (i + 1) +<span class="org-keyword">
+<span class="linenr"> 6: </span></span>    '"&gt;' +<span class="org-keyword">
+<span class="linenr"> 7: </span></span>    (i + 1) +<span class="org-keyword">
+<span class="linenr"> 8: </span></span>    "&lt;/a&gt;&lt;/li&gt;",<span class="org-keyword">
+<span class="linenr"> 9: </span></span>);<span class="org-keyword">
+<span class="linenr">10: </span>
+<span class="linenr">11: </span></span>let cardRow = Math.floor(i / (rowsPerPage + 1));<span class="org-keyword">
+<span class="linenr">12: </span></span>let cardWidth = 12 / articlePerRow;<span class="org-keyword">
+<span class="linenr">13: </span></span>let cardIndex = page * perPage + i;<span class="org-keyword">
+<span class="linenr">14: </span></span>if (cardIndex &lt; htmlArticles.length) {
 </pre>
 </div>
 </div>
