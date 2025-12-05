@@ -54,6 +54,11 @@ body {
   border-color: var(--enhance-text-color);
 }
 
+.card-text {
+    max-height: 15rem;
+    overflow: auto;
+}
+
 h1,
 h2 {
   color: var(--header-1-color) !;

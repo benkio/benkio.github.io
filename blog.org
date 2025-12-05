@@ -115,7 +115,7 @@
       articleHtmlElements[i][2],
       $($.parseHTML(htmlArticlesPaginated[i])).find("#Article").text(),
       $($.parseHTML(htmlArticlesPaginated[i])).find(
-        "#outline-container-ArticleAbstract",
+        "#text-ArticleAbstract p",
       ),
       htmlArticlesPathsPaginated[i],
     ]);
