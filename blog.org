@@ -97,7 +97,6 @@
 
   htmlArticlePathsPaginated.forEach((value, index) => {
     let pageUrl = siteOrigin + value.slice(1);
-      console.log(`pageUrl: ${pageUrl}` )
     fetch(pageUrl)
       .then((response) => {
         return response.text();
