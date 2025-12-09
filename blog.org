@@ -46,8 +46,8 @@
   }
   $("#text-Articles").append(`<nav> <ul id="pagination" class="pagination"> </ul> </nav>`)
 
-  for (var i = 0; i < articlesPerPage; i++) {
-    var active = "";
+  for (let i = 0; i < articlesPerPage; i++) {
+    let active = "";
     if (page == i) {
       active = 'active" aria-current="page';
     }
@@ -87,55 +87,38 @@
 #+name: blog_populateArticles
 #+begin_src javascript :exports none
   // Pagination 0 based
-  const siteUrl = "https://benkio.github.io"
-  const htmlArticlesPathsPaginated = htmlArticlesPaths.slice(
+  const siteOrigin = window.location.origin;
+  const htmlArticlePathsPaginated = htmlArticlesPaths.slice(
     page * perPage,
-    (page * perPage) + perPage,
+    page * perPage + perPage,
   );
 
-  var articleHtmlElements = $("[data-include]").map(function (index, item) {
-    return [
-      [
-        $(item).find(".card-title")[0],
-        $(item).find(".card-text")[0],
-        $(item).find(".stretched-link")[0],
-      ],
-    ];
+  const articleHtmlElements = $("[data-include]");
+
+  htmlArticlePathsPaginated.forEach((value, index) => {
+    let pageUrl = siteOrigin + value.slice(1);
+      console.log(`pageUrl: ${pageUrl}` )
+    fetch(pageUrl)
+      .then((response) => {
+        return response.text();
+      })
+      .then((html) => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, "text/html");
+
+        let cardTitle = articleHtmlElements[index].querySelector('.card-title');
+        let cardText = articleHtmlElements[index].querySelector('.card-text');
+        let cardLink = articleHtmlElements[index].querySelector('.stretched-link');
+
+        $(cardTitle).html(doc.querySelector("#Article").innerHTML);
+        $(cardText).html(doc.querySelector("#text-ArticleAbstract p").innerHTML);
+        $(cardLink).attr("href", pageUrl);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch page: ", error);
+      });
   });
 
-  var articlesZip = [];
-
-  for (var i = 0; i < htmlArticlesPathPaginated.length; i++) {
-      var pageUrl = siteUrl + htmlArticlesPathPaginated[i].slice(1)
-      var promise = fetch(pageUrl)
-      .then(response => {
-      return response.text()
-    })
-    .then(html => {
-      const parser = new DOMParser()
-      const doc = parser.parseFromString(html, "text/html")
-      return [
-          articleHtmlElements[i][0],
-          articleHtmlElements[i][1],
-          articleHtmlElements[i][2],
-          doc.querySelector('#Article').innerHTML,
-          doc.querySelector('"#text-ArticleAbstract p"').innerHTML
-          htmlArticlesPathsPaginated[i],
-      ]
-    })
-    .catch(error => {
-       console.error('Failed to fetch page: ', error)
-    })
-    articlesZip.push(promise);
-  }
-
-  await Promise.all(articlesZip).then(function (tuple) {
-    const [cardTitle, cardText, stretchedLink, title, abstract, path] = tuple;
-      debugger;
-    $(cardTitle).html(title);
-    $(cardText).html(abstract);
-    $(stretchedLink).attr("href", path);
-  });
   /* Attributes and classes that I can't add by plain org */
 
   document.getElementById("content").classList.add("container-fluid", "p-0");

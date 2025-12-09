@@ -70,13 +70,13 @@ Look at the org files modified within 4 months and compile them using ~org-twbs-
   (progn
     (defun ListToJsArray (elist varName)
       (setq almostJSVar (seq-reduce (lambda (acc content)(concat acc "\"" content "\"" ",")) elist (concat "var " varName " = ["))
-             almostJSVarLeng (length almostJSVar)
+            almostJSVarLeng (length almostJSVar)
             )
       (concat (substring almostJSVar 0 (- almostJSVarLeng 1)) "];")
       )
     (setq
      filePaths (mapcar (lambda (fileName) (concat "./articles/" fileName))
-                       (directory-files "./articles/" nil "\.html$"))
+                       (directory-files "./articles/" nil "\.html$")))
     (concat
      "<script type=\"text/javascript\">\n"
      (ListToJsArray (reverse filePaths) "htmlArticlesPaths")

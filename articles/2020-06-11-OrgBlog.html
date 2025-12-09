@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-12-04 Thu 14:27 -->
+<!-- 2025-12-09 Tue 11:59 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Static Personal Website with Org Mode</title>
@@ -211,8 +211,8 @@ page in this way:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-org"><span class="linenr">1: </span>for (var i = 0; i &lt; articlesPerPage; i++) {<span class="org-keyword">
-<span class="linenr">2: </span></span>  var active = "";<span class="org-keyword">
+<pre class="src src-org"><span class="linenr">1: </span>for (let i = 0; i &lt; articlesPerPage; i++) {<span class="org-keyword">
+<span class="linenr">2: </span></span>  let active = "";<span class="org-keyword">
 <span class="linenr">3: </span></span>  if (page == i) {
 </pre>
 </div>
@@ -223,7 +223,7 @@ populate the empty article tags:
 </p>
 
 <p>
-<a id="orgf4278da"></a>
+<a id="org9a84ebc"></a>
 </p>
 <div class="org-src-container">
 <pre class="src src-javascript"><span class="linenr"> 1: </span>          <span class="org-string">`&lt;div id=wrap${i} class="card bg-dark text-white" data-include="article${cardIndex}"&gt;&lt;/div&gt;`</span>,
@@ -244,24 +244,24 @@ populate the empty article tags:
 <span class="linenr">16: </span>#+name: blog_populateArticles
 <span class="linenr">17: </span>#+begin_src javascript :exports none
 <span class="linenr">18: </span>  <span class="org-comment-delimiter">// </span><span class="org-comment">Pagination 0 based
-<span class="linenr">19: </span></span>  <span class="org-keyword">const</span> <span class="org-variable-name">htmlArticlesPaginated</span> = htmlArticles.slice(
-<span class="linenr">20: </span>    page * perPage,
-<span class="linenr">21: </span>    (page * perPage) + perPage,
-<span class="linenr">22: </span>  );
-<span class="linenr">23: </span>  <span class="org-keyword">const</span> <span class="org-variable-name">htmlArticlesPathsPaginated</span> = htmlArticlesPaths.slice(
-<span class="linenr">24: </span>    page * perPage,
-<span class="linenr">25: </span>    (page * perPage) + perPage,
-<span class="linenr">26: </span>  );
-<span class="linenr">27: </span>
-<span class="linenr">28: </span>  <span class="org-keyword">var</span> <span class="org-variable-name">articleHtmlElements</span> = $(<span class="org-string">"[data-include]"</span>).map(<span class="org-keyword">function</span> (<span class="org-variable-name">index</span>, <span class="org-variable-name">item</span>) {
-<span class="linenr">29: </span>    <span class="org-keyword">return</span> [
-<span class="linenr">30: </span>      [
-<span class="linenr">31: </span>        $(item).find(<span class="org-string">".card-title"</span>)[0],
-<span class="linenr">32: </span>        $(item).find(<span class="org-string">".card-text"</span>)[0],
-<span class="linenr">33: </span>        $(item).find(<span class="org-string">".stretched-link"</span>)[0],
-<span class="linenr">34: </span>      ],
-<span class="linenr">35: </span>    ];
-<span class="linenr">36: </span>  });
+<span class="linenr">19: </span></span>  <span class="org-keyword">const</span> <span class="org-variable-name">siteOrigin</span> = window.location.origin;
+<span class="linenr">20: </span>  <span class="org-keyword">const</span> <span class="org-variable-name">htmlArticlePathsPaginated</span> = htmlArticlesPaths.slice(
+<span class="linenr">21: </span>    page * perPage,
+<span class="linenr">22: </span>    page * perPage + perPage,
+<span class="linenr">23: </span>  );
+<span class="linenr">24: </span>
+<span class="linenr">25: </span>  <span class="org-keyword">const</span> <span class="org-variable-name">articleHtmlElements</span> = $(<span class="org-string">"[data-include]"</span>);
+<span class="linenr">26: </span>
+<span class="linenr">27: </span>  htmlArticlePathsPaginated.forEach((value, index) =&gt; {
+<span class="linenr">28: </span>    <span class="org-keyword">let</span> <span class="org-variable-name">pageUrl</span> = siteOrigin + value.slice(1);
+<span class="linenr">29: </span>      console.log(<span class="org-string">`pageUrl: ${pageUrl}`</span> )
+<span class="linenr">30: </span>    fetch(pageUrl)
+<span class="linenr">31: </span>      .then((response) =&gt; {
+<span class="linenr">32: </span>        <span class="org-keyword">return</span> response.text();
+<span class="linenr">33: </span>      })
+<span class="linenr">34: </span>      .then((html) =&gt; {
+<span class="linenr">35: </span>        <span class="org-keyword">const</span> <span class="org-variable-name">parser</span> = <span class="org-keyword">new</span> <span class="org-type">DOMParser</span>();
+<span class="linenr">36: </span>        <span class="org-keyword">const</span> <span class="org-variable-name">doc</span> = parser.parseFromString(html, <span class="org-string">"text/html"</span>);
 </pre>
 </div>
 
@@ -292,7 +292,7 @@ takes advantage of the same data.
 </p>
 
 <p>
-If you take a look closely at the previous <a href="#orgf4278da">snippet</a> you will see
+If you take a look closely at the previous <a href="#org9a84ebc">snippet</a> you will see
 two additional variables, called <code>page</code> and <code>perPage</code>, used to
 slice the starting data arrays to the specific selected
 page. Both of those variables are defined in another snippet, in
@@ -318,7 +318,7 @@ Here you can see the complete js code snippet for the pagination:
 <span class="linenr">11: </span></span>let cardRow = Math.floor(i / (rowsPerPage + 1));<span class="org-keyword">
 <span class="linenr">12: </span></span>let cardWidth = 12 / articlePerRow;<span class="org-keyword">
 <span class="linenr">13: </span></span>let cardIndex = page * perPage + i;<span class="org-keyword">
-<span class="linenr">14: </span></span>if (cardIndex &lt; htmlArticles.length) {
+<span class="linenr">14: </span></span>if (cardIndex &lt; htmlArticlesPaths.length) {
 </pre>
 </div>
 </div>
