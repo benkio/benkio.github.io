@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-12-04 Thu 14:27 -->
+<!-- 2025-12-09 Tue 11:59 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>How to Load Sqlite Extension in Scala and Doobie</title>
@@ -85,9 +85,9 @@ In this article I show how you can load a <a href="https://sqlite.org/">Sqlite</
 <h3 id="ArticleContent">Content</h3>
 <div class="outline-text-3" id="text-ArticleContent">
 </div>
-<div id="outline-container-org30a1b43" class="outline-4">
-<h4 id="org30a1b43">Motivation</h4>
-<div class="outline-text-4" id="text-org30a1b43">
+<div id="outline-container-org7095893" class="outline-4">
+<h4 id="org7095893">Motivation</h4>
+<div class="outline-text-4" id="text-org7095893">
 <p>
 <a href="https://github.com/benkio/sbots">In my project</a>, when a message input come, I have to match that
 againg a list of regexp and then select the related response. In the
@@ -133,13 +133,13 @@ what's going on here.
 </p>
 </div>
 </div>
-<div id="outline-container-orgd5904d3" class="outline-4">
-<h4 id="orgd5904d3">Commentary</h4>
-<div class="outline-text-4" id="text-orgd5904d3">
+<div id="outline-container-orgba53b30" class="outline-4">
+<h4 id="orgba53b30">Commentary</h4>
+<div class="outline-text-4" id="text-orgba53b30">
 </div>
-<div id="outline-container-org9c09ba3" class="outline-5">
-<h5 id="org9c09ba3">[0] Setup</h5>
-<div class="outline-text-5" id="text-org9c09ba3">
+<div id="outline-container-org2acf46a" class="outline-5">
+<h5 id="org2acf46a">[0] Setup</h5>
+<div class="outline-text-5" id="text-org2acf46a">
 <ul class="org-ul">
 <li>Dependencies</li>
 <li>Imports</li>
@@ -156,9 +156,9 @@ extension to your file or you won't be able to have a normal Main.
 </p>
 </div>
 </div>
-<div id="outline-container-org67b1998" class="outline-5">
-<h5 id="org67b1998">[1] Built-In Regex</h5>
-<div class="outline-text-5" id="text-org67b1998">
+<div id="outline-container-org47e2bb7" class="outline-5">
+<h5 id="org47e2bb7">[1] Built-In Regex</h5>
+<div class="outline-text-5" id="text-org47e2bb7">
 <p>
 I try the built-in regex from <a href="https://stackoverflow.com/a/5071683">this stackoverflow post</a> and I got:
 </p>
@@ -201,9 +201,9 @@ and load it</a>
 </p>
 </div>
 </div>
-<div id="outline-container-orgc25cee9" class="outline-5">
-<h5 id="orgc25cee9">[2] Change of Direction</h5>
-<div class="outline-text-5" id="text-orgc25cee9">
+<div id="outline-container-org88708a0" class="outline-5">
+<h5 id="org88708a0">[2] Change of Direction</h5>
+<div class="outline-text-5" id="text-org88708a0">
 <p>
 I have never been a fun of C, and compiling gave me errors I couldn't,
 and didn't want, to understand. Therefore, I redirect myself toward
@@ -260,9 +260,9 @@ Unfortunately, I've done another discovery:
 </p>
 </div>
 </div>
-<div id="outline-container-orgb8be962" class="outline-5">
-<h5 id="orgb8be962">[3] Enable Extensions Config</h5>
-<div class="outline-text-5" id="text-orgb8be962">
+<div id="outline-container-org91d0926" class="outline-5">
+<h5 id="org91d0926">[3] Enable Extensions Config</h5>
+<div class="outline-text-5" id="text-org91d0926">
 <p>
 After getting crazy reading <a href="https://github.com/typelevel/doobie">Doobie</a> documentation and more, I realize
  my best bet was to:
@@ -295,9 +295,9 @@ I had to run this command:
 </p>
 </div>
 </div>
-<div id="outline-container-orgb486ce4" class="outline-5">
-<h5 id="orgb486ce4">[4] Load Extension</h5>
-<div class="outline-text-5" id="text-orgb486ce4">
+<div id="outline-container-orgcdb5061" class="outline-5">
+<h5 id="orgcdb5061">[4] Load Extension</h5>
+<div class="outline-text-5" id="text-orgcdb5061">
 <p>
 Pretty straight forward:
 </p>
@@ -317,9 +317,9 @@ Finally It seems the extension is properly loaded!!
 </p>
 </div>
 </div>
-<div id="outline-container-orgb8a81ba" class="outline-5">
-<h5 id="orgb8a81ba">[5] Run Regexp Matching Queries</h5>
-<div class="outline-text-5" id="text-orgb8a81ba">
+<div id="outline-container-org0047e5a" class="outline-5">
+<h5 id="org0047e5a">[5] Run Regexp Matching Queries</h5>
+<div class="outline-text-5" id="text-org0047e5a">
 <p>
 Time to try it!
 Here I needed a <code>WHERE EXISTS</code> inner query as the regexp are stored
@@ -336,9 +336,9 @@ Will it actually be performant? I hope so.
 </p>
 </div>
 </div>
-<div id="outline-container-orgf1eb071" class="outline-5">
-<h5 id="orgf1eb071">[6] Results</h5>
-<div class="outline-text-5" id="text-orgf1eb071">
+<div id="outline-container-org7828ce7" class="outline-5">
+<h5 id="org7828ce7">[6] Results</h5>
+<div class="outline-text-5" id="text-org7828ce7">
 <div class="org-src-container">
 <pre class="src src-scala"><span class="org-comment">// [doobieSqlLiteRegex] result: List(List(), List((baci )?perugina), List(\bm[i]+[a]+[o]+\b), List(\bm[i]+[a]+[o]+\b), List((restiamo|teniamo) in contatto))</span>
 </pre>
@@ -350,9 +350,9 @@ Exactly as expected!! 🎉 🎉
 </div>
 </div>
 </div>
-<div id="outline-container-org237b9fc" class="outline-4">
-<h4 id="org237b9fc">Code</h4>
-<div class="outline-text-4" id="text-org237b9fc">
+<div id="outline-container-orgb22d7bb" class="outline-4">
+<h4 id="orgb22d7bb">Code</h4>
+<div class="outline-text-4" id="text-orgb22d7bb">
 <div class="org-src-container">
 <pre class="src src-scala">  <span class="org-comment">#!/usr/bin/env scala-cli</span>
 //&gt; <span class="org-keyword">using</span> dep org.tpolecat::doobie-core:1.0.0-RC10

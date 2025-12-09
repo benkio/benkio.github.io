@@ -39,15 +39,15 @@
     ((new URLSearchParams(window.location.search).get("page") || 1) - 1);
   const rowsPerPage = 2;
   let articlePerRow = Math.floor(perPage / rowsPerPage);
-  let articlesPerPage = Math.round(htmlArticles.length / perPage);
+  let articlesPerPage = Math.round(htmlArticlesPaths.length / perPage);
 
   for (j = 0; j < rowsPerPage; j++) {
     $("#text-Articles").append(`<div class="row" id="articlesRow${j}"></div>`);
   }
   $("#text-Articles").append(`<nav> <ul id="pagination" class="pagination"> </ul> </nav>`)
 
-  for (var i = 0; i < articlesPerPage; i++) {
-    var active = "";
+  for (let i = 0; i < articlesPerPage; i++) {
+    let active = "";
     if (page == i) {
       active = 'active" aria-current="page';
     }
@@ -66,7 +66,7 @@
     let cardRow = Math.floor(i / (rowsPerPage + 1));
     let cardWidth = 12 / articlePerRow;
     let cardIndex = page * perPage + i;
-    if (cardIndex < htmlArticles.length) {
+    if (cardIndex < htmlArticlesPaths.length) {
       let card = $(`<div class="col-md-${cardWidth} p-2"></div>`).append(
         $(
           `<div id=wrap${i} class="card bg-dark text-white" data-include="article${cardIndex}"></div>`,
@@ -87,47 +87,37 @@
 #+name: blog_populateArticles
 #+begin_src javascript :exports none
   // Pagination 0 based
-  const htmlArticlesPaginated = htmlArticles.slice(
+  const siteOrigin = window.location.origin;
+  const htmlArticlePathsPaginated = htmlArticlesPaths.slice(
     page * perPage,
-    (page * perPage) + perPage,
-  );
-  const htmlArticlesPathsPaginated = htmlArticlesPaths.slice(
-    page * perPage,
-    (page * perPage) + perPage,
+    page * perPage + perPage,
   );
 
-  var articleHtmlElements = $("[data-include]").map(function (index, item) {
-    return [
-      [
-        $(item).find(".card-title")[0],
-        $(item).find(".card-text")[0],
-        $(item).find(".stretched-link")[0],
-      ],
-    ];
+  const articleHtmlElements = $("[data-include]");
+
+  htmlArticlePathsPaginated.forEach((value, index) => {
+    let pageUrl = siteOrigin + value.slice(1);
+    fetch(pageUrl)
+      .then((response) => {
+        return response.text();
+      })
+      .then((html) => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, "text/html");
+
+        let cardTitle = articleHtmlElements[index].querySelector('.card-title');
+        let cardText = articleHtmlElements[index].querySelector('.card-text');
+        let cardLink = articleHtmlElements[index].querySelector('.stretched-link');
+
+        $(cardTitle).html(doc.querySelector("#Article").innerHTML);
+        $(cardText).html(doc.querySelector("#text-ArticleAbstract p").innerHTML);
+        $(cardLink).attr("href", pageUrl);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch page: ", error);
+      });
   });
 
-  var articlesZip = [];
-
-  for (var i = 0; i < htmlArticlesPaginated.length; i++) {
-    articlesZip.push([
-      articleHtmlElements[i][0],
-      articleHtmlElements[i][1],
-      articleHtmlElements[i][2],
-      $($.parseHTML(htmlArticlesPaginated[i])).find("#Article").text(),
-      $($.parseHTML(htmlArticlesPaginated[i])).find(
-        "#text-ArticleAbstract p",
-      ),
-      htmlArticlesPathsPaginated[i],
-    ]);
-  }
-
-  articlesZip.forEach(function (tuple) {
-    const [cardTitle, cardText, stretchedLink, title, abstract, path] = tuple;
-      debugger;
-    $(cardTitle).html(title);
-    $(cardText).html(abstract);
-    $(stretchedLink).attr("href", path);
-  });
   /* Attributes and classes that I can't add by plain org */
 
   document.getElementById("content").classList.add("container-fluid", "p-0");
