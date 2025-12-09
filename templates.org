@@ -77,31 +77,8 @@ Look at the org files modified within 4 months and compile them using ~org-twbs-
     (setq
      filePaths (mapcar (lambda (fileName) (concat "./articles/" fileName))
                        (directory-files "./articles/" nil "\.html$"))
-     fileContents (mapcar (lambda (filePath) (with-temp-buffer
-                                               (insert-file-contents filePath)
-                                               (search-forward "outline-container-Article")
-                                               (beginning-of-line)
-                                               (kill-region (point-min) (point))
-                                               (search-forward "outline-container-ShareButtons")
-                                               (beginning-of-line)
-                                               (kill-region (point) (point-max))
-                                               (goto-char (point-min))
-                                               (replace-string "/" "\\/")
-                                               (goto-char (point-min))
-                                               (replace-string "\n" "")
-                                               (goto-char (point-min))
-                                               (replace-string "'" "\\'")
-                                               (goto-char (point-min))
-                                               (replace-string "\"" "\\\"")
-                                               (buffer-string)
-                                               )
-                            )
-                          filePaths)
-     )
     (concat
      "<script type=\"text/javascript\">\n"
-     (ListToJsArray (reverse fileContents) "htmlArticles")
-     "\n"
      (ListToJsArray (reverse filePaths) "htmlArticlesPaths")
      "\n"
      "</script>")

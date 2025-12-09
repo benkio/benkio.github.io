@@ -39,7 +39,7 @@
     ((new URLSearchParams(window.location.search).get("page") || 1) - 1);
   const rowsPerPage = 2;
   let articlePerRow = Math.floor(perPage / rowsPerPage);
-  let articlesPerPage = Math.round(htmlArticles.length / perPage);
+  let articlesPerPage = Math.round(htmlArticlesPaths.length / perPage);
 
   for (j = 0; j < rowsPerPage; j++) {
     $("#text-Articles").append(`<div class="row" id="articlesRow${j}"></div>`);
@@ -66,7 +66,7 @@
     let cardRow = Math.floor(i / (rowsPerPage + 1));
     let cardWidth = 12 / articlePerRow;
     let cardIndex = page * perPage + i;
-    if (cardIndex < htmlArticles.length) {
+    if (cardIndex < htmlArticlesPaths.length) {
       let card = $(`<div class="col-md-${cardWidth} p-2"></div>`).append(
         $(
           `<div id=wrap${i} class="card bg-dark text-white" data-include="article${cardIndex}"></div>`,
@@ -87,10 +87,7 @@
 #+name: blog_populateArticles
 #+begin_src javascript :exports none
   // Pagination 0 based
-  const htmlArticlesPaginated = htmlArticles.slice(
-    page * perPage,
-    (page * perPage) + perPage,
-  );
+  const siteUrl = "https://benkio.github.io"
   const htmlArticlesPathsPaginated = htmlArticlesPaths.slice(
     page * perPage,
     (page * perPage) + perPage,
@@ -108,20 +105,31 @@
 
   var articlesZip = [];
 
-  for (var i = 0; i < htmlArticlesPaginated.length; i++) {
-    articlesZip.push([
-      articleHtmlElements[i][0],
-      articleHtmlElements[i][1],
-      articleHtmlElements[i][2],
-      $($.parseHTML(htmlArticlesPaginated[i])).find("#Article").text(),
-      $($.parseHTML(htmlArticlesPaginated[i])).find(
-        "#text-ArticleAbstract p",
-      ),
-      htmlArticlesPathsPaginated[i],
-    ]);
+  for (var i = 0; i < htmlArticlesPathPaginated.length; i++) {
+      var pageUrl = siteUrl + htmlArticlesPathPaginated[i].slice(1)
+      var promise = fetch(pageUrl)
+      .then(response => {
+      return response.text()
+    })
+    .then(html => {
+      const parser = new DOMParser()
+      const doc = parser.parseFromString(html, "text/html")
+      return [
+          articleHtmlElements[i][0],
+          articleHtmlElements[i][1],
+          articleHtmlElements[i][2],
+          doc.querySelector('#Article').innerHTML,
+          doc.querySelector('"#text-ArticleAbstract p"').innerHTML
+          htmlArticlesPathsPaginated[i],
+      ]
+    })
+    .catch(error => {
+       console.error('Failed to fetch page: ', error)
+    })
+    articlesZip.push(promise);
   }
 
-  articlesZip.forEach(function (tuple) {
+  await Promise.all(articlesZip).then(function (tuple) {
     const [cardTitle, cardText, stretchedLink, title, abstract, path] = tuple;
       debugger;
     $(cardTitle).html(title);
