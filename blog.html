@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-12-09 Tue 11:59 -->
+<!-- 2025-12-24 Wed 12:52 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Blog</title>
@@ -69,7 +69,7 @@
 <h2 id="Articles">Articles</h2>
 <div class="outline-text-2" id="text-Articles">
 <script type="text/javascript">
-var htmlArticlesPaths = ["./articles/2025-11-14-UpdateAllGit.html","./articles/2025-11-01-DoobieSqliteExtension.html","./articles/2025-10-30-MinimalRegexLength.html","./articles/2025-10-09-GooglePhotosToTelegramTgstorage.html","./articles/2025-10-04-NixOsToWaylandSway.html","./articles/2025-09-26-ActWithNixShellAndPodman.html","./articles/2025-09-01-ScalaSituation.html","./articles/2025-08-09-YoutubeBulkUploadGuide.html","./articles/2025-01-17-AdventOfCode2024.html","./articles/2024-09-24-YTDLPJQYoutubeExtraction.html","./articles/2024-09-23-AdventOfCode2023.html","./articles/2023-12-02-MountErrorWrongFSTypeBadOption.html","./articles/2023-03-25-AdventOfCode2022.html","./articles/2022-10-08-ScriptingOsLib.html","./articles/2022-07-16-ScalaExampleTestContainerMunit.html","./articles/2022-01-12-AdventOfCode2021.html","./articles/2021-12-03-godsThemselvesInstructions.html","./articles/2021-07-04-MusicTalkShow4.html","./articles/2021-06-02-MusicTalkShow3.html","./articles/2021-05-20-MusicTalkShow2.html","./articles/2021-05-13-MusicTalkShow1.html","./articles/2021-03-25-AdventOfCode2016.html","./articles/2021-02-19-PasswordManagerMigration.html","./articles/2021-02-04-NixOs.html","./articles/2021-01-29-NixMigration.html","./articles/2021-01-24-AdventOfCode2015.html","./articles/2020-12-27-AdventOfCode2020.html","./articles/2020-10-03-KenIlGuerrieroChords.html","./articles/2020-08-31-Nettuno.html","./articles/2020-08-29-EmacsIDE.html","./articles/2020-08-11-ProjectEuler2.html","./articles/2020-07-20-ProjectEuler.html","./articles/2020-06-30-GildedRoseKata.html","./articles/2020-06-16-SparkReview.html","./articles/2020-06-11-OrgBlog.html"];
+var htmlArticlesPaths = ["./articles/2025-12-24-AdventOfCode2025.html","./articles/2025-11-14-UpdateAllGit.html","./articles/2025-11-01-DoobieSqliteExtension.html","./articles/2025-10-30-MinimalRegexLength.html","./articles/2025-10-09-GooglePhotosToTelegramTgstorage.html","./articles/2025-10-04-NixOsToWaylandSway.html","./articles/2025-09-26-ActWithNixShellAndPodman.html","./articles/2025-09-01-ScalaSituation.html","./articles/2025-08-09-YoutubeBulkUploadGuide.html","./articles/2025-01-17-AdventOfCode2024.html","./articles/2024-09-24-YTDLPJQYoutubeExtraction.html","./articles/2024-09-23-AdventOfCode2023.html","./articles/2023-12-02-MountErrorWrongFSTypeBadOption.html","./articles/2023-03-25-AdventOfCode2022.html","./articles/2022-10-08-ScriptingOsLib.html","./articles/2022-07-16-ScalaExampleTestContainerMunit.html","./articles/2022-01-12-AdventOfCode2021.html","./articles/2021-12-03-godsThemselvesInstructions.html","./articles/2021-07-04-MusicTalkShow4.html","./articles/2021-06-02-MusicTalkShow3.html","./articles/2021-05-20-MusicTalkShow2.html","./articles/2021-05-13-MusicTalkShow1.html","./articles/2021-03-25-AdventOfCode2016.html","./articles/2021-02-19-PasswordManagerMigration.html","./articles/2021-02-04-NixOs.html","./articles/2021-01-29-NixMigration.html","./articles/2021-01-24-AdventOfCode2015.html","./articles/2020-12-27-AdventOfCode2020.html","./articles/2020-10-03-KenIlGuerrieroChords.html","./articles/2020-08-31-Nettuno.html","./articles/2020-08-29-EmacsIDE.html","./articles/2020-08-11-ProjectEuler2.html","./articles/2020-07-20-ProjectEuler.html","./articles/2020-06-30-GildedRoseKata.html","./articles/2020-06-16-SparkReview.html","./articles/2020-06-11-OrgBlog.html"];
 </script>
 
 <script type="text/javascript">
@@ -134,7 +134,6 @@ const articleHtmlElements = $("[data-include]");
 
 htmlArticlePathsPaginated.forEach((value, index) => {
   let pageUrl = siteOrigin + value.slice(1);
-    console.log(`pageUrl: ${pageUrl}` )
   fetch(pageUrl)
     .then((response) => {
       return response.text();
