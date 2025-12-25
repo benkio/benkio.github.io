@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-12-24 Wed 12:52 -->
+<!-- 2025-12-25 Thu 10:42 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>~act~ with ~nix-shell~ and ~podman~</title>
@@ -100,9 +100,9 @@ Here I show how I did it.
 <h3 id="ArticleContent">Content</h3>
 <div class="outline-text-3" id="text-ArticleContent">
 </div>
-<div id="outline-container-org914501c" class="outline-4">
-<h4 id="org914501c">Tried with Docker</h4>
-<div class="outline-text-4" id="text-org914501c">
+<div id="outline-container-org5357deb" class="outline-4">
+<h4 id="org5357deb">Tried with Docker</h4>
+<div class="outline-text-4" id="text-org5357deb">
 <p>
 My ideas was to use just <code>docker</code> with <code>nix-shell</code> and call <code>act</code>. Everything should work and I go living my life, but of course the life is the enemy and nothing works.
 </p>
@@ -132,9 +132,9 @@ Error: Cannot connect to the Docker daemon at unix:///run/user/1000/docker.sock.
 </pre>
 </div>
 </div>
-<div id="outline-container-orgb4b00bd" class="outline-5">
-<h5 id="orgb4b00bd">Docker Rootless</h5>
-<div class="outline-text-5" id="text-orgb4b00bd">
+<div id="outline-container-org4925ed2" class="outline-5">
+<h5 id="org4925ed2">Docker Rootless</h5>
+<div class="outline-text-5" id="text-org4925ed2">
 <p>
 You can't run <code>dockerd</code> rootless right away. I searched on stackoverflow and I found <a href="https://discourse.nixos.org/t/is-there-a-way-to-run-docker-inside-a-nix-shell/46824">this article</a>
 </p>
@@ -160,9 +160,9 @@ I give up with docker on the fly. Switch to <code>podman</code>
 </div>
 </div>
 </div>
-<div id="outline-container-org5ee0f71" class="outline-4">
-<h4 id="org5ee0f71">Try with Podman</h4>
-<div class="outline-text-4" id="text-org5ee0f71">
+<div id="outline-container-orgcd6db88" class="outline-4">
+<h4 id="orgcd6db88">Try with Podman</h4>
+<div class="outline-text-4" id="text-orgcd6db88">
 <p>
 The package is there and it seems promising from <a href="https://nektosact.com/usage/custom_engine.html">the act documentation</a>, but it doesn't come with a daemon right away, so setting the socket is useless as in the guide.
 </p>
@@ -211,9 +211,9 @@ For reference I get the same error with <code>dockerd-rootless</code>:
 </div>
 </div>
 </div>
-<div id="outline-container-org07eed4b" class="outline-4">
-<h4 id="org07eed4b">Grok AI (last resort)</h4>
-<div class="outline-text-4" id="text-org07eed4b">
+<div id="outline-container-org5560aa2" class="outline-4">
+<h4 id="org5560aa2">Grok AI (last resort)</h4>
+<div class="outline-text-4" id="text-org5560aa2">
 <p>
 Prompt:
 <i>I want to run act on my project with docker or podman, but I don't want to install them, I want to use nix-shell instead to have them available temporarely. How can I do it?</i>
@@ -228,7 +228,7 @@ I get the same error as before
 </p>
 
 
-<div id="org96b5cc9" class="figure">
+<div id="orgaf0a6c0" class="figure">
 <p><img src="https://m.media-amazon.com/images/I/61rEuZFB01L._AC_SX679_.jpg" alt="61rEuZFB01L._AC_SX679_.jpg" class="img-fluid" />
 </p>
 </div>
@@ -271,9 +271,9 @@ The shell.nix is not necessary tho
 </p>
 </div>
 </div>
-<div id="outline-container-orgac64975" class="outline-4">
-<h4 id="orgac64975">Try to run Act finally</h4>
-<div class="outline-text-4" id="text-orgac64975">
+<div id="outline-container-org10a34bc" class="outline-4">
+<h4 id="org10a34bc">Try to run Act finally</h4>
+<div class="outline-text-4" id="text-org10a34bc">
 <p>
 So far so good, but running act gives me permission problems, still ask the AI and it gives me some options such as create a user group etc.
 </p>

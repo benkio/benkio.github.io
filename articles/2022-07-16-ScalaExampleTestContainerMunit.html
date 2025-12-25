@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-12-24 Wed 12:52 -->
+<!-- 2025-12-25 Thu 10:42 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Scala Example: TestContainers and MUnit</title>
@@ -95,9 +95,9 @@ Beware the fact that with <a href="https://github.com/scalameta/munit">MUnit</a>
 <h3 id="ArticleContent">Content</h3>
 <div class="outline-text-3" id="text-ArticleContent">
 </div>
-<div id="outline-container-org4df7dcf" class="outline-4">
-<h4 id="org4df7dcf">Dependencies</h4>
-<div class="outline-text-4" id="text-org4df7dcf">
+<div id="outline-container-org75459eb" class="outline-4">
+<h4 id="org75459eb">Dependencies</h4>
+<div class="outline-text-4" id="text-org75459eb">
 <ul class="org-ul">
 <li>Add dependencies to the project and submodules</li>
 <li><p>
@@ -121,9 +121,9 @@ Add <code>Default.itSettings</code> to your project and submodules settings
 </ul>
 </div>
 </div>
-<div id="outline-container-org2e7082f" class="outline-4">
-<h4 id="org2e7082f">Case 1: Single Test Container</h4>
-<div class="outline-text-4" id="text-org2e7082f">
+<div id="outline-container-org9c97fd7" class="outline-4">
+<h4 id="org9c97fd7">Case 1: Single Test Container</h4>
+<div class="outline-text-4" id="text-org9c97fd7">
 <p>
 Most simple case, where you declare a single container in your test
 to use. In the following example a <code>PostgreSQLContainer</code> is shown.
@@ -132,27 +132,27 @@ to use. In the following example a <code>PostgreSQLContainer</code> is shown.
 <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FmyTelegramBot%2Fblob%2F7d13e9470231d27027efc3183cb89e563fe5ccd5%2FbotDB%2Fsrc%2Fit%2Fscala%2Fcom%2Fbenkio%2FbotDB%2FITSpec.scala&style=github&showBorder=on&showCopy=on"></script>
 </div>
 </div>
-<div id="outline-container-org4e2ed47" class="outline-4">
-<h4 id="org4e2ed47">Case 2: Docker-Compose</h4>
-<div class="outline-text-4" id="text-org4e2ed47">
+<div id="outline-container-orgaa783ae" class="outline-4">
+<h4 id="orgaa783ae">Case 2: Docker-Compose</h4>
+<div class="outline-text-4" id="text-orgaa783ae">
 <p>
 Here there's <code>flyway</code> as well to run the migrations. Not necessary for this example.
 </p>
 
 <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FmyTelegramBot%2Fblob%2Fb2fb9d26cb9b9dbc9660374ed90a805e02f5df3e%2FbotDB%2Fdocker-compose.yml&style=github&showBorder=on&showCopy=on"></script>
 </div>
-<div id="outline-container-orga386f98" class="outline-5">
-<h5 id="orga386f98">Scala Code</h5>
-<div class="outline-text-5" id="text-orga386f98">
+<div id="outline-container-org60a4bf0" class="outline-5">
+<h5 id="org60a4bf0">Scala Code</h5>
+<div class="outline-text-5" id="text-org60a4bf0">
 </div>
 <ul class="org-ul">
-<li><a id="orga4bb49a"></a>DockerComposeContainer Definition<br />
-<div class="outline-text-6" id="text-orga4bb49a">
+<li><a id="orge552d91"></a>DockerComposeContainer Definition<br />
+<div class="outline-text-6" id="text-orge552d91">
 <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FmyTelegramBot%2Fblob%2F5177bf67616c1d68ac4c9cddd151e5e28461c205%2FbotDB%2Fsrc%2Fit%2Fscala%2Fcom%2Fbenkio%2FbotDB%2FContainerSuite.scala&style=github&showBorder=on&showCopy=on"></script>
 </div>
 </li>
-<li><a id="org4271cd6"></a>Simple MUnit Spec file<br />
-<div class="outline-text-6" id="text-org4271cd6">
+<li><a id="org23f8331"></a>Simple MUnit Spec file<br />
+<div class="outline-text-6" id="text-org23f8331">
 <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Fbenkio%2FmyTelegramBot%2Fblob%2Fb2fb9d26cb9b9dbc9660374ed90a805e02f5df3e%2FbotDB%2Fsrc%2Fit%2Fscala%2Fcom%2Fbenkio%2FbotDB%2FComposeSpec.scala&style=github&showBorder=on&showCopy=on"></script>
 </div>
 </li>

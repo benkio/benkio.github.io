@@ -34,7 +34,7 @@
   :CUSTOM_ID: ArticleAbstract
   :END:
 
-  You can find all the code in here: [[https://github.com/benkio/GeneralExercises/tree/master/AdventOfCode][Advent Of Code Repository]]
+  You can find all the code in here: [[https://github.com/benkio/AdventOfCode][Advent Of Code Repository]]
 
 ** Content
   :PROPERTIES:

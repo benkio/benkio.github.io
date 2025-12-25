@@ -40,7 +40,7 @@
   As for the 2020, here you can find the screencast of the calendar
   animated, plus the final congratulation page.
 
-  You can find all the code in here: [[https://github.com/benkio/GeneralExercises/tree/master/AdventOfCode][Advent Of Code
+  You can find all the code in here: [[https://github.com/benkio/AdventOfCode][Advent Of Code
   Repository]]
 
 ** Content

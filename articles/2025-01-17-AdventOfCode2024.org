@@ -40,7 +40,7 @@
   the site dimished the difficulty. At least I didn't have to struggle
   much 😎
 
-  You can find all the code in here: [[https://github.com/benkio/GeneralExercises/tree/master/AdventOfCode][Advent Of Code
+  You can find all the code in here: [[https://github.com/benkio/AdventOfCode][Advent Of Code
   Repository]]
 
 ** Content

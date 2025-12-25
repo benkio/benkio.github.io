@@ -43,7 +43,7 @@
 
   I just did some screenshot and screencast as a memory of the
   experience.
-  You can find all the code in here: [[https://github.com/benkio/GeneralExercises/tree/master/AdventOfCode][Advent Of Code Repository]]
+  You can find all the code in here: [[https://github.com/benkio/AdventOfCode][Advent Of Code Repository]]
 
 ** Content
   :PROPERTIES:
