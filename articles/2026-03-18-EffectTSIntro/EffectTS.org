@@ -1,0 +1,413 @@
+#+OPTIONS: toc:nil num:nil
+#+REVEAL_TRANS: fade
+#+REVEAL_TITLE_SLIDE: <h1>Effect TS Introduction</h1>
+#+HTML_HEAD_EXTRA: <style> .left-text { text-align: left; } .reveal pre { font-size: 0.48em !important; line-height: 1.35 !important; } .reveal ul, .reveal p { margin-top: 0.35em !important; margin-bottom: 0.35em !important; } </style>
+* Audience
+:PROPERTIES:
+:HTML_CONTAINER_CLASS: left-text
+:END:
+✅ If you are new to:
+- Functional Programming
+- Effect System
+- New to ~effect-ts~
+❌ If you know
+- ZIO/Cats Effect
+- Haskell or Similar FP Programming Language
+* Goals
+1. Main Core Concepts
+2. Core Components
+3. Read/Review ~effect-ts~ Code
+4. Write Basic ~effect-ts~ Code
+* When To Use
+Don't.
+
+Better alternatives: Scala, Purescript, Haskell, F#...
+
+In TypeScript, go for it
+* Benefits
+[[file:benefitsEffect.png]]
+* Modeling Side Effects and Referential Transparency
+Exposes at type level computations with side effects
+** Side effectful function
+:PROPERTIES:
+:HTML_CONTAINER_CLASS: left-text
+:END:
+
+❌ Calling this is not the same as its return value/type
+
+💔 Loss of referential transparency
+
+#+begin_src typescript
+  function log(message: string): void {
+      console.log(`Amazing log ${message}`);
+  }
+
+#+end_src
+** Side effectful function with Effect
+
+- ✅ Referential transparency restored.
+- 🆕 Return type
+- ~sync~ for *SAFE* synchronous computation
+- Notice the lambda function parameter
+
+#+begin_src typescript
+  import { Effect } from 'effect';
+
+  function log(message: string): Effect.Effect<void> {
+      return Effect.sync(() => console.log(`Amazing log ${message}`));
+  }
+
+#+end_src
+
+** More On Effect Later
+
+Let's focus on something simpler first
+* Leveraging the type system
+
+Better model several common scenarios
+
+More predictable results
+
+Not only for side effects
+** Example: Exposing Null/Undefined
+
+#+BEGIN_SRC typescript
+  import { Option } from "effect";
+
+  // Before: nullable indexing — easy to get wrong later
+  const rowRaw: string[] | undefined = csvRow[field];
+  // Often: throw/error here, or silently continue with undefined downstream
+  // Caller may forget checks; failures show up indirectly.
+
+  // After: absence is explicit at the type level
+  const row: Option.Option<string[]> =
+    Option.fromNullable(csvRow[field]);
+  // Caller must reduce the Option — harder to ignore
+#+END_SRC
+** More on string | undefined
+
+#+begin_src typescript
+  const mayUsername: string | undefined = "James";
+  const maySurname: string | undefined = undefined;
+
+  const fullName1 = `${mayUsername} ${maySurname}`;
+  console.log(fullName1); // "James undefined" — no compile error
+  // If you want to compose values but some are missing:
+  // - You can't safely resolve missing fields in one step
+  // - Composition is postponed until you've checked everything
+  // - Inference is brittle, especially across JS-heavy dependencies
+#+end_src
+
+* Composition
+** Previous Example
+
+#+begin_src typescript
+import { Option } from "effect"
+
+const maybeName: Option.Option<string> = Option.some("John")
+const maybeAge: Option.Option<number> = Option.none()
+
+const ageName : Option.Option<string> = Option.zipWith(maybeName, maybeAge, (name, age) =>
+  `${age} - ${name}`
+)
+
+// Since maybeAge is a None, the result will also be None
+console.log(ageName);
+#+end_src
+** Not That Impressive For Now
+:PROPERTIES:
+:HTML_CONTAINER_CLASS: left-text
+:END:
+~Effect~ provides several composition patterns
+
+The real benefits:
+- same, consistent, operations across several data types
+- you can compose operations together
+
+** Most Common Composition Patterns
+*** Pipe - Pure Composition
+no side effects, primary types computations
+#+begin_src fundamental
+┌───────┐    ┌───────┐    ┌───────┐    ┌───────┐    ┌───────┐    ┌────────┐
+│ input │───►│ func1 │───►│ func2 │───►│  ...  │───►│ funcN │───►│ result │
+└───────┘    └───────┘    └───────┘    └───────┘    └───────┘    └────────┘
+#+end_src
+#+begin_src typescript
+import { pipe } from "effect"
+
+// Define simple arithmetic operations
+const increment = (x: number) => x + 1
+const double = (x: number) => x * 2
+const subtractTen = (x: number) => x - 10
+
+// Sequentially apply these operations using `pipe`
+const result = pipe(5, increment, double, subtractTen)
+
+console.log(result)
+// Output: 2
+#+end_src
+*** Map - Pure Computation Over "Context"
+
+If you want to transform the result of the computation.
+
+Similar to ~Promise.then~, but only with pure computations
+
+#+begin_src typescript
+  // No side effects inside the "then"
+  fetch("https://example.org/products.json").then((product) => product.price);
+#+end_src
+
+let's see some examples
+
+**** Example Option
+#+begin_src typescript
+  import { Option, pipe } from "effect";
+
+  const mappedOption: Option.Option<number> = pipe(
+    Option.some(42),
+    Option.map((x: number) => x * 2),
+  );
+  // { _id: 'Option', _tag: 'Some', value: 84 }
+  console.log(mappedOption);
+  // 84
+  console.log(Option.getOrElse(mappedOption, () => 69));
+#+end_src
+**** Example Effect
+#+begin_src typescript
+  import { Effect, pipe } from "effect";
+
+  const mappedEffect: Effect.Effect<string> = pipe(
+    Effect.succeed("data"),
+    Effect.map((x: string) => `Awesome ${x}`),
+  );
+  // Awesome data
+  console.log(Effect.runSync(mappedEffect));
+#+end_src
+
+*** andThen
+I don't care about your result
+
+After that effect, do this
+
+#+begin_src typescript
+  import { Effect, pipe } from "effect";
+
+  // Notice the return type!
+  const mappedEffect: Effect.Effect<void> = pipe(
+    Effect.succeed("data"),
+    // works on pure functions as well. Multiple overloads
+    Effect.andThen(() => Effect.sync(() => console.log(`Finished`))),
+  );
+  // Prints:  Finished
+  // Returns: Undefined
+  console.log(Effect.runSync(mappedEffect));
+#+end_src
+
+*** Zip Right/Left
+~zipRight~ Very similar to ~Promise.then~
+
+You can decide which value to keep and what to discard. Both Effects are performed
+
+#+begin_src typescript
+  import { Effect, pipe } from "effect";
+
+  // Exact same example as before
+  const mappedEffect: Effect.Effect<void> = pipe(
+    Effect.succeed("data"),
+    Effect.zipRight(Effect.sync(() => console.log(`Finished`))),
+  );
+
+  console.log(Effect.runSync(mappedEffect));
+#+end_src
+
+*** Tap
+- Run a side-effect
+- Value flowing through ~pipe~ stays available for the next step
+#+begin_src typescript
+  import { Effect, pipe } from "effect";
+
+  const traced: Effect.Effect<string> = pipe(
+    Effect.succeed("data"),
+    Effect.tap(Effect.sync(() => console.log("In progress"))),
+    Effect.map((data: string) => `awesome ${data}`),
+  );
+  // In progress  — log from tap runs first
+  // awesome data — final mapped value
+  console.log(Effect.runSync(traced));
+#+end_src
+
+*** FlatMap - Chain of Effects
+~Promise.then((v) => AnotherPromise)~
+#+begin_src typescript
+  import { Effect, pipe } from "effect";
+
+  const mappedEffect: Effect.Effect<void> = pipe(
+    Effect.succeed("data"),
+    Effect.tap(Effect.sync(() => console.log(`In progress`))),
+    Effect.flatMap((data: string) =>
+      Effect.sync(() => console.log(`awesome ${data}`)),
+    ),
+  );
+  // Prints: In progress → awesome data → Finished
+  // Returns undefined
+#+end_src
+
+** Composition At Scale
+*** Back To Callback Hell!
+#+begin_src typescript
+import { Effect } from "effect"
+
+const program =
+  Effect.succeed(1).pipe(
+    Effect.flatMap(n1 =>
+      Effect.succeed(n1 + 1)
+    ),
+
+    Effect.flatMap(n2 =>
+      Effect.succeed(n2 * 2)
+    ),
+
+    // nested pipeline starts here
+    Effect.flatMap(n3 =>
+      Effect.succeed(n3).pipe(
+        Effect.flatMap(x =>
+          Effect.succeed(x + 10)
+        ),
+        Effect.flatMap(x =>
+          Effect.succeed(x * 3)
+        ),
+        Effect.flatMap(x =>
+          Effect.succeed(x - 5)
+        )
+      )
+    ),
+
+    Effect.flatMap(n4 =>
+      Effect.succeed(n4 / 2)
+    ),
+
+    Effect.flatMap(n5 =>
+      Effect.succeed(n5 + 7)
+    ),
+
+    Effect.flatMap(n6 =>
+      Effect.succeed(`Final result: ${n6}`)
+    )
+  )
+#+end_src
+*** Does It Recall Something?
+#+begin_src typescript
+  connectToDatabase()
+    .then((database) =>
+      getUsers(database)
+        .then((users) =>
+          getUserSettings(database)
+            .then((settings) =>
+              enableAccess(user, settings)
+            ),
+        ),
+    );
+#+end_src
+
+*** Problem Already Solved
+**** Scala for comprehension
+#+begin_src scala
+  for {
+    _ <- logger.logInfo("Access DB")
+    database <- connectToDatabase()
+    _ <- logger.logInfo("Get Users")
+    users <- getUsers(database)
+    _ <- logger.logInfo("Get User Settings")
+    settings <- getUserSettings(database)
+    _ <- logger.logInfo(s"Enable Access to $user")
+    result <- enableAccess(user, settings)
+  } yield result
+#+end_src
+
+**** Haskell do blocks
+#+begin_src haskell
+  do
+    logInfo logger "Access DB"
+    database <- connectToDatabase
+    logInfo logger "Get Users"
+    users <- getUsers database
+    logInfo logger "Get User Settings"
+    settings <- getUserSettings database
+    logInfo logger $ "Enable Access to " ++ show user
+    return (enableAccess user settings)
+#+end_src
+
+**** Async/Await
+#+begin_src typescript
+  async function run() {
+    logger.logInfo('Access DB');
+    const database = await connectToDatabase();
+    logger.logInfo('Get Users');
+    const users = await getUsers(database);
+    logger.logInfo('Get User Settings');
+    const settings = await getUserSettings(database);
+    logger.logInfo(`Enable Access to ${user}`);
+    const result = await enableAccess(user, settings);
+    return result;
+  }
+#+end_src
+
+*** Generators yield* / Do-for comprehension
+#+begin_src typescript
+  // Each step is an effect
+  Effect.gen(function* () {
+    yield* logger.logInfo('Access DB');
+    const database = yield* connectToDatabase();
+    yield* logger.logInfo('Get Users');
+    const users = yield* getUsers(database);
+    yield* logger.logInfo('Get User Settings');
+    const settings = yield* getUserSettings(database);
+    yield* logger.logInfo(`Enable Access to ${user}`);
+    const result = yield* enableAccess(user, settings);
+    return result;
+  })
+#+end_src
+
+** It's Just the Beginning
+- ~all~
+- ~forEach~
+- ~when~ - ~unless~
+- ~whenEffect~ - ~unlessEffect~
+- ~tapError~
+- ~both~
+
+  ...
+* Effect
+The core datatype for impure computations
+
+*** Explicit Dependencies
+*** Expected Error
+*** Defects
+*** Error Handling
+* Architecture
+** Services
+** Layers
+** Errors
+** Dependencies
+* Other Interesting Patterns
+** Retry Before
+[[file:eventuallyNoEffect.png]]
+** Retry After
+[[file:eventuallyEffect.png]]
+* Ecosystem
+* Popular Convenient Data Types
+** Either
+** Match
+*** withReturnType
+*** Exhaustive
+*** Value Match
+*** Type Match
+* Downsides
+** Syntax / Verbosity
+** Type Gymnastics
+** Pretty Stupid AI
+Prefer certain basic patterns (pattern matching)
+* References
+- [[https://zio.dev/][ZIO]]
+- [[https://effect.website/docs/][Effect Colloquial Docs]]
+- [[https://effect-ts.github.io/effect/][Effect Detailed Docs]]
