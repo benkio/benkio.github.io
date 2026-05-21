@@ -407,6 +407,18 @@ The core datatype for impure computations
 ** Type Gymnastics
 ** Pretty Stupid AI
 Prefer certain basic patterns (pattern matching)
+*** Example 1 - Useless Steps
+#+begin_src typescript
+  pipe(
+    ...
+    Stream.zipWithIndex,
+    // Stream.map(
+    //   ([record, rowIndex]: [Record<string, string>, number]): CsvRow => [record, rowIndex],
+    // ),
+    ...
+  )
+#+end_src
+
 * References
 - [[https://zio.dev/][ZIO]]
 - [[https://effect.website/docs/][Effect Colloquial Docs]]
