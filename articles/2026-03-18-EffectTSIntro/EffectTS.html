@@ -21,8 +21,8 @@
 <section id="sec-title-slide"><h1>Effect TS Introduction</h1>
 </section>
 <section>
-<section id="slide-org0433ca8" class="left-text">
-<h2 id="org0433ca8">Audience</h2>
+<section id="slide-orgc0b5f64" class="left-text">
+<h2 id="orgc0b5f64">Audience</h2>
 <p>
 ✅ If you are new to:
 </p>
@@ -43,8 +43,8 @@
 </section>
 </section>
 <section>
-<section id="slide-orgf4df661">
-<h2 id="orgf4df661">Goals</h2>
+<section id="slide-org3eaf523">
+<h2 id="org3eaf523">Goals</h2>
 <ol>
 <li>Main Core Concepts</li>
 <li>Core Components</li>
@@ -55,8 +55,8 @@
 </section>
 </section>
 <section>
-<section id="slide-org9f9f9bb">
-<h2 id="org9f9f9bb">When To Use</h2>
+<section id="slide-org866081a">
+<h2 id="org866081a">When To Use</h2>
 <p>
 Don't.
 </p>
@@ -71,24 +71,24 @@ In TypeScript, go for it
 </section>
 </section>
 <section>
-<section id="slide-orgb158114">
-<h2 id="orgb158114">Benefits</h2>
+<section id="slide-org7df4586">
+<h2 id="org7df4586">Benefits</h2>
 
-<div id="org9754788" class="figure">
+<div id="org329df58" class="figure">
 <p><img src="benefitsEffect.png" alt="benefitsEffect.png" />
 </p>
 </div>
 </section>
 </section>
 <section>
-<section id="slide-org52a8c73">
-<h2 id="org52a8c73">Modeling Side Effects and Referential Transparency</h2>
+<section id="slide-org5d081d4">
+<h2 id="org5d081d4">Modelling Side Effects and Referential Transparency</h2>
 <p>
 Exposes at type level computations with side effects
 </p>
 </section>
-<section id="slide-org8a0930b" class="left-text">
-<h3 id="org8a0930b">Side effectful function</h3>
+<section id="slide-org59a0bb4" class="left-text">
+<h3 id="org59a0bb4">Side effectful function</h3>
 <p>
 ❌ Calling this is not the same as its return value/type
 </p>
@@ -106,8 +106,8 @@ Exposes at type level computations with side effects
 </code></pre>
 </div>
 </section>
-<section id="slide-org5b59401">
-<h3 id="org5b59401">Side effectful function with Effect</h3>
+<section id="slide-org8584476">
+<h3 id="org8584476">Side effectful function with Effect</h3>
 <ul>
 <li>✅ Referential transparency restored.</li>
 <li>🆕 Return type</li>
@@ -127,16 +127,16 @@ Exposes at type level computations with side effects
 </code></pre>
 </div>
 </section>
-<section id="slide-org9224dbf">
-<h3 id="org9224dbf">More On Effect Later</h3>
+<section id="slide-org4c9f93f">
+<h3 id="org4c9f93f">More On Effect Later</h3>
 <p>
 Let's focus on something simpler first
 </p>
 </section>
 </section>
 <section>
-<section id="slide-org1e3b9bc">
-<h2 id="org1e3b9bc">Leveraging the type system</h2>
+<section id="slide-org2b09aab">
+<h2 id="org2b09aab">Leveraging the type system</h2>
 <p>
 Better model several common scenarios
 </p>
@@ -149,8 +149,8 @@ More predictable results
 Not only for side effects
 </p>
 </section>
-<section id="slide-org50db91f">
-<h3 id="org50db91f">Example: Exposing Null/Undefined</h3>
+<section id="slide-orgaa489aa">
+<h3 id="orgaa489aa">Example: Exposing Null/Undefined</h3>
 <div class="org-src-container">
 
 <pre  class="src src-typescript"   ><code trim><span style="color: #F0DFAF; font-weight: bold;">import</span> { <span style="color: #DFAF8F;">Option</span> } <span style="color: #F0DFAF; font-weight: bold;">from</span> <span style="color: #CC9393;">"effect"</span>;
@@ -167,8 +167,8 @@ Not only for side effects
 </code></pre>
 </div>
 </section>
-<section id="slide-orga004164">
-<h3 id="orga004164">More on string | undefined</h3>
+<section id="slide-org195f5fd">
+<h3 id="org195f5fd">More on string | undefined</h3>
 <div class="org-src-container">
 
 <pre  class="src src-typescript"   ><code trim><span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">mayUsername</span>: <span style="color: #7CB8BB;">string</span> | undefined = <span style="color: #CC9393;">"James"</span>;
@@ -185,13 +185,13 @@ console.log(fullName1); <span style="color: #7F9F7F;">// "James undefined" &#821
 </section>
 </section>
 <section>
-<section id="slide-orgc680af1">
-<h2 id="orgc680af1">Composition</h2>
-<div class="outline-text-2" id="text-orgc680af1">
+<section id="slide-org1ec4523">
+<h2 id="org1ec4523">Composition</h2>
+<div class="outline-text-2" id="text-org1ec4523">
 </div>
 </section>
-<section id="slide-org61fd6c7">
-<h3 id="org61fd6c7">Previous Example</h3>
+<section id="slide-orgd4f894f">
+<h3 id="orgd4f894f">Previous Example</h3>
 <div class="org-src-container">
 
 <pre  class="src src-typescript"   ><code trim><span style="color: #F0DFAF; font-weight: bold;">import</span> { <span style="color: #DFAF8F;">Option</span> } <span style="color: #F0DFAF; font-weight: bold;">from</span> <span style="color: #CC9393;">"effect"</span>
@@ -208,8 +208,8 @@ console.log(ageName);
 </code></pre>
 </div>
 </section>
-<section id="slide-org261d4eb" class="left-text">
-<h3 id="org261d4eb">Not That Impressive For Now</h3>
+<section id="slide-orga3bc67f" class="left-text">
+<h3 id="orga3bc67f">Not That Impressive For Now</h3>
 <p>
 <code>Effect</code> provides several composition patterns
 </p>
@@ -223,13 +223,13 @@ The real benefits:
 
 </ul>
 </section>
-<section id="slide-org833020e">
-<h3 id="org833020e">Most Common Composition Patterns</h3>
-<div class="outline-text-3" id="text-org833020e">
+<section id="slide-orge59a2d5">
+<h3 id="orge59a2d5">Most Common Composition Patterns</h3>
+<div class="outline-text-3" id="text-orge59a2d5">
 </div>
 </section>
-<section id="slide-orgb4e01df">
-<h4 id="orgb4e01df">Pipe - Pure Composition</h4>
+<section id="slide-orgd50adbe">
+<h4 id="orgd50adbe">Pipe - Pure Composition</h4>
 <p>
 no side effects, primary types computations
 </p>
@@ -257,8 +257,8 @@ console.log(result)
 </code></pre>
 </div>
 </section>
-<section id="slide-org4b7458d">
-<h4 id="org4b7458d">Map - Pure Computation Over "Context"</h4>
+<section id="slide-org22ec59b">
+<h4 id="org22ec59b">Map - Pure Computation Over "Context"</h4>
 <p>
 If you want to transform the result of the computation.
 </p>
@@ -278,8 +278,8 @@ fetch(<span style="color: #CC9393;">"https://example.org/products.json"</span>).
 let's see some examples
 </p>
 </section>
-<section id="slide-org93fdad3">
-<h5 id="org93fdad3">Example Option</h5>
+<section id="slide-org84da60b">
+<h5 id="org84da60b">Example Option</h5>
 <div class="org-src-container">
 
 <pre  class="src src-typescript"   ><code trim><span style="color: #F0DFAF; font-weight: bold;">import</span> { <span style="color: #DFAF8F;">Option</span>, <span style="color: #DFAF8F;">pipe</span> } <span style="color: #F0DFAF; font-weight: bold;">from</span> <span style="color: #CC9393;">"effect"</span>;
@@ -295,8 +295,8 @@ console.log(Option.getOrElse(mappedOption, () =&gt; <span style="color: #BFEBBF;
 </code></pre>
 </div>
 </section>
-<section id="slide-orge483cf8">
-<h5 id="orge483cf8">Example Effect</h5>
+<section id="slide-org8df4b9f">
+<h5 id="org8df4b9f">Example Effect</h5>
 <div class="org-src-container">
 
 <pre  class="src src-typescript"   ><code trim><span style="color: #F0DFAF; font-weight: bold;">import</span> { <span style="color: #DFAF8F;">Effect</span>, <span style="color: #DFAF8F;">pipe</span> } <span style="color: #F0DFAF; font-weight: bold;">from</span> <span style="color: #CC9393;">"effect"</span>;
@@ -310,8 +310,8 @@ console.log(Effect.runSync(mappedEffect));
 </code></pre>
 </div>
 </section>
-<section id="slide-org67ceb4b">
-<h4 id="org67ceb4b">andThen</h4>
+<section id="slide-org73a18df">
+<h4 id="org73a18df">andThen</h4>
 <p>
 I don't care about your result
 </p>
@@ -336,8 +336,8 @@ console.log(Effect.runSync(mappedEffect));
 </code></pre>
 </div>
 </section>
-<section id="slide-org1704d9f">
-<h4 id="org1704d9f">Zip Right/Left</h4>
+<section id="slide-org9fb9605">
+<h4 id="org9fb9605">Zip Right/Left</h4>
 <p>
 <code>zipRight</code> Very similar to <code>Promise.then</code>
 </p>
@@ -360,8 +360,8 @@ console.log(Effect.runSync(mappedEffect));
 </code></pre>
 </div>
 </section>
-<section id="slide-org000c0c9">
-<h4 id="org000c0c9">Tap</h4>
+<section id="slide-orgc7eee3e">
+<h4 id="orgc7eee3e">Tap</h4>
 <ul>
 <li>Run a side-effect</li>
 <li>Value flowing through <code>pipe</code> stays available for the next step</li>
@@ -382,8 +382,8 @@ console.log(Effect.runSync(traced));
 </code></pre>
 </div>
 </section>
-<section id="slide-org395f30d">
-<h4 id="org395f30d">FlatMap - Chain of Effects</h4>
+<section id="slide-org827da62">
+<h4 id="org827da62">FlatMap - Chain of Effects</h4>
 <p>
 <code>Promise.then((v) =&gt; AnotherPromise)</code>
 </p>
@@ -403,13 +403,13 @@ console.log(Effect.runSync(traced));
 </code></pre>
 </div>
 </section>
-<section id="slide-orgafe098e">
-<h3 id="orgafe098e">Composition At Scale</h3>
-<div class="outline-text-3" id="text-orgafe098e">
+<section id="slide-org84ad05e">
+<h3 id="org84ad05e">Composition At Scale</h3>
+<div class="outline-text-3" id="text-org84ad05e">
 </div>
 </section>
-<section id="slide-org289b06d">
-<h4 id="org289b06d">Back To Callback Hell!</h4>
+<section id="slide-orgd5f77bd">
+<h4 id="orgd5f77bd">Back To Callback Hell!</h4>
 <div class="org-src-container">
 
 <pre  class="src src-typescript"   ><code trim><span style="color: #F0DFAF; font-weight: bold;">import</span> { <span style="color: #DFAF8F;">Effect</span> } <span style="color: #F0DFAF; font-weight: bold;">from</span> <span style="color: #CC9393;">"effect"</span>
@@ -454,8 +454,8 @@ console.log(Effect.runSync(traced));
 </code></pre>
 </div>
 </section>
-<section id="slide-org0788e01">
-<h4 id="org0788e01">Does It Recall Something?</h4>
+<section id="slide-org1f03b7f">
+<h4 id="org1f03b7f">Does It Recall Something?</h4>
 <div class="org-src-container">
 
 <pre  class="src src-typescript"   ><code trim>connectToDatabase()
@@ -471,13 +471,13 @@ console.log(Effect.runSync(traced));
 </code></pre>
 </div>
 </section>
-<section id="slide-orgbbb09cc">
-<h4 id="orgbbb09cc">Problem Already Solved</h4>
-<div class="outline-text-4" id="text-orgbbb09cc">
+<section id="slide-org9cc6798">
+<h4 id="org9cc6798">Problem Already Solved</h4>
+<div class="outline-text-4" id="text-org9cc6798">
 </div>
 </section>
-<section id="slide-org3fe428e">
-<h5 id="org3fe428e">Scala for comprehension</h5>
+<section id="slide-org91915ea">
+<h5 id="org91915ea">Scala for comprehension</h5>
 <div class="org-src-container">
 
 <pre  class="src src-scala"   ><code trim><span style="color: #F0DFAF; font-weight: bold;">for</span> {
@@ -493,8 +493,8 @@ console.log(Effect.runSync(traced));
 </code></pre>
 </div>
 </section>
-<section id="slide-orge2c417c">
-<h5 id="orge2c417c">Haskell do blocks</h5>
+<section id="slide-org080f2f9">
+<h5 id="org080f2f9">Haskell do blocks</h5>
 <div class="org-src-container">
 
 <pre  class="src src-haskell"   ><code trim><span style="color: #F0DFAF; font-weight: bold;">do</span>
@@ -509,8 +509,8 @@ console.log(Effect.runSync(traced));
 </code></pre>
 </div>
 </section>
-<section id="slide-org549731b">
-<h5 id="org549731b">Async/Await</h5>
+<section id="slide-org971367a">
+<h5 id="org971367a">Async/Await</h5>
 <div class="org-src-container">
 
 <pre  class="src src-typescript"   ><code trim><span style="color: #F0DFAF; font-weight: bold;">async</span> <span style="color: #F0DFAF; font-weight: bold;">function</span> <span style="color: #93E0E3;">run</span>() {
@@ -527,8 +527,8 @@ console.log(Effect.runSync(traced));
 </code></pre>
 </div>
 </section>
-<section id="slide-orgd81e377">
-<h4 id="orgd81e377">Generators yield* / Do-for comprehension</h4>
+<section id="slide-orgb3df6b0">
+<h4 id="orgb3df6b0">Generators yield* / Do-for comprehension</h4>
 <div class="org-src-container">
 
 <pre  class="src src-typescript"   ><code trim><span style="color: #7F9F7F;">// Each step is an effect</span>
@@ -546,14 +546,14 @@ Effect.gen(<span style="color: #F0DFAF; font-weight: bold;">function</span>* () 
 </code></pre>
 </div>
 </section>
-<section id="slide-orgc39705c">
-<h3 id="orgc39705c">It's Just the Beginning</h3>
+<section id="slide-orged82a0a">
+<h3 id="orged82a0a">It's Just the Beginning</h3>
 <ul>
 <li><code>all</code></li>
 <li><code>forEach</code></li>
 <li><code>when</code> - <code>unless</code></li>
 <li><code>whenEffect</code> - <code>unlessEffect</code></li>
-<li><code>tapError</code></li>
+<li><code>tapError</code> - <code>mapError</code></li>
 <li><p>
 <code>both</code>
 </p>
@@ -566,118 +566,239 @@ Effect.gen(<span style="color: #F0DFAF; font-weight: bold;">function</span>* () 
 </section>
 </section>
 <section>
-<section id="slide-org7e30caf">
-<h2 id="org7e30caf">Effect</h2>
+<section id="slide-orgb8e2b5a">
+<h2 id="orgb8e2b5a">Effect</h2>
 <p>
-The core datatype for impure computations
+The core datatype for impure computations and beyond
+</p>
+
+<pre  class="example" >
+         ┌─── Represents the success type
+         │        ┌─── Represents the error type
+         │        │      ┌─── Represents required dependencies
+         ▼        ▼      ▼
+Effect&lt;Success, Error, Requirements&gt;
+</pre>
+</section>
+<section id="slide-orgb8a8170">
+<h4 id="orgb8a8170">Dependencies Channel</h4>
+<ul>
+<li>Declare Your Dependencies</li>
+<li>Consider Them Satisfied</li>
+<li>Use Them</li>
+<li><p>
+Provide Them Later
+</p>
+
+<pre  class="example" >
+                         ┌─── Represents required dependencies
+                         ▼
+Effect&lt;Success, Error, Requirements&gt;
+</pre></li>
+
+</ul>
+</section>
+<section id="slide-orgdb70551">
+<h5 id="orgdb70551">Why Does This Works? Lazyness!!!</h5>
+<ul>
+<li>Declare your effects</li>
+<li>Compose and prepare them</li>
+<li><p>
+Run Everything Everywhere All at Once
+</p>
+
+<p>
+<i>at the end of the world</i>
+</p></li>
+
+</ul>
+</section>
+<section id="slide-org23f2252">
+<h5 id="org23f2252">Dependencies Declaration, Retrieval and Usage</h5>
+<ul>
+<li><p>
+Declare a Random class dependency
+</p>
+
+<p>
+Usually a class/interface
+</p></li>
+
+<li>It is fetched it from the context and used</li>
+<li>Where does it come from? 🤷</li>
+
+</ul>
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">program</span>: <span style="color: #7CB8BB;">Effect</span>&lt;<span style="color: #F0DFAF; font-weight: bold;">void</span>, <span style="color: #7CB8BB;">never</span>, <span style="color: #7CB8BB;">Random</span>&gt; = Effect.gen(<span style="color: #F0DFAF; font-weight: bold;">function</span>* () {
+  <span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">random</span> = <span style="color: #F0DFAF; font-weight: bold;">yield</span>* Random
+  <span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">randomNumber</span> = <span style="color: #F0DFAF; font-weight: bold;">yield</span>* random.next
+  console.log(<span style="color: #CC9393;">`random number: </span><span style="color: #DCDCCC;">${</span>randomNumber<span style="color: #DCDCCC;">}</span><span style="color: #CC9393;">`</span>)
+})
+</code></pre>
+</div>
+</section>
+<section id="slide-org568214b">
+<h5 id="org568214b">Dependencies Fulfilment</h5>
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #7F9F7F;">// Providing the implementation</span>
+<span style="color: #7F9F7F;">//</span>
+<span style="color: #7F9F7F;">//      &#9484;&#9472;&#9472;&#9472; Effect&lt;void, never, never&gt;</span>
+<span style="color: #7F9F7F;">//      &#9660;</span>
+<span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">runnable</span> = Effect.provideService(program, Random, {
+  <span style="color: #DFAF8F;">next</span>: Effect.sync(() =&gt; Math.random()),
+});
+
+<span style="color: #7F9F7F;">// Run successfully</span>
+Effect.runPromise(runnable);
+<span style="color: #7F9F7F;">/*
+  Example Output:
+  random number: 0.8241872233134417
+*/</span>
+</code></pre>
+</div>
+</section>
+<section id="slide-orgf182351">
+<h5 id="orgf182351">Benefits</h5>
+<dl>
+<dt>Testability</dt><dd>can swap with mocks</dd>
+<dt>Reasoning</dt><dd>I don't look at the details</dd>
+<dt>Separation of Concerns</dt><dd></dd>
+
+</dl>
+</section>
+<section id="slide-org8905762">
+<h4 id="org8905762">Error Handling Channel</h4>
+<pre  class="example" >
+                  ┌─── Represents the error type
+                  │
+                  ▼
+Effect&lt;Success, Error, Requirements&gt;
+</pre>
+
+<p>
+Do you know really all your errors in advance? 🤔
+</p>
+
+<p>
+No, but I know some.
 </p>
 </section>
-<section id="slide-org0bff3ae">
-<h4 id="org0bff3ae">Explicit Dependencies</h4>
+<section id="slide-org2ec87e1">
+<h5 id="org2ec87e1">Expected Errors</h5>
 </section>
-<section id="slide-org8449e50">
-<h4 id="org8449e50">Expected Error</h4>
+<section id="slide-org4d538a7">
+<h5 id="org4d538a7">Defects</h5>
 </section>
-<section id="slide-orgb1d612e">
-<h4 id="orgb1d612e">Defects</h4>
+<section id="slide-orgfe3115e">
+<h5 id="orgfe3115e">Returning Errors</h5>
 </section>
-<section id="slide-orga00ef57">
-<h4 id="orga00ef57">Error Handling</h4>
+<section id="slide-orgfd4ea70">
+<h5 id="orgfd4ea70">Handlers</h5>
+<div class="outline-text-5" id="text-orgfd4ea70">
+</div>
+</section>
+<section id="slide-orgc73f8d4">
+<h6 id="orgc73f8d4">Expected Errors</h6>
+</section>
+<section id="slide-org8a73c07">
+<h6 id="org8a73c07">Defects</h6>
 </section>
 </section>
 <section>
-<section id="slide-org5f3d009">
-<h2 id="org5f3d009">Architecture</h2>
-<div class="outline-text-2" id="text-org5f3d009">
+<section id="slide-orgbf841a3">
+<h2 id="orgbf841a3">Architecture</h2>
+<div class="outline-text-2" id="text-orgbf841a3">
 </div>
 </section>
-<section id="slide-org23c6c3a">
-<h3 id="org23c6c3a">Services</h3>
+<section id="slide-orgf2f9f63">
+<h3 id="orgf2f9f63">Services</h3>
 </section>
-<section id="slide-orga790117">
-<h3 id="orga790117">Layers</h3>
+<section id="slide-orgb9d3a80">
+<h3 id="orgb9d3a80">Layers</h3>
 </section>
-<section id="slide-org7b85c53">
-<h3 id="org7b85c53">Errors</h3>
+<section id="slide-org1b83ada">
+<h3 id="org1b83ada">Errors</h3>
 </section>
-<section id="slide-orgf450853">
-<h3 id="orgf450853">Dependencies</h3>
+<section id="slide-orge1a43d5">
+<h3 id="orge1a43d5">Dependencies</h3>
 </section>
 </section>
 <section>
-<section id="slide-orgf958ef9">
-<h2 id="orgf958ef9">Other Interesting Patterns</h2>
-<div class="outline-text-2" id="text-orgf958ef9">
+<section id="slide-org681f3cc">
+<h2 id="org681f3cc">Other Interesting Patterns</h2>
+<div class="outline-text-2" id="text-org681f3cc">
 </div>
 </section>
-<section id="slide-org5af8ff8">
-<h3 id="org5af8ff8">Retry Before</h3>
+<section id="slide-org99704c4">
+<h3 id="org99704c4">Retry Before</h3>
 
-<div id="org22992f4" class="figure">
+<div id="org944c1db" class="figure">
 <p><img src="eventuallyNoEffect.png" alt="eventuallyNoEffect.png" />
 </p>
 </div>
 </section>
-<section id="slide-orgb12d614">
-<h3 id="orgb12d614">Retry After</h3>
+<section id="slide-orgf14976e">
+<h3 id="orgf14976e">Retry After</h3>
 
-<div id="org01569b8" class="figure">
+<div id="org8d851f9" class="figure">
 <p><img src="eventuallyEffect.png" alt="eventuallyEffect.png" />
 </p>
 </div>
 </section>
 </section>
 <section>
-<section id="slide-orgb5ecbc4">
-<h2 id="orgb5ecbc4">Ecosystem</h2>
+<section id="slide-orgafa5c5a">
+<h2 id="orgafa5c5a">Ecosystem</h2>
 </section>
 </section>
 <section>
-<section id="slide-org981bbc3">
-<h2 id="org981bbc3">Popular Convenient Data Types</h2>
-<div class="outline-text-2" id="text-org981bbc3">
+<section id="slide-orgfacf00d">
+<h2 id="orgfacf00d">Popular Convenient Data Types</h2>
+<div class="outline-text-2" id="text-orgfacf00d">
 </div>
 </section>
-<section id="slide-org18003f6">
-<h3 id="org18003f6">Either</h3>
+<section id="slide-orgaf5e19b">
+<h3 id="orgaf5e19b">Either</h3>
 </section>
-<section id="slide-org232a973">
-<h3 id="org232a973">Match</h3>
-<div class="outline-text-3" id="text-org232a973">
+<section id="slide-org01bc732">
+<h3 id="org01bc732">Match</h3>
+<div class="outline-text-3" id="text-org01bc732">
 </div>
 </section>
-<section id="slide-org46f57a3">
-<h4 id="org46f57a3">withReturnType</h4>
+<section id="slide-orgcc7ff14">
+<h4 id="orgcc7ff14">withReturnType</h4>
 </section>
-<section id="slide-org93aa582">
-<h4 id="org93aa582">Exhaustive</h4>
+<section id="slide-org0bf95f2">
+<h4 id="org0bf95f2">Exhaustive</h4>
 </section>
-<section id="slide-org7de92d1">
-<h4 id="org7de92d1">Value Match</h4>
+<section id="slide-org97d52f1">
+<h4 id="org97d52f1">Value Match</h4>
 </section>
-<section id="slide-org170cb81">
-<h4 id="org170cb81">Type Match</h4>
+<section id="slide-orgc5af56f">
+<h4 id="orgc5af56f">Type Match</h4>
 </section>
 </section>
 <section>
-<section id="slide-org8cf1b37">
-<h2 id="org8cf1b37">Downsides</h2>
-<div class="outline-text-2" id="text-org8cf1b37">
+<section id="slide-orgda26427">
+<h2 id="orgda26427">Downsides</h2>
+<div class="outline-text-2" id="text-orgda26427">
 </div>
 </section>
-<section id="slide-org103fc2a">
-<h3 id="org103fc2a">Syntax / Verbosity</h3>
+<section id="slide-org59926e7">
+<h3 id="org59926e7">Syntax / Verbosity</h3>
 </section>
-<section id="slide-org80a5fcf">
-<h3 id="org80a5fcf">Type Gymnastics</h3>
+<section id="slide-orge1b94e1">
+<h3 id="orge1b94e1">Type Gymnastics</h3>
 </section>
-<section id="slide-org769fb47">
-<h3 id="org769fb47">Beware of AI</h3>
-<div class="outline-text-3" id="text-org769fb47">
+<section id="slide-orgae1db3b">
+<h3 id="orgae1db3b">Beware of AI</h3>
+<div class="outline-text-3" id="text-orgae1db3b">
 </div>
 </section>
-<section id="slide-orgd9a7a98">
-<h4 id="orgd9a7a98">Example 1 - Useless Steps</h4>
+<section id="slide-org141ccda">
+<h4 id="org141ccda">Example 1 - Useless Steps</h4>
 <div class="org-src-container">
 
 <pre  class="src src-typescript"   ><code trim>pipe(
@@ -691,8 +812,8 @@ The core datatype for impure computations
 </code></pre>
 </div>
 </section>
-<section id="slide-org2d235aa">
-<h4 id="org2d235aa">Example 2 - Love for Option.Match</h4>
+<section id="slide-orgf1c8c2f">
+<h4 id="orgf1c8c2f">Example 2 - Love for Option.Match</h4>
 <ul>
 <li>Rewrite to <code>Option.match</code> unnecessary</li>
 <li><code>ElementNotFound</code> error lost
@@ -702,8 +823,8 @@ The core datatype for impure computations
 </section>
 </section>
 <section>
-<section id="slide-org0ac9975">
-<h2 id="org0ac9975">References</h2>
+<section id="slide-orgee9a90b">
+<h2 id="orgee9a90b">References</h2>
 <ul>
 <li><a href="https://zio.dev/">ZIO</a></li>
 <li><a href="https://effect.website/docs/">Effect Colloquial Docs</a></li>

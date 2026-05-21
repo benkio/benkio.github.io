@@ -26,7 +26,7 @@ Better alternatives: Scala, Purescript, Haskell, F#...
 In TypeScript, go for it
 * Benefits
 [[file:benefitsEffect.png]]
-* Modeling Side Effects and Referential Transparency
+* Modelling Side Effects and Referential Transparency
 Exposes at type level computations with side effects
 ** Side effectful function
 :PROPERTIES:
@@ -373,17 +373,95 @@ const program =
 - ~forEach~
 - ~when~ - ~unless~
 - ~whenEffect~ - ~unlessEffect~
-- ~tapError~
+- ~tapError~ - ~mapError~
 - ~both~
 
   ...
 * Effect
-The core datatype for impure computations
+The core datatype for impure computations and beyond
 
-*** Explicit Dependencies
-*** Expected Error
-*** Defects
-*** Error Handling
+#+begin_src
+         ┌─── Represents the success type
+         │        ┌─── Represents the error type
+         │        │      ┌─── Represents required dependencies
+         ▼        ▼      ▼
+Effect<Success, Error, Requirements>
+#+end_src
+
+*** Dependencies Channel
+- Declare Your Dependencies
+- Consider Them Satisfied
+- Use Them
+- Provide Them Later
+
+  #+begin_src
+                         ┌─── Represents required dependencies
+                         ▼
+Effect<Success, Error, Requirements>
+  #+end_src
+
+**** Why Does This Works? Lazyness!!!
+- Declare your effects
+- Compose and prepare them
+- Run Everything Everywhere All at Once
+
+  /at the end of the world/
+**** Dependencies Declaration, Retrieval and Usage
+- Declare a Random class dependency
+
+  Usually a class/interface
+
+- It is fetched it from the context and used
+- Where does it come from? 🤷
+#+begin_src typescript
+const program: Effect<void, never, Random> = Effect.gen(function* () {
+  const random = yield* Random
+  const randomNumber = yield* random.next
+  console.log(`random number: ${randomNumber}`)
+})
+#+end_src
+
+**** Dependencies Fulfilment
+
+#+begin_src typescript
+  // Providing the implementation
+  //
+  //      ┌─── Effect<void, never, never>
+  //      ▼
+  const runnable = Effect.provideService(program, Random, {
+    next: Effect.sync(() => Math.random()),
+  });
+
+  // Run successfully
+  Effect.runPromise(runnable);
+  /*
+    Example Output:
+    random number: 0.8241872233134417
+  */
+#+end_src
+**** Benefits
+
+- Testability :: can swap with mocks
+- Reasoning :: I don't look at the details
+- Separation of Concerns ::
+
+*** Error Handling Channel
+#+begin_src
+                  ┌─── Represents the error type
+                  │
+                  ▼
+Effect<Success, Error, Requirements>
+#+end_src
+
+Do you know really all your errors in advance? 🤔
+
+No, but I know some.
+**** Expected Errors
+**** Defects
+**** Returning Errors
+**** Handlers
+***** Expected Errors
+***** Defects
 * Architecture
 ** Services
 ** Layers
