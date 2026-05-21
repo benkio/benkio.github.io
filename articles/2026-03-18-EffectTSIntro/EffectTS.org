@@ -405,8 +405,7 @@ The core datatype for impure computations
 * Downsides
 ** Syntax / Verbosity
 ** Type Gymnastics
-** Pretty Stupid AI
-Prefer certain basic patterns (pattern matching)
+** Beware of AI
 *** Example 1 - Useless Steps
 #+begin_src typescript
   pipe(
@@ -419,6 +418,10 @@ Prefer certain basic patterns (pattern matching)
   )
 #+end_src
 
+*** Example 2 - Love for Option.Match
+- Rewrite to ~Option.match~ unnecessary
+- ~ElementNotFound~ error lost
+  [[file:AIEffectOptionMatch.png]]
 * References
 - [[https://zio.dev/][ZIO]]
 - [[https://effect.website/docs/][Effect Colloquial Docs]]
