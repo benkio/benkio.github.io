@@ -1,7 +1,7 @@
 #+OPTIONS: toc:nil num:nil
 #+REVEAL_TRANS: fade
 #+REVEAL_TITLE_SLIDE: <h1>Effect TS Introduction</h1>
-#+HTML_HEAD_EXTRA: <style> .left-text { text-align: left; } .reveal pre { font-size: 0.48em !important; line-height: 1.35 !important; } .reveal ul, .reveal p { margin-top: 0.35em !important; margin-bottom: 0.35em !important; } </style>
+#+REVEAL_EXTRA_CSS: ./EffectTS.css
 * Audience
 :PROPERTIES:
 :HTML_CONTAINER_CLASS: left-text
@@ -102,17 +102,18 @@ Not only for side effects
 ** Previous Example
 
 #+begin_src typescript
-import { Option } from "effect"
+  import { Option } from "effect"
 
-const maybeName: Option.Option<string> = Option.some("John")
-const maybeAge: Option.Option<number> = Option.none()
+  const maybeName: Option.Option<string> = Option.some("John")
+  const maybeAge: Option.Option<number> = Option.none()
 
-const ageName : Option.Option<string> = Option.zipWith(maybeName, maybeAge, (name, age) =>
-  `${age} - ${name}`
-)
+  const ageName : Option.Option<string> =
+    Option.zipWith(maybeName, maybeAge, (name, age) =>
+      `${age} - ${name}`
+  )
 
-// Since maybeAge is a None, the result will also be None
-console.log(ageName);
+  // Since maybeAge is a None, the result will also be None
+  console.log(ageName);
 #+end_src
 ** Not That Impressive For Now
 :PROPERTIES:
@@ -153,8 +154,9 @@ If you want to transform the result of the computation.
 Similar to ~Promise.then~, but only with pure computations
 
 #+begin_src typescript
-  // No side effects inside the "then"
-  fetch("https://example.org/products.json").then((product) => product.price);
+    // No side effects inside the "then"
+    fetch("https://example.org/products.json")
+      .then((product) => product.price);
 #+end_src
 
 let's see some examples
@@ -453,15 +455,59 @@ const program: Effect<void, never, Random> = Effect.gen(function* () {
 Effect<Success, Error, Requirements>
 #+end_src
 
-Do you know really all your errors in advance? 🤔
-
-No, but I know some.
+The ones we /Expect/
 **** Expected Errors
+***** Declare "Tagged" Expected Errors
+
+/Tag/ is used throughout Effect to identify components
+
+More examples later
+
+#+begin_src typescript
+  // Define a custom error type using Data.TaggedError
+  class HttpError extends Data.TaggedError("HttpError")<{
+    cause: unknown;
+  }> {}
+#+end_src
+***** Returning Tagged Errors
+
+#+begin_src typescript
+//      ┌─── Effect<string, HttpError, never>
+//      ▼
+const program = Effect.gen(function* () {
+  // Generate a random number between 0 and 1
+  const n = yield* Random.next
+
+  // Simulate an HTTP error
+  if (n < 0.5) {
+    return yield* Effect.fail(new HttpError())
+  }
+
+  return "some result"
+})
+#+end_src
+
+
+***** Notes
+- Multiple Errors ::
+
+  #+BEGIN_SRC typescript
+    Effect<string, HttpError | ValidationError, never>
+  #+END_SRC
+
+
+- Short Circuiting :: Stop execution upon encountering the first error.
 **** Defects
-**** Returning Errors
+Errors thrown and unexpected:
+- Not visible at type system
+- Part of the /Effect/ type semantic
 **** Handlers
+You can decide what and when to handle.
+
+Just please do it!
 ***** Expected Errors
 ***** Defects
+***** All
 * Architecture
 ** Services
 ** Layers
