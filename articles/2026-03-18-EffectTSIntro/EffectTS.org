@@ -506,8 +506,104 @@ You can decide what and when to handle.
 
 Just please do it!
 ***** Expected Errors
+****** CatchTags
+
+Use the previous error tag to handle it/them
+
+#+begin_src typescript
+  //      ┌─── Effect<string, never, never>
+  //      ▼
+  const recovered2 = program.pipe(
+    Effect.catchTags({
+      HttpError: (_HttpError) => Effect.succeed(`Recovering from HttpError`),
+      ValidationError: (_ValidationError) =>
+        Effect.succeed(`Recovering from ValidationError`),
+    }),
+  );
+#+end_src
 ***** Defects
-***** All
+****** Cause
+
+Store various details such as:
+
+- Unexpected errors or defects
+- Stack and execution traces
+- Reasons for fiber interruptions
+
+****** catchAllCause
+
+#+begin_src typescript
+// Recover from all errors by examining the cause
+const recovered = program.pipe(
+  Effect.catchAllCause((cause) =>
+    Cause.isFailType(cause)
+      ? Effect.succeed("Recovered from a regular error")
+      : Effect.succeed("Recovered from a defect")
+  )
+)
+#+end_src
+****** Exit
+
+- Datatype to signal the termination: =Success= or =Failure=
+- The wrapped error being a =Cause=
+- Subtype of =Effect=
+
+****** Effect.Exit
+
+A way to move the error to the value
+
+#+begin_src typescript
+Effect<A, E, R> -> Effect<Exit<A, E>, never, R>
+#+end_src
+
+****** catchAllDefect - Catch ONLY Defects
+
+#+begin_src typescript
+const program = Effect.catchAllDefect(task, (defect) => {
+  if (Cause.isRuntimeException(defect)) {
+    return Console.log(
+      `RuntimeException defect caught: ${defect.message}`
+    )
+  }
+  return Console.log("Unknown defect caught.")
+})
+#+end_src
+
+***** catchAll
+
+General handler getting a =error : unknown= handler
+
+Hard to know what that error could be
+
+#+begin_src typescript
+//      ┌─── Effect<string, never, never>
+//      ▼
+const recovered = program.pipe(
+  Effect.catchAll((error) =>
+    Effect.succeed(`Recovering from ${error._tag}`)
+  )
+)
+#+end_src
+* Popular Convenient Data Types
+** Either
+- Pure error handling type
+- Similar to =Exit= but for any type
+- Composed by:
+  - =Either.Left= (error)
+  - =Either.Right= (value)
+- Has all composition patterns seen before
+- Subtype of =Effect=
+- Use when your computation:
+  - Has no side-effects
+  - Can fail
+** Match
+- For FP coders :: +worse+ Pattern matching
+- For typescripters :: Better =switch=
+*** Value Match
+*** Type Match
+*** withReturnType
+*** Exhaustive
+** Stream
 * Architecture
 ** Services
 ** Layers
@@ -519,13 +615,6 @@ Just please do it!
 ** Retry After
 [[file:eventuallyEffect.png]]
 * Ecosystem
-* Popular Convenient Data Types
-** Either
-** Match
-*** withReturnType
-*** Exhaustive
-*** Value Match
-*** Type Match
 * Downsides
 ** Syntax / Verbosity
 ** Type Gymnastics
