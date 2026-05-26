@@ -354,7 +354,7 @@ const program =
   }
 #+end_src
 
-*** Generators yield* / Do-for comprehension
+*** Generators yield*
 #+begin_src typescript
   // Each step is an effect
   Effect.gen(function* () {
@@ -369,6 +369,9 @@ const program =
     return result;
   })
 #+end_src
+*** Mention: Do Notation simulation
+
+Very similar to the generators
 
 ** It's Just the Beginning
 - ~all~
@@ -600,25 +603,115 @@ const recovered = program.pipe(
 - For FP coders :: +worse+ Pattern matching
 - For typescripters :: Better =switch=
 *** Value Match
+
+#+begin_src typescript
+// Simulated dynamic input that can be a string or a number
+const input: string | number = "some input"
+
+//      ┌─── string
+//      ▼
+const result = Match.value(input).pipe(
+  // Match if the value is a number
+  Match.when(Match.number, (n) => `number: ${n}`),
+  // Match if the value is a string
+  Match.when(Match.string, (s) => `string: ${s}`),
+  // Ensure all possible cases are covered
+  Match.exhaustive
+)
+#+end_src
+**** Several Possible Conditions
+#+begin_src typescript
+  // Match when age is greater than 18
+  Match.when({ age: (age) => age > 18 }, (user) => `Age: ${user.age}`),
+  // Match when age is exactly 18
+  Match.when({ age: 18 }, () => "You can vote"),
+  // Match any value except "hi", returning "ok"
+  Match.not("hi", () => "ok"),
+  // Match either "fetch" or "success"
+  Match.tag("fetch", "success", () => `Ok!`),
+  // Fallback case for when the value is "hi"
+  Match.orElse(() => "fallback")
+#+end_src
 *** Type Match
+
+#+begin_src typescript
+// Create a matcher for values that are either strings or numbers
+//
+//      ┌─── (u: string | number) => string
+//      ▼
+const match = Match.type<string | number>().pipe(
+  // Match when the value is a number
+  Match.when(Match.number, (n) => `number: ${n}`),
+  // Match when the value is a string
+  Match.when(Match.string, (s) => `string: ${s}`),
+  // Ensure all possible cases are handled
+  Match.exhaustive
+)
+
+console.log(match(0))
+// Output: "number: 0"
+
+#+end_src
+
 *** withReturnType
+
+*Highly Reccommended*
+
+Ensures the match will return that type
+#+begin_src typescript
+const match = Match.type<{ a: number } | { b: string }>().pipe(
+  // Ensure all branches return a string
+  Match.withReturnType<string>(),
+  // ❌ Type error: returns a number
+  Match.when({ a: Match.number }, (_) => _.a),
+// Error ts(2322) ― Type 'number' is not assignable to type 'string'.
+// ✅ Correct: returns a string
+  Match.when({ b: Match.string }, (_) => _.b),
+  Match.exhaustive
+)
+#+end_src
+
 *** Exhaustive
+
+*Highly Reccommended*
+
+Ensures all possible cases are covered
+
+#+begin_src typescript
+// Create a matcher for string or number values
+const match = Match.type<string | number>().pipe(
+  // Match when the value is a number
+  Match.when(Match.number, (n) => `number: ${n}`),
+  // Mark the match as exhaustive, ensuring all cases are handled
+  // TypeScript will throw an error if any case is missing
+  Match.exhaustive
+)
+
+// Fail at compile time, string is not handled.
+
+#+end_src
+
 ** Stream
+- Known Composition Patterns
+- Integrates with the =Effect= type
+- Error channel
+- Node Streams Interoperability
+- *Rich API*: Grouping - Partitioning - Interleaving - Intersparsing - Scheduling - Debouncing - Throttling ...
+** Retry
+*** Before
+[[file:eventuallyNoEffect.png]]
+*** After
+[[file:eventuallyEffect.png]]
 * Architecture
 ** Services
 ** Layers
-** Errors
-** Dependencies
-* Other Interesting Patterns
-** Retry Before
-[[file:eventuallyNoEffect.png]]
-** Retry After
-[[file:eventuallyEffect.png]]
+** Context
 * Ecosystem
 * Downsides
 ** Syntax / Verbosity
 ** Type Gymnastics
 ** Beware of AI
+Probably fixable with some good prompts/skills
 *** Example 1 - Useless Steps
 #+begin_src typescript
   pipe(
