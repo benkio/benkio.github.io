@@ -697,16 +697,24 @@ const match = Match.type<string | number>().pipe(
 - Error channel
 - Node Streams Interoperability
 - *Rich API*: Grouping - Partitioning - Interleaving - Intersparsing - Scheduling - Debouncing - Throttling ...
-** Retry
+** Retry / Scheduler / Timeout Example
 *** Before
 [[file:eventuallyNoEffect.png]]
 *** After
 [[file:eventuallyEffect.png]]
 * Architecture
+ [[file:architecture.webp]]
 ** Services
 ** Layers
 ** Context
-* Ecosystem
+* Ecosystem & More
+- Adaptable to different platforms: =node=, =bun=, =browser=
+- Http: =client=, =routes=, =OpenApi=, =RPC=
+- Schema Validation
+- =@effect/opentelemetry=
+- =@effect/cli=
+- Configuration
+- Memoization / Cache
 * Downsides
 ** Syntax / Verbosity
 ** Type Gymnastics
