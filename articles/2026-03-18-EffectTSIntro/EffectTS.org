@@ -12,14 +12,14 @@
 - New to ~effect-ts~
 ❌ If you know
 - ZIO/Cats Effect
-- Haskell or Similar FP Programming Language
+- Haskell or a similar FP language
 * Goals
-1. Main Core Concepts
+1. Core Concepts
 2. Core Components
 3. Read/Review ~effect-ts~ Code
 4. Write Basic ~effect-ts~ Code
 * When To Use
-Whenever Typescript Is Used
+Whenever TypeScript is used
 * Why
 [[file:benefitsEffect.png]]
 * Improved Type System and More
@@ -28,12 +28,12 @@ Whenever Typescript Is Used
 - Consistent Patterns :: Learn once, Use +Almost+ Everywhere
 - Schema Validation :: Not Discussed Here
 - Easier Common Scenarios :: Concurrency, Resource Management, Missing Values, Error Handling, Dependencies...
-** Side effectful function
+** Side-effectful function
 :PROPERTIES:
 :HTML_CONTAINER_CLASS: left-text
 :END:
 
-❌ Calling this is not the same as its return value/type
+❌ Calling this is not equivalent to its value/type
 
 💔 Loss of Referential Transparency
 
@@ -43,7 +43,7 @@ Whenever Typescript Is Used
   }
 
 #+end_src
-** Side effectful function with Effect
+** Side-effectful function with Effect
 
 - ✅ Referential Transparency Restored.
 - 🆕 Return Type
@@ -63,10 +63,10 @@ Whenever Typescript Is Used
    const program : Effect.Effect<void> =
    Effect.sync(() => console.log(`Amazing Program`));
 
-  // Run Syncronously
+  // Run synchronously
   Effect.runSync(program);
 
-  // Run Asyncronously
+  // Run asynchronously
   Effect.runPromise(program);
 
   // Repeat the action 2 additional times after the first execution
@@ -76,7 +76,7 @@ Whenever Typescript Is Used
 
 * Composition
 ** Pipe - Pure Composition
-no side effects, primary types computations
+no side effects; primitive type computations
 #+begin_src fundamental
 ┌───────┐    ┌───────┐    ┌───────┐    ┌───────┐    ┌───────┐    ┌────────┐
 │ input │───►│ func1 │───►│ func2 │───►│  ...  │───►│ funcN │───►│ result │
@@ -105,10 +105,8 @@ Similar to ~Promise.then~, but only with pure computations
 #+begin_src typescript
     // No side effects inside the "then"
     fetch("https://example.org/products.json")
-      .then((product) => product.price);
+      .then((response) => response.status);
 #+end_src
-
-let's see some examples
 
 *** Example Option
 #+begin_src typescript
@@ -118,10 +116,10 @@ let's see some examples
     Option.some(42),
     Option.map((x: number) => x * 2),
   );
-  // { _id: 'Option', _tag: 'Some', value: 84 }
   console.log(mappedOption);
+  // { _id: 'Option', _tag: 'Some', value: 84 }
+  console.log(Option.getOrElse(mappedOption, () => 0));
   // 84
-  console.log(Option.getOrElse(mappedOption, () => 69));
 #+end_src
 *** Example Effect
 #+begin_src typescript
@@ -149,12 +147,12 @@ After that effect, do this
     // works on pure functions as well. Multiple overloads
     Effect.andThen(() => Effect.sync(() => console.log(`Finished`))),
   );
-  // Prints:  Finished
-  // Returns: Undefined
+  // Prints: Finished
+  // Returns: void
   console.log(Effect.runSync(mappedEffect));
 #+end_src
 
-** Zip Right/Left
+** zipRight (and zipLeft)
 ~zipRight~ Very similar to ~Promise.then~
 
 You can decide which value to keep and what to discard. Both Effects are performed
@@ -162,7 +160,6 @@ You can decide which value to keep and what to discard. Both Effects are perform
 #+begin_src typescript
   import { Effect, pipe } from "effect";
 
-  // Exact same example as before
   const mappedEffect: Effect.Effect<void> = pipe(
     Effect.succeed("data"),
     Effect.zipRight(Effect.sync(() => console.log(`Finished`))),
@@ -179,7 +176,7 @@ You can decide which value to keep and what to discard. Both Effects are perform
 
   const traced: Effect.Effect<string> = pipe(
     Effect.succeed("data"),
-    Effect.tap(Effect.sync(() => console.log("In progress"))),
+    Effect.tap(() => Effect.sync(() => console.log("In progress"))),
     Effect.map((data: string) => `awesome ${data}`),
   );
   // In progress  — log from tap runs first
@@ -194,13 +191,13 @@ You can decide which value to keep and what to discard. Both Effects are perform
 
   const mappedEffect: Effect.Effect<void> = pipe(
     Effect.succeed("data"),
-    Effect.tap(Effect.sync(() => console.log(`In progress`))),
+    Effect.tap(() => Effect.sync(() => console.log(`In progress`))),
     Effect.flatMap((data: string) =>
       Effect.sync(() => console.log(`awesome ${data}`)),
     ),
   );
-  // Prints: In progress → awesome data → Finished
-  // Returns undefined
+  // Prints: In progress → awesome data
+  // Returns: void
 #+end_src
 
 ** Composition At Scale
@@ -246,12 +243,12 @@ const program =
     )
   )
 #+end_src
-*** Does It Recall Something?
+*** Does This Ring a Bell?
 #+begin_src typescript
   connectToDatabase()
     .then((database) =>
-      getUsers(database)
-        .then((users) =>
+      getUser(database)
+        .then((user) =>
           getUserSettings(database)
             .then((settings) =>
               enableAccess(user, settings)
@@ -267,7 +264,7 @@ const program =
     _ <- logger.logInfo("Access DB")
     database <- connectToDatabase()
     _ <- logger.logInfo("Get Users")
-    users <- getUsers(database)
+    user <- getUser(database)
     _ <- logger.logInfo("Get User Settings")
     settings <- getUserSettings(database)
     _ <- logger.logInfo(s"Enable Access to $user")
@@ -281,7 +278,7 @@ const program =
     logInfo logger "Access DB"
     database <- connectToDatabase
     logInfo logger "Get Users"
-    users <- getUsers database
+    user <- getUser database
     logInfo logger "Get User Settings"
     settings <- getUserSettings database
     logInfo logger $ "Enable Access to " ++ show user
@@ -294,7 +291,7 @@ const program =
     logger.logInfo('Access DB');
     const database = await connectToDatabase();
     logger.logInfo('Get Users');
-    const users = await getUsers(database);
+    const user = await getUser(database);
     logger.logInfo('Get User Settings');
     const settings = await getUserSettings(database);
     logger.logInfo(`Enable Access to ${user}`);
@@ -303,14 +300,14 @@ const program =
   }
 #+end_src
 
-*** Generators yield*
+*** Effect.gen and yield*
 #+begin_src typescript
   // Each step is an effect
   Effect.gen(function* () {
     yield* logger.logInfo('Access DB');
     const database = yield* connectToDatabase();
     yield* logger.logInfo('Get Users');
-    const users = yield* getUsers(database);
+    const user = yield* getUser(database);
     yield* logger.logInfo('Get User Settings');
     const settings = yield* getUserSettings(database);
     yield* logger.logInfo(`Enable Access to ${user}`);
@@ -318,7 +315,7 @@ const program =
     return result;
   })
 #+end_src
-*** Mention: Do Notation simulation
+*** Simulating do notation
 
 Very similar to the generators
 
@@ -354,7 +351,7 @@ Effect<Success, Error, Requirements>
 Effect<Success, Error, Requirements>
   #+end_src
 
-**** Why Does This Works? Lazyness!!!
+**** Why Does This Work? Laziness!!!
 - Declare your effects
 - Compose and prepare them
 - Run Everything Everywhere All at Once
@@ -365,7 +362,7 @@ Effect<Success, Error, Requirements>
 
   Usually a class/interface
 
-- It is fetched it from the context and used
+- It is fetched from the context and used
 - Where does it come from? 🤷
 #+begin_src typescript
 const program: Effect<void, never, Random> = Effect.gen(function* () {
@@ -396,7 +393,7 @@ const program: Effect<void, never, Random> = Effect.gen(function* () {
 **** Benefits
 
 - Testability :: Can Swap With Mocks
-- Reasoning :: I don't look at the details
+- Reasoning :: without implementation details
 - Separation of Concerns ::
 
 *** Error Handling Channel
@@ -447,7 +444,7 @@ const program = Effect.gen(function* () {
 
 
 - Short Circuiting :: Stop execution upon encountering the first error.
-- Collecting Errors :: Is possible with other abstractions
+- Collecting errors is possible with other abstractions
 **** Defects
 Errors thrown and unexpected:
 - Not visible at type system
@@ -455,7 +452,7 @@ Errors thrown and unexpected:
 **** Handlers
 You can decide what and when to handle.
 
-You are forced to handle expected error
+You are forced to handle expected errors
 
 You should handle defects
 
@@ -500,7 +497,7 @@ const recovered = program.pipe(
 
 - Datatype to signal the termination: =Success= or =Failure=
 - The wrapped error being a =Cause=
-- Subtype of =Effect=
+- Describes how an Effect terminates
 
 ****** Effect.Exit
 
@@ -513,7 +510,7 @@ Effect<A, E, R> -> Effect<Exit<A, E>, never, R>
 ****** catchAllDefect - Catch ONLY Defects
 
 #+begin_src typescript
-const program = Effect.catchAllDefect(task, (defect) => {
+const program = Effect.catchAllDefect(riskyTask, (defect) => {
   if (Cause.isRuntimeException(defect)) {
     return Console.log(
       `RuntimeException defect caught: ${defect.message}`
@@ -542,17 +539,16 @@ const recovered = program.pipe(
 ** Either
 - Pure error handling type
 - Similar to =Exit= but for any type
-- Composed by:
+- Composed of:
   - =Either.Left= (error)
   - =Either.Right= (value)
 - Has all composition patterns seen before
-- Subtype of =Effect=
 - Use when your computation:
   - Has no side-effects
   - Can fail
 ** Match
 - For FP coders :: +worse+ Pattern matching
-- For typescripters :: Better =switch=
+- For TypeScript developers :: Better =switch=
 *** Value Match
 
 #+begin_src typescript
@@ -606,7 +602,7 @@ console.log(match(0))
 
 *** withReturnType
 
-*Highly Reccommended*
+*Highly Recommended*
 
 Ensures the match will return that type
 #+begin_src typescript
@@ -624,7 +620,7 @@ const match = Match.type<{ a: number } | { b: string }>().pipe(
 
 *** Exhaustive
 
-*Highly Reccommended*
+*Highly Recommended*
 
 Ensures all possible cases are covered
 
@@ -647,7 +643,7 @@ const match = Match.type<string | number>().pipe(
 - Integrates with the =Effect= Type
 - Error Channel
 - Node Streams Interoperability
-- *Rich API*: Grouping - Partitioning - Interleaving - Intersparsing - Scheduling - Debouncing - Throttling ...
+- *Rich API*: Grouping - Partitioning - Interleaving - Interspersing - Scheduling - Debouncing - Throttling ...
 ** Retry / Scheduler / Timeout Example
 *** Before
 [[file:eventuallyNoEffect.png]]
@@ -678,7 +674,7 @@ class Random extends Context.Tag("MyRandomService")<
 **** Provide Implementation
 
 #+begin_src typescript
-  export const uploadService = Effect.succeed({
+  export const RandomLive = Effect.succeed({
     next: Effect.sync(() => Math.random())
   })
 #+end_src
@@ -796,7 +792,7 @@ The environment must be correctly set up with all necessary services first
 
 *** Solution
 Conceptually: ~type Context = Map<Tag, Service>~
-Remember lazyness
+Remember laziness
 *** Extract Service Type
 #+begin_src typescript
 type RandomShape = Context.Tag.Service<Random>
@@ -842,9 +838,9 @@ Especially over simple computations
     Option.zipWith(
       user.name,
       user.surname,
-      (name, surname) => `${vanillaName} ${vanillaSurname}`
+      (name, surname) => `${name} ${surname}`
     ).pipe(
-      Option.getOrElse('John Doe')
+      Option.getOrElse(() => 'John Doe')
     )
 #+end_src
 

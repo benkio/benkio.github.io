@@ -49,7 +49,7 @@
   :CUSTOM_ID: ArticleConclusions
   :END:
 
-  I hope it can be useful if someone needs onboard someone else to the library.
+  I hope it can be useful if someone needs to onboard someone else to the library.
 
 * Share Buttons
   :PROPERTIES:
