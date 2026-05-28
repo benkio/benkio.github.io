@@ -1,0 +1,19 @@
+.left-text {
+  text-align: left;
+}
+.reveal :not(pre) > code {
+  font-size: 0.75em !important;
+  color: #ff79c6; /* Optional: give inline code a distinct color */
+  background-color: #282a36;
+  padding: 2px 5px;
+  border-radius: 4px;
+}
+.reveal pre code {
+  /* font-size: 0.7em !important; */
+  line-height: 1.35 !important;
+}
+.reveal ul,
+.reveal p {
+  margin-top: 0.35em !important;
+  margin-bottom: 0.35em !important;
+}

@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title></title>
+<meta name="author" content="Enrico Benini"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/dist/reveal.css"/>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/dist/theme/moon.css" id="theme"/>
+
+<link rel="stylesheet" href="./EffectTS.css"/>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>Effect TS Introduction</h1>
+</section>
+<section>
+<section id="slide-orgf95e3f8" class="left-text">
+<h2 id="orgf95e3f8">Audience</h2>
+<p>
+✅ If you are new to:
+</p>
+<ul>
+<li>Functional Programming</li>
+<li>Effect System</li>
+<li>New to <code>effect-ts</code></li>
+
+</ul>
+<p>
+❌ If you know
+</p>
+<ul>
+<li>ZIO/Cats Effect</li>
+<li>Haskell or a similar FP language</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org2a87f40">
+<h2 id="org2a87f40">Goals</h2>
+<ol>
+<li>Core Concepts</li>
+<li>Core Components</li>
+<li>Read/Review <code>effect-ts</code> Code</li>
+<li>Write Basic <code>effect-ts</code> Code</li>
+
+</ol>
+</section>
+</section>
+<section>
+<section id="slide-org8ee3083">
+<h2 id="org8ee3083">When To Use</h2>
+<p>
+Whenever TypeScript is used
+</p>
+</section>
+</section>
+<section>
+<section id="slide-org33fbb24">
+<h2 id="org33fbb24">Why</h2>
+
+<div id="org7b192fc" class="figure">
+<p><img src="benefitsEffect.png" alt="benefitsEffect.png" />
+</p>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-orgd1f3bd4">
+<h2 id="orgd1f3bd4">Improved Type System and More</h2>
+<dl>
+<dt>Computations with Side Effects</dt><dd>Referential Transparency Restored</dd>
+<dt>Computations as Values</dt><dd>Execution Control</dd>
+<dt>Consistent Patterns</dt><dd>Learn once, Use <del>Almost</del> Everywhere</dd>
+<dt>Schema Validation</dt><dd>Not Discussed Here</dd>
+<dt>Easier Common Scenarios</dt><dd>Concurrency, Resource Management, Missing Values, Error Handling, Dependencies&#x2026;</dd>
+
+</dl>
+</section>
+<section id="slide-orgeb58425" class="left-text">
+<h3 id="orgeb58425">Side-effectful function</h3>
+<p>
+❌ Calling this is not equivalent to its value/type
+</p>
+
+<p>
+💔 Loss of Referential Transparency
+</p>
+
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #F0DFAF; font-weight: bold;">function</span> <span style="color: #93E0E3;">log</span>(<span style="color: #DFAF8F;">message</span>: <span style="color: #7CB8BB;">string</span>): <span style="color: #F0DFAF; font-weight: bold;">void</span> {
+    console.log(<span style="color: #CC9393;">`Amazing log </span><span style="color: #DCDCCC;">${</span>message<span style="color: #DCDCCC;">}</span><span style="color: #CC9393;">`</span>);
+}
+
+</code></pre>
+</div>
+</section>
+<section id="slide-orgfa7a827">
+<h3 id="orgfa7a827">Side-effectful function with Effect</h3>
+<ul>
+<li>✅ Referential Transparency Restored.</li>
+<li>🆕 Return Type</li>
+<li><code>sync</code> for <b>SAFE</b> Synchronous Computation</li>
+<li>Notice the Lambda Function Parameter</li>
+
+</ul>
+
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #F0DFAF; font-weight: bold;">import</span> { <span style="color: #DFAF8F;">Effect</span> } <span style="color: #F0DFAF; font-weight: bold;">from</span> <span style="color: #CC9393;">'effect'</span>;
+
+<span style="color: #F0DFAF; font-weight: bold;">function</span> <span style="color: #93E0E3;">log</span>(<span style="color: #DFAF8F;">message</span>: <span style="color: #7CB8BB;">string</span>): <span style="color: #7CB8BB;">Effect</span>.<span style="color: #7CB8BB;">Effect</span>&lt;<span style="color: #F0DFAF; font-weight: bold;">void</span>&gt; {
+    <span style="color: #F0DFAF; font-weight: bold;">return</span> Effect.sync(() =&gt; console.log(<span style="color: #CC9393;">`Amazing log </span><span style="color: #DCDCCC;">${</span>message<span style="color: #DCDCCC;">}</span><span style="color: #CC9393;">`</span>));
+}
+
+</code></pre>
+</div>
+</section>
+<section id="slide-org17333b5">
+<h3 id="org17333b5">Computation As Values - Execution Control</h3>
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim> <span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">program</span> : <span style="color: #7CB8BB;">Effect</span>.<span style="color: #7CB8BB;">Effect</span>&lt;<span style="color: #F0DFAF; font-weight: bold;">void</span>&gt; =
+ Effect.sync(() =&gt; console.log(<span style="color: #CC9393;">`Amazing Program`</span>));
+
+<span style="color: #7F9F7F;">// Run synchronously</span>
+Effect.runSync(program);
+
+<span style="color: #7F9F7F;">// Run asynchronously</span>
+Effect.runPromise(program);
+
+<span style="color: #7F9F7F;">// Repeat the action 2 additional times after the first execution</span>
+<span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">programRepeated</span> = Effect.repeatN(program, <span style="color: #BFEBBF;">2</span>);
+Effect.runPromise(programRepeated);
+</code></pre>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-org6edfd0d">
+<h2 id="org6edfd0d">Composition</h2>
+<div class="outline-text-2" id="text-org6edfd0d">
+</div>
+</section>
+<section id="slide-orgda3ca37">
+<h3 id="orgda3ca37">Pipe - Pure Composition</h3>
+<p>
+no side effects; primitive type computations
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-fundamental"   ><code trim>&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;    &#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;    &#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;    &#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;    &#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;    &#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;
+&#9474; input &#9474;&#9472;&#9472;&#9472;&#9658;&#9474; func1 &#9474;&#9472;&#9472;&#9472;&#9658;&#9474; func2 &#9474;&#9472;&#9472;&#9472;&#9658;&#9474;  ...  &#9474;&#9472;&#9472;&#9472;&#9658;&#9474; funcN &#9474;&#9472;&#9472;&#9472;&#9658;&#9474; result &#9474;
+&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;    &#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;    &#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;    &#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;    &#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;    &#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;
+</code></pre>
+</div>
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #F0DFAF; font-weight: bold;">import</span> { <span style="color: #DFAF8F;">pipe</span> } <span style="color: #F0DFAF; font-weight: bold;">from</span> <span style="color: #CC9393;">"effect"</span>
+
+<span style="color: #7F9F7F;">// Define simple arithmetic operations</span>
+<span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #93E0E3;">increment</span> = (<span style="color: #DFAF8F;">x</span>: <span style="color: #7CB8BB;">number</span>) =&gt; x + <span style="color: #BFEBBF;">1</span>
+<span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #93E0E3;">double</span> = (<span style="color: #DFAF8F;">x</span>: <span style="color: #7CB8BB;">number</span>) =&gt; x * <span style="color: #BFEBBF;">2</span>
+<span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #93E0E3;">subtractTen</span> = (<span style="color: #DFAF8F;">x</span>: <span style="color: #7CB8BB;">number</span>) =&gt; x - <span style="color: #BFEBBF;">10</span>
+
+<span style="color: #7F9F7F;">// Sequentially apply these operations using `pipe`</span>
+<span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">result</span> = pipe(<span style="color: #BFEBBF;">5</span>, increment, double, subtractTen)
+
+console.log(result)
+<span style="color: #7F9F7F;">// Output: 2</span>
+</code></pre>
+</div>
+</section>
+<section id="slide-orga2d4233">
+<h3 id="orga2d4233">Map - Pure Computation Over "Context"</h3>
+<p>
+If you want to transform the result of the computation.
+</p>
+
+<p>
+Similar to <code>Promise.then</code>, but only with pure computations
+</p>
+
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #7F9F7F;">// No side effects inside the "then"</span>
+fetch(<span style="color: #CC9393;">"https://example.org/products.json"</span>)
+  .then((<span style="color: #DFAF8F;">response</span>) =&gt; response.status);
+</code></pre>
+</div>
+</section>
+<section id="slide-org8ba7f9a">
+<h4 id="org8ba7f9a">Example Option</h4>
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #F0DFAF; font-weight: bold;">import</span> { <span style="color: #DFAF8F;">Option</span>, <span style="color: #DFAF8F;">pipe</span> } <span style="color: #F0DFAF; font-weight: bold;">from</span> <span style="color: #CC9393;">"effect"</span>;
+
+<span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">mappedOption</span>: <span style="color: #7CB8BB;">Option</span>.<span style="color: #7CB8BB;">Option</span>&lt;<span style="color: #7CB8BB;">number</span>&gt; = pipe(
+  Option.some(<span style="color: #BFEBBF;">42</span>),
+  Option.map((<span style="color: #DFAF8F;">x</span>: <span style="color: #7CB8BB;">number</span>) =&gt; x * <span style="color: #BFEBBF;">2</span>),
+);
+console.log(mappedOption);
+<span style="color: #7F9F7F;">// { _id: 'Option', _tag: 'Some', value: 84 }</span>
+console.log(Option.getOrElse(mappedOption, () =&gt; <span style="color: #BFEBBF;">0</span>));
+<span style="color: #7F9F7F;">// 84</span>
+</code></pre>
+</div>
+</section>
+<section id="slide-orgcdc5770">
+<h4 id="orgcdc5770">Example Effect</h4>
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #F0DFAF; font-weight: bold;">import</span> { <span style="color: #DFAF8F;">Effect</span>, <span style="color: #DFAF8F;">pipe</span> } <span style="color: #F0DFAF; font-weight: bold;">from</span> <span style="color: #CC9393;">"effect"</span>;
+
+<span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">mappedEffect</span>: <span style="color: #7CB8BB;">Effect</span>.<span style="color: #7CB8BB;">Effect</span>&lt;<span style="color: #7CB8BB;">string</span>&gt; = pipe(
+  Effect.succeed(<span style="color: #CC9393;">"data"</span>),
+  Effect.map((<span style="color: #DFAF8F;">x</span>: <span style="color: #7CB8BB;">string</span>) =&gt; <span style="color: #CC9393;">`Awesome </span><span style="color: #DCDCCC;">${</span>x<span style="color: #DCDCCC;">}</span><span style="color: #CC9393;">`</span>),
+);
+<span style="color: #7F9F7F;">// Awesome data</span>
+console.log(Effect.runSync(mappedEffect));
+</code></pre>
+</div>
+</section>
+<section id="slide-org381c261">
+<h3 id="org381c261">andThen</h3>
+<p>
+I don't care about your result
+</p>
+
+<p>
+After that effect, do this
+</p>
+
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #F0DFAF; font-weight: bold;">import</span> { <span style="color: #DFAF8F;">Effect</span>, <span style="color: #DFAF8F;">pipe</span> } <span style="color: #F0DFAF; font-weight: bold;">from</span> <span style="color: #CC9393;">"effect"</span>;
+
+<span style="color: #7F9F7F;">// Notice the return type!</span>
+<span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">mappedEffect</span>: <span style="color: #7CB8BB;">Effect</span>.<span style="color: #7CB8BB;">Effect</span>&lt;<span style="color: #F0DFAF; font-weight: bold;">void</span>&gt; = pipe(
+  Effect.succeed(<span style="color: #CC9393;">"data"</span>),
+  <span style="color: #7F9F7F;">// works on pure functions as well. Multiple overloads</span>
+  Effect.andThen(() =&gt; Effect.sync(() =&gt; console.log(<span style="color: #CC9393;">`Finished`</span>))),
+);
+<span style="color: #7F9F7F;">// Prints: Finished</span>
+<span style="color: #7F9F7F;">// Returns: void</span>
+console.log(Effect.runSync(mappedEffect));
+</code></pre>
+</div>
+</section>
+<section id="slide-orgc02df8c">
+<h3 id="orgc02df8c">zipRight (and zipLeft)</h3>
+<p>
+<code>zipRight</code> Very similar to <code>Promise.then</code>
+</p>
+
+<p>
+You can decide which value to keep and what to discard. Both Effects are performed
+</p>
+
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #F0DFAF; font-weight: bold;">import</span> { <span style="color: #DFAF8F;">Effect</span>, <span style="color: #DFAF8F;">pipe</span> } <span style="color: #F0DFAF; font-weight: bold;">from</span> <span style="color: #CC9393;">"effect"</span>;
+
+<span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">mappedEffect</span>: <span style="color: #7CB8BB;">Effect</span>.<span style="color: #7CB8BB;">Effect</span>&lt;<span style="color: #F0DFAF; font-weight: bold;">void</span>&gt; = pipe(
+  Effect.succeed(<span style="color: #CC9393;">"data"</span>),
+  Effect.zipRight(Effect.sync(() =&gt; console.log(<span style="color: #CC9393;">`Finished`</span>))),
+);
+
+console.log(Effect.runSync(mappedEffect));
+</code></pre>
+</div>
+</section>
+<section id="slide-org93a13ac">
+<h3 id="org93a13ac">Tap</h3>
+<ul>
+<li>Run a side-effect</li>
+<li>Value flowing through <code>pipe</code> stays available for the next step</li>
+
+</ul>
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #F0DFAF; font-weight: bold;">import</span> { <span style="color: #DFAF8F;">Effect</span>, <span style="color: #DFAF8F;">pipe</span> } <span style="color: #F0DFAF; font-weight: bold;">from</span> <span style="color: #CC9393;">"effect"</span>;
+
+<span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">traced</span>: <span style="color: #7CB8BB;">Effect</span>.<span style="color: #7CB8BB;">Effect</span>&lt;<span style="color: #7CB8BB;">string</span>&gt; = pipe(
+  Effect.succeed(<span style="color: #CC9393;">"data"</span>),
+  Effect.tap(() =&gt; Effect.sync(() =&gt; console.log(<span style="color: #CC9393;">"In progress"</span>))),
+  Effect.map((<span style="color: #DFAF8F;">data</span>: <span style="color: #7CB8BB;">string</span>) =&gt; <span style="color: #CC9393;">`awesome </span><span style="color: #DCDCCC;">${</span>data<span style="color: #DCDCCC;">}</span><span style="color: #CC9393;">`</span>),
+);
+<span style="color: #7F9F7F;">// In progress  &#8212; log from tap runs first</span>
+<span style="color: #7F9F7F;">// awesome data &#8212; final mapped value</span>
+console.log(Effect.runSync(traced));
+</code></pre>
+</div>
+</section>
+<section id="slide-org3522e78">
+<h3 id="org3522e78">FlatMap - Chain of Effects</h3>
+<p>
+<code>Promise.then((v) =&gt; AnotherPromise)</code>
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #F0DFAF; font-weight: bold;">import</span> { <span style="color: #DFAF8F;">Effect</span>, <span style="color: #DFAF8F;">pipe</span> } <span style="color: #F0DFAF; font-weight: bold;">from</span> <span style="color: #CC9393;">"effect"</span>;
+
+<span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">mappedEffect</span>: <span style="color: #7CB8BB;">Effect</span>.<span style="color: #7CB8BB;">Effect</span>&lt;<span style="color: #F0DFAF; font-weight: bold;">void</span>&gt; = pipe(
+  Effect.succeed(<span style="color: #CC9393;">"data"</span>),
+  Effect.tap(() =&gt; Effect.sync(() =&gt; console.log(<span style="color: #CC9393;">`In progress`</span>))),
+  Effect.flatMap((<span style="color: #DFAF8F;">data</span>: <span style="color: #7CB8BB;">string</span>) =&gt;
+    Effect.sync(() =&gt; console.log(<span style="color: #CC9393;">`awesome </span><span style="color: #DCDCCC;">${</span>data<span style="color: #DCDCCC;">}</span><span style="color: #CC9393;">`</span>)),
+  ),
+);
+<span style="color: #7F9F7F;">// Prints: In progress &#8594; awesome data</span>
+<span style="color: #7F9F7F;">// Returns: void</span>
+</code></pre>
+</div>
+</section>
+<section id="slide-org07d225d">
+<h3 id="org07d225d">Composition At Scale</h3>
+<div class="outline-text-3" id="text-org07d225d">
+</div>
+</section>
+<section id="slide-orgde51665">
+<h4 id="orgde51665">Back To Callback Hell!</h4>
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #F0DFAF; font-weight: bold;">import</span> { <span style="color: #DFAF8F;">Effect</span> } <span style="color: #F0DFAF; font-weight: bold;">from</span> <span style="color: #CC9393;">"effect"</span>
+
+<span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">program</span> =
+  Effect.succeed(<span style="color: #BFEBBF;">1</span>).pipe(
+    Effect.flatMap(<span style="color: #DFAF8F;">n1</span> =&gt;
+      Effect.succeed(n1 + <span style="color: #BFEBBF;">1</span>)
+    ),
+
+    Effect.flatMap(<span style="color: #DFAF8F;">n2</span> =&gt;
+      Effect.succeed(n2 * <span style="color: #BFEBBF;">2</span>)
+    ),
+
+    <span style="color: #7F9F7F;">// nested pipeline starts here</span>
+    Effect.flatMap(<span style="color: #DFAF8F;">n3</span> =&gt;
+      Effect.succeed(n3).pipe(
+        Effect.flatMap(<span style="color: #DFAF8F;">x</span> =&gt;
+          Effect.succeed(x + <span style="color: #BFEBBF;">10</span>)
+        ),
+        Effect.flatMap(<span style="color: #DFAF8F;">x</span> =&gt;
+          Effect.succeed(x * <span style="color: #BFEBBF;">3</span>)
+        ),
+        Effect.flatMap(<span style="color: #DFAF8F;">x</span> =&gt;
+          Effect.succeed(x - <span style="color: #BFEBBF;">5</span>)
+        )
+      )
+    ),
+
+    Effect.flatMap(<span style="color: #DFAF8F;">n4</span> =&gt;
+      Effect.succeed(n4 / <span style="color: #BFEBBF;">2</span>)
+    ),
+
+    Effect.flatMap(<span style="color: #DFAF8F;">n5</span> =&gt;
+      Effect.succeed(n5 + <span style="color: #BFEBBF;">7</span>)
+    ),
+
+    Effect.flatMap(<span style="color: #DFAF8F;">n6</span> =&gt;
+      Effect.succeed(<span style="color: #CC9393;">`Final result: </span><span style="color: #DCDCCC;">${</span>n6<span style="color: #DCDCCC;">}</span><span style="color: #CC9393;">`</span>)
+    )
+  )
+</code></pre>
+</div>
+</section>
+<section id="slide-org08f9825">
+<h4 id="org08f9825">Does This Ring a Bell?</h4>
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim>connectToDatabase()
+  .then((<span style="color: #DFAF8F;">database</span>) =&gt;
+    getUser(database)
+      .then((<span style="color: #DFAF8F;">user</span>) =&gt;
+        getUserSettings(database)
+          .then((<span style="color: #DFAF8F;">settings</span>) =&gt;
+            enableAccess(user, settings)
+          ),
+      ),
+  );
+</code></pre>
+</div>
+</section>
+<section id="slide-orgb8830fe">
+<h4 id="orgb8830fe">Problem Already Solved</h4>
+<div class="outline-text-4" id="text-orgb8830fe">
+</div>
+</section>
+<section id="slide-org075a504">
+<h5 id="org075a504">Scala for comprehension</h5>
+<div class="org-src-container">
+
+<pre  class="src src-scala"   ><code trim><span style="color: #F0DFAF; font-weight: bold;">for</span> {
+  <span style="color: #F0DFAF; font-weight: bold;">_</span> <span style="color: #F0DFAF; font-weight: bold;">&lt;-</span> logger.logInfo(<span style="color: #CC9393;">"Access DB"</span>)
+  database <span style="color: #F0DFAF; font-weight: bold;">&lt;-</span> connectToDatabase()
+  <span style="color: #F0DFAF; font-weight: bold;">_</span> <span style="color: #F0DFAF; font-weight: bold;">&lt;-</span> logger.logInfo(<span style="color: #CC9393;">"Get Users"</span>)
+  user <span style="color: #F0DFAF; font-weight: bold;">&lt;-</span> getUser(database)
+  <span style="color: #F0DFAF; font-weight: bold;">_</span> <span style="color: #F0DFAF; font-weight: bold;">&lt;-</span> logger.logInfo(<span style="color: #CC9393;">"Get User Settings"</span>)
+  settings <span style="color: #F0DFAF; font-weight: bold;">&lt;-</span> getUserSettings(database)
+  <span style="color: #F0DFAF; font-weight: bold;">_</span> <span style="color: #F0DFAF; font-weight: bold;">&lt;-</span> logger.logInfo(s<span style="color: #CC9393;">"Enable Access to </span><span style="color: #DFAF8F;">$user</span><span style="color: #CC9393;">"</span>)
+  result <span style="color: #F0DFAF; font-weight: bold;">&lt;-</span> enableAccess(user, settings)
+} <span style="color: #F0DFAF; font-weight: bold;">yield</span> result
+</code></pre>
+</div>
+</section>
+<section id="slide-org906505d">
+<h5 id="org906505d">Haskell do blocks</h5>
+<div class="org-src-container">
+
+<pre  class="src src-haskell"   ><code trim><span style="color: #F0DFAF; font-weight: bold;">do</span>
+  logInfo logger <span style="color: #CC9393;">"Access DB"</span>
+  database <span style="color: #DFAF8F;">&lt;-</span> connectToDatabase
+  logInfo logger <span style="color: #CC9393;">"Get Users"</span>
+  user <span style="color: #DFAF8F;">&lt;-</span> getUser database
+  logInfo logger <span style="color: #CC9393;">"Get User Settings"</span>
+  settings <span style="color: #DFAF8F;">&lt;-</span> getUserSettings database
+  logInfo logger <span style="color: #DFAF8F;">$</span> <span style="color: #CC9393;">"Enable Access to "</span> <span style="color: #DFAF8F;">++</span> show user
+  return (enableAccess user settings)
+</code></pre>
+</div>
+</section>
+<section id="slide-orgdd76465">
+<h5 id="orgdd76465">Async/Await</h5>
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #F0DFAF; font-weight: bold;">async</span> <span style="color: #F0DFAF; font-weight: bold;">function</span> <span style="color: #93E0E3;">run</span>() {
+  logger.logInfo(<span style="color: #CC9393;">'Access DB'</span>);
+  <span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">database</span> = <span style="color: #F0DFAF; font-weight: bold;">await</span> connectToDatabase();
+  logger.logInfo(<span style="color: #CC9393;">'Get Users'</span>);
+  <span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">user</span> = <span style="color: #F0DFAF; font-weight: bold;">await</span> getUser(database);
+  logger.logInfo(<span style="color: #CC9393;">'Get User Settings'</span>);
+  <span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">settings</span> = <span style="color: #F0DFAF; font-weight: bold;">await</span> getUserSettings(database);
+  logger.logInfo(<span style="color: #CC9393;">`Enable Access to </span><span style="color: #DCDCCC;">${</span>user<span style="color: #DCDCCC;">}</span><span style="color: #CC9393;">`</span>);
+  <span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">result</span> = <span style="color: #F0DFAF; font-weight: bold;">await</span> enableAccess(user, settings);
+  <span style="color: #F0DFAF; font-weight: bold;">return</span> result;
+}
+</code></pre>
+</div>
+</section>
+<section id="slide-org77e9633">
+<h4 id="org77e9633">Effect.gen and yield*</h4>
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #7F9F7F;">// Each step is an effect</span>
+Effect.gen(<span style="color: #F0DFAF; font-weight: bold;">function</span>* () {
+  <span style="color: #F0DFAF; font-weight: bold;">yield</span>* logger.logInfo(<span style="color: #CC9393;">'Access DB'</span>);
+  <span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">database</span> = <span style="color: #F0DFAF; font-weight: bold;">yield</span>* connectToDatabase();
+  <span style="color: #F0DFAF; font-weight: bold;">yield</span>* logger.logInfo(<span style="color: #CC9393;">'Get Users'</span>);
+  <span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">user</span> = <span style="color: #F0DFAF; font-weight: bold;">yield</span>* getUser(database);
+  <span style="color: #F0DFAF; font-weight: bold;">yield</span>* logger.logInfo(<span style="color: #CC9393;">'Get User Settings'</span>);
+  <span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">settings</span> = <span style="color: #F0DFAF; font-weight: bold;">yield</span>* getUserSettings(database);
+  <span style="color: #F0DFAF; font-weight: bold;">yield</span>* logger.logInfo(<span style="color: #CC9393;">`Enable Access to </span><span style="color: #DCDCCC;">${</span>user<span style="color: #DCDCCC;">}</span><span style="color: #CC9393;">`</span>);
+  <span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">result</span> = <span style="color: #F0DFAF; font-weight: bold;">yield</span>* enableAccess(user, settings);
+  <span style="color: #F0DFAF; font-weight: bold;">return</span> result;
+})
+</code></pre>
+</div>
+</section>
+<section id="slide-orge81ffe4">
+<h4 id="orge81ffe4">Simulating do notation</h4>
+<p>
+Very similar to the generators
+</p>
+</section>
+<section id="slide-org27977f3">
+<h3 id="org27977f3">It's Just the Beginning</h3>
+<ul>
+<li><code>all</code></li>
+<li><code>forEach</code></li>
+<li><code>when</code> - <code>unless</code></li>
+<li><code>whenEffect</code> - <code>unlessEffect</code></li>
+<li><code>tapError</code> - <code>mapError</code></li>
+<li><p>
+<code>both</code>
+</p>
+
+<p>
+&#x2026;
+</p></li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org50e4163">
+<h2 id="org50e4163">Effect</h2>
+<p>
+The core datatype for impure computations and beyond
+</p>
+
+<pre  class="example" >
+         ┌─── Represents the success type
+         │        ┌─── Represents the error type
+         │        │      ┌─── Represents required dependencies
+         ▼        ▼      ▼
+Effect&lt;Success, Error, Requirements&gt;
+</pre>
+</section>
+<section id="slide-org016a4f5">
+<h4 id="org016a4f5">Dependencies Channel</h4>
+<ul>
+<li>Declare Your Dependencies</li>
+<li>Consider Them Satisfied</li>
+<li>Use Them</li>
+<li><p>
+Provide Them Later
+</p>
+
+<pre  class="example" >
+                         ┌─── Represents required dependencies
+                         ▼
+Effect&lt;Success, Error, Requirements&gt;
+</pre></li>
+
+</ul>
+</section>
+<section id="slide-org3f11d21">
+<h5 id="org3f11d21">Why Does This Work? Laziness!!!</h5>
+<ul>
+<li>Declare your effects</li>
+<li>Compose and prepare them</li>
+<li><p>
+Run Everything Everywhere All at Once
+</p>
+
+<p>
+<i>at the end of the world</i>
+</p></li>
+
+</ul>
+</section>
+<section id="slide-orgeb49d5d">
+<h5 id="orgeb49d5d">Dependencies Declaration, Retrieval and Usage</h5>
+<ul>
+<li><p>
+Declare a Random class dependency
+</p>
+
+<p>
+Usually a class/interface
+</p></li>
+
+<li>It is fetched from the context and used</li>
+<li>Where does it come from? 🤷</li>
+
+</ul>
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">program</span>: <span style="color: #7CB8BB;">Effect</span>&lt;<span style="color: #F0DFAF; font-weight: bold;">void</span>, <span style="color: #7CB8BB;">never</span>, <span style="color: #7CB8BB;">Random</span>&gt; = Effect.gen(<span style="color: #F0DFAF; font-weight: bold;">function</span>* () {
+  <span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">random</span> = <span style="color: #F0DFAF; font-weight: bold;">yield</span>* Random
+  <span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">randomNumber</span> = <span style="color: #F0DFAF; font-weight: bold;">yield</span>* random.next
+  console.log(<span style="color: #CC9393;">`random number: </span><span style="color: #DCDCCC;">${</span>randomNumber<span style="color: #DCDCCC;">}</span><span style="color: #CC9393;">`</span>)
+})
+</code></pre>
+</div>
+</section>
+<section id="slide-orgcb50a11">
+<h5 id="orgcb50a11">Dependencies Fulfilment</h5>
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #7F9F7F;">// Providing the implementation</span>
+<span style="color: #7F9F7F;">//</span>
+<span style="color: #7F9F7F;">//      &#9484;&#9472;&#9472;&#9472; Effect&lt;void, never, never&gt;</span>
+<span style="color: #7F9F7F;">//      &#9660;</span>
+<span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">runnable</span> = Effect.provideService(program, Random, {
+  <span style="color: #DFAF8F;">next</span>: Effect.sync(() =&gt; Math.random()),
+});
+
+<span style="color: #7F9F7F;">// Run successfully</span>
+Effect.runPromise(runnable);
+<span style="color: #7F9F7F;">/*
+  Example Output:
+  random number: 0.8241872233134417
+*/</span>
+</code></pre>
+</div>
+</section>
+<section id="slide-org036b636">
+<h5 id="org036b636">Benefits</h5>
+<dl>
+<dt>Testability</dt><dd>Can Swap With Mocks</dd>
+<dt>Reasoning</dt><dd>without implementation details</dd>
+<dt>Separation of Concerns</dt><dd></dd>
+
+</dl>
+</section>
+<section id="slide-orgf1253a0">
+<h4 id="orgf1253a0">Error Handling Channel</h4>
+<pre  class="example" >
+                  ┌─── Represents the error type
+                  │
+                  ▼
+Effect&lt;Success, Error, Requirements&gt;
+</pre>
+
+<p>
+The ones we <i>Expect</i>
+</p>
+</section>
+<section id="slide-org1a6489b">
+<h5 id="org1a6489b">Expected Errors</h5>
+<div class="outline-text-5" id="text-org1a6489b">
+</div>
+</section>
+<section id="slide-orgb6b4f03">
+<h6 id="orgb6b4f03">Declare "Tagged" Expected Errors</h6>
+<p>
+<i>Tag</i> is used throughout Effect to identify components
+</p>
+
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #7F9F7F;">// Define a custom error type using Data.TaggedError</span>
+<span style="color: #F0DFAF; font-weight: bold;">class</span> <span style="color: #7CB8BB;">HttpError</span> <span style="color: #F0DFAF; font-weight: bold;">extends</span> Data.TaggedError(<span style="color: #CC9393;">"HttpError"</span>)&lt;{
+  <span style="color: #DFAF8F;">cause</span>: <span style="color: #7CB8BB;">unknown</span>;
+}&gt; {}
+</code></pre>
+</div>
+</section>
+<section id="slide-org2bd6b2e">
+<h6 id="org2bd6b2e">Returning Tagged Errors</h6>
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #7F9F7F;">//      &#9484;&#9472;&#9472;&#9472; Effect&lt;string, HttpError, never&gt;</span>
+<span style="color: #7F9F7F;">//      &#9660;</span>
+<span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">program</span> = Effect.gen(<span style="color: #F0DFAF; font-weight: bold;">function</span>* () {
+  <span style="color: #7F9F7F;">// Generate a random number between 0 and 1</span>
+  <span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">n</span> = <span style="color: #F0DFAF; font-weight: bold;">yield</span>* Random.next
+
+  <span style="color: #7F9F7F;">// Simulate an HTTP error</span>
+  <span style="color: #F0DFAF; font-weight: bold;">if</span> (n &lt; <span style="color: #BFEBBF;">0.5</span>) {
+    <span style="color: #F0DFAF; font-weight: bold;">return</span> <span style="color: #F0DFAF; font-weight: bold;">yield</span>* Effect.fail(<span style="color: #F0DFAF; font-weight: bold;">new</span> <span style="color: #7CB8BB;">HttpError</span>())
+  }
+
+  <span style="color: #F0DFAF; font-weight: bold;">return</span> <span style="color: #CC9393;">"some result"</span>
+})
+</code></pre>
+</div>
+</section>
+<section id="slide-org898c0e1">
+<h6 id="org898c0e1">Notes</h6>
+<dl>
+<dt>Multiple Errors</dt><dd><div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim>Effect&lt;<span style="color: #7CB8BB;">string</span>, <span style="color: #7CB8BB;">HttpError</span> | <span style="color: #7CB8BB;">ValidationError</span>, <span style="color: #7CB8BB;">never</span>&gt;
+</code></pre>
+</div></dd>
+
+</dl>
+
+
+<dl>
+<dt>Short Circuiting</dt><dd>Stop execution upon encountering the first error.</dd>
+<dt>(no term)</dt><dd>Collecting errors is possible with other abstractions</dd>
+
+</dl>
+</section>
+<section id="slide-org6eb4923">
+<h5 id="org6eb4923">Defects</h5>
+<p>
+Errors thrown and unexpected:
+</p>
+<ul>
+<li>Not visible at type system</li>
+<li>Part of the <i>Effect</i> type semantic</li>
+
+</ul>
+</section>
+<section id="slide-org740a18e">
+<h5 id="org740a18e">Handlers</h5>
+<p>
+You can decide what and when to handle.
+</p>
+
+<p>
+You are forced to handle expected errors
+</p>
+
+<p>
+You should handle defects
+</p>
+</section>
+<section id="slide-orgaed3b87">
+<h6 id="orgaed3b87">Expected Errors</h6>
+<div class="outline-text-6" id="text-orgaed3b87">
+</div>
+</section>
+<section id="slide-orge5bcaa7">
+<h7 id="orge5bcaa7">CatchTags</h7>
+<p>
+Use the previous error tag to handle it/them
+</p>
+
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #7F9F7F;">//      &#9484;&#9472;&#9472;&#9472; Effect&lt;string, never, never&gt;</span>
+<span style="color: #7F9F7F;">//      &#9660;</span>
+<span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">recovered2</span> = program.pipe(
+  Effect.catchTags({
+    <span style="color: #DFAF8F;">HttpError</span>: (<span style="color: #DFAF8F;">_HttpError</span>) =&gt; Effect.succeed(<span style="color: #CC9393;">`Recovering from HttpError`</span>),
+    <span style="color: #DFAF8F;">ValidationError</span>: (<span style="color: #DFAF8F;">_ValidationError</span>) =&gt;
+      Effect.succeed(<span style="color: #CC9393;">`Recovering from ValidationError`</span>),
+  }),
+);
+</code></pre>
+</div>
+</section>
+<section id="slide-orge3e3b97">
+<h6 id="orge3e3b97">Defects</h6>
+<div class="outline-text-6" id="text-orge3e3b97">
+</div>
+</section>
+<section id="slide-org4a11cb3">
+<h7 id="org4a11cb3">Cause</h7>
+<p>
+Store various details such as:
+</p>
+
+<ul>
+<li>Unexpected errors or defects</li>
+<li>Stack and execution traces</li>
+<li>Reasons for fiber interruptions</li>
+
+</ul>
+</section>
+<section id="slide-org40502b6">
+<h7 id="org40502b6">catchAllCause</h7>
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #7F9F7F;">// Recover from all errors by examining the cause</span>
+<span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">recovered</span> = program.pipe(
+  Effect.catchAllCause((<span style="color: #DFAF8F;">cause</span>) =&gt;
+    Cause.isFailType(cause)
+      ? Effect.succeed(<span style="color: #CC9393;">"Recovered from a regular error"</span>)
+      : Effect.succeed(<span style="color: #CC9393;">"Recovered from a defect"</span>)
+  )
+)
+</code></pre>
+</div>
+</section>
+<section id="slide-org2fb58b5">
+<h7 id="org2fb58b5">Exit</h7>
+<ul>
+<li>Datatype to signal the termination: <code>Success</code> or <code>Failure</code></li>
+<li>The wrapped error being a <code>Cause</code></li>
+<li>Describes how an Effect terminates</li>
+
+</ul>
+</section>
+<section id="slide-org8ab75d6">
+<h7 id="org8ab75d6">Effect.Exit</h7>
+<p>
+A way to move the error to the value
+</p>
+
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim>Effect&lt;<span style="color: #7CB8BB;">A</span>, <span style="color: #7CB8BB;">E</span>, <span style="color: #7CB8BB;">R</span>&gt; -&gt; Effect&lt;<span style="color: #7CB8BB;">Exit</span>&lt;<span style="color: #7CB8BB;">A</span>, <span style="color: #7CB8BB;">E</span>&gt;, <span style="color: #7CB8BB;">never</span>, <span style="color: #7CB8BB;">R</span>&gt;
+</code></pre>
+</div>
+</section>
+<section id="slide-org7df3814">
+<h7 id="org7df3814">catchAllDefect - Catch ONLY Defects</h7>
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">program</span> = Effect.catchAllDefect(riskyTask, (<span style="color: #DFAF8F;">defect</span>) =&gt; {
+  <span style="color: #F0DFAF; font-weight: bold;">if</span> (Cause.isRuntimeException(defect)) {
+    <span style="color: #F0DFAF; font-weight: bold;">return</span> Console.log(
+      <span style="color: #CC9393;">`RuntimeException defect caught: </span><span style="color: #DCDCCC;">${</span>defect.message<span style="color: #DCDCCC;">}</span><span style="color: #CC9393;">`</span>
+    )
+  }
+  <span style="color: #F0DFAF; font-weight: bold;">return</span> Console.log(<span style="color: #CC9393;">"Unknown defect caught."</span>)
+})
+</code></pre>
+</div>
+</section>
+<section id="slide-org263c443">
+<h6 id="org263c443">catchAll</h6>
+<p>
+General handler getting a <code>error : unknown</code> handler
+</p>
+
+<p>
+Hard to know what that error could be
+</p>
+
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #7F9F7F;">//      &#9484;&#9472;&#9472;&#9472; Effect&lt;string, never, never&gt;</span>
+<span style="color: #7F9F7F;">//      &#9660;</span>
+<span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">recovered</span> = program.pipe(
+  Effect.catchAll((<span style="color: #DFAF8F;">error</span>) =&gt;
+    Effect.succeed(<span style="color: #CC9393;">`Recovering from </span><span style="color: #DCDCCC;">${</span>error._tag<span style="color: #DCDCCC;">}</span><span style="color: #CC9393;">`</span>)
+  )
+)
+</code></pre>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-orgf2159b2">
+<h2 id="orgf2159b2">Popular Convenient Data Types</h2>
+<div class="outline-text-2" id="text-orgf2159b2">
+</div>
+</section>
+<section id="slide-orgb8a7c97">
+<h3 id="orgb8a7c97">Either</h3>
+<ul>
+<li>Pure error handling type</li>
+<li>Similar to <code>Exit</code> but for any type</li>
+<li>Composed of:
+<ul>
+<li><code>Either.Left</code> (error)</li>
+<li><code>Either.Right</code> (value)</li>
+
+</ul></li>
+<li>Has all composition patterns seen before</li>
+<li>Use when your computation:
+<ul>
+<li>Has no side-effects</li>
+<li>Can fail</li>
+
+</ul></li>
+
+</ul>
+</section>
+<section id="slide-orgb8f6e30">
+<h3 id="orgb8f6e30">Match</h3>
+<dl>
+<dt>For FP coders</dt><dd><del>worse</del> Pattern matching</dd>
+<dt>For TypeScript developers</dt><dd>Better <code>switch</code></dd>
+
+</dl>
+</section>
+<section id="slide-orge17a2cf">
+<h4 id="orge17a2cf">Value Match</h4>
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #7F9F7F;">// Simulated dynamic input that can be a string or a number</span>
+<span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">input</span>: <span style="color: #7CB8BB;">string</span> | <span style="color: #7CB8BB;">number</span> = <span style="color: #CC9393;">"some input"</span>
+
+<span style="color: #7F9F7F;">//      &#9484;&#9472;&#9472;&#9472; string</span>
+<span style="color: #7F9F7F;">//      &#9660;</span>
+<span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">result</span> = Match.value(input).pipe(
+  <span style="color: #7F9F7F;">// Match if the value is a number</span>
+  Match.when(Match.number, (<span style="color: #DFAF8F;">n</span>) =&gt; <span style="color: #CC9393;">`number: </span><span style="color: #DCDCCC;">${</span>n<span style="color: #DCDCCC;">}</span><span style="color: #CC9393;">`</span>),
+  <span style="color: #7F9F7F;">// Match if the value is a string</span>
+  Match.when(Match.string, (<span style="color: #DFAF8F;">s</span>) =&gt; <span style="color: #CC9393;">`string: </span><span style="color: #DCDCCC;">${</span>s<span style="color: #DCDCCC;">}</span><span style="color: #CC9393;">`</span>),
+  <span style="color: #7F9F7F;">// Ensure all possible cases are covered</span>
+  Match.exhaustive
+)
+</code></pre>
+</div>
+</section>
+<section id="slide-org67b7a81">
+<h5 id="org67b7a81">Several Possible Conditions</h5>
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #7F9F7F;">// Match when age is greater than 18</span>
+Match.when({ <span style="color: #DFAF8F;">age</span>: (<span style="color: #DFAF8F;">age</span>) =&gt; age &gt; <span style="color: #BFEBBF;">18</span> }, (<span style="color: #DFAF8F;">user</span>) =&gt; <span style="color: #CC9393;">`Age: </span><span style="color: #DCDCCC;">${</span>user.age<span style="color: #DCDCCC;">}</span><span style="color: #CC9393;">`</span>),
+<span style="color: #7F9F7F;">// Match when age is exactly 18</span>
+Match.when({ <span style="color: #DFAF8F;">age</span>: <span style="color: #BFEBBF;">18</span> }, () =&gt; <span style="color: #CC9393;">"You can vote"</span>),
+<span style="color: #7F9F7F;">// Match any value except "hi", returning "ok"</span>
+Match.not(<span style="color: #CC9393;">"hi"</span>, () =&gt; <span style="color: #CC9393;">"ok"</span>),
+<span style="color: #7F9F7F;">// Match either "fetch" or "success"</span>
+Match.tag(<span style="color: #CC9393;">"fetch"</span>, <span style="color: #CC9393;">"success"</span>, () =&gt; <span style="color: #CC9393;">`Ok!`</span>),
+<span style="color: #7F9F7F;">// Fallback case for when the value is "hi"</span>
+Match.orElse(() =&gt; <span style="color: #CC9393;">"fallback"</span>)
+</code></pre>
+</div>
+</section>
+<section id="slide-org7f145f4">
+<h4 id="org7f145f4">Type Match</h4>
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #7F9F7F;">// Create a matcher for values that are either strings or numbers</span>
+<span style="color: #7F9F7F;">//</span>
+<span style="color: #7F9F7F;">//      &#9484;&#9472;&#9472;&#9472; (u: string | number) =&gt; string</span>
+<span style="color: #7F9F7F;">//      &#9660;</span>
+<span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">match</span> = Match.type&lt;<span style="color: #7CB8BB;">string</span> | <span style="color: #7CB8BB;">number</span>&gt;().pipe(
+  <span style="color: #7F9F7F;">// Match when the value is a number</span>
+  Match.when(Match.number, (<span style="color: #DFAF8F;">n</span>) =&gt; <span style="color: #CC9393;">`number: </span><span style="color: #DCDCCC;">${</span>n<span style="color: #DCDCCC;">}</span><span style="color: #CC9393;">`</span>),
+  <span style="color: #7F9F7F;">// Match when the value is a string</span>
+  Match.when(Match.string, (<span style="color: #DFAF8F;">s</span>) =&gt; <span style="color: #CC9393;">`string: </span><span style="color: #DCDCCC;">${</span>s<span style="color: #DCDCCC;">}</span><span style="color: #CC9393;">`</span>),
+  <span style="color: #7F9F7F;">// Ensure all possible cases are handled</span>
+  Match.exhaustive
+)
+
+console.log(match(<span style="color: #BFEBBF;">0</span>))
+<span style="color: #7F9F7F;">// Output: "number: 0"</span>
+
+</code></pre>
+</div>
+</section>
+<section id="slide-orgbf8b848">
+<h4 id="orgbf8b848">withReturnType</h4>
+<p>
+<b>Highly Recommended</b>
+</p>
+
+<p>
+Ensures the match will return that type
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">match</span> = Match.type&lt;{ <span style="color: #DFAF8F;">a</span>: <span style="color: #7CB8BB;">number</span> } | { <span style="color: #DFAF8F;">b</span>: <span style="color: #7CB8BB;">string</span> }&gt;().pipe(
+  <span style="color: #7F9F7F;">// Ensure all branches return a string</span>
+  Match.withReturnType&lt;<span style="color: #7CB8BB;">string</span>&gt;(),
+  <span style="color: #7F9F7F;">// &#10060; Type error: returns a number</span>
+  Match.when({ <span style="color: #DFAF8F;">a</span>: Match.number }, (<span style="color: #DFAF8F;">_</span>) =&gt; <span style="color: #BFEBBF;">_</span>.a),
+<span style="color: #7F9F7F;">// Error ts(2322) &#8213; Type 'number' is not assignable to type 'string'.</span>
+<span style="color: #7F9F7F;">// &#9989; Correct: returns a string</span>
+  Match.when({ <span style="color: #DFAF8F;">b</span>: Match.string }, (<span style="color: #DFAF8F;">_</span>) =&gt; <span style="color: #BFEBBF;">_</span>.b),
+  Match.exhaustive
+)
+</code></pre>
+</div>
+</section>
+<section id="slide-org80fc16e">
+<h4 id="org80fc16e">Exhaustive</h4>
+<p>
+<b>Highly Recommended</b>
+</p>
+
+<p>
+Ensures all possible cases are covered
+</p>
+
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #7F9F7F;">// Create a matcher for string or number values</span>
+<span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">match</span> = Match.type&lt;<span style="color: #7CB8BB;">string</span> | <span style="color: #7CB8BB;">number</span>&gt;().pipe(
+  <span style="color: #7F9F7F;">// Match when the value is a number</span>
+  Match.when(Match.number, (<span style="color: #DFAF8F;">n</span>) =&gt; <span style="color: #CC9393;">`number: </span><span style="color: #DCDCCC;">${</span>n<span style="color: #DCDCCC;">}</span><span style="color: #CC9393;">`</span>),
+  <span style="color: #7F9F7F;">// Mark the match as exhaustive, ensuring all cases are handled</span>
+  <span style="color: #7F9F7F;">// TypeScript will throw an error if any case is missing</span>
+  Match.exhaustive
+)
+
+<span style="color: #7F9F7F;">// Fail at compile time, string is not handled.</span>
+
+</code></pre>
+</div>
+</section>
+<section id="slide-orge7f9b8d">
+<h3 id="orge7f9b8d">Stream</h3>
+<ul>
+<li>Known Composition Patterns</li>
+<li>Integrates with the <code>Effect</code> Type</li>
+<li>Error Channel</li>
+<li>Node Streams Interoperability</li>
+<li><b>Rich API</b>: Grouping - Partitioning - Interleaving - Interspersing - Scheduling - Debouncing - Throttling &#x2026;</li>
+
+</ul>
+</section>
+<section id="slide-org4dd8693">
+<h3 id="org4dd8693">Retry / Scheduler / Timeout Example</h3>
+<div class="outline-text-3" id="text-org4dd8693">
+</div>
+</section>
+<section id="slide-orgb582a26">
+<h4 id="orgb582a26">Before</h4>
+
+<div id="org6133082" class="figure">
+<p><img src="eventuallyNoEffect.png" alt="eventuallyNoEffect.png" />
+</p>
+</div>
+</section>
+<section id="slide-orgb4bcacc">
+<h4 id="orgb4bcacc">After</h4>
+
+<div id="orgef4617d" class="figure">
+<p><img src="eventuallyEffect.png" alt="eventuallyEffect.png" />
+</p>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-orgb476a4e">
+<h2 id="orgb476a4e">Architecture</h2>
+
+<div id="orgcc74a9c" class="figure">
+<p><img src="architecture.webp" alt="architecture.webp" />
+</p>
+</div>
+</section>
+<section id="slide-org626c744">
+<h3 id="org626c744">Main Components</h3>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Concept</th>
+<th scope="col" class="org-left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">service</td>
+<td class="org-left">A reusable component providing specific functionality</td>
+</tr>
+
+<tr>
+<td class="org-left">tag</td>
+<td class="org-left">A unique identifier representing a service, allowing Effect to locate and use it.</td>
+</tr>
+
+<tr>
+<td class="org-left">context</td>
+<td class="org-left">A collection storing services</td>
+</tr>
+
+<tr>
+<td class="org-left">layer</td>
+<td class="org-left">An abstraction for constructing services</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="slide-org5fba945">
+<h3 id="org5fba945">Services</h3>
+<div class="outline-text-3" id="text-org5fba945">
+</div>
+</section>
+<section id="slide-org54c8251">
+<h5 id="org54c8251">Define A Service</h5>
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #F0DFAF; font-weight: bold;">import</span> { <span style="color: #DFAF8F;">Effect</span>, <span style="color: #DFAF8F;">Context</span> } <span style="color: #F0DFAF; font-weight: bold;">from</span> <span style="color: #CC9393;">"effect"</span>
+
+<span style="color: #7F9F7F;">// Declaring a tag for a service that generates random numbers</span>
+<span style="color: #F0DFAF; font-weight: bold;">class</span> <span style="color: #7CB8BB;">Random</span> <span style="color: #F0DFAF; font-weight: bold;">extends</span> Context.Tag(<span style="color: #CC9393;">"MyRandomService"</span>)&lt;
+  <span style="color: #7CB8BB;">Random</span>,
+  { <span style="color: #F0DFAF; font-weight: bold;">readonly</span> <span style="color: #DFAF8F;">next</span>: <span style="color: #7CB8BB;">Effect</span>.<span style="color: #7CB8BB;">Effect</span>&lt;<span style="color: #7CB8BB;">number</span>&gt; }
+&gt;() {}
+</code></pre>
+</div>
+</section>
+<section id="slide-orga2868ab">
+<h5 id="orga2868ab">Provide Implementation</h5>
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #F0DFAF; font-weight: bold;">export</span> <span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">RandomLive</span> = Effect.succeed({
+  <span style="color: #DFAF8F;">next</span>: Effect.sync(() =&gt; Math.random())
+})
+</code></pre>
+</div>
+</section>
+<section id="slide-org4550945">
+<h5 id="org4550945">Using The Service</h5>
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #7F9F7F;">//      &#9484;&#9472;&#9472;&#9472; Effect&lt;void, never, Random&gt;</span>
+<span style="color: #7F9F7F;">//      &#9660;</span>
+<span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">program</span> = Effect.gen(<span style="color: #F0DFAF; font-weight: bold;">function</span>* () {
+  <span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">random</span> = <span style="color: #F0DFAF; font-weight: bold;">yield</span>* Random
+  <span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">randomNumber</span> = <span style="color: #F0DFAF; font-weight: bold;">yield</span>* random.next
+  console.log(<span style="color: #CC9393;">`random number: </span><span style="color: #DCDCCC;">${</span>randomNumber<span style="color: #DCDCCC;">}</span><span style="color: #CC9393;">`</span>)
+})
+</code></pre>
+</div>
+</section>
+<section id="slide-org54f16d8">
+<h5 id="org54f16d8">Providing Service</h5>
+<ul>
+<li>Simple Way</li>
+<li>Does Not Scale</li>
+<li>Useful for Simple Cases</li>
+<li>You want to provide ONE dependency on the spot</li>
+
+</ul>
+
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">runnable</span> = Effect.provideService(program, Random, {
+  <span style="color: #DFAF8F;">next</span>: Effect.sync(() =&gt; Math.random())
+});
+Effect.runPromise(runnable)
+</code></pre>
+</div>
+</section>
+<section id="slide-org53e58d3">
+<h4 id="org53e58d3">Effect.Service</h4>
+<ul>
+<li>Another Way to Create Services</li>
+<li>Provide definition, implementation and dependencies in one place</li>
+<li>Automatically Generates Layers</li>
+
+</ul>
+</section>
+<section id="slide-org3156fd0">
+<h4 id="org3156fd0">Built-in Services</h4>
+<ul>
+<li>No need to explicitly provide their implementations</li>
+<li>No setup</li>
+<li>Overrideable</li>
+
+</ul>
+
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #F0DFAF; font-weight: bold;">type</span> <span style="color: #7CB8BB;">DefaultServices</span> =
+    <span style="color: #7CB8BB;">Clock</span>
+    | <span style="color: #7CB8BB;">ConfigProvider</span>
+    | <span style="color: #7CB8BB;">Console</span>
+    | <span style="color: #7CB8BB;">Random</span>
+    | <span style="color: #7CB8BB;">Tracer</span>
+</code></pre>
+</div>
+</section>
+<section id="slide-org4218b67">
+<h3 id="org4218b67">Layers</h3>
+<p>
+When the creation:
+</p>
+<ul>
+<li>Can Be Effectful</li>
+<li>Can fail</li>
+<li><p>
+Can have requirements
+</p>
+
+<pre  class="example" >
+        ┌─── The service to be created
+        │                ┌─── The possible error
+        │                │      ┌─── The required dependencies
+        ▼                ▼      ▼
+Layer&lt;RequirementsOut, Error, RequirementsIn&gt;
+</pre></li>
+
+</ul>
+</section>
+<section id="slide-org354e674">
+<h5 id="org354e674">Creating Layer</h5>
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">randomLayer</span> = Layer.effect(
+  Logger,
+  Effect.gen(<span style="color: #F0DFAF; font-weight: bold;">function</span>* () {
+    <span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">config</span> = <span style="color: #F0DFAF; font-weight: bold;">yield</span>* Config
+    <span style="color: #F0DFAF; font-weight: bold;">return</span> {
+      <span style="color: #DFAF8F;">next</span>: Effect.gen(<span style="color: #F0DFAF; font-weight: bold;">function</span>* () {
+        <span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">seed</span> = <span style="color: #F0DFAF; font-weight: bold;">yield</span>* config.getSeed();
+        <span style="color: #F0DFAF; font-weight: bold;">return</span> Math.random(seed);
+      })
+    }
+  });
+</code></pre>
+</div>
+</section>
+<section id="slide-orga470e0b">
+<h5 id="orga470e0b">Composing Layer</h5>
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">AppConfigLive</span> = Layer.merge(ConfigLive, LoggerLive);
+<span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">MainLive</span> = DatabaseLive.pipe(
+  Layer.provide(AppConfigLive),
+  Layer.provide(ConfigLive),
+);
+</code></pre>
+</div>
+</section>
+<section id="slide-org5dff675">
+<h5 id="org5dff675">Providing Layer</h5>
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #7F9F7F;">// I give you the whole structure</span>
+<span style="color: #7F9F7F;">// You'll select the services you need based on the tags</span>
+<span style="color: #7F9F7F;">// They will be created for you following layer logic</span>
+<span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">runnable</span> = Effect.provide(program, MainLive)
+
+Effect.runPromise(runnable).then(console.log)
+</code></pre>
+</div>
+</section>
+<section id="slide-orgc5a88c4">
+<h3 id="orgc5a88c4">Context</h3>
+<div class="outline-text-3" id="text-orgc5a88c4">
+</div>
+</section>
+<section id="slide-org21a6965">
+<h4 id="org21a6965">Motivation</h4>
+<ul>
+<li>You want a repository where all your services are</li>
+<li>Grab what you want</li>
+<li>Use it</li>
+
+</ul>
+</section>
+<section id="slide-orgeeebb27">
+<h4 id="orgeeebb27">Usual Service Setup</h4>
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #F0DFAF; font-weight: bold;">type</span> <span style="color: #7CB8BB;">Context</span> = {
+  <span style="color: #DFAF8F;">databaseService</span>: <span style="color: #7CB8BB;">DatabaseService</span>
+  <span style="color: #DFAF8F;">loggingService</span>: <span style="color: #7CB8BB;">LoggingService</span>
+}
+
+<span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #93E0E3;">processData</span> = (<span style="color: #DFAF8F;">data</span>: <span style="color: #7CB8BB;">Data</span>, <span style="color: #DFAF8F;">context</span>: <span style="color: #7CB8BB;">Context</span>) =&gt; {
+  <span style="color: #7F9F7F;">// Using multiple services from the context</span>
+}
+</code></pre>
+</div>
+</section>
+<section id="slide-org1c320b9">
+<h4 id="org1c320b9">Problem</h4>
+<p>
+The environment must be correctly set up with all necessary services first
+</p>
+<ul>
+<li>Tightly coupled code</li>
+<li>Functional composition and testing more difficult</li>
+<li>May just need one service out of 100</li>
+
+</ul>
+</section>
+<section id="slide-org744edaf">
+<h4 id="org744edaf">Solution</h4>
+<p>
+Conceptually: <code>type Context = Map&lt;Tag, Service&gt;</code>
+Remember laziness
+</p>
+</section>
+<section id="slide-orgdbb3017">
+<h4 id="orgdbb3017">Extract Service Type</h4>
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #F0DFAF; font-weight: bold;">type</span> <span style="color: #7CB8BB;">RandomShape</span> = Context.Tag.<span style="color: #7CB8BB;">Service</span>&lt;<span style="color: #7CB8BB;">Random</span>&gt;
+<span style="color: #7F9F7F;">/*
+This is equivalent to:
+type RandomShape = {
+    readonly next: Effect.Effect&lt;number&gt;;
+}
+*/</span>
+</code></pre>
+</div>
+</section>
+<section id="slide-orgf60f24d">
+<h4 id="orgf60f24d">Build and use Context</h4>
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #7F9F7F;">// Combine service implementations into a single 'Context'</span>
+<span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">context</span> = Context.empty().pipe(
+  Context.add(Random, { <span style="color: #DFAF8F;">next</span>: Effect.sync(() =&gt; Math.random()) }),
+  Context.add(Logger, {
+    <span style="color: #DFAF8F;">log</span>: (<span style="color: #DFAF8F;">message</span>) =&gt; Effect.sync(() =&gt; console.log(message))
+  })
+)
+
+<span style="color: #7F9F7F;">// Provide the entire context</span>
+<span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">runnable</span> = Effect.provide(program, context)
+</code></pre>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-orgef44751">
+<h2 id="orgef44751">Ecosystem &amp; More</h2>
+<ul>
+<li>Adaptable to different platforms: <code>node</code>, <code>bun</code>, <code>browser</code></li>
+<li>Http: <code>client</code>, <code>routes</code>, <code>OpenApi</code>, <code>RPC</code></li>
+<li>Schema Validation</li>
+<li><code>@effect/opentelemetry</code></li>
+<li><code>@effect/cli</code></li>
+<li>Configuration</li>
+<li>Memoization / Cache</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-orgdd6ef86">
+<h2 id="orgdd6ef86">Downsides</h2>
+<div class="outline-text-2" id="text-orgdd6ef86">
+</div>
+</section>
+<section id="slide-orgab8b030">
+<h3 id="orgab8b030">Syntax / Verbosity</h3>
+<p>
+Especially over simple computations
+</p>
+
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim><span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">vanillaName</span> = user.name ?? <span style="color: #CC9393;">'John'</span>;
+<span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">vanillaSurname</span> = user.surname ?? <span style="color: #CC9393;">'Doe'</span>;
+<span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">vanillaResult</span> = <span style="color: #CC9393;">`</span><span style="color: #DCDCCC;">${</span>vanillaName<span style="color: #DCDCCC;">}</span><span style="color: #CC9393;"> </span><span style="color: #DCDCCC;">${</span>vanillaSurname<span style="color: #DCDCCC;">}</span><span style="color: #CC9393;">`</span>;
+
+<span style="color: #F0DFAF; font-weight: bold;">const</span> <span style="color: #DFAF8F;">optionResult</span> =
+  Option.zipWith(
+    user.name,
+    user.surname,
+    (<span style="color: #DFAF8F;">name</span>, <span style="color: #DFAF8F;">surname</span>) =&gt; <span style="color: #CC9393;">`</span><span style="color: #DCDCCC;">${</span>name<span style="color: #DCDCCC;">}</span><span style="color: #CC9393;"> </span><span style="color: #DCDCCC;">${</span>surname<span style="color: #DCDCCC;">}</span><span style="color: #CC9393;">`</span>
+  ).pipe(
+    Option.getOrElse(() =&gt; <span style="color: #CC9393;">'John Doe'</span>)
+  )
+</code></pre>
+</div>
+</section>
+<section id="slide-org6606475">
+<h3 id="org6606475">Type Gymnastics</h3>
+<p>
+Complex Types → Complex Compilation Errors
+</p>
+</section>
+<section id="slide-org952393e">
+<h3 id="org952393e">Beware of AI</h3>
+<p>
+Probably fixable with some good prompts/skills
+</p>
+
+<p>
+Still good to solve common compilation problems
+</p>
+</section>
+<section id="slide-org6d42292">
+<h4 id="org6d42292">Example 1 - Useless Steps</h4>
+<div class="org-src-container">
+
+<pre  class="src src-typescript"   ><code trim>pipe(
+  ...
+  Stream.zipWithIndex,
+  <span style="color: #7F9F7F;">// Stream.map(</span>
+  <span style="color: #7F9F7F;">//   ([record, rowIndex]: [Record&lt;string, string&gt;, number]): CsvRow =&gt;</span>
+  <span style="color: #7F9F7F;">//      [record, rowIndex],</span>
+  <span style="color: #7F9F7F;">// ),</span>
+  ...
+)
+</code></pre>
+</div>
+</section>
+<section id="slide-orgac0ad36">
+<h4 id="orgac0ad36">Example 2 - Love for Option.Match</h4>
+<ul>
+<li>Rewrite to <code>Option.match</code> unnecessary</li>
+<li><code>ElementNotFound</code> error lost
+<img src="AIEffectOptionMatch.png" alt="AIEffectOptionMatch.png" /></li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org45fe4ef">
+<h2 id="org45fe4ef">References</h2>
+<ul>
+<li><a href="https://zio.dev/">ZIO</a></li>
+<li><a href="https://effect.website/docs/">Effect Colloquial Docs</a></li>
+<li><a href="https://effect-ts.github.io/effect/">Effect Detailed Docs</a></li>
+
+</ul>
+</section>
+</section>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/plugin/markdown/markdown.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/plugin/zoom/zoom.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/plugin/notes/notes.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealMarkdown, RevealZoom, RevealNotes]
+});
+
+</script>
+</body>
+</html>

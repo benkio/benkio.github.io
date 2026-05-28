@@ -55,12 +55,11 @@
 
 #+name: articles_populateArticles
 #+begin_src javascript :exports none
-
   $("#totalArticleCount").text("Total Articles: " + htmlArticlesPaths.length);
 
   const siteOrigin = window.location.origin;
 
-  htmlArticlesPaths.forEach((value, index) => {
+  htmlArticlesPaths.sort().reverse().forEach((value, index) => {
     let pageUrl = siteOrigin + value.slice(1);
     fetch(pageUrl)
       .then((response) => {
