@@ -871,6 +871,20 @@ Still good to solve common compilation problems
 - Rewrite to ~Option.match~ unnecessary
 - ~ElementNotFound~ error lost
   [[file:AIEffectOptionMatch.png]]
+*** Example 3 - Shortcuts
+
+/Please add returns types to functions/
+
+#+begin_src typescript
+  ...
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types -- Effect Layer inference
+  export function fooLayer() {
+    ...
+  }
+#+end_src
+
+#+html: <video preload="auto" loop="" autoplay="" id="content" width="300" height="300"><source src="https://media.tenor.com/ZfhT82UtSCkAAAPo/yes-man-no-man.mp4" type="video/mp4"><source src="https://media.tenor.com/ZfhT82UtSCkAAAPs/yes-man-no-man.webm" type="video/webm"></video>
+
 * References
 - [[https://zio.dev/][ZIO]]
 - [[https://effect.website/docs/][Effect Colloquial Docs]]
