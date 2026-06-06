@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-12-25 Thu 10:42 -->
+<!-- 2026-06-06 Sat 16:56 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>YouTube Android Bulk Upload Guide</title>
@@ -85,31 +85,31 @@ In this guide I show you currently the best way to bulk upload video on YouTube 
 <h3 id="ArticleContent">Content</h3>
 <div class="outline-text-3" id="text-ArticleContent">
 </div>
-<div id="outline-container-org5b3c3fd" class="outline-4">
-<h4 id="org5b3c3fd">Problem Description</h4>
-<div class="outline-text-4" id="text-org5b3c3fd">
+<div id="outline-container-org069c42a" class="outline-4">
+<h4 id="org069c42a">Problem Description</h4>
+<div class="outline-text-4" id="text-org069c42a">
 <p>
 You want to safely store and upload your videos online for free. A valuable option is to use YouTube directly. The main problem is to upload videos from your phone, especially if you come back from a long vacation and you have several of them.
 </p>
 </div>
 </div>
-<div id="outline-container-orgc05e0c3" class="outline-4">
-<h4 id="orgc05e0c3">Official Solution</h4>
-<div class="outline-text-4" id="text-orgc05e0c3">
+<div id="outline-container-org79bb9ea" class="outline-4">
+<h4 id="org79bb9ea">Official Solution</h4>
+<div class="outline-text-4" id="text-org79bb9ea">
 <p>
 The official way would be to use the YouTube Studio/YouTube app. However, it's not feasible as it allows only one upload at a time.
 </p>
 </div>
 </div>
-<div id="outline-container-org769d77e" class="outline-4">
-<h4 id="org769d77e">Current Best Solution</h4>
-<div class="outline-text-4" id="text-org769d77e">
+<div id="outline-container-org017414a" class="outline-4">
+<h4 id="org017414a">Current Best Solution</h4>
+<div class="outline-text-4" id="text-org017414a">
 <p>
 Searching online I found that, on desktop, YouTube Studio doesn't have such limitation. So we can use a phone browser (eg. Chrome, Firefox&#x2026;), access <a href="https://studio.youtube.com/">YouTube Studio</a> site in desktop mode and start your uploads through the top right button. To see the site in desktop mode you need to tick the option in your Android browser. In Firefox it looks like this:
 </p>
 
 
-<div id="orgc47f587" class="figure">
+<div id="org320da69" class="figure">
 <p><img src="./2025-08-09-YoutubeBulkUploadGuide/firefoxDesktopMode.jpg" alt="firefoxDesktopMode.jpg" class="rounded mx-auto d-block" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Firefox desktop mode</p>
@@ -120,9 +120,9 @@ Ideally this should be it, but there are very annoying obstacles in doing that. 
 </p>
 </div>
 </div>
-<div id="outline-container-org6d46872" class="outline-4">
-<h4 id="org6d46872">Problems</h4>
-<div class="outline-text-4" id="text-org6d46872">
+<div id="outline-container-orgbdfd2bb" class="outline-4">
+<h4 id="orgbdfd2bb">Problems</h4>
+<div class="outline-text-4" id="text-orgbdfd2bb">
 <p>
 The limitation we have are:
 </p>
@@ -136,6 +136,18 @@ The limitation we have are:
 <li>General limit of daily uploads. <a href="https://support.google.com/youtube/thread/163394510">Reference</a></li>
 <li>All the uploads are in Draft. So you have to do something afterwards, but for that there's a great script I've found: <a href="https://github.com/Niedzwiedzw/youtube-publish-drafts">youtube-publish-draft</a> you can launch thought the developer console while in the YouTube Studio content list that will take care of it.</li>
 </ol>
+</div>
+<div id="outline-container-org9322655" class="outline-5">
+<h5 id="org9322655">Edit</h5>
+<div class="outline-text-5" id="text-org9322655">
+<p>
+Nobody seems to maintain the above script and people keep forking it.
+</p>
+
+<p>
+I tried several forks, but none seems to work well. So I decided to <a href="https://github.com/benkio/youtube-publish-drafts">fork it myself</a>!! This way I can make it work if I see something is off.
+</p>
+</div>
 </div>
 </div>
 </div>

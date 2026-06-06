@@ -72,6 +72,12 @@ The limitation we have are:
 7. General limit of daily uploads. [[https://support.google.com/youtube/thread/163394510][Reference]]
 8. All the uploads are in Draft. So you have to do something afterwards, but for that there's a great script I've found: [[https://github.com/Niedzwiedzw/youtube-publish-drafts][youtube-publish-draft]] you can launch thought the developer console while in the YouTube Studio content list that will take care of it.
 
+**** Edit
+
+Nobody seems to maintain the above script and people keep forking it.
+
+I tried several forks, but none seems to work well. So I decided to [[https://github.com/benkio/youtube-publish-drafts][fork it myself]]!! This way I can make it work if I see something is off.
+
 ** Conclusions
   :PROPERTIES:
   :CUSTOM_ID: ArticleConclusions
