@@ -76,7 +76,7 @@
   <div class="col text-center"> <button type="button" class="btn btn-lg btn-primary wantedBook" >Purchased <br> Don't Buy</button></div>
   <div class="col text-center"> <button type="button" class="btn btn-lg btn-dark wantedBook" >You Can Buy/Gift This😛</button></div>
 </div>
-<p class="text-center">Price source: Bandcamp, Amazon, and Discgos. Price reference with shipment to UK.</p>
+<p class="text-center">Price source: Bandcamp, Amazon, and Discogs. Price reference with shipment to UK.</p>
 #+END_EXPORT
 
 #+CALL: templates.org:csvToButtonsLinks("./data/wantedAlbums.csv","wantedAlbum")
