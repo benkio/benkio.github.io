@@ -67,7 +67,7 @@
     let cardWidth = 12 / articlePerRow;
     let cardIndex = page * perPage + i;
     if (cardIndex < htmlArticlesPaths.length) {
-      let card = $(`<div class="col-md-${cardWidth} p-2"></div>`).append(
+      let card = $(`<div class="col-12 col-md-${cardWidth} p-2"></div>`).append(
         $(
           `<div id=wrap${i} class="card bg-dark text-white" data-include="article${cardIndex}"></div>`,
         ).append(
